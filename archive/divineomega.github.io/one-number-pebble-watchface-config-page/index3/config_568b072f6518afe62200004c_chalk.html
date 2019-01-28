@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>One Number Watchface Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/divineomega.github.io/one-number-pebble-watchface-config-page/css/slate.css'>
+  <script src='/divineomega.github.io/one-number-pebble-watchface-config-page/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>One Number Watchface Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied to the One Number Watchface.
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Inverted colours
+          <input id='inverted_colours' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        The default colours are black text with a white background. Switching this option on swaps these colours around.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Decimals places
+          <select id="decimal_places" dir='rtl' class="item-select">
+            <option class="item-select-option" value="-1">0</option>
+            <option class="item-select-option" value="1">1</option>
+            <option class="item-select-option" value="2">2</option>
+            <option class="item-select-option" value="3" selected="">3</option>
+          </select>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        The default number of decimal places is 3, but you can change it if you'd like.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE CHANGES'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+
+	// Build up config data
+    var configData = {
+      'inverted_colours': document.getElementById('inverted_colours').checked,
+      'decimal_places': document.getElementById('decimal_places').value
+    };
+
+    // Save for next launch
+    localStorage['inverted_colours'] = configData['inverted_colours'];
+    localStorage['decimal_places'] = configData['decimal_places'];
+
+    console.log('Got options: ' + JSON.stringify(configData));
+
+    return configData;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+
+    // Load any previously saved configuration, if available
+    if(localStorage['inverted_colours']) {
+      document.getElementById('inverted_colours').checked = JSON.parse(localStorage['inverted_colours']);
+    }
+    if(localStorage['decimal_places']) {
+      document.getElementById('decimal_places').value = JSON.parse(localStorage['decimal_places']);
+    }
+  })();
+  </script>
+</html>

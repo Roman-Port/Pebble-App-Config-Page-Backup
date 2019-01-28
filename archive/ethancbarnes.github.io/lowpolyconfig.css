@@ -1,0 +1,19 @@
+@font-face {
+  font-family: "Blocky";
+  src: url(resources/fonts/blocky.ttf);
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+h1 {
+    margin: 20px;
+    text-align: center;
+}
+
+.radiobuttons {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

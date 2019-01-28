@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Arcangle Settings</title>
+	<link rel="stylesheet" href="/pebble.lastfuture.de/config/arcangle13/css/slate.css">
+<body>
+	
+	<div class='item-container'>
+        <div class='item-container-header'>Settings</div>
+        <div class='item-container-content'>
+        	<label class="item">
+                Color Scheme
+                <select id="colors" dir='rtl' class="item-select">
+                    <option class="item-select-option" selected="" value="1">Green</option>
+                    <option class="item-select-option" value="2">Red</option>
+                    <option class="item-select-option" value="3">Blue</option>
+                    <option class="item-select-option" value="4">Grey</option>
+                </select>
+            </label>
+            <label class='item'>
+                White Backgorund
+                <input id='inverse' type='checkbox' class='item-toggle' checked="">
+            </label>
+        </div>
+    </div>
+    
+    <div class='item-container'>
+        <div class='item-container-header'>Advanced</div>
+        <div class='item-container-content'>
+            <label class='item'>
+                Vibrate On Disconnect
+                <input id='btvibe' type='checkbox' class='item-toggle' checked="">
+            </label>
+        </div>
+    </div>
+    
+    <div class="item-container">
+      <div class="button-container">
+        <input id="send" type="button" class="item-button" value="SEND">
+      </div>
+    </div>
+	
+    <script src="/pebble.lastfuture.de/config/arcangle13/js/slate.js"></script>
+    <script src="/pebble.lastfuture.de/config/arcangle13/js/main.js"></script>
+</body>
+</head></html>

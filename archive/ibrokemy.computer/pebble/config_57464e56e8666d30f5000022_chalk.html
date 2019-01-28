@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel='stylesheet' type='text/css' href='./css/slate.min.css'>
+  <link rel='stylesheet' type='text/css' href='/ibrokemy.computer/css/style.css'>
+</head>
+<body>
+  <div class='item-container'>
+    <h1 class='title'>Wunder Weather<br>Configuration</h1>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <div class='item'>
+        Use this configuration page to choose the settings you would like applied to the watchface. Settings are not saved until you click "Submit".
+      </div>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Color</div>
+    <div class='item-container-content'>
+      <label class='item'>
+        Invert color?
+        <input id='fontCheck' type='checkbox' class='item-checkbox' unchecked="">
+      </label>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Time Format</div>
+    <div class='item-container-content'>
+      <label class='item'>
+        24-Hour Format
+        <input id='timeFormatCheckbox' type='checkbox' class='item-checkbox' unchecked="">
+      </label>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Temperature Units</div>
+    <div class='item-container-content'>
+      <label class='item'>
+        Use Celcius?
+        <input id='temperatureCheck' type='checkbox' class='item-checkbox' unchecked="">
+      </label>
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Wunderground API Key</div>
+    <div class="item-container-content">
+      <label class="item">
+        <div class="item-input-wrapper">
+          <input id="apiInput" type="text" class="item-input" placeholder="Valid API Key Required">
+        </div>
+      </label>
+    </div>
+    <div class='item-container-footer'>
+      Free Wunderground API keys are available <a href="/wunderground.com/weather/api/_1931030394.html" target="_blank">here</a>.
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Custom Location</div>
+    <div class='item-container-content'>
+      <label class='item'>
+        Use custom location?
+        <input id='zipEnabled' type='checkbox' class='item-checkbox' unchecked="" onclick="zipActive()">
+      </label>
+    </div>
+  </div>
+
+  <div id="customZipMain" class="item-container">
+  <div class="item-container-header">Custom Location</div>
+  <div class="item-container-content">
+    <label class="item">
+      <div class="item-input-wrapper">
+        <input id="customZip" type="text" class="item-input" placeholder="Zip code (US Only)">
+      </div>
+    </label>
+  </div>
+  <div class='item-container-footer'>
+    Enable this option to use a custom location OR if you have location (GPS) disabled on your device.
+  </div>
+</div>
+
+  <div class='item-container'>
+    <div class='button-container'>
+      <input id='submitButton' type='button' class='item-button' value='SUBMIT'>
+    </div>
+  </div>
+
+  <script src='./js/slate.min.js'></script>
+  <script src='./js/main.js'></script>
+</body>
+</html>

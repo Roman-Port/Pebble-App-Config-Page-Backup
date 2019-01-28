@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=320px, initial-scale=1.0, user-scalable=no">
+    <!--<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />-->
+    <link rel="stylesheet" href="/members.chello.at/derfreimann/div/pebble/BARCODE39/conf.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+
+</head>
+  
+  <body>
+
+  
+<div data-role="page" data-theme="a">
+
+ 	<img src="/members.chello.at/derfreimann/div/pebble/BARCODE39/confheader_orig.png" height="126" width="360" border="0" align="top" alt="AUT FUZZY conf">
+
+<div data-role="collapsible-set" data-theme="a" data-content-theme="a" data-mini="false" data-collapsed-icon="gear" data-expanded-icon="grid">
+
+    <div data-role="collapsible" data-collapsed="true">
+        <h3><strong>colours</strong></h3>
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+        <input name="key0" id="key0-0" value="0" checked="checked" type="radio">
+        <label for="key0-0">black on white</label>
+        <input name="key0" id="key0-1" value="1" type="radio">
+        <label for="key0-1">white on black</label>
+		</fieldset>
+    </div>
+
+    <div data-role="collapsible" data-collapsed="true">
+        <h3><strong>flashing second indicator</strong></h3>
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+        <input name="key41" id="key41-0" value="0" type="radio">
+        <label for="key41-0" class="left">no indicator</label>
+<!--		</fieldset>
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+        <input name="key41" id="key41-1" value="1" type="radio">
+        <label for="key41-1" class="mid">2) blinding blinky</label>
+		</fieldset>
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+        <input name="key41" id="key41-2" value="2" type="radio">
+        <label for="key41-2" class="mid">3) easy blinky</label>
+		</fieldset>
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+        <input name="key41" id="key41-3" value="3" type="radio">
+        <label for="key41-3" class="mid">4) squint your eyes</label>
+		</fieldset>
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+        <input name="key41" id="key41-4" value="4" type="radio">
+        <label for="key41-4" class="mid">5) blinky, above digits</label>
+		</fieldset>
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+        <input name="key41" id="key41-5" value="5" type="radio">
+        <label for="key41-5" class="mid">6) top of the blinkies</label>        
+		</fieldset>
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+-->		<input name="key41" id="key41-6" value="6" checked="checked" type="radio">
+        <label for="key41-6" class="mid">'shrinky blinky'</label>
+		</fieldset>
+<!--		</br>
+		<legend><font color="#aa3d3d"><strong>explanation</strong></font>	</br><strong>option 1:</strong> no second indicator
+																			</br><strong>option 2:</strong> the whole parts next to the time will blink
+																			</br><strong>option 3:</strong> small parts next to the time will blink
+																			</br><strong>option 4:</strong> the parts blinking next to the time are so unimposing, you'll hardly see it
+																			</br><strong>option 5:</strong> a part above the time will blink
+																			</br><strong>option 6:</strong> a small part on top of the barcode will blink
+																			</br><strong>option 7:</strong> the whole barcode seems to pulsate... neat!
+		</legend>
+-->		
+    </div>
+
+    <div data-role="collapsible" data-collapsed="true">
+        <h3><strong>vibrations</strong></h3>
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend>disconnection</legend>
+        <input name="key11" id="key11-0" value="0" type="radio">
+        <label for="key11-0" class="left">off</label>
+        <input name="key11" id="key11-1" value="1" type="radio">
+        <label for="key11-1" class="mid">1x</label>
+        <input name="key11" id="key11-2" value="2" type="radio">
+        <label for="key11-2" class="mid">2x</label>
+        <input name="key11" id="key11-3" value="3" checked="checked" type="radio">
+        <label for="key11-3" class="right">3x</label>
+		</fieldset>
+		<br>
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend>reconnection</legend>
+        <input name="key12" id="key12-0" value="0" type="radio">
+        <label for="key12-0">off</label>
+        <input name="key12" id="key12-1" value="1" type="radio">
+        <label for="key12-1">1x</label>
+        <input name="key12" id="key12-2" value="2" checked="checked" type="radio">
+        <label for="key12-2">2x</label>
+        <input name="key12" id="key12-3" value="3" type="radio">
+        <label for="key12-3">3x</label>
+		</fieldset>
+    </div>
+
+    <div data-role="collapsible" data-collapsed="true">
+        <h3><strong>BT disconnection</strong></h3>
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+        <input name="key32" id="key32-0" value="0" type="radio">
+        <label for="key32-0">no optical indicator</label>
+        <input name="key32" id="key32-1" value="1" checked="checked" type="radio">
+        <label for="key32-1">invert watchface</label>
+		</fieldset>
+    </div>
+	
+<!--
+
+    <div data-role="collapsible" data-collapsed="true">
+        <h3><strong>Akkuladestand</strong></h3>
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend>anzeigen?</legend>
+        <input name="key31" id="key31-0" value="0" checked="checked" type="radio">
+        <label for="key31-0">ja</label>
+        <input name="key31" id="key31-1" value="1" type="radio">
+        <label for="key31-1">statische Linie</label>
+        <input name="key31" id="key31-2" value="2" type="radio">
+        <label for="key31-2">nein</label>
+		</fieldset>
+    </div>
+
+	<div data-role="collapsible" data-collapsed="true">
+        <h3><strong>Zeit</strong>, z.B. 08:15 Uhr</h3>
+
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+        <input name="key21" id="key21-0" value="0" checked="checked" type="radio">
+        <label for="key21-0">viertel nüni (<font color="#fff4ab">walliserdeutsch</font>)</label>
+		</fieldset>
+		<br/>
+		
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+        <input name="key21" id="key21-1" value="1" type="radio">
+        <label for="key21-1">viertel neun (<font color="#fff4ab">standarddeutsch</font>)</label>
+		</fieldset>
+
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+        <input name="key21" id="key21-2" value="2" type="radio">
+        <label for="key21-2">viertel nach acht (<font color="#fff4ab">standarddeutsch</font>)</label>
+		</fieldset>
+
+		</div>
+
+    <div data-role="collapsible" data-collapsed="true">
+        <h3><strong>Datum</strong>, z.B. 18. Jänner</h3>
+
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+        <input name="key22" id="key22-0" value="0" checked="checked" type="radio">
+        <label for="key22-0">der achzähnt (<font color="#fff4ab">walliserdeutsch</font>)</label>
+		</fieldset>
+
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+		<input name="key22" id="key22-1" value="1" type="radio">
+        <label for="key22-1">der achtzehnte (<font color="#fff4ab">standarddeutsch</font>)</label>
+		</fieldset>
+
+		<fieldset class="center" data-role="controlgroup" data-type="horizontal" data-mini="true">
+		<legend> </legend>
+		<input name="key22" id="key22-2" value="2" type="radio">
+        <label for="key22-2">18. 01.</label>
+		</fieldset>
+		</br>
+
+	</div>
+-->
+
+<div data-collapsed="true" data-role="collapsible" data-mini="false" data-collapsed-icon="info">
+		<h3><strong>FAQ & bakshish ;)</strong></h3>
+		
+        <!--<div class="ui-block-a"><button type="submit" data-theme="a" data-icon="star" data-inline="true" id="b-cancel">TIP</button></div></br>-->
+		
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		<!--<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" data-role="button">-->
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
+		<!--<input type="image" src="btn_donate_SM.gif" border="0" name="submit" alt="Jetzt einfach, schnell und sicher online bezahlen – mit PayPal.">-->
+		<input type="submit" name="submit" data-iconpos="top" data-icon="star" data-mini="false" value="tip the developer">
+		<!--<img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">-->
+		</form>
+
+		<a href="/members.chello.at/derfreimann/div/pebble/BARCODE39/commentsonly.html" data-role="button" data-icon="edit" data-iconpos="top">send a message!</a>
+
+		<div data-role="collapsible-set" data-inset="false">
+
+		<div data-collapsed="true" data-role="collapsible" data-mini="false" data-collapsed-icon="info">
+			<h3><strong>release notes</strong></h3>
+			<h3><font color="#aa3d3d">Version 2.0</font> [29.06.2014]</h3>
+			<p>- fully configurable version
+			<br>  I also changed the behaviour of the disconnection/reconnection alert: now it won't vibrate anymore when you switch watchfaces to avoid your wrist from going berzerk and to save some precious energy ;)</p>
+			<hr>
+			<h3><font color="#aa3d3d">Version 1.3.3</font></h3>
+			<p>- 'old' version, without config screen</p>
+		</div>	
+		
+		<div data-collapsed="true" data-role="collapsible" data-mini="false" data-collapsed-icon="info">
+			<h3><strong>FAQ</strong></h3>	
+			
+			<h3><font color="#aa3d3d">ಠ_ಠ<br>How do I <strong>UPDATE</strong> the watchface?</font></h3>
+			<p><br>ಠ◡ಠ</br>	<br>on <strong>iOS</strong>:</br>completely delete the watchface from your Pebble app, then look it up again in the app store and install it anew (=automatically most recent version)!<br>
+								</br>on <strong>Android</strong>:<br>select the watchface in the Pebble app and choose 'unload'. All you have to do now is reload it onto your Pebble... just out of the locker (=automatically most recent version)</br>
+								<br>ATTENTION: the date of the last update always refers to <strong>ANDROID</strong>, because there the updates will be published immediatey after release. On <strong>iOS</strong> however it could happen that it takes a couple of weeks, because iOS needs the JavaScript part of the watchface to be integrated into the Pebble app!</p>
+			
+			<br><hr></br><h3><font color="#aa3d3d">ಠ_ಠ<br>The watchface crashed!</font></h3>
+			<p><br>ಠ_ಠ			</br>That's a bummer - please leave a message [button on top of the FAQ] or send a mail via the Pebble app and precisely describe the circumstances that led to the crash!</p>
+			
+			<br><hr></br><h3><font color="#aa3d3d">ಠ_ಠ<br>I'd like to have some changes!</font></h3>
+			<p><br>ಠ◡ಠ			</br>Please leave a message [button on top of the FAQ] or send a mail via the Pebble app and I'll see what I can do about it!</p>
+			
+			<br><hr></br><h3><font color="#aa3d3d">ಠ_ಠ<br>I hate this bloody watchface, so what shall I do?</font></h3>
+			<p><br>ಠ◡ಠ			</br>Laugh at it, spit on it, do whatever you like, but please leave me alone with it!</p>
+		</div>	
+		</div>
+</div>	
+</div>  
+		<br>
+		</br>
+		<br>	
+		</br>	
+
+<div class="ui-footer-fixed">
+    <div class="ui-body ui-body-a">
+        <fieldset class="ui-grid-a">
+        <div class="ui-block-a"><button type="submit" data-theme="a" data-icon="delete" data-inline="true" id="b-cancel">cancel</button></div>
+        <div class="ui-block-b"><button type="submit" data-theme="b" id="b-submit">SAVE</button></div> 
+        </fieldset> 
+	</div>
+</div>
+
+</div>
+
+    <script>
+      function saveOptions() {
+        var options = {
+          'style_inv':     		 Number( $("input[name=key0]:checked").val() ),
+          'vibe_pat_disconnect': Number( $("input[name=key11]:checked").val() ),
+          'vibe_pat_connect':    Number( $("input[name=key12]:checked").val() ),
+          'bt_sig':    		 	 Number( $("input[name=key32]:checked").val() ),
+          'sec_ind':    		 Number( $("input[name=key41]:checked").val() ),
+          }
+        return options;
+      }
+
+       $().ready(function() {
+       if (typeof window.localStorage !== "undefined") {
+        if (window.localStorage.pebble_timely_options) {
+          ls_pto = JSON.parse(window.localStorage.pebble_timely_options);
+		  // the Pebble webview dies on the next line...
+          $("input[name=key0][id=key0-"+ls_pto["style_inv"]+"]").prop('checked',true);
+          $("input[name=key0]").checkboxradio('refresh');
+  
+		  if ("vibe_pat_disconnect" in ls_pto) {
+            $("input[name=key11][id=key11-"+ls_pto["vibe_pat_disconnect"]+"]").prop('checked',true);
+            $("input[name=key11]").checkboxradio('refresh');
+            $("input[name=key12][id=key12-"+ls_pto["vibe_pat_connect"]+"]").prop('checked',true);
+            $("input[name=key12]").checkboxradio('refresh');
+          }
+        
+		  $("input[name=key32][id=key32-"+ls_pto["bt_sig"]+"]").prop('checked',true);
+          $("input[name=key32]").checkboxradio('refresh');         		  
+
+		  $("input[name=key41][id=key41-"+ls_pto["sec_ind"]+"]").prop('checked',true);
+          $("input[name=key41]").checkboxradio('refresh');         		  
+ 
+		  }
+       }
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          ls_pto = JSON.stringify(saveOptions());
+          if (typeof window.localStorage !== "undefined") {
+            window.localStorage.pebble_timely_options = ls_pto;
+          }
+          var location = "pebblejs://close#" + encodeURIComponent(ls_pto);
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Eir Configuration</title>
+		
+		<link rel="stylesheet" type="text/css" href="/zerion7.com/pebble/eir/slate/css/slate.css">
+	</head>
+	<body>
+		<div class="item-container">
+			<div class="item-container-header">Hands</div>
+			<div class="item-container-content">
+				<label class="item">
+					Seconds
+					<input type="checkbox" class="item-toggle" id="hands-seconds" checked="">
+				</label>
+				<label class="item">
+					Color
+					<input type="text" class="item-color item-color-normal" id="hands-color" value="0xff0000">
+				</label>
+			</div>
+			<div class="item-container-footer">
+				Hands will only update once a minute if seconds hand is disabled.<br>
+				Color is always white on devices with black &amp; white displays.
+			</div>
+		</div>
+		
+		<div class="item-container">
+			<div class="item-container-header">Face</div>
+			<div class="item-container-content">
+				<label class="item">
+					Date
+					<input type="checkbox" class="item-toggle" id="face-date" checked="">
+				</label>
+			</div>
+		</div>
+		
+		<div class="item-container">
+			<div class="button-container">
+				<input type="button" class="item-button" id="save" value="Save">
+			</div>
+		</div>
+		
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				var	handsSeconds = document.getElementById('hands-seconds'),
+					handsColor = document.getElementById('hands-color'),
+					faceDate = document.getElementById('face-date'),
+					button = document.getElementById('save');
+				
+				button.addEventListener('click', function() {
+					var config = {'hands': {}, 'face': {}};
+					
+					config['hands']['seconds'] = handsSeconds.checked ? 1 : 0;
+					config['hands']['color'] = handsColor.value;
+					config['face']['date'] = faceDate.checked ? 1 : 0;
+					
+					location.href = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(config));
+				});
+			});
+		</script>
+		<script src="/zerion7.com/pebble/eir/slate/js/slate.js"></script>
+	</body>
+</html>

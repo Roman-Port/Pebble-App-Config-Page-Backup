@@ -1,0 +1,133 @@
+﻿<!DOCTYPE  html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+    <title></title>
+    <link rel="stylesheet" href="/apps.cwfranklin.com/pebble/_resources/css/slate.css">
+    <style>
+      html, body {height: 100%;}
+      h1 { line-height: 40px; }
+    </style>
+  </head>
+  <body>
+    <form id="main-form">
+      <h1>Pusheen Colour - Configuration</h1>
+      <div class="item-container">
+        <div class="item-container-header">Clock Type</div>
+        <div class="item-container-content">
+          <label class="item">
+            24-Hour Clock
+            <input id="clock-type" type="checkbox" class="item-toggle">
+          </label>
+        </div>
+      </div>
+      <div class="item-container">
+        <div class="item-container-header">Date</div>
+        <div class="item-container-content">
+          <label class="item">
+            Show Date
+            <input id="show-date" type="checkbox" class="item-toggle">
+          </label>
+          <label class="item">
+            Date Format
+            <select id="date-format" dir="rtl" class="item-select">
+              <option class="item-select-option" value="uk">31/12/2014</option>
+              <option class="item-select-option" value="us">12/31/2014</option>
+              <option class="item-select-option" value="iso">2014/12/31</option>
+              <option class="item-select-option" value="swe">2014-12-31</option>
+            </select>
+          </label>
+        </div>
+        <div class="item-container-footer">
+          If you want a date format added to this list, a long format date for example, send an email to <a href="mailto:support@cwfranklin.com">support@cwfranklin.com</a>.
+        </div>
+      </div>
+      <div class="item-container">
+        <div class="item-container-header">Animations (EXPERIMENTAL)</div>
+        <div class="item-container-content">
+          <label class="item">
+            Enabled
+            <input id="show-animations" type="checkbox" class="item-toggle">
+          </label>
+        </div>
+        <div class="item-container-footer">
+          This feature is a work in progress and is not fully supported by Pebble.js. You would have to be CRAZY to use it on the Aplite platform (original Pebble and Pebble Steel). If you experience high battery usage with this enabled, turn it off!
+        </div>
+      </div>
+      <div class="item-container">
+        <div class="button-container">
+          <input id="submit" type="button" class="item-button" value="SAVE">
+        </div>
+      </div>
+    </form>
+    
+    <script async="" src="/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- apps.cwfranklin.com -->
+	<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4455378146361643" data-ad-slot="3941415526" data-ad-format="link"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+    
+    <script type="text/javascript" src="/apps.cwfranklin.com/pebble/_resources/js/jquery-1.js"></script>
+    <script type="text/javascript" src="/apps.cwfranklin.com/pebble/_resources/js/slate.js"></script>
+    <script type="text/javascript">
+      (function() {
+        loadOptions();
+      })();
+      
+      $( '#submit' ).click(function() {
+        function getQueryParam(variable, default_) {
+          var query = location.search.substring(1);
+          var vars = query.split('&');
+          for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if (pair[0] == variable)
+              return decodeURIComponent(pair[1]);
+          }
+          return default_ || false;
+        }
+        
+        var return_to = getQueryParam('return_to', 'pebblejs://close#');
+        document.location = return_to + encodeURIComponent(JSON.stringify(getAndStoreConfigData()));
+      });
+      
+      function loadOptions() {
+        var $clockType = $('#clock-type');
+        var $dateShow = $('#show-date');
+        var $dateFormat = $('#date-format');
+        var $showAnimations = $('#show-animations');
+        
+        if (localStorage.clockType) {
+          $clockType[0].checked = localStorage.twentyFourHourClock === 'true';
+          $dateShow[0].checked = localStorage.dateShow === 'true';
+          $dateFormat.val(localStorage.dateFormat);
+          $showAnimations[0].checked = localStorage.showAnimations === 'true';
+        }
+      }
+      
+      function getAndStoreConfigData() {
+        var $clockType = $('#clock-type');
+        var $dateShow = $('#show-date');
+        var $dateFormat = $('#date-format');
+        var $showAnimations = $('#show-animations');
+        
+        var options = {
+          clockType: $clockType[0].checked,
+          dateShow: $dateShow[0].checked,
+          dateFormat: $dateFormat.val(),
+          showAnimations: $showAnimations[0].checked
+        };
+        
+        localStorage.twentyFourHourClock = options.clockType;
+        localStorage.dateShow = options.dateShow;
+        localStorage.dateFormat = options.dateFormat;
+        localStorage.showAnimations = options.showAnimations;
+        
+        console.log('Got options: ' + JSON.stringify(options));
+        return options;
+      }
+    </script>
+  </body>
+
+</html>

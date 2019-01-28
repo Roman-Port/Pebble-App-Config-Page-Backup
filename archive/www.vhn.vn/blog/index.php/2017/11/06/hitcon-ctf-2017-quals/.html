@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.vhn.vn/blog/xmlrpc.php">
+
+<title>HITCON CTF 2017 Quals &#8211; VHNVN&#039;s blog</title>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//ajax.googleapis.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; Feed" href="https://www.vhn.vn/blog/index.php/feed/" />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; Comments Feed" href="https://www.vhn.vn/blog/index.php/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; HITCON CTF 2017 Quals Comments Feed" href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.vhn.vn\/blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.9"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='jquery-ui-css'  href='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css?ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-bootstrap-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/css/bootstrap/bootstrap.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-style-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/style.css?ver=4.9.9' type='text/css' media='all' />
+<style id='oria-style-inline-css' type='text/css'>
+body, .widget a { color:#717376}
+.site-title a, .site-title a:hover { color:#fff}
+.site-description { color:#bbb}
+.site-logo { max-width:200px; }
+.site-branding { padding-top:80px;padding-bottom:80px; }
+.site-title { font-size:62px; }
+.site-description { font-size:18px; }
+
+</style>
+<link rel='stylesheet' id='oria-body-fonts-css'  href='//fonts.googleapis.com/css?family=Lato%3A400%2C700%2C400italic%2C700italic&#038;ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-headings-fonts-css'  href='//fonts.googleapis.com/css?family=Oswald%3A300%2C700&#038;ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-fontawesome-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/fonts/font-awesome.min.css?ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack-widget-social-icons-styles-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/modules/widgets/social-icons/social-icons.css?ver=20170506' type='text/css' media='all' />
+<link rel='stylesheet' id='enlighter-local-css'  href='https://www.vhn.vn/blog/wp-content/plugins/enlighter/resources/EnlighterJS.min.css?ver=3.6' type='text/css' media='all' />
+<link rel='stylesheet' id='enlighter-webfonts-css'  href='//fonts.googleapis.com/css?family=Source+Code+Pro%3Aregular%2C700&#038;ver=3.6' type='text/css' media='all' />
+<link rel='stylesheet' id='social-logos-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/css/jetpack.css?ver=6.1.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/related-posts/related-posts.min.js?ver=20150408'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/jquery.fitvids.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/jquery.slicknav.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/parallax.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/scripts.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/imagesloaded.min.js?ver=3.2.0'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/masonry.min.js?ver=3.3.2'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/imagesloaded.pkgd.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/masonry-init.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/owl.carousel.min.js?ver=1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sliderOptions = {"slideshowspeed":"4000"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/slider-init.js?ver=1'></script>
+<link rel='https://api.w.org/' href='https://www.vhn.vn/blog/index.php/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.vhn.vn/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.vhn.vn/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='hack.lu 2017' href='https://www.vhn.vn/blog/index.php/2017/10/19/hack-lu-2017/' />
+<link rel="canonical" href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/" />
+<link rel='shortlink' href='https://wp.me/p6MMNs-2D' />
+<link rel="alternate" type="application/json+oembed" href="https://www.vhn.vn/blog/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vhn.vn%2Fblog%2Findex.php%2F2017%2F11%2F06%2Fhitcon-ctf-2017-quals%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.vhn.vn/blog/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vhn.vn%2Fblog%2Findex.php%2F2017%2F11%2F06%2Fhitcon-ctf-2017-quals%2F&#038;format=xml" />
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'/>
+<link rel='dns-prefetch' href='//i0.wp.com'/>
+<link rel='dns-prefetch' href='//i1.wp.com'/>
+<link rel='dns-prefetch' href='//i2.wp.com'/>
+<style type='text/css'>img#wpstats{display:none}</style><!--[if lt IE 9]>
+<script src="https://www.vhn.vn/blog/wp-content/themes/oria/js/html5shiv.js"></script>
+<![endif]-->
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<style type="text/css">
+/* <![CDATA[ */
+img.latex { vertical-align: middle; border: none; }
+/* ]]> */
+</style>
+		<style type="text/css">
+			.site-header {
+				background-image: url(https://www.vhn.vn/blog/wp-content/themes/oria/images/header.jpg);
+			}
+		</style>
+		
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="HITCON CTF 2017 Quals" />
+<meta property="og:url" content="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/" />
+<meta property="og:description" content="Visit the post for more." />
+<meta property="article:published_time" content="2017-11-06T16:57:26+00:00" />
+<meta property="article:modified_time" content="2017-11-06T17:11:24+00:00" />
+<meta property="og:site_name" content="VHNVN&#039;s blog" />
+<meta property="og:image" content="https://s0.wp.com/i/blank.jpg" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:text:title" content="HITCON CTF 2017 Quals" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:description" content="Visit the post for more." />
+
+<!-- End Jetpack Open Graph Tags -->
+</head>
+
+<body class="post-template-default single single-post postid-163 single-format-standard">
+
+<div class="preloader"><div id="preloader-inner"><div class="preload">&nbsp;</div></div></div>
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<div class="top-bar clearfix no-toggle">
+					
+					</div>
+
+		<div class="container">
+			<div class="site-branding">
+				<h1 class="site-title"><a href="https://www.vhn.vn/blog/" rel="home">VHNVN&#039;s blog</a></h1><h2 class="site-description">Smile with the life, it will smile with you!</h2>			</div><!-- .site-branding -->
+		</div>
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<div id="primary-menu" class="menu clearfix"></div>
+		</nav><!-- #site-navigation -->
+		<nav class="mobile-nav"></nav>
+
+	</header><!-- #masthead -->
+	
+	
+	<div id="content" class="site-content clearfix">
+				<div class="container content-wrapper">
+		
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-163" class="post-163 post type-post status-publish format-standard hentry category-ctf">
+
+		
+	<header class="entry-header">
+		<h1 class="entry-title">HITCON CTF 2017 Quals</h1>
+				<div class="entry-meta">
+			<span class="posted-on"><a href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/" rel="bookmark"><time class="entry-date published" datetime="2017-11-06T23:57:26+00:00">November 6, 2017</time><time class="updated" datetime="2017-11-07T00:11:24+00:00">November 7, 2017</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="https://www.vhn.vn/blog/index.php/author/vanhoavn/">vanhoavn</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto, Pwn) Secret FS</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<p>Can you read the flag.txt?</p>
+<p>nc 13.112.220.64 9999</p>
+<p><a href="https://www.vhn.vn/blog/wp-content/uploads/2017/11/secretfs-c0119e98a895df1f361fb369bf9c98bf.elf_.zip">secretfs-c0119e98a895df1f361fb369bf9c98bf</a></p>
+</div></div>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>Loading the binary with IDA provides us:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vanhoavn/ace3ccbbfa89fb36c44983b1b66acf39.js"></script><noscript>View the code on <a href="https://gist.github.com/vanhoavn/ace3ccbbfa89fb36c44983b1b66acf39">Gist</a>.</noscript></div>
+<p>Connecting to the service:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell">$ nc 13.112.220.64 9999
+N: 104176920808444707134363566789644103637046138703732812593856489450966164422700871083271001476798525601830292237723021138499045286505397665962198734248957208942814238767855960753797521549548788530151996440657784060736603682776712677518537991291065233449586393186516770855075158900503486179189610821817031409223
+e: 3
+File list:
+flag.txt
+key.txt
+run.sh
+secret
+secretfile.txt
+Input filename(txt) :</pre>
+<p>At first i tried to factor N which give no promising result, after that @peter noticed the way server read filename can lead to buffer overflow that we can modify 2 bytes of <code>e</code>, after that we can re-read the flag file which will be encrypt using new <code>e</code> (let&#8217;s call it <code>e'</code>), if <code>gcd(e, e')=1</code> we can recover the original message by extended gcd:</p>
+<p style="text-align: center;"><img src='https://s0.wp.com/latex.php?latex=ae%2Bbe%27%3D1+%5CRightarrow+c_e%5Ea+%5Ctimes+c_%7Be%27%7D%5Eb+%3D+m%5E%7Bae%7D+%5Ctimes+m%5E%7Bbe%27%7D+%3D+m%5E%7Bae%2Bbe%27%7D+%3D+m%5E1+%3D+m&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='ae+be&#039;=1 \Rightarrow c_e^a \times c_{e&#039;}^b = m^{ae} \times m^{be&#039;} = m^{ae+be&#039;} = m^1 = m' title='ae+be&#039;=1 \Rightarrow c_e^a \times c_{e&#039;}^b = m^{ae} \times m^{be&#039;} = m^{ae+be&#039;} = m^1 = m' class='latex' />
+<p>Final solution:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vanhoavn/5e5af2a75381d98bed66448cb93e1aa0.js"></script><noscript>View the code on <a href="https://gist.github.com/vanhoavn/5e5af2a75381d98bed66448cb93e1aa0">Gist</a>.</noscript></div>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto, Pwn) Seccomp</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<div id="challenge-description">
+<p>I learned how to write seccomp rules, now is your turn.</p>
+<p><a href="https://s3-ap-northeast-1.amazonaws.com/hitcon2017qual-static/seccomp-05f3ea4af3f1da9331357bc167efae60">seccomp-05f3ea4af3f1da9331357bc167efae60</a></p>
+</div>
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"></div></div></span></p>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>@mipu94 first working on this problem, dumped the seccomp part:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic"> 0000: 0x20 0x00 0x00 0x00000000  A = sys_number
+ 0001: 0x15 0x01 0x00 0x00001337  if (A == 0x1337) goto 0003
+ 0002: 0x06 0x00 0x00 0x7fff0000  return ALLOW
+ 0003: 0x20 0x00 0x00 0x00000010  A = args[0]
+ 0004: 0x07 0x00 0x00 0x00000000  X = A
+ 0005: 0x54 0x00 0x00 0x0000ffff  A &amp;= 0xffff
+ 0006: 0x02 0x00 0x00 0x00000003  mem[3] = A
+ 0007: 0x87 0x00 0x00 0x00000000  A = X
+ 0008: 0x74 0x00 0x00 0x00000010  A &gt;&gt;= 16
+ 0009: 0x02 0x00 0x00 0x00000002  mem[2] = A
+ 0010: 0x20 0x00 0x00 0x00000014  A = args[0] &gt;&gt; 32
+ 0011: 0x07 0x00 0x00 0x00000000  X = A
+ 0012: 0x54 0x00 0x00 0x0000ffff  A &amp;= 0xffff
+ 0013: 0x02 0x00 0x00 0x00000001  mem[1] = A
+ 0014: 0x87 0x00 0x00 0x00000000  A = X
+ 0015: 0x74 0x00 0x00 0x00000010  A &gt;&gt;= 16
+ 0016: 0x02 0x00 0x00 0x00000000  mem[0] = A
+ 0017: 0x60 0x00 0x00 0x00000000  A = mem[0]
+ 0018: 0x15 0x00 0x01 0x00000000  if (A != 0) goto 0020
+ 0019: 0x00 0x00 0x00 0x00010000  A = 65536
+ 0020: 0x24 0x00 0x00 0x00006761  A *= 0x6761
+ 0021: 0x07 0x00 0x00 0x00000000  X = A
+ 0022: 0x34 0x00 0x00 0x00010001  A /= 0x10001
+ 0023: 0x24 0x00 0x00 0x00010001  A *= 0x10001
+ 0024: 0x84 0x00 0x00 0x00000000  A = -A
+ 0025: 0x0c 0x00 0x00 0x0000c450  A += X
+ 0026: 0x15 0x00 0x01 0x00010000  if (A != 65536) goto 0028
+ 0027: 0x00 0x00 0x00 0x00000000  A = 0
+ 0028: 0x02 0x00 0x00 0x00000000  mem[0] = A
+ 0029: 0x60 0x00 0x00 0x00000001  A = mem[1]
+ 0030: 0x04 0x00 0x00 0x00006c66  A += 0x6c66
+ 0031: 0x54 0x00 0x00 0x0000ffff  A &amp;= 0xffff
+ 0032: 0x02 0x00 0x00 0x00000001  mem[1] = A
+ 0033: 0x60 0x00 0x00 0x00000002  A = mem[2]
+ 0034: 0x04 0x00 0x00 0x00005f65  A += 0x5f65
+ 0035: 0x54 0x00 0x00 0x0000ffff  A &amp;= 0xffff
+ 0036: 0x02 0x00 0x00 0x00000002  mem[2] = A
+ 0037: 0x60 0x00 0x00 0x00000003  A = mem[3]
+ 0038: 0x15 0x00 0x01 0x00000000  if (A != 0) goto 0040
+ 0039: 0x00 0x00 0x00 0x00010000  A = 65536
+ 0040: 0x24 0x00 0x00 0x00006b61  A *= 0x6b61
+ 0041: 0x07 0x00 0x00 0x00000000  X = A
+ 0042: 0x34 0x00 0x00 0x00010001  A /= 0x10001
+ 0043: 0x24 0x00 0x00 0x00010001  A *= 0x10001
+ 0044: 0x84 0x00 0x00 0x00000000  A = -A
+ 0045: 0x0c 0x00 0x00 0x00001577  A += X
+ 0046: 0x15 0x00 0x01 0x00010000  if (A != 65536) goto 0048
+ 0047: 0x00 0x00 0x00 0x00000000  A = 0
+ 0048: 0x02 0x00 0x00 0x00000003  mem[3] = A
+ 0049: 0x60 0x00 0x00 0x00000000  A = mem[0]
+ 0050: 0x61 0x00 0x00 0x00000002  X = mem[2]
+ 0051: 0xac 0x00 0x00 0x0000340f  A ^= X
+ 0052: 0x02 0x00 0x00 0x00000004  mem[4] = A
+ 0053: 0x60 0x00 0x00 0x00000001  A = mem[1]
+ 0054: 0x61 0x00 0x00 0x00000003  X = mem[3]
+ 0055: 0xac 0x00 0x00 0x0000af9f  A ^= X
+ 0056: 0x02 0x00 0x00 0x00000005  mem[5] = A
+ 0057: 0x60 0x00 0x00 0x00000004  A = mem[4]
+ 0058: 0x15 0x00 0x01 0x00000000  if (A != 0) goto 0060
+...
+ 4037: 0x0c 0x00 0x00 0x0000fc4b  A += X
+ 4038: 0x15 0x00 0x01 0x00010000  if (A != 65536) goto 4040
+ 4039: 0x00 0x00 0x00 0x00000000  A = 0
+ 4040: 0x02 0x00 0x00 0x00000003  mem[3] = A
+ 4041: 0x01 0x00 0x00 0x00001337  X = 4919
+ 4042: 0x60 0x00 0x00 0x00000003  A = mem[3]
+ 4043: 0xac 0x00 0x00 0x00008080  A ^= X
+ 4044: 0x15 0x01 0x00 0x00005d3e  if (A == 23870) goto 4046
+ 4045: 0x06 0x00 0x00 0x00000000  return KILL
+ 4046: 0x60 0x00 0x00 0x00000002  A = mem[2]
+ 4047: 0xac 0x00 0x00 0x000031c8  A ^= X
+ 4048: 0x15 0x01 0x00 0x0000d4d8  if (A == 54488) goto 4050
+ 4049: 0x06 0x00 0x00 0x00000000  return KILL
+ 4050: 0x60 0x00 0x00 0x00000001  A = mem[1]
+ 4051: 0xac 0x00 0x00 0x00000503  A ^= X
+ 4052: 0x15 0x01 0x00 0x000066c7  if (A == 26311) goto 4054
+ 4053: 0x06 0x00 0x00 0x00000000  return KILL
+ 4054: 0x60 0x00 0x00 0x00000000  A = mem[0]
+ 4055: 0xac 0x00 0x00 0x0000302c  A ^= X
+ 4056: 0x15 0x01 0x00 0x00009cef  if (A == 40175) goto 4058
+ 4057: 0x06 0x00 0x00 0x00000000  return KILL
+</pre>
+<p>Full dumped file <a href="https://gist.github.com/vanhoavn/1d76a613a41000acb366506ab9c70e47/">here</a>.</p>
+<p>He tried to solve using z3 which seems practically impossible without optimizing.</p>
+<p>After play a bit with the patterns in the dump, i notice some common patterns:</p>
+<ul>
+<li>swap pattern:</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; SWAP($mem1, $mem2)
+A = $mem1
+X = $mem2
+$mem1 = X
+$mem2 = A
+</pre>
+<ul>
+<li>xor pattern:</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; $mem3 = $mem1 ^ $mem2
+A = $mem1
+X = $mem2
+A ^= X
+$mem3 = A</pre>
+<ul>
+<li>add pattern:</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; $mem3 = ($mem1 + $mem2) &amp; 0xFFFF
+A = $mem1
+X = $mem2
+A += X
+A &amp;= 0xffff
+$mem3 = A
+</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; $mem2 = ($mem1 + $num1) &amp; 0xFFFF
+A = $mem1
+A += $num1
+A &amp;= 0xffff
+$mem2 = A
+</pre>
+<ul>
+<li>mod 0x10001 pattern:</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; $mem2 = ((CHK0($mem1) * $num2) %0x10001) &amp; 0xFFFF
+A = $mem1
+if (A != 0) goto $line1
+A = 65536
+A *= $num2
+X = A
+A /= 0x10001
+A *= 0x10001
+A = -A
+A += X
+if (A != 65536) goto $line2
+A = 0
+$mem2 = A
+</pre>
+<ul>
+<li>check memory pattern:</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; REQUIREMEM($num4, $num3, $num2, $num1, $num0)
+X = $num0
+A = mem[3]
+A ^= X
+if (A == $num1) goto $line1
+return KILL
+A = mem[2]
+A ^= X
+if (A == $num2) goto $line2
+return KILL
+A = mem[1]
+A ^= X
+if (A == $num3) goto $line3
+return KILL
+A = mem[0]
+A ^= X
+if (A == $num4) goto $line4
+return KILL
+</pre>
+<ul>
+<li>load argument pattern:</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; LOADMEM($arg1)
+A = $arg1
+X = A
+A &amp;= 0xffff
+mem[3] = A
+A = X
+A &gt;&gt;= 16
+mem[2] = A
+A = $arg1 &gt;&gt; 32
+X = A
+A &amp;= 0xffff
+mem[1] = A
+A = X
+A &gt;&gt;= 16
+mem[0] = A
+</pre>
+<p>Using these pattern and after play some more we notice some more generic patterns:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; BLOCK($num1, $num2, $num3, $num4, $num5, $num6)
+mem[0] = ((CHK0(mem[0]) * $num1) %0x10001) &amp; 0xFFFF
+mem[1] = (mem[1] + $num2) &amp; 0xFFFF
+mem[2] = (mem[2] + $num3) &amp; 0xFFFF
+mem[3] = ((CHK0(mem[3]) * $num4) %0x10001) &amp; 0xFFFF
+mem[4] = mem[0] ^ mem[2]
+mem[5] = mem[1] ^ mem[3]
+mem[4] = ((CHK0(mem[4]) * $num5) %0x10001) &amp; 0xFFFF
+mem[5] = (mem[4] + mem[5]) &amp; 0xFFFF
+mem[5] = ((CHK0(mem[5]) * $num6) %0x10001) &amp; 0xFFFF
+mem[4] = (mem[4] + mem[5]) &amp; 0xFFFF
+mem[0] = mem[0] ^ mem[5]
+mem[1] = mem[1] ^ mem[4]
+mem[2] = mem[2] ^ mem[5]
+mem[3] = mem[3] ^ mem[4]</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; INITIAL($num1, $num2, $num3, $num4)
+mem[0] = ((CHK0(mem[0]) * $num1) %0x10001) &amp; 0xFFFF
+mem[1] = (mem[1] + $num2) &amp; 0xFFFF
+mem[2] = (mem[2] + $num3) &amp; 0xFFFF
+mem[3] = ((CHK0(mem[3]) * $num4) %0x10001) &amp; 0xFFFF
+</pre>
+<p>Here&#8217;s the script to apply these patterns:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vanhoavn/728e5ec804050572a984b73afd7736e6.js"></script><noscript>View the code on <a href="https://gist.github.com/vanhoavn/728e5ec804050572a984b73afd7736e6">Gist</a>.</noscript></div>
+<p>Which provided final block code:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">A = sys_number
+if (A == 0x1337) goto 0003
+return ALLOW
+LOADMEM(args[0])
+BLOCK(0x6761, 0x6c66, 0x5f65, 0x6b61, 0x665f, 0x615f)
+SWAP(mem[1], mem[2])
+BLOCK(0x6d61, 0x5f49, 0xccbe, 0xcad6, 0xc2cc, 0xbec2)
+SWAP(mem[1], mem[2])
+BLOCK(0xbeda, 0xc2be, 0x92ce, 0xc2d8, 0xad85, 0x997d)
+SWAP(mem[1], mem[2])
+BLOCK(0x857d, 0xb585, 0x7d25, 0x9d85, 0xb199, 0x7d95)
+SWAP(mem[1], mem[2])
+BLOCK(0xfb0a, 0xfb6b, 0xafa, 0x4b3b, 0xb63, 0x32fb)
+SWAP(mem[1], mem[2])
+BLOCK(0x2b5b, 0xb32, 0xd615, 0xf496, 0x7616, 0xc665)
+SWAP(mem[1], mem[2])
+BLOCK(0xf656, 0xb616, 0x65f6, 0x15f6, 0x2cec, 0x2d8c)
+SWAP(mem[1], mem[2])
+BLOCK(0xcbec, 0xad6c, 0x2ccb, 0xec2b, 0xedac, 0x2be9)
+INITIAL(0x1997, 0xd95a, 0xd859, 0x97d8)
+REQUIREMEM(44702, 45409, 6003, 2695, 4919)
+LOADMEM(args[1])
+BLOCK(0x7665, 0x725f, 0x7972, 0x375f, 0x6e30, 0x5f65)
+SWAP(mem[1], mem[2])
+BLOCK(0x6d6f, 0x435f, 0xbef2, 0xe46e, 0xbedc, 0x60be)
+SWAP(mem[1], mem[2])
+BLOCK(0xcada, 0xde86, 0xbeec, 0xcae4, 0xdd7d, 0xb8c1)
+SWAP(mem[1], mem[2])
+BLOCK(0x7d95, 0xb5bd, 0xd7d, 0xd995, 0xc97d, 0xe5c8)
+SWAP(mem[1], mem[2])
+BLOCK(0x82fb, 0x2b6b, 0x7a1a, 0xfbb3, 0x2b92, 0xfbcb)
+SWAP(mem[1], mem[2])
+BLOCK(0x91ba, 0xfb71, 0xd6f4, 0x35f7, 0x6657, 0x25f7)
+SWAP(mem[1], mem[2])
+BLOCK(0x9723, 0x75f6, 0xe305, 0xf656, 0xeecc, 0xae4b)
+SWAP(mem[1], mem[2])
+BLOCK(0xef2e, 0x46eb, 0xedc6, 0xbec, 0xadad, 0xe86b)
+INITIAL(0x97de, 0x5c8d, 0xd7db, 0x8c17)
+REQUIREMEM(39867, 15917, 15970, 37882, 4919)
+LOADMEM(args[2])
+BLOCK(0x6e69, 0x6b78, 0x7866, 0x5f73, 0x6968, 0x745f)
+SWAP(mem[1], mem[2])
+BLOCK(0x6573, 0x7265, 0xf0f0, 0xccbe, 0xe6d2, 0xd0e8)
+SWAP(mem[1], mem[2])
+BLOCK(0xbeca, 0xe6e4, 0xcadc, 0xd2d6, 0x7dcd, 0xa5a1)
+SWAP(mem[1], mem[2])
+BLOCK(0xd17d, 0x95cd, 0xc995, 0xb9a5, 0xade1, 0xe199)
+SWAP(mem[1], mem[2])
+BLOCK(0x43a2, 0xfb2b, 0x9b93, 0x2b73, 0x4b5b, 0xc3c3)
+SWAP(mem[1], mem[2])
+BLOCK(0x32fb, 0x9b4b, 0x5737, 0x2656, 0xe696, 0xb787)
+SWAP(mem[1], mem[2])
+BLOCK(0x8665, 0xf736, 0x9687, 0x45f6, 0xadcd, 0x2d6f)
+SWAP(mem[1], mem[2])
+BLOCK(0xf0c, 0xcbee, 0x6d2d, 0xe8b, 0xecae, 0x6e4c)
+INITIAL(0xde1e, 0x1997, 0xdcda, 0x5a1d)
+REQUIREMEM(45968, 47503, 4914, 18106, 4919)
+LOADMEM(args[3])
+BLOCK(0x2173, 0x656c, 0x7572, 0x5f70, 0x6d6f, 0x6363)
+SWAP(mem[1], mem[2])
+BLOCK(0x6573, 0x5f67, 0xd8ea, 0xe4be, 0xe0da, 0xdec6)
+SWAP(mem[1], mem[2])
+BLOCK(0xc6ca, 0xe6be, 0xce42, 0xe6ca, 0x7dc1, 0xb5bd)
+SWAP(mem[1], mem[2])
+BLOCK(0x8d8d, 0x95cd, 0x7d9c, 0x85cd, 0x95b1, 0xd5c9)
+SWAP(mem[1], mem[2])
+BLOCK(0x7b1b, 0x1b2b, 0x9afb, 0x390b, 0x9b2b, 0x63ab)
+SWAP(mem[1], mem[2])
+BLOCK(0x92fb, 0x836b, 0x5735, 0xf672, 0x1736, 0x56c7)
+SWAP(mem[1], mem[2])
+BLOCK(0x5725, 0xf706, 0xd6f6, 0x3636, 0xe42e, 0x6cad)
+SWAP(mem[1], mem[2])
+BLOCK(0x8eae, 0x4bee, 0xdad, 0xec6c, 0x6cae, 0x6bec)
+INITIAL(0x5b1d, 0x5c97, 0xdc1b, 0x5bd8)
+REQUIREMEM(52416, 34922, 5033, 1967, 4919)
+LOADMEM(args[4])
+BLOCK(0x6761, 0x6c66, 0x5f65, 0x6b61, 0x665f, 0x615f)
+SWAP(mem[1], mem[2])
+BLOCK(0x6d61, 0x5f49, 0xccbe, 0xcad6, 0xc2cc, 0xbec2)
+SWAP(mem[1], mem[2])
+BLOCK(0xbeda, 0xc2be, 0x92ce, 0xc2d8, 0xad85, 0x997d)
+SWAP(mem[1], mem[2])
+BLOCK(0x857d, 0xb585, 0x7d25, 0x9d85, 0xb199, 0x7d95)
+SWAP(mem[1], mem[2])
+BLOCK(0xfb0a, 0xfb6b, 0xafa, 0x4b3b, 0xb63, 0x32fb)
+SWAP(mem[1], mem[2])
+BLOCK(0x2b5b, 0xb32, 0xd615, 0xf496, 0x7616, 0xc665)
+SWAP(mem[1], mem[2])
+BLOCK(0xf656, 0xb616, 0x65f6, 0x15f6, 0x2cec, 0x2d8c)
+SWAP(mem[1], mem[2])
+BLOCK(0xcbec, 0xad6c, 0x2ccb, 0xec2b, 0xedac, 0x2be9)
+INITIAL(0x1997, 0xd95a, 0xd859, 0x97d8)
+REQUIREMEM(40175, 26311, 54488, 23870, 4919)</pre>
+<p>Code for BLOCK operation:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vanhoavn/38b46d544c24db4d0e504269baa99fca.js"></script><noscript>View the code on <a href="https://gist.github.com/vanhoavn/38b46d544c24db4d0e504269baa99fca">Gist</a>.</noscript></div>
+<p>The multiplication modulo operation can be reversed easily using exgcd, remain step to reverse is the xor with <code>mem4</code> and <code>mem5</code> variables, but luckily <code>mem[0]^mem[2]</code> is constant after that step, so we can reverse blocks directly:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vanhoavn/625d1bb49cc2b639a67c08e4a4900386.js"></script><noscript>View the code on <a href="https://gist.github.com/vanhoavn/625d1bb49cc2b639a67c08e4a4900386">Gist</a>.</noscript></div>
+<p>After that the final reversing is very easy:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vanhoavn/dd44065050436ed70da9cfc731090132.js"></script><noscript>View the code on <a href="https://gist.github.com/vanhoavn/dd44065050436ed70da9cfc731090132">Gist</a>.</noscript></div>
+<p>Output:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">args[4]: 3399988180034215742
+args[3]: 3399988403602744163
+args[2]: 7310236399631692389
+args[1]: 8391157515662226017
+args[0]: 6878457303729123447
+6878457303729123447
+8391157515662226017
+7310236399631692389
+3399988403602744163
+3399988180034215742
+</pre>
+<p>Easy life.</p>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto) Secret Server</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<div id="challenge-description">
+<p>AES is unbreakable. Right?</p>
+<p>nc 52.193.157.19 9999</p>
+<p><a href="https://s3-ap-northeast-1.amazonaws.com/hitcon2017qual-static/secretserver-03f9e1472f1088fcf5571d3288e759e3.py">secretserver-03f9e1472f1088fcf5571d3288e759e3.py</a></p>
+</div>
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"></div></div></span></p>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>Provided python script is quite short:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vanhoavn/002f70a8300e61d419418a1ef37f88f8.js"></script><noscript>View the code on <a href="https://gist.github.com/vanhoavn/002f70a8300e61d419418a1ef37f88f8">Gist</a>.</noscript></div>
+<p>Some summary:</p>
+<ul>
+<li>AES with CBC mode.</li>
+<li>Controllable <code>IV</code> on decryption.</li>
+<li>Non-randomized pad-length byte padding and un-checked un-padding.</li>
+</ul>
+<p>So they matched for a padding-oracle attack.</p>
+<p><img src="https://i0.wp.com/upload.wikimedia.org/wikipedia/commons/thumb/8/80/CBC_encryption.svg/601px-CBC_encryption.svg.png?w=1170&#038;ssl=1" data-recalc-dims="1" /></p>
+<p><img src="https://i0.wp.com/upload.wikimedia.org/wikipedia/commons/thumb/2/2a/CBC_decryption.svg/601px-CBC_decryption.svg.png?w=1170&#038;ssl=1" data-recalc-dims="1" /></p>
+<p>First, we obtain the encrypted welcome message which provides us full information of that block&#8217;s encryption:</p>
+<ul>
+<li>Message <code>welcome_txt</code>: <code>"Welcome!!" + "\x07"*7</code></li>
+<li>IV <code>welcome_iv</code>: first 16 bytes of <code>E_welcome</code></li>
+<li>Ciphertext <code>welcome_cip</code>: remain 16 bytes of <code>E_welcome</code></li>
+</ul>
+<p>With these we can fully control the decrypted text of first block:</p>
+<img src='https://s0.wp.com/latex.php?latex=P%3DE%5Coplus+IV%5CRightarrow+P%5Coplus+x%3DE%5Coplus%5Cleft%28IV%5Coplus+x%5Cright%29&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='P=E\oplus IV\Rightarrow P\oplus x=E\oplus\left(IV\oplus x\right)' title='P=E\oplus IV\Rightarrow P\oplus x=E\oplus\left(IV\oplus x\right)' class='latex' />
+<p>or <img src='https://s0.wp.com/latex.php?latex=P_%7Bcontrol%7D%3DE_%7Bknown%7D+%5Coplus+IV_%7Bcontrol%7D&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='P_{control}=E_{known} \oplus IV_{control}' title='P_{control}=E_{known} \oplus IV_{control}' class='latex' />
+<p>where <img src='https://s0.wp.com/latex.php?latex=IV_%7Bcontrol%7D+%3D+IV+%5Coplus+x+%3D+IV+%5Coplus+P+%5Coplus+P_%7Bcontrol%7D&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='IV_{control} = IV \oplus x = IV \oplus P \oplus P_{control}' title='IV_{control} = IV \oplus x = IV \oplus P \oplus P_{control}' class='latex' />
+<p>So to let the decrypt function to decrypt the first block into any plaintext just use <code>IV xor P_0 xor P_target</code> as the new IV.</p>
+<p>So we can manage to run <code>get-flag</code> by that method and obtain the encrypted flag, which turned out to have 3 blocks.</p>
+<p>The first block of flag starts with <code>hitcon{</code> from the assert part in server code, which allow us to control first 7 bytes of the decrypted, which&#8217;s enough for the <code>get-md5</code> command.</p>
+<p>So for the first block, we can find each byte from 8<sup>th</sup> character by enumerating its value. Assume we already found out a prefix <code>p</code>, we can use the known welcome encryption information to generate encrypted <code>md5</code> hash of <code>p+c</code> for any char <code>c</code>, and then find <code>c_flag</code> by looking up <code>p+c_flag</code> using that encrypted <code>md5</code> lookup table. But at first we have to find out the 16<sup>th</sup> character of the first block so we can control the padding, which&#8217;s quite easy after we have all encrypted <code>md5</code> hash of any single byte character <code>S1</code>: just enumerating the last byte <code>c</code> until we receive a hash that&#8217;s inside <code>S1</code>, at that time the decrypted block must be <code>"get-md5" + (1 char) + (7 chars) + char(8)</code>, so the last byte is <code>c xor 8</code>.</p>
+<p>For the second and third block, i used the part <code>msg = recv_msg().strip()</code> to solve each byte using md5 by controlling the padding value: if <code>hash(s)=hash(s+c)</code> then <code>c</code> must be a whitespace character.</p>
+<p>Final solution below:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vanhoavn/57596dc9c7bf037da0f99b274b3d6ed1.js"></script><noscript>View the code on <a href="https://gist.github.com/vanhoavn/57596dc9c7bf037da0f99b274b3d6ed1">Gist</a>.</noscript></div>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto) Luaky</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<div id="challenge-description">
+<div id="challenge-description">
+<p>Are you luaky enough?</p>
+<p>nc 13.113.99.240 50216</p>
+<p><a href="https://s3-ap-northeast-1.amazonaws.com/hitcon2017qual-static/luaky-b96e16b023d07964125fa8a401b62504.elf">luaky-b96e16b023d07964125fa8a401b62504.elf</a></p>
+</div>
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"></div></div></span></p>
+</div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto) Very Luaky</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<div id="challenge-description">
+<div id="challenge-description">
+<div id="challenge-description">
+<p>You need to be VERY LUAKY 🙂</p>
+<p>nc 13.113.99.240 50216</p>
+<p><a href="https://s3-ap-northeast-1.amazonaws.com/hitcon2017qual-static/luaky-b96e16b023d07964125fa8a401b62504.elf">luaky-b96e16b023d07964125fa8a401b62504.elf</a></p>
+</div>
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"></div></div></span></p>
+</div>
+</div>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>Main function&#8217;s code:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vanhoavn/4414349b3160b97769831ef9286a46af.js"></script><noscript>View the code on <a href="https://gist.github.com/vanhoavn/4414349b3160b97769831ef9286a46af">Gist</a>.</noscript></div>
+<p>This&#8217;s a Rock-paper-scissors game which use 0,1,2 as the move values. It first require us to beat Slime bot and 10 Alpaca bots to obtain the first flag, and then 10 Nozomi and 100 randomly selected bots to obtain the second flag. We must send our AI as lua code once and every match will run without additional input.</p>
+<p>All bot use pseudo random number generator to generate their moves, send last move to our ai and read our next move, then compare these moves to decide who wins, we will play 100 000 matches each game and required to win 90%, which&#8217;s 90 000 matches in order to win the game.</p>
+<ol>
+<li>Slime bot: this&#8217;s the most simple bot, which generate next move as <code>next_move = (last_move+1) mod 3</code>.</li>
+<li>Alpaca bot: this bot generate next move by using state transform formula <code>number = last_user_move + number - 0x61C88647;</code> which <code>number</code> is <code>unsigned int</code> and first generated using a true random generator, and then calculate its move as <code>number mod 3</code>.</li>
+<li>Nozomi bot: this&#8217;s a more advanced bot which at first frightened me from understanding its state transform function (below), but after some google it&#8217;s turned out to be Park and Miller #2 RNG.</li>
+</ol>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">// decompiled code
+tmp = 48271 * number * (unsigned __int128)0x200000005uLL &gt;&gt; 64;
+number = 48271 * number - 0x7FFFFFFF * ((tmp + ((48271 * number - tmp) &gt;&gt; 1)) &gt;&gt; 30);
+// Park and Miller #2 RNG
+__uint64_t pm(__uint64_t x){
+ return (x*48271)%0x7FFFFFFF;
+}</pre>
+<p>First we need a way to detect the current bot we&#8217;re facing with, the easiest way is using game-counter variable but will lead into problem with 100 randomized game. We need to win 90 000 games, which mean we can lose 10 000 games, that&#8217;s a lot, so i spend 30 first moves to decide which&#8217;s the bot we&#8217;re facing:</p>
+<ol>
+<li><strong>Slime bot</strong>: Its formula is easy to verify, if all the first 30 moves are in the pattern 0,1,2,0,1,2,0,1,2&#8230; then that&#8217;s it.</li>
+<li><strong>Alpaca bot</strong>: At first i think this bot&#8217;s so easy, as <code>0x61C88647 mod 3 = 1</code> we just need to keep sending <code>1</code> as our move for the first 30 moves and then the <code>number</code> variable wont be changed. I was wrong. But luckily checking for number of unchanged moves is enough to verify this bot, which 50% of the moves must not be changed if we keep sending move <code>1</code>.</li>
+<li><strong>Nozomi bot</strong>: Simple, if it isnt slime, and isnt alpaca, then that&#8217;s it.</li>
+</ol>
+<p>Now&#8217;s the time for &#8220;AI&#8221;:</p>
+<ol>
+<li><strong>Slime bot</strong>: bot&#8217;s next move is <code>(last_move+1)%3</code>, easy.</li>
+<li><strong>Alpaca bot</strong>: due to the overflow problem, i thought this&#8217;s a RE problem first and move to other problems, but then @trichimtrich found out the problem. Subtracting <code>number</code> by <code>0x61C88647</code> frequency overflow the operation, which add into it a factor of <code>2^32 mod 3 = 1</code>,  he completed solution for this bot and i ported to lua. Primary idea is that each time our predict move is different from the actual move, <code>number</code> must have been overflowed, we just need to keep a range that move the same speed as <code>number</code> to check for overflow and adjust the modulo value when our current predicted value is out or in of that range.</li>
+<li><strong>Nozomi bot</strong>: as the function is a <code>PRNG</code> which distributes sample equally within <code>[0, 0x7FFFFFFF]</code>, we can somehow precompute a table of <code>2 000 000</code> samples which can be checked easily when <code>number</code> go into that table. I decided to use last 20 moves encoded in base 3 as key for the table. The probability that we failed to catch this table after 7000 moves is<code>((0x7FFFFFFF-2000000)/0x7FFFFFFF)^7000 = 0.00147029</code>, so our success rate is above <code>99%</code>.</li>
+</ol>
+<p>Final code that solved all these problems:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vanhoavn/8a969f6e329565351c20fff0331f2370.js"></script><noscript>View the code on <a href="https://gist.github.com/vanhoavn/8a969f6e329565351c20fff0331f2370">Gist</a>.</noscript></div>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-163" class="share-twitter sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-163" class="share-facebook sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-163" class="share-google-plus-1 sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/?share=google-plus-1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-163" class="share-linkedin sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/?share=linkedin" target="_blank" title="Click to share on LinkedIn"><span>LinkedIn</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/?share=reddit" target="_blank" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-pinterest"><a rel="nofollow" data-shared="sharing-pinterest-163" class="share-pinterest sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/?share=pinterest" target="_blank" title="Click to share on Pinterest"><span>Pinterest</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/#print" target="_blank" title="Click to print"><span>Print</span></a></li><li class="share-end"></li></ul></div></div></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div>			</div><!-- .entry-content -->
+
+		<footer class="entry-footer">
+		<span class="cat-links">Posted in <a href="https://www.vhn.vn/blog/index.php/category/ctf/" rel="category tag">CTF</a></span>	</footer><!-- .entry-footer -->
+	</article><!-- #post-## -->
+
+			
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://www.vhn.vn/blog/index.php/2017/10/19/hack-lu-2017/" rel="prev">hack.lu 2017</a></div></div>
+	</nav>
+			
+<div id="disqus_thread"></div>
+
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	
+<div id="secondary" class="widget-area no-toggle" role="complementary">
+	<span class="sidebar-close"><i class="fa fa-times"></i></span>
+	<aside id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://www.vhn.vn/blog/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h4 class="widget-title">Recent Posts</h4>		<ul>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/">HITCON CTF 2017 Quals</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/10/19/hack-lu-2017/">hack.lu 2017</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/">Vue single file component and typescript</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/">0CTF 2016</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/">BKPCTF 2016</a>
+									</li>
+					</ul>
+		</aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h4 class="widget-title">Recent Comments</h4><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Tung Thanh</span> on <a href="https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/#comment-3">Một bài toán tính tổng</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h4 class="widget-title">Archives</h4>		<ul>
+			<li><a href='https://www.vhn.vn/blog/index.php/2017/11/'>November 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2017/10/'>October 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2017/07/'>July 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2016/03/'>March 2016</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/11/'>November 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/09/'>September 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/04/'>April 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/03/'>March 2015</a></li>
+		</ul>
+		</aside><aside id="categories-2" class="widget widget_categories"><h4 class="widget-title">Categories</h4>		<ul>
+	<li class="cat-item cat-item-2"><a href="https://www.vhn.vn/blog/index.php/category/ctf/" >CTF</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://www.vhn.vn/blog/index.php/category/trick/" >Trick</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://www.vhn.vn/blog/index.php/category/uncategorized/" >Uncategorized</a>
+</li>
+		</ul>
+</aside><aside id="meta-2" class="widget widget_meta"><h4 class="widget-title">Meta</h4>			<ul>
+			<li><a href="https://www.vhn.vn/blog/wp-login.php?action=register">Register</a></li>			<li><a href="https://www.vhn.vn/blog/wp-login.php">Log in</a></li>
+			<li><a href="https://www.vhn.vn/blog/index.php/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://www.vhn.vn/blog/index.php/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+			</aside></div><!-- #secondary -->
+
+		</div>
+	</div><!-- #content -->
+
+	
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="site-info container">
+			<a href="http://wordpress.org/" rel="nofollow">Proudly powered by WordPress</a><span class="sep"> | </span>Theme: <a href="http://justfreethemes.com/oria" rel="nofollow">Oria</a> by JustFreeThemes.		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+	<div style="display:none">
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/www.vhn.vn\/blog\/index.php\/2017\/11\/06\/hitcon-ctf-2017-quals\/":163};
+	</script>
+		<link rel='stylesheet' id='su-box-shortcodes-css'  href='https://www.vhn.vn/blog/wp-content/plugins/shortcodes-ultimate/assets/css/box-shortcodes.css?ver=5.0.3' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/widget.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/tabs.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/photon/photon.min.js?ver=20130122'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"vhnvn"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/disqus-comment-system/public/js/comment_count.js?ver=3.0.16'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.16"},"disqusIdentifier":"163 https:\/\/www.vhn.vn\/blog\/?p=163","disqusShortname":"vhnvn","disqusTitle":"HITCON CTF 2017 Quals","disqusUrl":"https:\/\/www.vhn.vn\/blog\/index.php\/2017\/11\/06\/hitcon-ctf-2017-quals\/","postId":"163"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/disqus-comment-system/public/js/comment_embed.js?ver=3.0.16'></script>
+<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201905'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/skip-link-focus-fix.js?ver=20130115'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/comment-reply.min.js?ver=4.9.9'></script>
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/enlighter/resources/EnlighterJS.min.js?ver=3.6'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/wp-embed.min.js?ver=4.9.9'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/oembed-gist/js/script.min.js?ver=4.9.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var su_other_shortcodes = {"no_preview":"This shortcode doesn't work in live preview. Please insert it into editor and preview on the site."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/shortcodes-ultimate/assets/js/other-shortcodes.js?ver=5.0.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=6.1.1'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-google-plus-1', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-linkedin', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+</script>
+<script type="text/javascript">/* <![CDATA[ */EnlighterJS_Config = {"selector":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"language":"generic","theme":"enlighter","indent":2,"hover":"hoverEnabled","showLinenumbers":true,"rawButton":true,"infoButton":true,"windowButton":true,"rawcodeDoubleclick":false,"grouping":true,"cryptex":{"enabled":false,"email":"mail@example.tld"}};!function(){var a=function(a){var b="Enlighter Error: ";console.error?console.error(b+a):console.log&&console.log(b+a)};return window.addEvent?"undefined"==typeof EnlighterJS?void a("Javascript Resources not loaded yet!"):"undefined"==typeof EnlighterJS_Config?void a("Configuration not loaded yet!"):void window.addEvent("domready",function(){EnlighterJS.Util.Init(EnlighterJS_Config.selector.block,EnlighterJS_Config.selector.inline,EnlighterJS_Config)}):void a("MooTools Framework not loaded yet!")}();;/* ]]> */</script>
+<!-- Shortcodes Ultimate custom CSS - start -->
+<style type="text/css">
+.su-spoiler-content {
+	border-left: 1px dashed #999;
+}
+</style>
+<!-- Shortcodes Ultimate custom CSS - end -->
+<script type='text/javascript' src='https://stats.wp.com/e-201905.js' async='async' defer='defer'></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:6.1.1',blog:'100285338',post:'163',tz:'7',srv:'www.vhn.vn'} ]);
+	_stq.push([ 'clickTrackerInit', '100285338', '163' ]);
+</script>
+
+</body>
+</html>

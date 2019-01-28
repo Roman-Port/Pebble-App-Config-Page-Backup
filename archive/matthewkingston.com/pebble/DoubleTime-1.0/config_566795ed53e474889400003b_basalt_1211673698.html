@@ -1,0 +1,342 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>DoubleTime 1.0</title>
+<link rel="stylesheet" type="text/css" href="/matthewkingston.com/pebble/slate/dist/css/slate.css">
+<script src="/matthewkingston.com/pebble/slate/dist/js/slate.js"></script>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+</head>
+<body>
+<h1 class=" title">DoubleTime 1.0</h1>
+<form>
+<div class=" item-container">
+<div class=" item-container-header">
+Default Configurations
+</div>
+<div class=" item-container-content">
+<label class=" item">&nbsp;<select id="DEFAULTS" class="OptionUpdate item-select" name="DEFAULTS" dir="rtl"><option class="item-select-option" value="" selected="TRUE">Choose a default configuration</option>
+<option class="item-select-option" value="FFFFFF|555555|AAAAAA|0000FF||||||FF0000|||||">Blue/Red on White</option>
+<option class="item-select-option" value="000000|AAAAAA|555555|FFFFFF||||||FFFF00|||||">White/Yellow on Black</option>
+</select></label>
+
+</div><div class=" item-container-footer">
+To save or load a custom configuration string, scroll to the bottom of this page.<br><br> 
+			<font size="+1"><b>Suggestions for color defaults?</b> <a href="mailto:matt@hitormiss.org">Copy/Email the Configuration 
+			String at the bottom of the page to Matt</a>.</font>
+</div>
+</div>
+
+<div class=" item-container">
+<div class=" item-container-header">
+Color Face Colors
+</div>
+<div class=" item-container-content">
+<label class=" item">Background<input type="text" id="COLOR_BACKGROUND" class="OptionUpdate item-color item-color-normal" name="COLOR_BACKGROUND" value="#FFFFFF"></label>
+<label class=" item">Dial Minute Marks<input type="text" id="COLOR_TICKS_MINOR" class="OptionUpdate item-color item-color-normal" name="COLOR_TICKS_MINOR" value="#AAAAAA"></label>
+<label class=" item">Dial 5-Minute Marks<input type="text" id="COLOR_TICKS_MAJOR" class="OptionUpdate item-color item-color-normal" name="COLOR_TICKS_MAJOR" value="#555555"></label>
+
+</div></div>
+
+<div class=" item-container">
+<div class=" item-container-header">
+Primary Time Zone
+</div>
+<div class=" item-container-content">
+<div class="item">
+Enter a text label for the Primary Time Zone below. 
+				<i>Max 15 chars. May use A-Z, 0-9, +, -, space.</i><br>
+				Use the slider below to set the Font Size
+</div><label class=" item"><div class="item-input-wrapper">
+<input type="text" id="NAME_TIME_1" class="OptionUpdate item-input" name="NAME_TIME_1" placeholder="Time Zone Label" value="New York">
+</div></label>
+<label class=" item"><input type="range" id="FONT_SIZE_TIME_1" class="OptionUpdate item-slider" name="FONT_SIZE_TIME_1" value="10" min="8" max="20"><div class="item-input-wrapper item-slider-text"><input type="text" class="item-input" name="FONT_SIZE_TIME_1" value="10"></div></label>
+<label class=" item">Hand & Label Color<input type="text" id="COLOR_TIME_1" class="OptionUpdate item-color item-color-normal" name="COLOR_TIME_1" value="#0000FF"></label>
+<div class="item">
+Use the slider below to set the +/- UTC Time Hour Offset for the Primary Time Zone
+</div><label class=" item"><input type="range" id="OFFSET_HOUR_1" class="OptionUpdate item-slider" name="OFFSET_HOUR_1" value="-5" min="-12" max="14"><div class="item-input-wrapper item-slider-text"><input type="text" class="item-input" name="OFFSET_HOUR_1" value="-5"></div></label>
+<label class=" item">Minute Offset (typically not used)<select id="OFFSET_MIN_1" class="OptionUpdate item-select" name="OFFSET_MIN_1" dir="rtl"><option class="item-select-option" value="0" selected="TRUE">0</option>
+<option class="item-select-option" value="30">30</option>
+<option class="item-select-option" value="45">45</option>
+</select></label>
+<label class=" item">Use DST offset for this TZ<input type="checkbox" id="DST_TIME_1" class="OptionUpdate item-checkbox" name="DST_TIME_1" value="1"></label>
+
+</div></div>
+
+<div class=" item-container">
+<div class=" item-container-header">
+Secondary Time Zone
+</div>
+<div class=" item-container-content">
+<div class="item">
+Enter a text label for the Secondary Time Zone below. 
+				<i>Max 15 chars. May use A-Z, 0-9, +, -, space.</i><br>
+				Use the slider below to set the Font Size
+</div><label class=" item"><div class="item-input-wrapper">
+<input type="text" id="NAME_TIME_2" class="OptionUpdate item-input" name="NAME_TIME_2" placeholder="Time Zone Label" value="Los Angeles">
+</div></label>
+<label class=" item"><input type="range" id="FONT_SIZE_TIME_2" class="OptionUpdate item-slider" name="FONT_SIZE_TIME_2" value="10" min="8" max="20"><div class="item-input-wrapper item-slider-text"><input type="text" class="item-input" name="FONT_SIZE_TIME_2" value="10"></div></label>
+<label class=" item">Hand & Label Color<input type="text" id="COLOR_TIME_2" class="OptionUpdate item-color item-color-normal" name="COLOR_TIME_2" value="#FF0000"></label>
+<div class="item">
+Use the slider below to set the +/- UTC Time Offset for the Secondary Time Zone
+</div><label class=" item"><input type="range" id="OFFSET_HOUR_2" class="OptionUpdate item-slider" name="OFFSET_HOUR_2" value="-8" min="-12" max="14"><div class="item-input-wrapper item-slider-text"><input type="text" class="item-input" name="OFFSET_HOUR_2" value="-8"></div></label>
+<label class=" item">Minute Offset (typically not used)<select id="OFFSET_MIN_2" class="OptionUpdate item-select" name="OFFSET_MIN_2" dir="rtl"><option class="item-select-option" value="0" selected="TRUE">0</option>
+<option class="item-select-option" value="30">30</option>
+<option class="item-select-option" value="45">45</option>
+</select></label>
+<label class=" item">Use DST offset for this TZ<input type="checkbox" id="DST_TIME_2" class="OptionUpdate item-checkbox" name="DST_TIME_2" value="1"></label>
+
+</div></div>
+
+<div class="item-container">
+<div class="button-container">
+<input type="button" class="item-button" style="width: 40%;" name="BUTTON_SUBMIT" value="UPDATE"> <input type="button" class="item-button" style="width: 40%;" name="BUTTON_CANCEL" value="CANCEL">
+</div>
+</div>
+<div class=" item-container">
+<div class=" item-container-header">
+Custom Configuration String
+</div>
+<div class=" item-container-content">
+<textarea readonly="" id="CONFIG_STRING" value="" style="padding: 10px; width: 100%; height: 100%; background: transparent; resize: none; padding: 0; border: none; outline: none; boxshadow: none;"></textarea>
+</div></div>
+
+<div class="item-container">
+<div class="button-container">
+<input type="button" class="item-button" style="width: 40%;" name="BUTTON_COPY" value="COPY"> <input type="button" class="item-button" style="width: 40%;" name="BUTTON_PASTE" value="PASTE">
+</div>
+</div>
+</form>
+</body>
+</html>
+<style>
+	BODY { padding: 5px; }	
+	
+	#CONFIG_STRING {
+	    -webkit-touch-callout: text;
+	    -webkit-user-select: text;
+	    -khtml-user-select: text;
+	    -moz-user-select: text;
+	    -ms-user-select: text;
+	    user-select: text;
+	}
+	
+</style>
+<script language="javascript">
+
+	function saveOptions() 
+	{
+		var options = {
+			'KEY_CONFIG': FormatConfigString() + '|'
+		};
+		return options;
+	}
+
+	function FormatConfigString()
+	{
+	//COLOR_BACKGROUND|COLOR_TICKS_MAJOR|COLOR_TICKS_MINOR|
+	//COLOR_TIME_1|OFFSET_HOUR_1|OFFSET_MIN_1|DST_TIME_1|NAME_TIME_1|FONT_SIZE_TIME_1
+	//COLOR_TIME_2|OFFSET_HOUR_2|OFFSET_MIN_2|DST_TIME_2|NAME_TIME_2|FONT_SIZE_TIME_2
+
+		var ConfigArray = []; 
+
+		ConfigArray[0] = $("#COLOR_BACKGROUND").val().substring(1);
+		ConfigArray[1] = $("#COLOR_TICKS_MAJOR").val().substring(1);
+		ConfigArray[2] = $("#COLOR_TICKS_MINOR").val().substring(1);
+		
+		ConfigArray[3] = $("#COLOR_TIME_1").val().substring(1);
+		ConfigArray[4] = $("#OFFSET_HOUR_1").val();
+		ConfigArray[5] = $("#OFFSET_MIN_1").val();
+		ConfigArray[6] = Number($("#DST_TIME_1").is(':checked'));
+		ConfigArray[7] = $("#NAME_TIME_1").val().toUpperCase().substring(0, 14);
+		ConfigArray[8] = $("#FONT_SIZE_TIME_1").val();
+
+		ConfigArray[9] = $("#COLOR_TIME_2").val().substring(1);
+		ConfigArray[10] = $("#OFFSET_HOUR_2").val();
+		ConfigArray[11] = $("#OFFSET_MIN_2").val();
+		ConfigArray[12] = Number($("#DST_TIME_2").is(':checked'));
+		ConfigArray[13] = $("#NAME_TIME_2").val().toUpperCase().substring(0, 14);
+		ConfigArray[14] = $("#FONT_SIZE_TIME_2").val();
+
+		var ConfigString = ConfigArray.join("|"); //+'|';
+		return ConfigString.toUpperCase();	
+	}
+
+	function UpdateConfigString()
+	{
+		$("#CONFIG_STRING").val(FormatConfigString()+'_TwoTime_1.0');
+	}
+
+	function LoadConfigString(UseString)
+	{
+	//COLOR_BACKGROUND|COLOR_TICKS_MAJOR|COLOR_TICKS_MINOR|
+	//COLOR_TIME_1|OFFSET_HOUR_1|OFFSET_MIN_1|DST_TIME_1|NAME_TIME_1|FONT_SIZE_TIME_1
+	//COLOR_TIME_2|OFFSET_HOUR_2|OFFSET_MIN_2|DST_TIME_2|NAME_TIME_2|FONT_SIZE_TIME_2
+
+		if (!UseString) return;
+		console.log("UseString - " + UseString);
+		
+		UseString = UseString.trim();
+		UseString = UseString.replace(/\n|\r/g, "");
+		
+		StringArray = UseString.split('_');
+		UseString = StringArray[0];
+		
+		ConfigArray = UseString.split('|');
+		if (ConfigArray)
+		{
+			if (ConfigArray[0]!='') $("#COLOR_BACKGROUND").val('#'+ConfigArray[0]);
+			if (ConfigArray[1]!='') $("#COLOR_TICKS_MAJOR").val('#'+ConfigArray[1]);
+			if (ConfigArray[2]!='') $("#COLOR_TICKS_MINOR").val('#'+ConfigArray[2]);
+			
+			if (ConfigArray[3]!='') $("#COLOR_TIME_1").val('#'+ConfigArray[3]);
+			if (ConfigArray[4]!='') $("#OFFSET_HOUR_1").val(ConfigArray[4]);
+			if (ConfigArray[5]!='') $("#OFFSET_MIN_1").val(ConfigArray[5]);
+
+			if (ConfigArray[6]!='') 
+			{
+				if (ConfigArray[6]==1) $("#DST_TIME_1").prop("checked", "true");
+				else $("#DST_TIME_1").prop("checked", 0);
+			}
+			if (ConfigArray[7]!='') $("#NAME_TIME_1").val(ConfigArray[7]);
+			if (ConfigArray[8]!='') $("#FONT_SIZE_TIME_1").val(ConfigArray[8]);
+			
+			if (ConfigArray[9]!='') $("#COLOR_TIME_2").val('#'+ConfigArray[9]);
+			if (ConfigArray[10]!='') $("#OFFSET_HOUR_2").val(ConfigArray[10]);
+			if (ConfigArray[11]!='') $("#OFFSET_MIN_2").val(ConfigArray[11]);
+
+			if (ConfigArray[12]!='') {
+				if (ConfigArray[12]==1) $("#DST_TIME_2").prop("checked", "true");
+				else $("#DST_TIME_2").prop("checked", 0);
+			}
+			if (ConfigArray[13]!='') $("#NAME_TIME_2").val(ConfigArray[13]);
+			if (ConfigArray[14]!='') $("#FONT_SIZE_TIME_2").val(ConfigArray[14]);
+		}
+		UpdateConfigString();
+		$('.item-color').change();
+		$('.item-slider').change();
+		$('#FORMAT_MINUTES').change();
+	}
+	
+	// Something like this to get query variables.
+	function getQueryParam(variable, defaultValue)
+	{
+		// Find all URL parameters
+		var query = location.search.substring(1);
+		var vars = query.split('&');
+		for (var i = 0; i < vars.length; i++) 
+		{
+			var pair = vars[i].split('=');
+			// If the query variable parameter is found, decode it to use and return it for use
+			if (pair[0] === variable) 
+			{
+				return decodeURIComponent(pair[1]);
+			}
+		}
+		return defaultValue || false;
+	}
+	
+	$().ready(function()
+    {
+		// LOAD FORM WITH SAVED OPTION SETTINGS   	
+    	if (typeof window.localStorage !== "undefined") 
+    	{
+    		console.log("Not undefined :)");
+    		var SavedString = window.localStorage.DoubleTime10;
+    		LoadConfigString(SavedString);
+    		console.log("Load string from local storage: " + SavedString);			
+		}
+    	
+    	// INITIAL DISPLAY OF CUSTOM CONFIGUATION STRING
+		UpdateConfigString();
+		
+		// SET FORM OPTIONS TO UPDATE CONFIG STRING WHEN CHANGED
+		$(".OptionUpdate").change(function(){
+			UpdateConfigString();
+			//alert($(this).val());
+		});
+
+		$(document).on('click','input[type="radio"]', function(){       
+			UpdateConfigString();
+		});
+
+
+		// LOAD DEFAULT
+		$('#DEFAULTS').change(function()
+		{
+			if ($(this).val()) 
+			{
+				LoadConfigString($(this).val());
+				//alert($(this).val());
+			}
+    	});            
+
+		$("input[name=BUTTON_SUBMIT]").click(function() 
+		{
+			console.log("Submit");
+			var ConfigString = FormatConfigString();
+			if (typeof window.localStorage !== "undefined")
+			{
+				window.localStorage.DoubleTime10 = ConfigString;
+			}
+			console.log("String: " + ConfigString);
+
+			// Set the return URL depending on the runtime environment
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+    		console.log("Save string to local storage: " + ConfigString);				
+			console.log("Return to: " + return_to);
+			console.log("Parameters: " + encodeURIComponent(ConfigString));
+
+			var return_value = JSON.stringify(saveOptions());
+			loc = return_to + encodeURIComponent(return_value);
+			console.log("Warping to: " + loc);
+			
+			//console.log(location);
+			document.location = loc;
+		});
+		
+		$("input[name=BUTTON_CANCEL]").click(function() 
+		{
+			console.log("Cancel");
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+			document.location = return_to;
+		});
+		
+		var copyTextareaBtn = document.querySelector('input[name=BUTTON_COPY]');
+		copyTextareaBtn.addEventListener('click', function(event)
+		{
+			var copyTextarea = document.querySelector('#CONFIG_STRING');
+			copyTextarea.select();
+			
+			try
+			{
+				var successful = document.execCommand('copy');
+				if (!successful) alert('This doesn\'t work with your browser (you must copy the Configuration String manually).');
+				//var msg = successful ? 'successful' : 'unsuccessful';
+				//console.log('Copying text command was ' + msg);
+			}
+			catch (err) 
+			{
+				console.log('Oops, unable to copy');
+			}
+		});
+		
+		$("input[name=BUTTON_PASTE]").click(function() 
+		{
+			var PasteString = prompt("Please paste a custom configuration string", "");
+		    if (PasteString != null) LoadConfigString(PasteString);
+		});
+		
+	});
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64921467-6', 'auto');
+  ga('send', 'pageview');
+</script>

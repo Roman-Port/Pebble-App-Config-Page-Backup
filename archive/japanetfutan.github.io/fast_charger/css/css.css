@@ -1,0 +1,11 @@
+a,h2,h3,p,div,img{
+	margin-left: 15px;
+	margin-right: 15px;
+}
+pre{margin-left: 10px;
+	margin-right: 10px;
+}
+
+.small{
+  font-size: 45%;
+}

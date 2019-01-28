@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<!-- -*-coding: utf-8 -*-
+vim: sw=2 ts=2 expandtab ai
+-->
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body { background-color: black; text-align: center; color: white }
+      h1 { margin: 0 }
+      small { color: #d0d0d0 }
+      a { color: white }
+      input { height: 1.5em; font-size: 1em }
+			div { margin: 0.5em }
+      .text { width: 90%; margin: 0.3em; font-size: 0.3em; text-align: center }
+      .submit { width: 93%; margin: 0.4em }
+      .param { display: inline-table; width: 95%; height: 3em }
+      .label,.checkbox { display: table-cell; vertical-align: middle }
+      .label { text-align: left }
+      .checkbox { text-align: right; width: 1.5em; height: 1.5em }
+      .example { width: 75%; display: inline-block; text-align: left; font-size: 0.6em }
+    </style>
+    <script>
+
+      var config = {"config_show_no_phone":true,"config_show_weather":true,"config_temperature_units":0,"config_show_battery":true,"config_show_phone_battery":false,"config_vibe":false,"config_vibe_hour":false,"config_background":0};
+			var platform = "aplite";
+
+      function put_config() {
+        for (var param in config) {
+          var element = document.getElementById(param);
+          if (element) {
+            if (typeof config[param] === 'boolean') {
+              element.checked = config[param];
+            } else {
+              element.value = config[param];
+            }
+          }
+        }
+				if (platform == 'aplite' || platform == 'diorite')
+				{
+					document.getElementById('config_background').disabled = true;
+					document.getElementById('background_comment').innerHTML = 'Pebble Time only!';
+					document.getElementById('config_character').disabled = true;
+					document.getElementById('character_comment').innerHTML = 'Pebble Time only!';
+				}
+				if (platform == 'unknown')
+				{
+					document.getElementById('background_comment').innerHTML += '<br/>Pebble Time only!';
+					document.getElementById('character_comment').innerHTML += '<br/>Pebble Time only!';
+				}
+				check_left_info();
+      }
+
+      function get_config() {
+        var form = document.getElementById('config_form');
+        for (config = {}, i = 0; i < form.length ; i++) {
+          id = form[i].id;
+          if (id.indexOf('config_') === 0) {
+            if (form[i].type === 'checkbox') {
+              config[id] = form[i].checked;
+            } else {
+              config[id] = parseInt(form[i].value);
+            }
+          }
+        }
+				var return_to = "pebblejs://close#";
+       	return window.location.href = return_to + encodeURIComponent(JSON.stringify(config));
+      }
+
+			function check_left_info() {
+				var b = document.getElementById('config_show_weather').checked;
+				var w = document.getElementById('config_show_phone_battery').checked;
+				document.getElementById('warn1').innerHTML = document.getElementById('warn2').innerHTML = (b && w) ? "<font color='white'>Shake your watch to switch weather/battery modes</font>" : "";
+			}
+    </script>
+  </head>
+  <body onload="put_config();">
+    <h1>Mario Time</h1>
+    <small>by Alexey Avdyukhin and Denis Dzyubenko</small>
+    <hr size="1">
+
+    <form action="javascript: get_config();" id="config_form">
+      <div class="param">
+        <div class="label">
+          Show weather<br>
+          <small>Show weather based on your location</small>
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" id="config_show_weather" class="checkbox" onchange="check_left_info();">
+        </div>
+      </div>
+      <div class="param">
+        <div class="label">
+          Units<br>
+          <small>Temperature scale units</small>
+        </div>
+        <div class="checkbox">
+					<select id="config_temperature_units">
+					  <option value="0">Fahrenheit</option>
+					  <option value="1">Celsius</option>
+					</select>          
+        </div>			
+      </div>
+			<small id="warn1"></small>
+			<hr size="1">
+      <div class="param">
+        <div class="label">
+          Show watch battery<br>
+          <small>Show watch battery level</small>
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" id="config_show_battery" class="checkbox">
+        </div>
+      </div>
+      <hr size="1">
+      <div class="param">
+        <div class="label">
+          Show phone battery<br>
+          <small>Show phone battery level<br><b>Android only! Companion app required!</b><br>Download (copy&paste this URL to browser):</small><br>
+					<input type='text' class='text' value='http://clusterrr.com/soft/PebbleMarioAndroid.apk'>
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" id="config_show_phone_battery" class="checkbox" onchange="check_left_info();">
+        </div>
+      </div>
+			<small id="warn2"></small>
+			<hr size="1">
+      <div class="param">
+        <div class="label">
+          Show "no connection" icon<br>
+          <small>Show the icon when phone is not connected</small>
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" id="config_show_no_phone" class="checkbox">
+        </div>
+      </div>
+			<hr size="1">
+      <div class="param">
+        <div class="label">
+          Vibe on disconnect<br>
+          <small>Vibe when phone is disconnected</small>
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" id="config_vibe" class="checkbox">
+        </div>
+      </div>
+	<hr size="1">
+      <div class="param">
+        <div class="label">
+          Hourly vibration<br>
+          <small>Vibe every hour</small>
+        </div>
+        <div class="checkbox">
+          <input type="checkbox" id="config_vibe_hour" class="checkbox">
+        </div>
+      </div>
+      <hr size="1">
+      <div class="param">
+        <div class="label">
+          Level<br>
+          <small id="background_comment">Select background image</small>
+        </div>
+        <div class="checkbox">
+					<select id="config_background">
+					  <option value="0">Rotate during day</option>
+					  <option value="1">Outdoors, day</option>
+					  <option value="2">Outdoors, night</option>
+					  <option value="3">Underground</option>
+					  <option value="4">Castle</option>
+					</select>          
+      	</div>
+      </div>
+      <hr size="1">
+      <div class="param">
+        <div class="label">
+          Character<br>
+          <small id="character_comment">Select character to show</small>
+        </div>
+        <div class="checkbox">
+					<select id="config_character">
+					  <option value="0">Mario</option>
+					  <option value="1">Luigi</option>
+					  <option value="2">Bowser :)</option>
+					</select>          
+      	</div>
+      </div>
+			<hr size="1">
+			<input type="submit" id="save" class="submit" value="Save and apply">
+		</form>
+  </body>
+</html>

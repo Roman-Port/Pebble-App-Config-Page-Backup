@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html> 
+    <head>
+        <meta charset="utf-8">
+        <title>Big H - Watchface Settings</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.0/jquery.css">
+        <link rel="stylesheet" href="/rawgithub.com/samalander/big-h/master/webconfig/big-h.css">
+        <script src="/code.jquery.com//jquery-1.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/code.jquery.com/mobile/1.4.0/jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script src="big-h.config.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <body>
+        <div data-role="page">
+            <div data-role="header">
+                <h1>Big H</h1>
+                <h2>Watchface Settings</h2>
+            </div>
+            <div data-role="ui-content">
+            	<form>
+                    <div id="weekday_format">
+                        <h3>Weekday Format</h3>
+                        <fieldset data-role="controlgroup">
+                            <input type="radio" name="weekday_format" value="0" id="weekday_format_intl" checked="checked">
+                            <label for="weekday_format_intl">International (numbers only; shows the current day of the week as well as 3 days before and after)</label>
+                            <input type="radio" name="weekday_format" value="1" id="weekday_format_en">
+                            <label for="weekday_format_en">English</label>
+                            <input type="radio" name="weekday_format" value="2" id="weekday_format_fr">
+                            <label for="weekday_format_fr">French</label>
+                            <input type="radio" name="weekday_format" value="3" id="weekday_format_es">
+                            <label for="weekday_format_es">Spanish</label>
+                        </fieldset>
+                    </div>
+                    <div id="weekday_first_day" data-role="collapsible" data-collapsed="false" id="weekday_first_day_set">
+                        <h3>First Day of the Week</h3>
+                        <p>Only relevant if the "International" weekday format is chosen above</p>
+                        <fieldset data-role="controlgroup">
+                            <input type="radio" name="weekday_first_day" value="0" id="weekday_first_day_sun" checked="checked">
+                            <label for="weekday_first_day_sun">Sunday</label>
+                            <input type="radio" name="weekday_first_day" value="1" id="weekday_first_day_mon">
+                            <label for="weekday_first_day_mon">Monday</label>
+                            <input type="radio" name="weekday_first_day" value="2" id="weekday_first_day_tue">
+                            <label for="weekday_first_day_tue">Tuesday</label>
+                            <input type="radio" name="weekday_first_day" value="3" id="weekday_first_day_wed">
+                            <label for="weekday_first_day_wed">Wednesday</label>
+                            <input type="radio" name="weekday_first_day" value="4" id="weekday_first_day_thu">
+                            <label for="weekday_first_day_thu">Thursday</label>
+                            <input type="radio" name="weekday_first_day" value="5" id="weekday_first_day_fri">
+                            <label for="weekday_first_day_fri">Friday</label>
+                            <input type="radio" name="weekday_first_day" value="6" id="weekday_first_day_sat">
+                            <label for="weekday_first_day_sat">Saturday</label>
+                        </fieldset>
+                    </div>
+                    <div id="vibrate_on_hour">
+                        <label for="vibrate_on_hour_field"><h3>Vibrate Every Hour</h3></label>
+                        <input type="checkbox" data-role="flipswitch" name="vibrate_on_hour" value="1" id="vibrate_on_hour_field">
+                    </div>
+                    <div id="display_seconds">
+                        <label for="display_seconds_field"><h3>Display Seconds Indicator</h3></label>
+                        <input type="checkbox" data-role="flipswitch" name="display_seconds" value="1" id="display_seconds_field" checked="checked">
+                    </div>
+                    <div id="leading_zero">
+                        <label for="leading_zero_field"><h3>Display Leading Zero on Hour</h3></label>
+                        <input type="checkbox" data-role="flipswitch" name="leading_zero" value="1" id="leading_zero_field">
+                    </div>
+                    <div id="date_format">
+                        <h3>Date Format</h3>
+                        <fieldset data-role="controlgroup">
+                            <input type="radio" name="date_format" value="0" id="date_format_default" checked="checked">
+                            <label for="date_format_default">Default (Y-M-D if 24h or M/D/Y if 12h)</label>
+                            <input type="radio" name="date_format" value="1" id="date_format_custom">
+                            <label for="date_format_custom">Custom (fill-in the format below)</label>
+                        </fieldset>
+                        <div data-role="collapsible" data-collapsed="true" id="date_format_custom_set">
+                            <h3>Custom Date Format</h3>
+                            <fieldset data-role="controlgroup" data-mini="true">
+                                <select name="date_format_0">
+                                    <option value="">Nothing</option>
+                                    <optgroup label="Date Elements">
+                                        <option value="Y">Year (4-digits)</option>
+                                        <option value="y">Year (2-digits)</option>
+                                        <option value="M">Month (with leading zero)</option>
+                                        <option value="m">Month (no leading zero)</option>
+                                        <option value="D">Day (with leading zero)</option>
+                                        <option value="d">Day (no leading zero)</option>
+                                    </optgroup>
+                                    <optgroup label="Separators">
+                                        <option value="-">- (dash)</option>
+                                        <option value="/">/ (slash)</option>
+                                        <option value=".">. (dot)</option>
+                                        <option value=" ">" " (space)</option>
+                                    </optgroup>
+                                </select>
+                                <select name="date_format_1">
+                                    <option value="">Nothing</option>
+                                    <optgroup label="Date Elements">
+                                        <option value="Y">Year (4-digits)</option>
+                                        <option value="y">Year (2-digits)</option>
+                                        <option value="M">Month (with leading zero)</option>
+                                        <option value="m">Month (no leading zero)</option>
+                                        <option value="D">Day (with leading zero)</option>
+                                        <option value="d">Day (no leading zero)</option>
+                                    </optgroup>
+                                    <optgroup label="Separators">
+                                        <option value="-">- (dash)</option>
+                                        <option value="/">/ (slash)</option>
+                                        <option value=".">. (dot)</option>
+                                        <option value=" ">" " (space)</option>
+                                    </optgroup>
+                                </select>
+                                <select name="date_format_2">
+                                    <option value="">Nothing</option>
+                                    <optgroup label="Date Elements">
+                                        <option value="Y">Year (4-digits)</option>
+                                        <option value="y">Year (2-digits)</option>
+                                        <option value="M">Month (with leading zero)</option>
+                                        <option value="m">Month (no leading zero)</option>
+                                        <option value="D">Day (with leading zero)</option>
+                                        <option value="d">Day (no leading zero)</option>
+                                    </optgroup>
+                                    <optgroup label="Separators">
+                                        <option value="-">- (dash)</option>
+                                        <option value="/">/ (slash)</option>
+                                        <option value=".">. (dot)</option>
+                                        <option value=" ">" " (space)</option>
+                                    </optgroup>
+                                </select>
+                                <select name="date_format_3">
+                                    <option value="">Nothing</option>
+                                    <optgroup label="Date Elements">
+                                        <option value="Y">Year (4-digits)</option>
+                                        <option value="y">Year (2-digits)</option>
+                                        <option value="M">Month (with leading zero)</option>
+                                        <option value="m">Month (no leading zero)</option>
+                                        <option value="D">Day (with leading zero)</option>
+                                        <option value="d">Day (no leading zero)</option>
+                                    </optgroup>
+                                    <optgroup label="Separators">
+                                        <option value="-">- (dash)</option>
+                                        <option value="/">/ (slash)</option>
+                                        <option value=".">. (dot)</option>
+                                        <option value=" ">" " (space)</option>
+                                    </optgroup>
+                                </select>
+                                <select name="date_format_4">
+                                    <option value="">Nothing</option>
+                                    <optgroup label="Date Elements">
+                                        <option value="Y">Year (4-digits)</option>
+                                        <option value="y">Year (2-digits)</option>
+                                        <option value="M">Month (with leading zero)</option>
+                                        <option value="m">Month (no leading zero)</option>
+                                        <option value="D">Day (with leading zero)</option>
+                                        <option value="d">Day (no leading zero)</option>
+                                    </optgroup>
+                                    <optgroup label="Separators">
+                                        <option value="-">- (dash)</option>
+                                        <option value="/">/ (slash)</option>
+                                        <option value=".">. (dot)</option>
+                                        <option value=" ">" " (space)</option>
+                                    </optgroup>
+                                </select>
+                                <select name="date_format_5">
+                                    <option value="">Nothing</option>
+                                    <optgroup label="Date Elements">
+                                        <option value="Y">Year (4-digits)</option>
+                                        <option value="y">Year (2-digits)</option>
+                                        <option value="M">Month (with leading zero)</option>
+                                        <option value="m">Month (no leading zero)</option>
+                                        <option value="D">Day (with leading zero)</option>
+                                        <option value="d">Day (no leading zero)</option>
+                                    </optgroup>
+                                    <optgroup label="Separators">
+                                        <option value="-">- (dash)</option>
+                                        <option value="/">/ (slash)</option>
+                                        <option value=".">. (dot)</option>
+                                        <option value=" ">" " (space)</option>
+                                    </optgroup>
+                                </select>
+                                <select name="date_format_6">
+                                    <option value="">Nothing</option>
+                                    <optgroup label="Date Elements">
+                                        <option value="Y">Year (4-digits)</option>
+                                        <option value="y">Year (2-digits)</option>
+                                        <option value="M">Month (with leading zero)</option>
+                                        <option value="m">Month (no leading zero)</option>
+                                        <option value="D">Day (with leading zero)</option>
+                                        <option value="d">Day (no leading zero)</option>
+                                    </optgroup>
+                                    <optgroup label="Separators">
+                                        <option value="-">- (dash)</option>
+                                        <option value="/">/ (slash)</option>
+                                        <option value=".">. (dot)</option>
+                                        <option value=" ">" " (space)</option>
+                                    </optgroup>
+                                </select>
+                                <select name="date_format_7">
+                                    <option value="">Nothing</option>
+                                    <optgroup label="Date Elements">
+                                        <option value="Y">Year (4-digits)</option>
+                                        <option value="y">Year (2-digits)</option>
+                                        <option value="M">Month (with leading zero)</option>
+                                        <option value="m">Month (no leading zero)</option>
+                                        <option value="D">Day (with leading zero)</option>
+                                        <option value="d">Day (no leading zero)</option>
+                                    </optgroup>
+                                    <optgroup label="Separators">
+                                        <option value="-">- (dash)</option>
+                                        <option value="/">/ (slash)</option>
+                                        <option value=".">. (dot)</option>
+                                        <option value=" ">" " (space)</option>
+                                    </optgroup>
+                                </select>
+                                <select name="date_format_8">
+                                    <option value="">Nothing</option>
+                                    <optgroup label="Date Elements">
+                                        <option value="Y">Year (4-digits)</option>
+                                        <option value="y">Year (2-digits)</option>
+                                        <option value="M">Month (with leading zero)</option>
+                                        <option value="m">Month (no leading zero)</option>
+                                        <option value="D">Day (with leading zero)</option>
+                                        <option value="d">Day (no leading zero)</option>
+                                    </optgroup>
+                                    <optgroup label="Separators">
+                                        <option value="-">- (dash)</option>
+                                        <option value="/">/ (slash)</option>
+                                        <option value=".">. (dot)</option>
+                                        <option value=" ">" " (space)</option>
+                                    </optgroup>
+                                </select>
+                                <select name="date_format_9">
+                                    <option value="">Nothing</option>
+                                    <optgroup label="Date Elements">
+                                        <option value="Y">Year (4-digits)</option>
+                                        <option value="y">Year (2-digits)</option>
+                                        <option value="M">Month (with leading zero)</option>
+                                        <option value="m">Month (no leading zero)</option>
+                                        <option value="D">Day (with leading zero)</option>
+                                        <option value="d">Day (no leading zero)</option>
+                                    </optgroup>
+                                    <optgroup label="Separators">
+                                        <option value="-">- (dash)</option>
+                                        <option value="/">/ (slash)</option>
+                                        <option value=".">. (dot)</option>
+                                        <option value=" ">" " (space)</option>
+                                    </optgroup>
+                                </select>
+                            </fieldset>
+                            <p>Note that the display is limited to 10 characters; any additional characters will be truncated.</p>
+                        </div>
+                    </div>
+                    <div id="display_battery">
+                        <label for="display_battery_field"><h3>Display Watch Battery Status</h3></label>
+                        <input type="checkbox" data-role="flipswitch" name="display_battery" value="1" id="display_battery_field" checked="checked">
+                    </div>
+                    <input type="submit" value="Save Settings" id="save" data-icon="check">
+                    <input type="submit" value="Cancel" id="cancel" data-icon="delete">
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,465 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"; "_http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+
+    <meta charset="utf-8">
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+    <link href="/geol.com/pebble/colorpicker.css" rel="stylesheet" type="text/css">
+
+    <script src='/geol.com/pebble/batWatch2/script2.bin'></script>
+    <title>Bat Watch II configuration</title>
+    <style>
+	span{
+		font-size:x-small;
+	}
+	td{
+		text-align:center;
+	}
+			.selectedBat{
+				border-width: 3px;
+				border-style: solid;
+				margin:0px;
+			}
+			.unselectedBat{
+				border-width: 3px;
+				border-style: none;
+				margin:3px;
+			}
+
+    </style>
+
+  </head>
+  <body>
+    <div data-role="page" id="page1">
+<div data-theme="" data-role="header" style="height:50px;"><img src="/geol.com/pebble/batWatch2/BatWatches.gif" style="height:48px;float:left;"><img src="/geol.com/pebble/OS-Pebble.png" style="height:48px;float:right;"><h3>Bat Watch II for Unknown</h3></div><div style="text-align:center;background-color:silver;">Unknown</div>
+      <div data-role="content">
+	<h2>Options</h2>
+
+	<div class="ui-body ui-body-b">
+	  <fieldset class="ui-grid-a">
+	    <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel2">Cancel</button></div>
+	    <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit2">Save</button></div>
+	  </fieldset>
+	</div>
+
+	<hr>
+
+	<div>
+			<label>Select-A-Bat</label><br>
+		<table style="width:100%"><tr>
+		<td><img class="unselectedBat" id="bat0" style="background-color:black;height:25px;" src="/geol.com/pebble/batWatch2/batWebClear0.png" onclick="selectabat(0);"></td>
+		<td><img class="selectedBat" id="bat1" style="background-color:yellow;height:25px;" src="/geol.com/pebble/batWatch2/batWebClear1.png" onclick="selectabat(1);"></td>
+		<td><img class="unselectedBat" id="bat2" style="background-color:red;height:25px;" src="/geol.com/pebble/batWatch2/batWebClear2.png" onclick="selectabat(2);"></td>
+		<td><img class="unselectedBat" id="bat3" style="background-color:blue;height:25px;" src="/geol.com/pebble/batWatch2/batWebClear3.png" onclick="selectabat(3);"></td>
+		<td><img class="unselectedBat" id="bat4" style="background-color:red;height:25px;" src="/geol.com/pebble/batWatch2/batWebClear4.png" onclick="selectabat(4);"></td>
+		</tr></table>
+		
+		<div style="display:none;">
+			<input id="numOp6" type="range" min="0" max="4" value="0" onchange="if(doUpdate) updateControls(parseInt(this.value)+1);">
+		</div>
+	</div>
+	<button onclick="updateControls(parseInt(document.getElementById('numOp6').value)+1);">Reload Settings for selected Bat</button>
+	<hr>
+
+
+		<div>
+	  <label>Watch Background Color<br>
+		<span>Click to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('colorOp0'));">
+			<img id="colorOp0" style="background-color:lime;height:30px;" src="/geol.com/pebble/batWatch2/timeBackgroundColor.png"></a>
+		<br>
+		<span>Choose the color.</span>
+	  </label>
+	</div>
+	<hr>
+
+		<div>
+	  <label>Time Text Color<br>
+		<span>Click to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('colorOp1'));">
+			<img id="colorOp1" style="background-color:black;height:30px;" src="/geol.com/pebble/batWatch2/timeColor.png"></a>
+		<br>
+		<span>Choose the color.</span>
+
+	  </label>
+	</div>
+	<hr>
+
+		<div>
+	  <label>Time Shadow Color<br>
+		<span>Click to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('colorOp2'));" style="background-color: transparent; height:24px;">
+			<img id="colorOp2" style="background-color:silver;height:30px;" src="/geol.com/pebble/batWatch2/timeShadowColor.png"></a>
+		<br>
+		<span>Choose the color.</span>
+
+	  </label>
+	<br>
+	<br>
+	  <label>Time Shadow<br>
+		<span>Time Text casts Shadow</span>
+	  </label>
+	<table><tr>
+	<td><span>Upper Left</span></td>
+	<td><span>Upper Right</span></td>
+	</tr><tr>
+	<td>
+	  <select id="togOp4" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</td>
+	<td>
+	  <select id="togOp5" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</td>
+	</tr><tr>
+	<td><span>Lower Left</span></td>
+	<td><span>Lower Right</span></td>
+	</tr><tr>
+	<td>
+	  <select id="togOp6" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</td>
+	<td>
+	  <select id="togOp7" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</td>
+	</tr></table>
+			<label>Shadow Size</label><br>
+		<span>Adjust the size of the shadow<br>
+		<input id="numOp4" type="range" min="1" max="5" value="2">
+
+
+	</span></div>
+	<hr>
+
+
+	<div>
+	  <label>Show Seconds<br>
+		<span>Show the Seconds</span>
+	  </label><br>
+	  <select id="togOp14" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+
+		<div>
+	  <label>Seconds Color<br>
+		<span>Click to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('colorOp9'));">
+			<img id="colorOp9" style="background-color:black;height:30px;" src="/geol.com/pebble/batWatch2/timeBackgroundColor.png"></a>
+		<br>
+		<span>Choose the color.</span>
+	  </label>
+	</div>
+	<hr>
+
+		<div>
+	  <label>Seconds Shadow Color<br>
+		<span>Click to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('colorOp11'));" style="background-color: transparent; height:24px;">
+			<img id="colorOp11" style="background-color:silver;height:30px;" src="/geol.com/pebble/batWatch2/timeShadowColor.png"></a>
+		<br>
+		<span>Choose the color.</span>
+
+	  </label>
+	<br>
+	<br>
+	  <label>Seconds Shadow<br>
+		<span>Time Text casts Shadow</span>
+	  </label>
+	<table><tr>
+	<td><span>Upper Left</span></td>
+	<td><span>Upper Right</span></td>
+	</tr><tr>
+	<td>
+	  <select id="togOp8" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</td>
+	<td>
+	  <select id="togOp9" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</td>
+	</tr><tr>
+	<td><span>Lower Left</span></td>
+	<td><span>Lower Right</span></td>
+	</tr><tr>
+	<td>
+	  <select id="togOp10" data-role="slider">
+
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</td>
+	<td>
+	  <select id="togOp11" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</td>
+	</tr></table>
+			<label>Shadow Size</label><br>
+		<span>Adjust the size of the shadow<br>
+		<input id="numOp5" type="range" min="1" max="5" value="1">
+
+
+	</span></div>
+	<hr>
+
+		<div>
+	  <label>Date Color<br>
+		<span>Click to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('colorOp10'));">
+			<img id="colorOp10" style="background-color:black;height:30px;" src="/geol.com/pebble/batWatch2/timeBackgroundColor.png"></a>
+		<br>
+		<span>Choose the color.</span>
+	  </label>
+	</div>
+	<hr>
+
+
+
+
+	
+	<div>
+	  <label>BT Indicator<br>
+		<span>Show the current Bluetooth status</span>
+	  </label>
+		<table><tr>
+		<td><img style="background-color:silver;height:30px;" src="/geol.com/pebble/batWatch2/batWebClear0.png"></td>
+		<td><img style="background-color:silver;height:30px;" src="/geol.com/pebble/batWatch2/batWebDark0.png"></td>
+		</tr><tr>
+		<td><span>Connected</span></td><td><span>Disconnected</span></td>
+		</tr></table>
+	  <select id="togOp0" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+
+
+
+		<div>
+	  <label>Battey Defaut Color<br>
+		<span>Click to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('colorOp7'));" style="background-color: transparent; height:24px;">
+			<img id="colorOp7" style="background-color:silver;height:30px;" src="/geol.com/pebble/batWatch2/batWebClear0.png"></a>
+		<br>
+		<span>This is the default battery color.<br> If Battery colors are enabled, this color will be seen when level is above High value.</span>
+
+	  </label>
+	</div>
+	<hr>
+
+	<div>
+	  <label>Battery Colors<br>
+		<span>Click to change color</span><br>
+		<table><tr>
+		<td><span>Full</span></td>
+		<td><span>High</span></td>
+		<td><span>Med</span></td>
+		<td><span>Low</span></td>
+		</tr><tr>
+		<td>
+				<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('colorOp3'));" style="background-color: transparent; height:24px;">
+			<img id="colorOp3" style="background-color:silver;height:30px;" src="/geol.com/pebble/batWatch2/batWebClear0.png"></a>
+		</td>
+		<td>
+				<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('colorOp4'));" style="background-color: transparent; height:24px;">
+			<img id="colorOp4" style="background-color:silver;height:30px;" src="/geol.com/pebble/batWatch2/batWebClear0.png"></a>
+		</td>
+		<td>
+				<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('colorOp5'));" style="background-color: transparent; height:24px;">
+			<img id="colorOp5" style="background-color:silver;height:30px;" src="/geol.com/pebble/batWatch2/batWebClear0.png"></a>
+		</td>
+		<td>
+				<a href="#color-picker" data-rel="popup" data-position-to="window" onclick="getNewColor(document.getElementById('colorOp6'));" style="background-color: transparent; height:24px;">
+			<img id="colorOp6" style="background-color:silver;height:30px;" src="/geol.com/pebble/batWatch2/batWebClear0.png"></a>
+		</td>
+		</tr>
+		<tr>
+			<td>100%</td>
+				<td><a href="#number-picker" id="numOp1" data-rel="popup" data-position-to="origin" onclick="getNewNumber(this,parseInt(document.getElementById('numOp2').innerHTML),90);" style="background-color: transparent; height:24px;">
+		70%</a></td>
+				<td><a href="#number-picker" id="numOp2" data-rel="popup" data-position-to="origin" onclick="getNewNumber(this,parseInt(document.getElementById('numOp3').innerHTML),parseInt(document.getElementById('numOp1').innerHTML));" style="background-color: transparent; height:24px;">
+		50%</a></td>
+				<td><a href="#number-picker" id="numOp3" data-rel="popup" data-position-to="origin" onclick="getNewNumber(this,10,parseInt(document.getElementById('numOp2').innerHTML));" style="background-color: transparent; height:24px;">
+		30%</a></td>
+		</tr>
+		</table>
+		  <select id="togOp1" data-role="slider">
+		    <option value="off">Off</option>
+		    <option value="on">On</option>
+		  </select>
+		<br>
+		<span>Battery Color changes with battery level.<br>Note: 100% is only seen when plugged in and fully charged.</span>
+
+	  </label>
+	</div>
+	<hr>
+
+		<div>
+	  <label>Battery Level Color<br>
+		<span>Click to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="window" onclick="getNewColor(document.getElementById('colorOp8'));" style="background-color: transparent; height:24px;">
+			<img id="colorOp8" style="background-color:silver;height:30px;" src="/geol.com/pebble/batWatch2/batWebClear0.png"></a>
+		<br>
+		<select id="togOp2" data-role="slider">
+			<option value="off">Off</option>
+			<option value="on">On</option>
+		</select>
+		<br>
+		<span>This color changes height based on battery level. As battery decreses, it will expose Default color or Level colors</span>
+
+	  </label>
+	</div>
+	<hr>
+
+
+
+
+
+
+	<div>
+	  <label>Show Battery Text %<br>
+		<span>Show the current battery level as a text percent</span>
+	  </label><br>
+	  <select id="togOp3" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+
+		<div>
+	  <label>Battery Time Level Color<br>
+		<span>Click to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="window" onclick="getNewColor(document.getElementById('colorOp12'));" style="background-color: transparent; height:24px;">
+
+			<img id="colorOp12" style="background-color:silver;height:30px;" src="/geol.com/pebble/batWatch2/timeColor.png"></a>
+		<br>
+		<select id="togOp12" data-role="slider">
+			<option value="off">Off</option>
+			<option value="on">On</option>
+		</select>
+		<br>
+		<span>This option shows the battery level on the Time. Color changes height based on battery level. As battery decreses, it will expose Default color or Level colors</span>
+		<br>
+		<select id="togOp13" data-role="slider">
+			<option value="off">Off</option>
+			<option value="on">On</option>
+		</select>
+		<br>
+		<span>Use Battery Level Colors (from above) for Time Color</span>
+
+	  </label>
+	</div>
+	<hr>
+
+
+
+	<div>
+			<label>Battery Level Test</label><br>
+		<span>Used to simulate battery level.<br>Return to settings and submit with a value of zero for true battery level<br>
+		<input id="numOp0" type="range" min="0" max="100" value="0">
+	</span></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="ui-body ui-body-b">
+	  <fieldset class="ui-grid-a">
+	    <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+	    <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+	  </fieldset>
+	</div>
+
+
+<br>
+<br>
+
+
+
+<div data-role="popup" id="color-picker" data-overlay-theme="b">
+	<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<div data-role="main" id="color-picker" class="ui-content" style="border-style: none; height:90vh; width:5000px; overflow-y:scroll; overflow-x:hidden; ">
+	<div class="color-row" id="color-row1"><div class="color-box selected-color-box" id="color-box-000000" style="background:#000000;">0</div><div class="color-box selected-color-box" id="color-box-000055" style="background:#000055;">1</div><div class="color-box selected-color-box" id="color-box-0000AA" style="background:#0000AA;">2</div><div class="color-box selected-color-box" id="color-box-0000FF" style="background:#0000FF;">3</div></div><div class="color-row" id="color-row2"><div class="color-box selected-color-box" id="color-box-005500" style="background:#005500;">4</div><div class="color-box selected-color-box" id="color-box-005555" style="background:#005555;">5</div><div class="color-box selected-color-box" id="color-box-0055AA" style="background:#0055AA;">6</div><div class="color-box selected-color-box" id="color-box-0055FF" style="background:#0055FF;">7</div></div><div class="color-row" id="color-row3"><div class="color-box selected-color-box" id="color-box-00AA00" style="background:#00AA00;">8</div><div class="color-box selected-color-box" id="color-box-00AA55" style="background:#00AA55;">9</div><div class="color-box selected-color-box" id="color-box-00AAAA" style="background:#00AAAA;">10</div><div class="color-box selected-color-box" id="color-box-00AAFF" style="background:#00AAFF;">11</div></div><div class="color-row" id="color-row4"><div class="color-box selected-color-box" id="color-box-00FF00" style="background:#00FF00;">12</div><div class="color-box selected-color-box" id="color-box-00FF55" style="background:#00FF55;">13</div><div class="color-box selected-color-box" id="color-box-00FFAA" style="background:#00FFAA;">14</div><div class="color-box selected-color-box" id="color-box-00FFFF" style="background:#00FFFF;">15</div></div><div class="color-row" id="color-row5"><div class="color-box selected-color-box" id="color-box-550000" style="background:#550000;">16</div><div class="color-box selected-color-box" id="color-box-550055" style="background:#550055;">17</div><div class="color-box selected-color-box" id="color-box-5500AA" style="background:#5500AA;">18</div><div class="color-box selected-color-box" id="color-box-5500FF" style="background:#5500FF;">19</div></div><div class="color-row" id="color-row6"><div class="color-box selected-color-box" id="color-box-555500" style="background:#555500;">20</div><div class="color-box selected-color-box" id="color-box-555555" style="background:#555555;">21</div><div class="color-box selected-color-box" id="color-box-5555AA" style="background:#5555AA;">22</div><div class="color-box selected-color-box" id="color-box-5555FF" style="background:#5555FF;">23</div></div><div class="color-row" id="color-row7"><div class="color-box selected-color-box" id="color-box-55AA00" style="background:#55AA00;">24</div><div class="color-box selected-color-box" id="color-box-55AA55" style="background:#55AA55;">25</div><div class="color-box selected-color-box" id="color-box-55AAAA" style="background:#55AAAA;">26</div><div class="color-box selected-color-box" id="color-box-55AAFF" style="background:#55AAFF;">27</div></div><div class="color-row" id="color-row8"><div class="color-box selected-color-box" id="color-box-55FF00" style="background:#55FF00;">28</div><div class="color-box selected-color-box" id="color-box-55FF55" style="background:#55FF55;">29</div><div class="color-box selected-color-box" id="color-box-55FFAA" style="background:#55FFAA;">30</div><div class="color-box selected-color-box" id="color-box-55FFFF" style="background:#55FFFF;">31</div></div><div class="color-row" id="color-row9"><div class="color-box selected-color-box" id="color-box-AA0000" style="background:#AA0000;">32</div><div class="color-box selected-color-box" id="color-box-AA0055" style="background:#AA0055;">33</div><div class="color-box selected-color-box" id="color-box-AA00AA" style="background:#AA00AA;">34</div><div class="color-box selected-color-box" id="color-box-AA00FF" style="background:#AA00FF;">35</div></div><div class="color-row" id="color-row10"><div class="color-box selected-color-box" id="color-box-AA5500" style="background:#AA5500;">36</div><div class="color-box selected-color-box" id="color-box-AA5555" style="background:#AA5555;">37</div><div class="color-box selected-color-box" id="color-box-AA55AA" style="background:#AA55AA;">38</div><div class="color-box selected-color-box" id="color-box-AA55FF" style="background:#AA55FF;">39</div></div><div class="color-row" id="color-row11"><div class="color-box selected-color-box" id="color-box-AAAA00" style="background:#AAAA00;">40</div><div class="color-box selected-color-box" id="color-box-AAAA55" style="background:#AAAA55;">41</div><div class="color-box selected-color-box" id="color-box-AAAAAA" style="background:#AAAAAA;">42</div><div class="color-box selected-color-box" id="color-box-AAAAFF" style="background:#AAAAFF;">43</div></div><div class="color-row" id="color-row12"><div class="color-box selected-color-box" id="color-box-AAFF00" style="background:#AAFF00;">44</div><div class="color-box selected-color-box" id="color-box-AAFF55" style="background:#AAFF55;">45</div><div class="color-box selected-color-box" id="color-box-AAFFAA" style="background:#AAFFAA;">46</div><div class="color-box selected-color-box" id="color-box-AAFFFF" style="background:#AAFFFF;">47</div></div><div class="color-row" id="color-row13"><div class="color-box selected-color-box" id="color-box-FF0000" style="background:#FF0000;">48</div><div class="color-box selected-color-box" id="color-box-FF0055" style="background:#FF0055;">49</div><div class="color-box selected-color-box" id="color-box-FF00AA" style="background:#FF00AA;">50</div><div class="color-box selected-color-box" id="color-box-FF00FF" style="background:#FF00FF;">51</div></div><div class="color-row" id="color-row14"><div class="color-box selected-color-box" id="color-box-FF5500" style="background:#FF5500;">52</div><div class="color-box selected-color-box" id="color-box-FF5555" style="background:#FF5555;">53</div><div class="color-box selected-color-box" id="color-box-FF55AA" style="background:#FF55AA;">54</div><div class="color-box selected-color-box" id="color-box-FF55FF" style="background:#FF55FF;">55</div></div><div class="color-row" id="color-row15"><div class="color-box selected-color-box" id="color-box-FFAA00" style="background:#FFAA00;">56</div><div class="color-box selected-color-box" id="color-box-FFAA55" style="background:#FFAA55;">57</div><div class="color-box selected-color-box" id="color-box-FFAAAA" style="background:#FFAAAA;">58</div><div class="color-box selected-color-box" id="color-box-FFAAFF" style="background:#FFAAFF;">59</div></div><div class="color-row" id="color-row16"><div class="color-box selected-color-box" id="color-box-FFFF00" style="background:#FFFF00;">60</div><div class="color-box selected-color-box" id="color-box-FFFF55" style="background:#FFFF55;">61</div><div class="color-box selected-color-box" id="color-box-FFFFAA" style="background:#FFFFAA;">62</div><div class="color-box selected-color-box" id="color-box-FFFFFF" style="background:#FFFFFF;">63</div></div>	</div>
+</div>
+
+<div data-role="popup" id="number-picker" data-overlay-theme="b" style="width:90vw;">
+	<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<div data-role="main" id="num-picker" class="ui-content" style="border-style: none; height:20vh; ">
+		<input class="num-box" id="numPick" type="range" min="0" max="100" value="0" step="10">
+		<div class="ui-block-a"><button data-theme="d" id="b-OK">OK</button></div>
+	</div>
+</div>
+
+<br>
+<div style="text-align:center;">
+For more help with this app<br> or anything else Pebble related,<br> check out the Facebook group Pebble Junkies
+<br>
+<a href="/www.facebook.com/groups/pebble.junkies/.html">https://www.facebook.com/groups/pebble.junkies/</a>
+</div>
+<br>
+<hr><hr>
+<br>
+	<div style="text-align:center;">
+	If you like this application be sure to show some love in the App Store. 
+
+	<br><a href="https://apps.getpebble.com/applications/55a58d367c789d0178000066"><img src="/geol.com/pebble/heart.png"></a>
+	<br>
+	<br>
+
+	</div>
+</div>
+<table style="width:100%;background-color:silver;"><tr><td><img src="/geol.com/pebble/logs/SmileTinyGray.png"></td><td><img src="/geol.com/pebble/logs/FlexTimeTinyGray.png"></td><td><img src="/geol.com/pebble/logs/BatmanTinyGray.png"></td></tr></table>
+      <div data-theme="" data-role="header">
+	<img src="/geol.com/pebble/flags/us.png" style="float:left; margin:10px;" alt="United States" title="United States"> 	<img src="/geol.com//glogonew.gif" style="height:32px;float:right;">
+	<h3>Bat Watch II</h3>
+      </div>
+
+    </div>
+
+
+    <script>
+      $('#page1').bind('pageinit', setControls);
+    </script>
+
+	
+
+
+
+
+  </body>
+</html>
+

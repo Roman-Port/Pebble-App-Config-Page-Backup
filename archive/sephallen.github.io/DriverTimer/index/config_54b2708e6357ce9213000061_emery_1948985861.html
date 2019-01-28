@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<html>
+    <head>
+      <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="/sephallen.github.io/DriverTimer/css/materialize.css" media="screen,projection">
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+      <title>Driver Timer Settings</title>
+    </head>
+
+    <body class="green lighten-5">
+
+      <nav class="green">
+        <div class="nav-wrapper">
+          <a class="brand-logo"><i class="mdi-action-settings"></i> Driver Timer Settings</a>
+        </div>
+      </nav>
+      <br>
+      <div class="container">
+        <div class="row">
+          <div class="col s12">
+            <div class="card white">
+              <div class="card-content">
+                <span class="card-title black-text">Battery saver mode</span>
+                <p>Turning this on removes the seconds display to increase battery life</p>
+                <div class="card-action">
+                  <form>
+                    <p>
+                      <input name="seconds_select" type="radio" id="saver_on" value="on">
+                      <label for="saver_on">On</label>
+                    </p>
+                    <p>
+                      <input name="seconds_select" type="radio" id="saver_off" value="off">
+                      <label for="saver_off">Off</label>
+                    </p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col s12">
+            <div class="card white">
+              <div class="card-content">
+                <span class="card-title black-text">Change driving regulations</span>
+                <p>Switch between different rules to change working hours</p>
+                <div class="card-action">
+                  <form>
+                    <p>
+                      <input name="regs_select" type="radio" id="driving" value="driving">
+                      <label for="driving">EU driving rules (HGV)</label>
+                    </p>
+                    <p>
+                      <input name="regs_select" type="radio" id="domestic" value="domestic">
+                      <label for="domestic">EU domestic rules (van)</label>
+                    </p>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col s12">
+            <button id="save_button" class="btn waves-effect waves-light green">Save</button>
+          </div>
+
+          </div>
+
+        </div>
+
+      
+
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="/code.jquery.com//jquery-2.js"></script>
+      <script type="text/javascript" src="/sephallen.github.io/DriverTimer/js/materialize.js"></script>
+
+      <script>
+
+        $(document).ready(function() {
+          var battery = getURLVariable('battery');
+          battery = decodeURI(battery);
+
+          var rules = getURLVariable('rules');
+          rules = decodeURI(rules);
+
+          if (battery == 'on') {
+            $('#saver_on').attr('checked', 'checked');
+          } else {
+            $('#saver_off').attr('checked', 'checked');
+          }
+
+          if (rules == 'domestic') {
+            $('#domestic').attr('checked', 'checked');
+          } else {
+            $('#driving').attr('checked', 'checked');
+          }
+
+        });
+
+        //Setup to allow easy adding more options later
+        function saveOptions() {
+
+          var options = {
+            "seconds": $('input[name=seconds_select]:checked').val(),
+            "rules": $('input[name=regs_select]:checked').val()
+          }
+
+          return options;
+        };
+
+        var submitButton = document.getElementById("save_button");
+        submitButton.addEventListener("click",
+        function() {
+          console.log("Submit");
+
+          var options = saveOptions();
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+
+          document.location = location;
+        },
+        false);
+
+        function getURLVariable(name) {
+          name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+          var regexS = "[\\?&]"+name+"=([^&#]*)",
+              regex = new RegExp(regexS),
+              results = regex.exec(window.location.href);
+          if (results == null) return "";
+          else return results[1];
+        }
+
+      </script>
+
+    </body>
+  </html>
+</html>

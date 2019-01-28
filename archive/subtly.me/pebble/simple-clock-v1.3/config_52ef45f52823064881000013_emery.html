@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>SimpleTextClock</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+		<script src="/code.jquery.com//jquery-1.js"></script>
+		<script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+	</head>
+
+	<body>
+		<div data-role="page" id="main">
+
+			<div data-role="header" class="jqm-header">
+				<h1>SimpleTextClock</h1>
+			</div>
+
+			<div data-role="content">
+
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" name="color_scheme" id="color_scheme">
+							<legend>Color scheme</legend>
+							<input type="radio" name="color_scheme" id="color_scheme_1" value="0" checked="checked">
+							<label for="color_scheme_1">Black</label>
+							<input type="radio" name="color_scheme" id="color_scheme_2" value="1">
+							<label for="color_scheme_2">White</label>
+					</fieldset>
+				</div>
+				<div data-role="fieldcontain">
+					<label for="display_seconds">Display seconds on clock</label>
+					<select name="display_seconds" id="display_seconds" data-role="slider">
+						<option value="0">Off</option>
+						<option value="1">On</option>
+					</select>
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="display_battery">Display battery level</label>
+					<select name="display_battery" id="display_battery" data-role="slider">
+						<option value="0">Off</option>
+						<option value="1">On</option>
+					</select>
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="display_bluetooth">Display bluetooth indicator</label>
+					<select name="display_bluetooth" id="display_bluetooth" data-role="slider">
+						<option value="0">Off</option>
+						<option value="1">On</option>
+					</select>
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="display_transitions">Display transitions</label>
+					<select name="display_transitions" id="display_transitions" data-role="slider">
+						<option value="0">Off</option>
+						<option value="1">On</option>
+					</select>
+				</div>
+
+				<div data-role="fieldcontain">
+						<label for="always_show_info">Always show extra info</label>
+						<select name="always_show_info" id="always_show_info" data-role="slider">
+								<option value="0">Off</option>
+								<option value="1">On</option>
+						</select>
+				</div>
+
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true" name="show_date_format" id="show_date_format">
+							<legend>Date format</legend>
+							<input type="radio" name="show_date_format" id="date_format_1" value="0" checked="checked">
+							<label for="date_format_1">m/d/y</label>
+							<input type="radio" name="show_date_format" id="date_format_2" value="1">
+							<label for="date_format_2">d/m/y</label>
+							<input type="radio" name="show_date_format" id="date_format_3" value="2">
+							<label for="date_format_3">y/m/d</label>
+					</fieldset>
+				</div>
+
+				<div class="ui-body ui-body-b">
+					<fieldset class="ui-grid-a">
+						<div class="ui-block-b" style="width: 100%;"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+					</fieldset>
+				</div>
+
+			</div>
+
+		</div>
+
+		<script>
+			function getOptions() {
+				var options = {
+					'color_scheme'        : getRadioValue("color_scheme"),
+					'display_seconds'     : getSelectValue("display_seconds"),
+					'display_battery'     : getSelectValue("display_battery"),
+					'display_bluetooth'   : getSelectValue("display_bluetooth"),
+					'display_transitions' : getSelectValue("display_transitions"),
+					'always_show_info'    : getSelectValue("always_show_info"),
+					'show_date_format'    : getRadioValue("show_date_format")
+				}
+				return options;
+			}
+
+			$().ready(function() {
+
+				$("#b-submit").click(function() {
+					var dataString = JSON.stringify(getOptions());
+					var location = "pebblejs://close#" + encodeURIComponent(dataString);
+
+					document.location = location;
+				});
+
+				if (location.hash && location.hash.length) {
+					var json = decodeURIComponent(location.hash.substr(1));
+					if (typeof json === 'string') {
+						var config = JSON.parse(json);
+
+						for (var i in config) {
+							setValueForOption(i, config[i]);
+						}
+					}
+				}
+
+			});
+
+			function getSelectValue(id) {
+				return parseInt($("#" + id).val(), 10);
+			}
+
+			function getRadioValue(id) {
+				return parseInt($("input[name='" + id + "']:checked").val(), 10);
+			}
+
+			function setValueForOption(id, value) {
+				var elem = $("#" + id);
+				var type = elem.attr("data-role");
+
+				if (type == "slider") {
+					setSelectByValue(id, value);
+				}
+				else if (type == "controlgroup") {
+					setRadioByValue(id, value);
+				}
+			}
+
+			function setRadioByValue(id, val) {
+				$("input:radio[name='" + id + "']").filter("[value='" + val + "']").prop('checked', 'checked');
+				$("input:radio[name='" + id + "']").checkboxradio("refresh");
+			}
+
+			function setSelectByValue(id, val) {
+				var el = document.getElementById(id);
+
+				for (var i = 0; i < el.length; i++) {
+
+					if (el.options[i].value == val) {
+						el.options[i].selected = true;
+						$('#' + id).slider('refresh');
+						return true;
+					}
+
+				}
+			}
+		</script>
+
+	</body>
+
+</html>

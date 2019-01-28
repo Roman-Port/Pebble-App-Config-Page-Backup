@@ -1,0 +1,490 @@
+﻿<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+<meta charset="utf-8">
+<title>CastAlbums.org</title>
+<meta name="description" content="Cast Recording Database and FAQ">
+<meta name="keywords" content="mp3, mp3s, download, original, cast, recording, recordings, showtunes, musical, musicals, musical theatre, musical theater, show tunes, soundtrack, database, faq, frequently asked questions">
+<meta name="MSSmartTagsPreventParsing" content="TRUE">
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height">
+<script src="/castalbums.org/cdn-cgi/apps/head/ntCOSst-fx79jMAZf82XmmUQQZU.js"></script><link rel="dns-prefetch" href="/oss.maxcdn.com//.html">
+<link rel="dns-prefetch" href="//googleapis.com/">
+<link rel="dns-prefetch" href="/maxcdn.bootstrapcdn.com//.bin">
+<link rel="dns-prefetch" href="/code.jquery.com//.html">
+<link rel="dns-prefetch" href="/google-analytics.com//.html">
+<meta property="twitter:account_id" content="393674279">
+
+<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+	<![endif]-->
+<link href="http://fonts.googleapis.com/css?family=Open+Sans:400,800&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
+<link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css">
+<link href="/castalbums.org/includes/silksprites/silk-sprite.css" rel="stylesheet">
+<link href="/castalbums.org/includes/templates/bootstrap-3.1/style.css" rel="stylesheet">
+<script type="text/javascript" src="/code.jquery.com//jquery-2.js"></script>
+<script type="text/javascript" src="/code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+<script src="/maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.js"></script>
+<script data-cfasync="false" type="text/javascript" src="/castalbums.org/includes/castalbums.js"></script>
+<link rel="shortcut icon" href="/castalbums.org//favicon.bin">
+</head>
+<body>
+<div id="cr-site-container">
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+<div class="container">
+<div class="navbar-header">
+<span href="#" class="navbar-brand">Settings</span>
+</div>
+<div class="navbar1">
+<div class="nav navbar-nav navbar-right">
+<button type="submit" class="btn btn-default btn-sm navbar-btn b-submit">Save</button>
+<button type="submit" class="btn btn-default btn-sm navbar-btn b-cancel">Cancel</button>
+</div>
+</div>
+</div>
+</nav>
+<div class="container">
+<form class=" form-horizontal" role="form" method="Post">
+<h3>DEFAULTS</h3>
+<div class=" form-group"><label for="Form-DEFAULT" class=" control-label col-sm-3"><b>DEFAULT COLOR SCHEMES</b></label>
+<div class="col-sm-9"><div class="radio"><label>
+<input type="radio" class=" highlightable" name="DEFAULT" value="StackedDiscs_0|65|15|15|4|2|0000FF|FFFFFF|55FFFF|000000|55FFFF|000000|555555|AAAAAA|000000|FFFFFF|000000"> Blue (No Seconds)
+</label></div>
+<div class="radio"><label>
+<input type="radio" class=" highlightable" name="DEFAULT" value="StackedDiscs_0|65|10|12|2|2|AA0000|FFFF00|FF0000|000000|55FFFF|000000|555555|AAAAAA|000000|FFFFFF|000000"> Red (No Seconds)
+</label></div>
+<div class="radio"><label>
+<input type="radio" class=" highlightable" name="DEFAULT" value="StackedDiscs_1|70|10|12|2|2|005500|AAFFAA|00AA00|000000|AAFFAA|000000|555555|AAAAAA|000000|FFFFFF|000000"> Green (with Seconds)
+</label></div>
+</div></div>
+<h3>STACKED DISCS</h3>
+<div class="row">
+<div class="col-xs-6 col-md-6">
+<div class=" form-group"><label for="Form-DISC_RADIUS" class=" control-label col-sm-3"><b>RADIUS</b></label>
+<div class="col-sm-9"><select class="OptionUpdate form-control" id="DISC_RADIUS" name="DISC_RADIUS">
+<option value="60">60</option>
+<option value="61">61</option>
+<option value="62">62</option>
+<option value="63">63</option>
+<option value="64">64</option>
+<option value="65">65</option>
+<option value="66">66</option>
+<option value="67">67</option>
+<option value="68">68</option>
+<option value="69">69</option>
+<option value="70">70</option>
+</select></div></div>
+<div class=" form-group"><label for="Form-DISC_MARGIN" class=" control-label col-sm-3"><b>MARGIN</b></label>
+<div class="col-sm-9"><select class="OptionUpdate form-control" id="DISC_MARGIN" name="DISC_MARGIN">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10" selected="TRUE">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+</select></div></div>
+</div>
+<div class="col-xs-6 col-md-6">
+<div class=" form-group"><label for="Form-WIDTH_DISC_OUTLINE" class=" control-label col-sm-3"><b>OUTLINE WIDTH</b></label>
+<div class="col-sm-9"><select class="OptionUpdate form-control" id="WIDTH_DISC_OUTLINE" name="WIDTH_DISC_OUTLINE">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2" selected="TRUE">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+</select></div></div>
+<div class=" form-group"><label for="Form-DISC_POINT" class=" control-label col-sm-3"><b>POINT</b></label>
+<div class="col-sm-9"><select class="OptionUpdate form-control" id="DISC_POINT" name="DISC_POINT">
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10" selected="TRUE">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+</select></div></div>
+</div>
+</div>
+<h3>HOUR DISC</h3>
+<div class="row">
+<div class="col-xs-6 col-md-6">
+<div class=" form-group"><label for="Form-COLOR_HOUR" class=" control-label col-sm-3"><b>HOUR COLOR</b></label>
+<div class="col-sm-9"><input "="" type="text" id="COLOR_HOUR" class="OptionUpdate cp form-control" name="COLOR_HOUR" value="#0000ff" "=""></div></div>
+</div>
+<div class="col-xs-6 col-md-6">
+<div class=" form-group"><label for="Form-COLOR_HOUR_OUTLINE" class=" control-label col-sm-3"><b>OUTLINE COLOR</b></label>
+<div class="col-sm-9"><input "="" type="text" id="COLOR_HOUR_OUTLINE" class="OptionUpdate cp form-control" name="COLOR_HOUR_OUTLINE" value="#aaaaaa" "=""></div></div>
+</div>
+</div>
+<h3>MINUTES DISC</h3>
+<div class="row">
+<div class="col-xs-6 col-md-6">
+<div class=" form-group"><label for="Form-COLOR_MIN" class=" control-label col-sm-3"><b>MINUTE COLOR</b></label>
+<div class="col-sm-9"><input "="" type="text" id="COLOR_MIN" class="OptionUpdate cp form-control" name="COLOR_MIN" value="#55aaff" "=""></div></div>
+</div>
+<div class="col-xs-6 col-md-6">
+<div class=" form-group"><label for="Form-COLOR_MIN_OUTLINE" class=" control-label col-sm-3"><b>OUTLINE COLOR</b></label>
+<div class="col-sm-9"><input "="" type="text" id="COLOR_MIN_OUTLINE" class="OptionUpdate cp form-control" name="COLOR_MIN_OUTLINE" value="#000000" "=""></div></div>
+</div>
+</div>
+<h3>SECONDS DISC</h3>
+<div class="row">
+<div class="col-xs-6 col-md-6">
+<div class=" form-group"><label for="Form-COLOR_SEC" class=" control-label col-sm-3"><b>SECONDS COLOR</b></label>
+<div class="col-sm-9"><input "="" type="text" id="COLOR_SEC" class="cp form-control" name="COLOR_SEC" value="#55aaff" "=""></div></div>
+</div>
+<div class="col-xs-6 col-md-6">
+<div class=" form-group"><label for="Form-COLOR_SEC_OUTLINE" class=" control-label col-sm-3"><b>OUTLINE COLOR</b></label>
+<div class="col-sm-9"><input "="" type="text" id="COLOR_SEC_OUTLINE" class="cp form-control" name="COLOR_SEC_OUTLINE" value="#0000ff" "=""></div></div>
+</div>
+</div>
+<div class=" form-group"><label for="Form-SEC_SHOW" class=" control-label col-sm-3"><b>SHOW SECONDS RING?</b></label>
+<div class="col-sm-9"><label class="radio-inline">
+<input type="radio" class=" highlightable" name="SEC_SHOW" value="0"> No
+</label>
+<label class="radio-inline highlightLabel">
+<input type="radio" class=" highlightable" name="SEC_SHOW" value="1" checked="TRUE"> Yes
+</label>
+</div></div>
+<h3>DIGITAL TIME</h3>
+<div class="row">
+<div class="col-xs-6 col-md-6">
+<div class=" form-group"><label for="Form-COLOR_TIME" class=" control-label col-sm-3"><b>TIME COLOR</b></label>
+<div class="col-sm-9"><input "="" type="text" id="COLOR_TIME" class="cp form-control" name="COLOR_TIME" value="#ffffff" "=""></div></div>
+</div>
+<div class="col-xs-6 col-md-6">
+<div class=" form-group"><label for="Form-COLOR_TIME_OUTLINE" class=" control-label col-sm-3"><b>OUTLINE COLOR</b></label>
+<div class="col-sm-9"><input "="" type="text" id="COLOR_TIME_OUTLINE" class="cp form-control" name="COLOR_TIME_OUTLINE" value="#000000" "=""></div></div>
+</div>
+</div>
+<div class=" form-group"><label for="Form-WIDTH_TIME_OUTLINE" class=" control-label col-sm-3"><b>OUTLINE WIDTH</b></label>
+<div class="col-sm-9"><select class="OptionUpdate form-control" id="WIDTH_TIME_OUTLINE" name="WIDTH_TIME_OUTLINE">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2" selected="TRUE">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+</select></div></div>
+<h3>BACKGROUND</h3>
+<div class=" form-group"><label for="Form-COLOR_BACKGROUND" class=" control-label col-sm-3"><b>BACKGROUND COLOR</b></label>
+<div class="col-sm-9"><input "="" type="text" id="COLOR_BACKGROUND" class="OptionUpdate cp form-control" name="COLOR_BACKGROUND" value="#000000" "=""></div></div>
+<div class="row">
+<div class="col-xs-6 col-md-6">
+<div class=" form-group"><label for="Form-COLOR_TICKS" class=" control-label col-sm-3"><b>TICKS COLOR</b></label>
+<div class="col-sm-9"><input "="" type="text" id="COLOR_TICKS" class="OptionUpdate cp form-control" name="COLOR_TICKS" value="#555555" "=""></div></div>
+</div>
+<div class="col-xs-6 col-md-6">
+<div class=" form-group"><label for="Form-COLOR_TICKS_MAIN" class=" control-label col-sm-3"><b>MAIN TICKS</b></label>
+<div class="col-sm-9"><input "="" type="text" id="COLOR_TICKS_MAIN" class="OptionUpdate cp form-control" name="COLOR_TICKS_MAIN" value="#aaaaaa" "=""></div></div>
+</div>
+</div>
+<hr>
+<p>Suggestions for defaults? Aftering configuring your watch, <a href="/castalbums.org/cdn-cgi/l/email-protection#365b574242765e5f4259445b5f454518594451.html">copy/email the Configuration String below to Matt</a>.</p>
+<div id="CONFIG_STRING" class=" well">
+</div>
+</form>
+</div>
+<script data-cfasync="false" src="/castalbums.org/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.js"></script><script language="javascript" type="text/javascript" src="/castalbums.org/pebble/color_picker/js/jquery.js"></script>
+
+<style><!--
+
+BODY 
+{
+	background: #fff; 
+	padding: 70px 10px 10px;
+}
+
+HR { border-color: #999 !important; background-color: #999; color: #999; }
+
+.navbar-header {
+  float: left;
+}
+
+.navbar-nav {
+  float: left;
+  margin: 0;
+}
+.navbar-right {
+  float: right!important;
+  /* margin-right: -15px; */
+}
+
+div.colorPicker-picker {
+  height: 3em;
+  width: 10em;
+  padding: 0 !important;
+  border: 1px solid #ccc;
+  background: url(./color_picker/arrow.gif) no-repeat bottom right;
+  cursor: pointer;
+  line-height: 3em;
+  font-size: 0.75em;
+  font-weight: bold;
+  text-align: center;
+}
+
+div.colorPicker-palette {
+  width: 85%;
+  position: absolute;
+  border: 1px solid #598FEF;
+  background-color: #EFEFEF;
+  padding: 2px;
+  z-index: 9999;
+}
+  div.colorPicker_hexWrap, div.colorPicker_pebbleWrap {width: 100%; float:left }
+  div.colorPicker_hexWrap label, div.colorPicker_pebbleWrap label {font-size: 95%; color: #2F2F2F; margin: 5px 2px; width: 25%}
+  div.colorPicker_hexWrap input, div.colorPicker_pebbleWrap input {margin: 5px 2px; padding: 0; font-size: 95%; border: 1px solid #000; width: 65%; }
+
+div.colorPicker-swatch {
+  height: 3em;
+  width: 3em;
+  border: 1px solid #000;
+  margin: 2px;
+  float: left;
+  cursor: pointer;
+  line-height: 3em;
+}
+-->
+</style>
+<script language="javascript">
+
+	function saveOptions() 
+	{
+		var options = {
+			'KEY_CONFIG': FormatConfigString()
+		};
+		return options;
+	}
+
+	function FormatConfigString()
+	{
+		var ConfigArray = []; 
+		ConfigArray[0] = Number($("input[name=SEC_SHOW]:checked").val());
+		ConfigArray[1] = Number($("select[name=DISC_RADIUS]").val());
+		ConfigArray[2] = Number($("select[name=DISC_MARGIN]").val());
+		ConfigArray[3] = Number($("select[name=DISC_POINT]").val());
+		ConfigArray[4] = Number($("select[name=WIDTH_DISC_OUTLINE]").val());
+		ConfigArray[5] = Number($("select[name=WIDTH_TIME_OUTLINE]").val());		
+
+		ConfigArray[6] = $("input[name=COLOR_HOUR]").val().substring(1);
+		ConfigArray[7] = $("input[name=COLOR_HOUR_OUTLINE]").val().substring(1);
+		ConfigArray[8] = $("input[name=COLOR_MIN]").val().substring(1);
+		ConfigArray[9] = $("input[name=COLOR_MIN_OUTLINE]").val().substring(1);
+		ConfigArray[10] = $("input[name=COLOR_SEC]").val().substring(1);
+		ConfigArray[11] = $("input[name=COLOR_SEC_OUTLINE]").val().substring(1);
+
+		ConfigArray[12] = $("input[name=COLOR_TICKS]").val().substring(1);
+		ConfigArray[13] = $("input[name=COLOR_TICKS_MAIN]").val().substring(1);
+		ConfigArray[14] = $("input[name=COLOR_BACKGROUND]").val().substring(1);
+
+		ConfigArray[15] = $("input[name=COLOR_TIME]").val().substring(1);
+		ConfigArray[16] = $("input[name=COLOR_TIME_OUTLINE]").val().substring(1);
+	
+		var ConfigString = ConfigArray.join("|"); //+'|';
+		return ConfigString.toUpperCase();		
+	}
+
+	function UpdateConfigString()
+	{
+		var ConfigString = FormatConfigString();
+		console.log("Update String");
+		$("#CONFIG_STRING").text('StackedDiscs_'+ConfigString);
+	}
+
+	function LoadConfigString(UseString)
+	{
+		if (!UseString) return;
+		
+		UseString = UseString.trim();
+		UseString = UseString.replace(/\n|\r/g, "");
+				
+		ConfigArray = UseString.split('_');
+		if (ConfigArray[1]) UseString = ConfigArray[1];
+		else UseString = ConfigArray[0];
+				
+		ConfigArray = UseString.split("|");
+
+		//ConfigArray[0] = Number($("input[name=SEC_SHOW]:checked").val(ConfigArray[0]));
+		
+		$("input[name=SEC_SHOW][value='"+ConfigArray[0]+"']").prop("checked",true);
+		$("select[name=DISC_RADIUS]").val(ConfigArray[1]);
+		$("select[name=DISC_MARGIN]").val(ConfigArray[2]);
+		$("select[name=DISC_POINT]").val(ConfigArray[3]);
+		$("select[name=WIDTH_DISC_OUTLINE]").val(ConfigArray[4]);
+		$("select[name=WIDTH_TIME_OUTLINE]").val(ConfigArray[5]);
+		
+		$("input[name=COLOR_HOUR]").val('#'+ConfigArray[6]);
+		$("input[name=COLOR_HOUR_OUTLINE]").val('#'+ConfigArray[7]);
+		$("input[name=COLOR_MIN]").val('#'+ConfigArray[8]);
+		$("input[name=COLOR_MIN_OUTLINE]").val('#'+ConfigArray[9]);
+		$("input[name=COLOR_SEC]").val('#'+ConfigArray[10]);
+		$("input[name=COLOR_SEC_OUTLINE]").val('#'+ConfigArray[11]);
+
+		$("input[name=COLOR_TICKS]").val('#'+ConfigArray[12]);
+		$("input[name=COLOR_TICKS_MAIN]").val('#'+ConfigArray[13]);
+		$("input[name=COLOR_BACKGROUND]").val('#'+ConfigArray[14]);
+
+		$("input[name=COLOR_TIME]").val('#'+ConfigArray[15]);
+		$("input[name=COLOR_TIME_OUTLINE]").val('#'+ConfigArray[16]);
+
+		console.log("Load String: " + UseString);
+		
+		UpdateConfigString();
+		$(".cp").change();
+	}
+
+	// Something like this to get query variables.
+	function getQueryParam(variable, defaultValue)
+	{
+		// Find all URL parameters
+		var query = location.search.substring(1);
+		var vars = query.split('&');
+		for (var i = 0; i < vars.length; i++) 
+		{
+			var pair = vars[i].split('=');
+			// If the query variable parameter is found, decode it to use and return it for use
+			if (pair[0] === variable) 
+			{
+				return decodeURIComponent(pair[1]);
+			}
+		}
+		return defaultValue || false;
+	}
+
+    $().ready(function()
+    {
+		// LOAD FORM WITH SAVED OPTION SETTINGS   	
+    	if (typeof window.localStorage !== "undefined") 
+    	{
+    		console.log("Not undefined :)");
+	    	//if (typeof window.localStorage.StackedDiscsSettings !== "undefined") 
+	    	{
+	    		//data = JSON.parse(window.localStorage.SecondRingSettings);
+	    		//LoadConfigString(data['KEY_CONFIG']);
+	    		//console.log("Load string from local storage: " + data['KEY_CONFIG']);
+			
+	    		var SavedString = window.localStorage.StackedDiscsSettings;
+	    		LoadConfigString(SavedString);
+	    		console.log("Load string from local storage: " + SavedString);			
+			
+			}
+			$(".cp").change();
+		}
+
+    	// TURN ON BOOTSTRAP TAB SELECTION
+		//$('#SettingTabs a').click(function (e) {
+		//  e.preventDefault();
+		//  $(this).tab('show');
+		//});  		
+		
+		// INITIAL FORMATTING OF CONFIG STRING
+		UpdateConfigString();
+		
+		// SET FORM OPTIONS TO UPDATE CONFIG STRING WHEN CHANGED
+		$(".OptionUpdate").change(function(){
+			UpdateConfigString();
+		});
+
+		$("input[type=radio][name=SEC_SHOW]").change(function(){
+			UpdateConfigString();
+		});
+
+		// SET UP COLOR PICKERS
+		$.fn.colorPicker.defaults.colors = ['000000','555555','AAAAAA','FFFFFF','000055','0000AA','0000FF','005500','005555','0055AA','0055FF','00AA00','00AA55','00AAAA','00AAFF','00FF00','00FF55','00FFAA','00FFFF','550000','550055','5500AA','5500FF','555500','5555AA','5555FF','55AA00','55AA55','55AAAA','55AAFF','55FF00','55FF55','55FFAA','55FFFF','AA0000','AA0055','AA00AA','AA00FF','AA5500','AA5555','AA55AA','AA55FF','AAAA00','AAAA55','AAAAFF','AAFF00','AAFF55','AAFFAA','AAFFFF','FF0000','FF0055','FF00AA','FF00FF','FF5500','FF5555','FF55AA','FF55FF','FFAA00','FFAA55','FFAAAA','FFAAFF','FFFF00','FFFF55','FFFFAA'];
+		$('.cp').colorPicker(
+			{
+				onColorChange: function()
+				{
+					UpdateConfigString(); 
+				},
+				transparency: true
+			}
+		);
+		//$('.cp').colorPicker();
+			
+
+		// LOAD DEFAULT
+		$('input[type=radio][name=DEFAULT]').on('change', function()
+		{
+			LoadConfigString($(this).val());
+			console.log("Load string from default: " + $(this).val());				
+    	});            
+		$('#SUBMITTED').on('change', function()
+		{
+			if ($(this).val()) LoadConfigString($(this).val());
+    	});            
+
+		$(".b-submit").click(function() 
+		{
+			console.log("Submit");
+			var ConfigString = FormatConfigString();
+			if (typeof window.localStorage !== "undefined")
+			{
+				window.localStorage.StackedDiscsSettings = ConfigString;
+			}
+			console.log("String: " + ConfigString);
+
+			// Set the return URL depending on the runtime environment
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+    		console.log("Save string to local storage: " + ConfigString);				
+			console.log("Return to: " + return_to);
+			console.log("Parameters: " + encodeURIComponent(ConfigString));
+
+			var return_value = JSON.stringify(saveOptions());
+			loc = return_to + encodeURIComponent(return_value);
+			console.log("Warping to: " + loc);
+			
+			//console.log(location);
+			document.location = loc;
+		});
+		
+		$(".b-cancel").click(function() 
+		{
+			console.log("Cancel");
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+			document.location = return_to;
+		});
+	});
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64921467-3', 'auto');
+  ga('send', 'pageview');
+</script>
+</div></body></html>

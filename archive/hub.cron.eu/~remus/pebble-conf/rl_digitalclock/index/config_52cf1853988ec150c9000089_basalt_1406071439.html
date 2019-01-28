@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]><html class="lt-ie9">
+<![endif]-->
+<!-- [if gt IE 8] <!-->
+<html lang="en">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <!-- <![endif]-->
+  <head>
+    <title>Pebble Calendar Configuration</title>
+    <meta charset="UTF-8">
+    <meta content="Configuration Interface for the Pebble Digitalclock App" name="description">
+    <meta content="Remus Lazar" name="author">
+    <meta content="3 days" name="revisit-after">
+    <link rel="stylesheet" href="/hub.cron.eu/~remus/pebble-conf/rl_digitalclock/styles/94fe6a9c.css">
+    <script src="/hub.cron.eu/~remus/pebble-conf/rl_digitalclock/scripts/8efb67d4.js"></script>
+  </head>
+  <body class="index">
+    <header></header>
+    <div id="page1" data-role="page">
+      <div data-role="content">
+        <form>
+          <div data-role="list-view">
+            <div data-role="fieldcontain">
+              <label for="cultures">Language / Country</label>
+              <select name="lang" id="cultures"></select>
+            </div>
+            <div data-role="fieldcontain">
+              <label for="update_interval">Weather Update-Interval</label>
+              <select name="update_interval" id="update_interval">
+                <option value="300">5 Minutes</option>
+                <option value="900">15 Minutes</option>
+                <option value="1800" selected="selected">30 Minutes (recommended)</option>
+                <option value="3600">1 Hour</option>
+                <option value="7200">2 Hours</option>
+                <option value="14400">4 Hours</option>
+              </select>
+            </div>
+            <div data-role="fieldcontain">
+              <fieldset data-role="controlgroup">
+                <legend>Invert Display</legend>
+                <input id="r1" name="invert_display" value="0" type="radio" data-corners="0" checked="checked">
+                <label for="r1">Black background</label>
+                <input id="r2" name="invert_display" value="1" type="radio" data-corners="0">
+                <label for="r2">White background</label>
+              </fieldset>
+            </div>
+            <div data-role="fieldcontain">
+              <fieldset data-role="controlgroup">
+                <legend>Show temperature in</legend>
+                <input id="r1" name="temp_celsius" value="1" type="radio" data-corners="0" checked="checked">
+                <label for="r1">Celsius (Europe)</label>
+                <input id="r2" name="temp_celsius" value="0" type="radio" data-corners="0">
+                <label for="r2">Fahrenheit (US)</label>
+              </fieldset>
+            </div>
+            <div data-role="fieldcontain">
+              <label for="show_week_number">Display Week Number</label>
+              <select id="show_week_number" name="show_week_number" data-role="slider" data-mini="true">
+                <option value="0">Off</option>
+                <option value="1" selected="selected">On</option>
+              </select>
+            </div>
+            <input type="submit" value="Save settings" data-corners="0" data-theme="b">
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Footer-->
+    <footer></footer>
+  </body>
+</html>

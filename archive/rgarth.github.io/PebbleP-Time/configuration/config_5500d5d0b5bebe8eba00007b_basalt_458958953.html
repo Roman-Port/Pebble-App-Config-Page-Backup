@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Preferences</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Preferences</h1>
+      </div>
+
+      <div data-role="content">
+        <div id="inverter-toggle">
+          <label for="inverter">Invert Colors</label>
+          <input type="checkbox" data-role="flipswitch" name="inverter" id="inverter"><br> <br>
+        </div>
+        <fieldset class="ui-grid-a">
+          <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+          <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+        </fieldset>
+    </div>
+
+    <script>
+      var options = {};
+
+      function getUrlParameter(sParam, default_) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+          var sParameterName = sURLVariables[i].split('=');
+          if (sParameterName[0] == sParam) {
+            return decodeURIComponent(sParameterName[1]);
+          }
+        }
+        return default_;
+      }          
+
+      $().ready(function() {
+
+        $('#b-cancel').click(function() {
+          console.log('Cancel');
+          var return_to = getUrlParameter('return_to', 'pebblejs://close');
+          document.location = return_to;
+        });
+
+        $('#b-submit').click(function() {
+         console.log("Submit");
+         options["invert"] = $("#inverter").is(":checked");
+         console.log(encodeURIComponent(JSON.stringify(options)));
+         var return_to = getUrlParameter('return_to', 'pebblejs://close#');
+         document.location = return_to + encodeURIComponent(JSON.stringify(options));
+
+        });
+
+       // Were we passed any values?
+       if (getUrlParameter('invert').toLowerCase() == 'true') {
+         $('#inverter').prop('checked', 'true').checkboxradio('refresh');
+       }
+      });
+
+    </script>
+  </div></body>
+</html>

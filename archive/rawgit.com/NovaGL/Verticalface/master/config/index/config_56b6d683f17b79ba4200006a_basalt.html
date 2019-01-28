@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Watch Face Configuration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' href='/rawgit.com/NovaGL/Verticalface/master/config/css/slate.css'>
+ <script src='/rawgit.com/NovaGL/Verticalface/master/config/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+    <!-- add extra css! -->
+
+    
+  </head>
+  <body>
+
+
+<h1 class='title'>Watch Face Configuration</h1>
+
+<form role="form" onsubmit="complete()" action="javascript:void(0);">
+
+<div class='item-container'>
+      <div class='item-container-header'>Customizability</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Minutes font color
+          <input id='background_color_picker' name="background_color" type='text' class='item-color item-color-sunny' value='0x00AAFF'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the minutes font color. Note: Only available on Basalt watches that support many colors.
+      </div>
+<div class="item-container-content">
+    <label class="item">
+	Hide Leading Zero
+      <input type="checkbox" class="item-toggle" name="leading_zero">
+    </label>
+  </div>
+  <div class="item-container-footer">
+   Hide the leading zero on hours instead of show 01:00 it would show 1:00
+  </div>
+</div>
+
+<div class="item-container">
+  <div class="button-container">
+    <input type="submit" class="item-button" value="SEND">
+  </div>
+</div>
+                
+</form>
+
+<script>
+ 
+  function complete() {
+      var o = {};
+      $.each($('form').serializeArray(), function() {
+          o[this.name] = this.value;
+      });
+      window.location.href="pebblejs://close#" + JSON.stringify(o);
+      return false
+    }
+</script>
+    <script src="/code.jquery.com//jquery.js"></script>
+    <script src="/netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.js"></script>
+</body>
+</html>
+
+

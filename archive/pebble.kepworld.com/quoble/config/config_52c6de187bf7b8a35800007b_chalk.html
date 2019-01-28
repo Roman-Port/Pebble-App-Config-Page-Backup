@@ -1,0 +1,444 @@
+﻿<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Quoble - Quotes for Pebble - Configuration</title>
+	<script src="/ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+	<link rel="stylesheet" href="/ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.css">
+	<script src="/ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.js"></script>
+	<link rel="stylesheet" href="/ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="/ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+</head>
+<script language="javascript">
+
+var symbol_id = 0;
+
+</script>
+<style class="text/css">
+<!--
+
+.btn_del
+{
+	margin-left: 0.5em;
+	vertical-align: middle;
+	margin-top: 1em;
+}
+
+.updates
+{
+	text-align: center;
+}
+
+.updates input
+{
+	text-align: center;
+}
+
+.notice
+{
+	width: 100%;
+	font-size: 0.8rem;
+}
+
+.symbols inputdiv
+{
+	width: 70%;
+}
+.symbols input
+{
+	text-align: center;
+}
+
+.symbol_row_input
+{
+	clear: both;
+	width: 65%;
+	/*width: 85%;*/
+	float: left;
+}
+.symbol_row_options
+{
+	float: left;
+	padding-top: 0.15rem;
+}
+
+.custom-border-radius
+{
+	width: 30px;
+	padding-left: 4px;
+	float: left;
+	max-width: 34px;
+}
+
+h2
+{
+	padding-left: 0.5rem;
+}
+
+.dispInline, .dispInlineLabel
+{
+    display: inline-block;
+    border-bottom-width:0;
+}
+.dispInlineLabel
+{
+    min-width: 100px;
+}
+.dispInline
+{
+    min-width: 200px;
+}
+.clearFloats{
+    clear:both;
+}
+
+-->
+</style>
+
+<body>
+
+	<div data-role="header" data-position="fixed">
+		<a onclick="clickCancel()" data-icon="delete">Cancel</a>
+		<h1>Quoble</h1>
+		<a onclick="clickSave()" data-icon="check">Save</a>
+	</div>
+
+	<h2>Symbols</h2>
+	
+	<div class="symbols" id="symbols">
+	</div>
+	
+	<div data-role="footer" class="ui-bar" style="text-align: center">
+		<a id="btn_addsymbol" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-icon-right ui-icon-plus">Add symbol</a>
+	</div>
+	
+	<h2>Refresh Rates</h2>
+	
+	<div class="updates">
+		<div class="notice">
+			All values in seconds, 0 = no automatic refresh
+		</div>
+		<fieldset>
+			<div class="ui-field-contain">
+				<label for="rate_quotes">Update quotes:</label>
+				<input type="text" name="rate_quotes" id="rate_quotes" value="">
+			</div>
+		</fieldset>
+		<fieldset>
+			<div class="ui-field-contain">
+				<label for="rate_rotview">Rotate values:</label>
+				<input type="text" name="rate_rotview" id="rate_rotview" value="">
+			</div>
+		</fieldset>
+		<fieldset>
+			<div class="ui-field-contain">
+				<label for="rate_rotpage">Rotate page:</label>
+				<input type="text" name="rate_rotpage" id="rate_rotpage" value="">
+			</div>
+		</fieldset>
+	</div>
+	
+	<h2>Colour Options</h2>
+	
+	<div class="updates">
+		<div class="notice">
+			Only available on Pebble Time (Steel)
+		</div>
+		<fieldset>
+			<div data-role="fieldcontain">
+				<div class="dispInlineLabel">  
+					<label for="select-based-flipswitch">Colour text:</label>
+				</div>
+				<div class="dispInline">
+					<select id="colour_strings" data-role="flipswitch">
+						<option value="0">No</option>
+						<option value="1">Yes</option>
+					</select>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+
+	<div data-role="footer" class="ui-bar" style="text-align: center">
+		<a onclick="clickCancel()" data-icon="delete">Cancel</a>
+		<a onclick="clickSave()" data-icon="check">Save</a>
+	</div>
+
+<script language="javascript">
+
+var default_rate_quotes = 0;
+var default_rate_rotview = 0;
+var default_rate_rotpage = 0;
+var default_colour_strings = 1;
+
+$( '#btn_addsymbol' ).click( function(){
+	addSymbolRow(symbol_id++,'',1);
+} );
+
+function addSymbolRow ( i, symbol, focus )
+{
+	getSymbolRow(i, symbol);
+	if ( arguments.length == 3 )
+		document.getElementById('symbol' + i).focus();
+}
+
+function getSymbolRow ( i, symbol )
+{
+	var newSymbolRow = $( '<div>' ).append(
+							$( '<div>' ).append(
+								$( '<input>' )
+									.attr('type', 'text')
+									.attr('id', 'symbol' + i)
+									.attr('name', 'symbol' + i)
+									.attr('value', symbol)
+									.keyup( function(){
+										var id = i;
+										symbolToUpper('symbol'+id);
+									})
+								)
+								.attr('class', 'symbol_row_input'),
+							$( '<div>' ).append(
+									$( '<div>' ).attr( 'class', 'custom-border-radius').append(
+										$( '<div>' ).attr( 'class', 'ui-input-btn ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all').append(
+											$( '<input>' ).attr('data-enhanced', 'true').attr('type', 'button').click( function(){
+												var id = i;
+												deleteAndHideSymbol(id);
+											})
+										)
+									),
+									$( '<div>' ).attr( 'class', 'custom-border-radius').append(
+										$( '<div>' ).attr( 'class', 'ui-input-btn ui-btn ui-icon-arrow-u ui-btn-icon-notext ui-corner-all').append(
+											$( '<input>' ).attr('data-enhanced', 'true').attr('type', 'button').click( function(){
+												var id = i;
+												moveSymbol(id, 1);
+											})
+										)
+									),
+									$( '<div>' ).attr( 'class', 'custom-border-radius').append(
+										$( '<div>' ).attr( 'class', 'ui-input-btn ui-btn ui-icon-arrow-d ui-btn-icon-notext ui-corner-all').append(
+											$( '<input>' ).attr('data-enhanced', 'true').attr('type', 'button').click( function(){
+												var id = i;
+												moveSymbol(id, -1);
+											})
+										)
+									)
+								)
+								.attr('class', 'symbol_row_options')
+						)
+						.attr('id', 'symbol_row'+i)
+						.attr('class', 'symbol_row');
+	newSymbolRow.appendTo('#symbols').enhanceWithin();
+}
+
+function deleteAndHideSymbol ( id )
+{
+	document.getElementById('symbol'+id).value = '';
+	// document.getElementById('symbol_row'+id).style.display = 'none';
+	
+	var i = id;
+	while ( moveSymbol(++i, 1) );
+	
+	for ( var j = i-1; j > 0; j-- )
+	{
+		var symbol_input = document.getElementById('symbol'+(j));
+		var symbol_row = document.getElementById('symbol_row'+(j));
+		var symbol_input_prev = document.getElementById('symbol'+(j-1));
+		var symbol_row_prev = document.getElementById('symbol_row'+(j-1));
+		
+		if ( symbol_row && symbol_input && symbol_row_prev && symbol_input_prev )
+		{
+			if ( symbol_input.value == "" && symbol_input_prev.value == "" )
+			{
+				symbol_row.parentNode.removeChild(symbol_row);
+				symbol_id--;
+			}
+			else
+				break;
+		}
+		else
+			break;
+	}
+}
+
+function moveSymbol ( id, dir )
+{
+	var symbol_input = document.getElementById('symbol'+id);
+	var symbol_row = document.getElementById('symbol_row'+id);
+	
+	if ( symbol_row && symbol_input )
+	{
+		// up
+		if ( dir == 1 )
+		{
+			var symbol_input_prev = document.getElementById('symbol'+(id-1));
+			var symbol_row_prev = document.getElementById('symbol_row'+(id-1));
+			
+			if ( symbol_input_prev && symbol_row_prev )
+			{
+				var temp = symbol_input_prev.value;
+				symbol_input_prev.value = symbol_input.value;
+				symbol_input.value = temp;
+				
+				return true;
+			}
+		}
+		
+		// down
+		if ( dir == -1 )
+		{
+			var symbol_input_next = document.getElementById('symbol'+(id+1));
+			var symbol_row_next = document.getElementById('symbol_row'+(id+1));
+			
+			if ( symbol_input_next && symbol_row_next )
+			{
+				var temp = symbol_input_next.value;
+				symbol_input_next.value = symbol_input.value;
+				symbol_input.value = temp;
+				
+				return true;
+			}
+		}
+	}
+	
+	return false;
+}
+
+function symbolToUpper ( id )
+{
+	document.getElementById(id).value = document.getElementById(id).value.toUpperCase();
+}
+
+function loadSettings ()
+{
+	console.log('Loading settings');
+	
+	var symbols_storage = localStorage.getItem("symbols");
+
+	if ( symbols_storage )
+	{
+		symbols = symbols_storage.split(',');
+		
+		for ( symbol_id = 0; symbol_id < symbols.length; symbol_id++ )
+			getSymbolRow(symbol_id, symbols[symbol_id]);
+	}
+	addSymbolRow(symbol_id++, '');
+	
+	var rate_quotes = localStorage.getItem('rate_quotes');
+	var rate_rotview = localStorage.getItem('rate_rotview');
+	var rate_rotpage = localStorage.getItem('rate_rotpage');
+	var colour_strings = localStorage.getItem('colour_strings');
+	
+	if ( !rate_quotes )
+	{
+		rate_quotes = default_rate_quotes;
+		localStorage.setItem('rate_quotes', rate_quotes);
+	}
+	document.getElementById('rate_quotes').value = rate_quotes;
+	
+	if ( !rate_rotview )
+	{
+		rate_rotview = default_rate_rotview;
+		localStorage.setItem('rate_rotview', rate_rotview);
+	}
+	document.getElementById('rate_rotview').value = rate_rotview;
+	
+	if ( !rate_rotpage )
+	{
+		rate_rotpage = default_rate_rotpage;
+		localStorage.setItem('rate_rotpage', rate_rotpage);
+	}
+	document.getElementById('rate_rotpage').value = rate_rotpage;
+	
+	if ( !colour_strings )
+	{
+		colour_strings = default_colour_strings;
+		localStorage.setItem('colour_strings', colour_strings);
+	}
+	document.getElementById('colour_strings').value = colour_strings; // TODO (on/off)
+}
+
+function saveSettings ()
+{
+	console.log('Saving settings');
+
+	var symbols = [];
+	var val;
+	var c = 0;
+	for ( var i = 0; i < symbol_id; i++ )
+	{
+		var symbol_input = document.getElementById('symbol' + i);
+		if ( symbol_input )
+		{
+			val = symbol_input.value;
+			if ( val ) 
+				symbols[c++] = val;
+		}
+	}
+	localStorage.setItem("symbols", symbols.join(','));
+	
+	var rate_quotes = parseInt(document.getElementById('rate_quotes').value);
+	var rate_rotview = parseInt(document.getElementById('rate_rotview').value);
+	var rate_rotpage = parseInt(document.getElementById('rate_rotpage').value);
+	var colour_strings = parseInt(document.getElementById('colour_strings').value);
+	
+	if ( isNaN(rate_quotes) || rate_quotes < 0 )
+		rate_quotes = default_rate_quotes;
+	if ( isNaN(rate_rotview) || rate_rotview < 0 )
+		rate_rotview = default_rate_rotview;
+	if ( isNaN(rate_rotpage) || rate_rotpage < 0 )
+		rate_rotpage = default_rate_rotpage;
+	if ( isNaN(colour_strings) || colour_strings < 0 )
+		colour_strings = default_colour_strings;
+	
+	document.getElementById('rate_quotes').value = rate_quotes;
+	document.getElementById('rate_rotview').value = rate_rotview;
+	document.getElementById('rate_rotpage').value = rate_rotpage;
+	document.getElementById('colour_strings').value = colour_strings;
+	
+	localStorage.setItem("rate_quotes", rate_quotes);
+	localStorage.setItem("rate_rotview", rate_rotview);
+	localStorage.setItem("rate_rotpage", rate_rotpage);
+	localStorage.setItem("colour_strings", colour_strings);
+}
+
+function resetStorage ()
+{
+	return;
+	localStorage.removeItem("symbols");
+	localStorage.removeItem("rate_quotes");
+	localStorage.removeItem("rate_rotview");
+	localStorage.removeItem("rate_rotpage");
+	localStorage.removeItem("colour_strings");
+	symbol_id = 0;
+	
+	console.log("Storage reset");
+}
+
+function clickCancel ()
+{
+	document.location = "pebblejs://close#";
+}
+
+function clickSave ()
+{
+	saveSettings();
+	
+	var settings = { "symbols": localStorage.getItem("symbols"), 
+					 "rate_quotes": localStorage.getItem("rate_quotes"), 
+					 "rate_rotview": localStorage.getItem("rate_rotview"), 
+					 "rate_rotpage": localStorage.getItem("rate_rotpage"),
+					 "colour_strings": localStorage.getItem("colour_strings")
+					};
+	
+	var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(settings));
+	
+	document.location = location;
+}
+
+loadSettings();
+
+</script>
+
+</body>
+</html>

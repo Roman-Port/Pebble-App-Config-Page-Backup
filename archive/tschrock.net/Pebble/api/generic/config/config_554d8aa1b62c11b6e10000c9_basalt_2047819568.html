@@ -1,0 +1,331 @@
+﻿<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>Pebble App Config</title>
+        <script>
+            $id = function (id) {
+                return document.getElementById(id);
+            };
+
+            function getGETData() {
+                data = {};
+                searchArray = window.location.search.substr(1).split("&").forEach(function (item) {
+                    keyval = item.split("=", 2);
+                    data[keyval[0]] = decodeURIComponent(keyval[1]);
+                });
+                return data;
+            }
+
+            function init() {
+                loadConfigData();
+            }
+
+            configuration = {
+                blackBackground: false,
+                showDate: true,
+                showBattery: true,
+                showBluetooth: true,
+                vibrateOnConnect: true,
+                vibrateOnDisconnect: true
+            };
+
+            returnAdr = "pebblejs://close#";
+
+            function loadConfigData() {
+                data = getGETData();
+                if (data["return_to"] !== undefined) {
+                    returnAdr = data["return_to"];
+                }
+                if (data["oldcfg"] !== undefined) {
+                    olddata = JSON.parse(decodeURIComponent(data["oldcfg"]));
+                    for (var attr in olddata) {
+                        if (olddata.hasOwnProperty(attr) && configuration.hasOwnProperty(attr)) {
+                            configuration[attr] = olddata[attr];
+                        }
+                    }
+                }
+
+//                
+//                data = JSON.parse(decodeURIComponent(window.location.hash.split("#")[1]));
+//                for (var attr in data) {
+//                    if (data.hasOwnProperty(attr) && configuration.hasOwnProperty(attr)) {
+//                        configuration[attrname] = data[attr];
+//                    }
+//                }
+
+                updateConfigForum();
+            }
+
+            function saveConfigData() {
+                updateConfigData();
+                returnData();
+            }
+
+            function returnData() {
+                location.href = returnAdr + encodeURIComponent(JSON.stringify(configuration));
+            }
+
+
+
+            function updateConfigData() {
+                configuration.blackBackground = $id("bb").checked;
+                configuration.showDate = $id("sd").checked;
+                configuration.showBattery = $id("sbt").checked;
+                configuration.showBluetooth = $id("sbl").checked;
+                configuration.vibrateOnConnect = $id("vc").checked;
+                configuration.vibrateOnDisconnect = $id("vd").checked;
+            }
+            function updateConfigForum() {
+                $id("bb").checked = configuration.blackBackground;
+                $id("sd").checked = configuration.showDate;
+                $id("sbt").checked = configuration.showBattery;
+                $id("sbl").checked = configuration.showBluetooth;
+                $id("vc").checked = configuration.vibrateOnConnect;
+                $id("vd").checked = configuration.vibrateOnDisconnect;
+            }
+
+            function updateFakeDropdown(selectElement) {
+                fakeSelectDiv = null;
+
+                currentElement = selectElement;
+                while (currentElement.parentNode) {
+                    currentElement = currentElement.parentNode;
+                    if (hasClass(currentElement, "fakeDropdown")) {
+                        fakeSelectDiv = currentElement;
+                        break;
+                    }
+                }
+
+                if (fakeSelectDiv !== null) {
+                    fakeSelectDiv.querySelectorAll(".fakeDropdownValue")[0].textContent = getSelectedText(selectElement);
+                }
+            }
+
+            function hasClass(element, cls) {
+                return (' ' + element.className + ' ').indexOf(' ' + cls + ' ') > -1;
+            }
+
+            function getSelectedText(selElement) {
+                if (selElement.selectedIndex === -1)
+                    return null;
+
+                return selElement.options[selElement.selectedIndex].text;
+            }
+        </script>
+        <style>
+
+            html, body{
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .header {
+                position: fixed;
+                top: 0px;
+                bottom: Opx;
+                margin: 0px;
+                padding: 0px;
+                width: 100%;
+                height: 44px;
+                background-color: #e04545;
+                border-bottom: 1px solid darkred;
+                color: #fff;
+                font-size: 17px;
+                line-height: 44px;
+                font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+                text-align: center;
+                z-index: 100;
+            }
+
+            .header input {
+                width: 40px;
+                height: 100%;
+                color: #fff;
+                background-color: #e04545;
+                border: none;
+                font-size: 22px;
+            }
+
+            .header input:active {
+                background-color: #ff7070;
+            }
+
+            #backBtn {
+                float: left;
+                font-weight: bold;
+                font-size: 30px;
+                line-height: 45px;
+            }
+
+            #saveBtn {
+                float: right;
+                font-size: 26px;
+                background-image: url("WhiteCheck3.png");
+                background-size: 60%;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+
+            .content {
+                margin: 0px;
+                padding: 0px;
+                padding-top: 44px;
+            }
+
+            .list {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+
+            .item {
+                display: table;
+                margin: 0px;
+                padding: 0px;
+                box-sizing: border-box;
+                width: 100%;
+                height: 70px;
+                border: 0px;
+                border-bottom: 1px #e4e4e4 solid;
+            }
+
+            .item:active {
+                background-color: #64d6ff;
+            }
+
+            label {
+                font-size: 18px;
+                font-family: "Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+                height: 100%;
+                width: 100%;
+                display: table-cell;
+                vertical-align: middle;
+            }
+
+
+            .fakeCheckboxLabel {
+                height: 100%;
+                width: 100%;
+                display: table-cell;
+                vertical-align: middle;
+                padding: 0px 20px 0px 10px;
+            }
+
+            .fakeCheckbox {
+                float: right;
+                width: 16px;
+                height: 16px;
+                border: 1px darkgray solid;
+                margin: 1px;
+                font-family: sans-serif;
+            }
+
+            .fakeCheckbox input[type=checkbox] {
+                display: none;
+            }
+
+            .fakeCheckbox span {
+                position: relative;
+                top: -9px;
+                left: -4px;
+                font-size: 25px;
+                display: none;
+            }
+
+            .fakeCheckbox input[type=checkbox]:checked + span {
+                display: inline;
+            }
+
+
+            .fakeDropdown{
+                position: relative;
+                width: 100%;
+                height: 100%;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .fakeDropdownContent{
+                position: absolute;
+                display: table;
+                width: 100%;
+                height: 100%;
+                margin: 0px;
+                padding: 0px 20px 0px 10px;
+                box-sizing: border-box;
+                z-index: 5;
+            }
+
+            .fakeDropdownSelect{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                margin: 0px;
+                padding: 0px;
+                opacity: 0;
+                z-index: 10;
+            }
+
+            .fakeDropdownValue {
+                margin-left: 10px;
+                font-size: 15px;
+                color: #444444;
+            }
+
+        </style>
+    </head>
+    <body onload="init();">
+        <div class="header">
+            <input type="button" id="backBtn" value="❬" onclick="returnData();">
+            <input type="button" id="saveBtn" value="" onclick="saveConfigData();"><!---->
+            <div>Settings</div>
+        </div>
+
+
+        <div class="content list">
+            <div class="item">
+                <label for="bb" class="fakeCheckboxLabel">
+                    Use black background
+                    <div class="fakeCheckbox"><input type="checkbox" id="bb"><span>✓</span></div>
+                </label>
+            </div>
+            <div class="item">
+                <label for="sd" class="fakeCheckboxLabel">
+                    Show date
+                    <div class="fakeCheckbox"><input type="checkbox" id="sd"><span>✓</span></div>
+                </label>
+            </div>
+            <div class="item">
+                <label for="sbt" class="fakeCheckboxLabel">
+                    Show battery
+                    <div class="fakeCheckbox"><input type="checkbox" id="sbt"><span>✓</span></div>
+                </label>
+            </div>
+            <div class="item">
+                <label for="sbl" class="fakeCheckboxLabel">
+                    Show bluetooth
+                    <div class="fakeCheckbox"><input type="checkbox" id="sbl"><span>✓</span></div>
+                </label>
+            </div>
+            <div class="item">
+                <label for="vc" class="fakeCheckboxLabel">
+                    Vibrate on connect
+                    <div class="fakeCheckbox"><input type="checkbox" id="vc"><span>✓</span></div>
+                </label>
+            </div>
+            <div class="item">
+                <label for="vd" class="fakeCheckboxLabel">
+                    Vibrate on disconnect
+                    <div class="fakeCheckbox"><input type="checkbox" id="vd"><span>✓</span></div>
+                </label>
+            </div>
+        </div>
+    </body>
+</html>

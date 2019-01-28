@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title></title>
+  <link rel="stylesheet" href="/sfwsoft.net/verawiz/dist/css/slate.css">
+</head>
+<body>
+  <form id="main-form">
+    <div class="item-container">
+      <div class="item-container-content">
+        <div class="item">
+          VeraWiz - Settings
+        </div>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Vera Credentials</div>
+      <div class="item-container-content">
+        <label class="item">
+		  Login
+          <div class="item-input-wrapper">
+            <input id="login" type="text" class="item-input" name="input-1" placeholder="">
+          </div>
+        </label>
+        <label class="item">
+		  Password
+          <div class="item-input-wrapper">
+            <input id="password" type="text" class="item-input" name="input-2" placeholder="">
+          </div>
+        </label>
+		  <div class="button-container">
+			<input id="validate_button" type="button" class="item-button" value="Validate">
+		  </div>
+      </div>
+      <div id="credentials_subtext" class="item-container-footer">
+        ***:
+      </div>
+	  
+    </div>
+	
+    <div id="general_div" class="item-container">
+      <div class="item-container-header">Device Config</div>
+      <div class="item-container-content">
+        <label class="item">
+          Veras
+          <select id="vera_list" dir='rtl' name="theme" class="vera-select">
+            <option class="item-select-option" selected="">ERRROR</option>
+          </select>
+        </label>
+      </div>
+    </div>
+	
+	<div class="item-container">
+      <div class="item-container-header">Device List</div>
+      <div class="item-container-content">
+        <div id="device_lookup" class="item-dynamic-listlookup" data-list="Select Vera">
+        </div>
+      </div>
+    </div>
+	
+	<div class="item-container">
+      <div class="item-container-header">Scene List</div>
+      <div class="item-container-content">
+        <div id="scene_lookup" class="item-dynamic-listlookup" data-list="Select Vera">
+        </div>
+      </div>
+    </div>	
+	
+
+    <div class="item-container">
+      <div class="button-container">
+        <input id="submit_button" type="button" class="item-button" value="Save">
+      </div>
+    </div>
+  </form>
+  <script type="text/javascript" src="/sfwsoft.net/verawiz/dist/js/slate.js"></script>
+  <script type="text/javascript" src="/sfwsoft.net/verawiz/config1.js"></script>
+</body>
+</html>

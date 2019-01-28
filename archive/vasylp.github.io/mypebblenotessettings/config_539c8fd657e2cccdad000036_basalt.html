@@ -1,0 +1,40 @@
+<html>
+<head>
+<title>My Notes configuration</title>
+</head>
+<body>
+<h2>My Notes</h2>
+<input type="button" value="Reload Page" onclick="window.location.reload()">
+<h3>Fill the form and submit</h3>
+<form role="form" onsubmit="complete()" action="javascript:void(0);">
+ <label>Note 1</label>
+ <input type='text' class="form-control" name="text" id="note1"><br>
+ <label>Note 2</label>
+  <input type='text' class="form-control" name="text" id="note2"><br>
+ <label>Note 3</label>
+  <input type='text' class="form-control" name="text" id="note3"><br>
+ <label>Note 4</label>
+  <input type='text' class="form-control" name="text" id="note4"><br>
+ <label>Note 5</label>
+  <input type='text' class="form-control" name="text" id="note5"><br><br>
+  <button type="submit" class="btn btn-default">Apply</button>
+</form>
+
+<div id='output'></div>
+
+<script>
+
+function complete() {
+    var a = document.getElementsByName('text');
+    var j = {};
+    for(i = 0; i < a.length; i++){
+     j[a[i].id]=a[i].value;
+    }
+    var str = JSON.stringify(j);
+    window.location.href="pebblejs://close#" + str;
+    return false;
+}
+
+</script>
+</body>
+</html>

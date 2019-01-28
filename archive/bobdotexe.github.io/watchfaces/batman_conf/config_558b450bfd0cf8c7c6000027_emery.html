@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title>Batman Beyond - Config page</title>
+  <link rel="stylesheet" href="/bobdotexe.github.io/watchfaces/dist/css/slate.css">
+</head>
+<body>
+  <form id="main-form">
+	<h2> Batman Beyond</h2>
+    <div class="item-container">
+      <div class="item-container-content">
+        <div class="item">
+			Here you can configure the settings for the Batman Beyond watch face!
+        </div>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Vibration</div>
+      <div class="item-container-content">
+        <label class="item">
+          Vibrate on hour?
+          <input id='vib' type="checkbox" class="item-toggle" name="toggle-1">
+        </label>
+      </div>
+      <div class="item-container-footer">
+        Make the watch Vibrate evey time the hour changes?
+      </div>
+    </div>
+
+	    <div class="item-container">
+      <div class="item-container-header">Special hourly image?</div>
+      <div class="item-container-content">
+        <label class="item">
+          Flash the image when the hour changes?
+          <input id='flash' type="checkbox" class="item-toggle" name="toggle-2" checked="">
+        </label>
+      </div>
+    </div>
+
+	<div class="item-container">
+	  <div class="item-container-header">Glitch interval</div>
+	  <div class="item-container-content">
+		<label class="item">
+		  Often! (twice as often)
+		  <input id='fast' type="radio" class="item-radio" name="bat-1" value="a">
+		</label>
+		<label class="item">
+		  Normal (Default speed)
+		  <input id='med' type="radio" class="item-radio" name="bat-1" value="b" checked="">
+		</label>
+		<label class="item">
+		  Not very often (once per min, maximum battery save)
+		  <input id='slow' type="radio" class="item-radio" name="bat-1" value="c">
+		</label>
+		
+	  </div>
+	  <div class="item-container-footer">
+	  How often should the 'glitches' show up?
+	  </div>
+	  <p>
+	</div>
+
+	<div class="item-container">
+	  <div class="item-container-header">Glitch duration</div>
+	  <div class="item-container-content">
+		<label class="item">
+		  Longer time! (1.5 times as long)
+		  <input id='long' type="radio" class="item-radio" name="bat-2" value="e">
+		</label>
+		<label class="item">
+		  Normal (Default speed)
+		  <input id='norm' type="radio" class="item-radio" name="bat-2" value="f" checked="">
+		</label>
+		<label class="item">
+		  Faster  (Just for a short time saves battery)
+		  <input id='short' type="radio" class="item-radio" name="bat-2" value="g">
+		</label>
+		
+	  </div>
+	  <div class="item-container-footer">
+	  How long should the 'glitches' last?
+	  </div>
+	  <p>
+	</div>
+	
+	
+    <div class="item-container">
+      <div class="button-container">
+        <input id='submitButton' type="button" class="item-button" value="SEND">
+      </div>
+    </div>
+  </form>
+  These setting will take effect the next time the watchface is loaded.
+  <p>
+  </p>
+  <p>
+  Created using <a href="/github.com/pebble/slate.html">Slate front-end framework!</a>
+  <script type="text/javascript" src="/bobdotexe.github.io/watchfaces/dist/js/slate.js"></script>
+  <script type="text/javascript" src="/bobdotexe.github.io/watchfaces/dist/js/batman_basic.js"></script>
+</body>
+</html>

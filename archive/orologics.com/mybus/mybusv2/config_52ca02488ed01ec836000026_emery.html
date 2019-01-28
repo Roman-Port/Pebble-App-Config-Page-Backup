@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="Transit Agencies">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+  	<script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+    <script src="/orologics.com/mybus/mybusv2.js"></script>
+	<title>My Bus 2.0</title>
+</head>
+<body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+     	<h1>My Bus 2.0</h1>
+     </div>
+     <div data-role="content">
+  
+		<div class="ui-field-contain">
+		  <fieldset data-role="controlgroup" data-mini="true">
+            <select name="selectNumber" id="selectNumber" data-iconpos="right">
+              <option value="0">Configure stop 1:</option>
+              <option value="1">Configure stop 2:</option>
+              <option value="2">Configure stop 3:</option>
+              <option value="3">Configure stop 4:</option>
+              <option value="4">Configure stop 5:</option>
+              <option value="5">Configure stop 6:</option>
+              <option value="6">Configure stop 7:</option>
+              <option value="7">Configure stop 8:</option>
+            </select>
+ 
+          <select name="selectRegion" id="selectRegion" data-iconpos="right" onchange="RegionChange (this)">
+          	<option value="California-Northern">Northern California</option>
+          	<option value="California-Southern">Southern California</option>
+          	<option value="District of Columbia">District of Columbia</option>
+          	<option value="Florida">Florida</option>
+          	<option value="Georgia">Georgia</option>
+          	<option value="Iowa">Iowa</option>
+          	<option value="Kentucky">Kentucky</option>
+          	<option value="Maryland">Maryland</option>
+          	<option value="Massachusetts">Massachusetts</option>
+          	<option value="Minnesota">Minnesota</option>
+          	<option value="Mississippi">Mississippi</option>
+          	<option value="New Hampshire">New Hampshire</option>
+          	<option value="New Jersey">New Jersey</option>
+          	<option value="New York">New York</option>
+          	<option value="Nevada">Nevada</option>
+          	<option value="North Carolina">North Carolina</option>
+          	<option value="Ontario">Ontario</option>
+          	<option value="Oregon">Oregon</option>
+          	<option value="Pennsylvania">Pennsylvania</option>
+          	<option value="Quebec">Quebec</option>
+          	<option value="Virginia">Virginia</option>
+          	<option value="Washington">Washington</option>
+          </select>
+          
+          <select name="selectAgency" id="selectAgency" data-iconpos="right" onchange="AgencyChange (this)"></select>
+		</fieldset>
+        </div>
+        <div>
+        	<a href="/www.nextbus.com/predictor/adaRegion.html">Look up stop on nextbus.com</a>
+        </div>
+ 		<div class="ui-field-contain">
+           <label for="stopId">Stop ID:</label>
+ 			<input type="text" name="stopId" id="stopId" maxlength="8" value="">
+            <label for="stopName">Name this stop:</label>
+ 			<input type="text" name="stopName" id="stopName" value="">
+            <label for="stopSubtitle">Subtitle for this stop:</label>
+ 			<input type="text" name="stopSubtitle" id="stopSubtitle" value="">
+        </div>
+
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+          	<button class="ui-btn ui-btn-inline" id="b-cancel">Cancel</button>
+          	<button class="ui-btn ui-btn-inline" id="b-submit">Save</button>
+            </fieldset>
+          </div>
+        </div>
+       
+      </div>
+   
+</body>
+</html> 

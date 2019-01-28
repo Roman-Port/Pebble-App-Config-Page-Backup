@@ -1,0 +1,420 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pebble Homewizard QuickSwitch</title>
+    <link rel="stylesheet" href="bower_components/Slate/dist/css/slate.min.css">
+</head>
+<body>
+<div class="item-container" id="method">
+    <div class="item-container-header">Choose method</div>
+    <div class="item-container-content">
+        <div class="button-container">
+            <input type="button" class="item-button" id="online" value="HomeWizard Online">
+        </div><br>
+        <div class="button-container">
+            <input type="button" class="item-button" id="portForwarding" value="Port forwarding">
+        </div><br>
+
+        <div class="button-container" style="display:none;" id="reorder-div">
+            <input type="button" class="item-button" id="reorder" value="Reorder switches">
+        </div>
+    </div>
+</div>
+<div class="item-container" id="homeWizardOnlineDisplay" style="display:none;">
+    <div class="item-container-header">Homewizard Online</div>
+    <div class="item-container-content">
+        <label class="item">
+            <div class="item-input-wrapper">
+                <input type="email" class="item-input" name="username" id="username" placeholder="Email">
+            </div>
+        </label>
+        <label class="item">
+            <div class="item-input-wrapper">
+                <input type="password" class="item-input" name="password" id="passwordOnline" placeholder="Password">
+            </div>
+        </label>
+        <div class="button-container">
+            <input type="button" class="item-button" id="get_data_online" value="Get switches">
+        </div>
+    </div>
+</div>
+<div class="item-container" id="chooseHW" style="display:none;">
+    <div class="item-container-header">Choose HomeWizard</div>
+    <div class="item-container-content">
+
+    </div>
+</div>
+<div class="item-container" id="portForwardingDisplay" style="display:none;">
+    <div class="item-container-header">Homewizard URL</div>
+    <div class="item-container-content">
+        <div class="item-container-footer">
+            All data provided is stored on the phone.<br><br>
+
+            To turn on the switch, click.<br>
+            To turn off the switch, long click.
+        </div>
+        <label class="item">
+            <div class="item-input-wrapper">
+                <input type="text" class="item-input" name="ip" id="IP" placeholder="IP-adres">
+            </div>
+        </label>
+        <label class="item">
+            <div class="item-input-wrapper">
+                <input type="number" class="item-input" name="port" id="port" placeholder="Port (default 80)">
+            </div>
+        </label>
+        <label class="item">
+            <div class="item-input-wrapper">
+                <input type="text" class="item-input" name="password" id="password" placeholder="Password">
+            </div>
+        </label>
+        <div class="button-container">
+            <input type="button" class="item-button" id="get_data" value="Refresh switches">
+        </div>
+        <br>
+    </div>
+</div>
+
+<div class="item-container" id="SensorsWindow" style="display:none;">
+    <div class="item-container-header">Switches</div>
+    <div class="item-container-content">
+        <div class="switch-list" id="SortList">
+        </div>
+        <div class="button-container">
+            <input type="button" class="item-button" id="orderSections" value="REORDER SECTIONS">
+        </div>
+        <br>
+    </div>
+</div>
+
+<div class="item-container" id="OrderSectionsWindow" style="display:none;">
+    <div class="item-container-header">Switches</div>
+    <div class="item-container-content">
+        <div class="section-list" id="SectionList">
+        </div>
+        <div class="button-container">
+            <input type="button" class="item-button" id="save" value="SAVE">
+        </div>
+        <br>
+    </div>
+</div>
+
+<script src="bower_components/Slate/dist/js/slate.js"></script>
+<script src="bower_components/cryptojslib/rollups/sha1.js"></script>
+<script>
+    var configData = JSON.parse(localStorage.getItem('configData'));
+    var session,
+        encodedPassword,
+        method,
+        email,
+        homewizardDevice,
+        thermometers = [],
+        heatlinks = [];
+
+    if (configData && configData['sensors'] && configData['sensors'].length > 0) {
+        $('#reorder-div').show();
+        method = configData['method'] ? configData['method'] : 'local';
+        email = configData['email'];
+        encodedPassword = configData['encodedPassword'];
+        homewizardDevice = configData['device'];
+        thermometers = configData['thermometers'];
+        $('#passwordOnline').val(configData['passwordOnline']);
+        $('#username').val(configData['email']);
+        $('#IP').val(configData['ip']);
+        $('#port').val(configData['port']);
+        $('#password').val(configData['password']);
+    }
+
+    // Determine the correct return URL (emulator vs real watch)
+    function getQueryParam(variable, defaultValue) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if (pair[0] === variable) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        return defaultValue || false;
+    }
+
+    function getIP() {
+        $.ajax({
+            url: "http://gateway.homewizard.nl/discovery.php",
+            cache: false,
+            jsonp: "callback",
+            dataType: "jsonp",
+            success: function (json) {
+                $('#IP').val(json.ip);
+            }
+        });
+    }
+
+    function showHomeWizards(wizards)
+    {
+        $('#homeWizardOnlineDisplay').hide();
+        $('#chooseHW').show();
+
+        var homeWizardList = $('#chooseHW > .item-container-content');
+        for (i=0; i<wizards.length; i++) {
+            var newHw = $('<div class="button-container"><input type="button" class="item-button homewizard-button" id="' + wizards[i].serial + '" value="' + wizards[i].name + '"></div>');
+            homeWizardList.append(newHw);
+        }
+
+        $('.homewizard-button').each(function () {
+            $(this).on('click touch', function (e) {
+                homewizardDevice = e.target.getAttribute('id');
+                var url = 'https://cloud.homewizard.com/forward/' + session + '/' + homewizardDevice + '/get-sensors'
+
+                $.ajax({
+                    url: url,
+                    cache: true,
+                    jsonp: "callback",
+                    dataType: "jsonp",
+                    success: function (json) {
+                        if (json) {
+                            scenes = json.scenes;
+                            formatThermometers(json.response.thermometers);
+                            formatHeatlinks(json.response.heatlinks);
+                            method = 'online';
+                            showData(json.response.switches);
+                        }
+                    }
+                });
+            });
+        });
+    }
+
+    function formatThermometers(sensors) {
+        thermometers = [];
+
+        if (sensors) {
+            $(sensors).each(function(index, thermo) {
+                thermometers.push({
+                    'id': thermo.id,
+                    'title': thermo.name,
+                    'outside': thermo.outside
+                });
+            });
+        }
+    }
+
+    function formatHeatlinks(sensors) {
+        heatlinks = [];
+
+        if (sensors) {
+            $(sensors).each(function(index, heatlink) {
+                heatlinks.push({
+                    'id': heatlink.id,
+                    'title': heatlink.name
+                });
+            });
+        }
+    }
+
+    function showData(switches)
+    {
+        $('#portForwardingDisplay').hide();
+        $('#chooseHW').hide();
+        $('#SensorsWindow').show();
+
+        var switchList = $('.switch-list');
+
+        for (i=0; i<switches.length; i++) {
+            var switchName = switches[i].name ? switches[i].name : switches[i].title;
+            var newSwitch = $('<label class="item" data-id="' + switches[i].id + '" data-switch-type="' + switches[i].type + '">' + switchName + '</label>');
+
+            switchList.append(newSwitch);
+        }
+
+        switchList.each(function () {
+            var $handlebar = '<div class="item-draggable-handle">'
+                    + '<div class="item-draggable-handle-bar"></div>'
+                    + '<div class="item-draggable-handle-bar"></div>'
+                    + '<div class="item-draggable-handle-bar"></div>'
+                    + '</div>';
+
+            $(this).children('label').append($handlebar);
+
+            Sortable.create(this, {
+                handle: '.item-draggable-handle'
+            });
+        });
+    }
+
+    $( document ).ready(function() {
+
+        if (configData) {
+            $('#IP').val(configData['ip']);
+            $('#port').val(configData['port']);
+            $('#password').val(configData['password']);
+        } else {
+            getIP();
+        }
+
+        var scenes;
+
+        $('#online').on('click touch', function (event) {
+            $('#method').hide();
+            $('#homeWizardOnlineDisplay').show();
+        });
+
+        $('#portForwarding').on('click touch', function (event) {
+            $('#method').hide();
+            $('#portForwardingDisplay').show();
+        });
+
+        $('#reorder').on('click touch', function (event) {
+            $('#method').hide();
+            showData(configData['sensors']);
+        });
+
+        $('#get_data').on('click touch', function (event) {
+            if (ga) {
+                ga('send', 'event', 'Switches', 'Get');
+            }
+
+            var ip = $('#IP').val(),
+                port = $('#port').val() == "" ? 80 : $("#port").val(),
+                password = $("#password").val(),
+                baseURL = 'http://' + ip + ':' + port + '/' + password + '/';
+
+            $.ajax({
+                url: baseURL + 'get-sensors',
+                cache: true,
+                jsonp: "callback",
+                dataType: "jsonp",
+                success: function (json) {
+                    if (json) {
+                        scenes = json.scenes;
+                        method = 'local';
+                        formatThermometers(json.response.thermometers);
+                        formatHeatlinks(json.response.heatlinks);
+                        showData(json.response.switches);
+                    }
+                },
+                error: function (json) {
+                    alert('There went something wrong with connecting, please try again.');
+                }
+            });
+        });
+
+        $('#get_data_online').on('click touch', function (event) {
+            if (ga) {
+                ga('send', 'event', 'Switches', 'Online');
+            }
+
+            encodedPassword = CryptoJS.SHA1($('#passwordOnline').val()).toString();
+            email = $('#username').val();
+            var baseURL = 'https://cloud.homewizard.com/account/login/?username=' + email + '&password=' + encodedPassword;
+
+            $.ajax({
+                url: baseURL,
+                cache: true,
+                jsonp: "callback",
+                dataType: "jsonp",
+                success: function (json) {
+                    if (json && json['status'] == 'ok') {
+                        session = json['session'];
+                        showHomeWizards(json['response']);
+                    }
+                },
+                error: function (json) {
+                    alert('There went something wrong with connecting, please try again.');
+                }
+            });
+        });
+
+        $('#orderSections').on('click touch', function () {
+            $('#SensorsWindow').hide();
+
+            var sectionsList = $('#SectionList');
+
+            console.log(sectionsList);
+            sectionsList.append($('<label class="item" >Switches</label>'));
+            sectionsList.append($('<label class="item" >Presets</label>'));
+
+            if (heatlinks.length > 0) {
+                sectionsList.append($('<label class="item" >Heatlinks</label>'));
+            }
+
+            if (thermometers.length > 0) {
+                sectionsList.append($('<label class="item" >Thermometers</label>'));
+            }
+
+            $('#OrderSectionsWindow').show();
+
+            sectionsList.each(function () {
+                var $handlebar = '<div class="item-draggable-handle">'
+                        + '<div class="item-draggable-handle-bar"></div>'
+                        + '<div class="item-draggable-handle-bar"></div>'
+                        + '<div class="item-draggable-handle-bar"></div>'
+                        + '</div>';
+
+                $(this).children('label').append($handlebar);
+
+                Sortable.create(this, {
+                    handle: '.item-draggable-handle'
+                });
+            });
+        });
+
+        $('#save').on('click touch', function () {
+            if (ga) {
+                ga('send', 'event', 'Sort', 'Save');
+            }
+
+            var sensors = [],
+                sectionOrder = [];
+
+            $('.switch-list > .item').each(function () {
+                sensors.push({
+                    'id': $(this).data('id'),
+                    'title': $(this).text(),
+                    'type': $(this).data('switch-type')
+                });
+            });
+
+            $('.section-list > .item').each(function (i) {
+                sectionOrder.push($(this).text());
+            });
+
+            var configData = {
+                'sensors': sensors,
+                'thermometers': thermometers,
+                'heatlinks': heatlinks,
+                'ip': $('#IP').val(),
+                'port': $('#port').val(),
+                'password': $('#password').val(),
+                'passwordOnline': $('#passwordOnline').val(),
+                'method': method,
+                'email': email,
+                'encodedPassword': encodedPassword,
+                'device': homewizardDevice,
+                'sectionOrder': sectionOrder,
+                'configVersion': 1
+            };
+
+            console.log(configData);
+
+            localStorage.setItem('configData', JSON.stringify(configData));
+
+            var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+            document.location = return_to + encodeURIComponent(JSON.stringify(configData));
+        });
+    });
+</script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-78057401-2', 'auto');
+    ga('send', 'pageview');
+
+</script>
+</body>
+</html>

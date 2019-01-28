@@ -1,0 +1,39 @@
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="/www.hagesverden.com/currency/config.css">
+	<script type="text/javascript" src="/www.hagesverden.com/currency/data/name_map.js"></script>
+	<script type="text/javascript" src="/www.hagesverden.com/currency/config.js"></script>
+</head>
+<body>
+	<div id="header">
+		<h1>Quick Currency Converter</h1>
+		<h2>Configuration</h2>
+	</div>
+
+	<div id="content">
+		<h3>Convert from</h3>
+		The currency you want to convert from, usually the currency of the place you are visiting.
+		<input type="text" id="from" value="">
+
+		<h3>Convert to</h3>	
+		The currency you want to convert to, usually your own currency.
+		<input type="text" id="to" value="">
+
+		<div id="buttons">
+			<button id="save" onclick="save()">Save</button> <button id="cancel" onclick="cancel()">Cancel</button>
+		</div>
+
+		<div id="instructions">
+			<h3>Instructions</h3>
+			<ul>
+				<li>Press <span class="btn">up</span>/<span class="btn">down</span> to increase/decrease the amount.</li>
+				<li><span class="btn">Select</span> doubles the amount.</li> 
+				<li>Shake the Pebble to reset to the start-value.</li>
+			</ul>
+		</div>
+
+		<div id="searchResult"></div>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,191 @@
+'use strict';
+
+var config;
+
+var translations = {
+  'fr': {
+    'page-title': "Options pour le visage Kane sur la montre Pebble",
+    'page-heading': "<small>Le visage</small> Kane",
+
+    'dial-shape': 'Forme du cadran',
+    'dial-shape-rectangular': 'Cadran avec points en rectangle',
+    'dial-shape-elliptical': 'Cadran avec points en ovale',
+    'dial-shape-blank': 'Cadran sans points',
+
+    'dial-colour': 'Couleur du cadran',
+    'dial-colour-black': 'Cadran noir',
+    'dial-colour-white': 'Cadran blanc',
+
+    'branding': 'Marque',
+    'branding-show': 'Montrer "Pebble" sur le cadran',
+
+    'second-hand': 'Aiguille des secondes',
+    'second-hand-smart': 'Aiguille des secondes intellegent',
+    'second-hand-smart-help': "Montrer l'aiguille des secondes pour 10 secondes quand la montre est agité, mais ne le montre jamais si le charge de la batterie est à 20% ou moins",
+    'second-hand-always': "Toujours montrer l'aiguille des secondes",
+    'second-hand-never': "Ne montrer jamais l'aiguille des secondes",
+
+    'calendar': 'Calendrier',
+    'week-starts-sunday': 'La semaine commence le dimanche',
+    'week-starts-monday': 'La semaine commence le lundi',
+
+    'bluetooth-vibrate': 'Vibrer sur coupage ou reliage de Bluetooth',
+
+    'save-settings': 'Enregistrer la configuration',
+    'cancel-changes': 'Annuler les modifications'
+  },
+  'es': {
+    'page-title': "Opciones para la esfera Kane para el reloj Pebble",
+    'page-heading': "<small>La esfera</small> Kane",
+
+    'dial-shape': 'Forma de la esfera',
+    'dial-shape-rectangular': 'Esfera rectangular',
+    'dial-shape-elliptical': 'Esfera elíptico',
+    'dial-shape-blank': 'Esfera sin marcas',
+
+    'dial-colour': 'Color de la esfera',
+    'dial-colour-black': 'Esfera negra',
+    'dial-colour-white': 'Esfera blanca',
+
+    'branding': 'Marca',
+    'branding-show': 'Incluir el logo Pebble en la esfera',
+
+    'second-hand': 'Secundero',
+    'second-hand-smart': 'Secundero intelligente',
+    'second-hand-smart-help': "Mostrar el secundero por 10 segundos cuando el reloj es sacudida, pero lo mostrar jamas si la batería es inferior a 20%",
+    'second-hand-always': "Mostrar siempre el secundero",
+    'second-hand-never': "Mostrar jamas el secundero",
+
+    'calendar': 'Calendario',
+    'week-starts-sunday': 'La semana comienzia el domingo',
+    'week-starts-monday': 'La semana comienzia el lunes',
+
+    'bluetooth-vibrate': 'Vibrar cuando Bluetooth se corta o connecta',
+
+    'save-settings': 'Guardar los cambios',
+    'cancel-changes': 'Descartar los cambios'
+  }
+};
+
+document.getElementById('save-settings').addEventListener('click', function(e) {
+  e.preventDefault();
+
+  config = {};
+
+  var dialShape = document.getElementsByName('dial-shape');
+  for (var i = 0; i < dialShape.length; i++) {
+    if (dialShape[i].checked) {
+      config['dial-shape'] = parseInt(dialShape[i].value);
+      break;
+    }
+  }
+
+  var dialColour = document.getElementsByName('dial-colour');
+  for (var i = 0; i < dialColour.length; i++) {
+    if (dialColour[i].checked) {
+      config['dial-colour'] = parseInt(dialColour[i].value);
+      break;
+    }
+  }
+
+  var secondHand = document.getElementsByName('second-hand');
+  for (var i = 0; i < secondHand.length; i++) {
+    if (secondHand[i].checked) {
+      config['second-hand'] = parseInt(secondHand[i].value);
+      break;
+    }
+  }
+
+  var startOfWeek = document.getElementsByName('start-on-monday');
+  for (var i = 0; i < startOfWeek.length; i++) {
+    if (startOfWeek[i].checked) {
+      config['start-on-monday'] = parseInt(startOfWeek[i].value);
+      break;
+    }
+  }
+
+  config['show-logo'] = document.getElementById('show-logo').checked ? 1 : 0;
+  config['bluetooth-vibrate'] = document.getElementById('bluetooth-vibrate').checked ? 1 : 0;
+
+  location.href = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(config));
+});
+
+document.getElementById('cancel-changes').addEventListener('click', function(e) {
+  e.preventDefault();
+
+  location.href = 'pebblejs://close';
+});
+
+function loadEnglishTranslations() {
+  translations['en'] = {};
+
+  var elementsForTranslation = document.getElementsByClassName('translate');
+  for (var i = 0; i < elementsForTranslation.length; i++) {
+    var element = elementsForTranslation[i];
+
+    translations['en'][element.id] = element.innerHTML;
+  }
+}
+
+function translatePage() {
+  var language = document.getElementById('language').value;
+
+  if (translations.hasOwnProperty(language)) {
+    var htmlTag = document.getElementsByTagName('html')[0];
+    htmlTag.setAttribute('lang', language);
+
+    var elementsForTranslation = document.getElementsByClassName('translate');
+    for (var i = 0; i < elementsForTranslation.length; i++) {
+      var element = elementsForTranslation[i];
+
+      if (translations[language].hasOwnProperty(element.id)) {
+        element.innerHTML = translations[language][element.id];
+      } else if (translations['en'].hasOwnProperty(element.id)) {
+        element.innerHTML = translations['en'][element.id];
+      }
+    }
+  }
+}
+
+(function() {
+  var languageSelect = document.getElementById('language');
+  languageSelect.value = navigator.language.split(/[-_]/)[0];
+  languageSelect.onchange = translatePage;
+
+  if (window.location.hash.indexOf('#') === 0) {
+    config = JSON.parse(decodeURIComponent(window.location.hash.substring(1)));
+
+    var dialShape = document.getElementsByName('dial-shape');
+    if (dialShape) {
+      dialShape[config['dial-shape']].checked = true;
+    }
+
+    var dialColour = document.getElementsByName('dial-colour');
+    if (dialColour && config['dial-colour']) {
+      dialColour[config['dial-colour']].checked = true;
+    }
+
+    var secondHand = document.getElementsByName('second-hand');
+    if (secondHand && config['second-hand']) {
+      secondHand[config['second-hand']].checked = true;
+    }
+
+    var startOfWeek = document.getElementsByName('start-on-monday');
+    if (startOfWeek && config['start-on-monday']) {
+      startOfWeek[config['start-on-monday']].checked = true;
+    }
+
+    var showPebble = document.getElementById('show-logo');
+    if (showPebble && config['show-logo']) {
+      showPebble.checked = true;
+    }
+
+    var bluetoothVibrate = document.getElementById('bluetooth-vibrate');
+    if (bluetoothVibrate && config['bluetooth-vibrate']) {
+      bluetoothVibrate.checked = true;
+    }
+  }
+
+  loadEnglishTranslations();
+  translatePage();
+})();

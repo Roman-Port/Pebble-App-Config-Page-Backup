@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {background-color: #003015}
+      h1 {color: white}
+      p {color: white}
+      b {color: #ffbc19}
+    </style>
+    <title>Ultra Weather Config</title>
+  </head>
+  <body>
+    <h1>Ultra Weather Configuration</h1>
+    <p>If you feel like being awesome, head over to <b>cash.me/$KyleLanmon</b> and send me a few bucks!</p>
+
+    <p>Choose Temperature Scale:
+    <select id="scale_select">
+      <option value="f">Farenheit</option>
+      <option value="c">Celsius</option>
+      <option value="k">Kelvin</option>
+      <option value="r">Rankine</option>
+    </select>
+    </p>
+
+    <p>
+    <button id="save_button">Save</button>
+    </p>
+
+    <script>
+      //fix to return params when called from emulator
+      function getQueryParam(variable, default_) {
+          var query = location.search.substring(1);
+          var vars = query.split('&');
+          for (var i = 0; i < vars.length; i++) {
+              var pair = vars[i].split('=');
+              if (pair[0] == variable)
+                  return decodeURIComponent(pair[1]);
+          }
+          return default_ || false;
+      }
+      //Setup to allow easy adding more options later
+      function saveOptions() {
+        var scaleSelect = document.getElementById("scale_select");
+        var options = {
+          "scale": scaleSelect.value
+        }
+        
+        return options;
+      };
+      var submitButton = document.getElementById("save_button");
+      submitButton.addEventListener("click", 
+        function() {
+          console.log("Submit");
+          //fix for Cloud Pebble emulator
+          var return_to = getQueryParam('return_to', 'pebblejs://close#');
+          var options = saveOptions();
+          var location = return_to + encodeURIComponent(JSON.stringify(options));
+          
+          document.location = location;
+        }, 
+      false);
+    </script>
+  </body>
+</html>

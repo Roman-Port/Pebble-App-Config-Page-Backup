@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Ek Mukta", sans-serif;
+  line-height: 1.1;
+}
+
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+
+  margin: auto 20pt;
+}
+
+header {
+  margin: 0.2em auto;
+  text-align: center;
+}
+
+label {
+  margin-left: 0.5em;
+}
+
+input {
+  margin: 8pt auto;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+/* TODO: Bigger checkboxes */
+/* TODO: Bigger save button */
+
+footer {
+  /* Footer sticks to the bottom using flexbox:
+   * https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
+   * See the .site and .site-content classes. */
+  font-size: small;
+  color: #444;
+  background: #ddd;
+}
+
+footer .content {
+  margin: 10pt 20pt 10pt 20pt;
+}
+
+footer ul li {
+  /* Remove newlines and bullets in the list */
+  display: inline;
+}
+
+footer ul li:not(:first-of-type)::before {
+  /* Dot (&middot;) followed by non-breaking space between elements */
+  content: "\00B7\00A0";
+}

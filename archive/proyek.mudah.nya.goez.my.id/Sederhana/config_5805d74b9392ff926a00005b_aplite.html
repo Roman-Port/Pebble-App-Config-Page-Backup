@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Sederhana</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/code.jquery.com/mobile/1.4.1/jquery.css">
+<script src="/code.jquery.com//jquery-2.js"></script>
+<script src="/code.jquery.com/mobile/1.4.1/jquery.js"></script>
+</head>
+<body>
+<div data-role="page" id="main">
+<div data-role="header" class="jqm-header">
+<h1>Sederhana</h1>
+</div>
+<div data-role="content">
+<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-mini="false">
+<div data-role="collapsible">
+<h3>Tampilan & Nuansa</h3>
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+<legend>Ketika bluetooth terputus tema akan menjadi </legend>
+<input name="key5" id="key5-0" data-type="int" value="0" checked="checked" type="radio">
+<label for="key5-0">Gelap</label>
+<input name="key5" id="key5-1" data-type="int" value="1" type="radio">
+<label for="key5-1">Terang</label>
+</fieldset>
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+<legend>Ketika bluetooth terhubung tema akan menjadi </legend>
+<input name="key6" id="key6-0" data-type="int" value="0" checked="checked" type="radio">
+<label for="key6-0">Gelap</label>
+<input name="key6" id="key6-1" data-type="int" value="1" type="radio">
+<label for="key6-1">Terang</label>
+</fieldset>
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+<legend>Teks Persen Baterai</legend>
+<input name="key7" id="key7-1" data-type="int" value="1" checked="checked" type="radio">
+<label for="key7-1">Tampilkan</label>
+<input name="key7" id="key7-0" data-type="int" value="0" type="radio">
+<label for="key7-0">Sembunyikan</label>
+</fieldset>
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+<legend>Tanggal</legend>
+<input name="key8" id="key8-1" data-type="int" value="1" checked="checked" type="radio">
+<label for="key8-1">Tampilkan</label>
+<input name="key8" id="key8-0" data-type="int" value="0" type="radio">
+<label for="key8-0">Sembunyikan</label>
+</fieldset>
+</div>
+<div data-role="collapsible">
+<h3>Format Waktu & Tanggal</h3>
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+<legend>Format Tanggal</legend>
+<input name="key0" id="key0-0" data-type="int" value="0" checked="checked" type="radio">
+<label for="key0-0">'18. Nov.'</label>
+<input name="key0" id="key0-1" data-type="int" value="1" type="radio">
+<label for="key0-1">'DD/MM/YY'</label>
+<input name="key0" id="key0-2" data-type="int" value="2" type="radio">
+<label for="key0-2">'MM/DD/YY'</label>
+</fieldset>
+</div>
+<div data-role="collapsible">
+<h3>Fitur</h3>
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+<legend>Koneksi bluetooth terputus</legend>
+<input name="key1" id="key1-1" data-type="int" value="1" checked="checked" type="radio">
+<label for="key1-1">Getar</label>
+<input name="key1" id="key1-0" data-type="int" value="0" type="radio">
+<label for="key1-0">Diam</label>
+</fieldset>
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+<legend>Koneksi bluetooth terhubung</legend>
+<input name="key2" id="key2-1" data-type="int" value="1" checked="checked" type="radio">
+<label for="key2-1">Getar</label>
+<input name="key2" id="key2-0" data-type="int" value="0" type="radio">
+<label for="key2-0">Diam</label>
+</fieldset>
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+<legend>Lihat teks</legend>
+<i>Tampilkan teks di bawah baris jam dan tanggal seperti "Hmm" dan "Tgl [date]"</i>
+<input name="key3" id="key3-1" data-type="int" value="1" checked="checked" type="radio">
+<label for="key3-1">Ya</label>
+<input name="key3" id="key3-0" data-type="int" value="0" type="radio">
+<label for="key3-0">Tidak</label>
+</fieldset>
+</div>
+<div data-role="collapsible">
+<h3>Lanjutan</h3>
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+<legend>Bahasa</legend>
+<input name="key4" id="key4-0" data-type="int" value="0" checked="checked" type="radio">
+<label for="key4-0">Linggisan</label>
+<input name="key4" id="key4-1" data-type="int" value="1" type="radio">
+<label for="key4-1">Indonesia</label>
+<input name="key4" id="key4-2" data-type="int" value="2" type="radio">
+<label for="key4-2">Njowo</label>
+<input name="key4" id="key4-3" data-type="int" value="3" type="radio">
+<label for="key4-3">Suroboyoan</label>
+</fieldset>
+</div>
+</div>
+<br>
+<div class="ui-body ui-body-c">
+<fieldset class="ui-grid-a">
+<div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+<div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+</fieldset>
+</div>
+</div>
+</div>
+<script>
+      function saveOptions() {
+        var options = {
+          'dateformat':     Number( $("input[name=key0]:checked").val() ),
+      	  'btdisalert':     Number( $("input[name=key1]:checked").val() ),
+      	  'btrealert':     Number( $("input[name=key2]:checked").val() ),
+      	  'showdestext':     Number( $("input[name=key3]:checked").val() ),
+      	  'language':     Number( $("input[name=key4]:checked").val() ),
+      	  'btdistheme':     Number( $("input[name=key5]:checked").val() ),
+      	  'btcontheme':     Number( $("input[name=key6]:checked").val() ),
+      	  'showbattext':     Number( $("input[name=key7]:checked").val() ),
+      	  'showdate':     Number( $("input[name=key8]:checked").val() ),
+        }
+        return options;
+      }
+
+      $().ready(function() {
+       if (typeof window.localStorage !== "undefined") {
+       	console.log("Not undefined :)");
+        if (window.localStorage.simplycleanops) {
+          ls_pto = JSON.parse(window.localStorage.simplycleanops);
+          // the Pebble webview dies on the next line...
+          $("input[name=key0][id=key0-"+ls_pto["dateformat"]+"]").prop('checked',true);
+          $("input[name=key0]").checkboxradio('refresh');
+          $("input[name=key1][id=key1-"+ls_pto["btdisalert"]+"]").prop('checked',true);
+          $("input[name=key1]").checkboxradio('refresh');
+          $("input[name=key2][id=key2-"+ls_pto["btrealert"]+"]").prop('checked',true);
+          $("input[name=key2]").checkboxradio('refresh');
+          $("input[name=key3][id=key3-"+ls_pto["showdestext"]+"]").prop('checked',true);
+          $("input[name=key3]").checkboxradio('refresh');
+          $("input[name=key4][id=key4-"+ls_pto["language"]+"]").prop('checked',true);
+          $("input[name=key4]").checkboxradio('refresh');
+          $("input[name=key5][id=key5-"+ls_pto["btdistheme"]+"]").prop('checked',true);
+          $("input[name=key5]").checkboxradio('refresh');
+          $("input[name=key6][id=key6-"+ls_pto["btcontheme"]+"]").prop('checked',true);
+          $("input[name=key6]").checkboxradio('refresh');
+          $("input[name=key7][id=key7-"+ls_pto["showbattext"]+"]").prop('checked',true);
+          $("input[name=key7]").checkboxradio('refresh');
+          $("input[name=key8][id=key8-"+ls_pto["showdate"]+"]").prop('checked',true);
+          $("input[name=key8]").checkboxradio('refresh');
+        }
+       }
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          ls_pto = JSON.stringify(saveOptions());
+          if (typeof window.localStorage !== "undefined") {
+            window.localStorage.simplycleanops = ls_pto;
+          }
+          var location = "pebblejs://close#" + ls_pto;
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+
+      });
+    </script>
+</body>
+</html>

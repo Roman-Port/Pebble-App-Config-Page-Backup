@@ -1,0 +1,272 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="expires" content="0">
+    <link rel="stylesheet" type="text/css" href="/www.actulife.com/slate-0.0.3/dist/css/slate.css">
+    <link rel="stylesheet" type="text/css" href="/www.actulife.com/WeatherStep/css/style.css">
+    <title>WeatherStep</title>
+</head>
+<body>
+    <div class="item-container">
+<h1 class="title">WeatherStep</h1>
+    </div>
+
+    <div class="item-container hidden" id="versionContainer">
+        <div class="item-container-content">
+            <div class="item">
+                <div id="versionText"></div>
+                <div class="hidden" id="updateText"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="item-container" id="healthContainer">
+        <div class="item-container-header">Pebble Health</div>
+        <div class="item-container-content">
+            <label class="item">
+                Enable Pebble Health data
+                <input id="enableHealth" class="item-toggle" type="checkbox">
+            </label>
+        </div>
+        <div class="item-container-footer">
+            Enables showing Pebble Health data. If Pebble Health is not enabled, then the High/Low temperatures will display instead of steps.
+        </div>
+    </div>
+
+    <div class="item-container">
+        <div class="item-container-header">Weather</div>
+        <div class="item-container-content">
+            <label class="item">
+                Enable Weather
+                <input id="enableWeather" class="item-toggle" type="checkbox">
+            </label>
+        </div>
+        <div class="item-container-footer">
+            Enables showing weather data. You can choose between the different weather providers below.
+        </div>
+        <div id="weatherConfigs" class="hidden">
+            <div class="item-container-content">
+                <label class="item">
+                    Use celsius
+                    <input id="useCelsius" class="item-toggle" type="checkbox">
+                </label>
+            </div>
+        
+        <div class="item-container-header">Weather Pins</div>
+        <div class="item-container-content">
+            <label class="item">&nbsp;
+                <select name="weather-pins" id="weatherPins" class="item-select">
+                    <option class="item-select-option" selected="" value="0">New Pin Every Day</option>
+                    <option class="item-select-option" value="1">New Pin Every Hour</option>
+                    <option class="item-select-option" value="2">New Pin Every Update</option>
+                </select>
+            </label>
+        </div>
+
+
+
+
+
+       <div class="item-container-header">Weather provider<br>Yahoo no longer supported</div>
+            <div class="item-container-content">
+                <div class="item tab-buttons" id="weatherProvider">
+                    <a name="tab-weather" class="tab-button tab-weather active" data-value="0">OpenWeatherMap</a>
+                    <a name="tab-weather" class="tab-button tab-weather" data-value="1">WUnderground</a>
+                    <a name="tab-weather" class="tab-button tab-weather" data-value="2"><strike>Yahoo Weather</strike></a>
+                </div>
+            </div>
+            <div id="weatherUndergroundConfig" class="hidden">
+                <div class="item-container-header">WeatherUnderground API Key</div>
+                <div class="item-container-content">
+                    <label class="item">
+                        <div class="item-input-wrapper">
+                            <input id="weatherKey" class="item-input" type="text" placeholder="Insert WeatherUnderground API key here">
+                        </div>
+                    </label>
+                </div>
+                <div class="item-container-footer">
+                    Notice: If you decide to use WeatherUnderground, you need an API key. Go to <a href="/www.wunderground.com/weather/api/_1199032912.html">wunderground.com</a> to create a free account and get a key and insert it below.
+                </div>
+            </div>
+            <div id="yahooConfig" class="hidden">
+                <div class="item-container-header">Yahoo Weather API Key</div>
+                <div class="item-container-content">
+                    <label class="item">
+                        <div class="item-input-wrapper">
+                            <input id="yahooKey" class="item-input" type="text" placeholder="Insert Yahoo API key here">
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="item-container-header">Manual location</div>
+            <div class="item-container-content">
+                <label class="item">
+                    <div class="item-input-wrapper item-input-wrapper-button">
+                        <input id="overrideLocation" class="item-input" type="text" placeholder="City, Country" maxlength="64">
+                    </div>
+                    <input type="button" id="verifyLocation" class="item-button item-input-button" value="Verify">
+                </label>
+            </div>
+            <div class="item-container-footer">
+                If you define a manual location, we won't try to use your current location for weather info. (max. length 64 characters)<br>
+<b>For PWS</b>: to specify a personal weather station for Weather Underground, enter it like this (for example):  <b> pws:iONTARIO261 </b> <br>
+
+                <b>Notice</b>: If you're not sure the city you entered is working, use the "Verify" button to check if it's a valid location.
+            </div>
+        </div>
+    </div>
+
+    <div class="item-container">
+        <div class="item-container-header">Locale</div>
+        <div class="item-container-content">
+            <label class="item">&nbsp;
+                <select name="locale" id="locale" class="item-select">
+                    <option class="item-select-option" selected="" value="0">English</option>
+                    <option class="item-select-option" value="1">Portuguese</option>
+                    <option class="item-select-option" value="2">French</option>
+                    <option class="item-select-option" value="3">German</option>
+                    <option class="item-select-option" value="4">Spanish</option>
+                    <option class="item-select-option" value="5">Italian</option>
+                    <option class="item-select-option" value="6">Dutch</option>
+                    <option class="item-select-option" value="7">Danish</option>
+                    <option class="item-select-option" value="8">Turkish</option>
+                    <option class="item-select-option" value="9">Czech</option>
+                    <option class="item-select-option" value="10">Polish</option>
+                    <option class="item-select-option" value="11">Swedish</option>
+                    <option class="item-select-option" value="12">Finnish</option>
+                    <option class="item-select-option" value="13">Slovak</option>
+                </select>
+            </label>
+        </div>
+    </div>
+
+    <div class="item-container">
+        <div class="item-container-header">Date format</div>
+        <div class="item-container-content">
+            <label class="item">&nbsp;
+                <select name="date-format" id="dateFormat" class="item-select">
+                    <option class="item-select-option" selected="" value="0">Day of week/Month/Day</option>
+                    <option class="item-select-option" value="1">Day of week/Day/Month</option>
+                </select>
+            </label>
+        </div>
+    </div>
+
+    <div class="item-container">
+        <div class="item-container-header">No Leading Zero</div>
+        <div class="item-container-content">
+            <label class="item">
+               Eliminate Leading Zero 
+                <input id="noLeadingZero" class="item-toggle" type="checkbox">
+            </label>
+        </div>
+    </div>
+
+    <div class="item-container">
+        <div class="item-container-header">Use Big Temp Font</div>
+        <div class="item-container-content">
+            <label class="item">
+               Use Bigger Temperature Font
+                <input id="useBigTemp" class="item-toggle" type="checkbox">
+            </label>
+        </div>
+    </div>
+
+    <div class="item-container">
+        <div class="item-container-header">Bluetooth</div>
+        <div class="item-container-content">
+            <label class="item">
+                Vibrate on disconnect
+                <input id="bluetoothDisconnect" class="item-toggle" type="checkbox">
+            </label>
+        </div>
+        <div class="item-container-footer">
+            Emits a vibration notification when the watch is disconnected from the phone. Won't trigger if you're asleep (only on Time and Time Round).
+        </div>
+    </div>
+
+
+    <div class="item-container">
+        <div class="item-container-header">Colors</div>
+        <div class="item-container-content">
+            <label class="item">
+                Background
+                <input id="bgColor" class="item-color item-color-normal" type="text" value="0x000000">
+            </label>
+            <label class="item">
+                Time
+                <input id="hoursColor" class="item-color item-color-normal" type="text" value="0xFFFFFF">
+            </label>
+            <label class="item">
+                Advanced colors
+                <input id="enableAdvanced" class="item-toggle" type="checkbox">
+            </label>
+        </div>
+        <div class="item-container-footer">
+            Enables specific color configuration for watchface items. If disabled, all text will have the same color as the selection for 'Time' above.
+        </div>
+
+        <div id="advancedConfigs" class="hidden">
+            <div class="item-container-header">Advanced colors</div>
+
+            <div class="item-container-content">
+                <label class="item">
+                    Date
+                    <input id="dateColor" class="item-color item-color-normal" type="text" value="0xFFFFFF">
+                </label>
+                <label class="item">
+                    Battery
+                    <input id="batteryColor" class="item-color item-color-normal" type="text" value="0xFFFFFF">
+                </label>
+                <label class="item">
+                    Battery Background
+                    <input id="batteryBackColor" class="item-color item-color-normal" type="text" value="0x555555">
+                </label>
+                <label class="item">
+                    Battery (low power)
+                    <input id="batteryLowColor" class="item-color item-color-normal" type="text" value="0xFFFFFF">
+                </label>
+                <label class="item">
+                    Bluetooth disconnected
+                    <input id="bluetoothColor" class="item-color item-color-normal" type="text" value="0xFFFFFF">
+                </label>
+                <label class="item">
+                    Weather icon
+                    <input id="weatherColor" class="item-color item-color-normal" type="text" value="0xFFFFFF">
+                </label>
+                <label class="item">
+                    Current temperature
+                    <input id="tempColor" class="item-color item-color-normal" type="text" value="0xFFFFFF">
+                </label>
+                <label class="item">
+                    Steps (or hi/lo)
+                    <input id="stepsColor" class="item-color item-color-normal" type="text" value="0xFFFFFF">
+                </label>
+            </div>
+        </div>
+        <div class="item-container-footer">
+            Remember to save to apply settings.<br><br>
+ Weather font used: <a href="/erikflowers.github.io/weather-icons/.html">Erik Flower's Weather Icons</a>.<br>
+Inspired by Luis Bento's Timeboxed watchface.
+<br>
+<br>
+If you'd like to support future watchface development, the next time you're in the market for domestic or international travel insurance, please consider shopping at
+  <a href="/www.actulife.com/travel-insurance/.html">Actulife</a>. I use this for my own personal travel.<br>
+<br>
+<center>www.actulife.com</center>
+
+        </div>
+    </div>
+
+    <div class="item-container">
+        <div class="button-container">
+            <input id="submit" class="item-button" type="button" value="SAVE SETTINGS">
+        </div>
+    </div>
+
+    <script src="/www.actulife.com/slate-0.0.3/dist/js/slate.js"></script>
+    <script src="/www.actulife.com/WeatherStep/js/main.js"></script>
+</body>
+</html>

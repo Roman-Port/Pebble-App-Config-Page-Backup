@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Active Hour Configuration</title>
+  </head>
+  <body>
+    <h2>Active Hour Configuration</h2>
+    <p>
+      Choose settings and click 'Save' 
+    </p>
+ 
+    <table>
+      <tr><td>Show date</td><td><input id='check_date' type='checkbox'></td></tr>
+      <tr><td>Show step count / sleep time</td><td><input id='check_steps' type='checkbox'></td></tr>
+      <tr><td><strong>BOLD</strong> text</td><td><input id='check_boldText' type='checkbox'></td></tr>
+      <tr><td><strong>BOLD</strong> dots</td><td><input id='check_boldDots' type='checkbox'></td></tr>
+      <tr><td>Hour marks when using bold dots</td><td><input id='check_minmarks' type='checkbox'></td></tr>
+      <tr><td>Show weather dot*</td><td><input id='check_weather' type='checkbox'></td></tr>
+      <tr><td>Bluetooth connect/disconnect vibration (restart watchface to apply)</td><td><input id='check_bt' type='checkbox'></td></tr>
+      <tr><td>Daily color change</td><td><input id='check_daily' type='checkbox'></td></tr>
+    </table>
+
+    <p>Color Scheme</p>
+    <form action="">
+      <input id='check_clr_bw' type="radio" name="color"> Black and White<br>
+      <input id='check_clr_orange' type="radio" name="color"> Orange<br>
+      <input id='check_clr_green' type="radio" name="color"> Green<br>
+      <input id='check_clr_blue' type="radio" name="color"> Blue<br>
+      <input id='check_clr_purple' type="radio" name="color"> Purple<br>
+      <input id='check_clr_red' type="radio" name="color"> Red<br>
+      <input id='check_clr_teal' type="radio" name="color"> Teal<br>
+      <br>
+      <input id='check_clr_inverted' type="checkbox" name="color"> Inverted Colors<br>
+    </form>
+
+    <p>
+    <button id='save_button'>Save</button>
+    </p>
+
+    <p>
+      Please consider donating to support my work <a href="/gum.co//thanksZach.html">here</a>. If you would like a certain color scheme added to this watchface, please donate and send me <a href="mailto:zburnhamdev@gmail.com?Subject=Pebble%20Watchface%20Request">an email</a>. Thank you!
+    </p>
+
+    <p>
+    * The weather option uses your location. But I worked hard to make sure that your location is not used if you have this option turned off. It will show a dot indicating the temperature (currently in Fahrenheit only) at the minute mark corresponding to the temperature. If it's 30 degrees, an extra dot will show at the bottom of the watchface. If it's below zero or above 60, the dot will hopefully be a noticeable color :) For example, 80 degrees will show an orange dot at the 20 minute mark.
+    </p>
+
+    <script>
+      function persistWrite(key, value) {
+        localStorage.setItem(key, value);
+      }
+
+      var persistRead = function(key, defaultValue) {
+        if(localStorage.getItem(key) === null) {
+          return defaultValue;
+        } else {
+          return localStorage.getItem(key);
+        }
+      };
+
+      function firstTimeSetup() {
+        if(!persistRead('first-time', false)) {
+          persistWrite('first-time', true);
+          console.log('This is the first launch!');
+
+          // Align with watchapp defaults
+          persistWrite('date', 'true');
+          persistWrite('steps', 'true');
+          persistWrite('boldText', 'false');
+          persistWrite('boldDots', 'false');
+          persistWrite('minmarks', 'false');
+          persistWrite('weather', 'false');
+          persistWrite('clr_bw', 'true');
+          persistWrite('clr_orange', 'false');
+          persistWrite('clr_green', 'false');
+          persistWrite('clr_blue', 'false');
+          persistWrite('clr_purple', 'false');
+          persistWrite('clr_red', 'false');
+          persistWrite('clr_teal', 'false');
+          persistWrite('daily', 'false');
+          persistWrite('clr_inverted', 'false');
+          persistWrite('bt', 'false');
+        }
+      }
+
+      function loadConfig() {
+        document.getElementById('check_date').checked = persistRead('date', 'false') === 'true';
+        document.getElementById('check_steps').checked = persistRead('steps', 'false') === 'true';
+        document.getElementById('check_boldText').checked = persistRead('boldText', 'false') === 'true';
+        document.getElementById('check_boldDots').checked = persistRead('boldDots', 'false') === 'true';
+        document.getElementById('check_minmarks').checked = persistRead('minmarks', 'false') === 'true';
+        document.getElementById('check_weather').checked = persistRead('weather', 'false') === 'true';
+        document.getElementById('check_clr_bw').checked = persistRead('clr_bw', 'false') === 'true';
+        document.getElementById('check_clr_orange').checked = persistRead('clr_orange', 'false') === 'true';
+        document.getElementById('check_clr_green').checked = persistRead('clr_green', 'false') === 'true';
+        document.getElementById('check_clr_blue').checked = persistRead('clr_blue', 'false') === 'true';
+        document.getElementById('check_clr_purple').checked = persistRead('clr_purple', 'false') === 'true';
+        document.getElementById('check_clr_red').checked = persistRead('clr_red', 'false') === 'true';
+        document.getElementById('check_clr_teal').checked = persistRead('clr_teal', 'false') === 'true';
+        document.getElementById('check_daily').checked = persistRead('daily', 'false') === 'true';
+        document.getElementById('check_clr_inverted').checked = persistRead('clr_inverted', 'false') === 'true';
+        document.getElementById('check_bt').checked = persistRead('bt', 'false') === 'true';
+      }
+
+      function ajax(url, type, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          callback(this.responseText);
+        };
+        xhr.open(type, url);
+        xhr.send();
+      };
+
+      function getQueryParam(query, defaultValue) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          // If the query query parameter is found, decode it to use and return it for use
+          if (pair[0] === query) {
+            return decodeURIComponent(pair[1]);
+          }
+        }
+        return defaultValue || false;
+      }
+
+      var submitButton = document.getElementById('save_button');
+      submitButton.addEventListener('click', 
+        function() {
+          var options = {
+            'date': document.getElementById('check_date').checked ? 'true' : 'false',
+            'steps': document.getElementById('check_steps').checked ? 'true' : 'false',
+            'boldText': document.getElementById('check_boldText').checked ? 'true' : 'false',
+            'boldDots': document.getElementById('check_boldDots').checked ? 'true' : 'false',
+            'minmarks': document.getElementById('check_minmarks').checked ? 'true' : 'false',
+            'weather': document.getElementById('check_weather').checked ? 'true' : 'false',
+            'clr_bw': document.getElementById('check_clr_bw').checked ? 'true' : 'false',
+            'clr_orange': document.getElementById('check_clr_orange').checked ? 'true' : 'false',
+            'clr_green': document.getElementById('check_clr_green').checked ? 'true' : 'false',
+            'clr_blue': document.getElementById('check_clr_blue').checked ? 'true' : 'false',
+            'clr_purple': document.getElementById('check_clr_purple').checked ? 'true' : 'false',
+            'clr_red': document.getElementById('check_clr_red').checked ? 'true' : 'false',
+            'clr_teal': document.getElementById('check_clr_teal').checked ? 'true' : 'false',
+            'daily': document.getElementById('check_daily').checked ? 'true' : 'false',
+            'clr_inverted': document.getElementById('check_clr_inverted').checked ? 'true' : 'false',
+            'bt': document.getElementById('check_bt').checked ? 'true' : 'false',
+          };
+
+          persistWrite('date', options.date);
+          persistWrite('steps', options.steps);
+          persistWrite('boldText', options.boldText);
+          persistWrite('boldDots', options.boldDots);
+          persistWrite('minmarks', options.minmarks);
+          persistWrite('weather', options.weather);
+          persistWrite('clr_bw', options.clr_bw);
+          persistWrite('clr_orange', options.clr_orange);
+          persistWrite('clr_green', options.clr_green);
+          persistWrite('clr_blue', options.clr_blue);
+          persistWrite('clr_purple', options.clr_purple);
+          persistWrite('clr_red', options.clr_red);
+          persistWrite('clr_teal', options.clr_teal);
+          persistWrite('daily', options.daily);
+          persistWrite('clr_inverted', options.clr_inverted);
+          persistWrite('bt', options.bt);
+
+          // Set the return URL depending on the runtime environment
+          var return_to = getQueryParam('return_to', 'pebblejs://close#');
+          document.location = return_to + encodeURIComponent(JSON.stringify(options));
+        }, 
+      false);
+
+      
+      firstTimeSetup();
+      loadConfig();
+    </script>
+  </body>
+</html>

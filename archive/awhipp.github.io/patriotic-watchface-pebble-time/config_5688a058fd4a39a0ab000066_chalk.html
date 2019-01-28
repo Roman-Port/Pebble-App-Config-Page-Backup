@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Nationalist Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/awhipp.github.io/patriotic-watchface-pebble-time/css/slate.css'>
+  <script src='/awhipp.github.io/patriotic-watchface-pebble-time/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Patriotic Clock Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied to this app.
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Select Country</div>
+      <div class='item-container-content'>
+	    <label class="item">
+	    	-
+	      <select id="select_country" name="select-country" dir='rtl' class="item-select">
+	        <option class="item-select-option" value="0" selected="">United States</option>
+	        <option class="item-select-option" value="1">Argentina</option>
+	        <option class="item-select-option" value="2">Bangladesh</option>
+	        <option class="item-select-option" value="3">Brazil</option>
+	        <option class="item-select-option" value="4">China</option>
+	        <option class="item-select-option" value="5">India</option>
+	        <option class="item-select-option" value="6">Indonesia</option>
+	        <option class="item-select-option" value="7">Japan</option>
+	        <option class="item-select-option" value="8">Nigeria</option>
+	        <option class="item-select-option" value="9">Pakistan</option>
+	        <option class="item-select-option" value="10">Russia</option>
+	        <option class="item-select-option" value="11">United Kingdom</option>
+	        <option class="item-select-option" value="12">Mexico</option>
+	        <option class="item-select-option" value="13">Philippines</option>
+	        <option class="item-select-option" value="14">Ethiopia</option>
+	        <option class="item-select-option" value="15">Vietnam</option>
+	        <option class="item-select-option" value="16">Egypt</option>
+	        <option class="item-select-option" value="17">Turkey</option>
+	        <option class="item-select-option" value="18">Germany</option>
+	        <option class="item-select-option" value="19">Iran</option>
+	        <option class="item-select-option" value="20">Democratic Republic of the Congo</option>
+	        <option class="item-select-option" value="21">Thailand</option>
+	        <option class="item-select-option" value="22">Trinidad and Tobago</option>
+	      </select>
+    	</label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the country you want your watchface to resemble. Theme based on primary colors of nation's flag.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+	var e = document.getElementById("select_country");
+	var country = e.options[e.selectedIndex].value;
+
+    var options = {
+      'country': country
+    };
+
+    // Save for next launch
+    localStorage['country'] = options['country'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+
+	var element = document.getElementById('select_country');
+
+    var tmpAry = new Array();
+    for (var i=0;i<element.options.length;i++) {
+        tmpAry[i] = new Array();
+        tmpAry[i][0] = element.options[i].text;
+        tmpAry[i][1] = element.options[i].value;
+    }
+    tmpAry.sort();
+    while (element.options.length > 0) {
+        element.options[0] = null;
+    }
+    for (var i=0;i<tmpAry.length;i++) {
+        var op = new Option(tmpAry[i][0], tmpAry[i][1]);
+        element.options[i] = op;
+    }
+
+    // Load any previously saved configuration, if available
+    if(localStorage['country']) {
+    	element.value = localStorage['country'];
+    }
+  })();
+  </script>
+</html>

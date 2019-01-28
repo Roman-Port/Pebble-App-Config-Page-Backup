@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>WoT-Adjutant</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="content">
+        <div data-role="fieldcontain">
+          <label for="fieldcontain-custom-1">Nickname:</label>            
+            <input type="text" name="user" id="user" style="text-align:center" value="">
+        </div>
+
+        <div class="ui-field-contain">
+            <label for="select-custom-1">Server:</label>
+            <select name="server" id="server" data-native-menu="true">
+                <option value="1">Russia</option>
+                <option value="2">Asia</option>
+                <option value="3">Korea</option>
+                <option value="4">Europe</option>
+                <option value="5">North America</option>
+            </select>
+        </div>
+
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+          </fieldset>
+        </div>
+        <div data-role="popup" id="popupPadded" class="ui-content">
+          <p>User not found!</p>
+        </div>
+      </div>
+    </div>
+    <script>
+    $().ready(function() {
+      $('#user').val(localStorage.getItem('user'));
+      $('#server').val(parseInt(localStorage.getItem('region'))).attr('selected', true).siblings('option').removeAttr('selected');
+      $('#server').selectmenu();
+      $('#server').selectmenu("refresh", true);
+
+      $("#b-cancel").click(function() {
+        document.location = "pebblejs://close#cancel";
+      });
+
+      $("#b-submit").click(function() {
+
+        var region      = $("#server").val();
+        var tld         = '';
+        var app_id      = '';
+        var app_id_ru   = "8466ab4b5c601bab5311a97d5d8cb427";
+        var app_id_asia = "f60da1cbc0785b196643058918028b43";
+        var app_id_kr   = "527f4c4bbcd380a5a02ae7175c6a852c";
+        var app_id_eu   = "3f33dcbe05dbff951ff46927171b7cf7";
+        var app_id_com  = "ffecdc0e7d96b70fd04307057acab7c8";
+
+        switch(region) {
+          case '1':
+            tld = "ru";
+            app_id = app_id_ru;
+            break;
+          case '2':
+            tld = "asia";
+            app_id = app_id_asia;
+            break;
+          case '3':
+            tld = "kr";
+            app_id = app_id_kr;
+            break;
+          case '4':
+            tld = "eu";
+            app_id = app_id_eu;
+            break;
+          case '5':
+            tld = "com";
+            app_id = app_id_com;
+            break;
+        }
+
+        var nick = $("#user").val();
+        var url = "https://api.worldoftanks." + tld + "/wot/account/list/?application_id=" + app_id + "&search=" + nick;
+        
+        $.getJSON(url, function(json) {
+          if (json.count == 0) { $("#popupPadded").popup("open") }
+          for (var i = 0; i <= json.count - 1; i++) {
+            if (json.data[i].nickname.toLowerCase() == nick.toLowerCase()) {
+
+              localStorage.setItem('account_id', json.data[i].account_id);
+              localStorage.setItem('user', json.data[i].nickname);
+              localStorage.setItem('region', region);
+
+              var options = {
+                'account_id': json.data[i].account_id,
+                'region': parseInt(region)
+              }
+              
+              var uri = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+              document.location = uri;
+
+              break;
+            }
+          }
+        });
+      });
+    });
+    </script>
+  </body>
+</html>

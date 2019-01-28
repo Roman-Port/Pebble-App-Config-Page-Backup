@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<!-- Started by copying from
+  --   https://github.com/pebble-hacks/js-configure-demo/blob/master/configurable.html
+  -- and then ripped out all the jquery stuff to avoid 300kB framework overhead (!).
+  -->
+<head>
+   <title>Twilight Sunclock Settings</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body bgcolor="#282828" text="#F0F0F0" style='margin-top:10 margin-left:10'>
+
+<div style="background-color:#0F005E; color:	#CC5200; padding:0.5em">
+<center>Twilight Sunclock</center>
+</div>
+
+<h3>Settings</h3>
+
+<fieldset>
+   <p>Click this to send current location values to the Pebble.</p>
+   <button type="submit" id="b-send-coords">Send...</button>
+</fieldset>
+
+<fieldset>
+   <p>Click this to show current location values from the phone.</p>
+   <button type="submit" id="b-show-coords">Show...</button>
+</fieldset>
+
+<fieldset>
+      <button type="submit" id="b-cancel">Close</button>
+</fieldset>
+
+<script language="javascript">
+
+/*jslint white: true */
+/*global document, window */
+
+   function onLoaded(){
+      "use strict";
+
+      document.getElementById("b-cancel").addEventListener('click', function() {
+         document.location = "pebblejs://close#cancel";
+      }, false);
+
+      document.getElementById("b-show-coords").addEventListener('click', function() {
+         var location = "pebblejs://close#show-coords";
+         document.location = location;
+      }, false);
+
+      document.getElementById("b-send-coords").addEventListener('click', function() {
+         var location = "pebblejs://close#send-coords";
+         document.location = location;
+      });
+   }
+
+   window.onload = onLoaded;
+
+
+</script>
+</body>
+</html>

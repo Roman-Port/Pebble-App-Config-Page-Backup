@@ -1,0 +1,418 @@
+/* Grid
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box; }
+
+/* For devices larger than 400px */
+@media (min-width: 400px) {
+  .container {
+    width: 85%;
+    padding: 0; }
+}
+
+/* For devices larger than 550px */
+@media (min-width: 550px) {
+  .container {
+    width: 80%; }
+}
+
+
+/* Base Styles
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/* NOTE
+html is set to 62.5% so that all the REM measurements throughout Skeleton
+are based on 10px sizing. So basically 1.5rem = 15px :) */
+html {
+  font-size: 62.5%; }
+body {
+  font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #2c3e50;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  image-rendering: optimizeQuality;
+  -webkit-image-rendering: optimizeQuality;
+  -moz-image-rendering: optimizeQuality; }
+
+header { position: fixed; top: 0; z-index: 9999; width: 100%; background: #e74c3c; padding: 10px 0px; color: #f7f7f7; margin-bottom: 4%; padding-bottom: 0; }
+header .title { padding-left: 0; }
+header .title h1 { display: inline-block; margin: 0; font-weight: bold; }
+header .title span { font-size: 10px; line-height: 50px; }
+header .buttons { text-align: right; padding-right: 0; }
+header .buttons .btn-header { display: inline-block; vertical-align: middle; line-height: 0; width: 50px; height: 50px; background: #c0392b; padding: 5%; text-align; center; font-size: 30px; color: rgba(255,255,255,0.8); border: 1px solid #b93434; }
+/*header .buttons .btn-header:last-child { padding-left: 20%; line-height: 51px; }*/
+header .buttons .btn-header:hover,
+header .buttons .btn-header:focus,
+header .buttons .btn-header:valid,
+header .buttons .btn-header:visited { border: none !important; }
+
+
+
+.tier { margin-bottom: 10%; }
+
+.main { margin-top: 90px; }
+.main .title { width: 85%; margin: 0 auto; }
+.main .title h3 { font-weight: 600; font-size: 22px; margin-bottom: 4%; }
+.main .tier.one .preset-container { width: 100%; white-space: nowrap; overflow: scroll; padding: 0 15px; }
+.main .tier.one .preset-container .preset { display: inline-block; width: 26.666667%; margin-right: 2%; border: 6px solid #ecf0f1; border-radius: 100%; background: #303030; border-bottom: 5px solid #ecf0f1; }
+.main .tier.one .preset-container .preset:last-child { margin-right: 0; }
+.main .tier.one .preset-container .preset img { width: 100%; }
+
+.main .tier.two ul { margin-bottom: 0; list-style: none; }
+.main .tier.two ul li { background: #ecf0f1; padding: 20px; }
+.main .tier.two ul li span:first-child { display: inline-block; widthL 90%; height: 100%; }
+.main .tier.two ul li i { font-size: 21px; float: right; cursor: pointer; }
+.main .tier.two ul li span .preset-color { display: inline-block; width: 24px; height: 100%; margin-right: 10px; border-radius: 2px; }
+.main .tier.two ul li span .preset-color:last-child { margin-right: 0; }
+.main .tier.two ul li span a:hover { text-decoration: none !important; color: transparent !important; }
+
+.main .tier.three ul { margin-bottom: 0; list-style: none; }
+.main .tier.three ul li { background: #ecf0f1; padding: 10px 15px; position: relative; }
+.main .tier.three ul li label div div div .color-box[data-value=transparent] { background: #ecf0f1; }
+.main .tier.three ul li label div div .color-box-container { background: #ecf0f1 !important; }
+
+.main .tier.four ul { margin-bottom: 0; list-style: none; }
+.main .tier.four ul li { background: #ecf0f1; padding: 10px 15px; }
+.main .tier.four ul li label { font-weight: 400; }
+.main .tier.four ul li .item-radio { display: none; }
+.main .tier.four ul li .item-styled-radio { top: 20px; }
+.main .tier.four ul li img { max-width: 75px !important; -webkit-font-smoothing: antialiased;}
+
+.main .tier.five .item { display: inline-block; float: left; width: 100%; top: 0;  line-height: 50px; padding: 10px 0px; margin-bottom: 0; }
+.main .tier.five .item select { display: inline-block; vertical-align: middle; line-height: 21px !important; }
+.main .tier.five .item .select-triangle { top: 30px !important; }
+
+.main .tier.six ul { margin-bottom: 0; list-style: none; }
+.main .tier.six ul li { background: #ecf0f1; padding: 10px 15px; }
+.main .tier.six ul li label { font-weight: 400; }
+.main .tier.six ul li .item-radio { display: none; }
+.main .tier.six ul li .item-styled-radio { top: 17px; }
+.main .tier.six ul li img { max-width: 90px !important; -webkit-font-smoothing: antialiased; vertical-align: sub; }
+
+.main .tier.seven ul { margin-bottom: 0; list-style: none; }
+.main .tier.seven ul li { background: #ecf0f1; padding: 10px 15px; }
+.main .tier.seven ul li label { font-weight: 400; }
+.main .tier.seven ul li label .item-toggle { display: none; }
+
+.main .tier.eight .item { display: inline-block; float: left; width: 100%; top: 0; line-height: 50px; padding: 10px 0px; margin-bottom: 0; }
+.main .tier.eight .item select { display: inline-block; vertical-align: middle; line-height: 21px !important; }
+.main .tier.eight .item .select-triangle { top: 30px !important; }
+
+.main .tier.nine .item { display: inline-block; float: left; width: 100%; top: 0; line-height: 50px; padding: 10px 0px; margin-bottom: 0; }
+.main .tier.nine .item select { display: inline-block; vertical-align: middle; line-height: 21px !important; }
+.main .tier.nine .item .select-triangle { top: 30px !important; }
+.main .tier.nine ul { margin-bottom: 0; list-style: none; float: left; width: 100%; }
+.main .tier.nine ul li { background: #ecf0f1; padding: 10px 15px; float: left; width: 100%; }
+.main .tier.nine ul li label { font-weight: 400; }
+.main .tier.nine ul li .item-toggle { display: none; }
+.main .tier.nine ul li .item select { display: inline-block; float: left; width: 100%; top: 0; line-height: 50px; padding: 10px 0px; margin-bottom: 0; }
+.main .tier.nine ul li .item .select-triangle { top: 30px !important; }
+
+.main .tier.ten ul { margin-bottom: 0; list-style: none; float: left; width: 100%; }
+.main .tier.ten ul li { background: #ecf0f1; padding: 10px 15px; float: left; width: 100%; }
+.main .tier.ten ul li label { font-weight: 400; }
+.main .tier.ten ul li .item-toggle { display: none; }
+
+.main .tier.eleven .item { display: inline-block; float: left; width: 100%; top: 0; line-height: 50px; padding: 10px 0px; margin-bottom: 0; height: 70px; }
+.main .tier.eleven .item select { display: inline-block; vertical-align: middle; line-height: 21px !important; width: 89%; }
+.main .tier.eleven .item .select-triangle { top: 30px !important; }
+
+.item-button { width: 100% !important; transition: all .5s ease-in-out; -webkit-transition: all .5s ease-in-out;}
+.item-button:hover { background: rgba(231, 76, 60, 0.9); color: white !important;  }
+
+/* Typography
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-weight: 300; }
+h1 { font-size: 4.0rem; line-height: 1.2;  letter-spacing: -.1rem;}
+h2 { font-size: 3.6rem; line-height: 1.25; letter-spacing: -.1rem; }
+h3 { font-size: 3.0rem; line-height: 1.3;  letter-spacing: -.1rem; }
+h4 { font-size: 2.4rem; line-height: 1.35; letter-spacing: -.08rem; }
+h5 { font-size: 1.8rem; line-height: 1.5;  letter-spacing: -.05rem; }
+h6 { font-size: 1.5rem; line-height: 1.6;  letter-spacing: 0; }
+
+/* Larger than phablet */
+@media (min-width: 550px) {
+  h1 { font-size: 5.0rem; }
+  h2 { font-size: 4.2rem; }
+  h3 { font-size: 3.6rem; }
+  h4 { font-size: 3.0rem; }
+  h5 { font-size: 2.4rem; }
+  h6 { font-size: 1.5rem; }
+}
+
+p {
+  margin-top: 0; }
+
+
+/* Links
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+a {
+  color: #1EAEDB; }
+a:hover {
+  color: #0FA0CE; }
+
+
+/* Buttons
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #555;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  cursor: pointer;
+  box-sizing: border-box; }
+.button:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+.button:focus,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+  color: #333;
+  border-color: #888;
+  outline: 0; }
+.button.button-primary,
+button.button-primary,
+input[type="submit"].button-primary,
+input[type="reset"].button-primary,
+input[type="button"].button-primary {
+  color: #FFF;
+  background-color: #33C3F0;
+  border-color: #33C3F0; }
+.button.button-primary:hover,
+button.button-primary:hover,
+input[type="submit"].button-primary:hover,
+input[type="reset"].button-primary:hover,
+input[type="button"].button-primary:hover,
+.button.button-primary:focus,
+button.button-primary:focus,
+input[type="submit"].button-primary:focus,
+input[type="reset"].button-primary:focus,
+input[type="button"].button-primary:focus {
+  color: #FFF;
+  background-color: #1EAEDB;
+  border-color: #1EAEDB; }
+
+
+/* Forms
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+  height: 38px;
+  padding: 6px 10px; /* The 6px vertically centers text on FF, ignored by Webkit */
+  background-color: #fff;
+  border: 1px solid #D1D1D1;
+  border-radius: 4px;
+  box-shadow: none;
+  box-sizing: border-box; }
+/* Removes awkward default styles on some inputs for iOS */
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none; }
+textarea {
+  min-height: 65px;
+  padding-top: 6px;
+  padding-bottom: 6px; }
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  border: 1px solid #33C3F0;
+  outline: 0; }
+label,
+legend {
+  display: block;
+  margin-bottom: .5rem;
+  font-weight: 400; }
+fieldset {
+  padding: 0;
+  border-width: 0; }
+input[type="checkbox"],
+input[type="radio"] {
+  display: inline; }
+label > .label-body {
+  display: inline-block;
+  margin-left: .5rem;
+  font-weight: normal; }
+
+
+/* Lists
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+ul {
+  list-style: circle inside; }
+ol {
+  list-style: decimal inside; }
+ol, ul {
+  padding-left: 0;
+  margin-top: 0; }
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin: 1.5rem 0 1.5rem 3rem;
+  font-size: 90%; }
+li {
+  margin-bottom: 1rem; }
+
+
+/* Code
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+code {
+  padding: .2rem .5rem;
+  margin: 0 .2rem;
+  font-size: 90%;
+  white-space: nowrap;
+  background: #F1F1F1;
+  border: 1px solid #E1E1E1;
+  border-radius: 4px; }
+pre > code {
+  display: block;
+  padding: 1rem 1.5rem;
+  white-space: pre; }
+
+
+/* Tables
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+th,
+td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #E1E1E1; }
+th:first-child,
+td:first-child {
+  padding-left: 0; }
+th:last-child,
+td:last-child {
+  padding-right: 0; }
+
+
+/* Spacing
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+button,
+.button {
+  margin-bottom: 1rem; }
+input,
+textarea,
+select,
+fieldset {
+  margin-bottom: 1.5rem; }
+pre,
+blockquote,
+dl,
+figure,
+table,
+p,
+ul,
+ol,
+form {
+  margin-bottom: 2.5rem; }
+
+
+/* Utilities
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.u-full-width {
+  width: 100%;
+  box-sizing: border-box; }
+.u-max-full-width {
+  max-width: 100%;
+  box-sizing: border-box; }
+.u-pull-right {
+  float: right; }
+.u-pull-left {
+  float: left; }
+
+
+/* Misc
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+hr {
+  margin-top: 3rem;
+  margin-bottom: 3.5rem;
+  border-width: 0;
+  border-top: 1px solid #E1E1E1; }
+
+
+/* Clearing
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+/* Self Clearing Goodness */
+.container:after,
+.row:after,
+.u-cf {
+  content: "";
+  display: table;
+  clear: both; }
+
+
+/* Media Queries
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+/*
+Note: The best way to structure the use of media queries is to create the queries
+near the relevant code. For example, if you wanted to change the styles for buttons
+on small devices, paste the mobile query code up in the buttons section and style it
+there.
+*/
+
+
+/* Larger than mobile */
+@media (min-width: 400px) {}
+
+/* Larger than phablet (also point when grid becomes active) */
+@media (min-width: 550px) {}
+
+/* Larger than tablet */
+@media (min-width: 750px) {}
+
+/* Larger than desktop */
+@media (min-width: 1000px) {}
+
+/* Larger than Desktop HD */
+@media (min-width: 1200px) {}

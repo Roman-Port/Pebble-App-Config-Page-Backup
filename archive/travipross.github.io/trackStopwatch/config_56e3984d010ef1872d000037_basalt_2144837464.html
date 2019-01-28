@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Example Configuration</title>
+    <style>
+    	body {color:white;}
+    	h1 {color:black;}
+    </style>
+  </head>
+  <body bgcolor="#007fff" onload="updateDisplay()">
+    <h1>Track Stopwatch configuration page</h1>
+    
+		<fieldset>
+			<legend>Preferred unit </legend>
+			<input id="dist_unit_metric" name="dist_unit" type="radio" value="0" checked=""> Metric (meters)<br>
+			<input id="dist_unit_imperial" name="dist_unit" type="radio" value="1"> Imperial (yards)<br>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Lap distance</legend>
+			<input id="lap_dist" name="lap_dist" type="number" value="162" min="1"><br>
+		</fieldset>
+
+		<fieldset>
+			<legend>Previous lap info display <br> (below current lap time)</legend>
+			<input id="disp_mode_time" name="disp_mode" type="radio" value="0" checked=""> Lap time<br>
+			<input id="disp_mode_pace" name="disp_mode" type="radio" value="1"> Lap pace
+		</fieldset>
+				
+		<fieldset id="color_fieldset">
+			<legend>Appearance</legend>
+			Background <br>
+			<input id="main_color" type="color" list="colorlist" value="#FFFFFF"><br><br>
+			Accent <br>
+			<input id="accent_color" type="color" list="colorlist" value="#000000"><br>
+			<datalist id="colorlist">
+				<option>#000000</option>
+				<option>#555555</option>
+				<option>#AAAAAA</option>
+				<option>#FFFFFF</option>
+				<option>#ff0000</option>
+    			<option>#ff5500</option>
+    			<option>#ffff00</option>
+    			<option>#00ff00</option>
+    			<option>#0000FF</option>
+				<option>#AA00FF</option>
+				<option>#5500AA</option>
+			</datalist>
+			*If the selected color can't be displayed on the watch, the closest color on the palette will be saved
+		</fieldset>	
+		
+		<fieldset id="bw_fieldset" style="display:none">
+			<legend>Appearance</legend>
+			<input id="color_bow" name="bw_color" type="radio" value="0" checked=""> Black on white <br>
+			<input id="color_wob" name="bw_color" type="radio" value="1"> White on black <br>
+		</fieldset>
+		<input id="submit_button" type="button" value="Save" style="float:left;width:100px;height:50px">
+  </body>
+  <script>	
+	// update the default values based on localStorage values
+	function updateDisplay(){
+		// load lap distance
+		if(localStorage["AppKeyLapDist"]){
+			console.log("load AppKeyLapDist: " + localStorage["AppKeyLapDist"]);
+			document.getElementById("lap_dist").value = localStorage["AppKeyLapDist"];
+		}
+		// load distance unit
+		if(localStorage["AppKeyDistUnit"]){
+			console.log("load AppKeyDistUnit: " + localStorage["AppKeyDistUnit"]);
+			if(localStorage["AppKeyDistUnit"]==1){
+				document.getElementById("dist_unit_imperial").checked = true;
+			}else{
+				document.getElementById("dist_unit_metric").checked = true;
+			}
+		}
+		// load display mode selection (if exists)
+		if(localStorage["AppKeyDispMode"]){
+			console.log("load AppKeyDispMode: " + localStorage["AppKeyDispMode"]);
+			if(localStorage["AppKeyDispMode"]==1){
+				document.getElementById("disp_mode_pace").checked = true;
+			}else{
+				document.getElementById("disp_mode_time").checked = true;
+			}
+		}
+		// load main background color (if exists)
+		if(localStorage["AppKeyColorMain"]){
+			console.log("load AppKeyColorMain: " + localStorage["AppKeyColorMain"]);
+			document.getElementById("main_color").value = localStorage["AppKeyColorMain"];
+		}
+		// load accent color (if exists)
+		if(localStorage["AppKeyColorAccent"]){
+			console.log("load AppKeyColorAccent: " + localStorage["AppKeyColorAccent"]);
+			document.getElementById("accent_color").value = localStorage["AppKeyColorAccent"];
+			if(localStorage["AppKeyColorAccent"] === "#FFFFFF"){
+				document.getElementById("color_wob").checked = true;
+			}else{
+				document.getElementById("color_bow").checked = true;
+			}
+		}
+		// check url for colormode
+		var screen_type = window.location.search.substring(1).split("&",1); // first param is screen type
+		if(screen_type == "bw"){
+			document.getElementById("color_fieldset").style.display = "none";
+			document.getElementById("bw_fieldset").style.display = "block";
+			console.log("Screen type: Black + White");
+		}else if(screen_type == "color"){
+			document.getElementById("color_fieldset").style.display = "block";
+			document.getElementById("bw_fieldset").style.display = "none";
+			console.log("Screen type: Color");
+		}else{
+			console.log("No screen type detected!");
+		}
+		
+		
+	}
+	function convertToNearest64BitHex(hexInput){// assumes 6-length hex value with leading hash
+		var outputString = "#";
+		for (var i = 0; i<3; i++){
+			var colorInt = parseInt(hexInput.substr(i*2+1,2),16); // get individual color tuple from hex string
+			// round to nearest 64 bit color value
+			if (colorInt<43){
+				outputString+="00";
+			}else if(colorInt<128){
+				outputString+="55";
+			}else if(colorInt<213){
+				outputString+="AA";
+			}else{
+				outputString+="FF";
+			}
+		}
+		return outputString;
+	} 
+
+		
+	// Get a handle to the button"s HTML element
+	var submitButton = document.getElementById("submit_button");
+
+	// Add a "click" listener to the submission button
+	submitButton.addEventListener("click", function() {
+		
+		// Get the config data from the UI elements
+		var distUnit = document.getElementsByName("dist_unit");
+		var lapDist = document.getElementById("lap_dist");
+		var dispMode = document.getElementsByName("disp_mode");
+		var mainColor = document.getElementById("main_color");
+		var accentColor = document.getElementById("accent_color");
+		
+
+		// Make a data object to be sent, coercing value types to integers
+		var options = {
+		  "AppKeyDistUnit": 0, // to be updated below
+		  "AppKeyLapDist": lapDist.value,
+		  "AppKeyDispMode": 0,
+		  "AppKeyColorMain": convertToNearest64BitHex(mainColor.value),
+		  "AppKeyColorAccent": convertToNearest64BitHex(accentColor.value)
+		};
+		
+		// store the colors in the case of bw watch config screen
+		var screen_type = window.location.search.substring(1).split("&",1); // first param is screen type
+		if(screen_type == "bw"){
+			if(document.getElementById("color_wob").checked){
+				options.AppKeyColorMain = "#000000";
+				options.AppKeyColorAccent = "#FFFFFF";
+			}else{
+				options.AppKeyColorMain = "#FFFFFF";
+				options.AppKeyColorAccent = "#000000";
+			}	
+		}
+		
+		// store the checked values of radio fields in data object
+		for(var i = 0; i<distUnit.length; i++){
+			if(distUnit[i].checked){
+				options.AppKeyDistUnit = i;
+				break;
+			}
+		}
+		for(var i = 0; i<dispMode.length; i++){
+			if(dispMode[i].checked){
+				options.AppKeyDispMode = i;
+				break;
+			}
+		}
+		
+		// put in local storage
+		localStorage["AppKeyDistUnit"] = options.AppKeyDistUnit;
+		console.log("saved AppKeyDistUnit: " + options.AppKeyDistUnit);
+		
+		localStorage["AppKeyLapDist"] = options.AppKeyLapDist;
+		console.log("saved AppKeyLapDist: " + options.AppKeyLapDist);
+		
+		localStorage["AppKeyDispMode"] = options.AppKeyDispMode;
+		console.log("saved AppKeyDispMode: " + options.AppKeyDispMode);
+		
+		localStorage["AppKeyColorMain"] = options.AppKeyColorMain;
+		console.log("saved AppKeyColorMain: " + options.AppKeyColorMain);
+		
+		localStorage["AppKeyColorAccent"] = options.AppKeyColorAccent;
+		console.log("saved AppKeyColorAccent: " + options.AppKeyColorAccent);
+
+		// Determine the correct return URL (emulator vs real watch)
+		function getQueryParam(variable, defaultValue) {
+		  var query = location.search.substring(1);
+		  var vars = query.split("&");
+		  for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split("=");
+			if (pair[0] === variable) {
+			  return decodeURIComponent(pair[1]);
+			}
+		  }
+		  return defaultValue || false;
+		}
+		var return_to = getQueryParam("return_to", "pebblejs://close#");
+
+		// Encode and send the data when the page closes
+		document.location = return_to + encodeURIComponent(JSON.stringify(options).replace(/#/g,"0x"));
+		console.log(return_to + JSON.stringify(options).replace(/#/g,"0x"));
+	});
+	</script>
+</html>

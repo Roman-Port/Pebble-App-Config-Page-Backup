@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>OrbitNG</title>
+  <!--- taken from SLATE -->
+  <link rel='stylesheet' type='text/css' href='/cdn.rawgit.com/tiptick/slate-config-example/1.02/config/css/slate.css'>
+  <script src='/cdn.rawgit.com/tiptick/slate-config-example/1.02/config/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>OrbitNG Config</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied to OrbitNG.
+        </div>
+      </div>
+    </div>
+<!----
+    <div class='item-container'>
+      <div class='item-container-header'>Customizability</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Color
+          <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's background color. Used if High Contrast Mode is not selected. Note: Only available on Basalt watches that support many colors.
+      </div>
+    </div>
+---->
+    <div class='item-container'>
+      <div class='item-container-header'>Customizing</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Display Date 
+          <input id='date_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        This shows the date below the Hour
+      </div>
+    </div>
+ <div class='item-container'>
+      <div class='item-container-header'>Connection Handling</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Vibrate on Bluetooth Dis-/Connect
+          <input id='btvib_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      
+  </div>
+    
+
+ <div class='item-container'>
+      <div class='item-container-header'>Colors</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Color
+          <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='0x000000'>
+        </label>
+         <label class='item'>
+          Earth Color
+          <input id='earth_color_picker' type='text' class='item-color item-color-sunny' value='0x000000'>
+        </label>
+        <label class='item'>
+          Invert Earths Fontcolor
+          <input id='earth_font_invert_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+        <label class='item'>
+          Bold Earth Font
+          <input id='earth_font_bold_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+        <label class='item'>
+          Moon Color
+          <input id='moon_color_picker' type='text' class='item-color item-color-sunny' value='0x000000'>
+        </label>
+         <label class='item'>
+          Invert Moons Fontcolor
+          <input id='moon_font_invert_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+        <label class='item'>
+          Invert Moons Orbit
+          <input id='moon_orbit_invert_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+        <label class='item'>
+          Invert Earths Orbit
+          <input id='earth_orbit_invert_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Color up you Planets
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+    
+    var dateCheckbox = document.getElementById('date_checkbox');
+    var btvib_checkbox = document.getElementById('btvib_checkbox');
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var earthColorPicker = document.getElementById('earth_color_picker');
+    var moonColorPicker = document.getElementById('moon_color_picker');
+    var earthFontBoldCheckbox = document.getElementById('earth_font_bold_checkbox');
+    var earthFontInvertCheckbox = document.getElementById('earth_font_invert_checkbox');
+    var moonFontInvertCheckbox = document.getElementById('moon_font_invert_checkbox');
+    var moonorbitinvertcheckbox = document.getElementById('moon_orbit_invert_checkbox');
+    var earthorbitinvertcheckbox = document.getElementById('earth_orbit_invert_checkbox');
+    
+    var options = {
+      'date': dateCheckbox.checked,
+      'btvib': btvib_checkbox.checked,
+      'backgroundColor': backgroundColorPicker.value,
+      'earthColor': earthColorPicker.value,
+      'moonColor': moonColorPicker.value,
+      'earthFontBold': earthFontBoldCheckbox.checked,
+      'earthFontInvert': earthFontInvertCheckbox.checked,
+      'moonFontInvert': moonFontInvertCheckbox.checked,
+      'earthOrbitInvert': earthorbitinvertcheckbox.checked,
+      'moonOrbitInvert': moonorbitinvertcheckbox.checked
+    };
+
+    // Save for next launch
+   // localStorage['background_color'] = options['background_color'];
+    localStorage['date'] = options['date'];
+    localStorage['btvib'] = options['btvib'];
+    localStorage['backgroundColor'] = options['backgroundColor'];
+    localStorage['earthColor'] = options['earthColor'];
+    localStorage['moonColor'] = options['moonColor'];
+    localStorage['earthFontBold'] = options['earthFontBold'];
+    localStorage['earthFontInvert'] = options['earthFontInvert'];
+    localStorage['moonFontInvert'] = options['moonFontInvert'];
+    localStorage['earthOrbitInvert'] = options['earthOrbitInvert'];
+    localStorage['moonOrbitInvert'] = options['moonOrbitInvert']
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    
+    var dateCheckbox = document.getElementById('date_checkbox');
+    var btvib_checkbox = document.getElementById('btvib_checkbox');
+    var earthFontBoldCheckbox = document.getElementById('earth_font_bold_checkbox');
+    var earthFontInvertCheckbox = document.getElementById('earth_font_invert_checkbox');
+    var moonFontInvertCheckbox = document.getElementById('moon_font_invert_checkbox');
+    var earthorbitinvert = document.getElementById('earth_orbit_invert_checkbox');
+    var moonorbitinvert = document.getElementById('moon_orbit_invert_checkbox');
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var earthColorPicker = document.getElementById('earth_color_picker');
+    var moonColorPicker = document.getElementById('moon_color_picker');
+   
+    
+    // Load any previously saved configuration, if available
+    if(localStorage['moonFontInvert']) {
+     dateCheckbox.checked = JSON.parse(localStorage['date']);
+     btvib_checkbox.checked = JSON.parse(localStorage['btvib']);
+     earthFontBoldCheckbox.checked = JSON.parse(localStorage['earthFontBold']);
+     earthFontInvertCheckbox.checked = JSON.parse(localStorage['earthFontInvert']);
+     moonFontInvertCheckbox.checked = JSON.parse(localStorage['moonFontInvert']);
+       earthorbitinvert.checked = JSON.parse(localStorage['earthOrbitInvert']);
+      moonorbitinvert.checked = JSON.parse(localStorage['moonOrbitInvert']);
+     backgroundColorPicker.value = JSON.parse(localStorage['backgroundColor']);    
+     earthColorPicker.value = JSON.parse(localStorage['earthColor']);
+     moonColorPicker.value = JSON.parse(localStorage['moonColor']);
+      
+    console.log("earthcolo" +  earthColorPicker.value); 
+  }
+  })();
+  </script>
+</html>

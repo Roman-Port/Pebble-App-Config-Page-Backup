@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Arcturus Configuration</title>
+  <link href="/www.richardwheeler.net/hosting/pebble/settings.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <h1>Arcturus</h1>
+    <h2>Watchface settings</h2>
+
+    <p id="show_seconds_p">
+      <select id="show_seconds_select">
+        <option value="off">Hide</option>
+        <option value="on" selected="selected">Show</option>
+      </select>
+      <label for="show_seconds_select">Show second hand (increases battery use)</label>
+    </p>
+  
+    <p id="color_select_p">
+      <select id="color_select">
+        <option value="auto" selected="selected">Automagic</option>
+        <option value="multi1">Red, green & blue</option>
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+        <option value="blue">Blue</option>
+        <option value="contr">High contrast</option>
+      </select>
+      <label for="color_select">Colour scheme</label>
+    </p>
+	
+	<p id="flat_caps_select_p">
+      <select id="flat_caps_select">
+        <option value="off" selected="selected">Round caps</option>
+        <option value="on">Flat caps</option>
+      </select>
+      <label for="flat_caps_select">Shape for arc caps</label>
+    </p>
+	
+	<p id="digital_select_p">
+      <select id="digital_select">
+        <option value="off" selected="selected">Hide</option>
+        <option value="on">Show</option>
+      </select>
+      <label for="digital_select">Also show digital time</label>
+    </p>
+
+    <p>
+      <button id="save_button">Save</button>
+    </p>
+
+    <script>
+//Load current settings from url
+function gup(name) {
+  name=name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+  var regexs="[\\?&]"+name+"=([^&#]*)";
+  var regex=new RegExp(regexs);
+  var results=regex.exec(window.location.href);
+  if (results==null) {
+    return null;
+  } else {
+    return results[1];
+  }
+}
+
+window.onload = function() {
+  if (gup("platform")=="aplite") {
+    //Hide color only options
+    document.getElementById("color_select_p").style.display="none";
+	document.getElementById("flat_caps_p").style.display="none";
+  }
+  
+  var showSecondsSelect = document.getElementById("show_seconds_select");
+  var colorSelect = document.getElementById("color_select");
+  var flatCapsSelect = document.getElementById("flat_caps_select");
+  var digitalSelect = document.getElementById("digital_select");
+
+  if (gup("show_seconds")=="on") {
+    showSecondsSelect.selectedIndex=1;
+  } else if (gup("show_seconds")=="off") {
+    showSecondsSelect.selectedIndex=0;
+  } else {
+	showSecondsSelect.selectedIndex=1;
+  }
+    
+  if (gup("color")=="auto") {
+    colorSelect.selectedIndex=0;
+  } else if (gup("color")=="multi1") {
+    colorSelect.selectedIndex=1;
+  } else if (gup("color")=="red") {
+    colorSelect.selectedIndex=2;
+  } else if (gup("color")=="green") {
+    colorSelect.selectedIndex=3;
+  } else if (gup("color")=="blue") {
+    colorSelect.selectedIndex=4;
+  } else if (gup("color")=="contr") {
+    colorSelect.selectedIndex=5;
+  } else {
+    colorSelect.selectedIndex=0;
+  }
+  
+  if (gup("flat_caps")=="on") {
+    flatCapsSelect.selectedIndex=1;
+  } else if (gup("flat_caps")=="off") {
+    flatCapsSelect.selectedIndex=0;
+  } else {
+	flatCapsSelect.selectedIndex=0;
+  }
+  
+  if (gup("digital")=="on") {
+    digitalSelect.selectedIndex=1;
+  } else if (gup("digital")=="off") {
+    digitalSelect.selectedIndex=0;
+  } else {
+	digitalSelect.selectedIndex=0;
+  }
+};
+
+function gupb(name, def) {
+  var v=gup(name);
+  if (v==null) {
+    v=def;
+  }
+  if (v=="1" || v.toLowerCase=="true" || v.toLowerCase=="yes") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+//Setup to allow easy adding more options later
+function saveOptions() {
+  var showSecondsSelect = document.getElementById("show_seconds_select");
+  var colorSelect = document.getElementById("color_select");
+  var flatCapsSelect = document.getElementById("flat_caps_select");
+  var digitalSelect = document.getElementById("digital_select");
+  
+  var options = {
+    "show_seconds": showSecondsSelect.options[showSecondsSelect.selectedIndex].value,
+    "color": colorSelect.options[colorSelect.selectedIndex].value,
+	"flat_caps": flatCapsSelect.options[flatCapsSelect.selectedIndex].value,
+	"digital": digitalSelect.options[digitalSelect.selectedIndex].value
+  }    
+  return options;
+};
+
+var submitButton = document.getElementById("save_button");
+
+submitButton.addEventListener("click", 
+  function() {
+    console.log("Submit");
+    var options = saveOptions();
+    var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));     
+    document.location = location;
+  }, 
+  false
+ );
+    </script>
+  </body>
+</html>

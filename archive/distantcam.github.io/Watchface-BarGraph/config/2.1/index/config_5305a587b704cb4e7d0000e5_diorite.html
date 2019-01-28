@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Bar Graph</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/code.jquery.com/mobile/1.4.1/jquery.css">
+	<script src="/code.jquery.com//jquery-1.js"></script>
+	<script src="/code.jquery.com/mobile/1.4.1/jquery.js"></script>
+	<script src="/ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.js"></script>
+	<style type="text/css">
+	
+	.invert-size-flipswitch.ui-flipswitch .ui-btn.ui-flipswitch-on {
+		text-indent: -4.525em;
+	}
+	.invert-size-flipswitch.ui-flipswitch .ui-flipswitch-off {
+		text-indent: 0.5em;
+	}
+	.invert-size-flipswitch.ui-flipswitch {
+		width: 7em;
+	}
+	.invert-size-flipswitch.ui-flipswitch.ui-flipswitch-active {
+		padding-left: 5.125em;
+		width: 1.875em;
+	}
+	
+	@media (min-width: 28em) {
+		.ui-field-contain .invert-size-flipswitch.ui-flipswitch {
+			width: 7em;
+		}
+				
+		.ui-field-contain .invert-size-flipswitch.ui-flipswitch.ui-flipswitch-active {
+			padding-left: 5.125em;
+			width: 1.875em;
+		}
+	}
+	</style>
+</head>
+
+<body>
+	<div data-role="page" id="configuration">
+		<div data-role="header" id="header">
+			<button id="b-cancel" data-icon="delete" data-iconpos="left" data-inline="true" data-mini="true">Cancel</button>
+			<h1>Bar Graph</h1>
+		</div>
+		<div role="main" class="ui-content">
+			<form id="configuration-form">
+				
+				<div class="ui-field-contain">
+					<label for="invert">Invert Display</label>
+					<input type="checkbox" data-role="flipswitch" name="invert" id="invert" data-on-text="White" data-off-text="Black" data-wrapper-class="invert-size-flipswitch">
+				</div>
+				
+				<button id="b-submit" data-theme="b" data-icon="check" data-iconpos="right">Save</button>
+			</form>
+		</div>
+		<div data-role="footer" id="footer" data-position="fixed">
+			<h2>Powered by Pebble Autoconfig</h2>
+		</div>
+	</div>
+	<script type="text/javascript">	 
+		$().ready(function() {	  
+			var dictionary;
+			try {
+				dictionary = JSON.parse(localStorage['Bar Graph']);
+			} catch(e) {
+				dictionary = {};
+			}
+			
+			
+			if(!dictionary.hasOwnProperty('invert')) {
+				dictionary['invert'] = false;
+			}
+			$('#invert').prop('checked', (dictionary['invert'])).flipswitch( "refresh" );
+		});
+		
+		// Handle different UI on i-devices
+		if( /iPhone|iPad|iPod/i.test(navigator.userAgent) ) {
+			$("#header").remove();
+		}
+		
+		$("form :input").on("keypress", function(e) {
+			return e.keyCode != 13;
+		});
+		
+		$("#configuration-form").validate({
+			rules: {
+				
+				
+			},
+			errorPlacement: function(error, element) {
+				error.insertAfter( element.parent() );
+			}
+		});
+
+		$('#b-submit').click(function() {
+			if (!$("#configuration-form").valid()) {
+				return false;
+			}
+			
+			var dictionary = {};
+			
+			dictionary['invert'] = ($('#invert').prop('checked') ? 1 : 0);
+			
+			localStorage['Bar Graph'] = JSON.stringify(dictionary);
+
+			var location = "pebblejs://close#" + encodeURIComponent(localStorage['Bar Graph']);
+			window.location.href = location;
+		});
+	
+		$('#b-cancel').click(function() {
+			var location = "pebblejs://close#";
+			window.location.href = location;
+		});
+	</script>
+</body>
+</html>

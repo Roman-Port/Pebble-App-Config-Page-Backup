@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<!--
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+-->
+
+<!--
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+-->
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+    <link href="/geol.com/pebble/colorpicker.css" rel="stylesheet" type="text/css">
+
+<script>
+function manModeC(v){
+	//alert(v);
+	el=document.getElementById("manMode");
+	if(v == 0){
+		el.style.display="block";
+	} else {
+		el.style.display="none";
+	}
+}
+</script>
+
+    <script src="/geol.com/pebble/settings/script3.bin"></script>
+	
+    <title>Karateka configuration</title>
+    <style>
+	span{
+		font-size:small;
+	}
+	td{
+		text-align:center;
+	}
+			
+			.help{
+				background-color:#F9E79F;
+			}
+			.help label{
+				font-weight:bold;
+			}
+			.help hr{
+				width:70%;
+			}
+	.hideV2 {display:none;}.hideV3 {display:none;}
+		.hideThis {
+			display:none;
+		}
+    </style>
+
+  </head>
+  <body>
+  
+    <div data-role="page" id="page1">
+
+
+<div data-theme="" data-role="header" style="height:50px;"><img src="BigDig48.jpg" style="height:48px;float:left;"><img src="/geol.com/pebble/OS-Pebble.png" style="height:48px;float:right;"><h3>Karateka for Unknown</h3></div><div style="text-align:center;background-color:silver;">Unknown</div>
+	  
+      <div data-role="content">
+	<div class="hideThis">
+		<button type="button" onclick="location.href='#secHelp';">Help</button>
+
+	</div>
+
+
+	<br>
+	<hr>
+	
+	<hr>
+	
+	<h2 id="secOp">Options</h2>
+
+
+	<div>
+
+
+
+
+
+
+
+	  <label>Change Mode<br>
+		<select id="numOp0" onchange="manModeC(this.value)">
+		  <option value="0" selected="">Manual Mode</option>
+		  <option value="1">Change Every Minute</option>
+		  <option value="2">Change Every Hour</option>
+		</select>
+	  </label>
+
+
+	<div id="manMode" style="display:none;">
+	  <label>Manual Mode<br>
+		<select id="numOp1">
+		  <option value="0" selected="">Picture 1</option>
+		  <option value="1">Picture 2</option>
+		</select>
+	  </label>
+	</div>
+
+
+	<label>Shake to Change</label><br>
+	 <select id="togOp0" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+	<div class="ui-body ui-body-b">
+	  <fieldset class="ui-grid-a">
+	    <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+	    <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+	  </fieldset>
+	</div>
+      </div>
+
+	<br>
+	<hr>
+	<hr>
+	
+	
+		
+
+
+
+<div data-role="popup" id="color-picker" data-overlay-theme="b">
+	<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<div data-role="main" id="color-picker" class="ui-content" style="border-style: none; height:90vh; width:5000px; overflow-y:scroll; overflow-x:hidden; ">
+	<div class="color-row" id="color-row1"><div class="color-box selected-color-box" id="color-box-000000" style="background:#000000;">0</div><div class="color-box selected-color-box" id="color-box-000055" style="background:#000055;">1</div><div class="color-box selected-color-box" id="color-box-0000AA" style="background:#0000AA;">2</div><div class="color-box selected-color-box" id="color-box-0000FF" style="background:#0000FF;">3</div></div><div class="color-row" id="color-row2"><div class="color-box selected-color-box" id="color-box-005500" style="background:#005500;">4</div><div class="color-box selected-color-box" id="color-box-005555" style="background:#005555;">5</div><div class="color-box selected-color-box" id="color-box-0055AA" style="background:#0055AA;">6</div><div class="color-box selected-color-box" id="color-box-0055FF" style="background:#0055FF;">7</div></div><div class="color-row" id="color-row3"><div class="color-box selected-color-box" id="color-box-00AA00" style="background:#00AA00;">8</div><div class="color-box selected-color-box" id="color-box-00AA55" style="background:#00AA55;">9</div><div class="color-box selected-color-box" id="color-box-00AAAA" style="background:#00AAAA;">10</div><div class="color-box selected-color-box" id="color-box-00AAFF" style="background:#00AAFF;">11</div></div><div class="color-row" id="color-row4"><div class="color-box selected-color-box" id="color-box-00FF00" style="background:#00FF00;">12</div><div class="color-box selected-color-box" id="color-box-00FF55" style="background:#00FF55;">13</div><div class="color-box selected-color-box" id="color-box-00FFAA" style="background:#00FFAA;">14</div><div class="color-box selected-color-box" id="color-box-00FFFF" style="background:#00FFFF;">15</div></div><div class="color-row" id="color-row5"><div class="color-box selected-color-box" id="color-box-550000" style="background:#550000;">16</div><div class="color-box selected-color-box" id="color-box-550055" style="background:#550055;">17</div><div class="color-box selected-color-box" id="color-box-5500AA" style="background:#5500AA;">18</div><div class="color-box selected-color-box" id="color-box-5500FF" style="background:#5500FF;">19</div></div><div class="color-row" id="color-row6"><div class="color-box selected-color-box" id="color-box-555500" style="background:#555500;">20</div><div class="color-box selected-color-box" id="color-box-555555" style="background:#555555;">21</div><div class="color-box selected-color-box" id="color-box-5555AA" style="background:#5555AA;">22</div><div class="color-box selected-color-box" id="color-box-5555FF" style="background:#5555FF;">23</div></div><div class="color-row" id="color-row7"><div class="color-box selected-color-box" id="color-box-55AA00" style="background:#55AA00;">24</div><div class="color-box selected-color-box" id="color-box-55AA55" style="background:#55AA55;">25</div><div class="color-box selected-color-box" id="color-box-55AAAA" style="background:#55AAAA;">26</div><div class="color-box selected-color-box" id="color-box-55AAFF" style="background:#55AAFF;">27</div></div><div class="color-row" id="color-row8"><div class="color-box selected-color-box" id="color-box-55FF00" style="background:#55FF00;">28</div><div class="color-box selected-color-box" id="color-box-55FF55" style="background:#55FF55;">29</div><div class="color-box selected-color-box" id="color-box-55FFAA" style="background:#55FFAA;">30</div><div class="color-box selected-color-box" id="color-box-55FFFF" style="background:#55FFFF;">31</div></div><div class="color-row" id="color-row9"><div class="color-box selected-color-box" id="color-box-AA0000" style="background:#AA0000;">32</div><div class="color-box selected-color-box" id="color-box-AA0055" style="background:#AA0055;">33</div><div class="color-box selected-color-box" id="color-box-AA00AA" style="background:#AA00AA;">34</div><div class="color-box selected-color-box" id="color-box-AA00FF" style="background:#AA00FF;">35</div></div><div class="color-row" id="color-row10"><div class="color-box selected-color-box" id="color-box-AA5500" style="background:#AA5500;">36</div><div class="color-box selected-color-box" id="color-box-AA5555" style="background:#AA5555;">37</div><div class="color-box selected-color-box" id="color-box-AA55AA" style="background:#AA55AA;">38</div><div class="color-box selected-color-box" id="color-box-AA55FF" style="background:#AA55FF;">39</div></div><div class="color-row" id="color-row11"><div class="color-box selected-color-box" id="color-box-AAAA00" style="background:#AAAA00;">40</div><div class="color-box selected-color-box" id="color-box-AAAA55" style="background:#AAAA55;">41</div><div class="color-box selected-color-box" id="color-box-AAAAAA" style="background:#AAAAAA;">42</div><div class="color-box selected-color-box" id="color-box-AAAAFF" style="background:#AAAAFF;">43</div></div><div class="color-row" id="color-row12"><div class="color-box selected-color-box" id="color-box-AAFF00" style="background:#AAFF00;">44</div><div class="color-box selected-color-box" id="color-box-AAFF55" style="background:#AAFF55;">45</div><div class="color-box selected-color-box" id="color-box-AAFFAA" style="background:#AAFFAA;">46</div><div class="color-box selected-color-box" id="color-box-AAFFFF" style="background:#AAFFFF;">47</div></div><div class="color-row" id="color-row13"><div class="color-box selected-color-box" id="color-box-FF0000" style="background:#FF0000;">48</div><div class="color-box selected-color-box" id="color-box-FF0055" style="background:#FF0055;">49</div><div class="color-box selected-color-box" id="color-box-FF00AA" style="background:#FF00AA;">50</div><div class="color-box selected-color-box" id="color-box-FF00FF" style="background:#FF00FF;">51</div></div><div class="color-row" id="color-row14"><div class="color-box selected-color-box" id="color-box-FF5500" style="background:#FF5500;">52</div><div class="color-box selected-color-box" id="color-box-FF5555" style="background:#FF5555;">53</div><div class="color-box selected-color-box" id="color-box-FF55AA" style="background:#FF55AA;">54</div><div class="color-box selected-color-box" id="color-box-FF55FF" style="background:#FF55FF;">55</div></div><div class="color-row" id="color-row15"><div class="color-box selected-color-box" id="color-box-FFAA00" style="background:#FFAA00;">56</div><div class="color-box selected-color-box" id="color-box-FFAA55" style="background:#FFAA55;">57</div><div class="color-box selected-color-box" id="color-box-FFAAAA" style="background:#FFAAAA;">58</div><div class="color-box selected-color-box" id="color-box-FFAAFF" style="background:#FFAAFF;">59</div></div><div class="color-row" id="color-row16"><div class="color-box selected-color-box" id="color-box-FFFF00" style="background:#FFFF00;">60</div><div class="color-box selected-color-box" id="color-box-FFFF55" style="background:#FFFF55;">61</div><div class="color-box selected-color-box" id="color-box-FFFFAA" style="background:#FFFFAA;">62</div><div class="color-box selected-color-box" id="color-box-FFFFFF" style="background:#FFFFFF;">63</div></div>	</div>
+</div>
+
+<div data-role="popup" id="number-picker" data-overlay-theme="b" style="width:90vw;">
+	<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<div data-role="main" id="num-picker" class="ui-content" style="border-style: none; height:20vh; ">
+		<input class="num-box" id="numPick" type="range" min="0" max="100" value="0" step="10">
+		<div class="ui-block-a"><button data-theme="d" id="b-OK">OK</button></div>
+	</div>
+</div>
+
+<br>
+<div style="text-align:center;">
+For more help with this app<br> or anything else Pebble related,<br> check out the Facebook group Pebble Junkies
+<br>
+<a href="/www.facebook.com/groups/pebble.junkies/.html">https://www.facebook.com/groups/pebble.junkies/</a>
+</div>
+<br>
+<hr><hr>
+<br>
+	<div style="text-align:center;">
+	If you like this application be sure to show some love in the App Store. 
+
+	<br><a href="https://apps.getpebble.com/en_US/application/5a9c326e461a8d72e8002b0e"><img src="/geol.com/pebble/heart.png"></a>
+	<br>
+	<br>
+
+	</div>
+</div>
+<table style="width:100%;background-color:silver;"><tr><td><img src="/geol.com/pebble/logs/SmileTinyGray.png"></td><td><img src="/geol.com/pebble/logs/FlexTimeTinyGray.png"></td><td><img src="/geol.com/pebble/logs/BatmanTinyGray.png"></td></tr></table>
+      <div data-theme="" data-role="header">
+	<img src="/geol.com/pebble/flags/us.png" style="float:left; margin:10px;" alt="United States" title="United States"> 	<img src="/geol.com//glogonew.gif" style="height:32px;float:right;">
+	<h3>Karateka</h3>
+      </div>
+
+    </div>
+
+
+    <script>
+      $('#page1').bind('pageinit', setControls);
+    </script>
+
+	
+  </body>
+</html>
+

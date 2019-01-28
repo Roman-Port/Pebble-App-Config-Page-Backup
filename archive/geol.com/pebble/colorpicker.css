@@ -1,0 +1,34 @@
+	.containing-element .ui-slider-switch {
+		width: 10em
+	}
+	.ui-header .ui-title 
+	{ 
+		margin-left: 1em;
+		margin-right: 1em;
+		text-overflow: clip;
+	}
+	.color-box
+	{
+		width: 15vw;
+		height: 15vw;
+		border-style: none;
+		margin: 3px;
+		display:inline-block;
+	}
+	.selected-color-box
+	{
+		border-width: 3px;
+		border-style: solid;
+		border-color: black;
+		margin: 0px;
+
+	}
+	.color-row
+	{
+		border-style: none;
+		border-width: 0px;
+	}
+	.num-box{
+
+	}
+

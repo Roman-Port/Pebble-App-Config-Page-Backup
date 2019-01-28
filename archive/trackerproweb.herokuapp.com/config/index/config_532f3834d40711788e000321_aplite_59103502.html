@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tracker PRO</title>
+
+    <!-- Bootstrap -->
+    <link href="/netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.css" rel="stylesheet">
+    <link href='/netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
+    <link href='/trackerproweb.herokuapp.com/config/style.css' rel='stylesheet'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+        <div class='panel panel-default panel-template panel-success'>
+          <div class='panel-heading'>
+            <span class='btn btn-danger btn-delete'><span class="glyphicon glyphicon-remove"></span></span>
+
+            <button type="button" class="btn btn-success btn-test">TEST</button>
+
+            <div class="input-group grp-cb-enable">
+              <span>
+                <input type="checkbox" id="cb-enable">
+              </span>
+            </div>
+
+            <div class='accordion-toggle'>
+              <span class='panel-title'></span>
+            </div>
+
+
+<!--             <a class='accordion-toggle' data-toggle='collapse' data-parent='#accordion'></a>
+ -->          </div>
+
+          <div class='panel-collapse collapse'>
+            <div class='panel-body'>
+              <div class='form-group'>
+                <label for='title'>Title</label>
+                <input type='text' class='form-control' id='title' maxlength='30'>
+              </div>
+
+              <div class='form-group'>
+                <label for='units'>Units</label>
+                <input type='text' class='form-control' id='units' maxlength='30'>
+              </div>
+
+              <div class='form-group'>
+                <label for='url'>URL</label>
+                <input type='url' class='form-control' id='url' maxlength='300'>
+              </div>
+
+              <div class='form-group'>
+                <label for='parse-field'>Parsing Field</label>
+                <input type='text' class='form-control' id='parse-field' maxlength='50'>
+              </div>
+
+              <div class="form-group">
+                <label for="sampling-rate">Request Rate</label>
+                <select id="sampling-rate" class="form-control">
+                  <option val='1'>Once per second</option>
+                  <option val='5'>Every 5 seconds</option>
+                  <option val='10'>Every 10 seconds</option>
+                  <option val='30'>Every 30 seconds</option>
+                  <option val='60'>Once per minute</option>
+                  <option val='3600'>Once per hour</option>
+                  <option val='85400'>Daily</option>
+                </select>
+              </div>
+
+              <div class='form-group'>
+                <label for='parse-field'>Authentication Header (optional)</label>
+                <input type='text' class='form-control' id='auth-header' maxlength='100'>
+              </div>
+
+<!--               <div class="input-group">
+                <span>
+                  <input type="checkbox" id="cb-enable">
+                  <label for='enable-cb'>Enabled</label>
+                </span>
+              </div>
+ -->            
+            </div>
+          </div>
+        </div> <!-- /panel-template -->
+
+
+    <!-- Fixed navbar -->
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+      <div class="container">
+
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Tracking Entries</a>
+          <button type="button" class="btn btn-success btn-add-entry right-button">ADD</button>
+          <button type="button" class="btn btn-danger btn-save right-button">SAVE</button>
+        </div>
+
+      </div>
+
+    </div>
+
+      <div class='panel-container panel-group' id='accordion'>
+
+      </div> <!-- /panel-container -->
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="/ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="/netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.js"></script>
+    <script src='/trackerproweb.herokuapp.com/config/script.js'></script>
+  </body>
+</html>

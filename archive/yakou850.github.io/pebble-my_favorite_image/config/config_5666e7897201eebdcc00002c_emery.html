@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My favorite image watchface setting</title>
+        <link rel='stylesheet' type='text/css' href='/yakou850.github.io/pebble-my_favorite_image/config/css/slate.css'>
+        <script src='/yakou850.github.io/pebble-my_favorite_image/config/js/slate.js'></script>
+        <script src='/yakou850.github.io/pebble-my_favorite_image/config/js/jquery.js'></script>
+        <style>
+            .title {
+                padding: 15px 10px;
+                text-transform: uppercase;
+                font-family: 'PT Sans', sans-serif;
+                font-size: 1.2em;
+                font-weight: 500;
+                color: #888888;
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1 class='title'>My favorite image watchface setting</h1>
+
+        <div class='item-container'>
+            <div class='item-container-header'>Image URL</div>
+            <div class='item-container-content'>
+                <label class='item'>
+                    <input type="text" id='image_url_1'>
+                </label>
+                <label class='item'>
+                    <input type="text" id='image_url_2'>
+                </label>
+                <label class='item'>
+                    <input type="text" id='image_url_3'>
+                </label>
+                <label class='item'>
+                    <input type="text" id='image_url_4'>
+                </label>
+                <label class='item'>
+                    <input type="text" id='image_url_5'>
+                </label>
+            </div>
+            <div class='item-container-footer'>
+                Input URL(PNG, under 20KB, but all is not supported :<) 
+            </div>
+        </div>
+        
+    <div class="item-container">
+      <div class="item-container-header">Update Interval</div>
+      <div class="item-container-content">
+        <label class="item">
+          Update Interval
+          <select name="updateinterval" class="item-select">
+            <option class="item-select-option" value="1">1 minute</option>
+            <option class="item-select-option" value="10">10 minutes</option>
+            <option class="item-select-option" selected="" value="20">20 minutes</option>
+            <option class="item-select-option" value="60">1 hour</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          If download error, doesn't try download next
+                <input id='error_url_remove_checkbox' type='checkbox' class='item-toggle' checked="checked">
+        </label>
+      </div>
+    </div>
+
+        <div class='item-container'>
+            <div class='button-container'>
+                <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+            </div>
+        </div>
+        <script type="text/javascript">
+            function getConfigData() {
+                var image_url_1 = document.getElementById('image_url_1');
+                var image_url_2 = document.getElementById('image_url_2');
+                var image_url_3 = document.getElementById('image_url_3');
+                var image_url_4 = document.getElementById('image_url_4');
+                var image_url_5 = document.getElementById('image_url_5');
+                var updateInterval = $('select[name=updateinterval]').val();
+                var error_url_remove = document.getElementById('error_url_remove_checkbox');
+                
+                var options = {
+                    'imageURL1': image_url_1.value,
+                    'imageURL2': image_url_2.value,
+                    'imageURL3': image_url_3.value,
+                    'imageURL4': image_url_4.value,
+                    'imageURL5': image_url_5.value,
+                    'updateInterval' : updateInterval,
+                    'error_url_remove': error_url_remove.checked
+                };
+
+                // Save for next launch
+                localStorage['imageURL1'] = image_url_1.value;
+                localStorage['imageURL2'] = image_url_2.value;
+                localStorage['imageURL3'] = image_url_3.value;
+                localStorage['imageURL4'] = image_url_4.value;
+                localStorage['imageURL5'] = image_url_5.value;
+                localStorage['updateinterval'] = updateInterval;
+                localStorage['errorUrlRemove'] = error_url_remove.checked;
+
+                console.log('Got options: ' + JSON.stringify(options));
+                return options;
+            }
+
+            function getQueryParam(variable, defaultValue) {
+                var query = location.search.substring(1);
+                var vars = query.split('&');
+                for (var i = 0; i < vars.length; i++) {
+                    var pair = vars[i].split('=');
+                    if (pair[0] === variable) {
+                        return decodeURIComponent(pair[1]);
+                    }
+                }
+                return defaultValue || false;
+            }
+
+            var submitButton = document.getElementById('submit_button');
+            submitButton.addEventListener('click', function() {
+                console.log('Submit');
+
+                // Set the return URL depending on the runtime environment
+                var return_to = getQueryParam('return_to', 'pebblejs://close#');
+                document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+            });
+
+            (function() {
+                var image_url_1 = document.getElementById('image_url_1');
+                var image_url_2 = document.getElementById('image_url_2');
+                var image_url_3 = document.getElementById('image_url_3');
+                var image_url_4 = document.getElementById('image_url_4');
+                var image_url_5 = document.getElementById('image_url_5');
+                var error_url_remove = document.getElementById('error_url_remove_checkbox');
+                
+                // Load any previously saved configuration, if available
+                if (localStorage['imageURL1']) {
+                    image_url_1.value = localStorage['imageURL1'];
+                }
+                if (localStorage['imageURL2']) {
+                    image_url_2.value = localStorage['imageURL2'];
+                }
+                if (localStorage['imageURL3']) {
+                    image_url_3.value = localStorage['imageURL3'];
+                }
+                if (localStorage['imageURL4']) {
+                    image_url_4.value = localStorage['imageURL4'];
+                }
+                if (localStorage['imageURL5']) {
+                    image_url_5.value = localStorage['imageURL5'];
+                }
+                if (localStorage['updateinterval']) {
+                    $('select[name=updateinterval]').val(localStorage['updateinterval']);
+                }
+                if (localStorage['errorUrlRemove']) {
+                    error_url_remove.checked = JSON.parse(localStorage['errorUrlRemove']);
+                }
+            })();
+        </script>
+    </body>
+</html>

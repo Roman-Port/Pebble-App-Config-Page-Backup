@@ -1,0 +1,27 @@
+/* CSS Document */
+
+.btn-paypal-donate {
+  color: #22486f;
+  font-style: italic;
+  font-weight: bold;
+  text-shadow: 0 -1px rgba(255,255,255,0.5);
+  background-color: #fdbb53;
+  border-color: #eca332;
+  border-radius: 20px;
+  box-shadow: 0 0 3px rgba(0,0,0,0.7);
+  padding-left: 20px; padding-right:20px;
+}
+.btn-paypal-donate:hover,
+.btn-paypal-donate:focus,
+.btn-paypal-donate.focus,
+.btn-paypal-donate:active,
+.btn-paypal-donate.active,
+.open > .dropdown-toggle.btn-paypal-donate {
+  color: #22486f;
+  border-color: #cc7d00;
+}
+.btn-paypal-donate:active,
+.btn-paypal-donate.active,
+.open > .dropdown-toggle.btn-paypal-donate {
+  background-image: none;
+}

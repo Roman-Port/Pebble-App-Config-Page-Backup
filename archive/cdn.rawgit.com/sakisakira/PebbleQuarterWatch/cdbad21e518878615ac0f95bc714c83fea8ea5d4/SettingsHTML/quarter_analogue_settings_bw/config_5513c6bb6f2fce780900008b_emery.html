@@ -1,0 +1,54 @@
+<html>
+<head>
+  <title>Quarter Analogue Watch (for Pebble) Settings</title>
+</head>
+<body>
+<script type="text/javascript"><!--
+function getQueryParam(variable, defaultValue) {
+  // Find all URL parameters
+  var query = location.search.substring(1);
+  var vars = query.split('&');
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split('=');
+
+    // If the query variable parameter is found, decode it to use and return it for use
+    if (pair[0] === variable) {
+      return decodeURIComponent(pair[1]);
+    }
+  }
+  return defaultValue || false;
+}
+function jump() {
+  var form = document.forms["settings_form"];
+  var datas = {};
+  datas["bg_color"] = form.elements["bg_color"].value;
+  datas["interval"] = form.elements["interval"].value;
+  datas["hour_digit"] = form.elements["hour_digit"].value;
+
+  datas["hand_color"] = "0";
+  datas["hour_color"] = "0";
+  datas["division_color"] = "0";
+  
+  var return_to = getQueryParam('return_to', 'pebblejs://close#');
+  location.href = return_to + encodeURIComponent(JSON.stringify(datas));
+}
+// --></script>
+<center>Quarter Analogue Setting</center>
+<form name="settings_form">
+<hr>
+Background Color:
+<input type="radio" name="bg_color" value="0xffffff" checked="">White
+<input type="radio" name="bg_color" value="0x000000">Black
+<p>
+Update Interval:
+<input type="radio" name="interval" value="second" checked="">Second
+<input type="radio" name="interval" value="minute">Minute
+<p>
+Hour in Digit:
+<input type="radio" name="hour_digit" value="show" checked="">Show
+<input type="radio" name="hour_digit" value="hide">Hidden
+<hr>
+<input type="button" name="submit" value="submit" onclick="jump()">
+</form>
+</body>
+</html>

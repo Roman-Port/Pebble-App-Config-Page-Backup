@@ -1,0 +1,409 @@
+﻿<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Instil Settings</title>
+        <link type="text/css" href="/www.benzotti.co/pebbledev/SplitScreen/v1.8/slate.css" rel="stylesheet">
+        <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css">
+        <link rel="stylesheet" href="/www.benzotti.co/pebbledev/SplitScreen/v1.8/css/normalize.css" type="text/css">
+        <link type="text/css" href="/www.benzotti.co/pebbledev/SplitScreen/v1.8/css/styles_1572752813.css" rel="stylesheet">
+        <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css">
+        <script src="/ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+        <script src="/maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js"></script>
+        <style>
+          .main .tier.one .preset-container .preset { display: inline-block; width: 26.666667%; margin-right: 2%; border: 6px solid #ecf0f1; border-radius: 8px; background: #303030; border-bottom: 5px solid #ecf0f1; }
+        </style>
+    </head>
+    <body>
+      <header>
+        <div class="container">
+          <div class="title col-xs-5">
+            <h1>Instil</h1>
+            <span>v1.8</span>
+          </div>
+          <div class="buttons col-xs-7">
+            <!-- <button id="resetStorage" type="button" class="btn-header" onClick="localStorage.clear(); sessionStorage.clear(); location.reload();">
+              <i class="fa fa-refresh"></i>
+            </button> -->
+            <button id="savePreset" type="button" class="btn-header" onclick="createPreset();">
+              <i class="fa fa-floppy-o"></i>
+            </button>
+            <button id="submitButton" type="button" class="btn-header">
+              <i class="fa fa-check"></i>
+            </button>
+          </div>
+        </div>
+      </header>
+      <div class="main">
+        <div class="tier one">
+          <div class="title">
+            <h3>Watchface Presets</h3>
+          </div>
+          <div class="preset-container">
+            <div id="1" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-1-s_843663471.png" alt="">
+            </div>
+            <div id="2" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-2-s_843597935.png" alt="">
+            </div>
+            <div id="3" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-3-s_1623804676.png" alt="">
+            </div>
+            <div id="4" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-4-s_843597935.png" alt="">
+            </div>
+            <div id="5" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-5-s_843597935.png" alt="">
+            </div>
+            <div id="6" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-6-s_843663471.png" alt="">
+            </div>
+            <div id="7" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-7-s_843663471.png" alt="">
+            </div>
+            <div id="8" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-8-s_843663471.png" alt="">
+            </div>
+            <div id="9" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-9-s_843663471.png" alt="">
+            </div>
+            <div id="10" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-10-s_843663471.png" alt="">
+            </div>
+            <div id="11" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-11-s_843663471.png" alt="">
+            </div>
+            <div id="100" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-12-s_843663471.png" alt="">
+            </div>
+            <div id="101" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-13-s_843663471.png" alt="">
+            </div>
+            <div id="102" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-14-s_843663471.png" alt="">
+            </div>
+            <div id="103" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-15-s_843663471.png" alt="">
+            </div>
+            <div id="104" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-16-s_843663471.png" alt="">
+            </div>
+            <div id="105" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-17-s_843663471.png" alt="">
+            </div>
+            <div id="106" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-18-s_843663471.png" alt="">
+            </div>
+            <div id="12" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-19-s_843663471.png" alt="">
+            </div>
+            <div id="13" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-20-s_843663471.png" alt="">
+            </div>
+            <div id="14" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-21-s_843663471.png" alt="">
+            </div>
+            <div id="15" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-22-s_843663471.png" alt="">
+            </div>
+            <div id="16" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-23-s_843663471.png" alt="">
+            </div>
+            <div id="17" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-24-s_843663471.png" alt="">
+            </div>
+            <div id="18" class="preset current">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/square/preset-25-s_843663471.png" alt="">
+            </div>
+          </div>
+        </div>
+
+        <div class="tier two">
+          <div class="title">
+            <h3>Custom Presets</h3>
+          </div>
+          <div class="container">
+            <ul class="presets">
+
+            </ul>
+          </div>
+        </div>
+
+        <div class="tier three">
+          <div class="title">
+            <h3>Colour Palette</h3>
+          </div>
+          <div class="container">
+            <ul>
+              <li><label class="item">
+                  Battery
+                  <input type="text" id="batteryColor" class="item-color item-color-normal" value="#000000">
+              </label></li>
+              <li><label class="item">
+                  Hour
+                  <input type="text" id="hourColor" class="item-color item-color-normal" value="#000000">
+              </label></li>
+              <li><label class="item">
+                  Minute
+                  <input type="text" id="minuteColor" class="item-color item-color-normal" value="#000000">
+              </label></li>
+              <li><label class="item">
+                  Seconds
+                  <input type="text" id="secondsColor" class="item-color item-color-normal" value="#000000">
+              </label></li>
+              <li><label class="item">
+                  Date
+                  <input type="text" id="dateColor" class="item-color item-color-normal" value="#000000">
+              </label></li>
+              <li><label class="item">
+                  Main Background
+                  <input type="text" id="mainBackgroundColor" class="item-color item-color-normal" value="#000000">
+              </label></li>
+              <li><label class="item">
+                  Panel Text
+                  <input type="text" id="panelTextColor" class="item-color item-color-normal" value="#000000">
+              </label></li>
+              <li><label class="item">
+                  Panel Background
+                  <input type="text" id="panelBackgroundColor" class="item-color item-color-normal" value="#000000">
+              </label></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tier four">
+          <div class="title">
+            <h3>Panel Configuration</h3>
+          </div>
+          <div class="container">
+            <ul>
+              <li>
+            <label class="item">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/panel-config-1-s_675482187.png" style="max-width: 100px !important; display: inline-block; vertical-align: middle;"> &nbsp; Min Weather
+                <input type="radio" name="panelConfig" id="panelConfig1" value="1" class="item-radio">
+            </label></li>
+            <li>
+            <label class="item">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/panel-config-2-s_675482187.png" style="max-width: 100px !important; display: inline-block; vertical-align: middle;"> &nbsp; Battery %
+                <input type="radio" name="panelConfig" id="panelConfig2" value="2" class="item-radio">
+            </label></li>
+            <li>
+            <label class="item">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/panel-config-3-s_675482187.png" style="max-width: 100px !important; display: inline-block; vertical-align: middle;"> &nbsp; Daily Steps
+                <input type="radio" name="panelConfig" id="panelConfig3" value="3" class="item-radio">
+            </label></li>
+            <li>
+            <label class="item">
+                <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/panel-config-4-s_675482187.png" style="max-width: 100px !important; display: inline-block; vertical-align: middle;"> &nbsp; Temp/Icon Only
+                <input type="radio" name="panelConfig" id="panelConfig4" value="4" class="item-radio">
+            </label></li>
+          </ul></div>
+        </div>
+
+        <div class="tier five">
+          <div class="title">
+            <h3>Fonts</h3>
+          </div>
+          <div class="container">
+            <label class="item">
+                Global Font
+                <select id="fontType" name="fontType" class="item-select">
+                    <option name="fontType" value="0">Din</option>
+                    <option name="fontType" value="1">Leco</option>
+                </select>
+            </label>
+            <label class="item">
+                Icon Font
+                <select id="iconType" name="iconType" class="item-select">
+                    <option name="iconType" value="0">Weather Icons</option>
+                    <option name="iconType" value="2">Colour Icons</option>
+                </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="tier six">
+          <div class="title">
+            <h3>Font Size</h3>
+          </div>
+          <div class="container">
+            <ul>
+              <li>
+            <label class="item">
+              <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/time-size-1_675482187.png"> &nbsp; Default
+              <input type="radio" name="timeSize" id="timeSize0" value="0" class="item-radio">
+            </label></li>
+            <li>
+            <label class="item">
+            <img src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/images/time-size-2_675482187.png"> &nbsp; Big
+            <input type="radio" name="timeSize" id="timeSize1" value="1" class="item-radio">
+          </label></li>
+          </ul>
+          </div>
+        </div>
+
+        <div class="tier seven">
+          <div class="title">
+            <h3>Time Settings</h3>
+          </div>
+          <div class="container">
+            <ul>
+              <li><label class="item">
+                  Remove Seconds
+                  <input type="checkbox" id="timeConfig" class="item-toggle">
+              </label></li>
+              <li><label class="item">
+                  Remove Time Separators
+                  <input type="checkbox" id="timeSeparator" class="item-toggle">
+              </label></li>
+              <li><label class="item">
+                  24h Format
+                  <input type="checkbox" id="timeFormat" class="item-toggle">
+              </label></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tier eight">
+          <div class="title">
+            <h3>Date Settings</h3>
+          </div>
+          <div class="container">
+            <label class="item">
+                Date Format
+                <select id="dateFormat" name="dateFormat" class="item-select">
+                  <option name="dateFormat" value="1">Sun 01, 2016</option>
+                  <option name="dateFormat" value="2">Jan 01, 2016</option>
+                  <option name="dateFormat" value="3">Sun, 1. Jan</option>
+                  <option name="dateFormat" value="4">1. Jan 2016</option>
+                  <option name="dateFormat" value="5">1. January</option>
+                  <option name="dateFormat" value="6">Sunday, Jan 01</option>
+                  <option name="dateFormat" value="7">Sun Jan 01</option>
+                  <option name="dateFormat" value="8">Sun 01 Jan</option>
+                  <option name="dateFormat" value="9">01 Jan, 2016</option>
+                  <option name="dateFormat" value="1.1">01 January</option>
+                </select>
+            </label>
+          </div>
+        </div>
+
+        <div class="tier nine">
+          <div class="title">
+            <h3>Weather Settings</h3>
+          </div>
+          <div class="container">
+            <label class="item">
+                  Weather Unit
+                  <select id="weatherUnit" name="weatherUnit" class="item-select">
+                      <option name="weatherUnit" value="0">Celsius</option>
+                      <option name="weatherUnit" value="1">Fahrenheit</option>
+                  </select>
+            </label>
+            <label class="item">
+                  Update Weather
+                  <select id="weatherCheck" name="weatherCheck" class="item-select">
+                      <option name="weatherUpdate" value="0">Never</option>
+                      <option name="weatherUpdate" value="1">60 Mins</option>
+                      <option name="weatherUpdate" value="2">30 Mins</option>
+                      <option name="weatherUpdate" value="3">15 Mins</option>
+                      <option name="weatherUpdate" value="4">5 Mins</option>
+                  </select>
+              </label>
+            <label class="item">
+              Weather Summary
+              <select name="weatherSummary" id="weatherSummary" class="item-select">
+                <option name="weatherSummary" value="0">Weather Condition</option>
+                <option name="weatherSummary" value="1">Current Location</option>
+              </select>
+            </label>
+            <label class="item">
+                Weather Source
+                <select id="weatherSource" name="weatherSource" class="item-select">
+                    <option name="weatherSource" value="openweathermap">OpenWeatherMap</option>
+                    <option name="weatherSource" value="forecastio">Forecast.io</option>
+                    <option name="weatherSource" value="weatherunderground">Weather Underground</option>
+                </select>
+            </label>
+            <label class="item fapiKey-item hide">
+              Forecast.io API Key
+              <input type="text" name="fapiKey" id="fapiKey" class="item-input" placeholder="Optional">
+            </label>
+            <label class="item oapiKey-item hide">
+              OpenWeatherMap API Key
+              <input type="text" name="oapiKey" id="oapiKey" class="item-input" placeholder="Optional">
+              </label>
+            <label class="item wuapiKey-item hide">
+              Weather Underground API Key
+              <input type="text" name="wuapiKey" id="wuapiKey" class="item-input" placeholder="Optional">
+              </label>
+              <label class="item">
+                  Manual Location
+                  <input type="text" name="manualLocation" id="manualLocation" class="item-input" placeholder="eg; London">
+              </label>
+          </div>
+        </div>
+
+        <div class="tier ten">
+          <div class="title">
+            <h3>General Settings</h3>
+          </div>
+          <div class="container">
+            <ul>
+              <li><label class="item">
+                  Enable Forecast Shake
+                  <input type="checkbox" id="showForecast" class="item-toggle">
+              </label></li>
+              <li><label class="item">
+                  Show Battery Meter
+                  <input type="checkbox" id="showBattery" class="item-toggle">
+              </label></li>
+              <li><label class="item">
+                  Bluetooth Disconnect Warning
+                  <input type="checkbox" id="btDisconnect" class="item-toggle">
+              </label></li>
+              <li><label class="item">
+                  Low Battery Warning
+                  <input type="checkbox" id="lowBatteryWarning" class="item-toggle">
+              </label></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="tier eleven">
+          <div class="title">
+            <h6 style="margin-bottom: 0; "><strong>Buy me a coffee?</strong></h6>
+          </div>
+          <div class="payment-gateway" style="background: white !important; padding: 5px 16px !important; font-size: 12px !important; text-align: center;">
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<!-- <input type="image" src="https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online."> -->
+If you want, you can donate <input type="submit" border="0" name="here" value="here" style="border: none; background: none; text-decoration: underline;">.
+<img alt="" border="0" src="/www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
+</form>
+          <!-- <div class="container">
+            <label class="item">
+            <select id="donateSelect" name="donateSelect" class="item-select">
+                <option name="coffee" value="0">Select brew...</option>
+                <option name="coffee" value="1">1 double shot esspresso</option>
+                <option name="coffee" value="2">1 triple shot esspresso</option>
+                <option name="coffee" value="3">1 macchiato w/ extra cream</option>
+                <option name="coffee" value="4">1 dirty chai latte</option>
+                <option name="coffee" value="5">Suprise me</option>
+            </select>
+            </label>
+          </div> -->
+        </div>
+
+      </div>
+      <script src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/slate.js"></script>
+      <!-- <script>
+        $(document).ready(function() {
+          localStorage.clear();
+        });
+      </script> -->
+      <script src="/www.benzotti.co/pebbledev/SplitScreen/v1.8/js/brains_1109076375.js"></script>
+    </div></body>
+</html>

@@ -1,0 +1,440 @@
+<html>
+  <head>
+    <title>Enigma+ Rosetta Configuration</title>
+  </head>
+<link rel="stylesheet" type="text/css" href="/yunharla.altervista.org/pebble/config.css">
+  <script src="/code.jquery.com//jquery-latest.js" type="text/javascript"></script>
+  <script>
+var DEBUG = false,
+	MAX_LANG = {
+        0: 3, //v2.0 and below
+        21: 7,
+        22: 8,
+        23: 8
+    },
+	VER_CUR = 23,
+	VER_VIBES_MIN = 22,
+	VER_WEATHER_MIN = 23,
+    LANG_HUMAN = 0,
+    DECODE_ALL = 7,
+    //masks for vibes:
+    MASKV_BTDC = 0x20000,
+    MASKV_HOURLY = 0x10000,
+    MASKV_FROM = 0xFF00,
+    MASKV_TO = 0x00FF;
+
+function getQueryParam(variable, defaultValue)
+{
+    // Something like this to get query variables.
+    // Find all URL parameters
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+
+        // If the query variable parameter is found, decode it to use and return it for use
+        if (pair[0] === variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    return defaultValue || false;
+}
+
+function onLangChanged()
+{
+    var lang = parseInt($("#lang_select").val(), 10);
+    if (lang === LANG_HUMAN)
+    {
+        $("#decode_select").prop('disabled', true);
+        $("#decode_select").val(DECODE_ALL);
+    }
+    else
+    {
+        $("#decode_select").prop('disabled', false);
+    }
+}
+
+function onVibesHourlyChanged()
+{
+    var enabled = $("#cbVibesHourly").is(":checked");
+    $("#vibe_start_select").prop('disabled', !enabled);
+    $("#vibe_end_select").prop('disabled', !enabled);
+}
+
+function onWeaUseGpsChanged()
+{
+    var enabled = $("#cbWeaUseGps").is(":checked");
+    $("#cbWeaLocation").prop('disabled', enabled);
+}
+
+function onWeatherChanged()
+{
+    var enabled = $("#cbWeather").is(":checked");
+    $("#wea_interval").prop('disabled', !enabled);
+    $("#cbWeaUseGps").prop('disabled', !enabled);
+	$("#test_button").prop('disabled', !enabled);
+	$('#txtWeaLocationStatus').html('');
+	$('#cbWeaLocation').removeClass('textbox-green');
+	$('#cbWeaLocation').removeClass('textbox-red');
+    $('input[name=weaUnits]').attr('disabled', !enabled);
+    if (enabled)
+    {
+    	$('label[class="css-label css-label-disabled"]').removeClass('css-label-disabled');
+	}
+	else
+	{
+    	$('label[class="css-label"]').addClass('css-label-disabled');
+	}
+    if (!enabled)
+    {
+    	$("#cbWeaLocation").prop('disabled', true);
+    }
+    else
+    {
+    	onWeaUseGpsChanged();
+	}
+}
+
+function onLoad()
+{
+    //parseInt returns NaN if not numeric
+    var ver = parseInt(getQueryParam('ver'), 10),
+        lang = parseInt(getQueryParam('lang'), 10),
+        decode = parseInt(getQueryParam('decode'), 10),
+        vibes = parseInt(getQueryParam('vibes'), 16),
+        maxAllVersLangCnt = $("#lang_select option").length,
+        weather = getQueryParam('weather', false) === 'true',
+        gps = getQueryParam('gps', false) === 'true',
+        location = getQueryParam('location', ''),
+        units = getQueryParam('units', 'c'),
+        interval = parseInt(getQueryParam('interval', 1800000), 10),
+        i, maxVerLangCnt, selector;
+    if (isNaN(ver))
+    {
+        ver = 0;
+    }
+    maxVerLangCnt = MAX_LANG[ver];
+    if (maxVerLangCnt === undefined)
+    {
+        maxVerLangCnt = 3;
+    }
+    for (i = maxVerLangCnt; i < maxAllVersLangCnt; ++i)
+    {
+        $("#lang_select option[value='" + i + "']").remove();
+    }
+    selector = $("#lang_select option[value='" + lang + "']");
+    if (selector.length > 0)
+    {
+        selector.prop('selected', true);
+    }
+    selector = $("#decode_select option[value='" + decode + "']");
+    if (selector.length > 0)
+    {
+        selector.prop('selected', true);
+    }
+	if (ver < VER_CUR)
+	{
+		$("#spanNewVer").css('visibility', '');
+	}
+    if (ver < VER_VIBES_MIN)
+    {
+        $("#divVibes").css('visibility', 'hidden');
+        $("#divVibes").css('height', '0px');
+        $("#cbVibesBtdc").prop('disabled', true);
+        $("#cbVibesHourly").prop('disabled', true);
+        $("#vibe_start_select").prop('disabled', true);
+        $("#vibe_end_select").prop('disabled', true);
+    }
+    else if (!isNaN(vibes) && (typeof vibes === 'number'))
+    {
+        $("#cbVibesBtdc").prop('checked', (vibes & MASKV_BTDC) > 0);
+        $("#cbVibesHourly").prop('checked', (vibes & MASKV_HOURLY) > 0);
+        selector = $("#vibe_start_select option[value='" + ((vibes & MASKV_FROM) >> 8) + "']");
+        selector.prop('selected', true);
+        selector = $("#vibe_end_select option[value='" + (vibes & MASKV_TO) + "']");
+        selector.prop('selected', true);
+    }
+    onVibesHourlyChanged();
+    if (ver < VER_WEATHER_MIN)
+    {
+        $("#divWeather").css('visibility', 'hidden');
+        $("#divWeather").css('height', '0px');
+        $("#cbWeather").prop('disabled', true);
+        $("#headingWeather").css({color: 'lightgray', 'text-decoration':'line-through'});
+        $("#wea_interval").prop('disabled', true);
+        $("#cbWeaUseGps").prop('disabled', true);
+        $("#cbWeaLocation").prop('disabled', true);
+        $("#test_button").prop('disabled', true);
+        $('label[class="css-label"]').addClass('css-label-disabled');
+    }
+    else
+    {
+    	//enable/disable weather
+    	$("#cbWeather").prop('checked', !!weather);
+		$("#cbWeaUseGps").prop('checked', !!gps);
+        selector = $("#wea_interval option[value='" + interval + "']");
+        selector.prop('selected', true);
+        if (location && (location.length > 0))
+        {
+        	$("#cbWeaLocation").val(location);
+		}
+        selector = $('input:radio[name="weaUnits"][value="' + units + '"]').prop('checked', true);
+    }
+    onWeatherChanged();
+}
+
+function locationFailed()
+{
+	$('#cbWeaLocation').removeClass('textbox-green');
+	$('#cbWeaLocation').addClass('textbox-red');
+	$('#txtWeaLocationStatus').html('Failed: Location unknown!');
+	$('#txtWeaLocationStatus').addClass('location-status-fail');
+}
+
+function updateLocation(location_name)
+{
+	$('#cbWeaLocation').val(location_name);
+	$('#cbWeaLocation').removeClass('textbox-red');
+	$('#cbWeaLocation').addClass('textbox-green');
+	$('#txtWeaLocationStatus').html('OK, Location found.');
+	$('#txtWeaLocationStatus').removeClass('location-status-fail');
+}
+
+function checkLocation()
+{
+	var location_name = $('#cbWeaLocation').val(),
+		response, woeid = -1,
+		query = encodeURI("select woeid, name from geo.places(1) where text=\"" + location_name + "\""),
+		url = "http://query.yahooapis.com/v1/public/yql?q=" + query + "&format=json",
+		req = new XMLHttpRequest();
+
+	if (!location_name || (location_name.length <= 0))
+	{
+		locationFailed();
+		return;
+	}
+    req.timeout = 10000;
+    req.ontimeout = function() {
+        locationFailed();;
+    };
+	req.open('GET', url, true);
+	req.onload = function(e) {
+		if (req.readyState === 4)
+		{
+			if (req.status === 200)
+			{
+				//console.log(req.responseText);
+				response = JSON.parse(req.responseText);
+				if (response && response.query && response.query.results
+					 && response.query.results.place
+					 && (response.query.results.place.name !== undefined)
+					 && (response.query.results.place.woeid !== undefined))
+				{
+					updateLocation(response.query.results.place.name);
+					return;
+				}
+			}
+			locationFailed();
+		}
+	};
+	req.send(null);
+}
+  </script>
+  <body bgcolor="#47484B" onload="onLoad()">
+    <font face="helvetica" color="white">
+    <h2>Enigma+ Rosetta <span id='spanNewVer' style='color:#FF00FF; visibility:hidden'><b><i>(New version available!)</i></b></span></h2>
+    <h3><i>Choose Watch Face Settings</i></h3>
+
+	<div class="css3-metro-dropdown-description">Language:
+		<span class="css3-metro-dropdown css3-metro-dropdown-color-2673ec">
+			<select id="lang_select" onchange="onLangChanged()">
+			  <!-- <option value="-1">(Random every hour)</option> -->
+			  <option value="0">Human</option>
+			  <option value="1" selected="">Klingon (Star Trek)</option>
+			  <option value="2">Aurebesh (Star Wars)</option>
+			  <option value="3">Aurebesh, Handwritten (Star Wars)&nbsp;&nbsp;&nbsp;</option>
+			  <option value="7">Betazed (Star Trek)</option>
+			  <option value="4">Graalen, Andorian (Star Trek)</option>
+			  <option value="5">Kentaurus, Greek (Star Trek)</option>
+			  <option value="6">Mandalorian (Star Wars)</option>
+			</select>
+		</span>
+	</div><p>
+
+	<div class="css3-metro-dropdown-description">Decode alien text:
+		<span class="css3-metro-dropdown css3-metro-dropdown-color-ff2e12">
+			<select id="decode_select">
+			  <option value="0">None</option>
+			  <option value="7">All</option>
+			  <option value="4" selected="">Time only</option>
+			  <option value="6">Date &amp; Time only&nbsp;&nbsp;&nbsp;</option>
+			</select>
+			
+		</span>
+	</div><p>
+
+<div id='divVibes'>
+    <h4>Enable Vibrations:</h4>
+    <div class="onoffswitch">
+		<input type="checkbox" id="cbVibesBtdc" class="onoffswitch-checkbox">
+			<label class="onoffswitch-label" for="cbVibesBtdc">
+				<span class="onoffswitch-inner"></span>
+				<span class="onoffswitch-switch"></span>
+			</label>
+	</div><div class="onoffswitch-description">On Bluetooth disconnection.</div><br>
+    <p>
+    <div class="onoffswitch">
+    	<input type="checkbox" id="cbVibesHourly" onchange="onVibesHourlyChanged()" class="onoffswitch-checkbox">
+			<label class="onoffswitch-label" for="cbVibesHourly">
+				<span class="onoffswitch-inner"></span>
+				<span class="onoffswitch-switch"></span>
+			</label>
+	</div><div class="onoffswitch-description">Hourly:</div><br>
+	<div class="css3-metro-dropdown-description">&nbsp;&nbsp;from (inclusive):
+		<span class="css3-metro-dropdown css3-metro-dropdown-color-2673ec">
+			<select id="vibe_start_select">
+			  <option value="0">12 AM&nbsp;&nbsp;&nbsp;</option>
+			  <option value="1">1 AM</option>
+			  <option value="2">2 AM</option>
+			  <option value="3">3 AM</option>
+			  <option value="4">4 AM</option>
+			  <option value="5">5 AM</option>
+			  <option value="6">6 AM</option>
+			  <option value="7">7 AM</option>
+			  <option value="8">8 AM</option>
+			  <option value="9">9 AM</option>
+			  <option value="10" selected="">10 AM</option>
+			  <option value="11">11 AM</option>
+			  <option value="12">12 PM</option>
+			  <option value="13">1 PM</option>
+			  <option value="14">2 PM</option>
+			  <option value="15">3 PM</option>
+			  <option value="16">4 PM</option>
+			  <option value="17">5 PM</option>
+			  <option value="18">6 PM</option>
+			  <option value="19">7 PM</option>
+			  <option value="20">8 PM</option>
+			  <option value="21">9 PM</option>
+			  <option value="22">10 PM</option>
+			  <option value="23">11 PM</option>
+			</select>
+		</span>
+	</div><br>
+	<div class="css3-metro-dropdown-description">&nbsp;&nbsp;to (inclusive):
+		<span class="css3-metro-dropdown css3-metro-dropdown-color-ff1d77">
+        <select id="vibe_end_select">
+          <option value="0">12 AM&nbsp;&nbsp;&nbsp;</option>
+          <option value="1">1 AM</option>
+          <option value="2">2 AM</option>
+          <option value="3">3 AM</option>
+          <option value="4">4 AM</option>
+          <option value="5">5 AM</option>
+          <option value="6">6 AM</option>
+          <option value="7">7 AM</option>
+          <option value="8">8 AM</option>
+          <option value="9">9 AM</option>
+          <option value="10">10 AM</option>
+          <option value="11">11 AM</option>
+          <option value="12">12 PM</option>
+          <option value="13">1 PM</option>
+          <option value="14">2 PM</option>
+          <option value="15">3 PM</option>
+          <option value="16">4 PM</option>
+          <option value="17">5 PM</option>
+          <option value="18">6 PM</option>
+          <option value="19">7 PM</option>
+          <option value="20" selected="">8 PM</option>
+          <option value="21">9 PM</option>
+          <option value="22">10 PM</option>
+          <option value="23">11 PM</option>
+        </select>
+    <p></span></div><br>
+</div><hr>
+<div id='divWeather'>
+    <h4 id='headingWeather'>Weather</h4>
+    <div class="onoffswitch">
+    	<input type="checkbox" id="cbWeather" onchange="onWeatherChanged()" class="onoffswitch-checkbox">
+			<label class="onoffswitch-label" for="cbWeather">
+				<span class="onoffswitch-inner"></span>
+				<span class="onoffswitch-switch"></span>
+			</label>
+	</div><div class="onoffswitch-description">Enable weather.</div><br>
+	<div class="css3-metro-dropdown-description">Update Interval:
+		<span class="css3-metro-dropdown css3-metro-dropdown-color-ff2e12">
+		<select id="wea_interval">
+		  <option value="900000">15 mins&nbsp;&nbsp;&nbsp;</option>
+		  <option value="1800000">30 mins</option>
+		  <option value="3600000">1 hr</option>
+		  <option value="7200000">2 hrs</option>
+		</select>
+		</span>
+	</div>
+    <p>
+    <div class="onoffswitch onoffswitch-gps">
+    	<input type="checkbox" id="cbWeaUseGps" onchange="onWeaUseGpsChanged()" class="onoffswitch-checkbox">
+    		<label class="onoffswitch-label" for="cbWeaUseGps">
+    			<span class="onoffswitch-inner onoffswitch-gps-inner"></span>
+				<span class="onoffswitch-switch onoffswitch-gps-switch"></span>
+			</label>
+	</div><div class="textbox-blue-description">&nbsp;<input type="textbox" id="cbWeaLocation" class="textbox-blue" placeholder="new york,usa"></div>
+    <br>&nbsp;&nbsp;&nbsp;<button id="test_button" class="saveButton">Check Location</button>&nbsp;&nbsp;<span id="txtWeaLocationStatus"></span>
+    <p>Note: owing to Yahoo Weather service changes, one can no longer get weather for a country as a whole.
+    Need to specify a city/place. E.g.: "New York" or "new york,usa" instead of "USA".
+	<p>Temperature in:
+	<input type="radio" name="weaUnits" value="c" id="weaUnitC" checked="" class="css-checkbox">
+	<label for="weaUnitC" class="css-label">&#x00b0;C</label>
+	<input type="radio" name="weaUnits" value="f" id="weaUnitF" class="css-checkbox">
+	<label for="weaUnitF" class="css-label">&#x00b0;F</label><br>
+</div>
+<div id='divSave'>
+    <p>
+    <button id="save_button" class="saveButton">Save</button>
+    </p>
+</div>
+    <script>
+      //Setup to allow easy adding more options later
+      function saveOptions() {
+        var langSelect = document.getElementById("lang_select"),
+            decodeSelect = document.getElementById("decode_select"),
+            options = {
+                lang: parseInt(langSelect.options[langSelect.selectedIndex].value, 10),
+                decode: parseInt(decodeSelect.options[decodeSelect.selectedIndex].value, 10),
+				weather: $("#cbWeather").prop('checked')? 1: 0,
+				gps: $("#cbWeaUseGps").prop('checked')? 1: 0,
+				location: $("#cbWeaLocation").val(),
+				interval: parseInt($("#wea_interval").val(), 10),
+				units: $('input[name=weaUnits]:checked').val()
+            }, vibes = 0;
+        if ($("#cbVibesBtdc").prop('checked'))
+        {
+            vibes += MASKV_BTDC;
+        }
+        if ($("#cbVibesHourly").prop('checked'))
+        {
+            vibes += MASKV_HOURLY;
+            vibes += parseInt($("#vibe_start_select").val(), 10) << 8;
+            vibes += parseInt($("#vibe_end_select").val(), 10);
+        }
+        options.vibes = vibes;
+        //console.log(options);
+
+        return options;
+      };
+      var button = document.getElementById("save_button");
+      button.addEventListener("click",
+        function() {
+          var options = JSON.stringify(saveOptions());
+          if (DEBUG)
+          {
+              alert(options); //DEBUG
+              return;
+          }
+          var location = "pebblejs://close#" + encodeURIComponent(options);
+          document.location = location;
+        },
+        false);
+      button = document.getElementById("test_button");
+      button.addEventListener("click", checkLocation, false);
+    </script>
+  </font></body>
+</html>

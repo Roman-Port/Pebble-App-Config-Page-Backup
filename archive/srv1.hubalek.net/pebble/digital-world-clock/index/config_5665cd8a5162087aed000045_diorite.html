@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Digital World Clock</title>
+  <link rel='stylesheet' type='text/css' href='/srv1.hubalek.net/pebble/digital-world-clock/css/slate.css'>
+  <script src='/srv1.hubalek.net/pebble/digital-world-clock/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Digital World Clock</h1>
+
+    <!--<div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          You can configure your watchface here. Application at the moment does not handle 
+          daylight saving time shifts automatically so you have to reconfigure it if necessary.
+        </div>
+      </div>
+    </div>-->
+
+ <div class="item-container">
+  <div class="item-container-header">Timezone Name</div>
+  <div class="item-container-content">
+    <label class="item">
+      <div class="item-input-wrapper">
+        <input type="text" class="item-input" name="remote-timezone-name" id="remote-timezone-name" placeholder="Timezone Code Name (anything but max 3 characters)">
+      </div>
+  </label></div>
+   <div class="item-container-footer">
+    You can put here any 3 letters of Latin Alphabet. Longer timezone names will be cut.
+  </div>
+</div>
+
+   <div class="item-container">
+  <div class="item-container-header">Timezone Offset</div>
+  <div class="item-container-content">
+    <label class="item">
+      Your Timezone:
+      <select name="local-timezone-offset" class="item-select" id="local-timezone-offset">
+          <option class='item-select-option'>UTC-12:00</option>
+          <option class='item-select-option'>UTC-11:00</option>
+          <option class='item-select-option'>UTC-10:00</option>
+          <option class='item-select-option'>UTC-09:30</option>
+          <option class='item-select-option'>UTC-09:00</option>
+          <option class='item-select-option'>UTC-08:00</option>
+          <option class='item-select-option'>UTC-07:00</option>
+          <option class='item-select-option'>UTC-06:00</option>
+          <option class='item-select-option'>UTC-05:00</option>
+          <option class='item-select-option'>UTC-04:30</option>
+          <option class='item-select-option'>UTC-04:00</option>
+          <option class='item-select-option'>UTC-03:30</option>
+          <option class='item-select-option'>UTC-03:00</option>
+          <option class='item-select-option'>UTC-02:00</option>
+          <option class='item-select-option'>UTC-01:00</option>
+          <option class='item-select-option'>UTC+00:00</option>
+          <option class='item-select-option'>UTC+01:00</option>
+          <option class='item-select-option'>UTC+02:00</option>
+          <option class='item-select-option'>UTC+03:00</option>
+          <option class='item-select-option'>UTC+03:30</option>
+          <option class='item-select-option'>UTC+04:00</option>
+          <option class='item-select-option'>UTC+04:30</option>
+          <option class='item-select-option'>UTC+05:00</option>
+          <option class='item-select-option'>UTC+05:30</option>
+          <option class='item-select-option'>UTC+05:45</option>
+          <option class='item-select-option'>UTC+06:00</option>
+          <option class='item-select-option'>UTC+06:30</option>
+          <option class='item-select-option'>UTC+07:00</option>
+          <option class='item-select-option'>UTC+08:00</option>
+          <option class='item-select-option'>UTC+08:30</option>
+          <option class='item-select-option'>UTC+08:45</option>
+          <option class='item-select-option'>UTC+09:00</option>
+          <option class='item-select-option'>UTC+09:30</option>
+          <option class='item-select-option'>UTC+10:00</option>
+          <option class='item-select-option'>UTC+10:30</option>
+          <option class='item-select-option'>UTC+11:00</option>
+          <option class='item-select-option'>UTC+12:00</option>
+          <option class='item-select-option'>UTC+12:45</option>
+          <option class='item-select-option'>UTC+13:00</option>
+          <option class='item-select-option'>UTC+14:00</option>
+      </select>
+    </label>
+    <label class="item">
+      Remote Timezone:
+      <select name="remote-timezone-offset" class="item-select" id="remote-timezone-offset">
+          <option class='item-select-option'>UTC-12:00</option>
+          <option class='item-select-option'>UTC-11:00</option>
+          <option class='item-select-option'>UTC-10:00</option>
+          <option class='item-select-option'>UTC-09:30</option>
+          <option class='item-select-option'>UTC-09:00</option>
+          <option class='item-select-option'>UTC-08:00</option>
+          <option class='item-select-option'>UTC-07:00</option>
+          <option class='item-select-option'>UTC-06:00</option>
+          <option class='item-select-option'>UTC-05:00</option>
+          <option class='item-select-option'>UTC-04:30</option>
+          <option class='item-select-option'>UTC-04:00</option>
+          <option class='item-select-option'>UTC-03:30</option>
+          <option class='item-select-option'>UTC-03:00</option>
+          <option class='item-select-option'>UTC-02:00</option>
+          <option class='item-select-option'>UTC-01:00</option>
+          <option class='item-select-option'>UTC+00:00</option>
+          <option class='item-select-option'>UTC+01:00</option>
+          <option class='item-select-option'>UTC+02:00</option>
+          <option class='item-select-option'>UTC+03:00</option>
+          <option class='item-select-option'>UTC+03:30</option>
+          <option class='item-select-option'>UTC+04:00</option>
+          <option class='item-select-option'>UTC+04:30</option>
+          <option class='item-select-option'>UTC+05:00</option>
+          <option class='item-select-option'>UTC+05:30</option>
+          <option class='item-select-option'>UTC+05:45</option>
+          <option class='item-select-option'>UTC+06:00</option>
+          <option class='item-select-option'>UTC+06:30</option>
+          <option class='item-select-option'>UTC+07:00</option>
+          <option class='item-select-option'>UTC+08:00</option>
+          <option class='item-select-option'>UTC+08:30</option>
+          <option class='item-select-option'>UTC+08:45</option>
+          <option class='item-select-option'>UTC+09:00</option>
+          <option class='item-select-option'>UTC+09:30</option>
+          <option class='item-select-option'>UTC+10:00</option>
+          <option class='item-select-option'>UTC+10:30</option>
+          <option class='item-select-option'>UTC+11:00</option>
+          <option class='item-select-option'>UTC+12:00</option>
+          <option class='item-select-option'>UTC+12:45</option>
+          <option class='item-select-option'>UTC+13:00</option>
+          <option class='item-select-option'>UTC+14:00</option>
+      </select>
+    </label>
+  </div>
+     <div class="item-container-footer">
+    Application at the moment does not handle daylight saving time shifts automatically so you have to reconfigure it if necessary.
+  </div>
+</div>
+
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+    
+  function offsetValueToMinutes(timezoneString) {
+    var sign = timezoneString.substring(3,4);
+    var hours = timezoneString.substring(4,6);
+    var minutes = timezoneString.substring(7,9);
+    var offset = (sign == '-' ? -1 : 1) * (parseInt(hours) * 60) + parseInt(minutes);
+    return offset; 
+  }
+  
+  function correctTimezoneName(timezoneName) {
+    return timezoneName.substr(0, 3).toUpperCase();
+  }
+    
+  function getConfigData() {
+    var remoteTimezoneName = document.getElementById('remote-timezone-name');
+    var remoteTimezoneOffset = document.getElementById('remote-timezone-offset');
+    var localTimezoneOffset = document.getElementById('local-timezone-offset');
+    
+    var remoteTimezoneOffsetValue = remoteTimezoneOffset.options[remoteTimezoneOffset.selectedIndex].value;
+    var localTimezoneOffsetValue = localTimezoneOffset.options[localTimezoneOffset.selectedIndex].value;
+    var offsetMinutes = offsetValueToMinutes(remoteTimezoneOffsetValue) - offsetValueToMinutes(localTimezoneOffsetValue);
+    var timezoneName = correctTimezoneName(remoteTimezoneName.value);
+    
+    remoteTimezoneName.value = timezoneName; 
+ 
+    var options = {
+      'remote_timezone_name': timezoneName,
+      'remote_timezone_offset': remoteTimezoneOffsetValue,
+      'local_timezone_offset': localTimezoneOffsetValue,
+      'offset_minutes': offsetMinutes,
+    };
+
+    // Save for next launch
+    localStorage['remote_timezone_name'] = options['remote_timezone_name'];
+    localStorage['remote_timezone_offset'] = options['remote_timezone_offset'];
+    localStorage['local_timezone_offset'] = options['local_timezone_offset'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var remoteTimezoneName = document.getElementById('remote-timezone-name');
+    var remoteTimezoneOffset = document.getElementById('remote-timezone-offset');
+    var localTimezoneOffset = document.getElementById('local-timezone-offset');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['remote_timezone_offset']) {
+      remoteTimezoneName.value = localStorage['remote_timezone_name'];
+      remoteTimezoneOffset.value = localStorage['remote_timezone_offset'];
+      localTimezoneOffset.value = localStorage['local_timezone_offset'];
+    }
+  })();
+  </script>
+</html>

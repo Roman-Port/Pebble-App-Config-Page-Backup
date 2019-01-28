@@ -1,0 +1,92 @@
+﻿
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Configurable</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+    <script src="/code.jquery.com//jquery-2.js"></script>
+    <script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="content">
+
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup">
+            <legend>Date format:</legend>
+            <input type="radio" name="dateformat" id="radio-mmyyyy" value="0" class="custom">
+            <label for="radio-mmyyyy">MM . YYYY</label>
+            <input type="radio" name="dateformat" id="radio-yyyymm" value="1" class="custom">
+            <label for="radio-yyyymm">YYYY . MM</label>
+            </fieldset>
+          </div>
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup">
+            <legend>Vibe when disconnected (over 3 sec):</legend>
+            <input type="radio" name="connection_alarm" id="connection_alarm_notuse" value="0" class="custom">
+            <label for="connection_alarm_notuse">Not use</label>
+            <input type="radio" name="connection_alarm" id="connection_alarm_use" value="1" class="custom">
+            <label for="connection_alarm_use">Use</label>
+            </fieldset>
+          </div>
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup">
+            <legend>Second:</legend>
+            <input type="radio" name="second" id="second_notuse" value="0" class="custom">
+            <label for="second_notuse">Not use</label>
+            <input type="radio" name="second" id="second_use" value="1" class="custom">
+            <label for="second_use">Use</label>
+            </fieldset>
+          </div>
+        </div>
+
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+            </fieldset>
+          </div>
+        </div>
+      
+    
+    <script>
+      function saveOptions() {
+        var options = {
+          '0': parseInt($("input:radio[name=dateformat]:checked").val()),
+          '1': parseInt($("input:radio[name=connection_alarm]:checked").val()),
+          '2': parseInt($("input:radio[name=second]:checked").val())
+        }
+        return options;
+      }
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+
+
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++)
+        {
+            var sParameterName = sURLVariables[i].split('=');
+            $("input:radio[name=" + sParameterName[0] + "][value=" + sParameterName[1] +"]").click();
+            $("input:radio[name=" + sParameterName[0] + "][value=" + sParameterName[1] +"]").click();
+        }
+
+      });
+    </script>
+  </body>
+</html>

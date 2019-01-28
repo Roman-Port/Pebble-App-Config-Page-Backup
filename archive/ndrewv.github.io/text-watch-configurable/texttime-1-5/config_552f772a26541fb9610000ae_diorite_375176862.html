@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Text Time</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/ndrewv.github.io/text-watch-configurable/css/themes/pebble-theme.css">
+  	<link rel="stylesheet" href="/ndrewv.github.io/text-watch-configurable/css/themes/jquery.css">
+	<link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+	<script src="/code.jquery.com//jquery-1.js"></script>
+	<script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+</head>
+<body>
+	<form name="form" name="form" method="GET">
+		<div data-theme="a" data-role="page">
+			<div data-role="header" class="jqm-header">
+				<h1>Text Time</h1>
+			</div>
+			<div id="textDiv"></div>
+			<div data-role="content">
+			<div data-role="fieldcontain">
+				<label for="bg">Background:</label>
+				<fieldset data-role="controlgroup" name="bg" data-type="horizontal">
+                <input type="radio" name="bg" id="bg_1" value="192">
+					<label for="bg_1">Black</label>
+                <input type="radio" name="bg" id="bg_2" value="255">
+					<label for="bg_2">White</label>
+				</fieldset>
+			</div>
+			<div data-role="fieldcontain">
+				<label for="align">Alignment:</label>
+				<fieldset data-role="controlgroup" name="align" data-type="horizontal">
+					<input type="radio" name="align" id="align_1" value="0">
+					<label for="align_1">Left</label>
+					<input type="radio" name="align" id="align_2" value="1">
+					<label for="align_2">Centre</label>
+					<input type="radio" name="align" id="align_3" value="2">
+					<label for="align_3">Right</label>
+				</fieldset>
+			</div>
+				<div data-role="fieldcontain">
+					<label for="date">Date Style:</label>
+					<select name="date" id="date">
+						<option value="0">Month</option>
+						<option value="1">Weekday</option>
+						<option value="2">No Date</option>
+					</select>
+				</div>
+				<div data-role="fieldcontain">
+					<label for="cap">Capitalize Month/Weekday:</label>
+					<fieldset data-role="controlgroup" name="cap" data-type="horizontal">
+						<input type="radio" name="cap" id="cap_1" value="0">
+						<label for="cap_1">Yes</label>
+						<input type="radio" name="cap" id="cap_2" value="1">
+						<label for="cap_2">No</label>
+					</fieldset>
+				</div>
+				<div data-role="fieldcontain">
+					<label for="font">Font Style:</label>
+					<select name="font" id="font">
+						<option value="0" class="bitham">Bitham (Default)</option>
+						<option value="1" class="daniel">Daniel</option>
+						<option value="2" class="fineliner">Fineliner</option>
+						<option value="3" class="philosopher">Philosopher</option>
+						<option value="4" class="retro">Retro</option>
+						<option value="5" class="jedi">Star Jedi</option>
+						<option value="6" class="stencilia">Stencilia</option>
+						<option value="7" class="technique">Technique BRK</option>
+						<option value="8" class="visitor">Visitor</option>
+						<option value="9" class="florence">Florence Sans</option>
+						<option value="10" class="quicksand">Quicksand</option>
+						<option value="11" class="college">College</option>
+						<option value="12" class="lcd">LCD</option>
+						<option value="13" class="archistico">Archistico</option>
+						<option value="14" class="eurofurence">Eurofurence</option>
+					</select>
+				</div>
+				<div data-theme="a" data-role="fieldcontain">
+					<label for="vert">Vertical Offset (px):</label>
+					<select name="vert" id="vert">
+						<option value="0">0 (Default)</option>
+						<option value="5">5</option>
+						<option value="10">10</option>
+						<option value="15">15</option>
+						<option value="19">19 (1/2 line)</option>
+						<option value="25">25</option>
+						<option value="30">30</option>
+						<option value="38">38 (1 line)</option>
+					</select>
+				</div>
+				<div data-role="fieldcontain">
+					<label for="anim">Animation Speed:</label>
+					<select name="anim" id="anim">
+						<option value="700">Default</option>
+						<option value="1000">Slow</option>
+						<option value="500">Fast</option>
+						<option value="0">None</option>
+					</select>
+				</div>
+					<fieldset class="ui-grid-a">
+					<div class="ui-block-a"><button data-theme="b" id="cancel" onclick="return cancelForm();">Cancel</button></div>
+					<div class="ui-block-b"><button data-theme="b" id="submit" onclick="return submitForm();">Submit</button></div>
+					</fieldset>
+			</div>
+		</div>
+	</form>
+	<script>
+		function getQueryParam(variable, default_) {
+		    var query = window.location.search.substring(1);
+		    var vars = query.split('&');
+		    for (var i = 0; i < vars.length; i++) {
+		        var pair = vars[i].split('=');
+		        if (pair[0] == variable)
+		            return decodeURIComponent(pair[1]);
+		    }
+		    return default_ || false;
+		}
+		
+		function submitForm(){
+		var variables = {};
+		var selects=this.form.getElementsByTagName('select');
+		//encode selects
+		for(var i=0;i<selects.length;i++){
+			variables[selects[i].name.toString()]=parseInt(selects[i].value);
+		}
+		var radios=this.form.getElementsByTagName('input');
+		for(var j=0;j<radios.length;j++){
+			if(radios[j].checked == true){
+				variables[radios[j].name.toString()]=parseInt(radios[j].value);	
+			}
+		}
+	        var location = return_to+encodeURIComponent(JSON.stringify(variables));
+            	document.location = location;
+		}
+		function cancelForm(){
+  		document.location = return_to;
+		}
+		
+		var return_to = getQueryParam('return_to', 'pebblejs://close#');
+		var config = getQueryParam('opts', '');
+		//document.getElementById("textDiv").innerHTML = window.location.search.substr(1);
+		var obj = JSON.parse(config);
+		if(obj!==null){
+			for (var key in obj){
+  				if(obj.hasOwnProperty(key)){
+					var element=document.getElementsByName(key);
+					if (element!==null) {
+					var len = element.length;
+						switch(element.length){
+							case 0:
+							break;
+							case 1:{
+								element[0].value=parseInt(obj[key]);
+								}break;
+							default:{
+								for(var i = 0; i < element.length; i++){
+									if(element[i].value == parseInt(obj[key])){
+										element[i].checked = true;
+										break;
+									}
+								}
+							}							
+						}
+					}
+				}
+			}
+		}
+	</script>
+</body>
+</html>

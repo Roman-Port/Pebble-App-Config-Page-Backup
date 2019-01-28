@@ -1,0 +1,191 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+		<link rel="stylesheet" href="/pi-king.github.io/css/slate.css">
+		<script type="text/javascript" src="/pi-king.github.io/js/slate.js"></script>
+		<style>
+			.title {
+				padding: 15px 10px;
+				text-transform: uppercase;
+				font-family: 'PT Sans', sans-serif;
+				font-size: 1.2em;
+				font-weight: 500;
+				color: #888888;
+				text-align: center;
+			}
+		</style>
+		
+		<title>Manekineko Setting Page</title>
+	</head>
+	<body>
+		<form id="main-form">
+			<div class="item-container">
+				<div class="item-container-header">General</div>
+				<div class="item-container-content">
+					<label class="item">
+						Show Date
+						<input type="checkbox" class="item-toggle" name="toggle-1" id="show_date_select">
+					</label>
+					<label class="item">
+						Show Watch Battery
+						<input type="checkbox" class="item-toggle" name="toggle-2" id="show_battery_select">
+					</label>
+					<label class="item">
+						Show Bluetooth
+						<input type="checkbox" class="item-toggle" name="toggle-3" id="show_bluetooth_select">
+					</label>
+					<label class="item">
+						Show Phone Battery
+						<input type="checkbox" class="item-toggle" name="toggle-4" id="show_phone_batt_select">
+					</label>
+					<label class="item">
+						Vibrate when BT connection lost
+						<input type="checkbox" class="item-toggle" name="toggle-5" id="vibe_bt_select">
+					</label>
+					<label class="item">
+						Hourly Vibration
+						<input type="checkbox" class="item-toggle" name="toggle-6" id="hourly_vibe_select">
+					</label>
+				</div>
+			</div>
+			
+			<div class="item-container">
+				<div class="item-container-header">Colors</div>
+				<div class="item-container-content">
+					<label class="item">
+						Text
+						<input type="text" class="item-color item-color-normal" name="color-1" id="color_text_select">
+					</label>
+					<label class="item">
+						Background
+						<input type="text" class="item-color item-color-normal" name="color-2" id="color_bkgnd_select">
+					</label>
+				</div>
+				<div class="item-container-footer">
+					Black&White device can only choose either black or white color. If other color is chosen, text will become white and background will become black by default.
+				</div>
+			</div>
+
+			<div class="item-container">
+				<div class="button-container">
+					<input type="button" class="item-button" id="save_button" value="SEND">
+				</div>
+			</div>
+			
+
+		</form>
+
+	
+		
+		<script>
+		
+			function getQueryVariable(variable) {
+				var query = location.search.substring(1);
+				var vars = query.split('&');
+				for (var i = 0; i < vars.length; i++) {
+				  var pair = vars[i].split('=');
+				  if (pair[0] === variable) {
+					return pair[1];
+				  }
+				}
+			}
+	
+			function fillOptions() {
+				if (getQueryParam("first_start") === "yes") {
+					var showDateSelect = document.getElementById("show_date_select");
+					var showBatterySelect = document.getElementById("show_battery_select");
+					var showBTSelect = document.getElementById("show_bluetooth_select");
+					var showPhoneBattSelect = document.getElementById("show_phone_batt_select");
+					var HourlyVibeSelect = document.getElementById("hourly_vibe_select");
+					var vibeBTSelect = document.getElementById("vibe_bt_select");
+					var colorTextSelect = document.getElementById("color_text_select");
+					var colorBkgndSelect = document.getElementById("color_bkgnd_select");
+					
+					showDateSelect.checked = true;
+					showBatterySelect.checked = true;
+					showBTSelect.checked = true;
+					showPhoneBattSelect.checked = true;
+					HourlyVibeSelect.checked = false;
+					vibeBTSelect.checked = true;
+					colorTextSelect.value = "0xFFFFFF";
+					colorBkgndSelect.value = "0xFF5500";
+
+				}else {
+					var showDateSelect = document.getElementById("show_date_select");
+					var showBatterySelect = document.getElementById("show_battery_select");
+					var showBTSelect = document.getElementById("show_bluetooth_select");
+					var showPhoneBattSelect = document.getElementById("show_phone_batt_select");
+					var HourlyVibeSelect = document.getElementById("hourly_vibe_select");
+					var vibeBTSelect = document.getElementById("vibe_bt_select");
+					var colorTextSelect = document.getElementById("color_text_select");
+					var colorBkgndSelect = document.getElementById("color_bkgnd_select");
+					
+					showDateSelect.checked = (getQueryVariable("show_date_select") === 'true');
+					showBatterySelect.checked = (getQueryVariable("show_battery_select") === 'true');
+					showBTSelect.checked = (getQueryVariable("show_bluetooth_select") === 'true');
+					showPhoneBattSelect.checked = (getQueryVariable("show_phone_batt_select") === 'true');
+					HourlyVibeSelect.checked = (getQueryVariable("hourly_vibe_select") === 'true');
+					vibeBTSelect.checked = (getQueryVariable("vibe_bt_select") === 'true');
+					colorTextSelect.value = getQueryVariable("color_text_select");
+					colorBkgndSelect.value = getQueryVariable("color_bkgnd_select");
+
+
+				}				
+			}
+	
+			function saveOptions() {
+				var showDateSelect = document.getElementById("show_date_select");
+				var showBatterySelect = document.getElementById("show_battery_select");
+				var showBTSelect = document.getElementById("show_bluetooth_select");
+				var showPhoneBattSelect = document.getElementById("show_phone_batt_select");
+				var vibeBTSelect = document.getElementById("vibe_bt_select");
+				var hourlyVibeSelect = document.getElementById("hourly_vibe_select");
+				var colorTextSelect = document.getElementById("color_text_select");
+				var colorBkgndSelect = document.getElementById("color_bkgnd_select");
+
+				var options = {
+					"KEY_PHONE_BATTERY" : 112,
+					"KEY_SHOW_DATE": showDateSelect.checked,
+					"KEY_SHOW_BATTERY": showBatterySelect.checked,
+					"KEY_SHOW_BT": showBTSelect.checked,
+					"KEY_SHOW_PHONE_BATT":showPhoneBattSelect.checked,
+					"KEY_HOURLY_VIBE":hourlyVibeSelect.checked,
+					"KEY_VIBE_BT": vibeBTSelect.checked,
+					"KEY_BKGND_COLOR": colorBkgndSelect.value,
+					"KEY_TEXT_COLOR": colorTextSelect.value,
+				}
+				
+				return options;
+			}
+			
+			function getQueryParam(variable, defaultValue) {
+				var query = location.search.substring(1);
+				var vars = query.split('&');
+				for (var i = 0; i < vars.length; i++) {
+				  var pair = vars[i].split('=');
+				  if (pair[0] === variable) {
+					return decodeURIComponent(pair[1]);
+				  }
+				}
+				return defaultValue || false;
+			}
+  
+			var submitButton = document.getElementById("save_button");
+			submitButton.addEventListener("click",
+				function() {
+					console.log("Submit");
+					
+					// Set the return URL depending on the runtime environment
+					var return_to = getQueryParam('return_to', 'pebblejs://close#');
+					document.location = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
+				}
+			);
+		  
+			fillOptions();
+		</script>
+	</body>
+</html>

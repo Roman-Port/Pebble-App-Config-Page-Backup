@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html class="ui-mobile" lang="en">
+<head>
+  <meta charset="UTF-8">
+	<meta http-equiv="EXPIRES" content="0">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title>WeatherWatch Analog</title>
+  <link rel='stylesheet' type='text/css' href='/pbhgl.github.io/weatherwatch/bower_components/pebble-slate/dist/css/slate.css'>
+  <link rel='stylesheet' type='text/css' href='/pbhgl.github.io/weatherwatch/css/style.css'>
+</head>
+<body>
+
+  <div class="item-container">
+    <div class='header'>
+      <div class='left'>
+        <h1 class='title'>WeatherWatch</h1>
+      </div>
+    </div>
+  </div>
+
+  <form id="main-form">
+
+    <div class="item-container">
+      <div class="item-container-content">
+        <div class="item">
+          <div class="button-container">
+            <input id="submitButton" type="button" class="item-button" value="SEND">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div id='headerWeatherService' class="item-container-header">Weather Underground API Key</div>
+      <div id='contentWeatherService' class="item-container-content">
+        <label class="item">
+          <div class="item-input-wrapper">
+            <input id="apiKey" type="text" class="item-input" name="apikey" placeholder="Enter your API key here">
+          </div>
+        </label>
+        <div class="item-container-footer">Weather Underground API is used for the weather data.
+          Weather Underground API requires an API key. As a developer you may already have one. Otherwise you can
+          get one at www.wunderground.com/weather/api/ (choose a plan with hourly forecast).
+        </div>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div id='headerLocation' class="item-container-header">Location</div>
+      <div id='contentLocation' class="item-container-content">
+        <label class="item">
+          Use GPS Location
+          <input id="gps" type="radio" class="item-radio" name="location" value="usegps" checked="">
+        </label>
+        <label class="item">
+          Use Latitude, Longitude
+          <input id="latlon" type="radio" class="item-radio" name="location" value="uselatlon">
+        </label>
+        <span id='latlon-settings'>
+        <label class="item">
+          <div class="item-subtitle">Latitude:</div>
+          <div class="item-input-wrapper">
+            <input id="latitude" type="text" class="item-input" name="latitude" placeholder="0">
+          </div>
+        </label>
+        <label class="item">
+          <div class="item-subtitle">Longitude:</div>
+          <div class="item-input-wrapper">
+            <input id="longitude" type="text" class="item-input" name="longitude" placeholder="0">
+          </div>
+        </label>
+      </span>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div id='headerFrequency' class="item-container-header">Weather Update Frequency (Minutes)</div>
+      <div id='contentFrequency' class="item-container-content">
+        <label class="item">
+          <input type="range" class="item-slider" name="sliderfreq" value="60">
+          <div class="item-input-wrapper item-slider-text">
+            <input id="frequency" type="text" class="item-input" name="sliderfreq" value="60">
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div id='headerDisplay' class="item-container-header">Display Configuration</div>
+      <div id='contentDisplay' class="item-container-content">
+        <label class="item">
+          Display Location
+          <input id="displayLocation" type="checkbox" class="item-checkbox" name="displaylocation" checked="">
+        </label>
+        <label class="item">
+          Display Hour Markers
+          <input id="displayHourMarkers" type="checkbox" class="item-checkbox" name="displayhourmarkers" checked="">
+        </label>
+        <label class="item">
+          Display Minor Markers
+          <input id="displayMinorMarkers" type="checkbox" class="item-checkbox" name="displayminormarkers" checked="">
+        </label>
+        <label class="item">
+          Display Observation Time (O)
+          <input id="displayObservationTime" type="checkbox" class="item-checkbox" name="displayobstime">
+        </label>
+        <label class="item">
+          Display Update Time (U)
+          <input id="displayUpdateTime" type="checkbox" class="item-checkbox" name="displayupdtime">
+        </label>
+        <span id="displayTemp">
+          <label class="item">
+            Display Current Temperature (°C)
+            <input id="displayTempC" type="checkbox" class="item-checkbox" name="displaytempc">
+          </label>
+          <label class="item">
+            Display Current Temperature (°F)
+            <input id="displayTempF" type="checkbox" class="item-checkbox" name="displaytempf">
+          </label>
+        </span>
+        <label id="selectTapAction" class="item">
+          Tap Action
+          <select id="tapAction" name="tapAction" class="item-select">
+            <option class="item-select-option" value="0">Ignore tap</option>
+            <option class="item-select-option" value="1" selected="">Weather info in the front</option>
+            <option class="item-select-option" value="2">Hide hands</option>
+          </select>
+          <div class="item-container-footer">
+            Switches back to normal display after 10 seconds
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <!-- <div id="selectTapActions" class="item-container">
+      <div id='headerTapActions' class="item-container-header">Tap Actions</div>
+      <div id='contentTapActions' class="item-container-content">
+        later: tapActions here
+      </div>
+    </div> -->
+
+    <div id="weatherAlerts" class="item-container">
+      <div id='headerAlerts' class="item-container-header">Weather Alerts</div>
+      <div class="item-container-footer">
+        Weather alerts are available for Europe and US.
+      </div>
+      <div id='contentAlerts' class="item-container-content">
+        <label class="item">
+          Show Alert Notification
+          <input id="showAlertNotification" type="checkbox" class="item-checkbox" name="showAlertNotification">
+        </label>
+        <label class="item">
+          Alert Levels (Europe only)
+          <select id="minAlertLevel" name="minAlertLevel" class="item-select">
+            <option class="item-select-option" value="2" selected="">2,3,4</option>
+            <option class="item-select-option" value="3">3,4</option>
+            <option class="item-select-option" value="4">4</option>
+          </select>
+          <div class="item-container-footer">
+            2: potentially dangerous<br>3: dangerous<br>4: very dangerous
+          </div>
+        </label>
+        <label id="alertsUS" class="item">
+          Alert Significance (US only)
+          <select id="alertSignificances" name="alertSignificances" class="item-select">
+            <option class="item-select-option" value="WAY" selected="">W,A,Y</option>
+            <option class="item-select-option" value="WA">W,A</option>
+            <option class="item-select-option" value="W">W</option>
+          </select>
+          <div class="item-container-footer">
+            W: Warning<br>A: Watch<br>Y: Advisory
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div id="colorSettings" class="item-container">
+      <div id='headerColors' class="item-container-header">Color Settings</div>
+      <div id='contentColors' class="item-container-content">
+        <label class="item">
+          Background
+          <input id="colorBackground" type="text" class="item-color item-color-normal" name="color-bg" value="0x000000">
+        </label>
+        <label class="item">
+          Text
+          <input id="colorText" type="text" class="item-color item-color-normal" name="color-text" value="0xFFFFFF">
+        </label>
+        <label class="item">
+          Hour Hand
+          <input id="colorHourHand" type="text" class="item-color item-color-normal" name="color-hour-hand" value="0xFFFFFF">
+        </label>
+        <label class="item">
+          Minute Hand (Bluetooth connected)
+          <input id="colorMinuteHand" type="text" class="item-color item-color-normal" name="color-minute-hand" value="0x55AAFF">
+        </label>
+        <label class="item">
+          Minute Hand (Bluetooth disconnected)
+          <input id="colorMinuteHandNoBT" type="text" class="item-color item-color-normal" name="color-minute-hand-nobt" value="0xFF5500">
+        </label>
+        <label class="item">
+          Hour Markers
+          <input id="colorHourMarkers" type="text" class="item-color item-color-normal" name="color-hour-markers" value="0xFFFFFF">
+        </label>
+        <label class="item">
+          Minor Markers
+          <input id="colorMinorMarkers" type="text" class="item-color item-color-normal" name="color-minor-markers" value="0xFFFFFF">
+        </label>
+        <div class="item">
+          <div class="button-container">
+            <input id="reloadDefaultColors" type="button" class="item-button" value="RELOAD DEFAULT COLORS">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <span id='connectionSettings'>
+    <div class="item-container">
+      <div id='headerConnection' class="item-container-header">Bluetooth Connection</div>
+      <div id='contentConnection' class="item-container-content">
+        <span id='InvertOnDisconnect'>
+          <label class="item">
+            Invert Colors on Disconnect
+            <input id="invertBtDisconnect" type="checkbox" class="item-checkbox" name="invertBtDisconnect">
+          </label>
+        </span>
+        <label class="item">
+          Vibrate on Disconnect
+          <input id="vibrateBtDisconnect" type="checkbox" class="item-checkbox" name="vibrateBtDisconnect">
+        </label>
+        <label class="item">
+          Vibrate on Reconnect
+          <input id="vibrateBtReconnect" type="checkbox" class="item-checkbox" name="vibrateBtReconnect">
+        </label>
+      </div>
+    </div>
+  </span>
+
+    <div class="item-container">
+      <div class="button-container">
+        <input id="submitButton2" type="button" class="item-button" value="SEND">
+      </div>
+    </div>
+
+  </form>
+
+  <div class="item-container">
+    <div class="item-container-content">
+      <div class="item">
+        Weather data provided by
+        <img style="width:4.5cm;" src="/pbhgl.github.io/weatherwatch/images/wundergroundLogo_4c_horz.png">
+      </div>
+    </div>
+  </div>
+
+  <script src='/pbhgl.github.io/weatherwatch/bower_components/pebble-slate/dist/js/slate.js'></script>
+  <script src='/pbhgl.github.io/weatherwatch/js/main.js'></script>
+</body>
+</html>

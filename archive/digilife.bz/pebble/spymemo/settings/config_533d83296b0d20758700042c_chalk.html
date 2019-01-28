@@ -1,0 +1,81 @@
+﻿<!doctype html5>
+<html>
+  <head>
+    <title>SpyMemo Settings</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/digilife.bz//favicon.bin" rel="icon">
+
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/foundation/4.0.2/css/foundation.css" /> -->
+    <!-- <link rel="stylesheet" href="/styles/base.css" /> -->
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+    <!--
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+    -->
+    <!--
+    <script src="//cdn.jsdelivr.net/foundation/4.0.2/js/vendor/custom.modernizr.js"></script>
+    <script src="//cdn.jsdelivr.net/foundation/4.0.2/js/foundation.min.js"></script>
+    -->
+    <!--
+    <script src="//cdn.jsdelivr.net/sugar/1.3.9/sugar.min.js"></script>
+    -->
+  </head>
+  <body>
+
+    <div class="row">
+      <div class="small-12 columns">
+        <h2>SypMemo Settings</h2>
+      </div>
+    </div>
+    <section>
+      <div class="row">
+        <div class="small-12 columns">
+          <label for="text-url"><h3>[Text File(UTF-8 LF, max 2KB) URL]</h3></label>
+          <input type="text" id="text-url" autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="http://your.domain.com/your/textfile.txt">
+          <div class="ui-block-a">
+            <button type="submit" data-theme="d" id="save-button">Save</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      $(function() {
+        var setOptions = function() {
+          var options = window.location.hash;
+          if (!options) {
+            return {};
+          }
+
+
+          var options = JSON.parse(decodeURIComponent(options.substr(1)));
+          if (!options) {
+            return {};
+          }
+          $('#text-url').val(options.textUrl ? options.textUrl : 'http://digilife.bz/pebble/spymemo/sample.txt');
+          return options;
+        };
+
+
+        var getOptions = function() {
+          var options = {};
+          options.textUrl = $('#text-url').val();
+          return options;
+        };
+
+
+        $('#save-button').on('click', function() {
+          document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(getOptions()));
+<!--
+          console.log(document.location);
+-->
+        });
+
+        setOptions();
+      });
+    </script>
+  </body>
+</html>

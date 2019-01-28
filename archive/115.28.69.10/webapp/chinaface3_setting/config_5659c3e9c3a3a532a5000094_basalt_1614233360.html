@@ -1,0 +1,348 @@
+
+
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/115.28.69.10/static/webapp/css/slate_723846822.css">
+<script type="text/javascript" src="/115.28.69.10/static/webapp/js/slate_40827226.js"></script>
+</head>
+<body>
+
+<div class="item-container">
+  <img class="logo" src="/115.28.69.10/static/webapp/images/pebblefan_logo_orange.png">
+  <div class="item-container-header">????</div>
+  <div class="item-container-content">
+    <label class="item" id="weather_station_label">
+      ?????
+      <select name="weather_station" id="weather_station" dir='rtl' class="item-select">
+        <option class="item-select-option" value="C" selected="">???????</option>
+        <option class="item-select-option" value="G">?????</option>
+      </select>
+    </label>
+
+    <div class="item" style="padding-bottom:0;">
+    <span id="watchid" style="display:none;">RPWS_APPCONFIGRIPPER_TOKEN_ACCOUNT</span>
+    <span id="station_notice">??GPS????,??????????(??:??),??????</span>
+    </div>
+      <div class="item-input-wrapper">
+        <input type="text" class="item-input" id="city_name" name="city_name" placeholder="???????" value="">
+      </div>
+
+      <label class="item" style="display:none;">
+        ??????
+        <select name="watch_style" id="watch_style" dir='rtl' class="item-select">
+          <option class="item-select-option" value="qinxin">???</option>
+          <option class="item-select-option" value="yuanshi">???</option>
+        </select>
+      </label>
+
+    <label class="item" id="switch_bw_label">
+      ??????
+      <input type="checkbox" class="item-toggle" name="switch_bw_check" id="switch_bw_check">
+    </label>
+
+      <label class="item" style="display:none;" id="bw_color_label">
+        ????
+        <select name="invert_color" id="invert_color" dir='rtl' class="item-select">
+          <option class="item-select-option" value="B" selected="">????</option>
+          <option class="item-select-option" value="W">????</option>
+          <option class="item-select-option" value="0">????</option>
+          <option class="item-select-option" value="1">????</option>
+          <option class="item-select-option" value="2">????</option>
+          <option class="item-select-option" value="3">????</option>
+        </select>
+      </label>
+
+     <label id="color_label" class="item">
+        ????
+        <input type="text" class="item-color item-color-normal" name="watch_color" id="watch_color" value="1">
+      </label>
+
+      <label class="item" id="bluetooth_label">
+        ????????
+        <input type="checkbox" class="item-toggle" name="bluetooth_alert" id="bluetooth_alert" checked="">
+      </label>
+
+      <label class="item" id="tap_label">
+        ????
+        <input type="checkbox" class="item-toggle" name="tap_check" id="tap_check" checked="">
+      </label>
+
+    <label class="item" id="shake_sens_label">
+      &nbsp;&nbsp;?????
+      <select name="shake_sens_sel" id="shake_sens_sel" dir='ltr' class="item-select">
+        <option class="item-select-option" value="0">?</option>
+        <option class="item-select-option" value="1" selected="">?</option>
+        <option class="item-select-option" value="2">?</option>
+        <option class="item-select-option" value="4">??</option>
+      </select>
+    </label>
+
+      <label class="item" id="hour24_label">
+        24???
+        <input type="checkbox" class="item-toggle" name="hour24_check" id="hour24_check" checked="">
+      </label>
+
+    <label class="item" id="show_second_label">
+      ???
+      <input type="checkbox" class="item-toggle" name="show_second_check" id="show_second_check">
+    </label>
+
+      <label class="item">
+        ????
+        <select name="vibration_period" id="vibration_period" dir='rtl' class="item-select">
+          <option class="item-select-option" value="0" selected="">???</option>
+          <option class="item-select-option" value="30">?30??</option>
+          <option class="item-select-option" value="40">?40??</option>
+          <option class="item-select-option" value="45">?45??</option>
+          <option class="item-select-option" value="60">???</option>
+        </select>
+      </label>
+      <label class="item" id="not_alert_label" style="display:none;">
+        ???????
+        <input type="checkbox" class="item-toggle" name="not_alert" id="not_alert" checked="">
+      </label>
+      <label class="item" id="not_alert_start_label" style="display:none;">
+        &nbsp;&nbsp;???????
+        <select name="not_alert_start" id="not_alert_start" dir='rtl' class="item-select">
+          
+          <option class="item-select-option" value="0">0?</option>
+          
+          <option class="item-select-option" value="1">1?</option>
+          
+          <option class="item-select-option" value="2">2?</option>
+          
+          <option class="item-select-option" value="3">3?</option>
+          
+          <option class="item-select-option" value="4">4?</option>
+          
+          <option class="item-select-option" value="5">5?</option>
+          
+          <option class="item-select-option" value="6">6?</option>
+          
+          <option class="item-select-option" value="7">7?</option>
+          
+          <option class="item-select-option" value="8">8?</option>
+          
+          <option class="item-select-option" value="9">9?</option>
+          
+          <option class="item-select-option" value="10">10?</option>
+          
+          <option class="item-select-option" value="11">11?</option>
+          
+          <option class="item-select-option" value="12">12?</option>
+          
+          <option class="item-select-option" value="13">13?</option>
+          
+          <option class="item-select-option" value="14">14?</option>
+          
+          <option class="item-select-option" value="15">15?</option>
+          
+          <option class="item-select-option" value="16">16?</option>
+          
+          <option class="item-select-option" value="17">17?</option>
+          
+          <option class="item-select-option" value="18">18?</option>
+          
+          <option class="item-select-option" value="19">19?</option>
+          
+          <option class="item-select-option" value="20">20?</option>
+          
+          <option class="item-select-option" value="21">21?</option>
+          
+          <option class="item-select-option" value="22">22?</option>
+          
+          <option class="item-select-option" value="23">23?</option>
+          
+        </select>
+      </label>
+      <label class="item" id="not_alert_end_label" style="display:none;">
+        &nbsp;&nbsp;???????
+        <select name="not_alert_end" id="not_alert_end" dir='rtl' class="item-select">
+          
+          <option class="item-select-option" value="0">0?</option>
+          
+          <option class="item-select-option" value="1">1?</option>
+          
+          <option class="item-select-option" value="2">2?</option>
+          
+          <option class="item-select-option" value="3">3?</option>
+          
+          <option class="item-select-option" value="4">4?</option>
+          
+          <option class="item-select-option" value="5">5?</option>
+          
+          <option class="item-select-option" value="6">6?</option>
+          
+          <option class="item-select-option" value="7">7?</option>
+          
+          <option class="item-select-option" value="8">8?</option>
+          
+          <option class="item-select-option" value="9">9?</option>
+          
+          <option class="item-select-option" value="10">10?</option>
+          
+          <option class="item-select-option" value="11">11?</option>
+          
+          <option class="item-select-option" value="12">12?</option>
+          
+          <option class="item-select-option" value="13">13?</option>
+          
+          <option class="item-select-option" value="14">14?</option>
+          
+          <option class="item-select-option" value="15">15?</option>
+          
+          <option class="item-select-option" value="16">16?</option>
+          
+          <option class="item-select-option" value="17">17?</option>
+          
+          <option class="item-select-option" value="18">18?</option>
+          
+          <option class="item-select-option" value="19">19?</option>
+          
+          <option class="item-select-option" value="20">20?</option>
+          
+          <option class="item-select-option" value="21">21?</option>
+          
+          <option class="item-select-option" value="22">22?</option>
+          
+          <option class="item-select-option" value="23">23?</option>
+          
+        </select>
+      </label>
+  </div>
+
+
+    <div class="item-container-header">?????</div>
+    <div class="item-container-content">
+      <label class="item" id="countday_label">
+        ???/???
+        <input type="checkbox" class="item-toggle" name="countday_check" id="countday_check">
+      </label>
+      <div class="item-input-wrapper" style="display: none;" id="mydate_name_div">
+        <input type="text" class="item-input" id="mydate_name" name="mydate_name" placeholder="???" value="" maxlength="7">
+      </div>
+      
+      <label class="item" style="display: none;" id="mydate_div">
+        &nbsp;&nbsp;??(?/?)
+        <input type="date" class="item-date" id="mydate" name="mydate" value="2016-01-01">
+      </label>
+
+      <label class="item" style="display: none;" id="mytime_div">
+        &nbsp;&nbsp;??(?/?)
+        <input type="time" class="item-time" id="mytime" name="mytime" value="00:00">
+      </label>
+
+      <label class="item" style="display: none;" id="countday_type_div">
+        &nbsp;&nbsp;????
+        <select name="countday_type" id="countday_type" dir='rtl' class="item-select">
+          <option class="item-select-option" value="Y" selected="">???</option>
+          <option class="item-select-option" value="H">??</option>
+          <option class="item-select-option" value="M">???</option>
+          <option class="item-select-option" value="S">????</option>
+        </select>
+      </label>
+
+    <label class="item" id="note_label">
+      ???
+      <input type="checkbox" class="item-toggle" name="note_check" id="note_check">
+    </label>
+    <div class="item-input-wrapper" style="display: none;" id="mytxt1_div">
+      <input type="text" class="item-input" id="mytxt1" name="mytx1" placeholder="???" value="" maxlength="7">
+    </div>
+    <div class="item-input-wrapper" style="display: none;" id="mytxt2_div">
+      <input type="text" class="item-input" id="mytxt2" name="mytxt2" placeholder="???" value="" maxlength="7">
+    </div>
+    
+    <label class="item" id="today_weather_label">
+      ????
+      <input type="checkbox" class="item-toggle" name="today_weather_check" id="today_weather_check">
+    </label>
+
+    <label class="item" id="health_label">
+      ???? (????)
+      <input type="checkbox" class="item-toggle" name="health_check" id="health_check">
+    </label>
+
+    <label class="item" style="display: none;" id="health_steps_label">
+      &nbsp;&nbsp;<img class="health_icon" src="/115.28.69.10/static/webapp/images/step_orange.png"><span class="health_name">????</span>
+      <input type="checkbox" class="item-toggle" name="health_steps" id="health_steps">
+    </label>
+
+    <label class="item" style="display: none;" id="health_calories_label">
+      &nbsp;&nbsp;<img class="health_icon" src="/115.28.69.10/static/webapp/images/calories_orange.png"><span class="health_name">????(???)</span>
+      <input type="checkbox" class="item-toggle" name="health_calories" id="health_calories">
+    </label>
+
+    <label class="item" style="display: none;" id="health_time_label">
+      &nbsp;&nbsp;<img class="health_icon" src="/115.28.69.10/static/webapp/images/time_orange.png"><span class="health_name">????</span>
+      <input type="checkbox" class="item-toggle" name="health_time" id="health_time">
+    </label>
+
+    <label class="item" style="display: none;" id="health_distance_label">
+      &nbsp;&nbsp;<img class="health_icon" src="/115.28.69.10/static/webapp/images/km_orange.png"><span class="health_name">????(??)</span>
+      <input type="checkbox" class="item-toggle" name="health_distance" id="health_distance">
+    </label>
+
+    <label class="item" style="display: none;" id="health_sleep_time_label">
+      &nbsp;&nbsp;<img class="health_icon" src="/115.28.69.10/static/webapp/images/sleep_orange.png"><span class="health_name">????</span>
+      <input type="checkbox" class="item-toggle" name="health_sleep_time" id="health_sleep_time">
+    </label>
+
+    <label class="item" style="display: none;" id="health_deep_sleep_time_label">
+      &nbsp;&nbsp;<img class="health_icon" src="/115.28.69.10/static/webapp/images/deep_sleep_orange.png"><span class="health_name">????</span>
+      <input type="checkbox" class="item-toggle" name="health_deep_sleep_time" id="health_deep_sleep_time">
+    </label>
+
+    </div>
+
+
+    <div class="item-container-header">Timeline??</div>
+    <div class="item-container-content">
+
+    <label class="item" id="timeline_news_label">
+      ????
+      <input type="checkbox" class="item-toggle" name="timeline_news_check" id="timeline_news_check">
+    </label>
+
+    <label class="item" id="timeline_english_label">
+      ????
+      <input type="checkbox" class="item-toggle" name="timeline_english_check" id="timeline_english_check">
+    </label>
+
+    <label class="item" id="timeline_zhongchao_label">
+      ????
+      <input type="checkbox" class="item-toggle" name="timeline_zhongchao_check" id="timeline_zhongchao_check">
+    </label>
+
+    <label class="item" id="timeline_huangli_label">
+      ????
+      <input type="checkbox" class="item-toggle" name="timeline_huangli_check" id="timeline_huangli_check">
+    </label>
+    </div>
+
+
+      <div class="item-container">
+        <div class="button-container">
+          <input type="button" class="item-button" id="submit_button" value="??">
+        </div>
+      </div>
+
+  <div class="item-container-footer">
+    Developed by ???, ???:<a href="weixin://contacts/profile/gh_ec6585b08e39">pebblecn</a><br>
+    ??:
+  </div>
+</div>
+<script type="text/javascript" src="/115.28.69.10/static/webapp/js/chinaface3_490598864.js"></script>
+<script type="text/javascript">  
+set_alert_value('0', 'True', '19', '8');  
+set_info_window_check('False', 'False', 'True', 'False');
+set_countday_type_value('Y');
+set_weather_station('C');
+set_health_value_check('');
+set_tap_check('True');
+
+set_switch_bw_check('False');
+
+</script>
+</body>
+</html>

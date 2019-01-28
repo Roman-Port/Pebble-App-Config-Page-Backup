@@ -1,0 +1,118 @@
+<html>
+  <head>
+    <title>RGB Hands configuration</title>
+    <link rel='stylesheet' type='text/css' href='/riviera.nishwater.com/pebble/css/slate.css'>
+    <script src='/riviera.nishwater.com/pebble/js/slate.js'></script>
+    <style>
+      h1 {
+	padding: 15px 10px;
+	text-transform: uppercase;
+	font-family: 'PT Sans', sans-serif;
+	font-size: 1.2em;
+	font-weight: 500;
+	color: #888888;
+	text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!--h1>Configuration</h1-->
+    <div class='item-container'>
+      <div class='item-container-header'>Configuration</div>
+        <div class='item-container-content'>
+          <label class='item'>
+            Show Second Hand
+            <input id='cbSec' type='checkbox' class='item-toggle'>
+          </label>
+        </div>
+        <div class='item-container-content'>
+          <label class='item'>
+            Second adjustment for other hands<br>(or once a minute)
+            <input id='cbJump' type='checkbox' class='item-toggle' checked='checked'>
+          </label>
+        </div>
+        <div class='item-container-footer'>
+          Turning second hand off will hide the second hand and reduce battery usage<br>
+          Only updating the other hands once a minute saves a small amount of battery and may be preferable visually
+        </div>
+        <div class='item-container-content'>
+          <label class='item'>
+            Show Hour Markers
+            <input id='cbCar' type='checkbox' class='item-toggle'>
+          </label>
+        </div>
+        <div class='item-container-footer'>
+          Markers around the outside of the display to show where the hours are
+        </div>
+        <div class='item-container-content'>
+          <label class='item'>
+            Show Date
+            <input id='cbDate' type='checkbox' class='item-toggle'>
+          </label>
+        </div>
+        <div class='item-container-content'>
+          <label class='item'>
+            Make Date Box Opaque
+            <input id='cbDateBox' type='checkbox' class='item-toggle'>
+          </label>
+        </div>
+        <div class='item-container-footer'>
+          Display today''s date on the right hand side of the display
+        </div>
+        <div class='item-container-content'>
+          <label class='item'>
+            White Background
+            <input id='cbWBg' type='checkbox' class='item-toggle'>
+          </label>
+        </div>
+        <div class='item-container-footer'>
+          Make the background white instead of black
+        </div>
+        <div class='item-container-content'>
+          <label class='item'>
+            Lighter colours
+            <input id='cbLight' type='checkbox' class='item-toggle'>
+          </label>
+        </div>
+        <div class='item-container-footer'>
+            Use lighter colours in dark background mode, don't black out crossover in white background mode
+        </div>
+        <div class='item-container-content'>
+          <label class='item'>
+            Bluetooth Connection Warning
+            <input id='cbBlueWarn' type='checkbox' class='item-toggle'>
+          </label>
+        </div>
+        <div class='item-container-footer'>
+            Vibrate and show icon on loss of bluetooth connetion to phone
+        </div>
+      </div>
+    
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE'>
+      </div>
+    </div>
+    <script>
+	var submitButton = document.getElementById('submit_button');
+	submitButton.addEventListener('click', function() {
+	  // Some example configuration values
+	    var config = {
+	    'showSeconds': document.getElementById('cbSec').checked,
+	    'showCardinals': document.getElementById('cbCar').checked,
+	    'showDate': document.getElementById('cbDate').checked,
+	    'whiteBackground': document.getElementById('cbWBg').checked,
+	    'lighterColours': document.getElementById('cbLight').checked,
+	    'dateBox': document.getElementById('cbDateBox').checked,
+	    'blueWarn': document.getElementById('cbBlueWarn').checked,
+	    'jumpyHands': (document.getElementById('cbJump').checked == false),
+	  }	;
+	
+	  // Return data to watchapp
+	    location.href = 'pebblejs://close#' + 
+	    encodeURIComponent(JSON.stringify(config));
+	}	);
+    </script>
+  </body>
+</html>
+	

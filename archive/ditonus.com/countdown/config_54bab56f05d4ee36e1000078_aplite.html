@@ -1,0 +1,9 @@
+<!DOCTYPE html><html manifest="countdown.appcache"><head><script>
+function qs(s){return document.querySelector(s||'textarea')}
+function save(){location.href='pebblejs://close#'+encodeURIComponent(qs().value)}
+function load(){qs().value=location.hash.substring(1)}
+function test(){var a=qs().value;qs('button').style.color=a==parseFloat(a)+''?'#000':'#808080'}
+</script></head><body onload="load();test()" style="font-family:sans-serif">
+<div>Minutes:</div><textarea rows="1" oninput="test()"></textarea>
+<div><button type="button" onclick="save()">Save</button></div>
+</body></html>

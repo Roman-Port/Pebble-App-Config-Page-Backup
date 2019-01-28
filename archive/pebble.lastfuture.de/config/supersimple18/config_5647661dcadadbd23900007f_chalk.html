@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Super Simple Settings</title>
+	<link rel="stylesheet" href="/pebble.lastfuture.de/config/supersimple18/css/slate.css">
+<body>
+	
+	<div class="item-container bwhide">
+    	<div class="item-container-header">Watch Hand Colors</div>
+    	<div class="item-container-content">
+        	<label class="item">
+            	Hours Color
+            	<input id="color-h" type="text" class="item-color item-color-normal" value="#ff0000">
+        	</label>
+        	<label class="item">
+            	Minutes Color
+            	<input id="color-m" type="text" class="item-color item-color-normal" value="#ffffff">
+        	</label>
+        	<label class="item">
+            	Center Peg Color
+            	<input id="color-p" type="text" class="item-color item-color-normal" value="#555555">
+        	</label>
+        	<label class='item'>
+                Show Shadows
+                <input id='shadows' type='checkbox' class='item-toggle' checked="">
+            </label>
+    	</div>
+        <div class='item-container-footer'>
+        Casting shadows will work best with lighter background colors, but feel free to experiment.
+        </div>
+	</div>
+	<div class='item-container'>
+        <div class='item-container-header'>Background</div>
+        <div class='item-container-content'>
+            <label class="item bwhide">
+            	Background Color
+            	<input id="color-bg" type="text" class="item-color item-color-normal" value="#000000">
+        	</label>
+        	<label class="item">
+                Tick Marks
+                <select id="ticks" dir='rtl' class="item-select">
+                    <option class="item-select-option" selected="" value="0">No Ticks</option>
+                    <option class="item-select-option" value="1">One Tick at 12</option>
+                    <option class="item-select-option" value="4">One every 3 Hours</option>
+                    <option class="item-select-option" value="12">One every Hour</option>
+                </select>
+            </label>
+            <label class="item bwhide">
+            	Tick Color
+            	<input id="color-t" type="text" class="item-color item-color-normal" value="#ffffff">
+        	</label>
+        	<label class='item roundhide'>
+                Fit Ticks To Rectangle
+                <input id='rectticks' type='checkbox' class='item-toggle'>
+            </label>
+            <label class='item colorhide' id="recttickwrapper">
+                Invert Watchface
+                <input id='invert' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+    </div>
+    <div class="item-container">
+    	<div class="item-container-header">Watch Hand Width</div>
+        <div class="item-container-content">
+            <label class="item">
+                Slim Watch Hands
+                <input type="radio" class="item-radio" id="whwidth3" name="whwidth" value="3">
+            </label>
+            <label class="item">
+                Regular Watch Hands
+                <input type="radio" class="item-radio" id="whwidth7" name="whwidth" value="7" checked="">
+            </label>
+            <label class="item">
+                Chunky Watch Hands
+                <input type="radio" class="item-radio" id="whwidth11" name="whwidth" value="11">
+            </label>
+        </div>
+	</div>
+	<div class='item-container'>
+        <div class='item-container-header'>Advanced</div>
+        <div class='item-container-content'>
+        	<label class='item' id="recttickwrapper">
+                Vibrate On Disconnect
+                <input id='btvibe' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+    </div>
+    
+    <div class="item-container">
+      <div class="button-container">
+        <input id="send" type="button" class="item-button" value="SEND">
+      </div>
+    </div>
+	
+    <script src="/pebble.lastfuture.de/config/supersimple18/js/slate.js"></script>
+    <script src="/pebble.lastfuture.de/config/supersimple18/js/main.js"></script>
+</body>
+</head></html>

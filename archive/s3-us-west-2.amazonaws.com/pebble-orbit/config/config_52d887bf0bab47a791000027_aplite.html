@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/code.jquery.com/mobile/1.1.0/jquery.css">
+<script src="/code.jquery.com//jquery-1.js"></script>
+<script src="/code.jquery.com/mobile/1.1.0/jquery.js"></script>
+</head>
+<body>
+<div id="Orbit Options" data-url="Orbit Options" data-role="page">
+  <div data-role="header">
+    <h1>Orbit Options</h1>
+  </div>
+  <div data-role="content">
+    <div data-role="fieldcontain">
+      <label for="starfield_key">Random Starfield</label>
+      <select name="starfield_key" id="starfield_key" data-role="slider">
+        <option value="0">Off</option>
+        <option value="1">On</option>
+      </select>
+    </div>
+    <input id="b-submit" type="submit" data-icon="check" data-theme="a" value="Save">
+    <input id="b-cancel" type="reset" data-icon="delete" data-theme="d" value="Cancel">
+  </div>
+</div>
+<script>
+	function saveOptions() {
+		var options = {
+			'starfield_key': parseInt($("#starfield_key").val())
+		}
+		return options;
+	}
+		
+	$().ready(function() {
+		$("#b-cancel").click(function() {
+			console.log("Cancel");
+			document.location = "pebblejs://close";
+		});
+		
+		$("#b-submit").click(function() {
+			console.log("Submit");
+			document.location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+		});
+	});
+</script>
+</body>
+</html>

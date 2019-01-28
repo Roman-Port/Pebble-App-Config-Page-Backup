@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Dalpek Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/www.dalpek.com/pebble/Analog/css/slate.css'>
+  <script src='/www.dalpek.com/pebble/Analog/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Dalpek Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Seconds Hand</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Disable seconds hand
+          <input id='high_contrast_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        This disables the seconds hand on the watchface to conserve battery.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Watchface Color</div>
+      <div class='item-container-content'>
+      <label class="item">
+      Face Color
+      <select id='face_color_box' name='select-1' dir='rtl' class='item-select'>
+        <option class='face_color' value='1'>Blue</option>
+        <option class='face_color' value='2'>Black</option> 
+        <option class='face_color' value='3'>Red</option>
+        <option class='face_color' value='4'>Green</option>
+        <option class='face_color' value='5'>Gold</option>
+      </select>
+    </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose your favourite watchface color.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+
+    var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+    var faceColorRadio = document.getElementById('face_color_box');
+ 
+    var options = {
+      'high_contrast': highContrastCheckbox.checked,
+      'face_color': faceColorRadio.value,
+    };
+
+    // Save for next launch
+
+    localStorage['high_contrast'] = options['high_contrast'];
+    localStorage['face_color'] = options['face_color'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+
+    var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+    var faceColorRadio = document.getElementById('face_color_box');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['high_contrast']) {
+      highContrastCheckbox.checked = JSON.parse(localStorage['high_contrast']);
+
+    }
+    if(localStorage['face_color']) {
+      faceColorRadio.value = JSON.parse(localStorage['face_color']);
+
+    }
+  })();
+  </script>
+</html>

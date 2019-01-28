@@ -1,0 +1,106 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+    <head><meta charset="utf-8"><link rel="stylesheet" type="text/css" href="/ihtnc-pebble-config.azurewebsites.net/css/style.css">
+		<script src="/code.jquery.com//jquery-2.js"></script>		
+		<script src="/ihtnc-pebble-config.azurewebsites.net/js/script.bin" type="text/javascript"></script>
+    <title>
+	Filipino Time Configuration
+</title></head>
+    <body>
+        <style>
+			
+		</style>
+        <div class="config">
+            <div class="title">
+                Filipino Time Configuration
+            </div>
+            
+            <div class="fields">
+                
+                    <div class="field">
+                        <div class="field-header">
+                            Show Holidays
+                        </div>
+                        <div class="field-content">
+                            
+                                <input id="id_IncludeHoliday" name="IncludeHoliday" type="checkbox" checked="checked" value="1">
+                            
+                        </div>
+                    </div>
+                
+                    <div class="field">
+                        <div class="field-header">
+                            Blink on Change
+                        </div>
+                        <div class="field-content">
+                            
+                                <input id="id_EnableBlink" name="EnableBlink" type="checkbox" checked="checked" value="1">
+                            
+                        </div>
+                    </div>
+                
+                    <div class="field">
+                        <div class="field-header">
+                            BT Notification
+                        </div>
+                        <div class="field-content">
+                            
+                                <input id="id_BTNotification" name="BTNotification" type="checkbox" value="1">
+                            
+                        </div>
+                    </div>
+                
+                    <div class="field">
+                        <div class="field-header">
+                            Invert Screen Color
+                        </div>
+                        <div class="field-content">
+                            
+                                <input id="id_InvertScreen" name="InvertScreen" type="checkbox" value="1">
+                            
+                        </div>
+                    </div>
+                
+                    <div class="field">
+                        <div class="field-header">
+                            Start countdown on
+                        </div>
+                        <div class="field-content">
+                            
+                                <input id="id_CountUpCutover" name="CountUpCutover" type="text" value="40">
+                            
+                        </div>
+                    </div>
+                
+            </div>
+            
+        <div class="footer">
+            
+            <input id="save" value="Save" type="submit">
+			
+            <input id="cancel" value="Cancel" type="submit">
+        </div>
+        <div class="copyright">
+            ThinCFG&nbsp;for&nbsp;Pebble&nbsp;©&nbsp;COPYRIGHT&nbsp;2019
+			<br>ALL&nbsp;RIGHTS&nbsp;RESERVED.
+        </div>
+        </div>
+		<script>
+			$(document).ready(function() {
+				$("#cancel").click(function(){
+					var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify({"action":"cancel"}));
+					if(enable_logging) console.log("save.cancel: location=" + location);
+					document.location.href = location;
+				});
+
+				$("#save").click(function(){
+					var location = "pebblejs://close#" + encodeURIComponent(parseSelections());
+					if(enable_logging) console.log("save.click: location=" + location);
+					document.location.href = location;
+				});
+			});
+		</script>
+    </body>
+</html>

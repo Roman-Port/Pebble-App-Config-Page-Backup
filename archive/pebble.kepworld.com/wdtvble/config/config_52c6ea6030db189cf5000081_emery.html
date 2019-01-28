@@ -1,0 +1,14 @@
+<html>
+<head>
+	<title>WDTV Remote for Pebble - Configuration</title>
+</head>
+
+<body style="text-align: center" onload="var val = localStorage.getItem('wdtvip'); document.getElementById('wdtvip').value = (val?val:'192.168.1.2');">
+	<h1>WDTVble</h1>
+	WDTV Live IP address:<br>
+	<input type="text" name="wdtvip" id="wdtvip" style="text-align: center"><br><br>
+	<button onclick="document.location = 'pebblejs://close#';">Cancel</button>&nbsp;
+	<button onclick="localStorage.setItem('wdtvip', document.getElementById('wdtvip').value); document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify({'wdtvip': document.getElementById('wdtvip').value}));">Save</button>
+</body>
+
+</html>

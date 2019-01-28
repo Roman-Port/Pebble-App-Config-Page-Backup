@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sidereal Watchface Configuration</title>
+    <link rel="stylesheet" type="text/css" href="/astrowebservices.com/~ste616/tools/cityLongitude/css/slate.css">
+    <script src="/astrowebservices.com/~ste616/tools/cityLongitude/js/slate.js"></script>
+    <script src="/astrowebservices.com/jslib/dojo/configure.js"></script>
+    <script src="/astrowebservices.com/jslib/dojo/1.10/dojo/dojo.js"></script>
+    <style>
+      .title {
+      padding: 15px 10px;
+      text-transform: uppercase;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 1.2em;
+      font-weight: 500;
+      color: #888888;
+      text-align: center;
+      }
+      .hidden { display: none; }
+      .clickme { cursor: pointer; }
+    </style>
+  </head>
+
+  <body>
+    <h1 class="title">Sidereal Watchface Configuration</h1>
+
+    <div class="item-container">
+      <div class="item-container-content">
+        <div class="item">
+	  You need to supply the longitude of the location that you want the sidereal time calculated for.
+	  Use either the search tool to get the longitude of your desired location, or supply the longitude
+	  yourself in the input box.
+        </div>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Observatory or City Search</div>
+      <div class="item-container-content">
+	<label class="item">
+	  <div class="item-input-wrapper item-input-wrapper-button">
+            <input type="text" class="item-input" name="input-site-search" placeholder="Observatory or City Name" id="input-site-search">
+	  </div>
+	  <input type="button" class="item-button item-input-button" value="SEARCH" id="search-button">
+	</label>
+      </div>
+    </div>
+
+    <div class="item-container hidden" id="location-wrapper">
+      <div class="item-container-header">Select your location</div>
+      <div class="item-container-content" id="location-container">
+      </div>
+    </div>
+    
+    <div class="item-container">
+      <div class="item-container-header">Sidereal Time Longitude (decimal degrees)</div>
+      <div class="item-container-content">
+	<label class="item">
+	  <div class="item-input-wrapper">
+            <input type="text" class="item-input" name="input-longitude" placeholder="Longitude" id="longitude-value">
+	  </div>
+	</label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="button-container">
+	<input type="button" class="item-button" value="SUBMIT" id="submit-button">
+      </div>
+    </div>
+    <script src="/astrowebservices.com/~ste616/tools/cityLongitude/cityLongitude.js"></script>
+  </body>
+</html>

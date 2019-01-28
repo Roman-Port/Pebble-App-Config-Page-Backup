@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.vhn.vn/blog/xmlrpc.php">
+
+<title>[Writeup] TrendMicro 2015 &#8211; VHNVN&#039;s blog</title>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//ajax.googleapis.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; Feed" href="https://www.vhn.vn/blog/index.php/feed/" />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; Comments Feed" href="https://www.vhn.vn/blog/index.php/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; [Writeup] TrendMicro 2015 Comments Feed" href="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.vhn.vn\/blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.9"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='jquery-ui-css'  href='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css?ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-bootstrap-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/css/bootstrap/bootstrap.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-style-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/style.css?ver=4.9.9' type='text/css' media='all' />
+<style id='oria-style-inline-css' type='text/css'>
+body, .widget a { color:#717376}
+.site-title a, .site-title a:hover { color:#fff}
+.site-description { color:#bbb}
+.site-logo { max-width:200px; }
+.site-branding { padding-top:80px;padding-bottom:80px; }
+.site-title { font-size:62px; }
+.site-description { font-size:18px; }
+
+</style>
+<link rel='stylesheet' id='oria-body-fonts-css'  href='//fonts.googleapis.com/css?family=Lato%3A400%2C700%2C400italic%2C700italic&#038;ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-headings-fonts-css'  href='//fonts.googleapis.com/css?family=Oswald%3A300%2C700&#038;ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-fontawesome-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/fonts/font-awesome.min.css?ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack-widget-social-icons-styles-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/modules/widgets/social-icons/social-icons.css?ver=20170506' type='text/css' media='all' />
+<link rel='stylesheet' id='enlighter-local-css'  href='https://www.vhn.vn/blog/wp-content/plugins/enlighter/resources/EnlighterJS.min.css?ver=3.6' type='text/css' media='all' />
+<link rel='stylesheet' id='enlighter-webfonts-css'  href='//fonts.googleapis.com/css?family=Source+Code+Pro%3Aregular%2C700&#038;ver=3.6' type='text/css' media='all' />
+<link rel='stylesheet' id='social-logos-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/css/jetpack.css?ver=6.1.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/related-posts/related-posts.min.js?ver=20150408'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/jquery.fitvids.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/jquery.slicknav.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/parallax.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/scripts.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/imagesloaded.min.js?ver=3.2.0'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/masonry.min.js?ver=3.3.2'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/imagesloaded.pkgd.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/masonry-init.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/owl.carousel.min.js?ver=1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sliderOptions = {"slideshowspeed":"4000"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/slider-init.js?ver=1'></script>
+<link rel='https://api.w.org/' href='https://www.vhn.vn/blog/index.php/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.vhn.vn/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.vhn.vn/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='[Writeup] Plaid CTF 2015 &#8211; radhos' href='https://www.vhn.vn/blog/index.php/2015/04/20/writeup-plaid-ctf-2015-radhos/' />
+<link rel='next' title='Một bài toán tính tổng' href='https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/' />
+<link rel="canonical" href="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/" />
+<link rel='shortlink' href='https://wp.me/p6MMNs-8' />
+<link rel="alternate" type="application/json+oembed" href="https://www.vhn.vn/blog/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vhn.vn%2Fblog%2Findex.php%2F2015%2F09%2F28%2Fwriteup-trendmicro-2015%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.vhn.vn/blog/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vhn.vn%2Fblog%2Findex.php%2F2015%2F09%2F28%2Fwriteup-trendmicro-2015%2F&#038;format=xml" />
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'/>
+<link rel='dns-prefetch' href='//i0.wp.com'/>
+<link rel='dns-prefetch' href='//i1.wp.com'/>
+<link rel='dns-prefetch' href='//i2.wp.com'/>
+<style type='text/css'>img#wpstats{display:none}</style><!--[if lt IE 9]>
+<script src="https://www.vhn.vn/blog/wp-content/themes/oria/js/html5shiv.js"></script>
+<![endif]-->
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<style type="text/css">
+/* <![CDATA[ */
+img.latex { vertical-align: middle; border: none; }
+/* ]]> */
+</style>
+		<style type="text/css">
+			.site-header {
+				background-image: url(https://www.vhn.vn/blog/wp-content/themes/oria/images/header.jpg);
+			}
+		</style>
+		
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="[Writeup] TrendMicro 2015" />
+<meta property="og:url" content="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/" />
+<meta property="og:description" content="I joined this CTF quite late, but luckily there&#8217;s still enough time to solve some interesting problems. Trend Micro CTF 2015 &#8211; Programming 400 Trend Micro CTF 2015 &#8211; Programming 5…" />
+<meta property="article:published_time" content="2015-09-28T15:46:29+00:00" />
+<meta property="article:modified_time" content="2015-09-30T08:43:28+00:00" />
+<meta property="og:site_name" content="VHNVN&#039;s blog" />
+<meta property="og:image" content="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?fit=603%2C336&amp;ssl=1" />
+<meta property="og:image:width" content="603" />
+<meta property="og:image:height" content="336" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:text:title" content="[Writeup] TrendMicro 2015" />
+<meta name="twitter:image" content="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?fit=603%2C336&#038;ssl=1&#038;w=640" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- End Jetpack Open Graph Tags -->
+</head>
+
+<body class="post-template-default single single-post postid-8 single-format-standard">
+
+<div class="preloader"><div id="preloader-inner"><div class="preload">&nbsp;</div></div></div>
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<div class="top-bar clearfix no-toggle">
+					
+					</div>
+
+		<div class="container">
+			<div class="site-branding">
+				<h1 class="site-title"><a href="https://www.vhn.vn/blog/" rel="home">VHNVN&#039;s blog</a></h1><h2 class="site-description">Smile with the life, it will smile with you!</h2>			</div><!-- .site-branding -->
+		</div>
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<div id="primary-menu" class="menu clearfix"></div>
+		</nav><!-- #site-navigation -->
+		<nav class="mobile-nav"></nav>
+
+	</header><!-- #masthead -->
+	
+	
+	<div id="content" class="site-content clearfix">
+				<div class="container content-wrapper">
+		
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-8" class="post-8 post type-post status-publish format-standard has-post-thumbnail hentry category-ctf">
+
+			<div class="single-thumb">
+			<img width="603" height="336" src="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?fit=603%2C336&amp;ssl=1" class="attachment-oria-large-thumb size-oria-large-thumb wp-post-image" alt="" srcset="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?w=603&amp;ssl=1 603w, https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?resize=300%2C167&amp;ssl=1 300w, https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?resize=520%2C290&amp;ssl=1 520w" sizes="(max-width: 603px) 100vw, 603px" data-attachment-id="9" data-permalink="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/swap_ip_2/" data-orig-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?fit=603%2C336&amp;ssl=1" data-orig-size="603,336" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="swap_ip_2" data-image-description="" data-medium-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?fit=300%2C167&amp;ssl=1" data-large-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?fit=603%2C336&amp;ssl=1" />		</div>
+		
+	<header class="entry-header">
+		<h1 class="entry-title">[Writeup] TrendMicro 2015</h1>
+				<div class="entry-meta">
+			<span class="posted-on"><a href="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/" rel="bookmark"><time class="entry-date published" datetime="2015-09-28T22:46:29+00:00">September 28, 2015</time><time class="updated" datetime="2015-09-30T15:43:28+00:00">September 30, 2015</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="https://www.vhn.vn/blog/index.php/author/vanhoavn/">vanhoavn</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p class="p1">I joined this CTF quite late, but luckily there&#8217;s still enough time to solve some interesting problems.</p>
+<p class="p1"><strong><span class="s1">Trend Micro CTF 2015 &#8211; </span><span class="s1">Programming 400</span></strong></p>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Show problem description</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<p class="p1"><span class="s1">You are trying to sneak into a network, and and impersonate target computer. </span></p>
+<p class="p1"><span class="s1">Here, you would connect to computers connected via network, and <b>‘impersonate the computer by exchanging IP address’</b>. </span></p>
+<p class="p1"><span class="s1">In the target’s network, computers are connected as illustrated below:</span></p>
+<p class="p1"> <a href="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?ssl=1"><img data-attachment-id="10" data-permalink="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/swap_ip_1/" data-orig-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?fit=235%2C338&amp;ssl=1" data-orig-size="235,338" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="swap_ip_1" data-image-description="" data-medium-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?fit=209%2C300&amp;ssl=1" data-large-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?fit=235%2C338&amp;ssl=1" class="size-medium wp-image-10 aligncenter" src="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?resize=209%2C300&#038;ssl=1" alt="swap_ip_1" width="209" height="300" srcset="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?resize=209%2C300&amp;ssl=1 209w, https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?w=235&amp;ssl=1 235w" sizes="(max-width: 209px) 100vw, 209px" data-recalc-dims="1" /></a></p>
+<p class="p1"><span class="s1">You are trying to impersonate computer A by accessing it from computer F. </span></p>
+<p class="p1"><span class="s1">In here, you can impersonate A by accessing it in the sequence of B -&gt; D -&gt; A, but the IP addresses of computer B and D will be changed.</span></p>
+<p class="p1"><span class="s1">However, if you access computer A in the order described below, you can impersonate without changing the IP addresses of computers other than A and F.</span></p>
+<p class="p1"><span class="s1">C -&gt; E -&gt; A -&gt; D -&gt; B -&gt; E -&gt; C -&gt; F -&gt; B -&gt; D -&gt; A</span></p>
+<p class="p1"><span class="s1">Please sneak into the network as illustrated below, and impersonate computer A from computer P.</span></p>
+<p class="p1"><img data-attachment-id="9" data-permalink="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/swap_ip_2/" data-orig-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?fit=603%2C336&amp;ssl=1" data-orig-size="603,336" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="swap_ip_2" data-image-description="" data-medium-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?fit=300%2C167&amp;ssl=1" data-large-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?fit=603%2C336&amp;ssl=1" class="size-medium wp-image-9 aligncenter" src="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?resize=300%2C167&#038;ssl=1" alt="swap_ip_2" width="300" height="167" srcset="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?resize=300%2C167&amp;ssl=1 300w, https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?resize=520%2C290&amp;ssl=1 520w, https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?w=603&amp;ssl=1 603w" sizes="(max-width: 300px) 100vw, 300px" data-recalc-dims="1" /></p>
+<p class="p1"><span class="s1">Please specify and generate the shortest path as an output. </span></p>
+<p class="p1"><span class="s1">(In the example above, you may generate the output ‘CEADBECFBDA’.)</span></p>
+<p class="p1"><span class="s1">If you encounter multiple paths with the same amount of steps, please generate the first value in alphabetical order as the output. </span></p>
+<p class="p1"><span class="s1">Please submit TMCTF{&lt;Your output&gt;} as your answer.</span></p>
+</div></div><div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Solution</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<p class="p1">I solved this problem using 2-ends BFS (yes, i have quite enough RAM for it:P). A state for this problem represented by the permutation of the assigned IP address of the machines and the last machine to move on. As we will have at most 16 values for 16 machines, we can use 64-bit unsigned int to represent the permutation state, and another 4-bit for last-machine, so uint128 is enough, but finally i was too lazy to do all bitwise operations and use pair struct :D.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">3 : TMCTF{CEADBECFBDA}
+4 : TMCTF{DGCFAEBGCFBGDHCFBEA}
+5 : TMCTF{DHCGAFBHCGBHDJEICGBHDIEJDHBFA}
+6 : TMCTF{FKDICHAGBICHBIDKEJCHBIDKEJDKFLEJDIBGA}
+7 : TMCTF{FLDJCIAHBJCIBJDLEKCIBJDLEKDLFNGMEKDLFMGNFLDJBHA}
+8 : TMCTF{HOFMDKCJAIBKCJBKDMELCJBKDMELDMFOGNELDMFOGNFOHPGNFMDKBIA}
+</pre>
+<p class="p1">My final code below:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vhqtvn/288acbdf1ceebeceacf9.js"></script><noscript>View the code on <a href="https://gist.github.com/vhqtvn/288acbdf1ceebeceacf9">Gist</a>.</noscript></div>
+</div></div>
+<p class="p1"><strong><span class="s1">Trend Micro CTF 2015 &#8211; Programming 500</span></strong></p>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Show problem description</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<p class="p1">(From my memory) Find probability of winning if user decide to hit or stand in international 104-cards blackjack, assume that player already has 2 cards: Aces and 2 and dealer has 3.</p>
+</div></div><div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Solution</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<p class="p1">I did not solve this problem in contest time, but after a day thinking i found out that it&#8217;s quite easy.</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vhqtvn/cb57ea18d56d575e933b.js"></script><noscript>View the code on <a href="https://gist.github.com/vhqtvn/cb57ea18d56d575e933b">Gist</a>.</noscript></div>
+</div></div>
+<p class="p1"><strong><span class="s1">Trend Micro CTF 2015 &#8211; Crypto</span><span class="s1"> 500</span></strong></p>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Show problem description</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<p class="p1"><span class="s1">Think about two different alphabetical strings with the same lengths.</span></p>
+<p class="p1"><span class="s1">After you encode the strings with Base64 respectively, if you find characters located in the same position between the two strings, then you may want to extract them.</span></p>
+<p class="p1"><span class="s1">You may find examples where the final strings are ‘2015’ and ‘Japan’ if you place the extracted characters from left to right in order.</span></p>
+<p class="p1"><span class="s1">Example:</span></p>
+<ul class="ul1">
+<li class="li2"><span class="s1">CaEkMbVnD→(Base64)→Q</span><span class="s2"><b>2</b></span><span class="s1">FFa</span><span class="s2"><b>01</b></span><span class="s1">iVm</span><span class="s2"><b>5</b></span><span class="s1">E</span></li>
+<li class="li2"><span class="s1">GePoMjXNW→(Base64)→R</span><span class="s2"><b>2</b></span><span class="s1">VQb</span><span class="s2"><b>01</b></span><span class="s1">qWE</span><span class="s2"><b>5</b></span><span class="s1">X</span></li>
+</ul>
+<ul class="ul1">
+<li class="li2"><span class="s1">aBckjTiRgbpS→(Base64)→YU</span><span class="s2"><b>J</b></span><span class="s1">j</span><span class="s2"><b>a</b></span><span class="s1">2</span><span class="s2"><b>p</b></span><span class="s1">U</span><span class="s2"><b>a</b></span><span class="s1">VJnY</span><span class="s2"><b>n</b></span><span class="s1">BT</span></li>
+<li class="li2"><span class="s1">URehZQjLyvwk→(Base64)→VV</span><span class="s2"><b>J</b></span><span class="s1">l</span><span class="s2"><b>a</b></span><span class="s1">F</span><span class="s2"><b>p</b></span><span class="s1">R</span><span class="s2"><b>a</b></span><span class="s1">kx5d</span><span class="s2"><b>n</b></span><span class="s1">dr</span></li>
+</ul>
+<p class="p1"><span class="s1">Character &#8216;a&#8217; may appear in the extracted string like the example above, character </span><span class="s2"><b>&#8216;f&#8217;*</b></span><span class="s1"> will never appear.</span></p>
+<p class="p1"><span class="s1">Please find a list of characters that would not appear in the extracted string, even if you specify any alphabetical characters in the input.</span></p>
+<p class="p1"><span class="s1">Once you come up with a list of characters, please sort the characters in the order of ASCII table and generate a SHA1 hash value in lower case.</span></p>
+<p class="p1"><span class="s1">This is the flag you are looking for.</span></p>
+<p class="p1"><span class="s1">Please submit the flag in the format of &#8216;TMCTF{&lt;flag&gt;}&#8217;.</span></p>
+<p class="p1"><span class="s2"><b>*</b></span><span class="s1">Note: Previous description suggested &#8216;A&#8217; will never appear. We apologise for any inconvenience.</span></p>
+</div></div><div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Solution</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<p class="p1">Alphabetical character <code class="EnlighterJSRAW" data-enlighter-language="null">[a-z|A-Z]</code> has hex range <code class="EnlighterJSRAW" data-enlighter-language="null">41-5A, 61-7A</code>, or binary range <code class="EnlighterJSRAW" data-enlighter-language="null">0100 0001 - 0101 1010, 0110 0001 - 0111 1010</code>.</p>
+<p class="p1">In base64 encoding, a group of 3 input byte will be grouped into 4 output base64 byte (3*8 bit = 4*6 bit), we can now calculate the value range for each base64 byte:</p>
+<pre class="EnlighterJSRAW" data-enlighter-theme="eclipse">1st base64 byte: 010000-010110 + 011000-011110 = .... lol, should we do it by hand?
+</pre>
+<div class="oembed-gist"><script src="https://gist.github.com/vhqtvn/c6922f2b6955714488bf.js"></script><noscript>View the code on <a href="https://gist.github.com/vhqtvn/c6922f2b6955714488bf">Gist</a>.</noscript></div>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">+/f
+TMCTF{eb2cb19785a3c3bdbba6e1657fbb901097fedc63}</pre>
+</div></div>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-8" class="share-twitter sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-8" class="share-facebook sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-8" class="share-google-plus-1 sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/?share=google-plus-1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-8" class="share-linkedin sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/?share=linkedin" target="_blank" title="Click to share on LinkedIn"><span>LinkedIn</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/?share=reddit" target="_blank" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-pinterest"><a rel="nofollow" data-shared="sharing-pinterest-8" class="share-pinterest sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/?share=pinterest" target="_blank" title="Click to share on Pinterest"><span>Pinterest</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/#print" target="_blank" title="Click to print"><span>Print</span></a></li><li class="share-end"></li></ul></div></div></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div>			</div><!-- .entry-content -->
+
+		<footer class="entry-footer">
+		<span class="cat-links">Posted in <a href="https://www.vhn.vn/blog/index.php/category/ctf/" rel="category tag">CTF</a></span>	</footer><!-- .entry-footer -->
+	</article><!-- #post-## -->
+
+			
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://www.vhn.vn/blog/index.php/2015/04/20/writeup-plaid-ctf-2015-radhos/" rel="prev">[Writeup] Plaid CTF 2015 &#8211; radhos</a></div><div class="nav-next"><a href="https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/" rel="next">Một bài toán tính tổng</a></div></div>
+	</nav>
+			
+<div id="disqus_thread"></div>
+
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	
+<div id="secondary" class="widget-area no-toggle" role="complementary">
+	<span class="sidebar-close"><i class="fa fa-times"></i></span>
+	<aside id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://www.vhn.vn/blog/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h4 class="widget-title">Recent Posts</h4>		<ul>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/">HITCON CTF 2017 Quals</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/10/19/hack-lu-2017/">hack.lu 2017</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/">Vue single file component and typescript</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/">0CTF 2016</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/">BKPCTF 2016</a>
+									</li>
+					</ul>
+		</aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h4 class="widget-title">Recent Comments</h4><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Tung Thanh</span> on <a href="https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/#comment-3">Một bài toán tính tổng</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h4 class="widget-title">Archives</h4>		<ul>
+			<li><a href='https://www.vhn.vn/blog/index.php/2017/11/'>November 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2017/10/'>October 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2017/07/'>July 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2016/03/'>March 2016</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/11/'>November 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/09/'>September 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/04/'>April 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/03/'>March 2015</a></li>
+		</ul>
+		</aside><aside id="categories-2" class="widget widget_categories"><h4 class="widget-title">Categories</h4>		<ul>
+	<li class="cat-item cat-item-2"><a href="https://www.vhn.vn/blog/index.php/category/ctf/" >CTF</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://www.vhn.vn/blog/index.php/category/trick/" >Trick</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://www.vhn.vn/blog/index.php/category/uncategorized/" >Uncategorized</a>
+</li>
+		</ul>
+</aside><aside id="meta-2" class="widget widget_meta"><h4 class="widget-title">Meta</h4>			<ul>
+			<li><a href="https://www.vhn.vn/blog/wp-login.php?action=register">Register</a></li>			<li><a href="https://www.vhn.vn/blog/wp-login.php">Log in</a></li>
+			<li><a href="https://www.vhn.vn/blog/index.php/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://www.vhn.vn/blog/index.php/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+			</aside></div><!-- #secondary -->
+
+		</div>
+	</div><!-- #content -->
+
+	
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="site-info container">
+			<a href="http://wordpress.org/" rel="nofollow">Proudly powered by WordPress</a><span class="sep"> | </span>Theme: <a href="http://justfreethemes.com/oria" rel="nofollow">Oria</a> by JustFreeThemes.		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+	<div style="display:none">
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/www.vhn.vn\/blog\/index.php\/2015\/09\/28\/writeup-trendmicro-2015\/":8};
+	</script>
+		<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/modules/carousel/jetpack-carousel-ie8fix.css?ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<link rel='stylesheet' id='font-awesome-css'  href='//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css?ver=4.7.0' type='text/css' media='all' />
+<link rel='stylesheet' id='su-box-shortcodes-css'  href='https://www.vhn.vn/blog/wp-content/plugins/shortcodes-ultimate/assets/css/box-shortcodes.css?ver=5.0.3' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/widget.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/tabs.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/photon/photon.min.js?ver=20130122'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"vhnvn"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/disqus-comment-system/public/js/comment_count.js?ver=3.0.16'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.16"},"disqusIdentifier":"8 https:\/\/www.vhn.vn\/blog\/?p=8","disqusShortname":"vhnvn","disqusTitle":"[Writeup] TrendMicro 2015","disqusUrl":"https:\/\/www.vhn.vn\/blog\/index.php\/2015\/09\/28\/writeup-trendmicro-2015\/","postId":"8"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/disqus-comment-system/public/js/comment_embed.js?ver=3.0.16'></script>
+<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201905'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/skip-link-focus-fix.js?ver=20130115'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/comment-reply.min.js?ver=4.9.9'></script>
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/enlighter/resources/EnlighterJS.min.js?ver=3.6'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/wp-embed.min.js?ver=4.9.9'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/oembed-gist/js/script.min.js?ver=4.9.1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/spin.min.js?ver=1.3'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/jquery.spin.min.js?ver=1.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/www.vhn.vn\/blog\/wp-admin\/admin-ajax.php","nonce":"83a9538251","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/www.vhn.vn\/blog\/wp-login.php?redirect_to=https%3A%2F%2Fwww.vhn.vn%2Fblog%2Findex.php%2F2015%2F09%2F28%2Fwriteup-trendmicro-2015%2F","blog_id":"1","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/carousel/jetpack-carousel.min.js?ver=20170209'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var su_other_shortcodes = {"no_preview":"This shortcode doesn't work in live preview. Please insert it into editor and preview on the site."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/shortcodes-ultimate/assets/js/other-shortcodes.js?ver=5.0.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=6.1.1'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-google-plus-1', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-linkedin', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+</script>
+<script type="text/javascript">/* <![CDATA[ */EnlighterJS_Config = {"selector":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"language":"generic","theme":"enlighter","indent":2,"hover":"hoverEnabled","showLinenumbers":true,"rawButton":true,"infoButton":true,"windowButton":true,"rawcodeDoubleclick":false,"grouping":true,"cryptex":{"enabled":false,"email":"mail@example.tld"}};!function(){var a=function(a){var b="Enlighter Error: ";console.error?console.error(b+a):console.log&&console.log(b+a)};return window.addEvent?"undefined"==typeof EnlighterJS?void a("Javascript Resources not loaded yet!"):"undefined"==typeof EnlighterJS_Config?void a("Configuration not loaded yet!"):void window.addEvent("domready",function(){EnlighterJS.Util.Init(EnlighterJS_Config.selector.block,EnlighterJS_Config.selector.inline,EnlighterJS_Config)}):void a("MooTools Framework not loaded yet!")}();;/* ]]> */</script>
+<!-- Shortcodes Ultimate custom CSS - start -->
+<style type="text/css">
+.su-spoiler-content {
+	border-left: 1px dashed #999;
+}
+</style>
+<!-- Shortcodes Ultimate custom CSS - end -->
+<script type='text/javascript' src='https://stats.wp.com/e-201905.js' async='async' defer='defer'></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:6.1.1',blog:'100285338',post:'8',tz:'7',srv:'www.vhn.vn'} ]);
+	_stq.push([ 'clickTrackerInit', '100285338', '8' ]);
+</script>
+
+</body>
+</html>

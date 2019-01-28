@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Thin Marker Configuration</title>
+
+    <link rel="stylesheet" type="text/css" href="/hw.github.io/thin-markers/css/slate.css">
+    <script src='/hw.github.io/thin-markers/js/slate.js'></script>
+    <style>
+      .title {
+        padding: 15px 10px;
+        text-transform: uppercase;
+        font-family: 'PT Sans', sans-serif;
+        font-size: 1.2em;
+        font-weight: 500;
+        color: #888888;
+        text-align: center;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <h2 class="title">Thin Marker Configuration</h2>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+         <div class='item'>
+         Choose settings, click 'Save' and reload app to apply. 
+         </div>
+      </div>
+    </div>
+ 
+    <div class='item-container'>
+      <div class='item-container-header'>Customization</div>
+      <div class='item-container-content'>
+         <label class='item'>Show weekday/month
+           <input id='check_date' type='checkbox' class="item-toggle">
+         </label>
+         <label class='item'>Show day of month
+           <input id='check_day' type='checkbox' class="item-toggle">
+         </label>
+         <label class='item'>Show disconnected indicator
+           <input id='check_bluetooth' type='checkbox' class="item-toggle">
+         </label>
+         <label class='item'>Show battery level
+           <input id='check_battery' type='checkbox' class="item-toggle">
+         </label>
+         <label class='item'>Show second hand
+           <input id='check_second_hand' type='checkbox' class="item-toggle">
+         </label>
+      <div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Colours</div>
+      <div class='item-container-content'>
+         <label class='item'>Hour Markers
+           <input id='picker_hour_markers_color' type='text' class="item-color item-color-normal" value="#FFFFFF">
+         </label>
+         <label class='item'>Minute Markers
+           <input id='picker_minute_markers_color' type='text' class="item-color item-color-normal" value="#AAAAAA">
+         </label>
+         <label class='item'>Hour Markers (when charging)
+           <input id='picker_charging_markers_color' type='text' class="item-color item-color-normal" value="#00FF00">
+         </label>
+         <label class='item'>Hour and Minute Hand 
+           <input id='picker_hands_color' type='text' class="item-color item-color-normal" value="#AAAAAA">
+         </label>
+         <label class='item'>Tip of Hour and Minute Hands
+           <input id='picker_tips_color' type='text' class="item-color item-color-normal" value="#FFFFFF">
+         </label>
+         <label class='item'>Second Hand 
+           <input id='picker_second_hand_color' type='text' class="item-color item-color-normal" value="#AA0000">
+         </label>
+         <label class='item'>Tip of Second Hand 
+           <input id='picker_second_tip_color' type='text' class="item-color item-color-normal" value="#FFFF00">
+         </label>
+         <label class='item'>Calendar Day Text
+           <input id='picker_calendar_day_color' type='text' class="item-color item-color-normal" value="#FFFF00">
+         </label>
+      <div>
+    </div>
+
+    <div class="item-container">
+      <div class="button-container">
+        <input id='save_button' type="button" class="item-button" value="Save">
+      </div>
+    </div>
+    <div class="item-container">
+      <div class="button-container">
+        <input id='reset_button' type="button" class="item-button" value="Reset">
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+         <div class='item'>
+         Thin Markers is modified version of the Thin watchface by Chris Lewis.
+         </div>
+      </div>
+    </div>
+ 
+
+    <script>
+      // Get query variables
+      function getQueryParam(variable, defaultValue) {
+        // Find all URL parameters
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+
+          // If the query variable parameter is found, decode it to use and return it for use
+          if (pair[0] === variable) {
+            return decodeURIComponent(pair[1]);
+          }
+        }
+        return defaultValue || false;
+      }
+    
+
+      function persistWrite(key, value) {
+        localStorage.setItem(key, value);
+      }
+
+      function persistRead(key, defaultValue) {
+        if(localStorage.getItem(key) === null) {
+          return defaultValue;
+        } else {
+          return localStorage.getItem(key);
+        }
+      };
+
+      function firstTimeSetup() {
+        if(!persistRead('first-time', false)) {
+          persistWrite('first-time', true);
+          console.log('This is the first launch!');
+
+          // Align with watchapp defaults
+          persistWrite('date', 'true');
+          persistWrite('day', 'true');
+          persistWrite('bluetooth', 'true');
+          persistWrite('battery', 'true');
+          persistWrite('second_hand', 'true');
+          persistWrite('hour_markers_color', '#FFFFFF');
+          persistWrite('minute_markers_color', '#FFFFFF');
+          persistWrite('charging_markers_color', '#00FF00');
+          persistWrite('hands_color', '#AAAAAA');
+          persistWrite('tips_color', '#FFFFFF');
+          persistWrite('second_hand_color', '#AA0000');
+          persistWrite('second_tip_color', '#FFFF00');
+          persistWrite('calendar_day_color', '#FFFF00');
+        }
+      }
+
+      function loadConfig() {
+        document.getElementById('check_date').checked        = persistRead('date', 'false') === 'true';
+        document.getElementById('check_day').checked         = persistRead('day', 'false') === 'true';
+        document.getElementById('check_bluetooth').checked   = persistRead('bluetooth', 'false') === 'true';
+        document.getElementById('check_battery').checked     = persistRead('battery', 'false') === 'true';
+        document.getElementById('check_second_hand').checked = persistRead('second_hand', 'false') === 'true';
+        document.getElementById('picker_hour_markers_color').value     = persistRead('hour_markers_color', '#FFFFFF');
+        document.getElementById('picker_minute_markers_color').value   = persistRead('minute_markers_color', '#AAAAAA');
+        document.getElementById('picker_charging_markers_color').value = persistRead('charging_markers_color', '#00FF00');
+        document.getElementById('picker_hands_color').value            = persistRead('hands_color', '#AAAAAA');
+        document.getElementById('picker_tips_color').value             = persistRead('tips_color', '#FFFFFF');
+        document.getElementById('picker_second_hand_color').value      = persistRead('second_hand_color', '#AA0000');
+        document.getElementById('picker_second_tip_color').value       = persistRead('second_tip_color', '#FFFF00');
+        document.getElementById('picker_calendar_day_color').value     = persistRead('calendar_day_color', '#FFFF00');
+      }
+
+      function ajax(url, type, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          callback(this.responseText);
+        };
+        xhr.open(type, url);
+        xhr.send();
+      };
+
+      var resetButton = document.getElementById('reset_button');
+      resetButton.addEventListener('click', 
+        function() {
+          var options = {
+            'date'       : 'true',
+            'day'        : 'true',
+            'bluetooth'  : 'true',
+            'battery'    : 'true',
+            'second_hand': 'true',
+            'hour_markers_color'     : '#FFFFFF',
+            'minute_markers_color'   : '#AAAAAA',
+            'charging_markers_color' : '#00FF00',
+            'hands_color'            : '#AAAAAA',
+            'tips_color'             : '#FFFFFF',
+            'second_hand_color'      : '#AA0000',
+            'second_tip_color'       : '#FFFF00',
+            'calendar_day_color'     : '#FFFF00'
+          };  
+          var location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(options));
+
+          persistWrite('date', options.date);
+          persistWrite('day', options.day);
+          persistWrite('bluetooth', options.bluetooth);
+          persistWrite('battery', options.battery);
+          persistWrite('second_hand', options.second_hand);
+          persistWrite('hour_markers_color', options.hour_markers_color);
+          persistWrite('minute_markers_color', options.minute_markers_color);
+          persistWrite('charging_markers_color', options.charging_markers_color);
+          persistWrite('hands_color', options.hands_color);
+          persistWrite('tips_color', options.tips_color);
+          persistWrite('second_hand_color', options.second_hand_color);
+          persistWrite('second_tip_color', options.second_tip_color);
+          persistWrite('calendar_day_color', options.calendar_day_color);
+
+          document.location = location;
+        }, 
+      false);
+
+      var submitButton = document.getElementById('save_button');
+      submitButton.addEventListener('click', 
+        function() {
+          var options = {
+            'date'       : document.getElementById('check_date').checked        ? 'true' : 'false',
+            'day'        : document.getElementById('check_day').checked         ? 'true' : 'false',
+            'bluetooth'  : document.getElementById('check_bluetooth').checked   ? 'true' : 'false',
+            'battery'    : document.getElementById('check_battery').checked     ? 'true' : 'false',
+            'second_hand': document.getElementById('check_second_hand').checked ? 'true' : 'false',
+            'hour_markers_color'     : document.getElementById('picker_hour_markers_color').value,
+            'minute_markers_color'   : document.getElementById('picker_minute_markers_color').value,
+            'charging_markers_color' : document.getElementById('picker_charging_markers_color').value,
+            'hands_color'            : document.getElementById('picker_hands_color').value,
+            'tips_color'             : document.getElementById('picker_tips_color').value,
+            'second_hand_color'      : document.getElementById('picker_second_hand_color').value,
+            'second_tip_color'       : document.getElementById('picker_second_tip_color').value,
+            'calendar_day_color'     : document.getElementById('picker_calendar_day_color').value
+          };  
+
+          var return_to = getQueryParam('return_to', 'pebblejs://close#');
+          var location  = return_to + encodeURIComponent(JSON.stringify(options));
+
+          persistWrite('date', options.date);
+          persistWrite('day', options.day);
+          persistWrite('bluetooth', options.bluetooth);
+          persistWrite('battery', options.battery);
+          persistWrite('second_hand', options.second_hand);
+          persistWrite('hour_markers_color', options.hour_markers_color);
+          persistWrite('minute_markers_color', options.minute_markers_color);
+          persistWrite('charging_markers_color', options.charging_markers_color);
+          persistWrite('hands_color', options.hands_color);
+          persistWrite('tips_color', options.tips_color);
+          persistWrite('second_hand_color', options.second_hand_color);
+          persistWrite('second_tip_color', options.second_tip_color);
+          persistWrite('calendar_day_color', options.calendar_day_color);
+
+          document.location = location;
+        }, 
+      false);
+
+      firstTimeSetup();
+      loadConfig();
+    </script>
+
+  </div></div></div></div></body>
+</html>

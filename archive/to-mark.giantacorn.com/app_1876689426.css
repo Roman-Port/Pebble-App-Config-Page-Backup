@@ -1,0 +1,197 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p,
+blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
+font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  vertical-align: baseline;
+  background: transparent; }
+
+body {
+  background-color: #f7f7f7;
+  color: #444;
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 62.5%;
+  line-height: 1; }
+
+.hide {
+  display: none !important; }
+
+.intro {
+  background-color: #444;
+  border-bottom: 2px solid #d41ead;
+  color: #eee;
+  font-size: 1.4em;
+  line-height: 1.2em;
+  margin-bottom: 2em;
+  padding: 1em; }
+
+#main {
+  padding: 0 1em 8em;
+  transition: 0.2s opacity; }
+
+#toolbar {
+  background-color: rgba(50, 50, 50, 0.9);
+  bottom: 0;
+  color: #eee;
+  padding: 1em;
+  position: fixed;
+  width: calc(100% - 2em); }
+  #toolbar #caltopo-activate {
+    float: right; }
+  #toolbar .subtoolbar {
+    background: #777;
+    margin: -1em;
+      margin-top: 1em;
+    max-height: 0;
+    padding: 0 1em;
+    transition: 0.6s max-height, 0.3s padding; }
+    #toolbar .subtoolbar.expanded {
+      max-height: 30em;
+      padding: 1em; }
+    #toolbar .subtoolbar h2 {
+      padding-bottom: 0.5em; }
+  #toolbar #caltopo label strong {
+    color: #a0ddff; }
+  #toolbar #caltopo button {
+    margin-right: 1em; }
+
+#templates, .hide {
+  display: none; }
+
+button {
+  background-color: #ddd;
+  border: none;
+    border-top: 2px solid #d41ead;
+  color: #222;
+  font-size: 1.3em;
+  font-weight: 700;
+  line-height: 1em;
+  outline: none;
+  padding: 0.7em; }
+
+input[type="text"], input[type="number"] {
+  background: #e4e4e4;
+  border: none;
+    border-bottom: 2px solid #1ed457;
+  display: block;
+  font-family: Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.3em;
+  outline: none;
+  margin-bottom: 0.2em;
+  padding: 0.6em;
+  width: calc(100% - 1.2em); }
+
+label {
+  display: block;
+  font-weight: 700;
+  padding-bottom: 1.5em; }
+
+@-webkit-keyframes spinspin {
+  from {
+    -webkit-transform: rotateZ(0deg); }
+  to {
+    -webkit-transform: rotateZ(-360deg); } }
+#loading {
+  height: 6em;
+  left: calc(50% - 3em);
+  position: fixed;
+  top: calc(50% - 3em);
+  width: 6em;
+  -webkit-animation-duration: 1.6s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-name: spinspin;
+  -webkit-animation-timing-function: linear; }
+  #loading #loading-inner {
+    height: 3em;
+    position: relative;
+    width: 3em;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: spinspin;
+    -webkit-animation-timing-function: linear; }
+    #loading #loading-inner:before, #loading #loading-inner:after {
+      content: "";
+      display: block;
+      background-color: #777;
+      border-radius: 9999px;
+      height: 1em;
+      position: absolute;
+      top: 1em;
+      width: 1em; }
+    #loading #loading-inner:before {
+      left: 0; }
+    #loading #loading-inner:after {
+      right: 0; }
+
+.group {
+  border-bottom: 2px solid #ccc;
+  margin-bottom: 1em;
+  overflow: hidden;
+  padding-bottom: 2em;
+  position: relative; }
+  .group .delete-group {
+    float: right; }
+  .group .group-icon {
+    background: #999;
+    border-top-right-radius: 0.2em;
+    height: 1.2em;
+    pointer-events: none;
+    position: absolute;
+    right: 1em;
+    top: 1.1em;
+    width: 2em; }
+    .group .group-icon:before {
+      content: "";
+      display: block;
+      background: inherit;
+      border-radius: 0.2em 0.2em 0 0;
+      bottom: 100%;
+      height: 0.2em;
+      left: 0;
+      position: absolute;
+      width: 1em; }
+  .group .group-name {
+    border-bottom-color: #1aa8f4; }
+
+.mark {
+  border-left: 4px solid #ccc;
+  margin-bottom: 1em;
+  overflow: hidden;
+  padding-left: 1.5em; }
+  .mark .dms h2 {
+    bottom: 1.5em;
+    clear: both;
+    font-size: 1em;
+    position: relative; }
+  .mark .dms label, .mark .dms input {
+    float: left;
+    margin-right: 0.5em; }
+  .mark .dms label:last-child {
+    float: none;
+    overflow: hidden; }
+  .mark .dms .dms-d {
+    width: 3em; }
+  .mark .dms .dms-m {
+    width: 5em; }
+  .mark .dms .dms-s {
+    width: calc(100% - 3em); }
+  .mark .delete-mark {
+    float: right; }
+
+body.editing #toolbar {
+  display: none; }
+
+#loading {
+  display: none; }
+
+body.loading #loading {
+  display: block; }
+body.loading #main {
+  opacity: 0.4;
+  pointer-events: none; }
+
+/*# sourceMappingURL=app.css.map */

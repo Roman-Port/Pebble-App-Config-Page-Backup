@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title>Megaman Basic - Config page</title>
+  <link rel="stylesheet" href="/bobdotexe.github.io/watchfaces/dist/css/slate.css">
+</head>
+<body>
+  <form id="main-form">
+	<h2> Megaman Basic</h2>
+    <div class="item-container">
+      <div class="item-container-content">
+        <div class="item">
+			Here you can configure the very few settings for the megaman basic watch face!
+        </div>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Vibration</div>
+      <div class="item-container-content">
+        <label class="item">
+          Vibrate on hour?
+          <input id='vib' type="checkbox" class="item-toggle" name="toggle-1" unchecked="">
+        </label>
+      </div>
+      <div class="item-container-footer">
+        Make the watch Vibrate evey time the hour changes?
+      </div>
+    </div>
+
+
+	<div class="item-container">
+	  <div class="item-container-header">Speed Of animation</div>
+	  <div class="item-container-content">
+		<label class="item">
+		  Fast! (real PET speed)
+		  <input id='fast' type="radio" class="item-radio" name="radio-1" value="a">
+		</label>
+		<label class="item">
+		  Normal (Default speed)
+		  <input id='med' type="radio" class="item-radio" name="radio-1" value="b" checked="">
+		</label>
+		<label class="item">
+		  Slow (once per min, maximum battery save)
+		  <input id='slow' type="radio" class="item-radio" name="radio-1" value="c">
+		</label>
+	  </div>
+	</div>
+
+    <div class="item-container">
+      <div class="button-container">
+        <input id='submitButton' type="button" class="item-button" value="SEND">
+      </div>
+    </div>
+  </form>
+  These setting will take effect the next time the watchface is loaded.
+  <p>
+  </p>
+  <p>
+  Created using <a href="/github.com/pebble/slate.html">Slate front-end framework!</a>
+  <script type="text/javascript" src="/bobdotexe.github.io/watchfaces/dist/js/slate.js"></script>
+  <script type="text/javascript" src="/bobdotexe.github.io/watchfaces/dist/js/megaman_basic.js"></script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>ESPN Pebble Config</title>
+    <link rel="stylesheet" href="/assets.espn.go.com/prod/assets/pebble/config.css">
+    <script type="text/javascript" src="/assets.espn.go.com/prod/assets/pebble/cookies.js"></script>
+    <script type="text/javascript" src="/assets.espn.go.com/prod/assets/pebble/URI.js"></script>
+    <script type="text/javascript" src="/assets.espn.go.com/prod/assets/pebble/config.js"></script>
+</head>
+<body>
+<div id="header-container">
+    <div class="container">
+        <p class="config-message">To update your settings, please click Save</p>
+    </div>
+    <div class="container">
+        <button class="config-button" onclick="logout();">Logout</button>
+        <button class="config-button" onclick="save();">Save</button>
+    </div>
+</div>
+<div id="config-container">
+    <iframe id="config-iframe"></iframe>
+</div>
+</body>
+</html>

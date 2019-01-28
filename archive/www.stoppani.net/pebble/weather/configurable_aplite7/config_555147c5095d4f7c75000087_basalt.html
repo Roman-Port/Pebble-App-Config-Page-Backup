@@ -1,0 +1,588 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+<link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+<link rel="stylesheet" href="/www.stoppani.net/pebble/weather/base.css">
+<script src="/code.jquery.com//jquery-1.js"></script>
+<script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+<title>Settings</title>
+<style type="text/css"></style>
+</head>
+
+<body>
+<div data-role="page" id="page1">
+  <div data-role="content">
+    <div data-role="fieldcontain">
+      <table cellpadding="3" cellspacing="0" border="1" align="center" width="95%">
+        <tr>
+          <th colspan="2"> Options</th>
+        </tr>
+        <tr>
+          <td><label for="tempformat">Temperature Units</label>
+            <select name="tempformat" id="tempformat" data-theme="" data-role="slider">
+              <option value="C">C</option>
+              <option value="F">F</option>
+            </select></td>
+          <td><label for="shake">Forecast shakes</label>
+            <select name="shake" id="shake">
+              <option value="0">No Action</option>
+              <option value="1">1 shake</option>
+              <option value="2">2 shakes</option>
+            </select></td>
+        </tr>
+        <tr>
+          <td><label for="weatherfetch">Fetch Weather</label>
+            <select name="weatherfetch" id="weatherfetch" data-theme="" data-role="slider">
+              <option value="0">Off</option>
+              <option value="1">On</option>
+            </select></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <table cellpadding="3" cellspacing="0" border="1" align="center" width="95%">
+        <tr>
+          <th colspan="2"> Display </th>
+        </tr>
+        <tr>
+          <td><label for="weathertemp">Temperature</label>
+            <select name="weathertemp" id="weathertemp" data-theme="" data-role="slider">
+              <option value="0">Off</option>
+              <option value="1">On</option>
+            </select></td>
+          <td><label for="weathercond">Weather</label>
+            <select name="weathercond" id="weathercond" data-theme="" data-role="slider">
+              <option value="0">Off</option>
+              <option value="1">On</option>
+            </select></td>
+        </tr>
+        <tr>
+          <td><label for="seconds">Seconds Hand</label>
+            <select name="seconds" id="seconds" data-theme="" data-role="slider">
+              <option value="0">Off</option>
+              <option value="1">On</option>
+            </select></td>
+          <td><label for="digitime">Digital Time</label>
+            <select name="digitime" id="digitime" data-theme="" data-role="slider">
+              <option value="0">Off</option>
+              <option value="1">On</option>
+            </select></td>
+        </tr>
+        <tr>
+          <td><label for="weekday">Weekday</label>
+            <select name="weekday" id="weekday" data-theme="" data-role="slider">
+              <option value="0">Off</option>
+              <option value="1">On</option>
+            </select></td>
+          <td><label for="date">Date</label>
+            <select name="date" id="date" data-theme="" data-role="slider">
+              <option value="0">Off</option>
+              <option value="1">On</option>
+            </select></td>
+        </tr>
+        <tr>
+          <td><label for="battery">Battery</label>
+            <select name="battery" id="battery" data-theme="" data-role="slider">
+              <option value="0">Off</option>
+              <option value="1">On</option>
+            </select></td>
+          <td><label for="bt">Bluetooth</label>
+            <select name="bt" id="bt" data-theme="" data-role="slider">
+              <option value="0">Off</option>
+              <option value="1">On</option>
+            </select></td>
+        </tr>
+        <tr>
+          <td><label for="largeFonts">Large Text</label>
+            <select name="largeFonts" id="largeFonts" data-theme="" data-role="slider">
+              <option value="0">Off</option>
+              <option value="1">On</option>
+            </select></td>
+          <td>&nbsp;</td>
+        </tr>
+      </table>
+      <br>
+      <br>
+      <table cellpadding="3" cellspacing="0" border="1" align="center" width="95%">
+        <tr>
+          <th colspan="3">Face</th>
+        </tr>
+        <tr>
+          <td align="center" onclick="document.getElementById('0').checked = true;"><input style="margin-top:27px;margin-left:7px;width:30px;height:30px;" type="radio" name="RadioGroupFaces" value="0" id="0">
+            <img src="/www.stoppani.net/pebble/weather/images/face0.png" width="74" height="86" alt=""></td>
+          <td align="center" onclick="document.getElementById('1').checked = true;"><input style="margin-top:27px;margin-left:7px;width:30px;height:30px;" type="radio" name="RadioGroupFaces" value="1" id="1">
+            <img src="/www.stoppani.net/pebble/weather/images/face0a.png" width="74" height="86" alt=""></td>
+          <td align="center" onclick="document.getElementById('2').checked = true;"><input style="margin-top:27px;margin-left:7px;width:30px;height:30px;" type="radio" name="RadioGroupFaces" value="2" id="2">
+            <img src="/www.stoppani.net/pebble/weather/images/face1.png" width="74" height="86" alt=""></td>
+        </tr>
+        <tr>
+          <td align="center" onclick="document.getElementById('3').checked = true;"><input style="margin-top:27px;margin-left:7px;width:30px;height:30px;" type="radio" name="RadioGroupFaces" value="3" id="3">
+            <img src="/www.stoppani.net/pebble/weather/images/face2.png" width="74" height="86" alt=""></td>
+          <td align="center" onclick="document.getElementById('4').checked = true;"><input style="margin-top:27px;margin-left:7px;width:30px;height:30px;" type="radio" name="RadioGroupFaces" value="4" id="4">
+            <img src="/www.stoppani.net/pebble/weather/images/face3.png" width="74" height="86" alt=""></td>
+          <td align="center" onclick="document.getElementById('5').checked = true;"><input style="margin-top:27px;margin-left:7px;width:30px;height:30px;" type="radio" name="RadioGroupFaces" value="5" id="5">
+            <img src="/www.stoppani.net/pebble/weather/images/face5.png" width="74" height="86" alt=""></td>
+        </tr>
+        <tr>
+          <td align="center" onclick="document.getElementById('6').checked = true;"><input style="margin-top:27px;margin-left:7px;width:30px;height:30px;" type="radio" name="RadioGroupFaces" value="6" id="6">
+            <img src="/www.stoppani.net/pebble/weather/images/face4.png" width="74" height="86" alt=""></td>
+          <td align="center" onclick="document.getElementById('7').checked = true;"><input style="margin-top:27px;margin-left:7px;width:30px;height:30px;" type="radio" name="RadioGroupFaces" value="7" id="7">
+            <img src="/www.stoppani.net/pebble/weather/images/face6a.png" width="74" height="86" alt=""></td>
+          <td align="center" onclick="document.getElementById('8').checked = true;"><input style="margin-top:27px;margin-left:7px;width:30px;height:30px;" type="radio" name="RadioGroupFaces" value="8" id="8">
+            <img src="/www.stoppani.net/pebble/weather/images/face7a.png" width="74" height="86" alt=""></td>
+        </tr>
+      </table>
+      <hr>
+      <table cellpadding="3" cellspacing="0" border="1" align="center" width="95%">
+        <tr>
+          <th colspan="3">Hands</th>
+        </tr>
+        <tr>
+          <td align="center" onclick="document.getElementById('100').checked = true;"><input style="margin-top:55px;margin-left:4px;width:30px;height:30px;" type="radio" name="RadioGroupHands" value="100" id="100">
+            <img src="/www.stoppani.net/pebble/weather/images/hands0.png" width="74" height="86" alt=""></td>
+          <td align="center" onclick="document.getElementById('101').checked = true;"><input style="margin-top:55px;margin-left:4px;width:30px;height:30px;" type="radio" name="RadioGroupHands" value="101" id="101">
+            <img src="/www.stoppani.net/pebble/weather/images/hands1.png" width="74" height="86" alt=""></td>
+          <td align="center" onclick="document.getElementById(10'2').checked = true;"><input style="margin-top:55px;margin-left:4px;width:30px;height:30px;" type="radio" name="RadioGroupHands" value="102" id="102">
+            <img src="/www.stoppani.net/pebble/weather/images/hands2.png" width="74" height="86" alt=""></td>
+        </tr>
+        <tr>
+          <td align="center" onclick="document.getElementById('103').checked = true;"><input style="margin-top:55px;margin-left:4px;width:30px;height:30px;" type="radio" name="RadioGroupHands" value="103" id="103">
+            <img src="/www.stoppani.net/pebble/weather/images/hands3.png" width="74" height="86" alt=""></td>
+          <td align="center" onclick="document.getElementById('104').checked = true;"><input style="margin-top:55px;margin-left:4px;width:30px;height:30px;" type="radio" name="RadioGroupHands" value="104" id="104">
+            <img src="/www.stoppani.net/pebble/weather/images/hands4.png" width="74" height="86" alt=""></td>
+          <td align="center" onclick="document.getElementById('105').checked = true;"><input style="margin-top:55px;margin-left:4px;width:30px;height:30px;" type="radio" name="RadioGroupHands" value="105" id="105">
+            <img src="/www.stoppani.net/pebble/weather/images/hands5.png" width="74" height="86" alt=""></td>
+        </tr>
+        <tr>
+          <td align="center" onclick="document.getElementById('106').checked = true;"><input style="margin-top:55px;margin-left:4px;width:30px;height:30px;" type="radio" name="RadioGroupHands" value="106" id="106">
+            <img src="/www.stoppani.net/pebble/weather/images/hands6.png" width="74" height="86" alt=""></td>
+          <td align="center" onclick="document.getElementById('107').checked = true;"><input style="margin-top:55px;margin-left:4px;width:30px;height:30px;" type="radio" name="RadioGroupHands" value="107" id="107">
+            <img src="/www.stoppani.net/pebble/weather/images/hands7.png" width="74" height="86" alt=""></td>
+          <td align="center" onclick="document.getElementById('108').checked = true;"><input style="margin-top:55px;margin-left:4px;width:30px;height:30px;" type="radio" name="RadioGroupHands" value="108" id="108">
+            <img src="/www.stoppani.net/pebble/weather/images/hands8.png" width="74" height="86" alt=""></td>
+        </tr>
+      </table>
+    </div>
+    <div align="center" style="text-align:center; background-color: #F4FFF6; ; color: 50;">
+      <h2 style="text-decoration: underline;">Premium Features</h2>
+      <table border="0" id="premiumtable">
+        <tr>
+          <td><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+              <input type="hidden" name="cmd" value="_s-xclick">
+              <input type="hidden" name="hosted_button_id" value="UHW93F7A48RPG">
+              <input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+              <img alt="" border="0" src="/www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form></td>
+          <td style="font-size: 24px; font-weight: bold; color: #039;">$2 USD</td>
+        </tr>
+        <tr>
+          <td colspan="2" style="text-align:center; text-decoration: none; font-size: 16pt;"><p><br>
+              Purchase Key<br>
+              <span style="font-size:12px;">(Sent via email within 12 hours)</span> </p></td>
+        </tr>
+        <tr>
+          <td colspan="2"><input style="width:100%" type="text" name="purchasekey" id="purchasekey" value=""></td>
+        </tr>
+      </table>
+      <br>
+      <table cellpadding="3" cellspacing="0" border="1" align="center" width="100%">
+        <tr>
+          <th colspan="2"> Options </th>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <label for="wunderground">Weather Source</label>
+            <select name="wunderground" id="wunderground">
+              <option value="0">Open Weather - Auto Location</option>
+              <option value="1">WUnderground - Auto Location</option>
+              <option value="2">WUnderground - Specified Location</option>
+            </select>
+          <br>
+          WU Location (<a style="font-size:12px" href="/www.stoppani.net/pebble/weather/configurable_aplite7.html" onclick="document.getElementById('wuHelp').hidden = !document.getElementById('wuHelp').hidden">Help</a>)
+          <div id="wuHelp" hidden="true" style="font-size:14px;">
+          Enter one of the following formats:
+           <table border="1" cellpadding="2" cellspacing="0" align="center" width="98%">
+           <tr><th>Location Type</th><th>Example</th></tr>
+           <tr><td style="text-align:right;font-weight:bold;margin-right:2px;">Station ID</td><td style="text-align:left">pws:KORPORTL26</td></tr>
+           <tr><td style="text-align:right;font-weight:bold;margin-right:2px;">US City and State</td><td style="text-align:left">OR/Portland</td></tr>
+          <tr><td style="text-align:right;font-weight:bold;margin-right:2px;">City, State, Country</td><td style="text-align:left">usa/or/portland</td></tr>
+          <tr><td style="text-align:right;font-weight:bold;margin-right:2px;">City, Country</td><td style="text-align:left">france/paris</td></tr>
+          <tr><td style="text-align:right;font-weight:bold;margin-right:2px;">Latitude/Longitude</td>
+          <td style="text-align:left">45.498287,-122.691322</td></tr>
+          </table>
+          <br>
+          </div>
+<input style="width:90%" type="text" name="weatherLocation" id="weatherLocation" value="">
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2"> Language:
+            <select name="language" id="language">
+              <option value="AF"> Afrikaans</option>
+              <option value="LI"> British English</option>
+              <option value="CZ"> Czech</option>
+              <option value="DK"> Danish</option>
+              <option value="NL"> Dutch</option>
+              <option value="EN"> English</option>
+              <option value="EO"> Esperanto</option>
+              <option value="ET"> Estonian</option>
+              <option value="FI"> Finnish</option>
+              <option value="FR"> French</option>
+              <option value="FC"> French Canadian</option>
+              <option value="DL"> German</option>
+              <option value="GR"> Greek</option>
+              <option value="HU"> Hungarian</option>
+              <option value="IT"> Italian</option>
+              <option value="NO"> Norwegian</option>
+              <option value="PL"> Polish</option>
+              <option value="BR"> Portuguese</option>
+              <option value="RO"> Romanian</option>
+              <option value="RU"> Russian</option>
+              <option value="SK"> Slovak</option>
+              <option value="SP"> Spanish</option>
+              <option value="SW"> Swedish</option>
+            </select></td>
+        </tr>
+        <tr>
+          <td>Bluetooth Alert
+            <select name="btalert" id="btalert" data-theme="" data-role="slider">
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select></td>
+          <td>Hour Alert
+            <select name="houralert" id="houralert" data-theme="" data-role="slider">
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select></td>
+        </tr>
+        <tr>
+          <td>Battery Alert
+            <select name="batteryalert" id="batteryalert" data-theme="" data-role="slider">
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select></td>
+          <td>Invert Colors
+            <select name="invert" id="invert" data-theme="" data-role="slider">
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select></td>
+        </tr>
+                <tr>
+        <td>
+        Filled Hands
+<select name="fillhands" id="fillhands" data-theme="" data-role="slider">
+              <option value="0">No</option>
+              <option value="1">Yes</option>
+            </select>
+        </td>
+        <td>&nbsp;</td>
+        </tr>
+
+        <tr>
+          <td colspan="2"></td>
+        </tr>
+        <tr>
+          <td colspan="2">Do Not Disturb<br>
+            <select name="dnd" id="dnd" data-theme="" data-role="slider">
+              <option value="0">Off</option>
+              <option value="1">On</option>
+            </select>
+            <br>
+            Start
+            <select name="dndStart" id="dndStart">
+              <option value="1"> 1 /  1 AM</option>
+              <option value="2"> 2 /  2 AM</option>
+              <option value="3"> 3 /  3 AM</option>
+              <option value="4"> 4 /  4 AM</option>
+              <option value="5"> 5 /  5 AM</option>
+              <option value="6"> 6 /  6 AM</option>
+              <option value="7"> 7 /  7 AM</option>
+              <option value="8"> 8 /  8 AM</option>
+              <option value="9"> 9 /  9 AM</option>
+              <option value="10">10 / 10 AM</option>
+              <option value="11">11 / 11 AM</option>
+              <option value="12">12 / noon</option>
+              <option value="13">13 /  1 PM</option>
+              <option value="14">14 /  2 PM</option>
+              <option value="15">15 /  3 PM</option>
+              <option value="16">16 /  4 PM</option>
+              <option value="17">17 /  5 PM</option>
+              <option value="18">18 /  6 PM</option>
+              <option value="19">19 /  7 PM</option>
+              <option value="20">20 /  8 PM</option>
+              <option value="21">21 /  9 PM</option>
+              <option value="22">22 / 10 PM</option>
+              <option value="23">23 / 11 PM</option>
+              <option value="24">24 / Midnight</option>
+            </select>
+            <br>
+            End
+            <select name="dndEnd" id="dndEnd">
+              <option value="1"> 1 /  1 AM</option>
+              <option value="2"> 2 /  2 AM</option>
+              <option value="3"> 3 /  3 AM</option>
+              <option value="4"> 4 /  4 AM</option>
+              <option value="5"> 5 /  5 AM</option>
+              <option value="6"> 6 /  6 AM</option>
+              <option value="7"> 7 /  7 AM</option>
+              <option value="8"> 8 /  8 AM</option>
+              <option value="9"> 9 /  9 AM</option>
+              <option value="10">10 / 10 AM</option>
+              <option value="11">11 / 11 AM</option>
+              <option value="12">12 / noon</option>
+              <option value="13">13 /  1 PM</option>
+              <option value="14">14 /  2 PM</option>
+              <option value="15">15 /  3 PM</option>
+              <option value="16">16 /  4 PM</option>
+              <option value="17">17 /  5 PM</option>
+              <option value="18">18 /  6 PM</option>
+              <option value="19">19 /  7 PM</option>
+              <option value="20">20 /  8 PM</option>
+              <option value="21">21 /  9 PM</option>
+              <option value="22">22 / 10 PM</option>
+              <option value="23">23 / 11 PM</option>
+              <option value="24">24 / Midnight</option>
+            </select></td>
+        </tr>
+      </table>
+      <p>&nbsp;</p>
+    </div>
+    <div class="ui-body ui-body-b">
+      <fieldset class="ui-grid-a">
+        <div class="ui-block-a">
+          <button type="submit" data-theme="d" id="b-cancel">Cancel</button>
+        </div>
+        <div class="ui-block-b">
+          <button type="submit" data-theme="a" id="b-submit">Submit</button>
+        </div>
+      </fieldset>
+    </div>
+  </div>
+</div>
+<script>
+ 	var purchasekeyvalid = 0
+      <!-- from http://snipplr.com/view/26662/get-url-parameters-with-jquery--improved/ -->
+      $.urlParam = function(name){
+	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	if (!results) { return ''; }
+	return results[1] || 0;
+      }
+
+      function updateControls() {
+		var temp = decodeURIComponent($.urlParam("purchasekeyvalid"));
+		if (temp == 1) {
+			purchasekeyvalid = 1
+		  $("#premiumtable").hide();
+		} else {
+		  purchasekeyvalid = 0
+		  $("#houralert").attr('disabled','disabled').slider("refresh");
+		  $("#btalert").attr('disabled','disabled').slider("refresh");
+		  $("#batteryalert").attr('disabled','disabled').slider("refresh");
+		  $("#invert").attr('disabled','disabled').slider("refresh");
+		  $("#fillhands").attr('disabled','disabled').slider("refresh");
+		  $("#wunderground").attr('disabled','disabled').selectmenu('refresh', true);
+		  $("#dnd").attr('disabled','disabled').slider("refresh");
+		  $("#dndStart").attr('disabled','disabled').selectmenu('refresh', true);
+		  $("#dndEnd").attr('disabled','disabled').selectmenu('refresh', true);
+		  $("#language").attr('disabled','disabled').selectmenu('refresh', true);
+   		  $("#weatherLocation").hide();
+		}
+        var purchasekey = decodeURIComponent($.urlParam("purchasekey"));
+        if (purchasekey != 'undefined' && purchasekey != '') {
+          $("#purchasekey").val(purchasekey);
+        }
+        var weatherLocation = decodeURIComponent($.urlParam("weatherLocation"));
+        if (weatherLocation != 'undefined' && weatherLocation != '') {
+          $("#weatherLocation").val(weatherLocation);
+        }
+        var houralert = decodeURIComponent($.urlParam("houralert"));
+        if (houralert != 'undefined' && houralert != '') {
+          $("#houralert").val(houralert).slider("refresh");
+        }
+        var btalert = decodeURIComponent($.urlParam("btalert"));
+        if (btalert  != 'undefined' && btalert != '') {
+          $("#btalert").val(btalert).slider("refresh");
+        }
+        var batteryalert = decodeURIComponent($.urlParam("batteryalert"));
+        if (batteryalert != 'undefined' && batteryalert != '') {
+          $("#batteryalert").val(batteryalert).slider("refresh");
+        }
+        var invert = decodeURIComponent($.urlParam("invert"));
+        if (invert != 'undefined' && invert != '') {
+          $("#invert").val(invert).slider("refresh");
+        }
+        var fillhands = decodeURIComponent($.urlParam("fillhands"));
+        if (fillhands != 'undefined' && fillhands != '') {
+          $("#fillhands").val(fillhands).slider("refresh");
+        } else {
+           $("#fillhands").val(1).slider("refresh");
+        }
+        var wunderground = decodeURIComponent($.urlParam("wunderground"));
+        if (wunderground != 'undefined' && wunderground != '') {
+          $("#wunderground").val(wunderground).selectmenu('refresh', true);
+        }
+        var shake = decodeURIComponent($.urlParam("shake"));
+        if (shake != 'undefined' && shake != '') {
+          $("#shake").val(shake).selectmenu('refresh', true);
+        } else {
+          $("#shake").val(1).selectmenu('refresh', true);
+        }
+		var largeFonts = decodeURIComponent($.urlParam("largeFonts"));
+        if (largeFonts != '') {
+          $("#largeFonts").val(largeFonts).slider("refresh");
+        } else {
+	      $("#largeFonts").val('0').slider("refresh");
+		}
+        var language = decodeURIComponent($.urlParam("language"));
+        if (language  != 'undefined' && language != '') {
+          $("#language").val(language).selectmenu('refresh', true);
+        } else {
+		  $("#language").val('EN').selectmenu('refresh', true);
+		}
+        var dnd = decodeURIComponent($.urlParam("dnd"));
+        if (dnd != 'undefined' && dnd != '') {
+	 		$("#dnd").val(dnd).slider("refresh");
+		}
+        var dndStart = decodeURIComponent($.urlParam("dndStart"));
+        if (dndStart != 'undefined' && dndStart != '') {
+		  $("#dndStart").val(dndStart).selectmenu('refresh', true);
+		}
+        var dndEnd = decodeURIComponent($.urlParam("dndEnd"));
+        if (dndEnd != 'undefined' && dndEnd != '') {
+		  $("#dndEnd").val(dndEnd).selectmenu('refresh', true);
+		}
+        var tempformat = decodeURIComponent($.urlParam("tempformat"));
+        if (tempformat != '') {
+          $("#tempformat").val(tempformat).slider("refresh");
+        }
+        var face = decodeURIComponent($.urlParam("face"));
+        if (face != '') {
+			document.getElementById(face).checked = true;
+		} else {
+			document.getElementById('1').checked = true;
+		}
+        var hands = decodeURIComponent($.urlParam("hands"));
+        if (hands != '') {
+			document.getElementById(hands).checked = true;
+        } else {
+			document.getElementById('100').checked = true;
+		}
+        var digitime = decodeURIComponent($.urlParam("digitime"));
+        if (digitime != '') {
+          $("#digitime").val(digitime).slider("refresh");
+        } else {
+	      $("#digitime").val('1').slider("refresh");
+		}
+        var weekday = decodeURIComponent($.urlParam("weekday"));
+        if (weekday != '') {
+          $("#weekday").val(weekday).slider("refresh");
+        } else {
+	      $("#weekday").val('1').slider("refresh");
+		}
+        var bt = decodeURIComponent($.urlParam("bt"));
+        if (bt != '') {
+          $("#bt").val(bt).slider("refresh");
+        } else {
+	      $("#bt").val('1').slider("refresh");
+		}
+        var battery = decodeURIComponent($.urlParam("battery"));
+        if (battery != '') {
+          $("#battery").val(battery).slider("refresh");
+        } else {
+	      $("#battery").val('1').slider("refresh");
+		}
+        var seconds = decodeURIComponent($.urlParam("seconds"));
+        if (seconds != '') {
+          $("#seconds").val(seconds).slider("refresh");
+        } else {
+	      $("#seconds").val('0').slider("refresh");
+		}
+        var weathertemp = decodeURIComponent($.urlParam("weathertemp"));
+        if (weathertemp != '') {
+          $("#weathertemp").val(weathertemp).slider("refresh");
+        } else {
+	      $("#weathertemp").val('1').slider("refresh");
+		}
+        var weatherfetch = decodeURIComponent($.urlParam("weatherfetch"));
+        if (weatherfetch != '') {
+          $("#weatherfetch").val(weatherfetch).slider("refresh");
+        } else {
+	      $("#weatherfetch").val('1').slider("refresh");
+		}
+	    var weathercond = decodeURIComponent($.urlParam("weathercond"));
+        if (weathercond != '') {
+          $("#weathercond").val(weathercond).slider("refresh");
+        }	 else {
+	      $("#weathercond").val('1').slider("refresh");
+		}
+	    var date = decodeURIComponent($.urlParam("date"));
+        if (date != '') {
+          $("#date").val(date).slider("refresh");
+        }	 else {
+	      $("#date").val('1').slider("refresh");
+		}
+      }
+
+      function saveOptions() {
+        var options = {
+          'purchasekey': $("#purchasekey").val(),
+          'wunderground': $("#wunderground").val(),
+          'weatherLocation': $("#weatherLocation").val(),
+          'dnd': $("#dnd").val(),
+          'dndStart': $("#dndStart").val(),
+          'dndEnd': $("#dndEnd").val(),
+          'language': $("#language").val(),
+          'houralert': $("#houralert").val(),
+          'btalert': $("#btalert").val(),
+          'batteryalert': $("#batteryalert").val(),
+          'invert': $("#invert").val(),
+          'fillhands': $("#fillhands").val(),
+          'tempformat': $("#tempformat").val(),
+          'digitime': $("#digitime").val(),
+          'weekday': $("#weekday").val(),
+          'bt': $("#bt").val(),
+          'shake': $("#shake").val(),
+          'largeFonts': $("#largeFonts").val(),
+          'battery': $("#battery").val(),
+          'seconds': $("#seconds").val(),
+          'weatherfetch': $("#weatherfetch").val(),
+          'weathertemp': $("#weathertemp").val(),
+          'weathercond': $("#weathercond").val(),
+          'date': $("#date").val(),
+          'face': $("input[type='radio'][name='RadioGroupFaces']:checked").val(),
+          'hands': $("input[type='radio'][name='RadioGroupHands']:checked").val(),
+		  'facebg': '0',
+          'facecolor': '0',
+          'handcolor': '0',
+        }
+        return options;
+      }
+
+
+  $('#destroy').on('click', function() {
+    $('select').simplecolorpicker('destroy');
+  });
+
+  
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close#";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log(location);
+          document.location = location;
+        });
+      });
+
+      $('#page1').bind('pageinit', updateControls);
+    </script>
+</body>
+</html>

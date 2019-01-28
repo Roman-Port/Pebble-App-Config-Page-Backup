@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ano Weather Settings</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.1/jquery.css">
+    <script src="/code.jquery.com//jquery-2.js"></script>
+    <script src="/code.jquery.com/mobile/1.4.1/jquery.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Ano Weather<br>Settings</h1>
+      </div>
+
+      <div data-role="content">
+
+<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-mini="false">
+        <h3></h3>
+
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+    <legend>Temperature type</legend>
+        <input name="key0" id="key0-0" data-type="int" value="0" checked="checked" type="radio">
+        <label for="key0-0">Celsius</label>
+        <input name="key0" id="key0-1" data-type="int" value="1" type="radio">
+        <label for="key0-1">Fahrenheit</label>
+</fieldset>
+
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+    <legend>Background Color</legend>
+        <input name="key1" id="key1-0" data-type="int" value="0" checked="checked" type="radio">
+        <label for="key1-0">White</label>
+        <input name="key1" id="key1-1" data-type="int" value="1" type="radio">
+        <label for="key1-1">Black</label>	
+		<input name="key1" id="key1-2" data-type="int" value="2" type="radio">
+		<label for="key1-2">Night Shift (Black between 6pm and 6am)</label>
+	
+</fieldset>
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+<legend>Show step count hand</legend>
+		<input name="key2" id="key2-0" data-type="int" value="1" checked="checked" type="radio">
+        <label for="key2-0">Yes</label>
+        <input name="key2" id="key2-1" data-type="int" value="0" type="radio">
+        <label for="key2-1">No</label>
+		<p><label><br>Step Goal</label></p>
+		<input name="key2" id="key2-2" data-type="int" type="number">
+		
+</fieldset>
+</div>
+<label>Please report all bugs using the "Contact developer" feature</label>
+<br>
+        <div class="ui-body ui-body-c">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+   <script>
+	
+  //Setup to allow easy adding more options later
+  function saveOptions() {
+    //var invertSelect = document.getElementsByName("key0");
+ 
+    //var options = {"invert": invt, "colour": colo}
+	 
+      //var options2 = {"invert": document.getElementById('key0-1').value
+	
+     //console.log("Option: " + invertSelect.options[invertSelect.selectedIndex].value);
+     var invt = null;
+     var colo = null;
+     var ShowStep = null;
+	 var StepGoal = null;
+	 
+    if (document.getElementById('key0-0').checked){
+	invt = document.getElementById('key0-0').value;}
+	else if (document.getElementById('key0-1').checked){
+	invt = document.getElementById('key0-1').value;}
+	
+    if (document.getElementById('key1-0').checked){
+	colo = document.getElementById('key1-0').value;}
+    else if (document.getElementById('key1-1').checked){
+	colo = document.getElementById('key1-1').value;}
+	else if (document.getElementById('key1-2').checked){
+	colo = document.getElementById('key1-2').value;}
+	
+	if (document.getElementById('key2-0').checked){
+	ShowStep = document.getElementById('key2-0').value;}
+    else if (document.getElementById('key2-1').checked){
+	ShowStep = document.getElementById('key2-1').value;}
+	
+	StepGoal = document.getElementById('key2-2').value
+	
+	var options = {"invert": invt, "colour": colo, "ShowStep": ShowStep, "StepGoal": StepGoal}	
+	return options;
+  };
+  
+  //function saveColour() {
+  //var invertSelect = document.getElementsByName("key1");
+ 
+    //var options = "Colour": document.getElementById('key1-0').value}
+	 
+    //  var options2 = "Colour": document.getElementById('key1-1').value }
+	
+     //console.log("Colour: " + invertSelect.options[invertSelect.selectedIndex].value);
+  //  if (document.getElementById('key1-0').checked)
+//	return options;
+//	else if (document.getElementById('key1-1').checked)
+//	return options2;	
+//  };
+ 
+ var urlParams;
+(window.onpopstate = function () {
+    var match,
+        pl     = /\+/g,  // Regex for replacing addition symbol with a space
+        search = /([^&=]+)=?([^&]*)/g,
+        decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); },
+        query  = window.location.search.substring(1);
+    urlParams = {};
+    while (match = search.exec(query))
+       urlParams[decode(match[1])] = decode(match[2]);
+})();
+//alert(urlParams["CORF"]); 
+function LoadedPage()
+{
+	console.log("Loading");
+	var invertSelect = document.getElementsByName("key0");
+	var colSelect = document.getElementsByName("key1");
+	
+	if(urlParams["CORF"] == '0')
+		document.getElementById('key0-0').checked = true;
+	else if(urlParams["CORF"] == '1')
+		document.getElementById('key0-1').checked = true;
+		
+	if(urlParams["COL"] == '0')
+		document.getElementById('key1-0').checked = true;
+	else if(urlParams["COL"] == '1')
+		document.getElementById('key1-1').checked = true;	
+	else if(urlParams["COL"] == '2')
+		document.getElementById('key1-2').checked = true;	
+	
+	if(urlParams["SHOW"] == '0')
+		document.getElementById('key2-1').checked = true;
+	else if(urlParams["SHOW"] == '1')	
+	document.getElementById('key2-0').checked = true;
+	
+	if(urlParams["GOAL"] != null)
+		document.getElementById('key2-2').value = urlParams["GOAL"];
+		
+	invertSelect.selectedIndex = urlParams["CORF"];
+	colSelect.slectedIndex = urlParams["COL"];
+};
+window.onload = LoadedPage();
+ 
+  var submitButton = document.getElementById("b-submit").addEventListener("click", 
+    function() {
+      console.log("Submit");
+ 
+      var options = saveOptions();
+      //var backcolour = saveColour();
+      //var final = options + ", " backcolour;
+      var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));// + encodeURIComponent(JSON.stringify(backcolour));
+       //location.href = 'pebblejs://close#success';
+      document.location.href = location;
+    }, 
+  false);
+</script>
+  </body>
+</html>

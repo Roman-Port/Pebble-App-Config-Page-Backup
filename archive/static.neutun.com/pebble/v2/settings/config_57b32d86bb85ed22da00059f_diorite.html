@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+        <title>Neutun Pebble Login</title>
+
+        <!-- Slate -->
+        <link rel="stylesheet" href="/static.neutun.com/pebble/v2/resources/vendor/slate/css/slate.css">
+        <script src="/static.neutun.com/pebble/v2/resources/vendor/slate/js/slate.js"></script>
+
+        <!-- Custom Resource -->
+        <link rel="stylesheet" href="/static.neutun.com/pebble/v2/resources/style/custom.css">
+        <script src="/static.neutun.com/pebble/v2/resources/js/settings.js"></script>
+
+    </head>
+    <body>
+        <h1 class='title'>Neutun Configuration</h1>
+
+        <div id="LoginContainer">
+            <div class='item-container'>
+                <div class='item-container-header'>Neutun Login</div>
+                <div class="item-container-content">
+                    <label class="item">
+                        Email
+                        <div class="item-input-wrapper">
+                            <input type="text" class="item-input" id="username" placeholder="Username">
+                        </div>
+                    </label>
+                </div>
+                <div class="item-container-content">
+                    <label class="item">
+                        Password
+                        <div class="item-input-wrapper">
+                            <input type="password" class="item-input" id="password" placeholder="Password">
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class='item-container'>
+                <div class='button-container'>
+                    <input id='loginbutton' type='button' class='item-button' value='Login'>
+                </div>
+            </div>
+        </div>
+        <div id="LogoutContainer" class="hidden">
+            <div class='item-container'>
+                <div class='button-container'>
+                    <input id='logoutbutton' type='button' class='item-button' value='Logout'>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

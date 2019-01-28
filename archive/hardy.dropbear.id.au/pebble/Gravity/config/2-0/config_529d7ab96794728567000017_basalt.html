@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Gravity config</title>
+
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.2.1/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.2.1/jquery.js"></script>
+  </head>
+  <body>
+    <!-- Home -->
+    <div data-theme="c" data-role="page" id="page1">
+      <div data-theme="c" data-role="header">
+	<h3>Gravity config</h3>
+      </div>
+      <div data-theme="c" data-role="content">
+        <div data-role="fieldcontain" style="text-align: center;">
+          <fieldset data-role="controlgroup" data-type="horizontal" id="facestyle">
+	    <input type="radio" name="radio" id="regular" value="1">
+	    <label for="regular">Regular face</label>
+	    <input type="radio" name="radio" id="inverted" value="2">
+	    <label for="inverted">Inverted face</label>
+          </fieldset>
+        </div>
+        <div class="ui-grid-a">
+          <div class="ui-block-a">
+            <a data-role="button" href="#settings" data-icon="delete" data-iconpos="left" id="b-cancel">Cancel</a>
+          </div>
+          <div class="ui-block-b">
+            <a data-role="button" href="#settings" data-icon="check" data-iconpos="left" id="b-submit">Save</a>
+          </div>
+        </div>
+      </div>    
+    </div>
+    <script>
+      $().ready(function() {
+        $('div[data-role="fieldcontain"] fieldset  div div:first-child label span span').html('<img src="../normal.png" width="72px" height="84px"></img>');
+        $('div[data-role="fieldcontain"] fieldset  div div:last-child label span span').html('<img src="../inverted.png" width="72px" height="84px"></img>');
+
+        $('#b-cancel').click(function() {
+          console.log('Cancel');
+          document.location = 'pebblejs://close#';
+        });
+
+        $('#b-submit').click(function() {
+          var params= {
+            'facestyle': $('#facestyle :radio:checked').val()
+          };
+          console.log(params);
+          var location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(params));
+          document.location = location;
+        });
+      });
+    </script>
+  </body>
+</html>
+

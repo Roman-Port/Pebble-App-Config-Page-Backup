@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+    <style>
+		h1 {
+			color: darkgrey;
+			-webkit-text-stroke: 1px black;
+			font-family:arial;
+		}
+        td {
+            width: 120px;
+			padding: 5px;
+        }
+        select {
+            width: 120px;
+			
+			-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+			-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+			box-shadow:inset 0px 1px 3px 0px #91b8b3;
+			background-color:#768d87;
+			-moz-border-radius:5px;
+			-webkit-border-radius:5px;
+			border-radius:5px;
+			border:1px solid #566963;
+			color:#ffffff;
+			font-family:arial;
+			font-size:15px;
+			font-weight:bold;
+			text-decoration:none;
+			text-shadow:0px -1px 0px #2b665e;
+        }
+		table {
+			border: solid 1px darkgrey;
+			background-color: #e8e7e2;
+			border-radius:5px;
+		}
+		.myButton {
+			-moz-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+			-webkit-box-shadow:inset 0px 1px 3px 0px #91b8b3;
+			box-shadow:inset 0px 1px 3px 0px #91b8b3;
+			background-color:#768d87;
+			-moz-border-radius:5px;
+			-webkit-border-radius:5px;
+			border-radius:5px;
+			border:1px solid #566963;
+			display:inline-block;
+			color:#ffffff;
+			font-family:arial;
+			font-size:18px;
+			font-weight:bold;
+			padding:11px 23px;
+			text-decoration:none;
+			text-shadow:0px -1px 0px #2b665e;
+		}
+
+    </style>
+    
+    <head>
+        <title>Graph Face Config</title>
+    </head>
+    
+    <body>
+        <table>
+		
+			<tr>
+				<td colspan="2">
+					<center><h1>Graph Face</h1></center>
+				</td>
+			</tr>
+
+            <tr>
+                <td>Invert Colors:</td>
+                <td>
+                    <select id="invert_select">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select>
+                </td>
+            </tr>
+			
+            <tr>
+                <td>Background:</td>
+                <td>
+                    <select id="background_select">
+                        <option value="off">Off</option>
+                        <option value="on">On</option>
+                    </select>
+                </td>
+            </tr>
+			
+            <tr>
+                <td>Date Format:</td>
+                <td>
+                    <select id="date_select">
+                        <option value="DD-MM">DD-MM</option>
+                        <option value="MM-DD">MM-DD</option>
+                    </select>
+                </td>
+            </tr>
+			
+            <tr>
+                <td>Graph Updates:</td>
+                <td>
+                    <select id="graph_update">
+                        <option value="0">No Updates</option>
+                        <option value="1">1 sec</option>
+                        <option value="5">5 sec</option>
+                        <option value="10">10 sec</option>
+                        <option value="30">30 sec</option>
+                        <option value="60">1 min</option>
+                    </select>
+                </td>
+            </tr>
+			
+			<tr>
+				<td colspan="2">
+					<center><button id="save_button" class="myButton">Save</button></center>
+				</td>
+			</tr>
+			
+        </table>
+		
+        <script>
+            var invertSelect = document.getElementById("invert_select");
+            var backSelect = document.getElementById("background_select");
+            var dateSelect = document.getElementById("date_select");
+            var graphUpdate = document.getElementById("graph_update");
+
+            var invert;
+            var back;
+            var date;
+            var graphPeriod;
+
+            var tid = setInterval(function() {
+                if (document.readyState !== 'complete') return;
+                clearInterval(tid);
+
+                // do your work
+                invert = localStorage.getItem("invert");
+                back = localStorage.getItem("back");
+                date = localStorage.getItem("date");
+                graphPeriod = localStorage.getItem("graphPeriod");
+
+                if (invert) invertSelect.value = invert;
+                if (back) backSelect.value = back;
+                if (date) dateSelect.value = date;
+                if (graphPeriod) graphUpdate.value = graphPeriod;
+
+            }, 100);
+
+            //Setup to allow easy adding more options later
+            function saveOptions() {
+                console.log("Saving");
+
+                localStorage.setItem("invert", invertSelect.options[invertSelect.selectedIndex].value);
+                localStorage.setItem("back", backSelect.options[backSelect.selectedIndex].value);
+                localStorage.setItem("date", dateSelect.options[dateSelect.selectedIndex].value);
+                localStorage.setItem("graphPeriod", graphUpdate.options[graphUpdate.selectedIndex].value);
+
+                var options = {
+                    "invert": localStorage.invert,
+                        "back": localStorage.back,
+                        "date": localStorage.date,
+                        "graphPeriod": localStorage.graphPeriod
+                }
+
+                return options;
+            };
+
+            var submitButton = document.getElementById("save_button");
+            submitButton.addEventListener("click",
+
+            function() {
+                console.log("Submit");
+
+                var options = saveOptions();
+                var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+
+                document.location = location;
+            },
+            false);
+        </script>
+    </body>
+
+</html>

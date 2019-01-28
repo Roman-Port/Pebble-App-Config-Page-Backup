@@ -1,0 +1,154 @@
+<html>
+<head>
+<title>Syn&aelig;sthetic</title>
+<link rel="stylesheet" type="text/css" href="/www.kreativekorp.com/pbl/slate/css/slate.css">
+<link rel="stylesheet" type="text/css" href="/www.kreativekorp.com/pbl/syn/v11/config.css">
+</head>
+<body>
+
+<div class="item-container">
+	<h1>Syn&aelig;sthetic</h1>
+</div>
+
+<div class="item-container">
+	<div class="item-container-header">General</div>
+	<div class="item-container-content">
+		<label class="item">
+			Background Color
+			<input id="backgroundColor" type="text" class="item-color item-color-normal" value="#000000">
+		</label>
+		<label class="item">
+			Box Border Color
+			<select id="boxBorderColor" dir="rtl" class="item-select">
+				<option value="1" class="item-select-option">None</option>
+				<option value="2" class="item-select-option">Darker</option>
+				<option value="3" class="item-select-option">Lighter</option>
+				<option value="4" class="item-select-option">Contrast with Box</option>
+				<option value="5" class="item-select-option">Contrast with Bkgd</option>
+			</select>
+		</label>
+		<label class="item">
+			Box Text Color
+			<select id="boxTextColor" dir="rtl" class="item-select">
+				<option value="1" class="item-select-option">None</option>
+				<option value="2" class="item-select-option">Darker</option>
+				<option value="3" class="item-select-option">Lighter</option>
+				<option value="4" class="item-select-option">Contrast with Box</option>
+			</select>
+		</label>
+		<label class="item">
+			Layout
+			<select id="layoutShape" dir="rtl" class="item-select">
+				<option value="square" class="item-select-option">Square</option>
+				<option value="hexagon" class="item-select-option">Hexagon</option>
+			</select>
+		</label>
+		<label class="item">
+			Under Hour
+			<select id="layoutUnderHour" dir="rtl" class="item-select">
+				<option value="seconds" class="item-select-option">Seconds</option>
+				<option value="ampm" class="item-select-option">AM/PM</option>
+				<option value="dst" class="item-select-option">DST</option>
+			</select>
+		</label>
+		<label class="item">
+			Under Minute
+			<select id="layoutUnderMinute" dir="rtl" class="item-select">
+				<option value="seconds" class="item-select-option">Seconds</option>
+				<option value="ampm" class="item-select-option">AM/PM</option>
+				<option value="dst" class="item-select-option">DST</option>
+			</select>
+		</label>
+	</div>
+</div>
+
+<div class="item-container">
+	<div class="item-container-header">Digits</div>
+	<div class="item-container-content">
+		<label class="item">0 <input id="digitColor0" type="text" class="item-color item-color-normal" value="#000000"></label>
+		<label class="item">1 <input id="digitColor1" type="text" class="item-color item-color-normal" value="#AA5500"></label>
+		<label class="item">2 <input id="digitColor2" type="text" class="item-color item-color-normal" value="#FF0000"></label>
+		<label class="item">3 <input id="digitColor3" type="text" class="item-color item-color-normal" value="#FF5500"></label>
+		<label class="item">4 <input id="digitColor4" type="text" class="item-color item-color-normal" value="#FFFF00"></label>
+		<label class="item">5 <input id="digitColor5" type="text" class="item-color item-color-normal" value="#00FF00"></label>
+		<label class="item">6 <input id="digitColor6" type="text" class="item-color item-color-normal" value="#0000FF"></label>
+		<label class="item">7 <input id="digitColor7" type="text" class="item-color item-color-normal" value="#5500FF"></label>
+		<label class="item">8 <input id="digitColor8" type="text" class="item-color item-color-normal" value="#555555"></label>
+		<label class="item">9 <input id="digitColor9" type="text" class="item-color item-color-normal" value="#FFFFFF"></label>
+	</div>
+</div>
+
+<div class="item-container">
+	<div class="item-container-header">AM/PM</div>
+	<div class="item-container-content">
+		<label class="item">Early AM <input id="ampmColor0" type="text" class="item-color item-color-normal" value="#FF0000"></label>
+		<label class="item">Late AM  <input id="ampmColor1" type="text" class="item-color item-color-normal" value="#FFFF00"></label>
+		<label class="item">Early PM <input id="ampmColor2" type="text" class="item-color item-color-normal" value="#00FF00"></label>
+		<label class="item">Late PM  <input id="ampmColor3" type="text" class="item-color item-color-normal" value="#0000FF"></label>
+	</div>
+</div>
+
+<div class="item-container">
+	<div class="item-container-header">Daylight Saving Time</div>
+	<div class="item-container-content">
+		<label class="item">Standard Time <input id="dstColor0" type="text" class="item-color item-color-normal" value="#AAAAAA"></label>
+		<label class="item">Summer Time   <input id="dstColor1" type="text" class="item-color item-color-normal" value="#FFFF00"></label>
+	</div>
+</div>
+
+<div class="item-container">
+	<div class="item-container-header">Weekday</div>
+	<div class="item-container-content">
+		<label class="item">Sunday    <input id="weekdayColor0" type="text" class="item-color item-color-normal" value="#FF0000"></label>
+		<label class="item">Monday    <input id="weekdayColor1" type="text" class="item-color item-color-normal" value="#FF5500"></label>
+		<label class="item">Tuesday   <input id="weekdayColor2" type="text" class="item-color item-color-normal" value="#FFFF00"></label>
+		<label class="item">Wednesday <input id="weekdayColor3" type="text" class="item-color item-color-normal" value="#00FF00"></label>
+		<label class="item">Thursday  <input id="weekdayColor4" type="text" class="item-color item-color-normal" value="#00FFFF"></label>
+		<label class="item">Friday    <input id="weekdayColor5" type="text" class="item-color item-color-normal" value="#0000FF"></label>
+		<label class="item">Saturday  <input id="weekdayColor6" type="text" class="item-color item-color-normal" value="#5500FF"></label>
+	</div>
+</div>
+
+<div class="item-container">
+	<div class="item-container-header">Month</div>
+	<div class="item-container-content">
+		<label class="item">January   <input id="monthColor0" type="text" class="item-color item-color-normal" value="#000000"></label>
+		<label class="item">February  <input id="monthColor1" type="text" class="item-color item-color-normal" value="#AA5500"></label>
+		<label class="item">March     <input id="monthColor2" type="text" class="item-color item-color-normal" value="#FF0000"></label>
+		<label class="item">April     <input id="monthColor3" type="text" class="item-color item-color-normal" value="#FF5500"></label>
+		<label class="item">May       <input id="monthColor4" type="text" class="item-color item-color-normal" value="#FFFF00"></label>
+		<label class="item">June      <input id="monthColor5" type="text" class="item-color item-color-normal" value="#00FF00"></label>
+		<label class="item">July      <input id="monthColor6" type="text" class="item-color item-color-normal" value="#00FFFF"></label>
+		<label class="item">August    <input id="monthColor7" type="text" class="item-color item-color-normal" value="#0000FF"></label>
+		<label class="item">September <input id="monthColor8" type="text" class="item-color item-color-normal" value="#5500FF"></label>
+		<label class="item">October   <input id="monthColor9" type="text" class="item-color item-color-normal" value="#FF00FF"></label>
+		<label class="item">November  <input id="monthColor10" type="text" class="item-color item-color-normal" value="#555555"></label>
+		<label class="item">December  <input id="monthColor11" type="text" class="item-color item-color-normal" value="#FFFFFF"></label>
+	</div>
+</div>
+
+<div class="item-container">
+	<div class="item-container-header">Status</div>
+	<div class="item-container-content">
+		<label class="item">Bluetooth Connected    <input id="statusColor0" type="text" class="item-color item-color-normal" value="#0000FF"></label>
+		<label class="item">Bluetooth Disconnected <input id="statusColor1" type="text" class="item-color item-color-normal" value="#AAAAAA"></label>
+		<label class="item">Battery Empty          <input id="statusColor2" type="text" class="item-color item-color-normal" value="#FF0000"></label>
+		<label class="item">Battery Low            <input id="statusColor3" type="text" class="item-color item-color-normal" value="#FF5500"></label>
+		<label class="item">Battery High           <input id="statusColor4" type="text" class="item-color item-color-normal" value="#FFFF00"></label>
+		<label class="item">Battery Full           <input id="statusColor5" type="text" class="item-color item-color-normal" value="#00FF00"></label>
+		<label class="item">Charging               <input id="statusColor6" type="text" class="item-color item-color-normal" value="#00FFFF"></label>
+		<label class="item">100                    <input id="statusColor7" type="text" class="item-color item-color-normal" value="#FFFFFF"></label>
+		<label class="item">%                      <input id="statusColor8" type="text" class="item-color item-color-normal" value="#FFFFFF"></label>
+	</div>
+</div>
+
+<div class="item-container">
+	<div class="button-container">
+		<input id="saveButton" type="button" class="item-button" value="SAVE">
+	</div>
+</div>
+
+<script type="text/javascript" src="/www.kreativekorp.com/pbl/slate/js/slate.js"></script>
+<script type="text/javascript" src="/www.kreativekorp.com/pbl/syn/v11/config.js"></script>
+</body>
+</html>

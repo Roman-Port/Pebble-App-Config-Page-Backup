@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ZWay Configuration</title>
+        <link rel='stylesheet' type='text/css' href='/cdn.rawgit.com/sionyx/pebble_zway_time/b86cf1263ac2167d62c37b24e501fd330f7573ea/config/css/slate.css'>
+            <script src='/cdn.rawgit.com/sionyx/pebble_zway_time/b86cf1263ac2167d62c37b24e501fd330f7573ea/config/js/slate.js'></script>
+            <style>
+                .title {
+                    padding: 15px 10px;
+                    text-transform: uppercase;
+                    font-family: 'PT Sans', sans-serif;
+                    font-size: 1.2em;
+                    font-weight: 500;
+                    color: #888888;
+                    text-align: center;
+                }
+                </style>
+    </head>
+    
+    <body>
+        <h1 class='title'>ZWay Configuration</h1>
+        
+        <div class='item-container'>
+            <div class='item-container-content'>
+                <div class='item'>
+                    Use these fields to specify address and port of your RaZberry.
+                </div>
+            </div>
+        </div>
+        
+        <div class="item-container">
+            <div class="item-container-header">ADDRESS</div>
+            <div class="item-container-content">
+                <label class="item">
+                    <div class="item-input-wrapper">
+                        <input type="text" class="item-input" id="address_input" placeholder="192.168.1.123" value="192.168.1.123">
+                    </div>
+                </label>
+            </div>
+        </div>
+        
+        <div class="item-container">
+            <div class="item-container-header">PORT</div>
+            <div class="item-container-content">
+                <label class="item">
+                    <div class="item-input-wrapper">
+                        <input type="text" class="item-input" id="port_input" placeholder="8083" value="8083">
+                    </div>
+                </label>
+            </div>
+        </div>
+        
+        <div class='item-container'>
+            <div class='item-container-content'>
+                <div class='item'>
+                    Use these fields to specify credentials for ZWay.
+                </div>
+            </div>
+        </div>
+        
+        <div class="item-container">
+            <div class="item-container-header">LOGIN</div>
+            <div class="item-container-content">
+                <label class="item">
+                    <div class="item-input-wrapper">
+                        <input type="text" class="item-input" id="login_input" placeholder="admin" value="">
+                    </div>
+                </label>
+            </div>
+        </div>
+        
+        <div class="item-container">
+            <div class="item-container-header">PASSWORD</div>
+            <div class="item-container-content">
+                <label class="item">
+                    <div class="item-input-wrapper">
+                        <input type="text" class="item-input" id="pass_input" placeholder="admin" value="">
+                    </div>
+                </label>
+            </div>
+        </div>
+        
+        <div class='item-container'>
+            <div class='item-container-content'>
+                <div class='item'>
+                    Choose which deviices you want to control with Pebble.
+                </div>
+            </div>
+        </div>
+        
+
+        <div class="item-container">
+            <div class="item-container-header">DEVICE TYPES</div>
+            <div class="item-container-content">
+                <label class="item">
+                    All
+                    <input type="radio" class="item-radio" name="device-type" id="device_type_all" value="all">
+                </label>
+                <label class="item">
+                    Scenes only
+                    <input type="radio" class="item-radio" name="device-type" id="device_type_scenes" value="scenes">
+                        </label>
+                <label class="item">
+                    Scenes and Switches
+                    <input type="radio" class="item-radio" name="device-type" id="device_type_switches" value="switches">
+                </label>
+                <label class="item">
+                    Devices with "pebble" tag
+                    <input type="radio" class="item-radio" name="device-type" id="device_type_tagged" value="tagged">
+                </label>
+                <div class="item-container-footer">
+                    Add tag "pebble" in your Z-WAVE>ME control panel.<br \="">
+                    Tag favorite devices to control them with Pebble.
+                </div>
+            </div>
+        </div>
+
+        <div class='item-container'>
+            <div class='button-container'>
+                <input id='submit_button' type='button' class='item-button' value='APPLY'>
+            </div>
+        </div>
+    </body>
+    <script>
+        function getConfigData() {
+            var addressInput = document.getElementById('address_input');
+            var portInput = document.getElementById('port_input');
+            var loginInput = document.getElementById('login_input');
+            var passInput = document.getElementById('pass_input');
+            var deviceTypeValue = $('input[name=device-type]').filter(':checked').val();
+            
+            var options = {
+                'address_input': addressInput.value,
+                'port_input': portInput.value,
+                'login_input': loginInput.value,
+                'pass_input': passInput.value,
+                'device_type' : deviceTypeValue
+            };
+            
+            // Save for next launch
+            localStorage['address_input'] = options['address_input'];
+            localStorage['port_input'] = options['port_input'];
+            localStorage['login_input'] = options['login_input'];
+            localStorage['pass_input'] = options['pass_input'];
+            localStorage['device_type'] = options['device_type'];
+            
+            console.log('Got options: ' + JSON.stringify(options));
+            return options;
+        }
+    
+        function getQueryParam(variable, defaultValue) {
+            var query = location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (pair[0] === variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return defaultValue || false;
+        }
+    
+        var submitButton = document.getElementById('submit_button');
+        submitButton.addEventListener('click', function() {
+                                      console.log('Submit');
+                                      
+                                      // Return data to watchapp
+                                      document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(getConfigData()));
+                                      });
+                                  
+      (function() {
+           var addressInput = document.getElementById('address_input');
+           var portInput = document.getElementById('port_input');
+           var loginInput = document.getElementById('login_input');
+           var passInput = document.getElementById('pass_input');
+       
+           // Load any previously saved configuration, if available
+           if(localStorage['address_input']) {
+               addressInput.value = localStorage['address_input'];
+               portInput.value = localStorage['port_input'];
+               loginInput.value = localStorage['login_input'];
+               passInput.value = localStorage['pass_input'];
+           }
+       
+           var type = localStorage['device_type'] || 'all';
+           var deviceType = document.getElementById('device_type_' + type);
+           if (deviceType) {
+               deviceType.checked = true;
+           }
+       })();
+        </script>
+</html>

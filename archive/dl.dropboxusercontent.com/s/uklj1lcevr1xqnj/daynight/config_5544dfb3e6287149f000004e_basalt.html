@@ -1,0 +1,111 @@
+<html>
+	<head>
+		<title>Day &amp; Night</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+	<script src="/code.jquery.com//jquery-1.js"></script>
+	<script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>	
+	</head>
+	<body>
+		<div data-role="page" data-theme="a">
+			<div data-role="header">
+				<h1>Configuration</h1>
+			</div>
+			
+			<div data-role="main" class="ui-content">
+				<form>
+					<label for="second_pref" class="select">Second Hand:</label>
+					<select name="second_pref" id="second_pref">
+						<option value="1">Full</option>
+						<option value="2">Edge</option>
+						<option value="3">Hide</option>
+					</select>
+				
+					<label for="temp_unit" class="select">Temperature Unit:</label>
+					<select name="temp_unit" id="temp_unit">
+						<option value="F">Fahrenheit</option>
+						<option value="C">Celsius</option>
+						<option value="K">Kelvin</option>
+					</select>
+					
+					<label for="rise_set_pref" class="select">Day / Night:</label>
+					<select name="rise_set_pref" id="rise_set_pref">
+						<option value="both">Day & Night</option>
+						<option value="day">Day only</option>
+						<option value="night">Night only</option>
+					</select>
+					
+					<label for="top_pref" class="select">Top Display:</label>
+					<select name="top_pref" id="top_pref">
+						<option value="1">City, Country</option>
+						<option value="2">Long Date</option>
+						<option value="3" selected="">Day &amp; Night Logo</option>
+						<option value="4">Temperature</option>
+						<option value="5">Short Date</option>
+						<option value="6">Digital Time</option>
+						<option value="0">BT: Battery %</option>
+						<option value="7">Sunrise</option>
+						<option value="8">Sunset</option>
+						<option value="9">Blank</option>
+					</select>
+					
+					<label for="bottom_pref" class="select">Bottom Display:</label>
+					<select name="bottom_pref" id="bottom_pref">
+						<option value="1">City, Country</option>
+						<option value="2">Long Date</option>
+						<option value="3">Day &amp; Night Logo</option>
+						<option value="4">Temperature</option>
+						<option value="5" selected="">Short Date</option>
+						<option value="6">Digital Time</option>
+						<option value="0">BT: Battery %</option>
+						<option value="7">Sunrise</option>
+						<option value="8">Sunset</option>
+						<option value="9">Blank</option>					
+					</select>
+					
+					<label for="manual_city_text">Manually input City rather than rely on GPS:</label>
+					<input onblur="if(this.value === ''){ this.value='e.g. London, UK'; this.style.color='#CCC'; }" onfocus="if(this.value === 'e.g. London, UK'){ this.value=''; this.style.color = '#000'; }" type="text" name="manual_city_text" id="manual_city_text" value="e.g. London, UK" style="color:#CCC;">
+					
+					<label for="show_pins">Add Sunrise and Sunset pins to Timeline?</label>
+					<input type="checkbox" name="show_pins" id="show_pins" checked="">
+				</form>
+				
+				<button style="width:50%; margin-left:auto; margin-right:0px;" type="submit" id="submit">Submit</button>
+			</div>
+			
+			<script>
+				function getQueryParam(variable, default_){
+					var query = location.search.substring(1);
+					var vars = query.split('&');
+					for(var i = 0; i < vars.length; i++){
+						var pair = vars[i].split('=');
+						if(pair[0] == variable)
+							return decodeURIComponent(pair[1]);
+					}
+					return default_ || false;
+				}
+
+				function saveOptions(){
+					var pin_check = $('#show_pins').attr('checked');
+					
+					var options = {
+						'second_pref': $('#second_pref').val(),
+						'temp_unit': $('#temp_unit').val(),
+						'rise_set_pref': $('#rise_set_pref').val(),
+						'top_pref': $('#top_pref').val(),
+						'bottom_pref': $('#bottom_pref').val(),
+						'city': $('#manual_city_text').val(),
+						'show_pins': $('input[name=show_pins]:checked').val() ? "yes" : "no"
+					};
+					return options;
+				}
+				
+				$("#submit").click(function(){
+					console.log(saveOptions());
+					var return_to = getQueryParam('return_to', 'pebblejs://close#');
+					document.location = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
+				});
+			</script>
+		</div>
+	</body>
+</html>

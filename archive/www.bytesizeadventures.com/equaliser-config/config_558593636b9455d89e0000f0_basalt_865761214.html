@@ -1,0 +1,59 @@
+﻿<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Equaliser Configuration</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css">
+        <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.css">
+    </head>
+    <body role="document">
+        <div class="container">
+            <h3>
+                <span class="label label-default">Display Second Hand?</span>
+            </h3>
+
+            <div>
+                <label class="radio-inline"><input type="radio" name="second" id="seconds_1" value="1">Yes</label>
+                <label class="radio-inline"><input type="radio" name="second" id="seconds_0" value="0">No</label>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-default" id="cancel">Cancel</button>
+            <button type="submit" class="btn btn-default" id="submit">Submit</button>
+        </div>
+
+        <script src="/ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+        <script src="/maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var second_value = (getUrlParameter('seconds') ? getUrlParameter('seconds') : 1);
+                $("#seconds_" + second_value).prop('checked', true);
+
+                $('#submit').click(function() {
+                    var second_hand_selection = $("input[type='radio'][name='second']:checked").val();
+                    var configuration = {"seconds" : second_hand_selection};
+                    document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(configuration));
+                });
+                $('#cancel').click(function() {
+                    document.location = 'pebblejs://close';
+                });
+            });
+
+            function getUrlParameter(sParam)
+            {
+                var sPageURL = window.location.search.substring(1);
+                var sURLVariables = sPageURL.split('&');
+                for (var i = 0; i < sURLVariables.length; i++) 
+                {
+                    var sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] == sParam) 
+                    {
+                        return sParameterName[1];
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

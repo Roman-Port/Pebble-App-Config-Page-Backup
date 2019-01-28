@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>ThoB II Config</title>
+  <link rel='stylesheet' type='text/css' href='/www.wotb.de/pebble_config/dist/css/slate.css'>
+  <script src='/www.wotb.de/pebble_config/dist/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+  
+    <div class="item2">
+      ThoB II Config
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Config Date</div>
+      <div class="item-container-content">
+
+        <label class="item">
+          date type
+          <select id="week_select" name="selDateType" dir='rtl' class="item-select">
+            <option class="item-select-option" value="weu" selected="">ISO week</option>
+            <option class="item-select-option" value="wus">US week</option>
+            <option class="item-select-option" value="wot">first Monday week</option>
+          </select>
+        </label>
+
+        <label class="item">
+          date format
+          <select id="date_format" name="selDateFormat" dir='rtl' class="item-select">
+            <option class="item-select-option" value="dd.mmm.yyyy" selected="">dd.mmm.yyyy</option>
+            <option class="item-select-option" value="mmm.dd.yyyy">mmm.dd.yyyy</option>
+            <option class="item-select-option" value="yyyy.mmm.dd">yyyy.mmm.dd</option>
+
+            <option class="item-select-option" value="dd.mmm.yyyy">dd.mmm.yyyy</option>
+            <option class="item-select-option" value="mmm.dd.yyyy">mmm.dd.yyyy</option>
+            <option class="item-select-option" value="yy.mmm.dd">yy.mmm.dd</option>
+
+            <option class="item-select-option" value="dd.mm.yyyy">dd.mm.yyyy</option>
+            <option class="item-select-option" value="mm.dd.yyyy">mm.dd.yyyy</option>
+            <option class="item-select-option" value="yyyy.mm.dd">yyyy.mm.dd</option>
+
+            <option class="item-select-option" value="dd.mm.yy">dd.mm.yy</option>
+            <option class="item-select-option" value="mm.dd.yy">mm.dd.yy</option>
+            <option class="item-select-option" value="yy.mm.dd">yy.mm.dd</option>
+          </select>
+        </label>
+
+        <label class="item">
+          date delimiter
+          <select id="date_deli" name="selDateDelimiter" dir='rtl' class="item-select">
+            <option class="item-select-option" value="ddp" selected="">[.] point</option>
+            <option class="item-select-option" value="ddb">[/] slash</option>
+            <option class="item-select-option" value="ddm">[-] minus</option>
+	    <option class="item-select-option" value="dds">[_] space</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Config Watchface</div>
+      <div class="item-container-content">
+
+        <label class="item">
+          show second
+          <select id="second_vis" name="secondVis" dir='rtl' class="item-select">
+            <option class="item-select-option" value="yes" selected="">yes</option>
+            <option class="item-select-option" value="nosoft">no SoftMin</option>
+            <option class="item-select-option" value="nohard">no</option>
+          </select>
+        </label>
+
+        <label class="item">
+          color second hand (only Pebble Time)
+          <select id="sec_color_select" name="sec_color_select" dir='rtl' class="item-select">
+            <option class="item-select-option" value="sc_red" selected="">red</option>
+            <option class="item-select-option" value="sc_black">black</option>
+          </select>
+        </label>
+
+        <label class="item">
+          show low battery symbol
+          <select id="sw_bat_symb" name="swBatSymb" dir='rtl' class="item-select">
+            <option class="item-select-option" value="yes" selected="">yes</option>
+	    <option class="item-select-option" value="no">no</option>
+          </select>
+        </label>
+
+
+        <label class="item">
+          battery symbol at ...
+          <select id="batt_lvl_select" name="perBatSymb" dir='rtl' class="item-select">
+            <option class="item-select-option" value="10" selected="">10%</option>
+            <option class="item-select-option" value="20">20%</option>
+	    <option class="item-select-option" value="30">30%</option>
+          </select>
+        </label>
+
+        <label class="item">
+          show battery [%] ...
+          <select id="batt_perc" name="battPerc" dir='rtl' class="item-select">
+            <option class="item-select-option" value="yes" selected="">yes</option>
+	    <option class="item-select-option" value="no">no</option>
+          </select>
+        </label>
+
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+
+  </body>
+  <script>
+  function getConfigData() {
+//--->
+
+    var weekTypeSelect = document.getElementById('week_select');
+    var dateFormatSelect = document.getElementById('date_format');
+    var dateDeliSelect = document.getElementById('date_deli');
+    var swBatSymb = document.getElementById('sw_bat_symb');
+    var secColorSelect = document.getElementById('sec_color_select');
+    var perLvlSelect = document.getElementById('batt_lvl_select');
+    var secondVis = document.getElementById('second_vis');
+    var battPerc = document.getElementById('batt_perc');
+ 
+    var options = {
+//--->
+      'week_select': weekTypeSelect.value,
+      'date_format': dateFormatSelect.value,
+      'date_deli': dateDeliSelect.value,
+      'sw_bat_symb': swBatSymb.value,
+      'sec_color_select': secColorSelect.value,
+      'batt_lvl_select': perLvlSelect.value,
+      'second_vis': secondVis.value,
+      'batt_perc': battPerc.value
+      
+    };
+    // Save for next launch
+//--->
+
+    localStorage['week_select'] = options['week_select'];
+    localStorage['date_format'] = options['date_format'];
+    localStorage['date_deli'] = options['date_deli'];
+    localStorage['sw_bat_symb'] = options['sw_bat_symb'];
+    localStorage['sec_color_select'] = options['sec_color_select'];
+    localStorage['batt_lvl_select'] = options['batt_lvl_select'];
+    localStorage['second_vis'] = options['second_vis'];
+    localStorage['batt_perc'] = options['batt_perc'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+  (function() {
+//--->
+
+    var weekTypeSelect = document.getElementById('week_select');
+    var dateFormatSelect = document.getElementById('date_format');
+    var dateDeliSelect = document.getElementById('date_deli');
+    var swBatSymb = document.getElementById('sw_bat_symb');
+    var secColorSelect = document.getElementById('sec_color_select');
+    var perLvlSelect = document.getElementById('batt_lvl_select');
+    var secondVis = document.getElementById('second_vis');
+    var battPerc = document.getElementById('batt_perc');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['week_select']) {
+//--->
+
+      weekTypeSelect.value = localStorage['week_select'];
+      dateFormatSelect.value = localStorage['date_format'];
+      dateDeliSelect.value = localStorage['date_deli'];
+      swBatSymb.value = localStorage['sw_bat_symb'];
+      secColorSelect.value = localStorage['sec_color_select'];
+      perLvlSelect.value = localStorage['batt_lvl_select'];
+      secondVis.value = localStorage['second_vis'];
+      battPerc.value = localStorage['batt_perc'];
+
+    }
+  })();
+  </script>
+</html>

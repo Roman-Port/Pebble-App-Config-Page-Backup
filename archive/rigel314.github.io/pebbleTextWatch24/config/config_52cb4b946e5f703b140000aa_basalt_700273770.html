@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>TextWatch 24</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			body
+			{
+				background-color: #00FFFF;
+			}
+			div.indent
+			{
+				position: relative;
+				left: +10px;
+			}
+			div.spaceFill
+			{
+				height: 20px;
+				width: 1px;
+			}
+			h2.boring
+			{
+				margin-top: 0px;
+			}
+		</style>
+		<script>function s(e){for(o={},i=0;i<e.length;i++)(j=e[i].id)&&(o[j]=e[i].checked?1:0);return window.location.href="pebblejs://close#"+JSON.stringify(o),!1}</script>
+		<script type="text/javascript" src="/rigel314.github.io/pebbleTextWatch24/loadedFunc.js"></script>
+	</head>
+	<body onload="loadedFunc()">
+		<h2>24-Hour Text Watch Configuration</h2>
+		<form onsubmit="return s(this)">
+			<h3>Date</h3>
+			<div class="indent">
+				<input name="dateVar" id="dateVar" type="checkbox"><label for="dateVar">Show Date</label>
+			</div>
+			<h3>o' or oh</h3>
+			<div class="indent">
+				<input name="ohVar" id="ohVar1" type="radio">o'<br>
+				<input name="ohVar" id="ohVar2" type="radio">oh
+			</div>
+			<div class="spaceFill"></div>
+			<input type="submit" value="Submit">
+			<div class="spaceFill"></div>
+			by<br>
+			<h2 class="boring">Computing Eureka</h2>
+		</form>
+	</body>
+</html>

@@ -1,0 +1,1493 @@
+<html class="ui-mobile">
+	<head>
+		<meta http-equiv="EXPIRES" content="0" charset="UTF-8">
+		<title>Slides of Time configuration</title>
+		<link href="/www.pebble.timm.tc//pebble_config_design.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="/www.pebble.timm.tc//pebble_config_scripts.js"></script>
+		<script>
+			var default_config = {
+				row1: 0, row2: 2, row3: 3, row4: 1, row5: 0,
+				splash1: "", splash2: Base64.encode("IT'S"), splash3: Base64.encode("TIME"), splash4: "", splash5: "",
+				animation: 0,
+				animationspeed: 150,
+				disableanimation: 0,
+				highlight: 1,
+				dateformat: 0,
+				tapping: 0,
+				tappingtimeout: 5000,
+				tempunit: 0,
+				location: "",
+				btloss: 1,
+				btlevel: 1,
+				vibratehourly: 0,
+				highlightcolor: "0000ff",
+				tempupdateinterval: 30,
+				tempcacheinterval: 60,
+				expertoptions: 1,
+				heartsappid: "",
+				heartsupdateinterval: 30,
+				heartsvibration: 4,
+				btlossvibration: 1,
+				btlevelvibration: 0,
+				btreconnectvibration: 0,
+				animationtype: 2,
+				dndwhilecharging: 0,
+				dndperiod: 0,
+				dndstarthours: 0,
+				dndstartminutes: 0,
+				dndstartampm: "24",
+				dndstophours: 6,
+				dndstopminutes: 0,
+				dndstopampm: "24",
+				invertscreen: 0,
+				skipsplashscreen: 0,
+				btlossnoanimation: 0,
+				hc2: "ff0000",
+				dp: 50,
+				tf: 0,
+				ctz: 0,
+				ctf: 1,
+				skin: 0,
+				ctz2: 0,
+				ctf2: 0,
+				hc3: "00ff00",
+				cl: 1,
+				fwd: 6,
+				ph: 0,
+				ctd: 0,
+				ctd2: 0,
+				bf: 0,
+				ss: 0,
+				sc: 0,
+				hu: 0,
+				hi: 0,
+				ho: 0,
+				hs: 0,
+			};
+			var latest_version = "1.18";
+			var aplite_watch = {
+				platform: "aplite",
+			};
+			var basalt_watch = {
+				platform: "basalt",
+			};
+			var chalk_watch = {
+				platform: "chalk",
+			};
+			var diorite_watch = {
+				platform: "diorite",
+			};
+			var current_config;
+			var current_version;
+			var current_watch;
+			var debug_log;
+
+			function setupValueSelector(valueSelector) {
+				var valueOptions = [
+					{text: "Random", value: "rand"},
+					{text: "Year", value: "year"},
+					{text: "Date", value: "date"},
+					{text: "Time", value: "time"},
+					{text: "Temperature", value: "temp"},
+					{text: "Battery level (right)", value: "blrt"},
+					{text: "Battery level (left)", value: "bllt"},
+					{text: "Battery level | Temperature", value: "bltp"},
+					{text: "Battery level | Calendar week", value: "blcw"},
+					{text: "Calendar week (right)", value: "cwrt"},
+					{text: "Calendar week (left)", value: "cwlt"},
+					{text: "Calendar week | Temperature", value: "cwtp"},
+					{text: "Calendar week | Battery level", value: "cwbl"},
+					{text: "Splash screen row", value: "spls"}
+				];
+				var option;
+				for(i = 0; i < valueOptions.length; i++) {
+					option = document.createElement("option");
+					option.value = valueOptions[i].value;
+					option.text = valueOptions[i].text;
+					valueSelector.add(option);
+				}
+				if(versionCompare(current_version, "1.6") > 0) {
+					option = document.createElement("option");
+					option.value = "hart";
+					option.text = "Pebble Appstore Hearts";
+					option.className = "ExpertOption";
+					valueSelector.add(option);
+					if(versionCompare(current_version, "1.7") > 0) {
+						option = document.createElement("option");
+							option.value = "dtmp";
+							option.text = "Temp(F/C) | Temp(C/F)";
+							option.className = "ExpertOption";
+							valueSelector.add(option);
+						if(versionCompare(current_version, "1.8") > 0) {
+							option = document.createElement("option");
+							if(versionCompare(current_version, "1.11") > 0) {
+								option.value = "ctz1";
+								option.text = "Custom time zone 1";
+							} else {
+								option.value = "zulu";
+								option.text = "Zulu time";
+							}
+							option.className = "ExpertOption";
+							valueSelector.add(option);
+							option = document.createElement("option");
+							if(versionCompare(current_version, "1.11") > 0) {
+								option.value = "ctz2";
+								option.text = "Custom time zone 2";
+							} else {
+								option.value = "gmtz";
+								option.text = "GMT";
+							}
+							option.className = "ExpertOption";
+							valueSelector.add(option);
+							if(versionCompare(current_version, "1.12") > 0) {
+										option = document.createElement("option");
+											option.value = "moyr";
+											option.text = "Month | Short year";
+											valueSelector.add(option);
+								if(versionCompare(current_version, "1.13") > 0) {
+									option = document.createElement("option");
+									option.value = "empt";
+									option.text = "Empty";
+									option.className = "ExpertOption";
+									valueSelector.add(option);
+									option = document.createElement("option");
+									option.value = "cwdn";
+									option.text = "Calendar week | Weekday number";
+									valueSelector.add(option);
+									if(versionCompare(current_version, "1.15") > 0) {
+										option = document.createElement("option");
+										option.value = "cwse";
+										option.text = "Calendar week | Seconds";
+										valueSelector.add(option);
+										if(versionCompare(current_version, "1.17") > 0) {
+											option = document.createElement("option");
+											option.value = "tpse";
+											option.text = "Temperature | Seconds";
+											valueSelector.add(option);
+											if("aplite" !== current_watch.platform) {
+												option = document.createElement("option");
+												option.value = "step";
+												option.text = "Steps (Pebble Health)";
+												valueSelector.add(option);
+												option = document.createElement("option");
+												option.value = "dist";
+												option.text = "Distance (Pebble Health)";
+												valueSelector.add(option);
+												option = document.createElement("option");
+												option.value = "actv";
+												option.text = "Active time (Pebble Health)";
+												valueSelector.add(option);
+												if(versionCompare(current_version, "1.19") > 0) {
+													option = document.createElement("option");
+													option.value = "achr";
+													option.text = "Active time | Heart rate (Pebble Health)";
+													valueSelector.add(option);
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+
+			function setupHighlightSelector(highlightSelector) {
+				if(!current_watch || current_watch.platform === "aplite"
+					                || current_watch.platform === "diorite") {
+					var highlightOptions = [
+						{text: "None", value: "none"},
+						{text: "Inverted", value: "inverted"},
+						{text: "Gray", value: "gray"},
+						{text: "Box", value: "box"},
+						{text: "Stripes", value: "stripes"}
+					];
+					if(versionCompare(current_version, "1.2") > 0) {
+						highlightOptions.push({text: "Dark Gray", value: "gray_20"});
+					}
+					for(i = 0; i < highlightOptions.length; i++) {
+						var option = document.createElement("option");
+						option.value = highlightOptions[i].value;
+						option.text = highlightOptions[i].text;
+						highlightSelector.add(option);
+					}
+				} else {
+					var highlightOptions = [
+						{text: "None", value: "none"},
+						{text: "Single color", value: "color"}
+					];
+					var expertHighlightOptions = [
+						{text: "Dithered color", value: "dithered"},
+						{text: "Box", value: "box"},
+						{text: "Stripes", value: "stripes"},
+						{text: "Bold box", value: "boldbox"},
+						{text: "Smooth gradient(v, 2 color)", value: "smooth_grad_vert"},
+						{text: "Smooth gradient(h, 2 color)", value: "smooth_grad_horiz"},
+						{text: "Dithered gradient(v, 2 color)", value: "dith_grad_vert"},
+						{text: "Dithered gradient(h, 2 color)", value: "dith_grad_horiz"}
+					];
+					var additionalExpertHighlightOptions = [
+						{text: "Smooth gradient (v, 3 color)", value: "smooth_grad_vert_3"},
+						{text: "Smooth gradient (h, 3 color)", value: "smooth_grad_horiz_3"},
+						{text: "Dithered gradient (v, 3 color)", value: "dith_grad_vert_3"},
+						{text: "Dithered gradient (h, 3 color)", value: "dith_grad_horiz_3"},
+						{text: "Two stripes", value: "twostripes"},
+						{text: "Three stripes", value: "threestripes"},
+						{text: "Bold stripes (2 color)", value: "boldstripes_2"},
+						{text: "Bold stripes (3 color)", value: "boldstripes_3"},
+						{text: "Diagonal stripes (2 color)", value: "diagonalstripes_2"},
+						{text: "Diagonal stripes (3 color)", value: "diagonalstripes_3"},
+					];
+					if(versionCompare(current_version, "1.17") > 0) {
+						additionalExpertHighlightOptions.push({text: "Two columns", value: "twocols"});
+						additionalExpertHighlightOptions.push({text: "Three columns", value: "threecols"});
+					}
+					for(i = 0; i < highlightOptions.length; i++) {
+						var option = document.createElement("option");
+						option.value = highlightOptions[i].value;
+						option.text = highlightOptions[i].text;
+						highlightSelector.add(option);
+					}
+					if(versionCompare(current_version, "1.9") > 0) {
+						for(i = 0; i < expertHighlightOptions.length; i++) {
+							var option = document.createElement("option");
+							option.value = expertHighlightOptions[i].value;
+							option.text = expertHighlightOptions[i].text;
+							option.className = "ExpertOption";
+							highlightSelector.add(option);
+						}
+						if(versionCompare(current_version, "1.10") > 0) {
+							var option = document.createElement("option");
+							option.value = "rainbow";
+							option.text = "Rainbow";
+							highlightSelector.add(option);
+							if(versionCompare(current_version, "1.11") > 0) {
+								for(i = 0; i < additionalExpertHighlightOptions.length; i++) {
+									var option = document.createElement("option");
+									option.value = additionalExpertHighlightOptions[i].value;
+									option.text = additionalExpertHighlightOptions[i].text;
+									option.className = "ExpertOption";
+									highlightSelector.add(option);
+								}
+							}
+						}
+					}
+				}
+			}
+
+			function setupVibrationSelector(vibrationSelector) {
+				var vibrationOptions;
+				if(versionCompare(current_version, "1.6") > 0) {
+					vibrationOptions = [
+						{text: "None", value: "none"},
+						{text: "Short", value: "short"},
+						{text: "Long", value: "long"},
+						{text: "Double", value: "double"},
+						{text: "Heartbeat", value: "heartbeat"}
+					];
+					if(versionCompare(current_version, "1.8") > 0) {
+						vibrationOptions.push({text: "Halfbeat", value: "halfbeat"});
+					}
+				} else {
+					vibrationOptions = [
+						{text: "Off", value: "off"},
+						{text: "On", value: "on"}
+					];
+				}
+				for(i = 0; i < vibrationOptions.length; i++) {
+					var option = document.createElement("option");
+					option.value = vibrationOptions[i].value;
+					option.text = vibrationOptions[i].text;
+					vibrationSelector.add(option);
+				}
+			}
+
+			function setupHourSelector(hourSelector) {
+				for(i = 0; i < 24; i++) {
+					var option = document.createElement("option");
+					option.value = i;
+					option.text = (i < 10 ? "0" : "") + i;
+					hourSelector.add(option);
+				}
+			}
+
+			function setupMinuteSelector(minuteSelector) {
+				for(i = 0; i < 60; i++) {
+					var option = document.createElement("option");
+					option.value = i;
+					option.text = (i < 10 ? "0" : "") + i;
+					minuteSelector.add(option);
+				}
+			}
+
+			function setupLowBatteryAlert(batterySelector) {
+				var lowBatteryOptions;
+				if(versionCompare(current_version, "1.6") > 0) {
+					lowBatteryOptions = [
+						{text: "None", value: "nothing"},
+						{text: "Icon", value: "icon"}
+					];
+				} else {
+					lowBatteryOptions = [
+						{text: "Vibrate + icon", value: "vibrateandicon"},
+						{text: "Vibrate", value: "vibrate"},
+						{text: "Icon", value: "icon"},
+						{text: "None", value: "nothing"}
+					];
+				}
+				for(i = 0; i < lowBatteryOptions.length; i++) {
+					var option = document.createElement("option");
+					option.value = lowBatteryOptions[i].value;
+					option.text = lowBatteryOptions[i].text;
+					batterySelector.add(option);
+				}
+			}
+
+			function setupBluetoothAlert(bluetoothSelector) {
+				var bluetoothOptions;
+				if(versionCompare(current_version, "1.6") > 0) {
+					bluetoothOptions = [
+						{text: "None", value: "nothing"},
+						{text: "Icon", value: "icon"},
+						{text: "Invert black & white", value: "invert"},
+					];
+					if(versionCompare(current_version, "1.8") > 0) {
+						bluetoothOptions.push({text: "Invert without highlight", value: "invertwoh"});
+						bluetoothOptions.push({text: "Invert highlight only", value: "invertho"});
+					}
+				} else {
+					bluetoothOptions = [
+						{text: "Vibrate + icon", value: "vibrateandicon"},
+						{text: "Vibrate", value: "vibrate"},
+						{text: "Icon", value: "icon"},
+						{text: "None", value: "nothing"}
+					];
+				}
+				for(i = 0; i < bluetoothOptions.length; i++) {
+					var option = document.createElement("option");
+					option.value = bluetoothOptions[i].value;
+					option.text = bluetoothOptions[i].text;
+					bluetoothSelector.add(option);
+				}
+			}
+
+			function setupInvertOptions(invertSelector) {
+				var invertOptions;
+				if(versionCompare(current_version, "1.8") > 0) {
+					invertOptions = [
+						{text: "Disabled", value: "disabled"},
+						{text: "Everything", value: "everything"},
+						{text: "Without highlight", value: "withouthighlight"},
+						{text: "Highlight only", value: "highlightonly"}
+					];
+				} else {
+					invertOptions = [
+						{text: "Disabled", value: "disabled"},
+						{text: "Enabled", value: "enabled"}
+					];
+				}
+				for(i = 0; i < invertOptions.length; i++) {
+					var option = document.createElement("option");
+					option.value = invertOptions[i].value;
+					option.text = invertOptions[i].text;
+					invertSelector.add(option);
+				}
+			}
+
+			function setupCustomSchedule(schedule) {
+				var scheduleOptions = [
+					{text: "Disabled", value: "disabled"},
+					{text: "No vibration", value: "novibration"}
+				];
+				if(versionCompare(current_version, "1.9") > 0) {
+					scheduleOptions.push({text: "No animation", value: "noanimation"});
+					scheduleOptions.push({text: "Neither vibe nor anim", value: "novibenoanim"});
+				}
+				for(i = 0; i < scheduleOptions.length; i++) {
+					var option = document.createElement("option");
+					option.value = scheduleOptions[i].value;
+					option.text = scheduleOptions[i].text;
+					schedule.add(option);
+				}
+			}
+
+			function setupDateFormat(selector) {
+				var dateFormatOptions = [
+					{text: "Day | month", value: "ddmm"},
+					{text: "Month | day", value: "mmdd"}
+				];
+				if(versionCompare(current_version, "1.11") > 0) {
+					dateFormatOptions.push({text: "Weekday name | day", value: "wddd"});
+					dateFormatOptions.push({text: "Weekday number | day", value: "dndd"});
+				}
+				for(i = 0; i < dateFormatOptions.length; i++) {
+					var option = document.createElement("option");
+					option.value = dateFormatOptions[i].value;
+					option.text = dateFormatOptions[i].text;
+					selector.add(option);
+				}
+			}
+
+			function animationSpeedChanged() {
+				document.getElementById("animationspeedtext").innerHTML = document.getElementById("animationspeed").value + " ms";
+			}
+
+			function tappingTimeoutChanged() {
+				document.getElementById("tappingtimeouttext").innerHTML = document.getElementById("tappingtimeout").value + " ms";
+			}
+
+			function temperatureUpdateIntervalChanged() {
+				document.getElementById("tempupdateintervaltext").innerHTML = document.getElementById("tempupdateinterval").value + " min";
+			}
+
+			function temperatureCachingIntervalChanged() {
+				document.getElementById("tempcacheintervaltext").innerHTML = document.getElementById("tempcacheinterval").value + " min";
+			}
+
+			function expertOptionsChanged() {
+				var expert = document.getElementById("expertoptions");
+				var x = document.getElementsByClassName("ExpertOption");
+				for(i = 0; i < x.length; i++) {
+					x[i].style.display = (expert.checked || versionCompare(current_version, "1.7") < 0) ? "inline" : "none";
+					x[i].setAttribute("hidden", true);
+					if(x[i].tagName.toLowerCase() === "option") {
+						x[i].disabled = !(expert.checked || versionCompare(current_version, "1.7") < 0);
+					}
+				}
+			}
+
+			function heartsUpdateIntervalChanged() {
+				document.getElementById("heartsupdateintervaltext").innerHTML = document.getElementById("heartsupdateinterval").value + " min";
+			}
+
+			function dndAMPMChanged(ampm, hours) {
+				if("24" === ampm.value) {
+					for(i = 12; i < 24; i++) {
+						hours.options[i].style.display = "inline";
+					}
+					hours.options[0].value = 0;
+					hours.options[0].text = "00";
+				} else {
+					for(i = 12; i < 24; i++) {
+						hours.options[i].style.display = "none";
+					}
+					hours.options[0].value = 12;
+					hours.options[0].text = "12";
+					if(hours.selectedIndex > 11) {
+						hours.selectedIndex -= 12;
+					}
+				}
+			}
+
+			function dndStartAMPMChanged() {
+				dndAMPMChanged(document.getElementById("dndstartampm"), document.getElementById("dndstarthours"));
+			}
+
+			function dndStopAMPMChanged() {
+				dndAMPMChanged(document.getElementById("dndstopampm"), document.getElementById("dndstophours"));
+			}
+
+			function invertScreenChanged() {
+				var p = [document.getElementById("highlightcolorPreview"), document.getElementById("highlightcolor2Preview"), document.getElementById("highlightcolor3Preview")];
+				var t = [document.getElementById("highlightcolorpicker"), document.getElementById("highlightcolor2picker"), document.getElementById("highlightcolor3picker")];
+				if( "highlightonly" === document.getElementById("invertscreen").value
+				      || "disabled" === document.getElementById("invertscreen").value) {
+					document.body.style.backgroundColor = "#000000";
+					document.body.style.color = "#ffffff";
+					for(i = 0; i < p.length; i++) {
+						p[i].style.borderColor = "#000000";
+						selectColor(t[i], p[i].style.backgroundColor, "#000000", "#ffffff");
+					}
+				} else {
+					document.body.style.backgroundColor = "#ffffff";
+					document.body.style.color = "#000000";
+					for(i = 0; i < p.length; i++) {
+						p[i].style.borderColor = "#ffffff";
+						selectColor(t[i], p[i].style.backgroundColor, "#ffffff", "#000000");
+					}
+				}
+				if( "highlightonly" === document.getElementById("invertscreen").value
+				    || "everything" === document.getElementById("invertscreen").value) {
+					for(i = 0; i < p.length; i++) {
+						if(1 === document.getElementById("highlight").selectedIndex && "000000" === getColorValue(p[i].style.backgroundColor)) {
+							p[i].style.color = "#ffffff";
+						} else {
+							p[i].style.color = "#000000";
+						}
+					}
+				} else {
+					for(i = 0; i < p.length; i++) {
+						if(1 === document.getElementById("highlight").selectedIndex && "ffffff" == getColorValue(p[i].style.backgroundColor)) {
+							p[i].style.color = "#000000";
+						} else {
+							p[i].style.color = "#ffffff";
+						}
+					}
+				}
+			}
+
+			function rowChanged(row) {
+			}
+
+			var firstHighlightColorPicker = true;
+			function onHighlightColorPicker(colorValue, colorName) {
+				var preview = document.getElementById("highlightcolorPreview");
+				if(firstHighlightColorPicker || preview.style.backgroundColor === colorValue) {
+					firstHighlightColorPicker = false;
+					document.getElementById("highlightcolorpicker").setAttribute("hidden", true);
+				}
+				preview.style.backgroundColor = colorValue;
+				preview.innerHTML = colorName;
+				invertScreenChanged();
+			}
+
+			function showhighlightcolorpicker() {
+				document.getElementById("highlightcolor2picker").setAttribute("hidden", true);
+				document.getElementById("highlightcolor3picker").setAttribute("hidden", true);
+				invertScreenChanged();
+				var p = document.getElementById("highlightcolorpicker");
+				if(p.hasAttribute("hidden")) {
+					p.removeAttribute("hidden");
+					scrollToShow(p);
+				} else {
+					p.setAttribute("hidden", true);
+				}
+			}
+
+			var firstHighlightColor2Picker = true;
+			function onHighlightColor2Picker(colorValue, colorName) {
+				var preview = document.getElementById("highlightcolor2Preview");
+				if(firstHighlightColor2Picker || preview.style.backgroundColor === colorValue) {
+					firstHighlightColor2Picker = false;
+					document.getElementById("highlightcolor2picker").setAttribute("hidden", true);
+				}
+				preview.style.backgroundColor = colorValue;
+				preview.innerHTML = colorName;
+				invertScreenChanged();
+			}
+
+			function showhighlightcolor2picker() {
+				document.getElementById("highlightcolorpicker").setAttribute("hidden", true);
+				document.getElementById("highlightcolor3picker").setAttribute("hidden", true);
+				invertScreenChanged();
+				var p = document.getElementById("highlightcolor2picker");
+				if(p.hasAttribute("hidden")) {
+					p.removeAttribute("hidden");
+					scrollToShow(p);
+				} else {
+					p.setAttribute("hidden", true);
+				}
+			}
+
+			var firstHighlightColor3Picker = true;
+			function onHighlightColor3Picker(colorValue, colorName) {
+				var preview = document.getElementById("highlightcolor3Preview");
+				if(firstHighlightColor3Picker || preview.style.backgroundColor === colorValue) {
+					firstHighlightColor3Picker = false;
+					document.getElementById("highlightcolor3picker").setAttribute("hidden", true);
+				}
+				preview.style.backgroundColor = colorValue;
+				preview.innerHTML = colorName;
+				invertScreenChanged();
+			}
+
+			function showhighlightcolor3picker() {
+				document.getElementById("highlightcolorpicker").setAttribute("hidden", true);
+				document.getElementById("highlightcolor2picker").setAttribute("hidden", true);
+				invertScreenChanged();
+				var p = document.getElementById("highlightcolor3picker");
+				if(p.hasAttribute("hidden")) {
+					p.removeAttribute("hidden");
+					scrollToShow(p);
+				} else {
+					p.setAttribute("hidden", true);
+				}
+			}
+
+			function scrollDown() {
+				var pos = getAbsPosition(document.getElementById("bottom"));
+				window.scrollTo(0, pos[0]);
+			}
+
+			function currentSettings() {
+				var x = document.getElementsByClassName("DownArrowLeft");
+				var y = document.getElementsByClassName("DownArrowRight");
+				for(i = 0; i < x.length; i++) {
+					x[i].innerHTML = "&darr;";
+					y[i].innerHTML = "&darr;";
+				}
+
+				var o = document.getElementsByTagName("SELECT");
+				for(i = 0; i < o.length; i++) {
+					if(o[i].className !== "SpecialSelect") {
+						o[i].style.width = (window.innerWidth*0.44);
+					}
+				}
+
+				current_config = JSON.parse(getQueryParam('current_config', JSON.stringify(default_config)));
+				current_watch = JSON.parse(getQueryParam('current_watch', JSON.stringify(basalt_watch)));
+				if("aplite" === current_watch.platform) {
+					latest_version = "1.17";
+				}
+				current_version = getQueryParam('current_version', latest_version);
+				if(versionCompare(current_version, "1.11") > 0) {
+					default_config.splash2 = Base64.encode(default_config.splash2);
+					default_config.splash3 = Base64.encode(default_config.splash3);
+				}
+
+				debug_log = JSON.parse(getQueryParam('debug_log', JSON.stringify(['no_log'])));
+				if(debug_log[0] !== 'no_log') {
+					document.getElementById("debug_log").innerHTML = debug_log.join("<br>");
+					document.getElementById("debug_log").removeAttribute("hidden");
+				}
+
+				if(versionCompare(current_version, latest_version) < 0) {
+					document.getElementById("latest_version").innerHTML = latest_version;
+					document.getElementById("not_latest_version").removeAttribute("hidden");
+				}
+
+				document.getElementById("version").innerHTML = "V"+current_version;
+
+				setupValueSelector(document.getElementById("row1"));
+				setupValueSelector(document.getElementById("row2"));
+				setupValueSelector(document.getElementById("row3"));
+				setupValueSelector(document.getElementById("row4"));
+				setupValueSelector(document.getElementById("row5"));
+
+				setupHighlightSelector(document.getElementById("highlight"));
+
+				if(!current_watch || (current_watch.platform != "aplite" && current_watch.platform != "diorite")) {
+					setupColorPicker(document.getElementById("highlightcolorpicker"), onHighlightColorPicker, "#000000", "#ffffff");
+					document.getElementById("coloroptions").removeAttribute("hidden");
+					if(versionCompare(current_version, "1.9") > 0) {
+						setupColorPicker(document.getElementById("highlightcolor2picker"), onHighlightColor2Picker, "#000000", "#ffffff");
+						document.getElementById("additionalhighlightoptions").removeAttribute("hidden");
+						document.getElementById("additionalhighlightoptionstext").removeAttribute("hidden");
+						if(versionCompare(current_version, "1.11") > 0) {
+							setupColorPicker(document.getElementById("highlightcolor3picker"), onHighlightColor3Picker, "#000000", "#ffffff");
+							document.getElementById("thirdcolorselection").removeAttribute("hidden");
+						}
+					}
+				}
+
+				setupVibrationSelector(document.getElementById("heartsvibration"));
+				setupVibrationSelector(document.getElementById("btlossvibration"));
+				setupVibrationSelector(document.getElementById("btreconnectvibration"));
+				setupVibrationSelector(document.getElementById("btlevelvibration"));
+				setupVibrationSelector(document.getElementById("vibratehourly"));
+
+				setupHourSelector(document.getElementById("dndstarthours"));
+				setupMinuteSelector(document.getElementById("dndstartminutes"));
+				setupHourSelector(document.getElementById("dndstophours"));
+				setupMinuteSelector(document.getElementById("dndstopminutes"));
+				setupCustomSchedule(document.getElementById("dndperiod"));
+
+				setupLowBatteryAlert(document.getElementById("btlevel"));
+				setupBluetoothAlert(document.getElementById("btloss"));
+				setupInvertOptions(document.getElementById("invertscreen"));
+
+				setupTimeZoneSelector(document.getElementById("customtimezone"));
+				setupTimeZoneSelector(document.getElementById("customtimezone2"));
+
+				setupDateFormat(document.getElementById("dateformat"));
+
+				if(versionCompare(current_version, "1.2") > 0) {
+					var option = document.createElement("option");
+					option.value = "shortanimation";
+					option.text = "Short animation";
+					document.getElementById("tapping").add(option);
+					if(versionCompare(current_version, "1.3") > 0) {
+						option = document.createElement("option");
+						option.value = "startup";
+						option.text = "Startup only";
+						document.getElementById("animation").add(option);
+						option = document.createElement("option");
+						option.value = "tapping";
+						option.text = "Tapping effect only";
+						document.getElementById("animation").add(option);
+						option = document.createElement("option");
+						option.value = "startuptapping";
+						option.text = "Startup and Tapping only";
+						document.getElementById("animation").add(option);
+						if(versionCompare(current_version, "1.4") > 0) {
+							document.getElementById("tempintervals").removeAttribute("hidden");
+							if(versionCompare(current_version, "1.6") > 0) {
+								option = document.createElement("option");
+								option.value = "longanimation";
+								option.text = "Long animation";
+								document.getElementById("tapping").add(option);
+								document.getElementById("extendedoptions").removeAttribute("hidden");
+								document.getElementById("heartsoptions").removeAttribute("hidden");
+								document.getElementById("btvibrationselect").removeAttribute("hidden");
+								document.getElementById("btlevelvibrationselect").removeAttribute("hidden");
+								document.getElementById("animationtypeoption").removeAttribute("hidden");
+								document.getElementById("dndoptions").removeAttribute("hidden");
+								document.getElementById("invertscreenoption").removeAttribute("hidden");
+								if(versionCompare(current_version, "1.8") > 0) {
+									document.getElementById("v1_8_animationoptions").removeAttribute("hidden");
+										option = document.createElement("option");
+										option.value = "splashscreen";
+										option.text = "Show splash screen";
+										document.getElementById("tapping").add(option);
+									if(versionCompare(current_version, "1.11") > 0) {
+										document.getElementById("timeoptions").removeAttribute("hidden");
+										document.getElementById("skinselection").removeAttribute("hidden");
+										document.getElementById("v_1_12_othersettings").removeAttribute("hidden");
+										document.getElementById("weekdayoption").removeAttribute("hidden");
+										if(versionCompare(current_version, "1.13") > 0) {
+											document.getElementById("dst1option").removeAttribute("hidden");
+											document.getElementById("dst2option").removeAttribute("hidden");
+											document.getElementById("blformatselect").removeAttribute("hidden");
+											document.getElementById("sansserifselection").removeAttribute("hidden");
+											if(current_watch.platform === "chalk") {
+												document.getElementById("sidecolsselection").removeAttribute("hidden");
+											}
+											if(versionCompare(current_version, "1.17") > 0) {
+												document.getElementById("hash_heart").removeAttribute("hidden");
+												if(current_watch.platform !== "aplite") {
+													document.getElementById("healthselect").removeAttribute("hidden");
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				document.getElementById("row1").selectedIndex = current_config.row1;
+				document.getElementById("row2").selectedIndex = current_config.row2;
+				document.getElementById("row3").selectedIndex = current_config.row3;
+				document.getElementById("row4").selectedIndex = current_config.row4;
+				document.getElementById("row5").selectedIndex = current_config.row5;
+				if(versionCompare(current_version, "1.11") > 0) {
+						document.getElementById("splash1").value = Base64.decode(current_config.splash1);
+						document.getElementById("splash2").value = Base64.decode(current_config.splash2);
+						document.getElementById("splash3").value = Base64.decode(current_config.splash3);
+						document.getElementById("splash4").value = Base64.decode(current_config.splash4);
+						document.getElementById("splash5").value = Base64.decode(current_config.splash5);
+				} else {
+						document.getElementById("splash1").value = current_config.splash1;
+						document.getElementById("splash2").value = current_config.splash2;
+						document.getElementById("splash3").value = current_config.splash3;
+						document.getElementById("splash4").value = current_config.splash4;
+						document.getElementById("splash5").value = current_config.splash5;
+					}
+				document.getElementById("animation").selectedIndex = current_config.animation;
+				document.getElementById("animationspeed").value = current_config.animationspeed;
+				animationSpeedChanged();
+				document.getElementById("disableanimation").selectedIndex = current_config.disableanimation;
+				document.getElementById("highlight").selectedIndex = current_config.highlight;
+				document.getElementById("dateformat").selectedIndex = current_config.dateformat;
+				document.getElementById("tapping").selectedIndex = current_config.tapping;
+				document.getElementById("tappingtimeout").value = current_config.tappingtimeout;
+				tappingTimeoutChanged();
+				document.getElementById("tempunit").selectedIndex = current_config.tempunit;
+				document.getElementById("location").value = current_config.location;
+				if(versionCompare(current_version, "1.6") > 0) {
+					document.getElementById("btloss").selectedIndex = current_config.btloss;
+					document.getElementById("btlevel").selectedIndex = current_config.btlevel;
+				} else {
+					document.getElementById("btloss").value = current_config.btloss;
+					document.getElementById("btlevel").value = current_config.btlevel;
+				}
+				document.getElementById("vibratehourly").selectedIndex = current_config.vibratehourly;
+				if(current_config.highlight_color) {
+					document.getElementById("highlightcolorPreview").style.backgroundColor = current_config.highlight_color;
+				} else {
+					document.getElementById("highlightcolorPreview").style.backgroundColor = current_config.highlightcolor;
+				}
+				document.getElementById("highlightcolorPreview").innerHTML = getColorName(document.getElementById("highlightcolorPreview").style.backgroundColor);
+				document.getElementById("tempupdateinterval").value = current_config.tempupdateinterval;
+				temperatureUpdateIntervalChanged();
+				document.getElementById("tempcacheinterval").value = current_config.tempcacheinterval;
+				temperatureCachingIntervalChanged();
+				document.getElementById("btlossvibration").selectedIndex = current_config.btlossvibration;
+				document.getElementById("btreconnectvibration").selectedIndex = current_config.btreconnectvibration;
+				document.getElementById("btlevelvibration").selectedIndex = current_config.btlevelvibration;
+				document.getElementById("expertoptions").checked = current_config.expertoptions;
+				expertOptionsChanged();
+				document.getElementById("heartsappid").value = current_config.heartsappid;
+				document.getElementById("heartsvibration").selectedIndex = current_config.heartsvibration;
+				document.getElementById("heartsupdateinterval").value = current_config.heartsupdateinterval;
+				heartsUpdateIntervalChanged();
+				document.getElementById("animationtype").selectedIndex = current_config.animationtype;
+				document.getElementById("dndwhilecharging").selectedIndex = current_config.dndwhilecharging;
+				document.getElementById("dndperiod").selectedIndex = current_config.dndperiod;
+				document.getElementById("dndstarthours").value = current_config.dndstarthours;
+				document.getElementById("dndstartminutes").value = current_config.dndstartminutes;
+				document.getElementById("dndstartampm").value = current_config.dndstartampm;
+				dndStartAMPMChanged();
+				document.getElementById("dndstophours").value = current_config.dndstophours;
+				document.getElementById("dndstopminutes").value = current_config.dndstopminutes;
+				document.getElementById("dndstopampm").value = current_config.dndstopampm;
+				dndStopAMPMChanged();
+				document.getElementById("invertscreen").selectedIndex = current_config.invertscreen;
+				document.getElementById("skipsplashscreen").selectedIndex = current_config.skipsplashscreen;
+				document.getElementById("btlossnoanimation").selectedIndex = current_config.btlossnoanimation;
+				document.getElementById("highlightcolor2Preview").style.backgroundColor = current_config.hc2;
+				document.getElementById("highlightcolor2Preview").innerHTML = getColorName(document.getElementById("highlightcolor2Preview").style.backgroundColor);
+				document.getElementById("ditherpercent").value = current_config.dp;
+				document.getElementById("timeformat").selectedIndex = current_config.tf;
+				document.getElementById("customtimezone").value = current_config.ctz;
+				document.getElementById("customtimeformat").selectedIndex = current_config.ctf;
+				document.getElementById("skin").selectedIndex = current_config.skin;
+				document.getElementById("customtimezone2").value = current_config.ctz2;
+				document.getElementById("customtimeformat2").selectedIndex = current_config.ctf2;
+				document.getElementById("highlightcolor3Preview").style.backgroundColor = current_config.hc3;
+				document.getElementById("highlightcolor3Preview").innerHTML = getColorName(document.getElementById("highlightcolor3Preview").style.backgroundColor);
+				document.getElementById("language").selectedIndex = current_config.cl;
+				document.getElementById("firstweekday").selectedIndex = current_config.fwd;
+				document.getElementById("permanenthints").selectedIndex = current_config.ph;
+				document.getElementById("customtimedst").selectedIndex = current_config.ctd;
+				document.getElementById("customtimedst2").selectedIndex = current_config.ctd2;
+				document.getElementById("blformat").selectedIndex = current_config.bf;
+				document.getElementById("sansserif").selectedIndex = current_config.ss;
+				document.getElementById("sidecols").selectedIndex = current_config.sc;
+				document.getElementById("healthupdate").selectedIndex = current_config.hu;
+				document.getElementById("healthunit").selectedIndex = current_config.hi;
+				document.getElementById("healthoverflow").selectedIndex = current_config.ho;
+				document.getElementById("healthsleep").selectedIndex = current_config.hs;
+
+				invertScreenChanged();
+			}
+
+			function save() {
+				var configuration = {
+					row1: document.getElementById("row1").selectedIndex,
+					row2: document.getElementById("row2").selectedIndex,
+					row3: document.getElementById("row3").selectedIndex,
+					row4: document.getElementById("row4").selectedIndex,
+					row5: document.getElementById("row5").selectedIndex,
+					splash1: document.getElementById("splash1").value.replace("\'", "@"),
+					splash2: document.getElementById("splash2").value.replace("\'", "@"),
+					splash3: document.getElementById("splash3").value.replace("\'", "@"),
+					splash4: document.getElementById("splash4").value.replace("\'", "@"),
+					splash5: document.getElementById("splash5").value.replace("\'", "@"),
+					animation: document.getElementById("animation").selectedIndex,
+					animationspeed: document.getElementById("animationspeed").value,
+					disableanimation: document.getElementById("disableanimation").selectedIndex,
+					highlight: document.getElementById("highlight").selectedIndex,
+					dateformat: document.getElementById("dateformat").selectedIndex,
+					tapping: document.getElementById("tapping").selectedIndex,
+					tappingtimeout: document.getElementById("tappingtimeout").value,
+					tempunit: document.getElementById("tempunit").selectedIndex,
+					location: document.getElementById("location").value,
+					btloss: document.getElementById("btloss").value,
+					btlevel: document.getElementById("btlevel").value,
+					vibratehourly: document.getElementById("vibratehourly").selectedIndex,
+					highlightcolor: ((current_watch && current_watch.platform != "aplite") ? getColorValue(document.getElementById("highlightcolorPreview").style.backgroundColor) : 0),
+				};
+				if(versionCompare(current_version, "1.4") > 0) {
+					configuration.tempupdateinterval = document.getElementById("tempupdateinterval").value;
+					configuration.tempcacheinterval = document.getElementById("tempcacheinterval").value;
+					if(versionCompare(current_version, "1.6") > 0) {
+						configuration.expertoptions = document.getElementById("expertoptions").checked;
+						configuration.heartsappid = document.getElementById("heartsappid").value;
+						configuration.heartsupdateinterval = document.getElementById("heartsupdateinterval").value;
+						configuration.heartsvibration = document.getElementById("heartsvibration").selectedIndex;
+						configuration.btlossvibration = document.getElementById("btlossvibration").selectedIndex;
+						configuration.btlevelvibration = document.getElementById("btlevelvibration").selectedIndex;
+						configuration.btreconnectvibration = document.getElementById("btreconnectvibration").selectedIndex;
+						configuration.animationtype = document.getElementById("animationtype").selectedIndex;
+						configuration.dndwhilecharging = document.getElementById("dndwhilecharging").selectedIndex;
+						configuration.dndperiod = document.getElementById("dndperiod").selectedIndex;
+						configuration.dndstarthours = document.getElementById("dndstarthours").value;
+						configuration.dndstartminutes = document.getElementById("dndstartminutes").value;
+						configuration.dndstartampm = document.getElementById("dndstartampm").value;
+						configuration.dndstophours = document.getElementById("dndstophours").value;
+						configuration.dndstopminutes = document.getElementById("dndstopminutes").value;
+						configuration.dndstopampm = document.getElementById("dndstopampm").value;
+						configuration.invertscreen = document.getElementById("invertscreen").selectedIndex;
+						configuration.btloss = document.getElementById("btloss").selectedIndex;
+						configuration.btlevel = document.getElementById("btlevel").selectedIndex;
+						if(versionCompare(current_version, "1.8") > 0) {
+							configuration.skipsplashscreen = document.getElementById("skipsplashscreen").selectedIndex;
+							configuration.btlossnoanimation = document.getElementById("btlossnoanimation").selectedIndex;
+							if(versionCompare(current_version, "1.9") > 0) {
+								configuration.hc2 = getColorValue(document.getElementById("highlightcolor2Preview").style.backgroundColor);
+								configuration.dp = document.getElementById("ditherpercent").value;
+								if(versionCompare(current_version, "1.11") > 0) {
+									configuration.tf = document.getElementById("timeformat").selectedIndex;
+									configuration.ctz = document.getElementById("customtimezone").value;
+									configuration.ctf = document.getElementById("customtimeformat").selectedIndex;
+									configuration.skin = document.getElementById("skin").selectedIndex;
+									configuration.ctz2 = document.getElementById("customtimezone2").value;
+									configuration.ctf2 = document.getElementById("customtimeformat2").selectedIndex;
+									configuration.hc3 = getColorValue(document.getElementById("highlightcolor3Preview").style.backgroundColor);
+									configuration.cl = document.getElementById("language").selectedIndex;
+									configuration.fwd = document.getElementById("firstweekday").selectedIndex;
+									configuration.ph = document.getElementById("permanenthints").selectedIndex;
+									configuration.splash1 = Base64.encode(document.getElementById("splash1").value);
+									configuration.splash2 = Base64.encode(document.getElementById("splash2").value);
+									configuration.splash3 = Base64.encode(document.getElementById("splash3").value);
+									configuration.splash4 = Base64.encode(document.getElementById("splash4").value);
+									configuration.splash5 = Base64.encode(document.getElementById("splash5").value);
+									if(versionCompare(current_version, "1.13") > 0) {
+										configuration.ctd = document.getElementById("customtimedst").selectedIndex;
+										configuration.ctd2 = document.getElementById("customtimedst2").selectedIndex;
+										configuration.bf = document.getElementById("blformat").selectedIndex;
+										configuration.ss = document.getElementById("sansserif").selectedIndex;
+										if(current_watch.platform === "chalk") {
+											configuration.sc = document.getElementById("sidecols").selectedIndex;
+										}
+										if(versionCompare(current_version, "1.17") > 0) {
+											if(current_watch.platform !== "aplite") {
+												configuration.hu = document.getElementById("healthupdate").selectedIndex;
+												configuration.hi = document.getElementById("healthunit").selectedIndex;
+												configuration.ho = document.getElementById("healthoverflow").selectedIndex;
+												configuration.hs = document.getElementById("healthsleep").selectedIndex;
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				document.location.href=getQueryParam('return_to', 'pebblejs://close#') + encodeURIComponent(JSON.stringify(configuration));
+			}
+		</script>
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-63222361-1', 'auto');
+			ga('send', 'pageview');
+		</script>
+	</head>
+	<body text="#ffffff" bgcolor="#000000" onload="currentSettings()">
+			<div id="testtest"></div>
+		<h1 style="padding:15px 10px 0px;font-family:'PT Sans',sans-serif;font-size:xx-large;font-weight:500">Slides of Time</h1>
+		<div id="version" style="text-align:right;font-size:x-small"></div>
+		<!--
+		<div style="padding:15px 10px 0px;font-family:'PT Sans',sans-serif;font-size:xx-large;font-weight:500;color:#888888;white-space:nowrap;text-align:center">BETA BETA BETA</div>
+		-->
+		<div id="not_latest_version" style="margin:10px;background-color:#FF4700;border-radius: 5px;padding:5px;color:#F7F7F7" hidden="">A new version (V<span id="latest_version"></span>) is available in the Pebble App Store. Make sure to update to the latest version to get all bugfixes and new features.</div>
+		<p id="debug_log" hidden="">
+		<div class="Divider"></div>
+		<div id="extendedoptions" style="float:right" hidden="">Show extended options<input type="checkbox" id="expertoptions" onclick="expertOptionsChanged()"></div>
+		<div id="empty"><br></div>
+		<br><div class="Divider"><span class="DownArrowLeft" onclick="scrollDown()"></span>Screens<span class="DownArrowRight" onclick="scrollDown()"></span></div><br>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Main screen rows:<br>
+					<select class="SpecialSelect" id="row1" size="1" onchange="rowChanged('row1')"></select><br>
+					<select class="SpecialSelect" id="row2" size="1" onchange="rowChanged('row2')"></select><br>
+					<select class="SpecialSelect" id="row3" size="1" onchange="rowChanged('row3')"></select><br>
+					<select class="SpecialSelect" id="row4" size="1" onchange="rowChanged('row4')"></select><br>
+					<select class="SpecialSelect" id="row5" size="1" onchange="rowChanged('row5')"></select></div></div>
+			<div class="Row">
+				<div class="Cell">Splash screen rows:<br>
+					<input id="splash1" type="text" maxlength="4"><br>
+					<input id="splash2" type="text" maxlength="4"><br>
+					<input id="splash3" type="text" maxlength="4"><br>
+					<input id="splash4" type="text" maxlength="4"><br>
+					<input id="splash5" type="text" maxlength="4"><br>
+					- leave empty for random digits<span id="hash_heart" hidden=""><br>- use # to display a &hearts;</span></div></div>
+		</div>
+		<div id="skinselection" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Font:</div>
+				<div class="Cell"><select id="skin" size="1">
+					<option value="sot">Normal</option>
+					<option value="enigma">Large</option>
+					</select></div></div>
+		</div>
+		</div>
+		<div id="sansserifselection" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">5 sans serif:</div>
+				<div class="Cell"><select id="sansserif" size="1">
+					<option value="disabled">Disabled</option>
+					<option value="enabled">Enabled</option>
+					</select></div></div>
+		</div>
+		</div>
+		<div id="sidecolsselection" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Side columns:</div>
+				<div class="Cell"><select id="sidecols" size="1">
+					<option value="gray">Gray</option>
+					<option value="white">White</option>
+					<option value="off">Off</option>
+					</select></div></div>
+		</div>
+		</div>
+		<br><div class="Divider"><span class="DownArrowLeft" onclick="scrollDown()"></span>Animation<span class="DownArrowRight" onclick="scrollDown()"></span></div><br>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Limits:</div>
+				<div class="Cell"><select id="animation" size="1">
+					<option value="full">On every change</option>
+					<option value="10minutes">More than 1 column changes</option>
+					<option value="hourly">More than 2 columns change</option>
+					<option value="10hours">All columns change</option>
+					<option value="none">No animation</option>
+					</select></div></div>
+		</div>
+		<div class="ExpertOption">
+		<div id="animationtypeoption" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Type:</div>
+				<div class="Cell"><select id="animationtype" size="1">
+					<option value="off">Ease in and out</option>
+					<option value="on">Ease in</option>
+					<option value="on">Ease out</option>
+					<option value="on">Linear</option>
+					</select></div></div>
+		</div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Speed:</div>
+				<div class="Cell" id="animationspeedtext"></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell"><input oninput="animationSpeedChanged()" type="range" id="animationspeed" min="50" max="1000" step="50" style="width:100%"></div></div>
+		</div>
+		<div id="v1_8_animationoptions" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Skip splash screen:</div>
+				<div class="Cell"><select id="skipsplashscreen" size="1">
+					<option value="disabled">Disabled</option>
+					<option value="enabled">Enabled</option>
+					</select></div></div>
+			<div class="Row">
+				<div class="Cell">No animation on bluetooth connection loss:</div>
+				<div class="Cell"><select id="btlossnoanimation" size="1">
+					<option value="disabled">Disabled</option>
+					<option value="enabled">Enabled</option>
+					</select></div></div>
+		</div>
+		</div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">No animation on low battery:</div>
+				<div class="Cell"><select id="disableanimation" size="1">
+					<option value="disabled">Disabled</option>
+					<option value="enabled">Enabled</option>
+					</select></div></div>
+		</div>
+		<br><div class="Divider" id="highlightoptions"><span class="DownArrowLeft" onclick="scrollDown()"></span>Highlighting<span class="DownArrowRight" onclick="scrollDown()"></span></div><br>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Type:</div>
+				<div class="Cell"><select id="highlight" size="1" onchange="invertScreenChanged()"></select></div></div>
+		</div>
+		<div id="coloroptions" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Color:</div>
+				<div class="Cell ColorPicker" id="highlightcolorPreview" style="text-align:center" onclick='showhighlightcolorpicker()'></div></div>
+		</div>
+		<div id="highlightcolorpicker" hidden=""></div>
+		<div class="ExpertOption">
+		<div id="additionalhighlightoptions" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">2nd color:</div>
+				<div class="Cell ColorPicker" id="highlightcolor2Preview" style="text-align:center" onclick='showhighlightcolor2picker()'></div></div>
+		</div>
+		<div id="highlightcolor2picker" hidden=""></div>
+		<div id="thirdcolorselection" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">3rd color:</div>
+				<div class="Cell ColorPicker" id="highlightcolor3Preview" style="text-align:center" onclick='showhighlightcolor3picker()'></div></div>
+		</div>
+		<div id="highlightcolor3picker" hidden=""></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Dither percent:</div>
+				<div class="Cell"><select id="ditherpercent" size="1">
+					<option value="10">10%</option>
+					<option value="20">20%</option>
+					<option value="25">25%</option>
+					<option value="30">30%</option>
+					<option value="40">40%</option>
+					<option value="50">50%</option>
+					<option value="60">60%</option>
+					<option value="70">70%</option>
+					<option value="75">75%</option>
+					<option value="80">80%</option>
+					<option value="90">90%</option>
+					</select></div></div>
+		</div>
+		</div>
+		</div>
+		</div>
+		<div id="invertscreenoption" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Invert black & white:</div>
+				<div class="Cell"><select id="invertscreen" size="1" onchange="invertScreenChanged()"></select></div></div>
+		</div>
+		</div>
+		<div class="ExpertOption">
+		<div id="additionalhighlightoptionstext" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">
+					Dithering and gradient implementations are provided by <b>MathewReiss</b>' <i>dithering</i> library.</div></div>
+		</div>
+		</div>
+		</div>
+		<br><div class="Divider"><span class="DownArrowLeft" onclick="scrollDown()"></span>Tapping<span class="DownArrowRight" onclick="scrollDown()"></span></div><br>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Effect:</div>
+				<div class="Cell"><select id="tapping" size="1">
+					<option value="none">None</option>
+					<option value="scramble">Scramble</option>
+					<option value="showhints">Show hints</option>
+					</select></div></div>
+			<div class="Row">
+				<div class="Cell">Timeout:</div>
+				<div class="Cell" id="tappingtimeouttext"></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell"><input oninput="tappingTimeoutChanged()" type="range" id="tappingtimeout" min="100" max="5000" step="100" style="width:100%"></div></div>
+		</div>
+		<br><div class="Divider"><span class="DownArrowLeft" onclick="scrollDown()"></span>Date & Time<span class="DownArrowRight" onclick="scrollDown()"></span></div><br>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Date format:</div>
+				<div class="Cell"><select id="dateformat" size="1"></select></div></div>
+		</div>
+		<div id="weekdayoption" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">First day of the week:</div>
+				<div class="Cell"><select id="firstweekday" size="1">
+					<option value="sun">Sunday</option>
+					<option value="sat">Saturday</option>
+					<option value="fri" style="display:none" hidden="" disabled=""></option>
+					<option value="thu" style="display:none" hidden="" disabled=""></option>
+					<option value="wed" style="display:none" hidden="" disabled=""></option>
+					<option value="tue" style="display:none" hidden="" disabled=""></option>
+					<option value="mon">Monday</option>
+				</select></div></div>
+		</div>
+		</div>
+		<div class="ExpertOption">
+		<div id="timeoptions" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Time format:</div>
+				<div class="Cell"><select id="timeformat" size="1">
+					<option value="watch">Watch settings</option>
+					<option value="24h">24h</option>
+					<option value="12h">12h</option>
+					</select></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Custom time zone 1:</div>
+				<div class="Cell"><select id="customtimezone" size="1"></select></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Custom time format 1:</div>
+				<div class="Cell"><select id="customtimeformat" size="1">
+					<option value="watch">Watch settings</option>
+					<option value="24h">24h</option>
+					<option value="12h">12h</option>
+					</select></div></div>
+		</div>
+		<div id="dst1option" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Custom time DST 1:</div>
+				<div class="Cell"><select id="customtimedst" size="1">
+					<option value="no">Use no DST</option>
+					<option value="dst">Adjust automatically</option>
+					</select></div></div>
+		</div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Custom time zone 2:</div>
+				<div class="Cell"><select id="customtimezone2" size="1"></select></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Custom time format 2:</div>
+				<div class="Cell"><select id="customtimeformat2" size="1">
+					<option value="watch">Watch settings</option>
+					<option value="24h">24h</option>
+					<option value="12h">12h</option>
+					</select></div></div>
+		</div>
+		<div id="dst2option" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Custom time DST 2:</div>
+				<div class="Cell"><select id="customtimedst2" size="1">
+					<option value="no">Use no DST</option>
+					<option value="dst">Adjust automatically</option>
+					</select></div></div>
+		</div>
+		</div>
+		</div>
+		</div>
+		<div id="healthselect" hidden="">
+		<br><div class="Divider"><span class="DownArrowLeft" onclick="scrollDown()"></span>Pebble Health<span class="DownArrowRight" onclick="scrollDown()"></span></div><br>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Update:</div>
+				<div class="Cell"><select id="healthupdate" size="1">
+					<option value="lazy">With time</option>
+					<option value="live">Immediately</option>
+				</select></div>
+			</div>
+			<div class="Row">
+				<div class="Cell">Distance units:</div>
+				<div class="Cell"><select id="healthunit" size="1">
+					<option value="m">Meters</option>
+					<option value="yd">Yards</option>
+					<option value="km">Kilometers</option>
+					<option value="mi">Miles</option>
+				</select></div>
+			</div>
+			<div class="Row">
+				<div class="Cell">Overflow handling:</div>
+				<div class="Cell"><select id="healthoverflow" size="1">
+					<option value="longer">Use longer unit (km/mi)</option>
+					<option value="shift">Cut lower end</option>
+					<option value="wrap">Wrap arouond</option>
+				</select></div>
+			</div>
+			<div class="Row">
+				<div class="Cell">When sleeping:</div>
+				<div class="Cell"><select id="healthsleep" size="1">
+					<option value="disabled">No sleep detection</option>
+					<option value="novibration">No vibration</option>
+					<option value="noanimation">No animation</option>
+					<option value="novibenoanim">Neither vibe nor anim</option>
+				</select></div>
+			</div>
+		</div>
+		</div>
+		<br><div class="Divider"><span class="DownArrowLeft" onclick="scrollDown()"></span>Weather<span class="DownArrowRight" onclick="scrollDown()"></span></div><br>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Temperature unit:</div>
+				<div class="Cell"><select id="tempunit" size="1">
+					<option value="c">Celsius</option>
+					<option value="f">Fahrenheit</option>
+					</select></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">
+					Fixed location:<br>
+					<input id="location" type="text" style="width:100%"><br>
+					(leave empty to use GPS)</div></div>
+		</div>
+		<div id="tempintervals" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell ThreeQuarter">Update interval:</div>
+				<div class="Cell" id="tempupdateintervaltext"></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell"><input oninput="temperatureUpdateIntervalChanged()" type="range" id="tempupdateinterval" min="15" max="180" step="15" style="width:100%"></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell ThreeQuarter">Caching interval:</div>
+				<div class="Cell" id="tempcacheintervaltext"></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell"><input oninput="temperatureCachingIntervalChanged()" type="range" id="tempcacheinterval" min="30" max="360" step="30" style="width:100%"></div></div>
+		</div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">
+					All weather data provided by <b>OpenWeatherMap.org</b></div></div>
+		</div>
+		<div class="ExpertOption">
+		<div id="heartsoptions" hidden="">
+		<br><div class="Divider"><span class="DownArrowLeft" onclick="scrollDown()"></span>Pebble Appstore Hearts<span class="DownArrowRight" onclick="scrollDown()"></span></div><br>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">
+					Application ID:<br>
+					<input id="heartsappid" type="text" style="width:100%"></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Changed vibration:</div>
+				<div class="Cell"><select id="heartsvibration" size="1"></select></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell ThreeQuarter">Update interval:</div>
+				<div class="Cell" id="heartsupdateintervaltext"></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell"><input oninput="heartsUpdateIntervalChanged()" type="range" id="heartsupdateinterval" min="30" max="360" step="30" style="width:100%"></div></div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">
+					Pebble Appstore Hearts data provided by <b>PblWeb.com</b></div></div>
+		</div>
+		</div>
+		</div>
+		<br><div class="Divider"><span class="DownArrowLeft" onclick="scrollDown()"></span>Other settings<span class="DownArrowRight" onclick="scrollDown()"></span></div><br>
+		<div id="v_1_12_othersettings" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Language:</div>
+				<div class="Cell"><select id="language" size="1">
+					<option value="en">English</option>
+					<option value="de">deutsch</option>
+					<option value="es">español</option>
+					<option value="nl">Nederlands</option>
+					<option value="it">italiano</option>
+					<option value="fr">français</option>
+					<option value="pt">português</option>
+					<option value="sv">svenska</option>
+					<option value="no">norsk</option>
+					<option value="dk">dansk</option>
+					<option value="pl">polski</option>
+					<option value="hu">magyar</option>
+					<option value="fi">suomi</option>
+				</select></div></div>
+		</div>
+		<div class="ExpertOption">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Permanent hint display:</div>
+				<div class="Cell">
+					<select id="permanenthints" size="1">
+						<option value="disabled">Disabled</option>
+						<option value="enabled">Enabled</option>
+					</select></div></div>
+		</div>
+		</div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Bluetooth connection loss alert:</div>
+				<div class="Cell"><select id="btloss" size="1"></select></div></div>
+		</div>
+		<div id="btvibrationselect" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Bluetooth connection loss vibration:</div>
+				<div class="Cell"><select id="btlossvibration" size="1"></select></div></div>
+			<div class="Row">
+				<div class="Cell">Bluetooth reconnect vibration:</div>
+				<div class="Cell"><select id="btreconnectvibration" size="1"></select></div></div>
+		</div>
+		</div>
+		<div id="blformatselect" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Battery level format:</div>
+				<div class="Cell"><select id="blformat" size="1">
+					<option value="perdeci">x/10</option>
+					<option value="percent">%</option>
+				</select></div></div>
+		</div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Low battery alert:</div>
+				<div class="Cell"><select id="btlevel" size="1"></select></div></div>
+		</div>
+		<div id="btlevelvibrationselect" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Low battery vibration:</div>
+				<div class="Cell"><select id="btlevelvibration" size="1"></select></div></div>
+		</div>
+		</div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">Hourly vibration:</div>
+				<div class="Cell"><select id="vibratehourly" size="1"></select></div></div>
+		</div>
+		<div class="ExpertOption">
+		<div id="dndoptions" hidden="">
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell">No vibration while charging:</div>
+				<div class="Cell">
+					<select id="dndwhilecharging" size="1">
+						<option value="disabled">Disabled</option>
+						<option value="enabled">Enabled</option>
+					</select></div></div>
+			<div class="Row">
+				<div class="Cell">Custom schedule:</div>
+				<div class="Cell"><select id="dndperiod" size="1"></select></div></div>
+			<div class="Row">
+				<div class="Cell">Custom schedule begin:</div>
+				<div class="Cell">
+					<select class="SpecialSelect" id="dndstarthours" size="1"></select>
+					<select class="SpecialSelect" id="dndstartminutes" size="1"></select>
+					<select class="SpecialSelect" id="dndstartampm" size="1" oninput="dndStartAMPMChanged()">
+						<option value="24">24h</option>
+						<option value="AM">AM</option>
+						<option value="PM">PM</option>
+					</select></div></div>
+			<div class="Row">
+				<div class="Cell">Custom schedule end:</div>
+				<div class="Cell">
+					<select class="SpecialSelect" id="dndstophours" size="1"></select>
+					<select class="SpecialSelect" id="dndstopminutes" size="1"></select>
+					<select class="SpecialSelect" id="dndstopampm" size="1" oninput="dndStopAMPMChanged()">
+						<option value="24">24h</option>
+						<option value="AM">AM</option>
+						<option value="PM">PM</option>
+					</select></div></div>
+		</div>
+		</div>
+		</div>
+		<br><div class="Divider"></div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell" style="width:100%">If you like the Watchface, don't forget to give it a &hearts; in the Pebble Appstore. <b>Thanks!</b></div></div>
+		</div>
+		<br><div class="Divider"></div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell" style="width:100%">And if you <i>really</i> love the Watchface, feel free to donate any amount you like:
+				</div></div>
+			<div class="Row">
+				<div class="Cell ButtonRow" style="text-align:center"><button class="Button" type="button" onclick="document.location.href='https://paypal.me/MorrisTimm'">Donate via PayPal</button></div>
+			</div>
+			<div class="Row">
+				<div class="Cell" style="text-align:center">You can also use this link: <a href="/donate.timm.tc//.html">donate.timm.tc</a>.<br><b>Thanks again!</b></div></div></div>
+		<br><div class="Divider" id="bottom"></div>
+		<div class="Table">
+			<div class="Row">
+				<div class="Cell ButtonRow"><button class="Button" type="button" onclick="save()">SAVE</button></div>
+			</div>
+			<div class="Row">
+				<div class="Cell" style="text-align:center">
+					Also check out my other Watchfaces:<br><a href="#" onclick="document.location.href='https://apps.getpebble.com/en_US/application/5546abfc47bb344acb0000d2?hardware='+current_watch.platform">BCD minimalist</a><br><a href="#" onclick="document.location.href='https://apps.getpebble.com/en_US/application/58060628c988667eaa00009e?hardware='+current_watch.platform">Cut/up</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

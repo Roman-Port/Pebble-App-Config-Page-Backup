@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+<!-- TODO: Add jquery mobile -->
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="/cloud.imihov.com/analog-fit/css/bootstrap.css">
+	<link rel="stylesheet" href="/cloud.imihov.com/analog-fit/css/titatoggle-dist-min.css">
+	<link rel="stylesheet" href="/cloud.imihov.com/analog-fit/css/styles.css">
+	<link href="/gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" rel="stylesheet">
+
+	<script src="/ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+	<script src="/gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.js"></script>
+</head>
+
+<body>
+	<script async="" src="/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- pebble_settings_page_1 -->
+	<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5667144757255021" data-ad-slot="6811121642" data-ad-format="auto"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+
+	<table class="table table-striped table-hover ">
+		<tbody>
+			<tr>
+				<td>
+					<span class="steps-label">Steps Goal</span>
+					<input type="number" class="form-control steps-input" id="steps_goal" placeholder="10000" value="10000">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="invert-label">Invert Colors</span>
+					<span class="invert-input flip-switch">
+						<input type="checkbox" data-toggle="toggle" data-onstyle="success" data-size="normal" id='inverted_color'>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="seconds-label">Show Seconds</span>
+					<span class="seconds-input flip-switch">
+						<input type="checkbox" data-toggle="toggle" data-onstyle="success" data-size="normal" id='show_seconds'>
+					</span>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<span class="custom-text-label">Custom Text (max 18 chars)</span>
+					<input type="text" class="form-control steps-input" id="custom_text" placeholder="" value="" maxlength="18">
+				</td>
+			</tr>
+			<!--<tr>
+				<td>
+					<span class="timeformat-label">Time Format</span>
+					<span class="timeformat-input flip-switch">
+						<input type="checkbox" checked data-toggle="toggle" 
+							data-on="12HR"
+							data-off="24HR" 
+							data-size="normal"
+							data-onstyle="success" 
+							data-offstyle="info"
+							id='time_format'>
+					</span>
+				</td>
+			</tr>-->
+		</tbody>
+	</table>
+	<div class="form-group">
+		<div class="col-xs-12">
+			<a href="#" class="btn btn-success col-xs-6" id='save_button'>Save</a>
+			<a href="#" class="btn btn-danger col-xs-6" id='cancel_button'>Cancel</a>
+		</div>
+	</div>
+	
+	<script async="" src="/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- pebble_settings_page_2 -->
+	<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5667144757255021" data-ad-slot="2459170444" data-ad-format="auto"></ins>
+	<script>
+	(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+	
+	<script>
+  	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  	ga('create', 'UA-87681919-2', 'auto');
+  	ga('send', 'pageview');
+	</script>
+	
+	<style type="text/css">
+		.table>tbody>tr>td {
+			vertical-align: middle !important;
+		}
+		.steps-input {
+			float:right;
+		}
+		.slider {
+			width: 100% !important;
+		}
+		.flip-switch {
+			float:right;
+		}
+		.invert-label {
+			line-height: 40px;
+		}
+	</style>
+
+	<script>
+		// Get a handle to the button's HTML element
+		var saveButton = document.getElementById('save_button');
+		var cancelButton = document.getElementById('cancel_button');
+		// Add a 'click' listener
+		saveButton.addEventListener('click', function() {
+			// Get the config data from the UI elements
+			var inverted_color = document.getElementById('inverted_color');
+			var steps_goal = document.getElementById('steps_goal');
+			//var time_format = document.getElementById('time_format');
+			var invert_on_disconnect = document.getElementById('invert_on_disconnect');
+			var show_seconds = document.getElementById('show_seconds');
+			var custom_text = document.getElementById('custom_text');
+
+			// Make a data object to be sent, coercing value types to integers
+			var options = {
+				'inverted_color': inverted_color.checked ? 1 : 0,
+				'show_seconds': show_seconds.checked ? 1 : 0,
+				//'time_format': time_format.checked ? 1 : 0,
+				'steps_goal': steps_goal.value == '' ? 0 : steps_goal.value,
+				'custom_text': custom_text.value,
+			};
+
+			// Determine the correct return URL (emulator vs real watch)
+			function getQueryParam(variable, defaultValue) {
+				var query = location.search.substring(1);
+				var vars = query.split('&');
+				for (var i = 0; i < vars.length; i++) {
+					var pair = vars[i].split('=');
+					if (pair[0] === variable) {
+						return decodeURIComponent(pair[1]);
+					}
+				}
+				return defaultValue || false;
+			}
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+			// Encode and send the data when the page closes
+			document.location = return_to + encodeURIComponent(JSON.stringify(options));
+		});
+		cancelButton.addEventListener('click', function() {
+			document.location = "pebblejs://close";
+		});
+	</script>
+	<script type="text/javascript">
+		$().ready(function() {
+			//Set form values to whatever is passed in.
+			var uri = window.location.search;
+			var n = uri.indexOf('&return_to');
+			var obj = jQuery.parseJSON(decodeURIComponent(uri.substring(1, n != -1 ? n : uri.length)));
+
+			jQuery.each(obj, function(key, value) {
+				if (key == 'steps_goal' || key == 'custom_text') {
+					$("#" + key).val(value);
+				}
+				else {
+					$("#" + key).prop('checked', value).change();
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>

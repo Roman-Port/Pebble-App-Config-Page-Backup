@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>PIP-PIP</title>
+  <link rel='stylesheet' type='text/css' href='/rawgit.com/rozza-m/pip-pip-config/master/config/css/slate.css'>
+  <script src='/rawgit.com/rozza-m/pip-pip-config/master/config/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Pip-Boy Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Colours</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Character Color
+          <input id='text_color_picker' type='text' class='item-color item-color-normal' value='#00FF00'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's character color. (Colour watches only.)
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          UI Color
+          <input id='line_color_picker' type='text' class='item-color item-color-normal' value='#00FF00'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's UI color, used to colour the accent lines. (Colour watches only.)
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>OS Options</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Month first
+          <input id='month_first_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Swaps the day and month (North America style).
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Fast boot
+          <input id='fast_anim_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        This skips some of Pip-Pip's POST to make it load quicker (i.e. faster startup animation).
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Hide background
+          <input id='no_bg_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Don't display the CRT-style background. (Colour watches only.)
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+    var textColorPicker = document.getElementById('text_color_picker');
+    var lineColorPicker = document.getElementById('line_color_picker');
+    var fastAnimCheckbox = document.getElementById('fast_anim_checkbox');
+    var noBgCheckbox = document.getElementById('no_bg_checkbox');
+    var monthFirstCheckbox = document.getElementById('month_first_checkbox');
+ 
+    var options = {
+      'text_color': textColorPicker.value,
+      'line_color': lineColorPicker.value,
+      'fast_anim': fastAnimCheckbox.checked,
+      'no_bg': noBgCheckbox.checked,
+      'month_first': monthFirstCheckbox.checked
+    };
+    // Save for next launch
+    localStorage['text_color'] = options['text_color'];
+    localStorage['line_color'] = options['line_color'];
+    localStorage['fast_anim'] = options['fast_anim'];
+    localStorage['no_bg'] = options['no_bg'];
+    localStorage['month_first'] = options['month_first'];
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+  (function() {
+    var textColorPicker = document.getElementById('text_color_picker');
+    var lineColorPicker = document.getElementById('line_color_picker');
+    var fastAnimCheckbox = document.getElementById('fast_anim_checkbox');
+    var noBgCheckbox = document.getElementById('no_bg_checkbox');
+    var monthFirstCheckbox = document.getElementById('month_first_checkbox');
+    // Load any previously saved configuration, if available
+    if(localStorage['fast_anim']) {  fastAnimCheckbox.checked = JSON.parse(localStorage['fast_anim']); }
+    if(localStorage['no_bg']) {  noBgCheckbox.checked = JSON.parse(localStorage['no_bg']); }
+    if(localStorage['month_first']) {  monthFirstCheckbox .checked = JSON.parse(localStorage['month_first']); }
+    if(localStorage['text_color']) {  textColorPicker.value = localStorage['text_color']; }
+    if(localStorage['line_color']) {  lineColorPicker.value = localStorage['line_color']; }
+  })();
+  </script>
+</html>

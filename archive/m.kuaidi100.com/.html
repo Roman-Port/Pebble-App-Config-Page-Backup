@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>快递100-查快递,寄快递,上快递100</title>
+<meta name="Keywords" content="快递100,快递查询,快递单号查询,快递网点查询,国际快递查询,快递电话查询,物流查询" />
+<meta name="Description" content="快递100，提供上百家常用快递、物流公司的快递单号查询、快递网点电话查询、快递价格查询、网上寄快递服务，支持手机查询快递，提供免费Open API。" />
+<link rel="canonical" href="https://m.kuaidi100.com/" />
+
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-status-bar-style" content="white" />
+<meta itemprop="name" content="查快递，寄快递，上快递100" />
+<meta itemprop="image" content="https://cdn.kuaidi100.com/images/logo_200x200.png" />
+<link rel="apple-touch-icon" href="https://cdn.kuaidi100.com/images/touch-icon-iphone.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="https://cdn.kuaidi100.com/images/touch-icon-ipad.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="https://cdn.kuaidi100.com/images/touch-icon-iphone4.png" />
+<link rel="shortcut icon" href="https://cdn.kuaidi100.com/favicon.ico" />
+<link rel="icon" type="image/gif" href="https://cdn.kuaidi100.com/images/favicon.gif" />
+<link rel="stylesheet" href="https://cdn.kuaidi100.com/css/smart/mbase_v6.css?version=201812141600" />
+<link rel="stylesheet" href="https://cdn.kuaidi100.com/css/smart/query_v7.css?version=201808161015" />
+<style>
+.page-col .ico {background-image: url(https://cdn.kuaidi100.com/images/m/index_ico_bak.png?version=20180425);}
+ /*  .page-col .ico {background-color: transparent;}
+  .app-form {border-color: #e63c42;} */
+/*   .app-search {background-color: #e63c42;}
+  .scan {background: red;-webkit-mask-image:url(https://cdn.kuaidi100.com/images/m/ico_scan.png);-webkit-mask-size: 1.2rem;-webkit-mask-repeat: no-repeat;-webkit-mask-position: center center;} */
+</style>
+</head>
+<body>
+
+
+
+
+
+<div class="toolbar">
+  <a id="t-index"  class="active" >
+    <div class="ico"></div>
+    <div class="txt">查快递</div>
+  </a>
+  <a id="t-courier" href="https://m.kuaidi100.com/courier/" >
+    <div class="ico"></div>
+    <div class="txt">寄快递</div>
+  </a>
+  <a id="t-more" href="https://m.kuaidi100.com/more.jsp" >
+    <div class="ico"></div>
+    <div class="txt">更多</div>
+  </a>
+  <a id="t-center" href="https://m.kuaidi100.com/ucenter.jsp" >
+    <div class="ico"></div>
+    <div class="txt">我</div>
+  </a>
+</div>
+
+<script>
+var navs = document.querySelectorAll(".toolbar a"),len = navs && navs.length;
+if(len) {
+  for(var i = 0; i < len; i++) {
+    navs[i].addEventListener("click",function(event){
+      event.preventDefault();
+      this.getAttribute('href') && location.replace(this.getAttribute('href'))
+    })
+  }
+}
+</script>
+<div class="container" id="main">
+  <div class="main">
+    <h1 class="logo"><a href="https://m.kuaidi100.com/"><img src="https://cdn.kuaidi100.com/images/logo_v4_sso.png" alt="快递100"></a></h1>
+    <div class="app-form">
+      <div class="app-form-ctrl">
+        <input type="text" placeholder="请输入快递单号" v-model.trim="num" @focus="getHistory" ref="input" @keyup.enter="search()">
+        <div class="scan" v-show="!num" @click="scan"></div>
+        <div class="search-list" v-cloak v-show="showHistory && history.length">
+          <ul><li v-for="item in history" @click="search(item.nu,item.code)" v-show="item.nu.indexOf(num) > -1">{{item.nu}}<small>{{item.name}}</small></li></ul>
+          <div class="last"><span  @click="clearHistory">清除历史记录</span><span class="close" @click="showHistory = false">关闭</span></div>
+        </div>
+        <div class="clear-input" v-show="num" @click="num=''" v-cloak>+</div>
+      </div>
+      <div class="app-search" @click="search()"><span></span></div>
+    </div>
+    <section class="page-col">
+      <ul>
+        <li>
+          <a href="https://m.kuaidi100.com/courier/">
+            <div class="ico courier"></div>
+            <div class="text">寄快递</div></a>
+        </li>
+        <li>
+          <a href="https://m.kuaidi100.com/price/">
+            <div class="ico price"></div>
+            <div class="text">时长和价格</div></a>
+        </li>
+        <li>
+          <a href="https://m.kuaidi100.com/global/">
+            <div class="ico global"></div>
+            <div class="text">国际快递</div></a>
+        </li>
+        <li>
+          <a href="https://m.kuaidi100.com/network/plist.jsp">
+          <div class="ico network"></div>
+          <div class="text">网点和电话</div></a>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <div role-slot="m_index_banner" style="margin:0 10px;"></div>
+    </section>
+    <section class="products">
+      <h3><span>快递100产品大全</span></h3>
+      <ul>
+        <li @click="to('/products/app.jsp')">
+          <div class="logo app"></div>
+          <div class="info">
+            <h4>快递100APP</h4>
+            <p>寄快递、查快递一键搞定</p>
+          </div>
+        </li>
+        <li @click="to('/products/express.jsp')">
+          <div class="logo courier"></div>
+          <div class="info">
+            <h4>快递100收件端</h4>
+            <p>为快递员打造的收派一体化APP</p>
+          </div>
+        </li>
+      </ul>
+      <ul>
+        <li @click="to('/products/print.jsp')">
+          <div class="logo cloud"></div>
+          <div class="info">
+            <h4>云打印产品</h4>
+            <p>让电子面单打印更方便</p>
+          </div>
+        </li>
+        <li @click="to('/products/mgr.jsp')">
+          <div class="logo b"></div>
+          <div class="info">
+            <h4>快递管家</h4>
+            <p>微商打单发货、物流跟踪</p>
+          </div>
+        </li>
+      </ul>
+      <ul>
+        <li style="width:65%;" @click="to('/products/api.jsp')">
+          <div class="logo api"></div>
+          <div class="info">
+            <h4>API接口</h4>
+            <p>帮助网站、系统和APP集成快递100各项服务</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+  	
+
+<section class="copyright">
+  <p class="copyright-meun"><a id="downApp">下载APP</a><a id="showCode">关注微信</a></p>
+  <p><a href="https://m.kuaidi100.com/" title="快递100-查快递、寄快递、上快递100"><img src="https://cdn.kuaidi100.com/images/smart/logo_footer.png" style="width: 2.875rem;"></a> 粤ICP备14085002号-5 </p>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded",function(){
+    var code = document.getElementById("code"),showCode = document.getElementById("showCode");
+    showCode.onclick = function(){
+      code.style.display = "-webkit-box"
+    }
+    code.onclick = function(){
+      code.style.display = "none";
+    }
+    document.getElementById("downApp").addEventListener("click",function(){
+      var downApp = typeof window.downApp === 'function' ? window.downApp : function(){
+        if(ua.indexOf("micromessenger") != -1){
+          location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.Kingdee.Express";
+        }else if(ua.indexOf("iphone") != -1 || ua.indexOf("ipad") != -1){
+          location.href = "http://itunes.apple.com/app/id458270120?ls=1&mt=8";
+        }else if(ua.indexOf("android") != -1){
+          location.href = "http://a.app.qq.com/o/simple.jsp?pkgname=com.Kingdee.Express";
+        }else{
+          location.href = "//m.kuaidi100.com/app/";
+        }
+      }
+      downApp();
+    })
+  })
+</script>
+
+  </div>
+</div>
+<div class="m-mask" role-slot="m_index_important"></div>
+<div class="m-mask flex center" style="display:none;text-align:center;color:#FFF;" id="code">
+  <div>
+    <img src="https://cdn.kuaidi100.com/images/qrcode/qr_sjd.jpg" style="max-width: 50%">
+    <p>长按二维码保存至相册</p>
+    <p>微信识别二维码关注快递100公众号</p>
+  </div>
+</div><script>var allpos = ["m_index_banner","m_index_important"];</script>
+<script>
+  var _hmt = _hmt || [];(function () {var hm = document.createElement("script");hm.src = "//hm.baidu.com/hm.js?22ea01af58ba2be0fec7c11b25e88e6c";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+  <script src="https://cdn.kuaidi100.com/js/util/jquery-1.7.1.min.js?version=20170719103981500"></script>
+<script src="https://cdn.kuaidi100.com/js/page/smart/app_base.js?version=201812251810"></script>
+<script src="https://cdn.kuaidi100.com/js/share/vue.js"></script>
+<script src="https://cdn.kuaidi100.com/js/page/smart/query/index_v7.js?version=201809271110"></script>
+<script src="https://cdn.kuaidi100.com/js/share/a_show_new.js?version=201809191200"></script>
+
+<script>
+  // var flag = sessionStorage.getItem("indexModal");
+  // if(!flag) {
+  //   sessionStorage.setItem("indexModal",1);
+  //   showDownload("modal","indexModal");
+  // }
+</script>
+</body>
+</html>

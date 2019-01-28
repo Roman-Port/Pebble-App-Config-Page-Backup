@@ -1,0 +1,48 @@
+<html>
+<head>
+<title>Pebble Watchface Bavarian Configuration</title>
+<link rel="stylesheet" href="PebbleConfig.css">
+</head>
+<body>
+<header>
+<h1>Pebble Watchface Bavarian Configuration</h1>
+
+<script type="text/javascript">
+<!--
+const version = "2.1.0";
+const defaultBackground = 1;
+
+function ConfigBavarian(version, background)
+{
+	this.version = version;
+	this.background = background;
+}
+
+function Save() 
+{
+	var config = new ConfigBavarian(version, defaultBackground);
+	config.background = (document.Background.elements[0].checked == true) ? 0 : 1;
+	
+	document.location.href = "pebblejs://close#" + JSON.stringify(config);
+}
+//-->
+</script>
+
+<body>
+<table>
+<tr>
+<td><img src="/www.meisenecker.de/pebble/config/NoBackground.bin"></td>
+<td><img src="/www.meisenecker.de/pebble/config/FlagBackground.bin"></td>
+</tr>
+<tr>
+<form name="Background" action="">
+<td align="center"><input name="BackgroundRadio" type="radio" class="roundButton" value="NoBackground">No Background</td>
+<td align="center"><input name="BackgroundRadio" type="radio" value="BavarianFlag">Bavarian Flag</td>
+</form>
+</tr>
+<tr>
+<p>
+<td colspan="2" align="center"><input type="button" value="Save" onclick="Save();"></td>
+<p>
+</tr></table></body>
+</header></body></html>

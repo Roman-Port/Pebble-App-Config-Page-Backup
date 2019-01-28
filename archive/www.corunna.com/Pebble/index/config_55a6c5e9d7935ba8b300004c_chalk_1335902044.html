@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Configurable</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css"> 
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+    <script src="/www.corunna.com/Pebble/js/colors.js"></script>
+    <script src="/www.corunna.com/Pebble/js/jqColorPicker.js"></script>
+    <script src="/www.corunna.com/Pebble/js/index.js"></script>
+    <script type="text/javascript">
+      $().ready(function() {
+        $(".color").colorPicker();
+        var suffix = window.location.href.split('?');
+//  set up th web page
+
+        if (/on/.test(suffix[1])) {
+          $("#vibes_on_on").prop("checked",true).checkboxradio("refresh");
+        } 
+        else {
+          if (/off/.test(suffix[1])) {
+            $("#vibes_on_off").prop('checked',true).checkboxradio("refresh");
+          }
+        } 
+        if (/yes/.test(suffix[2])) {
+          $("#revert_yes").prop("checked",true).checkboxradio("refresh");
+        } 
+        else {
+          if (/no/.test(suffix[2])) {
+            $("#revert_no").prop('checked',true).checkboxradio("refresh");
+          }
+        } 
+        if (/sb/.test(suffix[3])) {
+          $("#screen_type_std_b").prop("checked",true).checkboxradio("refresh");
+        } 
+        else if (/bb/.test(suffix[3])) {
+          $("#screen_type_bold_b").prop('checked',true).checkboxradio("refresh");
+        } 
+        else if (/sw/.test(suffix[3])) {
+          $("#screen_type_std_w").prop('checked',true).checkboxradio("refresh");
+        } 
+        else if (/bw/.test(suffix[3])) {
+          $("#screen_type_bold_w").prop('checked',true).checkboxradio("refresh");
+        }
+        if (/basalt/.test(suffix[4])) {
+          $("#basaltcols").show();
+        }
+	var watchface_color = "rgb(0, 0, 0)";;
+	if (suffix[5] && /basalt/.test(suffix[4])) {
+		watchface_color = decodeURIComponent(suffix[5]);
+		$("#col1").css('background-color',watchface_color);
+		$("#col1").val(rgb2hex(watchface_color));
+		$(".myface").css('background-color',watchface_color);
+	}
+        if (/yes/.test(suffix[6])) {
+          $("#flipscreen_yes").prop("checked",true).checkboxradio("refresh");
+        } 
+        else {
+          if (/no/.test(suffix[6])) {
+            $("#flipscreen_no").prop('checked',true).checkboxradio("refresh");
+          }
+        } 
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close#";
+        });
+      });
+      function saveOptions() {
+      var options = {}
+//Add all textual values
+      $('textarea, select, [type="hidden"], [type="password"], [type="text"]').each(function() {
+        options[$(this).attr('id')] = $(this).val();
+      })
+//Add all checkbox type values
+      $('[type="radio"], [type="checkbox"]').each(function() {
+        options[$(this).attr('id')] = $(this).is(':checked');
+        if ($(this).is(':checked') && /screen_type/.test($(this).attr('name'))) {
+          options["watchface_color"] = $(this).parent().find("img").css('background-color');
+        }
+      })
+      return options;
+    }
+
+    function rgb2hex(rgb){
+      rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+      return (rgb && rgb.length === 4) ? "#" +
+          ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+          ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+          ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+    }
+  </script>
+    </head>
+    <body>
+        <div data-role="page" id="main">
+            <div data-role="content">
+                <div data-role="fieldcontain" style="margin-left:20px;">
+                    <label for="special-feature"><h3 style="-webkit-margin-after: 0px;">Timer Vibrations</h3>Select whether the down timer vibrates for the last 5 seconds.</label>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="false">
+                        <input type="radio" name="vibes_on" id="vibes_on_on" value="On">
+                        <label for="vibes_on_on">On</label>
+                        <input type="radio" name="vibes_on" id="vibes_on_off" value="Off">
+                        <label for="vibes_on_off">Off</label>
+                    </fieldset>
+                    <label for="special-feature"><h3 style="-webkit-margin-after: 0px;">Revert to Watchface on Close</h3>Select whether this Watchapp, on closing, displays the current Watchface or the one from which it was called.</label>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="false">
+                        <input type="radio" name="revert_status" id="revert_no" value="No">
+                        <label for="revert_no">No</label>
+                        <input type="radio" name="revert_status" id="revert_yes" value="Yes">
+                        <label for="revert_yes">Yes</label>
+                    </fieldset>
+                    <label for="special-feature"><h3 style="-webkit-margin-after: 0px;">Flip Screen</h3>Select Flip Screen if you want to wear your Pebble on your right wrist with the buttons towards the wrist..</label>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="false">
+                        <input type="radio" name="flipscreen" id="flipscreen_no" value="No">
+                        <label for="flipscreen_no">No</label>
+                        <input type="radio" name="flipscreen" id="flipscreen_yes" value="Off">
+                        <label for="flipscreen_yes">Yes</label>
+                    </fieldset>
+                    <div style="display:none; margin-top:10px;" id="basaltcols">
+                    <table border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td>
+                          <input type="text" id="col1" class="color" value="#ffffff" style="background-color:#ffffff;">
+                        </td>
+                        <td style="padding-left:5px;">Tap to select<br>watchface color</td>
+                       </tr>
+                    </table>
+                    </div>
+                    <h3 style="-webkit-margin-after: 0px;">Watchface to Display</h3>Select watchface to display (standard or bold).<br>
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="false">
+                        <table border="0" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td align="center">Standard</td>
+                            <td width="5px">&nbsp;</td>
+                            <td align="center"><b>Bold</b></td>
+                          </tr>
+                          <tr>
+                            <td><input type="radio" name="screen_type" id="screen_type_std_b" value="std"><label for="screen_type_std_b"><img id="screen_type_std_b_i" src="/www.corunna.com/Pebble/images/pebble-screenshot-sw.png" class="myface" style="background-color:#000000;"></label></td>
+                            <td width="5px">&nbsp;</td>
+                            <td><input type="radio" name="screen_type" id="screen_type_bold_b" value="bold"><label for="screen_type_bold_b"><img id="screen_type_bold_b_i" src="/www.corunna.com/Pebble/images/pebble-screenshot-bw.png" class="myface" style="background-color:#000000;"></label></td>
+                          </tr>
+                          <tr>
+                            <td><input type="radio" name="screen_type" id="screen_type_std_w" value="std"><label for="screen_type_std_w"><img id="screen_type_std_w_i" src="/www.corunna.com/Pebble/images/pebble-screenshot-sb.png" class="myface" style="background-color:#ffffff;"></label></td>
+                            <td width="5px">&nbsp;</td>
+                            <td><input type="radio" name="screen_type" id="screen_type_bold_w" value="bold"><label for="screen_type_bold_w"><img id="screen_type_bold_w_i" src="/www.corunna.com/Pebble/images/pebble-screenshot-bb.png" class="myface" style="background-color:#ffffff;"></label></td>
+                          </tr>
+                        </table>
+                    </fieldset>
+                 </div>
+              </div>
+            <div class="ui-body ui-body-b">
+                <fieldset class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <button type="submit" data-theme="d" id="b-cancel">Cancel</button>
+                    </div>
+                    <div class="ui-block-b">
+                        <button type="submit" data-theme="a" id="b-submit">Submit</button>
+                    </div>
+                </fieldset>
+            </div>
+            <div style="margin-left:5px;"><h3>Instuctions</h3>
+The Modern+Timer Watchapp provides both a count up (stopwatch) and count down timer in conjunction with a standard '<b>Modern</b>' clock face.  The timer function is selected by pressing the '<b>Select</b>' button.  No other button will function until the timer window is displayed.
+
+<p><b>Select Button</b> - Display the timer window.</p>
+<ul>
+  <li><b>Up Button</b> - Display '00:00' ready to start the Up Timer</li>
+  <ul>
+    <li><b>Select Button</b> - Start the Up Timer</li>
+    <li><b>Select Button</b> - Pause/Continue the Up Timer</li>
+    <li><b>Long Press Select Button</b> - Stop the Up Timer and close the Timer window
+  </li></ul>
+  <li><b>Down Button</b> - Display the last Down Timer start time</li>
+  <ul>
+    <li><b>Up Button</b> - Increment down timer minutes.  Minutes roll over to 0 after 99
+    <li><b>Long Press Up Button</b> - Holding down the Up Button will cause the minutes to rapidly increase</li>
+    <li><b>Down Button</b> - Decrement the down timer seconds</li>
+    <li><b>Long Press Down Button</b> - Holding down the down button will rapidly decrease the seconds</li>
+    <li><b>Select Button</b> - Start the Down Timer</li>
+    <li><b>Long Press Select Button</b> - Close the timer window</li>
+  </ul></ul>
+  <p><b>Long Press Select Button</b> - Close the Timer window</p>
+</div>
+        </div>
+    </body>
+</html>

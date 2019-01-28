@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Watch Face Configuration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' type='text/css' href='/rawgit.com/NovaGL/simpleface/master/config/css/slate.css'>
+ <script src='/rawgit.com/NovaGL/simpleface/master/config/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+    <!-- add extra css! -->
+
+    
+  </head>
+  <body>
+
+
+<h1 class='title'>Watch Face Configuration</h1>
+
+<form role="form" onsubmit="complete()" action="javascript:void(0);">
+
+<div class="item-container">
+  <div class="item-container-header">Date Format</div>
+  <div class="item-container-content">
+    <div class="item tab-buttons">
+      <a name="tab-1" class="tab-button active" value="edate">Euro Date</a>
+      <a name="tab-1" class="tab-button" value="sdate">US Date</a>
+    </div>
+  </div>
+</div>     
+<div class='item-container-footer'>
+       Euro Date for Day first, US Date for Month first only available when language is English.
+</div>
+<div class="item-container" style="display: none;">
+  <div class="item-container-header">Input Field</div>
+  <div class="item-container-content">
+      <div class="item-input-wrapper">
+        <input type="text" class="item-input" id="hidden" name="dateformat" value="edate">
+      </div>
+  </div>
+</div>
+
+<div class="item-container">
+        <div class="item-container-content">
+          <label class="item">Language 
+          <select name="locale" id="locale" dir="rtl" class="item-select">
+            <option class="item-select-option" value="en" selected="">English</option>
+            <option class="item-select-option" value="fr">French</option>
+            <option class="item-select-option" value="de">German</option>Italiano
+            <option class="item-select-option" value="es">Spanish</option>
+            <option class="item-select-option" value="il">Italian</option>
+          </select></label>
+        </div>
+      </div>
+
+<div class='item-container'>
+      <div class='item-container-header'>Customizability</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Time font color
+          <input id='background_color_picker' name="background_color" type='text' class='item-color item-color-sunny' value='0x00AAFF'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's background color. Note: Only available on Basalt watches that support many colors.
+      </div>
+</div>
+
+<div class="item-container">
+  <div class="item-container-header">Connectivity</div>
+  <div class="item-container-content">
+    <label class="item">
+      Hide Bluetooth connection
+      <input type="checkbox" class="item-toggle" name="bluetooth_toggle">
+    </label>
+  </div>
+  <div class="item-container-footer">
+    When enabled  Bluetooth icon will be hidden when Pebble is connected to your phone.
+  </div>
+</div>
+
+
+<div class="item-container">
+  <div class="item-container-content">
+    <label class="item">
+      Vibrate on Bluetooth Disconnect
+      <input type="checkbox" class="item-toggle" name="vibe_on_disconnect">
+    </label>
+<label class="item">
+      Vibrate on Bluetooth Reconnect
+      <input type="checkbox" class="item-toggle" name="vibe_on_connect">
+    </label>
+  </div>
+  <div class="item-container-footer">
+    When enabled Pebble will vibrate when connected or disconnected from phone
+  </div>
+</div>
+
+
+<div class="item-container">
+  <div class="button-container">
+    <input type="submit" class="item-button" value="SEND">
+  </div>
+</div>
+                
+</form>
+
+<script>
+ 
+  function complete() {
+      var o = {};
+      $.each($('form').serializeArray(), function() {
+          o[this.name] = this.value;
+      });
+      window.location.href="pebblejs://close#" + JSON.stringify(o);
+      return false
+    }
+</script>
+    <script src="/code.jquery.com//jquery.js"></script>
+    <script src="/netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/js/bootstrap.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<html>
+   <head>
+      <title>Configuration</title>
+   </head>
+
+   <body>
+      <h1>Configuration</h1>
+
+      <p>Select Language:
+         <select id="languageSelect">
+            <option value="English">English</option>
+            <option value="Dutch">Dutch  </option>
+            <option value="French">French </option>
+            <option value="German">German </option>
+            <option value="Italian">Italian</option>
+            <option value="Spanish">Spanish</option>
+         </select>
+      </p>
+ 
+      <p>
+         <button id="saveButton">Save</button>
+      </p>
+   </body>
+
+   <script>
+      //Setup to allow easy adding more options later
+      function saveOptions()
+ 	      {
+         var languageSelect = document.getElementById("languageSelect");
+         var options = {"language": languageSelect.options[languageSelect.selectedIndex].value
+                       }
+     
+         return options;
+         };
+ 
+      var submitButton = document.getElementById("saveButton");
+      submitButton.addEventListener("click", 
+                                    function()
+		 									     {
+                                       console.log("Submit");
+                                       var options = saveOptions();
+                                       var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+													console.log(location);
+                                       document.location = location;
+                                       }, 
+                                    false);
+   </script>
+
+</html>

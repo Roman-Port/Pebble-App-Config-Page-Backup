@@ -1,0 +1,95 @@
+@font-face {
+  font-family: 'PF DinDisplay Pro';
+  src: url("../fonts/pfdindisplaypro-regular.woff") format('woff');
+}
+@font-face {
+  font-family: 'PT Sans';
+  src: url("../fonts/ptsans-regular.woff") format('woff');
+}
+p {
+  margin: 0;
+}
+.progress {
+  margin: 10px;
+  height: 11px;
+  width: 43px;
+  background: url("../img/slate-progress-orange.gif") center;
+}
+.progress.blue {
+  background: url("../img/slate-progress-blue.gif") center;
+}
+.text-center {
+  text-align: center;
+}
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+h2 {
+  font-size: 1.4em;
+  margin: 10px 0;
+  font-weight: 400;
+}
+.alert-background {
+  background-color: rgba(255,71,0,0.5);
+  color: #fff;
+  padding: 10px;
+}
+.error-background {
+  background-color: rgba(255,0,0,0.5);
+  color: #fff;
+  padding: 10px;
+}
+.success-background {
+  background-color: rgba(0,128,0,0.5);
+  color: #fff;
+  padding: 10px;
+}
+.hide {
+  display: none;
+}
+.show {
+  display: block;
+}
+.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: block;
+  background: #eaeaea;
+  padding: 10px 0;
+}
+.fixed-bottom-padding {
+  margin-bottom: 60px;
+}
+.pull-right {
+  float: right !important;
+}
+.pull-left {
+  float: left !important;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+.margin-right-10 {
+  margin-right: 10px;
+}
+.margin-left-10 {
+  margin-left: 10px;
+}
+.margin-bottom-15 {
+  margin-bottom: 15px;
+}
+.footer {
+  margin-top: 30px;
+  font-size: 0.75em;
+}

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {background-color:DeepSkyBlue}
+      p    {
+        color:MediumBlue;
+        font-size:100%;
+      }
+      h1   {color:Cyan}
+      h2   {color:LightCyan}
+      h4  {
+        color:Black;
+        font-size:110%;
+      }
+      button  {
+        font-size:200%;
+      }
+      select  {
+        color:Black;
+        font-size:100%;
+      }
+      input  {
+        color:Black;
+        font-size:100%;
+      }
+      a   {
+        font-size:100%;
+      }
+    </style>  
+  
+    <title>NIKE pAIR settings</title>
+    <script src="/2621795-0.web-hosting.es/pebble-watchfaces-cfg/js/jquery-2.js"></script>
+  </head>
+  <body>
+    <div>
+      <h1>NIKE pAIR watchface (v1.1)</h1>
+      <h2>SETTINGS</h2>
+   
+      <h4>Weather units
+      <select id="temperature_unit">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+        <option value="K">Kelvin</option>
+      </select>
+      </h4>
+   
+      <h4>Vibes on Disconnect
+      <select id="btdiscvibes">
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+      </select>
+      </h4>
+      
+      <h4>Show Battery bar
+      <select id="battery_bar_o">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      </h4>
+   
+      <h4>Show Date
+      <select id="day_month_order">
+        <option value="111">No</option>
+        <option value="22">Day DAYWEEK (eg. 23 MON)</option>
+        <option value="3">Day only (eg. 23)</option>
+      </select>
+      </h4>
+      
+      <h4>Color height
+      <select id="look_style_o">
+        <option value="0">60% Upper / 40% Midsole</option>
+        <option value="1">50% Upper / 50% Sole</option>
+        <option value="2">40% Tongue / 60% Upper</option>
+      </select>
+      </h4>
+   
+      <h4>TOP color
+      <select id="color1_o">
+        <option value="0">White</option>
+        <option value="1">Black</option>
+        <option value="2">Gray light</option>
+        <option value="3">Gray dark</option>
+        <option value="4">Blue light</option>
+        <option value="5">Blue</option>
+        <option value="6">Blue dark</option>
+        <option value="7">Cyan</option>
+        <option value="8">Cyan dark</option>
+        <option value="9">Red</option>
+        <option value="10">Orange</option>
+        <option value="11">Orange light</option>
+        <option value="12">Yellow</option>
+        <option value="13">Magenta</option>
+        <option value="14">Purple</option>
+        <option value="15">Green</option>
+        <option value="16">Green light</option>
+        <option value="99">RANDOM</option>
+      </select>
+      </h4>
+   
+      <h4>BOTTOM color
+      <select id="color2_o">
+        <option value="0">White</option>
+        <option value="1">Black</option>
+        <option value="2">Gray light</option>
+        <option value="3">Gray dark</option>
+        <option value="4">Blue light</option>
+        <option value="5">Blue</option>
+        <option value="6">Blue dark</option>
+        <option value="7">Cyan</option>
+        <option value="8">Cyan dark</option>
+        <option value="9">Red</option>
+        <option value="10">Orange</option>
+        <option value="11">Orange light</option>
+        <option value="12">Yellow</option>
+        <option value="13">Magenta</option>
+        <option value="14">Purple</option>
+        <option value="15">Green</option>
+        <option value="16">Green light</option>
+        <option value="99">RANDOM</option>
+      </select>
+      </h4>
+   
+      <h4>SWOOSH color (Nike logo)
+      <select id="color3_o">
+        <option value="0">White</option>
+        <option value="1">Black</option>
+        <option value="2">Gray light</option>
+        <option value="3">Gray dark</option>
+        <option value="4">Blue light</option>
+        <option value="5">Blue</option>
+        <option value="6">Blue dark</option>
+        <option value="7">Cyan</option>
+        <option value="8">Cyan dark</option>
+        <option value="9">Red</option>
+        <option value="10">Orange</option>
+        <option value="11">Orange light</option>
+        <option value="12">Yellow</option>
+        <option value="13">Magenta</option>
+        <option value="14">Purple</option>
+        <option value="15">Green</option>
+        <option value="16">Green light</option>
+        <option value="99">RANDOM</option>
+      </select>
+      </h4>
+   
+      <h4>Pair Theme
+      <select id="color_theme_o">
+        <option value="0">NIKE pAIR</option>
+        <option value="1">Universal pair (no logo)</option>
+      </select>
+      </h4>
+      
+      <h4>Random frequency
+      <select id="random_time_o">
+        <option value="1">1 minute</option>
+        <option value="5">5 minutes</option>
+        <option value="10">10 minutes</option>
+        <option value="15">15 minutes</option>
+        <option value="30">30 minutes</option>
+        <option value="60">60 minutes</option>
+      </select>
+      </h4>
+
+      <h4 id="head_gps_loc">Weather location (Blank for auto detect)
+      <input type="text" id="gps_location_o">
+      </h4>
+      <p id="p_gps_loc">&nbsp; &nbsp; ZipCode,CountryCode *Example: 08031,es</p>
+     
+      
+      <br>
+      <p align="center">
+      <button id="save_button">SAVE</button>
+      </p>
+
+      <br>
+      <br>
+      <hr color="Cyan">
+      <p align="center"><a style="font-family: verdana; font-size: 130%; font-weight: bold;" href="/dp-watchfaces.com//_634240805.html" target="_blank">dP-watchfaces.com</a></p>
+    </div>
+  
+    <script>
+      function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+          var sParameterName = sURLVariables[i].split('=');
+          if (sParameterName[0] == sParam) {
+            return sParameterName[1];
+          }
+        }
+      }
+
+      function saveOptions() {
+        var temperatureUnit = document.getElementById("temperature_unit");
+        var btdiscvibes     = document.getElementById("btdiscvibes");
+        var batterybar      = document.getElementById("battery_bar_o");
+        var dayMonthOrder   = document.getElementById("day_month_order");
+        var lookstyle       = document.getElementById("look_style_o");
+        var color1          = document.getElementById("color1_o");
+        var color2          = document.getElementById("color2_o");
+        var color3          = document.getElementById("color3_o");
+        var basalttheme     = document.getElementById("color_theme_o");
+        var randomtime      = document.getElementById("random_time_o");
+        var gpslocation     = document.getElementById("gps_location_o");
+     
+        var options = {
+          "temp_unit"   : temperatureUnit.options[temperatureUnit.selectedIndex].value,
+          "btdiscvibes" : btdiscvibes.options[btdiscvibes.selectedIndex].value,
+          "battery_bar" : batterybar.options[batterybar.selectedIndex].value,
+          "day_first"   : dayMonthOrder.options[dayMonthOrder.selectedIndex].value,
+          "look_style"  : lookstyle.options[lookstyle.selectedIndex].value,
+          "color_1"     : color1.options[color1.selectedIndex].value,
+          "color_2"     : color2.options[color2.selectedIndex].value,
+          "color_3"     : color3.options[color3.selectedIndex].value,
+          "color_theme" : basalttheme.options[basalttheme.selectedIndex].value,
+          "random_time" : randomtime.options[randomtime.selectedIndex].value,
+          "gps_location": encodeURIComponent(gpslocation.value)
+        }
+         
+        return options;
+      }
+     
+      var submitButton = document.getElementById("save_button");
+      submitButton.addEventListener("click", 
+        function() {
+          console.log("Submit");
+     
+          var options = saveOptions();
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+           
+          document.location = location;
+        }, 
+      false);
+
+      
+      $(document).ready(function() {
+        var temperatureUnit = document.getElementById('temperature_unit');
+        var btdiscvibes     = document.getElementById('btdiscvibes');
+        var batterybar      = document.getElementById("battery_bar_o");
+        var dayMonthOrder   = document.getElementById("day_month_order");
+        var lookstyle       = document.getElementById('look_style_o');
+        var color1          = document.getElementById("color1_o");
+        var color2          = document.getElementById("color2_o");
+        var color3          = document.getElementById("color3_o");
+        var basalttheme     = document.getElementById('color_theme_o');
+        var randomtime      = document.getElementById('random_time_o');
+        var gpslocation     = document.getElementById('gps_location_o');
+        var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+        temperatureUnit.value = getUrlParameter('temp_unit');
+        if (temperatureUnit.selectedIndex < 0) temperatureUnit.selectedIndex = 0;
+
+        btdiscvibes.value = getUrlParameter('btdiscvibes');
+        if (btdiscvibes.selectedIndex < 0) btdiscvibes.selectedIndex = 0;
+
+        batterybar.value = getUrlParameter('battery_bar');
+        if (batterybar.selectedIndex < 0) batterybar.selectedIndex = 0;
+
+        dayMonthOrder.value = getUrlParameter('day_first');
+        if (dayMonthOrder.selectedIndex < 0) dayMonthOrder.selectedIndex = 1;
+
+        lookstyle.value = getUrlParameter('look_style');
+        if (lookstyle.selectedIndex < 0) lookstyle.selectedIndex = 0;
+
+        color1.value = getUrlParameter('color_1');
+        if (color1.selectedIndex < 0) color1.selectedIndex = 0;
+
+        color2.value = getUrlParameter('color_2');
+        if (color2.selectedIndex < 0) color2.selectedIndex = 1;
+
+        color3.value = getUrlParameter('color_3');
+        if (color3.selectedIndex < 0) color3.selectedIndex = 10;
+
+        basalttheme.value = getUrlParameter('color_theme');
+        if (basalttheme.selectedIndex < 0) basalttheme.selectedIndex = 0;
+
+        randomtime.value = getUrlParameter('random_time');
+        if (randomtime.selectedIndex < 0) randomtime.selectedIndex = 1;
+
+        if (!iOS) {
+          gpslocation.value = getUrlParameter('gps_location');
+          if ((gpslocation.value == null) || (gpslocation.value == "null") || (gpslocation.value == undefined) ||
+              (gpslocation.value == "None") || (gpslocation.value == "undefined")) {
+            gpslocation.value = "";
+          }
+          else {
+            gpslocation.value = decodeURIComponent(gpslocation.value).trim();
+          }
+        }
+        else {
+          gpslocation.value = "";
+          gpslocation.style.visibility = "hidden";
+          document.getElementById("head_gps_loc").style.visibility = "hidden";
+          document.getElementById("p_gps_loc").style.visibility = "hidden";
+        }
+        
+      });
+      
+    </script>
+
+  </body>
+</html>
+	

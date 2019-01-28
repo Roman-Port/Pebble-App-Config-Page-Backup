@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Simple Step 1.0</title>
+<link rel="stylesheet" type="text/css" href="/matthewkingston.com/pebble/slate/dist/css/slate.css">
+<script src="/matthewkingston.com/pebble/slate/dist/js/slate.js"></script>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+</head>
+<body>
+<h1 class=" title">Simple Step 1.0</h1>
+<form>
+<div class=" item-container">
+<div class=" item-container-header">
+Time
+</div>
+<div class=" item-container-content">
+<label class=" item">Time Background Color<input type="text" id="COLOR_TIME_BACKGROUND" class=" item-color item-color-normal" name="COLOR_TIME_BACKGROUND" value="#000000"></label>
+<label class=" item">Hour Color<input type="text" id="COLOR_TIME_HOUR" class=" item-color item-color-normal" name="COLOR_TIME_HOUR" value="#FFFFFF"></label>
+<label class=" item">Minute Color<input type="text" id="COLOR_TIME_MIN" class=" item-color item-color-normal" name="COLOR_TIME_MIN" value="#FFFFFF"></label>
+<label class=" item">Hour/Minute Separator Line<input type="text" id="COLOR_TIME_LINE" class=" item-color item-color-normal" name="COLOR_TIME_LINE" value="#FFFFFF"></label>
+
+</div><div class=" item-container-footer">
+Don't want a line between the Hour & Minute? Choose the same color as your background 
+</div>
+</div>
+
+<div class=" item-container">
+<div class=" item-container-header">
+Steps
+</div>
+<div class=" item-container-content">
+<label class=" item">Steps Background Color<input type="text" id="COLOR_STEPS_BACKGROUND" class=" item-color item-color-normal" name="COLOR_STEPS_BACKGROUND" value="#0000FF"></label>
+<label class=" item">Steps Count Color<input type="text" id="COLOR_STEPS_COUNT" class=" item-color item-color-normal" name="COLOR_STEPS_COUNT" value="#FFFF00"></label>
+
+</div></div>
+
+<div class=" item-container">
+<div class=" item-container-header">
+Progress Bar & Daily Step Goal
+</div>
+<div class=" item-container-content">
+<label class=" item">Show Progress Bar<input type="checkbox" id="PROGRESS_BAR" class=" item-toggle" name="PROGRESS_BAR" value="1"></label>
+<label class=" item"><input type="range" id="GOAL" class=" item-slider" name="GOAL" value="10000" min="1000" max="12000" step="500"><div class="item-input-wrapper item-slider-text"><input type="text" class="item-input" name="GOAL" value="10000"></div></label>
+
+</div></div>
+
+<div class="item-container">
+<div class="button-container">
+<input type="button" class="item-button" style="width: 40%;" name="BUTTON_SUBMIT" value="UPDATE"> <input type="button" class="item-button" style="width: 40%;" name="BUTTON_CANCEL" value="CANCEL">
+</div>
+</div>
+</form>
+</body>
+</html>
+<style>
+	BODY { padding: 10px; }	
+</style>
+<script language="javascript">
+
+	function saveOptions() 
+	{
+		var options = {
+			'KEY_CONFIG': FormatConfigString() + '|'
+		};
+		return options;
+	}
+
+	function FormatConfigString()
+	{
+		//COLOR_TIME_BACKGROUND|COLOR_TIME_HOUR|COLOR_TIME_MIN|COLOR_TIME_LINE|
+		//PROGRESS_BAR|GOAL|COLOR_STEPS_BACKGROUND|COLOR_STEPS_BAR|COLOR_STEPS_COUNT|
+
+		var ConfigArray = []; 
+
+		ConfigArray[0] = $("#COLOR_TIME_BACKGROUND").val().substring(1);
+		ConfigArray[1] = $("#COLOR_TIME_HOUR").val().substring(1);
+		ConfigArray[2] = $("#COLOR_TIME_MIN").val().substring(1);
+		ConfigArray[3] = $("#COLOR_TIME_LINE").val().substring(1);
+
+		ConfigArray[4] = Number($("#PROGRESS_BAR").is(':checked'));
+		ConfigArray[5] = Number($("#GOAL").val());
+		ConfigArray[6] = $("#COLOR_STEPS_BACKGROUND").val().substring(1);
+		//ConfigArray[7] = $("#COLOR_STEPS_BAR").val().substring(1);
+		ConfigArray[7] = 'xxxxxx';
+		ConfigArray[8] = $("#COLOR_STEPS_COUNT").val().substring(1);
+
+		var ConfigString = ConfigArray.join("|"); //+'|';
+		return ConfigString.toUpperCase();	
+	}
+
+	function LoadConfigString(UseString)
+	{
+		//COLOR_TIME_BACKGROUND|COLOR_TIME_HOUR|COLOR_TIME_MIN|COLOR_TIME_LINE|
+		//PROGRESS_BAR|GOAL|COLOR_STEPS_BACKGROUND|COLOR_STEPS_BAR|COLOR_STEPS_COUNT|
+		
+		if (!UseString) UseString = '';
+		console.log("UseString - " + UseString);
+		
+		UseString = UseString.trim();
+		UseString = UseString.replace(/\n|\r/g, "");
+		
+		StringArray = UseString.split('_');
+		UseString = StringArray[0];
+		
+		ConfigArray = UseString.split('|');
+		if (ConfigArray)
+		{
+			if (ConfigArray[0]) $("#COLOR_TIME_BACKGROUND").val('#'+ConfigArray[0]);
+			if (ConfigArray[1]) $("#COLOR_TIME_HOUR").val('#'+ConfigArray[1]);
+			if (ConfigArray[2]) $("#COLOR_TIME_MIN").val('#'+ConfigArray[2]);
+			if (ConfigArray[3]) $("#COLOR_TIME_LINE").val('#'+ConfigArray[3]);
+
+			if (ConfigArray[4]!=0) $("#PROGRESS_BAR").prop("checked", (ConfigArray[4]?"true":"false"));
+			if (ConfigArray[5]!=0) $("input[name=GOAL]").val(ConfigArray[5]);
+
+			if (ConfigArray[6]) $("#COLOR_STEPS_BACKGROUND").val('#'+ConfigArray[6]);
+			//if (ConfigArray[7]) $("#COLOR_STEPS_BAR").val('#'+ConfigArray[7]);
+			if (ConfigArray[8]) $("#COLOR_STEPS_COUNT").val('#'+ConfigArray[8]);
+		}
+		//ToggleSubSection("#SHOW_DATE", "#DATE_WINDOW_CONTAINER");
+		$('.item-color').change();
+	}
+
+	function ToggleSubSection(ValueSelector, ContainerSelector)
+	{
+		if ($(ValueSelector).is(':checked')) $(ContainerSelector).show();
+		else $(ContainerSelector).hide();
+	}
+	
+	// Something like this to get query variables.
+	function getQueryParam(variable, defaultValue)
+	{
+		// Find all URL parameters
+		var query = location.search.substring(1);
+		var vars = query.split('&');
+		for (var i = 0; i < vars.length; i++) 
+		{
+			var pair = vars[i].split('=');
+			// If the query variable parameter is found, decode it to use and return it for use
+			if (pair[0] === variable) 
+			{
+				return decodeURIComponent(pair[1]);
+			}
+		}
+		return defaultValue || false;
+	}
+	
+	$().ready(function()
+    {
+    	// SHOW OR HIDE CONFIGURATION SUBSECTIONS
+    	//$("#SHOW_DATE").on('change', function()
+		//{			
+		//	ToggleSubSection("#SHOW_DATE", "#DATE_WINDOW_CONTAINER");
+    	//});
+    	
+		// LOAD FORM WITH SAVED OPTION SETTINGS   	
+    	if (typeof window.localStorage !== "undefined") 
+    	{
+    		console.log("Not undefined :)");
+	    	//if (typeof window.localStorage.StackedDiscsSettings !== "undefined") 
+	    	{
+	    		//data = JSON.parse(window.localStorage.SecondRingSettings);
+	    		//LoadConfigString(data['KEY_CONFIG']);
+	    		//console.log("Load string from local storage: " + data['KEY_CONFIG']);
+			
+	    		var SavedString = window.localStorage.SimpleStep10;
+	    		console.log("Load string from local storage: " + SavedString);			
+	    		LoadConfigString(SavedString);
+			}
+		}
+   		else LoadConfigString('000000|FFFFFF|FFFFFF|FFFFFF|1|10000|0000FF|FF0000|FFFF00');
+
+    			
+		$("input[name=BUTTON_SUBMIT]").click(function() 
+		{
+			console.log("Submit");
+			var ConfigString = FormatConfigString();
+			if (typeof window.localStorage !== "undefined")
+			{
+				window.localStorage.SimpleStep10 = ConfigString;
+			}
+			console.log("String: " + ConfigString);
+
+			// Set the return URL depending on the runtime environment
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+    		console.log("Save string to local storage: " + ConfigString);				
+			console.log("Return to: " + return_to);
+			console.log("Parameters: " + encodeURIComponent(ConfigString));
+
+			var return_value = JSON.stringify(saveOptions());
+			loc = return_to + encodeURIComponent(return_value);
+			console.log("Warping to: " + loc);
+			
+			//console.log(location);
+			document.location = loc;
+		});
+		
+		$("input[name=BUTTON_CANCEL]").click(function() 
+		{
+			console.log("Cancel");
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+			document.location = return_to;
+		});
+	});
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64921467-8', 'auto');
+  ga('send', 'pageview');
+</script>

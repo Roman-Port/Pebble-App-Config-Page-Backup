@@ -1,0 +1,378 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Pebble Time To</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+//reset
+html,body,div,span, h1, p,a,img,strong,center,ol,ul,li,table,tbody,tr,th,td{
+margin:0; padding:0;border:0;font-size:100%;font:inherit}
+body{line-height:1}
+
+body {
+	font-size:125%;
+	max-width:720px;
+	margin:0 auto;
+	font-family:Helvetica,Arial,sans-serif
+}
+#page {
+	margin:.15em;
+}
+h1 {
+	font-size:1em;
+	text-align:center;
+	background-color:#000;
+	color:#fff;
+	padding:.05em 0;
+	margin:0;
+}
+button {
+	border:0;
+}
+.kbd td, button {
+	border-radius:.25em; -moz-border-radius:.25em; -webkit-border-radius:.25em;
+}
+#timers, #vibrs {
+	margin:.1em 0;
+	}
+	.timer, .vibr {
+		display:inline-block;
+		margin:.3em .3em;
+		-webkit-user-select:none;
+	}
+	.timer span, .vibr span {
+		border:1px solid #BBF;
+		margin:0 .05em;
+		padding:.15em .2em .05em;
+		border-radius:.2em; -moz-border-radius:.2em; -webkit-border-radius:.2em;
+		cursor:pointer;
+	}
+	.add, .del {
+		font-size:1.1em;
+		width:1.5em;
+		height:1.5em;
+		background-color:#0df;
+		margin:.3em;
+	}
+	.del {display:none}
+#kb {}
+	.kbd {
+		-webkit-user-select:none;
+		margin:.5em auto .2em;
+		text-align:center;
+		font-size:1.2em;
+		border-spacing:.15em
+	}
+	.kbd td {
+		width:2.2em; height:1.8em;
+		border:1px solid #bbf;
+		cursor:pointer;
+		background-color:#def;
+	}
+.submit {
+	text-align:center
+	}
+	#b-cancel, #b-submit {
+		width:6.5em; height:2.2em;
+		font-size:.9em;
+		margin:.6em .7em;
+	}
+	#b-cancel {background-color:#F08080;} //lightcoral
+	#b-submit {background-color:lightgreen}  //lightgreen
+</style>
+</head>
+
+<body>
+<h1>Time To Config</h1>
+<div id="page">
+	<div>
+		Timers:
+		<button class="add" id="addtimer">+</button>
+		<button class="del" id="deltimer">&minus;</button>
+	</div>
+	<div id="timers">
+	</div>
+
+	<div>
+		Vibrate bebore, min:
+		<button class="add" id="addvibr">+</button>
+		<button class="del" id="delvibr">&minus;</button>
+	</div>
+	<div id="vibrs">
+	</div>
+
+	<div id="kb">
+	<table class="kbd">
+		<tr><td>1</td><td>2</td><td>3</td></tr>
+		<tr><td>4</td><td>5</td><td>6</td></tr>
+		<tr><td>7</td><td>8</td><td>9</td></tr>
+		<tr><td>&LeftArrow;</td><td>0</td><td>ok</td></tr>
+	</table>
+	</div>
+
+	<div class="submit">
+		<button id="b-cancel">Cancel</button>
+		<button id="b-submit" style="background-color:lightgreen;">Submit</button>
+	</div>
+</div>
+
+<script>
+//	"use strict";
+/*	var bodyW = document.body.clientWidth;
+	var bodyH = document.body.clientHeight;
+	if (!bodyW) bodyW = 720;
+	if (!bodyH) bodyH = 720;
+	var pix = bodyW<bodyH ? bodyW : bodyH;
+	if (pix > 720) pix = 720;
+	alert(bodyH);
+	var page = document.getElementById("page");
+	page.style.fontSize = (pix/34).toFixed() + "px";
+*/
+	var keyOk = "ok",
+		keyBsp = "←",
+		cBkgSel = "#AAF",
+		vibr = [1,5,10],
+		tb = [9,0,15,0],
+		tID = 0, vID = 0,
+		sel,
+		kbClick = 0,
+		timers = document.getElementById("timers"),
+		vibrs = document.getElementById("vibrs"),
+		addtimer = document.getElementById("addtimer"),
+		addvibr = document.getElementById("addvibr"),
+		deltimer = document.getElementById("deltimer"),
+		delvibr = document.getElementById("delvibr"),
+		bcancel = document.getElementById("b-cancel"),
+		bsubmit = document.getElementById("b-submit"),
+		kbb = document.getElementsByTagName("TD");
+
+// Get params
+	function parseUrlQuery() {
+		var data = {}, i, param, pair;
+		if (location.search) {
+			pair = (location.search.substr(1)).split('&');
+			for (i = 0; i < pair.length; i++) {
+				param = pair[i].split('=');
+				data[param[0]] = param[1];
+			}
+		}
+		return data;
+	}
+	function getParams() {
+		var ts, vs, par = parseUrlQuery();
+		if (par.ts) {
+			ts = decodeURIComponent(par.ts);
+			tb = JSON.parse(ts);
+		}
+		if (par.vs) {
+			vs = decodeURIComponent(par.vs);
+			vibr = JSON.parse(vs);
+		}
+	}
+	getParams();
+	
+// ^^^ Get params
+
+	function intVal(mixed_var) {
+		var n = parseInt(mixed_var, 10);
+		return isNaN(n) ? -1 : n;
+	}
+
+	function unselect() {
+		if (sel) {
+			sel.style.background = '';
+			kbClick = 0;
+			deltimer.style.display = '';
+			delvibr.style.display = '';
+			sel = null;
+		}
+	}
+	function select(el) {
+		unselect();
+		sel = el;
+		var cl = sel.className;
+		sel.style.background = cBkgSel;
+		if (cl === "h" || cl === "m") {
+			deltimer.style.display = 'inline';
+		} else if (cl === "v") {
+				delvibr.style.display = 'inline';
+		}
+	}
+
+	function addTimer(h, m) {
+		saveSel();
+		var div = document.createElement('div');
+		div.className = "timer";
+		div.id = "t" + tID;
+		div.innerHTML = '<span class="h" num="'+tID+'">'+h+'</span>:<span class="m" num="'+(tID+1)+'">'+(m<10?"0"+m:m)+'</span>';
+		timers.appendChild(div);
+		var sp = div.getElementsByTagName("SPAN");
+		sp[0].onclick = sp[1].onclick = function () {
+			saveSel();
+			select(this);
+		};
+		tb[tID] = h;
+		tb[tID+1] = m;
+		tID+=2;
+		return sp[0];
+	}
+	function addVibr(v) {
+		saveSel();
+		var div = document.createElement('div');
+		div.className = "vibr";
+		div.id = "v" + vID;
+		div.innerHTML = '<span class="v" num="'+vID+'">'+v+'</span>';
+		var sp = div.getElementsByTagName("SPAN");
+		sp[0].onclick = function () {
+			saveSel();
+			select(this);
+		};
+		vibrs.appendChild(div);
+		vibr[vID] = v;
+		vID++;
+		return sp[0];
+	}
+
+	function saveSel() {
+		var num;
+		if (!sel) {return;}
+		var r = intVal(sel.innerHTML);
+		var selType = sel.className;
+		if (selType === "h") {
+			r = r>23 ? 23 : (r<0 ? 0 : r);
+			sel.innerHTML = r;
+			num = intVal(sel.getAttribute("num"));
+			if (num>=0) { tb[num] = r;}
+		} else if (selType === "m") {
+			r = r>59 ? 59 : (r<0 ? 0 : r);
+			sel.innerHTML = r<10 ? "0"+r : r;
+			num = intVal(sel.getAttribute("num"));
+			if (num>=0) { tb[num] = r; }
+		} else if (selType === "v") {
+			r = r>255 ? 255 : (r<0 ? 0 : r);
+			sel.innerHTML = r;
+			num = intVal(sel.getAttribute("num"));
+			if (num>=0) { vibr[num] = r; }
+		}
+		unselect();
+	}
+
+	function saveOptions() {
+		var v = [], t = [], options;
+		for (var i in vibr) {
+			if (vibr[i] !== null) { v.push(vibr[i]); }
+		}
+		for (i in tb) {
+			if (tb[i] !== null) { t.push(tb[i]); }
+		}
+		options = {
+			'vibr': v,
+			'timers': t
+		};
+		return options;
+	}
+
+	window.onload = function() {
+//		alert(vibr.join('-'));
+		var i;
+		for (i=0; i<tb.length-1; i+=2) {
+			addTimer(tb[i], tb[i+1]);
+		}
+		for (i=0; i<vibr.length; i++) {
+			addVibr(vibr[i]);
+		}
+// +
+		addtimer.onclick = function() {
+			var el = addTimer(12, 0);
+			select(el);
+		};
+		addvibr.onclick = function() {
+			var el = addVibr(10);
+			select(el);
+		};
+// -
+		deltimer.onclick = function() {
+			if (!sel) {return;}
+			var cl, num, vDiv;
+			cl = sel.className;
+			if (cl !== "h" && cl !== "m") {return;}
+			num = intVal(sel.getAttribute("num"));
+			if (cl === "m") {num--;}
+			vDiv = sel.parentNode;
+			unselect();
+			vDiv.parentNode.removeChild(vDiv);
+			delete tb[num];
+			delete tb[num+1];
+		};
+		delvibr.onclick = function() {
+			if (!sel || sel.className !== "v") {return;}
+			var num = intVal(sel.getAttribute("num")),
+				vDiv = sel.parentNode;
+			unselect();
+			vDiv.parentNode.removeChild(vDiv);
+			delete vibr[num];
+		};
+
+		for (i in kbb) { if (kbb.hasOwnProperty(i)) {
+//				kbb[i].onmousedown = function () {this.style.background = cBkgSel;};
+			kbb[i].onclick = function () {
+				if (!sel) {return;}
+				var key = this.innerHTML,
+					cl = sel.className,
+					s = sel.innerHTML,
+					r, se;
+				if (key === keyOk) { saveSel(); }
+				else if (key === keyBsp) {
+					if (s) { s = s.substring(0, s.length-1); }
+					if (s.length < 1) {
+						sel.innerHTML = " ";
+						kbClick = 0;
+					} else {
+						sel.innerHTML = s;
+						kbClick = 1;
+					}
+				} else {
+					if (kbClick) {
+						if ((cl === 'h' || cl === 'm') && s.length > 1) return;
+						if (cl === 'v' && s.length > 2) return;
+						sel.innerHTML = s + key;
+					} else { sel.innerHTML = key;}
+					s = sel.innerHTML;
+					r = intVal(s);
+					if (cl === 'h') {
+						if (r > 2 || s.length > 1) {
+							var se = sel;
+							saveSel();
+							select(se.nextElementSibling);
+							return;
+						}
+					}
+					kbClick++;
+				}
+			};
+		}}
+// cancel summit
+		bcancel.onclick = function() {
+			console.log("Cancel");
+			document.location = "pebblejs://close";
+		};
+		bsubmit.onclick = function() {
+			saveSel();
+			var opt = saveOptions();
+			console.log("Submit");
+			var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(opt));
+			console.log("Warping to: " + JSON.stringify(opt));
+			console.log(location);
+			document.location = location;
+		};
+
+	};
+</script>
+
+<!-- Yandex.Metrika counter ->
+<script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter24077080 = new Ya.Metrika({id:24077080}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/24077080" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+</body>
+</html>

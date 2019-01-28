@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html style='height:100%'>
+  <head>
+  <title>Slate Example Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/fahrstuhl.github.io/ANote/config/css/slate.css'>
+  <script src='/fahrstuhl.github.io/ANote/config/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body style='height:100%'>
+    <h1 class='title'>A Note</h1>
+
+    <div class='item-container' style='height:50%'>
+      <div class='item-container-header'>Note</div>
+      <div class='item-container-content' style='height:95%'>
+        <label class='item' style='height:95%'>
+          Enter your note below.
+          <textarea id='note_input' type='text' class='item-input' style='background-color:#ffffff; height:85%'></textarea>
+        </label>
+      </div>
+    </div>
+
+<div class="item-container">
+  <div class="item-container-header">Settings</div>
+  <div class="item-container-content">
+    <label class="item">
+      Font Size
+      <select id="font_size_select" dir='rtl' class="item-select">
+        <option class="item-select-option" value="18">Smaller</option>
+        <option class="item-select-option" value="24" selected="">Default</option>
+        <option class="item-select-option" value="28">Larger</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE'>
+      </div>
+    </div>
+  </body>
+  <script>
+    console.log('opened config');
+  function getConfigData() {
+    console.log('getconfigdata');
+    var note_input = document.getElementById('note_input');
+    var font_size_select = document.getElementById('font_size_select');
+    var font_size_selection = font_size_select.selectedIndex;
+    var font_size = font_size_select.options[font_size_selection];
+ 
+    var options = {
+      'note_input': note_input.value,
+      'font_size': font_size.value
+    };
+
+    // Save for next launch
+    localStorage['note_input'] = options['note_input'];
+    localStorage['font_size'] = font_size_selection;
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    console.log('getqueryparam');
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var note_input = document.getElementById('note_input');
+    var font_size_select = document.getElementById('font_size_select');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['note_input']) {
+      note_input.value = localStorage['note_input'];
+    }
+    if(localStorage['font_size']) {
+        font_size_select.selectedIndex = localStorage['font_size'];
+        console.log('Loading font_size_selection' + font_size_select.selectedIndex);
+    }
+  })();
+  </script>
+</html>

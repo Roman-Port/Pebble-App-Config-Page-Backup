@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Q-Watchface Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/jonaslej.github.io/pebble-qwatchface/css/slate.css'>
+  <style type="text/css">
+    .hidden{display: none}
+    </style>
+</head>
+<body>
+  <div class="item-container">
+    <h1 class="title">Q Face</h1>
+  </div>
+  <div class="item-container">
+    <div class="item-container-header">Appearance</div>
+    <div class="item-container-content">
+      <label class="item">
+        Background color
+        <input type="text" class="item-color item-color-normal" name="bgcolor" id="bgcolor" value="#000000">
+      </label>
+      <label class="item">
+        Time color
+        <input type="text" class="item-color item-color-normal" name="tmcolor" id="tmcolor" value="#FFFF00">
+      </label>
+      <label class="item">
+        Date color
+        <input type="text" class="item-color item-color-normal" name="dtcolor" id="dtcolor" value="#FFFFFF">
+      </label>
+      <label class="item">
+        Weekday color
+        <input type="text" class="item-color item-color-normal" name="wdcolor" id="wdcolor" value="#00FF00">
+      </label>
+      <label class="item">
+        Weather conditions color
+        <input type="text" class="item-color item-color-normal" name="wccolor" id="wccolor" value="#FFFFFF">
+      </label>
+      <label class="item">
+        Temperature color
+        <input type="text" class="item-color item-color-normal" name="tpcolor" id="tpcolor" value="#FFFFFF">
+      </label>
+    </div>
+  </div>
+  <div class="item-container">
+    <div class="item-container-header">Settings</div>
+    <div class="item-container-content">
+      <label class="item">
+        Use degrees Celcius for temperature
+        <input type="checkbox" id="degcelc" class="item-toggle" checked="">
+      </label>
+    </div>
+    <div class="item-container-footer">
+      Uncheck to use degrees Fahrenheit
+    </div>
+  </div>
+  <div class="item-container">
+    <div class="button-container">
+      <input type="button" class="item-button" value="SAVE" id="submit">
+    </div>
+  </div>
+  <div class="item-container hidden" id="debug">
+    <div class="item-container-content">
+      <div class="item" id="debug-content">debugging...<br></div>
+    </div>
+  </div>
+  <script src='/jonaslej.github.io/pebble-qwatchface/js/slate.js'></script>
+  <script src='/jonaslej.github.io/pebble-qwatchface/js/config.js'></script>
+</body>
+</html>

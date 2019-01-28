@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Back In Time Configuration</title>
+    <link rel="stylesheet" type="text/css" href="/pebble.limitedpixel.com/bit/config/css/slate.css">
+    <script src="/pebble.limitedpixel.com/bit/config/js/slate.js"></script>
+    <style>
+    
+      .title {
+        padding: 15px 10px;
+        text-transform: uppercase;
+        font-family: 'PT Sans', sans-serif;
+        font-size: 1.2em;
+        font-weight: 500;
+        color: #888888;
+        text-align: center;
+      }
+    
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1 class="title">Back In Time</h1>
+
+    <div class="item-container">
+      <div class="item-container-header">Countdown</div>
+      <div class="item-container-content">
+        <label class="item">
+          Enabled
+          <input id="chkCountdown" type="checkbox" class="item-toggle" checked="">
+        </label>
+        <label class="item">
+          Date
+          <input id="dateCountdown" type="date" class="item-date" value="2015-10-21">
+        </label>
+        <label class="item">
+          Time
+          <input id="timeCountdown" type="time" class="item-date" value="16:29">
+        </label>
+      </div>
+      <div class="item-container-footer">Enabling the countdown will show it when you flick your wrist</div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Misc</div>
+      <div class="item-container-content">
+        <label class="item">
+          Show seconds
+          <input id="chkSeconds" type="checkbox" class="item-toggle" checked="">
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="button-container">
+        <input id="submit_button" type="button" class="item-button" value="SUBMIT">
+      </div>
+    </div>
+    
+    <div class="item-subtitle">
+      <div class="item">
+        Configuration version 1.5
+      </div>
+    </div>
+  </body>
+  
+  <script>
+
+    function getConfigData() {
+      var date = $('#dateCountdown').val();
+      var time = $('#timeCountdown').val();
+      var datetime = new Date(date + 'T' + time + 'Z');
+      
+      console.log(datetime.getTime() / 1000);
+            
+      var options = {
+        'countdown_enabled': $('#chkCountdown').prop('checked'),
+        'countdown_datetime': Math.floor(datetime.getTime() / 1000),
+        'seconds_enabled': $('#chkSeconds').prop('checked')
+      };
+  
+      // Save for next launch
+      localStorage['countdown_enabled'] = options['countdown_enabled'];
+      localStorage['countdown_date'] = $('#dateCountdown').val();
+      localStorage['countdown_time'] = $('#timeCountdown').val();
+      localStorage['seconds_enabled'] = options['seconds_enabled'];
+  
+      console.log('Got options: ' + JSON.stringify(options));
+      return options;
+    }
+  
+    function getQueryParam(variable, defaultValue) {
+      var query = location.search.substring(1);
+      var vars = query.split('&');
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (pair[0] === variable) {
+          return decodeURIComponent(pair[1]);
+        }
+      }
+      return defaultValue || false;
+    }
+  
+    //Submit
+    var submitButton = document.getElementById('submit_button');
+    $('#submit_button').on('click', function() {
+      console.log('Submit');
+  
+      // Set the return URL depending on the runtime environment
+      var return_to = getQueryParam('return_to', 'pebblejs://close#');
+      document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+    });
+  
+    //Load
+    (function() {
+      //localStorage.clear();
+      if(localStorage['countdown_enabled']) {
+        $('#chkCountdown').prop('checked', JSON.parse(localStorage['countdown_enabled']));
+        $('#dateCountdown').val(localStorage['countdown_date']);
+        $('#timeCountdown').val(localStorage['countdown_time']);
+        $('#chkSeconds').prop('checked', JSON.parse(localStorage['seconds_enabled']));
+      }
+    })();
+  </script>
+</html>

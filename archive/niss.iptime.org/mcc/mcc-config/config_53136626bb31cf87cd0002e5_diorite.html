@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Configurable</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.3/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.4.3/jquery.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Configurable</h1>
+      </div>
+
+      <div data-role="content">
+
+        <div data-role="fieldcontain">
+          <label for="invert_select">Invert color:</label>
+          <select name="invert_select" id="invert_select" data-role="slider">
+            <option value="white">White</option>
+            <option value="black">Black</option>
+          </select>
+        </div>
+
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    
+    <script>
+
+      	function updateControls() {
+		//var background = JSON.parse(decodeURIComponent(window.location.hash).substr(1));
+		var background = document.getElementById("invert_select");
+		if(background){
+			$("#invert_select").val(background).slider("refresh");
+		}else{
+			$("#invert_select").val("white").slider("refresh");
+		}
+      	}
+	$('#main').bind('pageinit', updateControls);
+
+      	function saveOptions() {
+        	var options = {
+          	'invert': $("#invert_select").val()
+	        }
+	        return options;
+	    }
+
+      	$().ready(
+      		function() {
+	        	$("#b-cancel").click(
+		        	function() {
+			          	console.log("Cancel");
+			          	document.location = "pebblejs://close";
+		        	}
+	        	);
+
+		        $("#b-submit").click(
+		        	function() {
+			        	console.log("Submit");
+		          		document.location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+		        	}
+	        	);
+	      	}
+    	);
+	</script>
+  </body>
+</html>

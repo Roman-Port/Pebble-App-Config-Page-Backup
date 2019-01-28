@@ -1,0 +1,51 @@
+<html>
+   <head>
+      <title>Configuration</title>
+   </head>
+
+   <body>
+      <h1>Configuration</h1>
+
+      <p>Show Grid:<br>
+         <input type="radio" name="showgrid" value="Yes" checked="">Yes<br>
+         <input type="radio" name="showgrid" value="No">No<br>
+      </p>
+ 
+      <p>
+         <button id="saveButton">Save</button>
+      </p>
+   </body>
+
+   <script>
+      //Setup to allow easy adding more options later
+      function saveOptions()
+ 	      {
+			var radios = document.getElementsByName('showgrid');
+			var showgridValue;
+			for (var i = 0, length = radios.length; i < length; i++)
+				{
+				if (radios[i].checked)
+					{
+					showgridValue = radios[i].value;
+					}
+				}
+         var options = {"showgrid": showgridValue
+                       }
+     
+         return options;
+         };
+ 
+      var submitButton = document.getElementById("saveButton");
+      submitButton.addEventListener("click", 
+                                    function()
+		 									     {
+                                       console.log("Submit");
+                                       var options = saveOptions();
+                                       var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+													console.log(location);
+                                       document.location = location;
+                                       }, 
+                                    false);
+   </script>
+
+</html>

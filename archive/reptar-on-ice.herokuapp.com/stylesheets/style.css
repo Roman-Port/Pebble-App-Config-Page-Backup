@@ -1,0 +1,32 @@
+
+.btn-group {
+	width: 100%;
+}
+.btn-group .btn{
+	width: 50%;
+}
+
+.slider {
+	width: 100% !important;
+}
+#weight-slider .slider-selection {
+	background: #428bca;
+}
+#weight-slider .slider-handle {
+	opacity: 1;
+}
+
+body {
+    background-color: rgb(220, 226, 236) !important;
+}
+
+#weight_val {
+	font-size: 1.1em;
+}
+
+.eula-text {
+	margin-bottom: 1em;
+	background: rgba(0, 0, 0, 0.1);
+	border-radius: 1em;
+	padding: 1em;
+}

@@ -1,0 +1,512 @@
+<html>
+ <head>
+  <title>Maurice Config</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" />
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <style type="text/css">
+        #Banner {
+          display: block;
+          margin: 1em auto 0;
+          width: 100%;
+        }
+
+        #map-page, #map-canvas { width: 100%; height: 80%; padding: 0; }
+  </style>
+ </head>
+ <body>
+ <br><br>
+ <center>Loading...</center>
+ <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Maurice Configuration</h1>
+      <center>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="D3C427GK2PGE8">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/pl_PL/i/scr/pixel.gif" width="1" height="1">
+</form>
+<script src="http://coinwidget.com/widget/coin.js"></script>
+<script>
+CoinWidgetCom.go({
+	wallet_address: "1DAvDGQCXJtL2SHPz47QUjaSXBXLSXwThJ"
+	, currency: "bitcoin"
+	, counter: "count"
+	, alignment: "bc"
+	, qrcode: true
+	, auto_show: false
+	, lbl_button: "Donate BTC"
+	, lbl_address: "My Bitcoin Address:"
+	, lbl_count: "donations"
+	, lbl_amount: "BTC"
+});
+</script>
+      </center>
+      </div>
+      <div data-role="content">
+
+        <a class="ui-link" href="" ><img id="Banner" src="images/9.jpg"> </a> 
+
+        <div data-role="fieldcontain">
+          <label for="invert">Invert colors:</label>
+          <select name="invert" id="invert" data-role="slider">
+            <option value="0">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="seconds">Seconds hand:</label>
+          <select name="seconds" id="seconds" data-role="slider">
+            <option value="0">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="top" class="select">Top:</label>
+          <select name="top" id="top">
+            <option value="0">Logo + battery bar</option>
+            <option value="1">Time</option>
+            <option value="2">Time + battery bar</option>
+            <option value="3">Weather</option>
+            <option value="4">Weather + battery bar</option>
+            <option value="5">Battery bar</option>
+            <option value="6">Empty</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="format" class="select">Date type:</label>
+          <select name="format" id="format">
+            <option value="0">SUN 31</option>
+            <option value="1">31 JAN</option>
+            <option value="2">JAN 31</option>
+            <option value="3">31 01</option>
+            <option value="4">01 31</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="lang" class="select">Date language:</label>
+          <select name="lang" id="lang">
+            <option value="00">English</option>
+            <option value="01">Albanian</option>
+            <option value="02">Catalan</option>
+            <option value="03">Croatian</option>
+            <option value="04">Czech</option>
+            <option value="05">Danish</option>
+            <option value="06">Dutch</option>
+            <option value="07">Estonian</option>
+            <option value="08">Finnish</option>
+            <option value="09">French</option>
+            <option value="10">German</option>
+            <option value="11">Hungarian</option>
+            <option value="12">Icelandic</option>
+            <option value="13">Indonesian</option>
+            <option value="14">Irish</option>
+            <option value="15">Italian</option>
+            <option value="16">Latvian</option>
+            <option value="17">Lithuanian</option>
+            <option value="18">Malay</option>
+            <option value="19">Maltese</option>
+            <option value="20">Norwegian</option>
+            <option value="21">Polish</option>
+            <option value="22">Portuguese</option>
+            <option value="23">Romanian</option>
+            <option value="24">Slovak</option>
+            <option value="25">Slovenian</option>
+            <option value="26">Spanish</option>
+            <option value="27">Swedish</option>
+            <option value="28">Turkish</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="weather">Weather:</label>
+          <select name="weather" id="weather" data-role="slider">
+            <option value="0">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup" data-type="horizontal">
+    	    <legend>Weather provider: (applies with next fetch)</legend>
+            <input type="radio" name="provider" id="openweather" value="0" checked="checked" />
+            <label for="openweather">Openweather</label>
+
+            <input type="radio" name="provider" id="yahoo" value="1"  />
+            <label for="yahoo">Yahoo</label>
+          </fieldset>
+        </div>
+
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup" data-type="horizontal">
+    	    <legend>Weather units: (applies with next fetch)</legend>
+            <input type="radio" name="weather" id="metric" value="0" checked="checked" />
+            <label for="metric">C&#176;</label>
+
+            <input type="radio" name="weather" id="imperial" value="1"  />
+            <label for="imperial">F&#176;</label>
+          </fieldset>
+        </div>
+
+        <div id="openweathersettings">
+
+        <div data-role="fieldcontain">
+          <label for="location">Automatic location: (applies with next fetch)</label>
+          <select name="location" id="location" data-role="slider">
+            <option value="0">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="location">Custom location: (applies with next fetch)</label>
+            <a href="#map-page" class="ui-btn ui-shadow ui-corner-all" data-rel="dialog" data-transition="pop">Show map</a></p>
+        </div>
+
+        </div>
+        <div id="yahoosettings">
+
+        <div data-role="fieldcontain">
+          <label for="ylocation">Weather location: (applies with next fetch)</label>
+          <input type="text" name="ylocation" id="ylocation" value="">
+        </div>
+
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="ftime">Weather update interval: (minutes)(requires restart)</label>
+          <input type="range" name="ftime" id="ftime" value="60" min="5" max="180" step="5">
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="vibe">Hourly vibration:</label>
+          <select name="vibe" id="vibe" data-role="slider">
+            <option value="0">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+ 
+        <div data-role="fieldcontain">
+          <label for="vibestart" class="select">Weather and hourly vibration start:</label>
+          <select name="vibestart" id="vibestart">
+            <option value="00">00:00</option>
+            <option value="01">01:00</option>
+            <option value="02">02:00</option>
+            <option value="03">03:00</option>
+            <option value="04">04:00</option>
+            <option value="05">05:00</option>
+            <option value="06">06:00</option>
+            <option value="07">07:00</option>
+            <option value="08">08:00</option>
+            <option value="09">09:00</option>
+            <option value="10">10:00</option>
+            <option value="11">11:00</option>
+            <option value="12">12:00</option>
+            <option value="13">13:00</option>
+            <option value="14">14:00</option>
+            <option value="15">15:00</option>
+            <option value="16">16:00</option>
+            <option value="17">17:00</option>
+            <option value="18">18:00</option>
+            <option value="19">19:00</option>
+            <option value="20">20:00</option>
+            <option value="21">21:00</option>
+            <option value="22">22:00</option>
+            <option value="23">23:00</option>
+          </select>
+        </div>
+ 
+        <div data-role="fieldcontain">
+          <label for="vibeend" class="select">Weather and hourly vibration end:</label>
+          <select name="vibeend" id="vibeend">
+            <option value="00">00:00</option>
+            <option value="01">01:00</option>
+            <option value="02">02:00</option>
+            <option value="03">03:00</option>
+            <option value="04">04:00</option>
+            <option value="05">05:00</option>
+            <option value="06">06:00</option>
+            <option value="07">07:00</option>
+            <option value="08">08:00</option>
+            <option value="09">09:00</option>
+            <option value="10">10:00</option>
+            <option value="11">11:00</option>
+            <option value="12">12:00</option>
+            <option value="13">13:00</option>
+            <option value="14">14:00</option>
+            <option value="15">15:00</option>
+            <option value="16">16:00</option>
+            <option value="17">17:00</option>
+            <option value="18">18:00</option>
+            <option value="19">19:00</option>
+            <option value="20">20:00</option>
+            <option value="21">21:00</option>
+            <option value="22">22:00</option>
+            <option value="23">23:00</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="font">Use system font (restart required):</label>
+          <select name="font" id="font" data-role="slider">
+            <option value="0">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="battery">Low battery icon:</label>
+          <select name="battery" id="battery" data-role="slider">
+            <option value="0">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="bluetooth">Vibrate on BT disconnect:</label>
+          <select name="bluetooth" id="bluetooth" data-role="slider">
+            <option value="0">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="errors">Show errors:</label>
+          <select name="errors" id="errors" data-role="slider">
+            <option value="0">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+          <div data-role="navbar">
+            <ul>
+              <div class="ui-block-a"><button type="submit" id="b-cancel" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-delete">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" id="b-submit" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check ui-btn-active ui-state-persist">Submit</button></div>
+            </ul>
+          </div>
+          <h4 style="display:none;">Footer</h4>
+        </div>
+
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-role="page" id="map-page">
+     <div data-role="header" data-theme="a">
+       <h1>Move pin</h1>
+<a href="#main" data-rel="back" id="b-locationok" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-back ui-btn-icon-left">OK</a>
+<a href="#main" data-rel="back" id="b-locationcancel" class="ui-btn ui-shadow ui-corner-all ui-btn-inline ui-icon-delete ui-btn-icon-left">Cancel</a>
+     </div>
+
+     <div role="main" class="ui-content" id="map-canvas">
+		<!-- map loads here... -->
+     </div>
+    </div>
+
+    <script>
+        var settings = "undefined";
+        var map;
+        var latitude = "undefined";
+        var longitude = "undefined";
+        var mlocation = "undefined";
+        var fetchtime = "60";
+        var marker;
+
+      
+ 
+        if(settings=="")settings='0100008220010100001';
+
+        if(settings.substring(0,1)=='1'){
+          var selectinvert = $("select#invert");
+          selectinvert[0].selectedIndex = 1;
+        }
+
+        if(settings.substring(1,2)=='1'){
+          var selectseconds = $("select#seconds");
+          selectseconds[0].selectedIndex = 1;
+        }
+
+        var selectlang = $("select#lang");
+        selectlang[0].selectedIndex = parseInt(settings.substring(2,4), 10);
+
+        if(settings.substring(4,5)=='1'){
+          var selectvibe = $("select#vibe");
+          selectvibe[0].selectedIndex = 1;
+        }
+
+        var selectvibestart = $("select#vibestart");
+        selectvibestart[0].selectedIndex = parseInt(settings.substring(5,7), 10);
+
+        var selectvibeend = $("select#vibeend");
+        selectvibeend[0].selectedIndex = parseInt(settings.substring(7,9), 10);
+
+        var selectformat = $("select#format");
+        selectformat[0].selectedIndex = parseInt(settings.substring(9,10), 10);
+
+        if(settings.substring(10,11)=='1'){
+          $("#metric").attr("checked",false);
+          $("#imperial").attr("checked",true);
+        }
+
+        if(settings.substring(11,12)=='1'){
+          var selectanalogdate = $("select#location");
+          selectanalogdate[0].selectedIndex = 1;
+        }
+
+        var selecttop = $("select#top");
+        selecttop[0].selectedIndex = parseInt(settings.substring(12,13), 10);
+
+        if(settings.substring(13,14)=='1'){
+          var selectweather = $("select#weather");
+          selectweather[0].selectedIndex = 1;
+        }
+
+        if(settings.substring(14,15)=='1'){
+          $("#openweather").attr("checked",false);
+          $("#yahoo").attr("checked",true);
+          switchtoyahoo();
+        }else{
+          switchtoopenweather();
+        }
+
+        if(settings.substring(15,16)=='1'){
+          var selectfont = $("select#font");
+          selectfont[0].selectedIndex = 1;
+        }
+
+        if(settings.substring(16,17)=='1'){
+          var selectbattery = $("select#battery");
+          selectbattery[0].selectedIndex = 1;
+        }
+
+        if(settings.substring(17,18)=='1'){
+          var selectbluetooth = $("select#bluetooth");
+          selectbluetooth[0].selectedIndex = 1;
+        }
+
+        if(settings.substring(18,19)=='1'){
+          var selecterrors = $("select#errors");
+          selecterrors[0].selectedIndex = 1;
+        }
+
+        $("#ylocation").val(mlocation);
+      
+
+      function saveOptions() {
+        var settings = "" + $("#invert").val() + $("#seconds").val() + $("#lang").val();
+        settings += $("#vibe").val() + $("#vibestart").val() + $("#vibeend").val();
+        settings += $("#format").val();
+        if($("#metric").is(':checked'))settings += "0";
+        else settings += "1";
+        settings += $("#location").val() + $("#top").val() + $("#weather").val();
+        if($("#openweather").is(':checked'))settings += "0";
+        else settings += "1";
+        settings += $("#font").val() + $("#battery").val() + $("#bluetooth").val() + $("#errors").val();
+
+        mlocation = $("#ylocation").val();
+        fetchtime = $("#ftime").val();
+
+        var options = {
+          'settings': settings,
+          'latitude': latitude,
+          'longitude': longitude,
+          'location': mlocation,
+          'fetchtime': fetchtime
+        }
+        return options;
+      }
+
+      function switchtoopenweather(){
+        $('#yahoosettings').slideUp();
+        $('#openweathersettings').slideDown();
+      }
+
+      function switchtoyahoo(){
+        $('#openweathersettings').slideUp();
+        $('#yahoosettings').slideDown();
+      }
+
+$( document ).on( "pagecreate", "#map-page", function() {
+    var defaultLatLng = new google.maps.LatLng(latitude, longitude); 
+    if ( navigator.geolocation ) {
+        function success(pos) {
+            // Location found, show map with these coordinates
+            drawMap(new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude));
+        }
+        function fail(error) {
+            drawMap(defaultLatLng);  // Failed to find location, show default map
+        }
+        // Find the users current position.  Cache the location for 5 minutes, timeout after 6 seconds
+        navigator.geolocation.getCurrentPosition(success, fail, {maximumAge: 500000, enableHighAccuracy:true, timeout: 6000});
+    } else {
+        drawMap(defaultLatLng);  // No geolocation support, show default map
+    }
+    function drawMap(latlng) {
+        var myOptions = {
+            zoom: 6,
+            center: latlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map-canvas"), myOptions);
+        // Add an overlay to the map of current lat/lng
+        marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            draggable:true,
+            title:"Drag me!"
+        });
+    }
+});
+
+      $().ready(function() {
+
+        $("#yahoo").click(function() {
+          switchtoyahoo();
+        });
+
+        $("#openweather").click(function() {
+          switchtoopenweather();
+        });
+
+        $("#ftime").val(fetchtime).slider("refresh");
+
+        $("#b-locationok").click(function() {
+          console.log("Location Picked");
+          var center = map.getCenter();
+          console.log("Center: " + center);
+          var location = marker.getPosition();
+          console.log("Marker position: " + location);
+          latitude = location.lat();
+          longitude = location.lng();
+        });
+
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location.href = "pebblejs://close#";
+        });
+
+        $("#b-submit").click(function() {
+          if($("#yahoo").is(':checked')&&($("#ylocation").val()==""||$("#ylocation").val()=="undefined")){
+            $("#ylocation").focus();
+            alert("Set location for weather first");
+            return;
+          }
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Submit: " + location);
+          document.location = location;
+        });
+
+      });
+   </script>
+  <br><br><br>
+ </body>
+</html>

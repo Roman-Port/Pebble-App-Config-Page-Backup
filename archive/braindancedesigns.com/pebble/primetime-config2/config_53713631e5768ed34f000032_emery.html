@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+    <title>PrimeTime Settings</title>
+  </head>
+
+  <body>
+    <div data-role="page" id="page1">
+      <div data-theme="" data-role="header">
+	<h3>PrimeTime</h3>
+      </div>
+      <div data-role="content">
+	<h2>Settings</h2>
+	<div data-role="fieldcontain">
+	  <label for="battIndOn">Show Battery Indicator:</label>
+	  <select name="battIndOn" id="battIndOn" data-theme="" data-role="slider">
+	    <option value="0">No</option>
+	    <option value="1">Yes</option>
+	  </select>
+	</div>
+	<div data-role="fieldcontain">
+	  <label for="btIndOn">Show Bluetooth Indicator:</label>
+	  <select name="btIndOn" id="btIndOn" data-theme="" data-role="slider">
+	    <option value="0">No</option>
+	    <option value="1">Yes</option>
+	  </select>
+	</div>
+	<div data-role="fieldcontain">
+	  <label for="vibOnDisconnect">Vibrate on Disconnect:</label>
+	  <select name="vibOnDisconnect" id="vibOnDisconnect" data-theme="" data-role="slider">
+	    <option value="0">No</option>
+	    <option value="1">Yes</option>
+	  </select>
+	</div>
+	<div data-role="fieldcontain">
+	  <label for="invScreen">Screen Color:</label>
+	  <select name="invScreen" id="invScreen" data-theme="" data-role="slider">
+	    <option value="0">Dark</option>
+	    <option value="1">Light</option>
+	  </select>
+	</div>
+
+	<div class="ui-body ui-body-b">
+	  <fieldset class="ui-grid-a">
+	    <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+	    <div class="ui-block-b"><button type="reset" data-theme="d" id="b-reset">Reset</button></div>
+	    <div class="ui-block-c"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+	  </fieldset>
+	</div>
+      </div>
+    </div>
+    <script>
+      <!-- from http://snipplr.com/view/26662/get-url-parameters-with-jquery--improved/ -->
+      $.urlParam = function(name){
+			var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+			if (!results) { return 0; }
+			return results[1] || 0;
+      }
+	   
+	  function updateControls() {
+			var settingsin = decodeURIComponent($.urlParam("settings"));
+			var settingsstr = $.parseJSON(settingsin);
+			var settings = $.parseJSON($.parseJSON(settingsin));
+			//alert(settings.battIndOn);
+		 	if (settings.battIndOn !='') {
+				$('#battIndOn').val(settings.battIndOn).slider("refresh");
+		 	}
+		 	if (settings.btIndOn !='') {
+				$('#btIndOn').val(settings.btIndOn).slider("refresh");
+		 	}
+		 	if (settings.vibOnDisconnect !='') {
+				$('#vibOnDisconnect').val(settings.vibOnDisconnect).slider("refresh");
+		 	}
+		 	if (settings.invScreen !='') {
+				$('#invScreen').val(settings.invScreen).slider("refresh");
+		 	}
+	   }
+
+
+      function saveOptions() {
+        var options = {
+          'battIndOn': $("#battIndOn").val(),
+          'btIndOn': $("#btIndOn").val(),
+          'vibOnDisconnect': $("#vibOnDisconnect").val(),
+          'invScreen': $("#invScreen").val(),
+        }
+        return options;
+      }
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close#";
+        });
+
+        $("#b-reset").click(function() {
+          console.log("Reset");
+          document.location = "pebblejs://close#" + encodeURIComponent(false);
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log(location);
+          document.location = location;
+        });
+      });
+
+      $('#page1').bind('pageinit', updateControls);
+    </script>
+  </body>
+</html>

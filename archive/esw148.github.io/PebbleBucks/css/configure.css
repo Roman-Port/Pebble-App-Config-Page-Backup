@@ -1,0 +1,23 @@
+h1.navbar-brand {
+	margin: inherit;
+	font-weight: inherit;
+}
+
+h2 {
+	font-size: 1.25em;
+}
+
+#barcode-container {
+	display: none;
+	margin-top: 20px;
+}
+
+canvas {
+	display: block;
+	image-rendering: -webkit-optimize-contrast;
+	image-rendering: optimize-contrast;
+}
+
+.container .row:last-of-type {
+	margin-bottom: 20px;
+}

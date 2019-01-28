@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel='stylesheet' type='text/css' href='/pebble.nikolai-rinas.de/slate/dist/css/slate.css'>
+  <link rel='stylesheet' type='text/css' href='/pebble.nikolai-rinas.de/css/style.css'>
+</head>
+<body>
+  <div class='item-container'>
+    <h1 class='title'>DigiMe<br>Configuration Page</h1>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <div class='item'>
+        Use this configuration page to choose the settings you would like
+        applied to this app.
+      </div>
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Temperature format</div>
+    <div class="item-container-content">
+      <label class="item">
+        Celsius
+        <input type="radio" class="item-radio" name="tempFormat" id="tempFormatCelsius" value="c">
+      </label>
+      <label class="item">
+        Fahrenheit
+        <input type="radio" class="item-radio" name="tempFormat" id="tempFormatFahrenheit" value="f">
+      </label>
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Language</div>
+    <div class="item-container-content">
+      <label class="item">
+        English
+        <input type="radio" class="item-radio" name="langFormat" id="langFormatEngl" value="e">
+      </label>
+      <label class="item">
+        Spanish
+        <input type="radio" class="item-radio" name="langFormat" id="langFormatSpan" value="s">
+      </label>
+      <label class="item">
+        German
+        <input type="radio" class="item-radio" name="langFormat" id="langFormatGer" value="g">
+      </label>
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">OpenWeatherMap API Key</div>
+    <div class="item-container-content">
+      <label class="item">
+        <div class="item-input-wrapper">
+            <input type="text" class="item-input" id="OWMApiKey" placeholder="Paste your API key here">
+        </div>
+      </label>
+    </div>
+    <div class="item-container-footer">
+    <a href="/home.openweathermap.org/users/sign_up.html">Create your personal API key</a>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='button-container'>
+      <input id='submitButton' type='button' class='item-button' value='SUBMIT'>
+    </div>
+  </div>
+
+  <script src='/pebble.nikolai-rinas.de/slate/dist/js/slate.js'></script>
+  <script src='/pebble.nikolai-rinas.de/js/mainV2.js'></script>
+</body>
+</html>

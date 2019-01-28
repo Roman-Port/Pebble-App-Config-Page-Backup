@@ -1,0 +1,83 @@
+﻿
+
+<!DOCTYPE html>
+<html>
+    <head><meta charset="utf-8"><link rel="stylesheet" type="text/css" href="/ihtnc-pebble-config.azurewebsites.net/css/style.css">
+		<script src="/code.jquery.com//jquery-2.js"></script>		
+		<script src="/ihtnc-pebble-config.azurewebsites.net/js/script.bin" type="text/javascript"></script>
+    <title>
+	OrangeKid Configuration
+</title></head>
+    <body>
+        <style>
+			
+		</style>
+        <div class="config">
+            <div class="title">
+                OrangeKid Configuration
+            </div>
+            
+            <div class="fields">
+                
+                    <div class="field">
+                        <div class="field-header">
+                            Screen color
+                        </div>
+                        <div class="field-content">
+                            
+                                
+                                <input id="id_InvertMode" name="InvertMode" type="radio" value="0" checked="checked">&nbsp;Original
+                                <br>
+                                
+                                
+                                <input id="id_InvertMode" name="InvertMode" type="radio" value="1">&nbsp;Invert in the morning
+                                <br>
+                                
+                                
+                                <input id="id_InvertMode" name="InvertMode" type="radio" value="2">&nbsp;Invert
+                                <br>
+                                
+                        </div>
+                    </div>
+                
+                    <div class="field">
+                        <div class="field-header">
+                            BT Notification
+                        </div>
+                        <div class="field-content">
+                            
+                                <input id="id_BTNotification" name="BTNotification" type="checkbox" value="1">
+                            
+                        </div>
+                    </div>
+                
+            </div>
+            
+        <div class="footer">
+            
+            <input id="save" value="Save" type="submit">
+			
+            <input id="cancel" value="Cancel" type="submit">
+        </div>
+        <div class="copyright">
+            ThinCFG&nbsp;for&nbsp;Pebble&nbsp;©&nbsp;COPYRIGHT&nbsp;2019
+			<br>ALL&nbsp;RIGHTS&nbsp;RESERVED.
+        </div>
+        </div>
+		<script>
+			$(document).ready(function() {
+				$("#cancel").click(function(){
+					var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify({"action":"cancel"}));
+					if(enable_logging) console.log("save.cancel: location=" + location);
+					document.location.href = location;
+				});
+
+				$("#save").click(function(){
+					var location = "pebblejs://close#" + encodeURIComponent(parseSelections());
+					if(enable_logging) console.log("save.click: location=" + location);
+					document.location.href = location;
+				});
+			});
+		</script>
+    </body>
+</html>

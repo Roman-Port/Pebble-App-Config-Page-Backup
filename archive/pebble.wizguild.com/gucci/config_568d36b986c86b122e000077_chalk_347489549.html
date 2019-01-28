@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ShoGucci Settings</title>
+    <link rel="stylesheet" type="text/css" href="/pebble.wizguild.com/gucci/css/slate.css">
+    <style>
+        .title { padding: 15px 10px; text-align: center; }
+    </style>
+</head>
+<body>
+        <div class="item-container">
+
+      <div class="item-container">
+        <script async="" src="/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- gucci -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1135036851319784" data-ad-slot="4341915020" data-ad-format="auto"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+
+        <h1 class="title">ShoGucci</h1>
+
+        <div class="item-container-content">
+            <label class='item'>
+                Show second hand
+                <input id='showseconds' type='checkbox' class='item-toggle'>
+            </label>
+            <div class="item">
+                Second hand color
+                <input id='secondColorPicker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+            </div>
+            <label class='item'>
+                No logo
+                <input name='logo' type='radio' class='item-radio' value="0">
+            </label>
+            <label class='item'>
+                Pebble logo
+                <input name='logo' type='radio' class='item-radio' value="1">
+            </label>
+            <label class='item'>
+                Gucci logo
+                <input name='logo' type='radio' class='item-radio' value="2">
+            </label>
+                        <label class='item'>
+                Hide battery percentage
+                <input id='hideBattery' type='checkbox' class='item-toggle'>
+            </label>
+                        <div class='item-container-footer'>
+              These settings only change on the watch after you click save.
+            </div>
+       </div>
+
+      <div class='item-container'>
+        <div class='button-container'>
+          <input id='submitButton' type='button' class='item-button' value='Save Settings'>
+        </div>
+      </div>
+    </div>
+    <script src="/pebble.wizguild.com/gucci/js/slate.js"></script>
+    <script src="/pebble.wizguild.com/gucci/js/jquery-1.js"></script>
+  <script>
+  function getConfigData() {
+    var showseconds = $('#showseconds')[0];
+    var logo = $('input[name=logo]:checked').val();
+    var secColor = $('#secondColorPicker');
+        var hideBatt = $('#hideBattery')[0];
+    
+    var options = {
+      'secColor': secColor.val(),
+      'showSeconds': showseconds.checked,
+      'logo': logo
+                ,'batt': hideBatt.checked
+            };
+    // Save for next launch
+    localStorage['secColor'] = options['secColor'];
+    localStorage['showSeconds'] = options['showSeconds'];
+    localStorage['logo'] = options['logo'];
+        localStorage['batt'] = options['batt'];
+    
+    return options;
+  }
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submitButton');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+  (function() {
+    var secondColor = $('#secondColorPicker');
+    if (localStorage.secColor) {
+        secondColor[0].value = localStorage.secColor;
+    }
+    var showseconds = $('#showseconds')[0];
+    // Load any previously saved configuration, if available
+    if(localStorage.showSeconds) {
+      showseconds.checked = JSON.parse(localStorage.showSeconds);
+    }
+    if(localStorage['logo']) {
+        var value = localStorage['logo'];
+        $("input[name=logo][value=" + value + "]").attr('checked', 'checked');
+    }
+        var batt = $('#hideBattery');
+    if (localStorage.batt) {
+        batt[0].checked = JSON.parse(localStorage.batt);
+    }
+      })();
+  </script>
+</body>
+</html>

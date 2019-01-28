@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Slate Example Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/helene.pelsy.free.fr/pebble/digitalround/css/slate.css'>
+  <script src='/helene.pelsy.free.fr/pebble/digitalround/js/slate.bin'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Configuration DigitalRound</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+       
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Color</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Color
+          <input id='background_color_picker' type='text' class='item-color item-color-normal' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's background color.
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Hour Color
+          <input id='hour_color_picker' type='text' class='item-color item-color-normal' value='#00FFFF'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Minutes Color
+          <input id='minute_color_picker' type='text' class='item-color item-color-normal' value='#00AAFF'>
+        </label>
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Circle color
+          <input id='circle_color_picker' type='text' class='item-color item-color-normal' value='#0050FF'>
+        </label>
+      </div>
+      
+              <div class='item-container'>
+      <div class='item-container-header'>Bluetooth</div>
+      <div class='item-container-content'>
+       <label class='item'>
+          Vibe on disconnection
+        <input id='btoff_checkbox' type='checkbox' class='item-toggle' checked="">
+        </label>
+        
+           <label class='item'>
+          Vibe on connection
+        <input id='bton_checkbox' type='checkbox' class='item-toggle' checked="">
+        </label>
+        
+         <label class='item'>
+          Circle color when bt is disconnected
+          <input id='bt_color_picker' type='text' class='item-color item-color-normal' value='#FF0000'>
+        </label>
+        </div>
+           <div class='item-container-footer'>
+        Bluetooth detection
+      </div>  
+    </div>
+    
+    <div class='item-container'>
+      <div class='item-container-header'>Battery</div>
+      <div class='item-container-content'>
+       <label class='item'>
+          Circle becomes the battery gauge 
+        <input id='battery_checkbox' type='checkbox' class='item-toggle' checked="">
+        </label>
+        </div>
+           <div class='item-container-footer'>
+        Battery gauge
+      </div>  
+    </div>
+    
+        <div class='item-container'>
+      <div class='item-container-header'>Date</div>
+      <div class='item-container-content'>
+       <label class='item'>
+          Date is visible.
+        <input id='date_checkbox' type='checkbox' class='item-toggle' checked="">
+        </label>
+         <label class='item'>
+          Date color
+          <input id='d_color_picker' type='text' class='item-color item-color-normal' value='#FFdd00'>
+        </label>
+        </div>
+           <div class='item-container-footer'>
+        Date configuration.
+      </div>  
+    </div>
+    
+    
+     <div class='item-container'>
+      <div class='item-container-header'>Seconde</div>
+      <div class='item-container-content'>
+       <label class='item'>
+          Seconde on tap.
+        <input id='seconde_checkbox' type='checkbox' class='item-toggle' checked="">
+        </label>
+         <label class='item'>
+          Seconde color
+          <input id='s_color_picker' type='text' class='item-color item-color-normal' value='#FFdd00'>
+        </label>
+        </div>
+           <div class='item-container-footer'>
+        Seconde configuration.
+      </div>  
+    </div>
+    
+    <div class='item-container'>
+      <div class='item-container-header'>Step</div>
+      <div class='item-container-content'>
+       <label class='item'>
+          Step circle.
+        <input id='step_checkbox' type='checkbox' class='item-toggle' checked="">
+        </label>
+        <label class='item'>
+          Step circle color
+          <input id='step_color_picker' type='text' class='item-color item-color-normal' value='#FFdd00'>
+        </label>
+        <label class='item'>
+          Step counter. (step on the day upper left, step goal upper right)
+        <input id='stepcounter_checkbox' type='checkbox' class='item-toggle' checked="">
+        </label>
+           <label class='item'>
+          Step text color
+          <input id='steptxt_color_picker' type='text' class='item-color item-color-normal' value='#FFdd00'>
+        </label>
+        
+        <label class="item">
+        Custom Goal  (0 --> your average)
+      <div class="item-input-wrapper">
+        <input id='step_custom_picker' type="number" min='0' max='1000000' class="item-input" name="input-1" placeholder="Number only" step="500" value="0">
+      </div>
+    </label>
+         
+           <label class='item'>
+          Average Mark (if you walk more than your goal)
+          <input id='stepmark_color_picker' type='text' class='item-color item-color-normal' value='#00ddFF'>
+        </label>
+
+        </div>
+           <div class='item-container-footer'>
+        step configuration.
+      </div>  
+    </div>
+    
+         <div class='item-container'>
+      <div class='item-container-header'>Deep Sleep (only pebble time)</div>
+      <div class='item-container-content'>
+       <label class='item'>
+          Deep sleep.
+        <input id='ds_checkbox' type='checkbox' class='item-toggle' checked="">
+        </label>
+         <label class='item'>
+          deep sleep color
+          <input id='ds_color_picker' type='text' class='item-color item-color-normal' value='#FFdd00'>
+        </label>
+        </div>
+           <div class='item-container-footer'>
+        deep sleep
+      </div>  
+    </div>
+      
+        
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </div></body>
+  <script>
+  function getConfigData() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    //var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+    var hColorPicker =  document.getElementById('hour_color_picker');
+    var mColorPicker =  document.getElementById('minute_color_picker');
+    var cColorPicker =  document.getElementById('circle_color_picker');
+    var cbtColorPicker =  document.getElementById('bt_color_picker');
+    var btonPicker =  document.getElementById('bton_checkbox');
+    var btoffPicker =  document.getElementById('btoff_checkbox');
+    var batteryPicker =  document.getElementById('battery_checkbox');
+    var datePicker =  document.getElementById('date_checkbox');
+    var dColorPicker =  document.getElementById('d_color_picker');
+    var secondePicker =  document.getElementById('seconde_checkbox');
+    var sColorPicker =  document.getElementById('s_color_picker');
+    var stepPicker =  document.getElementById('step_checkbox');
+    var stepCounterPicker =  document.getElementById('stepcounter_checkbox');
+    var stepColorPicker =  document.getElementById('step_color_picker');
+    var steptxtColorPicker =  document.getElementById('steptxt_color_picker');
+    var dsColorPicker =  document.getElementById('ds_color_picker');
+    var stepmarkColorPicker =  document.getElementById('stepmark_color_picker');
+    var dsPicker =  document.getElementById('ds_checkbox');
+    var stepcustomPicker = document.getElementById('step_custom_picker');
+    
+    var options = {
+      'background_color': backgroundColorPicker.value,
+      'h_color': hColorPicker.value,
+      'm_color': mColorPicker.value,
+      'c_color': cColorPicker.value,
+      's_color': sColorPicker.value,
+      'd_color': dColorPicker.value,
+      'step_color': stepColorPicker.value,
+      'steptxt_color': steptxtColorPicker.value,
+      'cbt_color': cbtColorPicker.value,
+      'ds_Color': dsColorPicker.value,
+      'a_Color': stepmarkColorPicker.value,
+      'stepcustom': stepcustomPicker.value,
+      'deepsleep': dsPicker.checked,
+      'bton': btonPicker.checked,
+      'btoff': btoffPicker.checked,
+      'battery': batteryPicker.checked,
+      'second': secondePicker.checked,
+      'step': stepPicker.checked,
+      'stepcounter': stepCounterPicker.checked,
+      'datev': datePicker.checked
+    };
+
+    // Save for next launch
+    localStorage['background_color'] = options['background_color'];
+    localStorage['h_color'] = options['h_color'];
+    localStorage['m_color'] = options['m_color'];
+    localStorage['c_color'] = options['c_color'];
+    localStorage['s_color'] = options['s_color'];
+    localStorage['d_color'] = options['d_color'];
+    localStorage['second'] = options['second'];
+    localStorage['step'] = options['step'];
+    localStorage['stepcounter'] = options['stepcounter'];
+    localStorage['step_color'] = options['step_color'];
+    localStorage['steptxt_color'] = options['steptxt_color'];
+    localStorage['cbt_color'] = options['cbt_color'];
+    localStorage['bton'] = options['bton'];
+    localStorage['btoff'] = options['btoff'];
+    localStorage['battery'] = options['battery'];
+    localStorage['datev'] = options['datev'];
+    localStorage['ds_Color'] = options['ds_Color'];
+    localStorage['a_Color'] = options['a_Color'];
+    localStorage['stepcustom'] = options['stepcustom'];
+    localStorage['deepsleep'] = options['deepsleep'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var hColorPicker =  document.getElementById('hour_color_picker');
+    var mColorPicker =  document.getElementById('minute_color_picker');
+    var cColorPicker =  document.getElementById('circle_color_picker');
+    var cbtColorPicker =  document.getElementById('bt_color_picker');
+    var btonPicker =  document.getElementById('bton_checkbox');
+    var btoffPicker =  document.getElementById('btoff_checkbox');
+    var batteryPicker =  document.getElementById('battery_checkbox');
+    var datePicker =  document.getElementById('date_checkbox');
+    var dColorPicker =  document.getElementById('d_color_picker');
+    var secondePicker =  document.getElementById('seconde_checkbox');
+    var sColorPicker =  document.getElementById('s_color_picker');
+    var stepColorPicker =  document.getElementById('step_color_picker');
+    var steptxtColorPicker =  document.getElementById('steptxt_color_picker');
+    var stepPicker =  document.getElementById('step_checkbox');
+    var stepCounterPicker =  document.getElementById('stepcounter_checkbox');
+    var dsColorPicker =  document.getElementById('ds_color_picker');
+    var stepmarkColorPicker =  document.getElementById('stepmark_color_picker');
+    var dsPicker =  document.getElementById('ds_checkbox');
+    var stepcustomPicker = document.getElementById('step_custom_picker');
+    
+   if(localStorage['background_color']) {
+   backgroundColorPicker.value = localStorage['background_color'];
+   hColorPicker.value = localStorage['h_color'];
+   mColorPicker.value = localStorage['m_color'];
+   cColorPicker.value = localStorage['c_color'];
+   cbtColorPicker.value = localStorage['cbt_color'];
+   btonPicker.checked = JSON.parse(localStorage['bton']);
+   btoffPicker.checked = JSON.parse(localStorage['btoff']);
+   batteryPicker.checked = JSON.parse(localStorage['battery']);
+   datePicker.checked = JSON.parse(localStorage['datev']);
+   dColorPicker.value = localStorage['d_color'];
+   stepColorPicker.value = localStorage['step_color'];
+   steptxtColorPicker.value = localStorage['steptxt_color'];
+   stepPicker.checked = JSON.parse(localStorage['step']);
+   stepCounterPicker.checked = JSON.parse(localStorage['stepcounter']);
+   sColorPicker.value = localStorage['s_color'];
+   secondePicker.checked = JSON.parse(localStorage['second']);
+   dsColorPicker.value = localStorage['ds_Color'];
+   stepmarkColorPicker.value = localStorage['a_Color'];
+   dsPicker.checked = JSON.parse(localStorage['deepsleep']);
+   stepcustomPicker.value = localStorage['stepcustom'];
+      
+   }
+   
+  })();
+  </script>
+</html>

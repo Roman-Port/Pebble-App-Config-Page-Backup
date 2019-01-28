@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Hub2Watch Color</title>
+  <link rel='stylesheet' type='text/css' href='/rodgerleblanc.github.io/Hub2Watch/css/slate.css'>
+  <script src='/rodgerleblanc.github.io/Hub2Watch/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>H2W Silver Edition Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied to this app.
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Color (Only for Time Series)</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Color
+          <input id='top_color_picker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the background color.
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+    var topColorPicker = document.getElementById('top_color_picker');
+
+    var options = {
+      'top_color': topColorPicker.value,
+    };
+    
+    // Save for next launch"
+    localStorage['top_color'] = options['top_color'];
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+  (function() {
+    var topColorPicker = document.getElementById('top_color_picker');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['top_color']) {
+      topColorPicker.value = localStorage['top_color'];
+    }
+  })();
+  </script>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="/ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+    <link rel="stylesheet" src="slate-master/dist/css/slate.css">
+    <script src="slate-master/dist/js/slate.js"></script>
+    <script>
+      function getNewTimetable(day) {
+        var x = prompt("The timetable for " + day + " is greater than 64 characters. Please enter another.");
+        if (x.length > 64) {
+          return getNewTimetable(day);
+        } else {
+          return x
+        }
+      }
+    </script>
+    <script>
+      $(function() {
+        if (localStorage.getItem(1)) {
+          var o = JSON.parse(localStorage.getItem(1));
+          $("#sunday_timetable").val(o.sun);
+          $("#monday_timetable").val(o.mon);
+          $("#tuesday_timetable").val(o.tue);
+          $("#wednesday_timetable").val(o.wed);
+          $("#thursday_timetable").val(o.thu);
+          $("#friday_timetable").val(o.fri);
+          $("#saturday_timetable").val(o.sat);
+        }
+        
+        $("#submit").click(function() {
+          
+          optionsArr = new Array();
+          
+          var sun = $("#sunday_timetable").val();
+          if (sun.length > 64) {
+            sun = getNewTimetable("Sunday");
+          }
+          optionsArr[0] = sun;
+          
+          var mon = $("#monday_timetable").val();
+          if (mon.length > 64) {
+            mon = getNewTimetable("Monday");
+          }
+          optionsArr[1] = mon;
+          
+          var tue = $("#tuesday_timetable").val();
+          if (tue.length > 64) {
+            tue = getNewTimetable("Tuesday");
+          }
+          optionsArr[2] = tue;
+          
+          var wed = $("#wednesday_timetable").val();
+          if (wed.length > 64) {
+            wed = getNewTimetable("Wednesday");
+          }
+          optionsArr[3] = wed;
+          
+          var thu = $("#thursday_timetable").val();
+          if (thu.length > 64) {
+            thu = getNewTimetable("Thursday");
+          }
+          optionsArr[4] = thu;
+          
+          var fri = $("#friday_timetable").val();
+          if (fri.length > 64) {
+            fri = getNewTimetable("Friday");
+          }
+          optionsArr[5] = fri;
+          
+          var sat = $("#saturday_timetable").val();
+          if (sat.length > 64) {
+            sat = getNewTimetable("Saturday");
+          }
+          optionsArr[6] = sat;
+          
+          for (var i = 0; i > 7; i++) {
+            if (optionsArr[i] === null || undefined || "") {
+              if (confirm("Some values not set. Continue?") === true) {
+                optionsArr[i] = "Not set\n\n:-(";
+              }
+            } else {
+              optionsArr[i] = optionsArr[i];
+            }
+          }
+          
+          var options = {
+            "sun": optionsArr[0],
+            "mon": optionsArr[1],
+            "tue": optionsArr[2],
+            "wed": optionsArr[3],
+            "thu": optionsArr[4],
+            "fri": optionsArr[5],
+            "sat": optionsArr[6]
+          };
+          
+          localStorage.setItem(1, JSON.stringify(options));
+          
+          optionsToSend = encodeURIComponent(JSON.stringify(options));
+          
+          document.location = "pebblejs://close#" + optionsToSend;
+          console.log("Closing settings!");
+          
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="item-container">
+      <div class="item-container-header">Timetable time configuration</div>
+      <div class="item-container-content">
+        <label class="item">
+          <h2>Sunday</h2>
+          <textarea id="sunday_timetable"></textarea><br>
+          <h2>Monday</h2><br>
+          <textarea id="monday_timetable"></textarea><br>
+          <h2>Tuesday</h2><br>
+          <textarea id="tuesday_timetable"></textarea><br>
+          <h2>Wednesday</h2><br>
+          <textarea id="wednesday_timetable"></textarea><br>
+          <h2>Thrusday</h2><br>
+          <textarea id="thursday_timetable"></textarea><br>
+          <h2>Friday</h2><br>
+          <textarea id="friday_timetable"></textarea><br>
+          <h2>Saturday</h2><br>
+          <textarea id="saturday_timetable"></textarea><br>
+        </label>
+      </div>
+      <button id="submit">SEND</button>
+    </div>
+  </body>
+</html>

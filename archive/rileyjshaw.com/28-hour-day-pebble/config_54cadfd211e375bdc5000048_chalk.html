@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Configuration</title>
+</head>
+<body>
+	<div>
+		<label for="sleep">Show sleep notifier?</label>
+		<input type="checkbox" name="sleep" id="sleep">
+	</div>
+	<button id="cancel">Cancel</button>
+	<button id="submit">Submit</button>
+
+	<script>
+		var box = document.getElementById('sleep');
+		var cancel = document.getElementById('cancel');
+		var submit = document.getElementById('submit');
+
+		if (location.hash.slice(1) === 'enabled') {
+			box.checked = 'checked';
+		}
+
+		cancel.addEventListener('click', function () {
+			location.href = 'pebblejs://close';
+		});
+
+		submit.addEventListener('click', function () {
+			location.href = 'pebblejs://close#' + +box.checked;
+		});
+	</script>
+</body>
+</html>

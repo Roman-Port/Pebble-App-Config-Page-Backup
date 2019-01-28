@@ -1,0 +1,137 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel='stylesheet' type='text/css' href='/singleserveapps.github.io/basic-steps-weather-config/bower_components/pebble-slate/dist/css/slate.css'>
+	<link rel='stylesheet' type='text/css' href='/singleserveapps.github.io/basic-steps-weather-config/css/style.css'>
+</head>
+<body>
+
+    <div class='item-container'>
+        <div class='item-container-header'>Color options</div>
+        <div class='item-container-content'>
+            <label class='item'>
+                Background Color
+                <input id='backgroundColorPicker' type='text' class='item-color item-color-normal' value='#000000'>
+            </label>
+
+            <label class='item'>
+                Hour Text Color
+                <input id='hrColorPicker' type='text' class='item-color item-color-normal' value='#ffffff'>
+            </label>
+
+            <label class='item'>
+                Minutes Text Color
+                <input id='minColorPicker' type='text' class='item-color item-color-normal' value='#ff5500'>
+            </label>
+
+            <label class='item'>
+                Weather/Steps/Date Color
+                <input id='wsdColorPicker' type='text' class='item-color item-color-normal' value='#ffffff'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Choose the background, hour, minutes, and weather/steps/date colors for the watchface.
+            (For Pebble and Pebble Steel, select from black & white colors only. Black is default for background color and white is default for text color.)
+        </div>
+    </div>	
+
+	<div class='item-container'>
+		<div class='item-container-header'>Weather options</div>
+		<div class='item-container-content'>
+			<label class='item'>
+				Use GPS for weather
+				<input id='useGPS' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+        <div class='item-container-footer'>
+	        Check to use current GPS location for weather conditions or manually enter weather location information below.
+		 </div>
+        <div class="item-container-content">
+            <label class="item">
+				Weather location
+			</label>
+            <div class="item-input-wrapper">
+                <input type="text" class="item-input" id="weatherLocation" placeholder="e.g. 'San Diego CA US', or '92103 US'">
+            </div>
+        </div>
+        <div class='item-container-footer'>
+	        Enter location for non-GPS weather condition retrieval, e.g. 'San Diego CA US', or '92103 US'
+		 </div>
+
+		<div class='item-container-content'>
+			<label class='item'>
+				Display Lo/Hi Temperature
+				<input id='shakeforLoHi' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+	        	Check to show today's lo and hi temperatures. Also temporarily displays last weather update time.
+		 </div>
+
+		<div class='item-container-content'>
+			<label class='item'>
+				Use Celsius
+				<input id='useCelsius' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+	        	Check to display temperature in degrees Celsius. Uncheck to display in degrees Fahrenheit.
+		 </div>
+		 <div class='item-container-content'>
+    			<label class='item'>
+    				Weather update frequency
+      				<input type='range' class='item-slider' id='weatherFrequencySlider' name='weatherFrequencySlider' min='15' max='120' step='15' value='30'>
+      			<div class='item-input-wrapper item-slider-text'>
+        			<input type='text' class='item-input' name='weatherFrequencySlider' readonly="">
+      			</div>
+    			</label>
+  		</div>
+  		<div class='item-container-footer'>
+	        	Select how often weather information is updated (minutes).
+		 </div>	
+	</div>
+
+    <div class='item-container'>
+        <div class='item-container-header'>Display options</div>
+		
+		<div class="item-container-content">
+		<label class="item">
+      			Hour font
+      			<select id="hourFont" dir='rtl' class="item-select">
+        		<option class="item-select-option" value="0">Thin</option>
+        		<option class="item-select-option" selected="" value="1">Regular</option>
+        		<option class="item-select-option" value="2">Bold</option>
+      			</select>
+      	</label>
+          </div>
+          <div class='item-container-footer'>
+              Select font width for hour digits - thin, regular, or bold. Relaunch watchface to apply display option.
+         </div>			
+
+		<div class="item-container-content">
+		<label class="item">
+      			Minutes font
+      			<select id="minutesFont" dir='rtl' class="item-select">
+        		<option class="item-select-option" value="0">Thin</option>
+        		<option class="item-select-option" selected="" value="1">Regular</option>
+        		<option class="item-select-option" value="2">Bold</option>
+      			</select>
+      	</label>
+          </div>
+          <div class='item-container-footer'>
+              Select font width for minutes digits - thin, regular, or bold. Relaunch watchface to apply display option.
+         </div>
+    </div>
+
+    <div class='item-container'>
+        <div class='button-container'>
+            <input id='submitButton' type='button' class='item-button' value='Save'>
+        </div>
+    </div>
+
+	<script src='/singleserveapps.github.io/basic-steps-weather-config/bower_components/pebble-slate/dist/js/slate.js'></script>
+	<script src='/singleserveapps.github.io/basic-steps-weather-config/js/main.js'></script>
+</body>
+</html>

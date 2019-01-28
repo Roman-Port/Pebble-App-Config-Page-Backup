@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel='stylesheet' type='text/css' href='/gogothegogo.github.io/SimpleSquare_Pebble/css/slate.css'>
+  <link rel='stylesheet' type='text/css' href='/gogothegogo.github.io/SimpleSquare_Pebble/css/style.css'>
+  
+          <style>
+            .item-container-content { width: 100%; overflow-x: scroll; overflow-y: hidden; }
+            .preset-container { width: 1150px; margin: 0 auto; padding: 1rem 1rem; white-space: nowrap;}
+            .preset { display: inline-block !important; width: 10.666667%; margin-right: 1%; vertical-align: middle; opacity: .4; }
+            .preset img { width: 100%; }
+            .current { opacity: 1; }
+            .item-input { border: 1px solid #ababab; padding: 10px; margin-top: 16px; font-size: 16px; }
+            .show { display: block; }
+            .hide { display: none; }
+        </style>
+</head>
+<body>
+  <div class='item-container'>
+    <h1 class='title'>Simple Square Watchface<br>Configuration Page</h1>
+  </div>
+
+  <!-- div class='item-container'>
+    <div class='item-container-content'>
+      <div class='item'>
+        Use this configuration page to choose the settings you would like
+        applied to this app.
+      </div>
+    </div>
+  </div -->
+  
+  <div class="item-container">
+  <div class="item-container-header">Presets</div>
+  <div class="item-container-content">
+  <div class="preset-container">
+                    <div id="1b" class="preset current">
+                        <img src="/gogothegogo.github.io/SimpleSquare_Pebble/images/1b_843532399.png" alt="">
+                    </div>
+                    <div id="2b" class="preset current">
+                        <img src="/gogothegogo.github.io/SimpleSquare_Pebble/images/2b_843532399.png" alt="">
+                    </div>
+                    <div id="3b" class="preset current">
+                        <img src="/gogothegogo.github.io/SimpleSquare_Pebble/images/3b_843532399.png" alt="">
+                    </div>
+                    <div id="4b" class="preset current">
+                        <img src="/gogothegogo.github.io/SimpleSquare_Pebble/images/4b_843532399.png" alt="">
+                    </div>
+                    <div id="5b" class="preset current">
+                        <img src="/gogothegogo.github.io/SimpleSquare_Pebble/images/5b_843532399.png" alt="">
+                    </div>
+                    <div id="6b" class="preset current">
+                        <img src="/gogothegogo.github.io/SimpleSquare_Pebble/images/6b_843532399.png" alt="">
+                    </div>
+                </div>
+          </div>
+    </div>
+  
+  <div class='item-container'>
+    <div class='button-container'>
+      <input id='submitButton' type='button' class='item-button' value='SAVE'>
+    </div>
+  </div>
+  
+<div class="item-container">
+  <div class="item-container-header">Appearance</div>
+  <div class="item-container-content">
+    <label class="item">
+      Background Color
+      <input type="text" class="item-color item-color-normal" id="colorTimeBackground" value="#000000">
+    </label>
+    <label class="item">
+      Time Color
+      <input type="text" class="item-color item-color-normal" id="colorTimeText" value="#FFFFFF">
+    </label>
+    <label class="item">
+      Time size
+      <select id="timeSize" dir='timeSize' class="item-select">
+        <option class="item-select-option" value="1">Tiny</option>
+        <option class="item-select-option" value="2">Small</option>
+        <option class="item-select-option" value="3" selected="">Medium</option>
+        <option class="item-select-option" value="4">Large</option>
+        <option class="item-select-option" value="5">Huge</option>
+      </select>
+    </label>
+    <label class="item">
+      Date Background Color
+      <input type="text" class="item-color item-color-normal" id="colorDateBackground" value="#000000">
+    </label>
+    <label class="item">
+      Date and Notification Color
+      <input type="text" class="item-color item-color-normal" id="colorDateText" value="#FFFFFF">
+    </label>
+    <label class="item">
+      Date size
+      <select id="dateSize" dir='dateSize' class="item-select">
+        <option class="item-select-option" value="0">No date</option>
+        <option class="item-select-option" value="1">Small</option>
+        <option class="item-select-option" value="2" selected="">Medium</option>
+        <option class="item-select-option" value="3">Large</option>
+      </select>
+    </label>
+  </div>
+  <div class="item-container-footer">
+    Change the appearance of the watchface.
+  </div>
+</div>
+
+<div class="item-container">
+  <div class="item-container-header">Notifications</div>
+  <div class="item-container-content">
+    <label class="item">
+      Bluetooth
+      <select id="bluetoothAlarm" dir='bluetoothAlarm' class="item-select">
+        <option class="item-select-option" value="0">Off</option>
+        <option class="item-select-option" value="1">Icon only</option>
+        <option class="item-select-option" value="2" selected="">Icon + vibration</option>
+      </select>
+    </label>
+    <label class="item">
+      Battery low
+      <select id="batteryIcon" dir='batteryIcon' class="item-select">
+        <option class="item-select-option" value="0">Off</option>
+        <option class="item-select-option" value="1">on 10%</option>
+        <option class="item-select-option" value="2" selected="">on 20% and 10%</option>
+      </select>
+    </label>
+  </div>
+  <div class="item-container-footer">
+    These notifications only show when needed (connection lost or battery empty).
+  </div>
+</div>
+
+<div class="item-container">
+  <div class="item-container-header">Other features</div>
+  <div class="item-container-content">
+    <label class="item">
+      Date format
+      <select id="dateFormat" dir='dateFormat' class="item-select">
+        <option class="item-select-option" value="1" selected="">27 Apr, Wed</option>
+        <option class="item-select-option" value="2">Apr 27, Wed</option>
+        <option class="item-select-option" value="3">Wed, 27 Apr</option>
+        <option class="item-select-option" value="4">Wed, Apr 27</option>
+      </select>
+    </label>
+    <label class="item">
+      Croatian date
+      <input type="checkbox" class="item-toggle" id="croatianDate">
+    </label>
+  </div>
+  <div class="item-container-footer">
+    Change other watchface features.
+  </div>
+</div>
+
+  <script src='/gogothegogo.github.io/SimpleSquare_Pebble/js/slate.js'></script>
+  <script src='/gogothegogo.github.io/SimpleSquare_Pebble/js/main.js'></script>
+  
+</body>
+</html>

@@ -1,0 +1,382 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<!--
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+-->
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+<script src='/geol.com/pebble/settings/script.bin'></script>
+    <title>AC/DC Watch configuration</title>
+    <style>
+	span{
+		font-size:x-small;
+	}
+	td{
+		text-align:center;
+	}
+			.ui-header .ui-title 
+			{ 
+				margin-left: 1em;
+				margin-right: 1em;
+				text-overflow: clip;
+			}
+			.color-box
+			{
+				width: 12vw;
+				height: 12vw;
+				border-style: none;
+				margin: 1.5vw;
+				display:inline-block;
+			}
+			.selected-color-box
+			{
+				border-width: 1.5vw;
+				border-style: solid;
+				border-color: black;
+				margin: 0px;
+			}
+			.color-row
+			{
+				border-style: none;
+				border-width: 0px;
+			}
+
+    </style>
+
+  </head>
+
+  <body>
+    <div data-role="page" id="page1">
+      <div data-theme="" data-role="header">
+	<img src="/geol.com//glogonew.gif" style="height:32px;float:left;">
+	<h3>AC/DC Watch</h3>
+      </div>
+	<br><div style="text-align:center;"><img src="/geol.com/pebble/settings/ACDCWatchSim.png"></div>
+      <div data-role="content">
+	<h2>Options</h2>
+	<div data-role="fieldcontain">
+	  <label for="batBack">Logo Background Color<br>
+		<span>Click Logo to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('bat-color4'));" style="background-color: transparent; height:24px;">
+			<img id="bat-color4" style="background-color:black;height:32px;" src="/geol.com/pebble/settings/ACDC_Clear.png"></a>
+		<br>
+		<span>Choose the Default background color of the Logo</span>
+
+	  </label>
+	</div>
+	<hr>
+
+	<div data-role="fieldcontain">
+	  <label for="btdisco-notif">Bluetooth Indicator<br>
+		<img style="background-color:black;height:32px;" src="/geol.com/pebble/settings/ACDC_Clear.png">
+		<img style="background-color:black;height:32px;" src="/geol.com/pebble/settings/ACDC_Clear_Dark.png">
+		<br>
+		<span>Logo outline will be Bright when Bluetooth is connected and dark when disconnected</span>
+
+	  </label>
+	  <select name="btdisco-notif" id="btdisco-notif" data-theme="" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+
+	<div data-role="fieldcontain">
+	  <label for="lowbat-notif">Battery Color Indicator<br>
+		<span>Click Logo to change color</span><br>
+		<table><tr>
+		<td><a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('bat-color0'));" style="background-color: transparent; height:24px;">
+			<img id="bat-color0" style="background-color:#00FF00;height:32px;" src="/geol.com/pebble/settings/ACDC_Clear.png"></a></td>
+		<td><a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('bat-color1'));" style="background-color: transparent; height:24px;">
+			<img id="bat-color1" style="background-color:#0000FF;height:32px;" src="/geol.com/pebble/settings/ACDC_Clear.png"></a></td>
+		<td><a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('bat-color2'));" style="background-color: transparent; height:24px;">
+			<img id="bat-color2" style="background-color:orange;height:32px;" src="/geol.com/pebble/settings/ACDC_Clear.png"></a></td>
+		<td><a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('bat-color3'));" style="background-color: transparent; height:24px;">
+			<img id="bat-color3" style="background-color:red;height:32px;" src="/geol.com/pebble/settings/ACDC_Clear.png"></a></td>
+		</tr>
+		<tr>
+<td>100%</td><td>70%</td><td>50%</td><td>30%</td>
+<!--
+<td>
+     <input type="number" data-clear-btn="false" name="number-1" pattern="[0-9]*" id="number-1" value="100" disabled="disabled">
+</td>
+<td>
+     <input type="number" data-clear-btn="false" name="number-1" pattern="[0-9]*" id="number-1" value="70">
+</td>
+<td>
+     <input type="number" data-clear-btn="false" name="number-2" pattern="[0-9]*" id="number-2" value="50">
+</td>
+<td>
+     <input type="number" data-clear-btn="false" name="number-3" pattern="[0-9]*" id="number-3" value="30">
+</td>
+-->
+</tr>
+		</table>
+		<span>Inside of logo will change color with battery level<br>Note: 100% is only seen when plugged in and fully charged.</span>
+
+	  </label>
+	  <select name="lowbat-notif" id="lowbat-notif" data-theme="" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+
+	<div data-role="fieldcontain">
+	  <label for="levbat-notif">Battery Level Indicator<br>
+		<span>Click Logo to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('bat-color5'));" style="background-color: transparent; height:24px;">
+			<img id="bat-color5" style="background-color:blue;height:32px;" src="/geol.com/pebble/settings/ACDC_Logo_Sim.png"></a>
+		<br><span>Inside of logo will show level of battery<br>
+		Note: Battery level is always on when charging</span>
+	  </label>
+	  <select name="levbat-notif" id="levbat-notif" data-theme="" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+	<div data-role="fieldcontain">
+	  <label for="battext-notif">Show Battery Text %<br>
+		<span>Show the current battery level as a text percent</span>
+
+	  </label>
+	  <select name="battext-notif" id="battext-notif" data-theme="" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+	<div data-role="fieldcontain">
+		<label for="slider">Battery Level Test</label><br>
+		<span>Used to simulate battery level.<br>Return to settings and submit with a value of zero for true battery level<br>
+		<input name="battestslider" id="battestslider" type="range" min="0" max="100" value="0">
+	</span></div>
+
+			<div data-role="popup" id="color-picker" data-overlay-theme="b">
+				<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+				<div data-role="main" id="color-picker" class="ui-content" style="border-style: none; height:90vh; width:5000px; overflow-y:scroll; overflow-x:hidden;">
+					<div class="color-row" id="color-row1">
+						<div class="color-box" id="color-box-000000" style="background:#000000;"></div>
+						<div class="color-box" id="color-box-555555" style="background:#555555;"></div>
+						<div class="color-box" id="color-box-AAAAAA" style="background:#AAAAAA;"></div>
+						<div class="color-box" id="color-box-FFFFFF" style="background:#FFFFFF;"></div>
+						<div class="color-box" id="color-box-550000" style="background:#550000;"></div>
+					</div>
+					<div class="color-row" id="color-row2">
+						<div class="color-box" id="color-box-FFAAAA" style="background:#FFAAAA;"></div>
+						<div class="color-box" id="color-box-FF5555" style="background:#FF5555;"></div>
+						<div class="color-box" id="color-box-FF0000" style="background:#FF0000;"></div>
+						<div class="color-box" id="color-box-AA5555" style="background:#AA5555;"></div>
+						<div class="color-box" id="color-box-AA0000" style="background:#AA0000;"></div>
+					</div>
+					<div class="color-row" id="color-row3">
+						<div class="color-box" id="color-box-FF55AA" style="background:#FF55AA;"></div>
+						<div class="color-box" id="color-box-FF00AA" style="background:#FF00AA;"></div>
+						<div class="color-box" id="color-box-FF0055" style="background:#FF0055;"></div>
+						<div class="color-box" id="color-box-AA0055" style="background:#AA0055;"></div>
+						<div class="color-box" id="color-box-550055" style="background:#550055;"></div>
+					</div>
+					<div class="color-row" id="color-row4">
+						<div class="color-box" id="color-box-FFAAFF" style="background:#FFAAFF;"></div>
+						<div class="color-box" id="color-box-FF55FF" style="background:#FF55FF;"></div>
+						<div class="color-box" id="color-box-FF00FF" style="background:#FF00FF;"></div>
+						<div class="color-box" id="color-box-AA00AA" style="background:#AA00AA;"></div>
+						<div class="color-box" id="color-box-AA55AA" style="background:#AA55AA;"></div>
+					</div>
+					<div class="color-row" id="color-row5">
+						<div class="color-box" id="color-box-AAAAFF" style="background:#AAAAFF;"></div>
+						<div class="color-box" id="color-box-AA55FF" style="background:#AA55FF;"></div>
+						<div class="color-box" id="color-box-AA00FF" style="background:#AA00FF;"></div>
+						<div class="color-box" id="color-box-5555AA" style="background:#5555AA;"></div>
+						<div class="color-box" id="color-box-5500AA" style="background:#5500AA;"></div>
+					</div>
+					<div class="color-row" id="color-row6">
+						<div class="color-box" id="color-box-0000FF" style="background:#0000FF;"></div>
+						<div class="color-box" id="color-box-0000AA" style="background:#0000AA;"></div>
+						<div class="color-box" id="color-box-000055" style="background:#000055;"></div>
+						<div class="color-box" id="color-box-5555FF" style="background:#5555FF;"></div>
+						<div class="color-box" id="color-box-5500FF" style="background:#5500FF;"></div>
+					</div>
+					<div class="color-row" id="color-row7">
+						<div class="color-box" id="color-box-0055FF" style="background:#0055FF;"></div>
+						<div class="color-box" id="color-box-0055AA" style="background:#0055AA;"></div>
+						<div class="color-box" id="color-box-00AAFF" style="background:#00AAFF;"></div>
+						<div class="color-box" id="color-box-55AAFF" style="background:#55AAFF;"></div>
+						<div class="color-box" id="color-box-00AAAA" style="background:#00AAAA;"></div>
+					</div>
+					<div class="color-row" id="color-row8">
+						<div class="color-box" id="color-box-AAFFAA" style="background:#AAFFAA;"></div>
+						<div class="color-box" id="color-box-AAFFFF" style="background:#AAFFFF;"></div>
+						<div class="color-box" id="color-box-55FFFF" style="background:#55FFFF;"></div>
+						<div class="color-box" id="color-box-00FFFF" style="background:#00FFFF;"></div>
+						<div class="color-box" id="color-box-55AAAA" style="background:#55AAAA;"></div>
+					</div>
+					<div class="color-row" id="color-row9">
+						<div class="color-box" id="color-box-00FFAA" style="background:#00FFAA;"></div>
+						<div class="color-box" id="color-box-55FFAA" style="background:#55FFAA;"></div>
+						<div class="color-box" id="color-box-00FF55" style="background:#00FF55;"></div>
+						<div class="color-box" id="color-box-005555" style="background:#005555;"></div>
+						<div class="color-box" id="color-box-005500" style="background:#005500;"></div>
+					</div>
+					<div class="color-row" id="color-row10">
+						<div class="color-box" id="color-box-55FF00" style="background:#55FF00;"></div>
+						<div class="color-box" id="color-box-55FF55" style="background:#55FF55;"></div>
+						<div class="color-box" id="color-box-AAFF55" style="background:#AAFF55;"></div>
+						<div class="color-box" id="color-box-AAFF00" style="background:#AAFF00;"></div>
+						<div class="color-box" id="color-box-555500" style="background:#555500;"></div>
+					</div>
+					<div class="color-row" id="color-row11">
+						<div class="color-box" id="color-box-00FF00" style="background:#00FF00;"></div>
+						<div class="color-box" id="color-box-55AA55" style="background:#55AA55;"></div>
+						<div class="color-box" id="color-box-00AA55" style="background:#00AA55;"></div>
+						<div class="color-box" id="color-box-00AA00" style="background:#00AA00;"></div>
+						<div class="color-box" id="color-box-55AA00" style="background:#55AA00;"></div>
+					</div>
+					<div class="color-row" id="color-row12">
+						<div class="color-box" id="color-box-FFFFAA" style="background:#FFFFAA;"></div>
+						<div class="color-box" id="color-box-FFFF55" style="background:#FFFF55;"></div>
+						<div class="color-box" id="color-box-FFFF00" style="background:#FFFF00;"></div>
+						<div class="color-box" id="color-box-AAAA55" style="background:#AAAA55;"></div>
+						<div class="color-box" id="color-box-AAAA00" style="background:#AAAA00;"></div>
+					</div>
+					<div class="color-row" id="color-row13">
+						<div class="color-box" id="color-box-FFAA55" style="background:#FFAA55;"></div>
+						<div class="color-box" id="color-box-FFAA00" style="background:#FFAA00;"></div>
+						<div class="color-box" id="color-box-FF5500" style="background:#FF5500;"></div>
+						<div class="color-box" id="color-box-AA5500" style="background:#AA5500;"></div>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="ui-body ui-body-b">
+	  <fieldset class="ui-grid-a">
+	    <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+	    <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+	  </fieldset>
+	</div>
+      </div>
+    </div>
+    <script>
+      <!-- from http://snipplr.com/view/26662/get-url-parameters-with-jquery--improved/ -->
+      $.urlParam = function(name){
+	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	if (!results) { return 0; }
+	return results[1] || 0;
+      }
+
+      function updateControls() {
+	var jason = JSON.parse(decodeURIComponent($.urlParam("J")));
+	//document.write(JSON.stringify(jason));
+        //var btdisconotif = decodeURIComponent($.urlParam("btdisco-notif"));
+        //var lowbatnotif = decodeURIComponent($.urlParam("lowbat-notif"));
+        //var levbatnotif = decodeURIComponent($.urlParam("levbat-notif"));
+/*
+	//var btdisconotif = jason['levbat-notif'];
+	var btdisconotif = "on";
+	var lowbatnotif = "on";
+	var levbatnotif = "off";
+	var showbattextnotif = "on";
+*/
+	if(jason.OP & 1) $("#btdisco-notif").val("on").slider("refresh");
+	if(jason.OP & 2) $("#lowbat-notif").val("on").slider("refresh");
+	if(jason.OP & 4) $("#levbat-notif").val("on").slider("refresh");
+	if(jason.OP & 8) $("#battext-notif").val("on").slider("refresh");
+
+/*
+	if(jason.btdisco) btdisconotif = jason.btdisco;
+	if(jason.lowbat) lowbatnotif = jason.lowbat;
+	if(jason.levbat) levbatnotif = jason.levbat;
+	if(jason.battext) showbattextnotif = jason.battext;
+
+        //  $("#btdisco-notif").val(jason.btdisco).slider("refresh");
+
+        if (btdisconotif != '') {
+          $("#btdisco-notif").val(btdisconotif).slider("refresh");
+        }
+ 
+       if (lowbatnotif != '') {
+          $("#lowbat-notif").val(lowbatnotif).slider("refresh");
+        }
+        if (levbatnotif != '') {
+          $("#levbat-notif").val(levbatnotif).slider("refresh");
+        }
+        if (showbattextnotif != '') {
+          $("#battext-notif").val(showbattextnotif).slider("refresh");
+        }
+*/
+	if(jason.C0) $("#bat-color0").css('backgroundColor',phextojhex(jason.C0));
+	if(jason.C1) $("#bat-color1").css('backgroundColor',phextojhex(jason.C1));
+	if(jason.C2) $("#bat-color2").css('backgroundColor',phextojhex(jason.C2));
+	if(jason.C3) $("#bat-color3").css('backgroundColor',phextojhex(jason.C3));
+	if(jason.C4) $("#bat-color4").css('backgroundColor',phextojhex(jason.C4));
+	if(jason.C5) $("#bat-color5").css('backgroundColor',phextojhex(jason.C5));
+      }
+
+      function saveOptions() {
+	var op = 0;
+	if ($("#btdisco-notif").val() == "on") op = op | 1;
+	if ($("#lowbat-notif").val() == "on") op = op | 2;
+	if ($("#levbat-notif").val() == "on") op = op | 4;
+	if ($("#battext-notif").val() == "on") op = op | 8;
+	//alert(op);
+
+        var options = {
+/*
+          'btdisco': $("#btdisco-notif").val(),
+          'lowbat': $("#lowbat-notif").val(),
+          'levbat': $("#levbat-notif").val(),
+          'testbat': parseInt($("#battestslider").val()),
+          'battext': $("#battext-notif").val(),
+*/
+          'testbat': parseInt($("#battestslider").val()),
+	  'OP': op,
+          'C0': jhextophex(rgb2hex($("#bat-color0").css('backgroundColor'))),
+          'C1': jhextophex(rgb2hex($("#bat-color1").css('backgroundColor'))),
+          'C2': jhextophex(rgb2hex($("#bat-color2").css('backgroundColor'))),
+          'C3': jhextophex(rgb2hex($("#bat-color3").css('backgroundColor'))),
+          'C4': jhextophex(rgb2hex($("#bat-color4").css('backgroundColor'))),
+          'C5': jhextophex(rgb2hex($("#bat-color5").css('backgroundColor'))),
+	  //'testbat':37,
+        }
+
+	//alert(options['forecolor']);
+        return options;
+      }
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close#";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log(location);
+          document.location = location;
+        });
+      });
+
+      $('#page1').bind('pageinit', updateControls);
+    </script>
+  </body>
+</html>
+

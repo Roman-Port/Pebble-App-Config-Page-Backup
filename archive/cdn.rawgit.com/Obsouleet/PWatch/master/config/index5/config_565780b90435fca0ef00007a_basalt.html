@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Stymple Configuration</title>
+		<link rel='stylesheet' type='text/css' href='/cdn.rawgit.com/Obsouleet/PWatch/master/config/css/slate.css'>
+  
+		<script src='/cdn.rawgit.com/Obsouleet/PWatch/master/config/js/slate.js'></script>
+
+		<style>
+		  .title {
+			padding: 15px 10px 0px 10px;
+			text-transform: uppercase;
+			font-family: 'PT Sans', sans-serif;
+			font-size: 1.2em;
+			font-weight: 500;
+			color: #888888;
+			text-align: center;
+		  }
+		</style>
+	</head>
+	<body>
+
+		<canvas id="Canvas2" width="100" height="100" style="padding-left: 0;
+						padding-right: 0;
+						margin-left: auto;
+						margin-right: auto;
+						margin-top: 5px;
+						display: block;
+						width: 100px;
+						border:1px solid #000000;">
+		</canvas>
+		<div class='item-container'>
+			<div class='item-container-content'>
+				<label class='item'>
+					Swap Colors
+					<input id='inverted' type='checkbox' class='item-checkbox'>
+				</label>
+			</div>
+		</div>
+		<div class='item-container'>
+			<div class='item-container-header'>Presets</div>
+				<div class='item-container-content'>
+					<div class='button-container'>
+						<table style="margin-left:auto; margin-right:auto;"> 
+							<tr> 
+								<td style="width:90px; height:45px;"><input id='down_button' type='button' class='item-button' value='<'></td>
+								<td><div id="Counter">1/27</div></td>
+								<td style="width:90px; height:45px;"><input id='up_button' type='button' class='item-button' value='>'></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		
+		<div class='item-container-header'>
+			Or Choose Your Own Colors
+		</div>
+		<div class='item-container-content'>
+			<label class='item'>
+				Background Color
+  				<input id='background' type='text' class='item-color item-color-normal' value='#000000'>
+			</label>
+			<label class='item'>
+  				Foreground Color
+  				<input id='foreground' type='text' class='item-color item-color-normal' value='#000000'>
+			</label>
+      		</div>
+      		<div style="height: 10px;">
+		</div>
+		<div class='item-container'>
+			<div class='item-container-content'>
+				<label class='item'>
+					12 Hour Format
+					<input id='twelvehr' type='checkbox' class='item-checkbox'>
+				</label>  
+				<label class='item'>
+					Show Date
+					<input id='showdate' type='checkbox' class='item-checkbox'>
+				</label>
+				<label class='item'>
+					Vibrate on BT changes
+					<input id='BTvibe' type='checkbox' class='item-checkbox'>
+				</label>
+			</div>
+		</div>  
+		<div class='item-container'>
+			<div class='button-container'>
+				<input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+			</div>
+		</div>
+		
+	<!-- Start of StatCounter Code for Default Guide -->
+		<script type="text/javascript">
+			var sc_project=10634946; 
+			var sc_invisible=1; 
+			var sc_security="dafe4577"; 
+			var scJsHost = (("https:" == document.location.protocol) ?	"https://secure." : "http://www.");
+			document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+		</script>
+		<noscript>
+			<div class="statcounter">
+				<a title="shopify site analytics" href="/statcounter.com/shopify/.html" target="_blank"><img class="statcounter" src="/c.statcounter.com/10634946/0/dafe4577/1/.gif" alt="shopify site analytics"></a>
+			</div>
+		</noscript>
+	<!-- End of StatCounter Code for Default Guide -->
+		<script>
+		
+function dechex(number) {
+  if (number < 0) {
+    number = 0xFFFFFFFF + number + 1;
+  }
+  return parseInt(number, 10)
+    .toString(16);
+}
+
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return "0x" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+		
+			var aktfarbe=0;
+			var gg=0;
+			var one=0;
+			var two=0;
+			var three=0;
+			var four=0;
+			var blocker=false;
+			var drawcols= new Array("#FFF", "#AAA", "#555","#000");	
+			var steps = new Array(0,0,0);
+		    var farben = new Array(
+							"#500", "#fff",
+							"#505", "#fff",
+							"#A00", "#fff",
+							"#A00", "#000",
+							"#F00", "#000",
+							"#05F", "#FFF",
+							"#00A", "#FFF",
+							"#055", "#FFF",
+							"#005", "#FFF",
+							"#05F", "#000",
+							"#050", "#FFF",
+							"#0A0", "#FFF",
+							"#550", "#FFF",
+							"#0F0", "#FFF",
+							"#0F0", "#000",
+							"#0FA", "#000",
+							"#F55", "#5FF",
+							"#0FA", "#FF0",
+							"#05F", "#FF0",
+							"#FF0", "#F00",
+							"#055", "#FF5",
+							"#F55", "#FF0",
+							"#000", "#FFF",
+							"#A50", "#FFA",
+							"#A50", "#FFF",
+							"#A50", "#000",
+							"#555", "#FFF");
+		  
+			  // own style
+			var hoch = document.getElementById('up_button');
+			hoch.addEventListener('click', function() {
+				  
+				aktfarbe=aktfarbe+1;
+				if (aktfarbe>26) {aktfarbe=0;}
+				document.getElementById('Counter').innerHTML=  (aktfarbe+1).toString() + "/27";
+				blocker=true;
+				document.getElementById('inverted').checked=false;
+				blocker=false;
+				drawcols[0] = farben[aktfarbe*2];
+				drawcols[3] = farben[aktfarbe*2+1];
+				draw_it();
+			});
+			var runter = document.getElementById('down_button');
+			runter.addEventListener('click', function() {
+								  
+				aktfarbe=aktfarbe-1;
+				if (aktfarbe<0) {aktfarbe=26;}
+				document.getElementById('Counter').innerHTML= (aktfarbe+1).toString() + "/27";
+				blocker=true;
+				document.getElementById('inverted').checked=false;
+				blocker=false;
+				drawcols[0] = farben[aktfarbe*2];
+				drawcols[3] = farben[aktfarbe*2+1];
+				draw_it();
+			});
+			var backg = document.getElementById('background');
+			backg.addEventListener('change', function() {
+//				var foreg = document.getElementById('foreground');
+//				var back = document.getElementById('background');
+//				blocker=true;
+//				document.getElementById('inverted').checked=false;
+//				blocker=false;
+				drawcols[3] = foreg.value;
+				drawcols[3] = '#' + drawcols[3].charAt(3) + drawcols[3].charAt(5) + drawcols[3].charAt(7);
+				drawcols[0] = backg.value;
+				drawcols[0] = '#' + drawcols[0].charAt(3) + drawcols[0].charAt(5) + drawcols[0].charAt(7);
+				draw_it();
+			});
+			var foreg = document.getElementById('foreground');
+			foreg.addEventListener('change', function() {
+//				var backg = document.getElementById('background');
+//				var fore = document.getElementById('foreground');
+//				blocker=true;
+//				document.getElementById('inverted').checked=false;
+//				blocker=false;
+				drawcols[3] = foreg.value;
+				drawcols[3] = '#' + drawcols[3].charAt(3) + drawcols[3].charAt(5) + drawcols[3].charAt(7);
+				drawcols[0] = backg.value;
+				drawcols[0] = '#' + drawcols[0].charAt(3) + drawcols[0].charAt(5) + drawcols[0].charAt(7);
+				draw_it();
+			});
+			var nun = document.getElementById('inverted');
+			nun.addEventListener('change', function() {
+				if(blocker==false) {
+				var one=drawcols[0];
+				var two=drawcols[1];
+				var three=drawcols[2];
+				var four=drawcols[3];
+				drawcols[0]=four;
+				drawcols[1]=three;
+				drawcols[2]=two;
+				drawcols[3]=one;
+				draw_it();}
+			});
+ 			
+			function draw_it() {
+			
+					//calc inbetween
+					
+				for (var stelle = 0; stelle < 3; stelle++) {
+					steps[stelle] = (parseInt(drawcols[0].charAt(stelle + 1),16) - parseInt(drawcols[3].charAt(stelle + 1),16)) / 5 /3 ;
+				}
+				 
+				drawcols[1] = "#" + dechex(parseInt(parseInt(drawcols[3].charAt(1),16) + parseInt(steps[0] * 2) * 5));
+				drawcols[1] = drawcols[1].concat(dechex(parseInt(parseInt(drawcols[3].charAt(2),16) + parseInt(steps[1] * 2) * 5)));
+				drawcols[1] = drawcols[1].concat(dechex(parseInt(parseInt(drawcols[3].charAt(3),16) + parseInt(steps[2] * 2) * 5)));
+				
+				drawcols[2] = "#" + dechex(parseInt(parseInt(drawcols[3].charAt(1),16) + parseInt(steps[0]) * 5));
+				drawcols[2] = drawcols[2].concat(dechex(parseInt(parseInt(drawcols[3].charAt(2),16) + parseInt(steps[1]) * 5)));
+				drawcols[2] = drawcols[2].concat(dechex(parseInt(parseInt(drawcols[3].charAt(3),16) + parseInt(steps[2]) * 5)));
+				
+				// draw
+				var c2 = document.getElementById("Canvas2");
+				var c2_context = c2.getContext("2d");
+				
+				c2_context.fillStyle = drawcols[0];
+				c2_context.fillRect(0, 0, 100, 100);
+				c2_context.fillStyle = drawcols[3];
+				c2_context.fillRect(20, 60, 60, 20);	
+c2_context.fillRect(30,20,30,20);
+c2_context.fillRect(40,40,20,20);
+
+			}
+			
+			function getConfigData() {
+				//    var backgroundColorPicker = document.getElementById('background_color_picker');
+				var inverted = document.getElementById('inverted');
+				if(inverted.checked){one=1;} else {one=0;}
+				if(twelvehr.checked){two=1;} else {two=0;}
+				if(showdate.checked){three=1;} else {three=0;}
+				if(BTvibe.checked){four=1;} else {four=0;}
+				
+			  	var col00=parseInt(drawcols[0].charAt(1)+drawcols[0].charAt(1),16);
+			  	var col01=parseInt(drawcols[0].charAt(2)+drawcols[0].charAt(2),16);
+			  	var col02=parseInt(drawcols[0].charAt(3)+drawcols[0].charAt(3),16);
+			  	
+			  	var col10=parseInt(drawcols[1].charAt(1)+drawcols[1].charAt(1),16);
+			  	var col11=parseInt(drawcols[1].charAt(2)+drawcols[1].charAt(2),16);
+			  	var col12=parseInt(drawcols[1].charAt(3)+drawcols[1].charAt(3),16);
+
+			  	var col20=parseInt(drawcols[2].charAt(1)+drawcols[2].charAt(1),16);
+			  	var col21=parseInt(drawcols[2].charAt(2)+drawcols[2].charAt(2),16);
+			  	var col22=parseInt(drawcols[2].charAt(3)+drawcols[2].charAt(3),16);
+
+			  	var col30=parseInt(drawcols[3].charAt(1)+drawcols[3].charAt(1),16);
+			  	var col31=parseInt(drawcols[3].charAt(2)+drawcols[3].charAt(2),16);
+			  	var col32=parseInt(drawcols[3].charAt(3)+drawcols[3].charAt(3),16);
+
+				var options = {
+				  'colour': aktfarbe,
+				  'inverted': one,
+				  'twelvehr': two,
+				  'showdate': three,
+				  'col00': col00,
+				  'col01': col01,
+				  'col02': col02,
+				  'col10': col10,
+				  'col11': col11,
+				  'col12': col12,
+				  'col20': col20,
+				  'col21': col21,
+				  'col22': col22,
+				  'col30': col30,
+				  'col31': col31,
+				  'col32': col32,
+				  'BTvibe': four
+				};
+			 
+				// Save for next launch
+				localStorage['colour'] = options['colour'];
+				localStorage['inverted'] = options['inverted'];
+				localStorage['twelvehr'] = options['twelvehr'];
+				localStorage['showdate'] = options['showdate'];
+				
+				localStorage['col00'] = options['col00'];
+				localStorage['col01'] = options['col01'];
+				localStorage['col02'] = options['col02'];
+
+				localStorage['col10'] = options['col10'];
+				localStorage['col11'] = options['col11'];
+				localStorage['col12'] = options['col12'];
+
+				localStorage['col20'] = options['col20'];
+				localStorage['col21'] = options['col21'];
+				localStorage['col22'] = options['col22'];
+
+				localStorage['col30'] = options['col30'];
+				localStorage['col31'] = options['col31'];
+				localStorage['col32'] = options['col32'];
+
+				localStorage['BTvibe'] = options['BTvibe'];
+				
+				console.log('Got options: ' + JSON.stringify(options));
+				return options;
+			}
+			  
+			function getQueryParam(variable, defaultValue) {
+				var query = location.search.substring(1);
+				var vars = query.split('&');
+				for (var i = 0; i < vars.length; i++) {
+					var pair = vars[i].split('=');
+					if (pair[0] === variable) {
+						return decodeURIComponent(pair[1]);
+					}
+				}
+				return defaultValue || false;
+			}
+			 
+			var submitButton = document.getElementById('submit_button');
+			submitButton.addEventListener('click', function() {
+				console.log('Submit');
+				// Set the return URL depending on the runtime environment
+				var return_to = getQueryParam('return_to', 'pebblejs://close#');
+				document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+			});
+			
+			(function() {
+				// var backgroundColorPicker = document.getElementById('background_color_picker');
+				var inverted = document.getElementById('inverted');
+				// Load any previously saved configuration, if available
+				if(localStorage['inverted']) {
+					aktfarbe = JSON.parse(localStorage['colour']);
+					document.getElementById('Counter').innerHTML= "Preset " + (aktfarbe+1).toString() + "/27";
+					console.log("got saved vars %d", aktfarbe);
+					inverted.checked = JSON.parse(localStorage['inverted']);
+					twelvehr.checked = JSON.parse(localStorage['twelvehr']);
+					showdate.checked = JSON.parse(localStorage['showdate']);
+					BTvibe.checked = JSON.parse(localStorage['BTvibe']);
+					
+					drawcols[0] = rgbToHex(JSON.parse(localStorage['col00']) ,JSON.parse(localStorage['col01']), JSON.parse(localStorage['col02']));
+					drawcols[1] = rgbToHex(JSON.parse(localStorage['col10']) ,JSON.parse(localStorage['col11']), JSON.parse(localStorage['col12']));
+					drawcols[2] = rgbToHex(JSON.parse(localStorage['col20']) ,JSON.parse(localStorage['col21']), JSON.parse(localStorage['col22']));
+					drawcols[3] = rgbToHex(JSON.parse(localStorage['col30']) ,JSON.parse(localStorage['col31']), JSON.parse(localStorage['col32']));
+					
+					var foreg = document.getElementById('foreground');	
+					foreg.value=drawcols[3];
+					var backg = document.getElementById('background');
+					backg.value=drawcols[0];
+					
+					drawcols[0]='#' + drawcols[0].charAt(2) + drawcols[0].charAt(4) + drawcols[0].charAt(6);
+					drawcols[1]='#' + drawcols[1].charAt(2) + drawcols[1].charAt(4) + drawcols[1].charAt(6);
+					drawcols[2]='#' + drawcols[2].charAt(2) + drawcols[2].charAt(4) + drawcols[2].charAt(6);
+					drawcols[3]='#' + drawcols[3].charAt(2) + drawcols[3].charAt(4) + drawcols[3].charAt(6);
+				}
+			})();
+	  
+			draw_it();
+			document.getElementById('Counter').innerHTML=  (aktfarbe+1).toString() + "/27";   
+		</script>
+	</body>
+</html>
+
+

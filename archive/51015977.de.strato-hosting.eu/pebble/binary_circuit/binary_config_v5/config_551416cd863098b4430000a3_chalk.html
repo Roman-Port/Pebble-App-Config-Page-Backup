@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Binary Circuit Configuration</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link href="/51015977.de.strato-hosting.eu/pebble/binary_circuit/css/bootstrap.css" rel="stylesheet">
+	<link href="/51015977.de.strato-hosting.eu/pebble/binary_circuit/css/bootstrap-theme.css" rel="stylesheet">
+	
+	<script type="text/javascript" src="/51015977.de.strato-hosting.eu/pebble/binary_circuit/js/jquery.js"></script>
+	<script type="text/javascript" src="/51015977.de.strato-hosting.eu/pebble/binary_circuit/js/bootstrap.js"></script>
+  </head>
+  <body>
+	<center>
+	<div class="container">
+	
+    <h1>Binary Circuit</h1>
+	<div class="form-configure well">
+
+    <p>Choose watchface settings</p>
+
+    <p><b>Mode:</b><br>
+    <select id="mode_select">
+      <option value="day">Day</option>
+      <option value="night">Night</option>
+	  <option value="auto">Auto</option>
+    </select>
+    </p>
+	
+	<p><b>Day starts at:</b> (Auto Mode)<br>
+    <select id="day_start">
+      <option value="1">1</option>
+      <option value="2">2</option>
+	  <option value="3">3</option>
+	  <option value="4">4</option>
+	  <option value="5">5</option>
+	  <option value="6">6</option>
+	  <option value="7">7</option>
+	  <option value="8">8</option>
+	  <option value="9">9</option>
+	  <option value="10">10</option>
+	  <option value="11">11</option>
+	  <option value="12">12</option>
+    </select> 
+	o'clock 
+    </p>
+	
+	<p><b>Night starts at:</b> (Auto Mode)<br>
+    <select id="day_end">
+      <option value="13">13</option>
+      <option value="14">14</option>
+	  <option value="15">15</option>
+	  <option value="16">16</option>
+	  <option value="17">17</option>
+	  <option value="18">18</option>
+	  <option value="19">19</option>
+	  <option value="20">20</option>
+	  <option value="21">21</option>
+	  <option value="22">22</option>
+	  <option value="23">23</option>
+	  <option value="0">24</option>
+    </select> 
+	o'clock
+    </p>
+	
+	<p><b>Show Numbers:</b><br>
+    <select id="show_numbers">
+      <option value="show">Yes</option>
+      <option value="hide">No</option>
+    </select>
+    </p>
+	
+	<p><b>Show battery bar:</b><br>
+    <select id="show_bat">
+      <option value="1">Yes</option>
+	  <option value="0">No</option>      
+    </select>
+    </p>
+	
+	<p><b>Hourly Vibe:</b><br>
+    <select id="vibe_h">
+      <option value="1">Yes</option>
+	  <option value="0">No</option>      
+    </select>
+    </p>
+	
+	<p><b>Vibe if BT disconnect:</b><br>
+    <select id="vibe_bt">
+      <option value="1">Yes</option>
+	  <option value="0">No</option>      
+    </select>
+    </p>
+
+	<p>
+	<b>Timeformat:</b><br>
+		<select id="format">
+			<option value="1">12h</option>
+			<option value="0">24h</option>
+		</select>
+	</p>
+	
+    <p>
+    <button class="btn btn-lg btn-primary btn-block" id="save_button">Save</button>
+    </p>
+	</div>
+	</div></center>
+	<div class="footer container">
+	
+	<p>
+	<b>Mode Day:</b><br> The background is black. <br><br>
+	<b>Mode Night:</b><br> The background is white. <br><br>
+	<b>Mode Auto:</b><br> The background turns at 8 clock in the morning in the day mode. From 20 clock in the evening, he switches to night mode for better readability in the dark.<br><br>
+	</p>
+	
+	<p>
+	<b>Feedback:</b><br>
+	<br>
+	If you like the watch face or do you have any ideas: Feel free and send me a message.<br> It's a good feeling if you know somebody likes your work.
+	</p>
+	</div>
+	
+    <script>
+      //Setup to allow easy adding more options later
+		//read the elementes
+		var modeSelect 		= document.getElementById("mode_select");
+		var formatSelect	= document.getElementById("format");
+		var startSelect 	= document.getElementById("day_start");
+		var endSelect 		= document.getElementById("day_end");
+		var numberSelect	= document.getElementById("show_numbers");
+		var vibehSelect		= document.getElementById("vibe_h");
+		var vibebtSelect	= document.getElementById("vibe_bt");
+		var showbatSelect	= document.getElementById("show_bat");
+
+		var mMode;
+		var mFormat;
+		var mStart;
+		var mEnd;
+		var mNumber;
+		var mVibeH;
+		var mVibeBT;
+		var mShowBat;
+		
+		$().ready(function () {
+			//load the last settings
+			mMode 		= localStorage.getItem("mode");
+			mFormat		= localStorage.getItem("format");
+			mStart 		= localStorage.getItem("start");
+			mEnd 		= localStorage.getItem("end");
+			mNumber		= localStorage.getItem("number");
+			mVibeH		= localStorage.getItem("vibeH");
+			mVibeBT		= localStorage.getItem("vibeBT");
+			mShowBat	= localStorage.getItem("showbat");
+			
+			//set default settings
+			if(isNaN(mMode))	{mMode 		= 2;}
+			if(isNaN(mFormat))	{mFormat 	= 1;}
+			if(isNaN(mStart))	{mStart 	= 7;}
+			if(isNaN(mEnd))		{mEnd 		= 8;}
+			if(isNaN(mNumber))	{mNumber 	= 0;}
+			if(isNaN(mVibeH))	{mVibeH		= 0;}
+			if(isNaN(mVibeBT))	{mVibeBT 	= 0;}
+			if(isNaN(mShowBat))	{mShowBat 	= 0;}
+			
+			//set the settings
+			modeSelect.options[mMode].selected 		= true;
+			formatSelect.options[mFormat].selected	= true;
+			startSelect.options[mStart].selected 	= true;
+			endSelect.options[mEnd].selected 		= true;
+			numberSelect.options[mNumber].selected 	= true;
+			vibehSelect.options[mVibeH].selected	= true;
+			vibebtSelect.options[mVibeBT].selected	= true;
+			showbatSelect.options[mShowBat].selected= true;
+		});
+	  
+      function saveOptions() {
+        
+		//save the setting
+		localStorage.setItem ('mode', 	modeSelect.selectedIndex);
+		localStorage.setItem ('format',	formatSelect.selectedIndex);
+		localStorage.setItem ('start', 	startSelect.selectedIndex);
+		localStorage.setItem ('end', 	endSelect.selectedIndex);
+		localStorage.setItem ('number', numberSelect.selectedIndex);
+		localStorage.setItem ('vibeH', 	vibehSelect.selectedIndex);
+		localStorage.setItem ('vibeBT', vibebtSelect.selectedIndex);
+		localStorage.setItem ('showbat',showbatSelect.selectedIndex);
+		
+		//create the transmit stream
+        var options = {
+          "mode": 	modeSelect.options[modeSelect.selectedIndex].value,
+		  "format":	parseInt(formatSelect.options[formatSelect.selectedIndex].value),
+		  "start": 	parseInt(startSelect.options[startSelect.selectedIndex].value),
+		  "number": numberSelect.options[numberSelect.selectedIndex].value,
+		  "end": 	parseInt(endSelect.options[endSelect.selectedIndex].value),
+		  "vibe_h": parseInt(vibehSelect.options[vibehSelect.selectedIndex].value),
+		  "vibe_bt":parseInt(vibebtSelect.options[vibebtSelect.selectedIndex].value),
+		  "show_bat":parseInt(showbatSelect.options[showbatSelect.selectedIndex].value)
+        }
+        
+        return options;
+      };
+
+	  //send the stream
+      var submitButton = document.getElementById("save_button");
+      submitButton.addEventListener("click", 
+        function() {
+          console.log("Submit");
+
+          var options = saveOptions();
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+          
+          document.location = location;
+        }, 
+      false);
+    </script>
+  </body>
+</html>

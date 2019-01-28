@@ -1,0 +1,189 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/cdn.rawgit.com/pebble/slate/dd764efc0162015ca705860d9b640de7bb6ffad4/dist/css/slate.css">
+  </head>
+  <body>
+  <h1 class="title">BigDate configuration</h1>
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <label class='item'>
+        Second hand style
+      <select id="second" class="item-select">
+        <option value="0">None</option>
+        <option value="1" selected="">Ball</option>
+        <option value="2">Line</option>
+        <option value="3">Bold Line</option>
+      </select>
+      </label>
+    </div>
+  </div>  
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <label class='item'>
+        Second hand color
+        <input id='second_color' type='text' class='item-color item-color-normal' value='0xff0000'>
+      </label>
+    </div>
+  </div>  
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <label class='item'>
+        Hour and minute hand style
+      <select id="hand_style" class="item-select">
+        <option value="0">Thin index</option>
+        <option value="1" selected="">Normal index</option>
+        <option value="2">Bold index</option>
+        <option value="3">Frying index</option>
+        <option value="4">Pyramid</option>
+        <option value="5">Leaf</option>
+        <option value="6">Dauphin</option>
+        <option value="7">Arrow</option>
+      </select>
+      </label>
+    </div>
+  </div>  
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <label class='item'>
+        Hour hand color
+        <input id='hour_color' type='text' class='item-color item-color-normal' value='0xffffff'>
+      </label>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <label class='item'>
+        Minute hand color
+        <input id='minute_color' type='text' class='item-color item-color-normal' value='0xffffff'>
+      </label>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <label class='item'>
+        Date and week color
+        <input id='date_color' type='text' class='item-color item-color-normal' value='0x55ff55'>
+      </label>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <label class='item'>
+        Date size
+      <select id="date_size" class="item-select">
+        <option value="0">Small</option>
+        <option value="1">Medium</option>
+        <option value="2" selected="">Large Light</option>
+        <option value="3">Large Bold</option>
+        <option value="4">Large Leco</option>
+      </select>
+      </label>
+    </div>
+  </div>  
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <label class='item'>
+        Day of the week size
+      <select id="week_size" class="item-select">
+        <option value="0">Small</option>
+        <option value="1" selected="">Medium</option>
+        <option value="2">Large</option>
+      </select>
+      </label>
+    </div>
+  </div>  
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <label class='item'>
+        Day of the week style
+      <select id="week_style" class="item-select">
+        <option value="0">None</option>
+        <option value="1">Same color as date</option>
+        <option value="2" selected="">Red on weekend</option>
+      </select>
+      </label>
+    </div>
+  </div>  
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <label class='item'>
+        Background
+      <select id="background" class="item-select">
+        <option value="0" selected="">Black</option>
+        <option value="1">White</option>
+      </select>
+      </label>
+    </div>
+  </div>  
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+    <a id="addoption" href="#"><font color="white">.....</font></a>
+<script type="text/javascript">
+var keylist = ["second", "second_color", "date_color", "hour_color", "minute_color",
+  "date_size", "week_size", "week_style", "background", "hand_style"];
+function getConfigData() {
+  var conf = {};
+  keylist.forEach(function (id) {
+    var obj = document.getElementById(id);
+    localStorage[id] = obj.value;
+    conf[id] = obj.value;
+  });
+  return conf;
+}
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+
+  var submitobj = document.getElementById("submit_button");
+  submitobj.addEventListener('click', function(){
+    console.log('Submit');
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  var addobj = document.getElementById("addoption");
+  addobj.addEventListener('click', function(){
+    var bobj = document.getElementById("background");
+    var obj = document.createElement('option');
+    obj.text = 'Enlightend';
+    obj.value = "2";
+    bobj.add(obj, null);
+  });
+
+//(function() {
+  // load settings
+  keylist.forEach(function(id){
+    if (localStorage[id]) {
+      var obj = document.getElementById(id);
+      obj.value = localStorage[id];
+    }
+  });
+//})();
+</script>
+<script src="/cdn.rawgit.com/pebble/slate/dd764efc0162015ca705860d9b640de7bb6ffad4/dist/js/slate.js"></script>
+  </body>
+</html>

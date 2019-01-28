@@ -1,0 +1,12 @@
+.title {
+	padding: 15px 10px;
+	font-size: 1.2em;
+	font-weight: 1000;
+	color: #888888;
+	text-align: center;
+}
+
+.item-button {
+	width: 40%;
+}
+

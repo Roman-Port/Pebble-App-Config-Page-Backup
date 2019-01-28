@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <title>YASWF</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="jumbotron">
+            <h1 style="font-family: sans-serif; text-align:center;">YASWF Settings</h1>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-8">
+          Vibration on Bluetooth disconnection
+        </div>
+        <div class="col-xs-4">
+          <select class="form-control" id="vibrate_enabled">
+            <option value="off">Off</option>
+            <option value="on">On</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row" style="text-align: right">
+        <div class="col-xs-12">
+          &nbsp;
+          <br>
+          <button class="btn btn-success" type="button" id="save_button">Save</button>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    //Setup to allow easy adding more options later
+    function saveOptions() {
+      var vibrateSelect = document.getElementById("vibrate_enabled");
+ 
+      var options = {
+        "vibrate": vibrateSelect.options[vibrateSelect.selectedIndex].value
+      }
+     
+      return options;
+    };
+ 
+    var submitButton = document.getElementById("save_button");
+    submitButton.addEventListener("click", 
+      function() {
+        console.log("Submit");
+
+        var options = saveOptions();
+        var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+       
+        document.location = location;
+      }, false);
+  </script>
+  
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>minim settings</title>
+  <link rel="stylesheet" type="text/css" href="/pebble.lkrms.org/minim/css/slate.css">
+  <script src="/pebble.lkrms.org/minim/js/slate.js"></script>
+  <style>
+    .title {
+      padding: 15px 10px;
+      text-transform: uppercase;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 1.2em;
+      font-weight: 500;
+      color: #888888;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="title">minim settings</h1>
+
+  <div class="item-container">
+    <div class="item-container-content">
+      <div class="item">
+        Thanks for using minim. If you like it, please tap the &hearts; button, and tell your fellow Pebblers! Feedback via &ldquo;Contact developer&rdquo; is always welcome too.
+      </div>
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Power management</div>
+    <div class="item-container-content">
+      <label class="item">
+        Battery saving mode
+        <input type="checkbox" name="BatterySavingMode" class="item-toggle watchface-switch">
+      </label>
+    </div>
+    <div class="item-container-footer">
+      Enable battery saving mode to disable the seconds hand. By default, the seconds hand is displayed unless Pebble Health believes you&rsquo;re in a deep sleep. (Note: the seconds hand will appear while Pebble is charging regardless of this setting.)
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Appearance</div>
+    <div class="item-container-content">
+      <label class="item">
+        Theme
+        <select name="ActiveTheme" dir="rtl" class="item-select watchface-setting">
+          <option class="item-select-option" value="0" selected="">Dark</option>
+          <option class="item-select-option" value="1">Light</option>
+        </select>
+      </label>
+    </div>
+    <div class="item-container-footer">
+      We've worked hard to create classy, readable themes that look great in sunlight, backlight, and not-much-light. If there's a particular colour scheme you'd like us to work on, let us know and we'll consider it.
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Health &amp; fitness</div>
+    <div class="item-container-content">
+      <label class="item">
+        Target steps
+        <select name="ManualStepTarget" dir="rtl" class="item-select watchface-setting">
+          <option class="item-select-option" value="0" selected="">Automatic</option>
+          <option class="item-select-option" value="1">Manual</option>
+        </select>
+      </label>
+      <label class="item">
+        <input type="range" class="item-slider watchface-setting" name="TargetSteps" value="10000" min="5000" max="50000" step="2500">
+        <div class="item-input-wrapper item-slider-text">
+          <input type="text" class="item-input" name="TargetSteps" value="10000" readonly="">
+        </div>
+      </label>
+    </div>
+    <div class="item-container-footer">
+      Tell minim how many steps you&rsquo;re aiming for each day. In automatic mode, your average steps per day over the last 7 days will be used. In manual mode, the step count you provide here will be used.
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="button-container">
+      <input type="button" class="item-button watchface-save" value="SAVE">
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="button-container">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="74ZZ3LNSRP9TE">
+        <input type="image" src="/www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
+        <img alt="" border="0" src="/www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
+      </form>
+    </div>
+  </div>
+
+  <script>
+// Zepto is jQuery-like, so ...
+function getSettings() {
+  var settings = {};
+  $(".watchface-switch").each(function () {
+    var elem = $(this);
+    var name = elem.attr("name");
+    localStorage[name] = settings[name] = elem.prop("checked");
+  });
+  $(".watchface-setting").each(function () {
+    var elem = $(this);
+    var name = elem.attr("name");
+    localStorage[name] = settings[name] = elem.val();
+  });
+  return settings;
+}
+
+$(".watchface-save").on("click", function () {
+  document.location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(getSettings()));
+});
+
+(function () {
+  $(".watchface-switch").each(function () {
+    var elem = $(this);
+    var name = elem.attr("name");
+    if (typeof localStorage[name] != "undefined") {
+      elem.prop("checked", JSON.parse(localStorage[name]));
+    }
+  });
+  $(".watchface-setting").each(function () {
+    var elem = $(this);
+    var name = elem.attr("name");
+    if (typeof localStorage[name] != "undefined") {
+      $("[name=" + name + "]").val(localStorage[name]);
+    }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>N88KA config</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="/spangborn.github.io/pebble-n8/css/bootstrap.css" rel="stylesheet">
+	<link href="/spangborn.github.io/pebble-n8/css/bootstrap-theme.css" rel="stylesheet">
+
+	<script type="text/javascript" src="/spangborn.github.io/pebble-n8/js/jquery.js"></script>
+
+</head>
+<body>
+    <div class="container">
+		<h3 class=""><small class="glyphicon glyphicon-cog"></small> N88KA</h3>
+    	<form id="configure" class="form-configure well" action="#" method="POST">
+        	<div class="form-group">
+        		<label for="seconds">Update Seconds</label>
+				<select id="seconds" class="form-control" name="seconds">
+					<option value="15">15 Seconds</option>
+					<option value="5">5 Seconds</option>
+					<option value="1">1 Second</option>
+				</select>
+			</div>
+			<p class="help-block">Select how often the watch should update the seconds.</p>
+			<div class="form-group">
+				<label for="theme">Theme</label>
+				<select id="theme" class="form-control">
+					<option value="1">Black</option>
+					<option value="0">White</option>
+				</select>
+			</div>
+			<!--<div class="form-group">
+				<label for="the_name">Name</label>
+				<input type="text" maxlength="12" id="the_name" class="form-control" value="N88KA" placeholder="N88KA"/>
+			</div>
+			<p class="help-block">Select the name that should be displayed in the bottom-left corner of the screen.</p>-->
+			<br>
+        	<input class="btn btn-lg btn-primary btn-block" id="save" type="submit" value="Save">
+
+      </form>
+    </div>
+    <div class="footer container">
+    	<p><a href="/github.com/spangborn/pebble-n8.html">N88KA</a> by <a href="/twitter.com//spangborn.html">Sawyer Pangborn</a></p>
+    </div>
+	<script type="text/javascript">
+		$().ready(function () {
+			if (!localStorage.getItem("seconds")) {
+				localStorage.setItem("seconds", "15");
+			}
+			if (!localStorage.getItem("theme")) {
+				localStorage.setItem("theme", "1");
+			}
+			// if (!localStorage.getItem("name")) {
+			// 	localStorage.setItem("name", "N88KA");
+			// }
+			$("#seconds").val(localStorage.getItem("seconds"));
+			$("#theme").val(localStorage.getItem("theme"));
+			// $("#name").val(localStorage.getItem("name"));
+
+			$("#configure").submit(function(e) {
+				var s = $("#seconds").val();
+				var t = $("#theme").val();
+				//var n = $("#the_name").val().substr(0,11);
+
+				var j = {
+					"seconds" : parseInt(s),
+					"theme"   : parseInt(t)
+				};
+
+	    		localStorage.setItem("seconds", s);
+	    			localStorage.setItem("seconds", s);
+				localStorage.setItem("theme", t);
+				//localStorage.setItem("name", n);
+
+				window.location.href = "pebblejs://close#" + JSON.stringify(j);
+
+				e.preventDefault();
+			});
+		});
+
+</script>
+</body>
+</html>

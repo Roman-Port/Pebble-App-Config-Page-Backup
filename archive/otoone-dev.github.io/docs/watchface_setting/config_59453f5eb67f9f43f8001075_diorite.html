@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="UTF-8">
+    <title>Watchface Setting Page</title>
+  </head>
+  <body>
+    <h1>Watchface Setting Page</h1>
+    
+<p>
+<br>
+PlanetType
+<select name="draw-type" id="planet">
+<option value="0">Sun&Moon</option>
+<option value="1">SunToMars</option>
+<option value="2">SunToSaturn</option>
+<option value="3">MoonOnly</option>
+</select><br>
+ColorType
+<select name="color-type" id="color">
+<option value="0">White</option>
+<option value="1">Black</option>
+<option value="2">Auto</option>
+<option value="3">Auto(Reverse)</option>
+</select><br>
+<br>
+    <button id="save_button">Save</button><br>
+</p>
+   </body>
+</html>
+
+
+<script>
+  //Setup to allow easy adding more options later
+  function saveOptions() {
+    
+    color = document.getElementById("color");
+    planet = document.getElementById("planet");
+    var options = {
+      "color": color.value,
+      "planet": planet.value
+    }
+    return options;
+  };
+ 
+  var submitButton = document.getElementById("save_button");
+  submitButton.addEventListener("click", 
+    function() {
+      console.log("Submit");
+ 
+      var options = saveOptions();
+      var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+       
+      document.location = location;
+    }, 
+  false);
+</script>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Revolution Color Config</title>	
+	<link rel='stylesheet' type='text/css' href='css/slate.min.css'>
+	<script src='js/slate.min.js'></script>
+	<style>
+		.title {
+			padding: 15px 10px;
+			text-transform: uppercase;
+			font-family: 'PT Sans', sans-serif;
+			font-size: 1.2em;
+			font-weight: 500;
+			color: #888888;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="item-container-header">Color Settings</div>
+	<div class="item-container-content">
+		<label class='item'>
+			Time Color
+			<select id="time_color" onclick="timeSelected();">
+				<option value="0">White</option>
+				<option value="1">Red</option>
+				<option value="2">Blue</option>
+				<option value="3">Green</option>
+				<option value="4">Black</option>
+				<option value="5">Original Freebox</option>
+			</select>
+		</label>
+		<label class='item'>
+			Date Color
+			<select id="date_color">
+				<option value="0">White</option>
+				<option value="1">Red</option>
+				<option value="2">Blue</option>
+				<option value="3">Green</option>
+				<option value="4">Black</option>
+				<option value="5">Original Freebox</option>
+			</select>
+		</label>
+		<label class='item'>
+			Day Color
+			<select id="day_color">
+				<option value="0">White</option>
+				<option value="1">Red</option>
+				<option value="2">Blue</option>
+				<option value="3">Green</option>
+				<option value="4">Black</option>
+				<option value="5">Original Freebox</option>
+			</select>
+		</label>
+		<label class='item'>
+			Seconds Color
+			<select id="second_color">
+				<option value="0">White</option>
+				<option value="1">Red</option>
+				<option value="2">Blue</option>
+				<option value="3">Green</option>
+				<option value="4">Black</option>
+				<option value="5">Original Freebox</option>
+			</select>
+		</label>
+		<label class="item">
+			Background Color
+			<input type="text" class="item-color item-color-normal" id="background_color" name="color-1" value="#000000">
+		</label>
+	</div>
+	<div class="item-container-header">Display Settings</div>
+	<div class="item-container-content">
+		<label class="item">
+		  Use American Date format
+		  <input type="checkbox" class="item-toggle" id="use_american_format">
+		</label>
+		<label class="item">
+		  Vibe on hour
+		  <input type="checkbox" class="item-toggle" id="vibe_on_hour">
+		</label>
+	</div>
+	<div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='OK' onclick="submit();">
+      </div>
+    </div>
+
+	<script type="text/javascript">
+		(function() {
+			var timeColorPicker = document.getElementById('time_color');
+			var dayColorPicker = document.getElementById('day_color');
+			var dateColorPicker = document.getElementById('date_color');
+			var secondColorPicker = document.getElementById('second_color');
+			var backgroundColorPicker = document.getElementById('background_color');
+			var americanFormatToggle = document.getElementById('use_american_format');
+			var vibeHourToggle = document.getElementById('vibe_on_hour');
+			// Load any previously saved configuration, if available
+			if (localStorage['time_color']) {				
+				timeColorPicker.value = localStorage['time_color'];
+				dayColorPicker.value = localStorage['day_color'];
+				dateColorPicker.value = localStorage['date_color'];
+				secondColorPicker.value = localStorage['second_color'];
+				backgroundColorPicker.value = localStorage['background_color'];
+				americanFormatToggle.checked = JSON.parse(localStorage['use_american_format']);
+				vibeHourToggle.checked = JSON.parse(localStorage['vibe_on_hour']);
+			}
+		})();
+		
+		// Pour tester depuis CloudPebble
+		function getQueryParam(variable, defaultValue) {
+		  // Find all URL parameters
+		  var query = location.search.substring(1);
+		  var vars = query.split('&');
+		  for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split('=');
+
+			// If the query variable parameter is found, decode it to use and return it for use
+			if (pair[0] === variable) {
+			  return decodeURIComponent(pair[1]);
+			}
+		  }
+		  return defaultValue || false;
+		}
+	
+		function submit() {
+			var options = {
+			  'time_color': document.getElementById("time_color").value,
+			  'day_color': document.getElementById("day_color").value,
+			  'date_color': document.getElementById("date_color").value,
+			  'second_color': document.getElementById("second_color").value,
+			  'background_color': document.getElementById("background_color").value,
+			  'use_american_format' : document.getElementById("use_american_format").checked,
+			  'vibe_on_hour' : document.getElementById("vibe_on_hour").checked
+			};
+			
+			// Save for next launch
+			localStorage['time_color'] = options['time_color'];
+			localStorage['day_color'] = options['day_color'];
+			localStorage['date_color'] = options['date_color'];
+			localStorage['second_color'] = options['second_color'];
+			localStorage['background_color'] = options['background_color'];
+			localStorage['use_american_format'] = options['use_american_format'];
+			localStorage['vibe_on_hour'] = options['vibe_on_hour'];
+		
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+			document.location = return_to + encodeURIComponent(JSON.stringify(options));
+		}
+		
+		/*function timeSelected() {
+			var timeColorPicker = document.getElementById('time_color');
+			var dayColorPicker = document.getElementById('day_color');
+			var dateColorPicker = document.getElementById('date_color');
+			var secondColorPicker = document.getElementById('second_color');
+			
+			dayColorPicker.value = timeColorPicker.value;
+			dateColorPicker.value = timeColorPicker.value;
+			secondColorPicker.value = timeColorPicker.value;
+		}*/
+	</script>
+</body></html>

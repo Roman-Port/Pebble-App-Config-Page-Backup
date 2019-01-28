@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Cute Dasiy Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/imoto-yuya.github.io/cute_daisy/css/slate.css'>
+  <script src='/imoto-yuya.github.io/cute_daisy/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Cute Dasiy Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Vibrate on disconnect
+          <input id='connection_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Display</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Ticks
+          <input id='show_ticks_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Second hans's decoration
+          <select id="decoration_select" style="color:#000000">
+      	  <option value="heart">Heart</option>
+      	  <option value="star">Star</option>
+    	  </select>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Vertical watchface
+          <input id='rotate_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        The watchface rotate to the left in charging.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE'>
+      </div>
+    </div>
+
+    <div style="margin-top : 30px">
+    <center>
+    <a href="http://imoto-yuya-1234.github.io/web_page/bitcoin/bitcoin.html">
+    <img src="/imoto-yuya.github.io/cute_daisy/RibbonDonateBitcoin.png" width="200" height="50">
+    </a>
+    </center>
+    </div>
+    
+  </body>
+  
+  <script>
+  function getConfigData() {
+    var connectionCheckbox = document.getElementById('connection_checkbox');
+    var showticksCheckbox = document.getElementById('show_ticks_checkbox');
+    var decorationSelect = document.getElementById('decoration_select');
+    var rotateCheckbox = document.getElementById('rotate_checkbox');
+ 
+    var options = {
+      'connection': connectionCheckbox.checked,
+      'show_ticks': showticksCheckbox.checked,
+      'decoration': decorationSelect.value,
+      'rotate': rotateCheckbox.checked
+    };
+
+    // Save for next launch
+    localStorage['connection'] = options['connection'];
+    localStorage['show_ticks'] = options['show_ticks'];
+    localStorage['decoration'] = options['decoration'];
+    localStorage['rotate'] = options['rotate'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var connectionCheckbox = document.getElementById('connection_checkbox');
+    var showticksCheckbox = document.getElementById('show_ticks_checkbox');
+    var decorationSelect = document.getElementById('decoration_select');
+    var rotateCheckbox = document.getElementById('rotate_checkbox');
+
+    // Load any previously saved configuration, if available
+    connectionCheckbox.checked = JSON.parse(localStorage['connection']);
+    showticksCheckbox.checked = JSON.parse(localStorage['show_ticks']);
+    decorationSelect.value = localStorage['decoration'];
+    rotateCheckbox.checked = JSON.parse(localStorage['rotate']);
+    
+  })();
+  </script>
+</html>

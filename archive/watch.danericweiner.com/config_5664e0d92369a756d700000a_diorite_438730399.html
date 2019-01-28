@@ -1,0 +1,221 @@
+?<!DOCTYPE html>
+<html>
+<head>
+    <title>Configuration</title>
+    <link rel='stylesheet' type='text/css' href='/watch.danericweiner.com/css/slate.css'>
+    <script src='/watch.danericweiner.com/js/slate.js'></script>
+    <style>
+        .title {
+            padding: 15px 10px;
+            text-transform: uppercase;
+            font-family: 'PT Sans', sans-serif;
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #888888;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class='item-container'>
+        <div class='item-container-content'>
+            <div class='item'>Settings</div>
+            <div class='item-container-footer'>
+                Sunrise and sunset times from
+                <a href="/sunrise-sunset.org//.html">
+                    sunrise-sunset.org
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class='item-container'>
+        <div class='item-container-header'>Data Source:</div>
+        <div class='item-container-content'>
+            <label class='item'>
+                Get data from Wunderground
+                <input id='data_alternate' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            If you're outside the U.S. you may need to get your data
+            from Wunderground instead of the NOAA.  You'll need to enter an
+            API key below.
+        </div>
+    </div>
+    <div class="item-container" id="api_key_section">
+        <div class="item-container-header">Wunderground API Key:</div>
+        <div class="item-container-content">
+            <label class="item">
+                <input id="api_key" type="text" class="item-input" name="input-2" placeholder="A valid key is required.">
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Get your key from
+            wunderground.com/weather/api.
+        </div>
+    </div>
+    <div class='item-container' id="wind_alternate_section">
+        <div class='item-container-header'>Wind Source:</div>
+        <div class='item-container-content'>
+            <label class='item'>
+                Get Wind from Alternate Source
+                <input id='wind_alternate' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            In some cases other sources
+            provide more relevant wind results than Weather Underground.
+            Powered by Dark Sky.
+        </div>
+    </div>
+    <div class='item-container'>
+        <div class='item-container-header'>Location Data:</div>
+        <div class='item-container-content'>
+            <label class='item'>
+                Show Location Instead of GPS
+                <input id='show_city' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Show station location that
+            tide data was retrieved from instead of GPS coordinates.
+        </div>
+    </div>
+    <div class='item-container'>
+        <div class='item-container-header'>Temperature Units:</div>
+        <div class='item-container-content'>
+            <label class='item'>
+                Use Celsius for Temperature
+                <input id='units_celsius' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Use Celsius for temperature
+            readings instead of Fahrenheit.
+        </div>
+    </div>
+    <div class='item-container'>
+        <div class='item-container-header'>Colors:</div>
+        <div class='item-container-content'>
+            <label class='item'>
+                Invert Colors
+                <input id='invert' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Show black text on white
+            background instead of white text on a black background.
+        </div>
+    </div>
+    <div class='item-container'>
+        <div class='button-container'>
+            <input id='submit_button' type='button' class='item-button' value='SAVE'>
+        </div>
+    </div>
+</body>
+<script>
+    function getConfigData() {
+	    var data_alternate = document.getElementById('data_alternate').checked;
+        var api_key = document.getElementById('api_key').value;
+        var wind_alternate = document.getElementById('wind_alternate').checked;
+        var show_city = document.getElementById('show_city').checked;
+        var units_celsius = document.getElementById('units_celsius').checked;
+        var invert = document.getElementById('invert').checked;
+
+
+
+        var options = {
+            'data_alternate' : data_alternate,
+            'api_key' : api_key,
+            'wind_alternate' : wind_alternate,
+            'show_city' : show_city,
+            'units_celsius' : units_celsius,
+            'invert' : invert
+        };
+        return options;
+    }
+
+    function getQueryParam(variable, defaultValue) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if (pair[0] === variable) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        return defaultValue || false;
+    }
+
+    function toggle_section(){
+        var data_alternate = document.getElementById('data_alternate').checked;
+        var api_key_section = document.getElementById('api_key_section');
+        var wind_alternate_section = document.getElementById('wind_alternate_section');
+        if (data_alternate){
+		    api_key_section.style.display = 'block';
+		    wind_alternate_section.style.display = 'block';
+        }else{
+            api_key_section.style.display = 'none'
+            wind_alternate_section.style.display = 'none';
+        }
+    }
+
+    var data_alternate_toggle = document.getElementById('data_alternate')
+    data_alternate_toggle.addEventListener('change', toggle_section);
+
+    var submitButton = document.getElementById('submit_button');
+    submitButton.addEventListener('click', function() {
+        console.log('Submit');
+
+        // Set the return URL depending on the runtime environment
+        var return_to = getQueryParam('return_to', 'pebblejs://close#');
+        document.location = return_to
+                + encodeURIComponent(JSON.stringify(getConfigData()));
+    });
+
+    var prior_data_alternate = getQueryParam('prior_data_alternate', false);
+    var prior_api_key = getQueryParam('prior_api_key', false);
+    var prior_wind_alternate = getQueryParam('prior_wind_alternate', false);
+    var prior_show_city = getQueryParam('prior_show_city', false);
+    var prior_units_celsius = getQueryParam('prior_units_celsius', false);
+    var prior_invert = getQueryParam('prior_invert', false);
+
+    if (prior_data_alternate) {
+        prior_data_alternate = decodeURI(prior_data_alternate);
+        var prior_data_alternate_bool = (prior_data_alternate === 'true');
+        document.getElementById('data_alternate').checked = prior_data_alternate_bool;
+    }
+
+    toggle_section();
+
+    if (prior_api_key) {
+        prior_api_key = decodeURI(prior_api_key);
+        document.getElementById('api_key').value = prior_api_key;
+    }
+
+    if (prior_wind_alternate) {
+        prior_wind_alternate = decodeURI(prior_wind_alternate);
+        var prior_wind_alternate_bool = (prior_wind_alternate === 'true');
+        document.getElementById('wind_alternate').checked = prior_wind_alternate_bool;
+    }
+
+    if (prior_show_city) {
+        prior_show_city = decodeURI(prior_show_city);
+        var prior_show_city_bool = (prior_show_city === 'true');
+        document.getElementById('show_city').checked = prior_show_city_bool;
+    }
+
+    if (prior_units_celsius) {
+        prior_units_celsius = decodeURI(prior_units_celsius);
+        var prior_units_celsius_bool = (prior_units_celsius === 'true');
+        document.getElementById('units_celsius').checked = prior_units_celsius_bool;
+    }
+
+    if (prior_invert) {
+        prior_invert = decodeURI(prior_invert);
+        var prior_invert_bool = (prior_invert === 'true');
+        document.getElementById('invert').checked = prior_invert_bool;
+    }
+
+</script>
+</html>

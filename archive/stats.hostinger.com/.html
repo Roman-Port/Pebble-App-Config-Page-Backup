@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html ng-app="urStatusPage" ng-controller="AppCtrl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=11" />
+  <meta name="robots" content="noindex" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/png" href="https://uptimerobot.com/assets/ico/favicon.ico"/>
+  <title></title>
+  <link rel="stylesheet" href="/css/static.css">
+  <link rel="stylesheet" href="/css/custom.css?v0.0.1">
+  
+  
+  <link rel="canonical" href="http://stats.hostinger.com/" />
+  
+  
+</head>
+<body>
+<!-- 
+EDITABLE AREA STARTS HERE - EDITABLE AREA STARTS HERE - EDITABLE AREA STARTS HERE 
+-->
+<div class="controller" ng-controller="StatusPageCtrl" ng-cloak>
+  <!-- MAIN HEADER -->
+  
+  <style>
+    {{ psp.custom_css }}
+  </style>
+  
+  <header id="main-header">
+    <div class="wrapper cf">
+      <div class="logo-wrapper">
+        <img ng-src="https://userfiles.uptimerobot.com/img/{{ psp.logo }}" alt="{{ psp.name }}" class="logo" ng-if="pspDataLoaded && psp.logo !== null">
+        <h1 class="text-logo" ng-if="pspDataLoaded && psp.logo === null">{{ psp.name }}</h1>
+      </div>
+      <!-- Subscribe -->
+      <div class="btn-subscribe right" ng-controller="SubscriptionCtrl" ng-if="false">
+        <button href="#" class="btn btn-success" ng-click="subscribe = !subscribe"><i class="icon-rss_feed"></i> Subscribe</button>
+        <div class="subscribe-wrapper" ng-show="subscribe">
+          <i class="icon-close" ng-click="close()"></i>
+          <h4>Subscribe to this page</h4>
+          <h5>Get notified about the updates.</h5>
+
+          <div class="btn-group btn-group-sm" role="group" aria-label="...">
+            <button type="button" class="btn btn-default" ng-click="showMethod('email')"><i class="icon-mail_outline"></i> Email</button>
+            <button type="button" class="btn btn-default" ng-click="showMethod('rss')"><i class="icon-rss_feed"></i> RSS</button>
+          </div>
+
+          <h6 ng-show="methods.email">Via Email</h6>
+          <div class="email-form form-inline" ng-show="methods.email">
+
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="jane.doe@example.com" ng-model="emailValue">
+              <button ng-if="!emailLoading" class="btn btn-success btn-submit-email" ng-click="subscribeEmail()"><i class="icon-send"></i></button>
+              <div class="loader" ng-if="emailLoading"></div>
+            </div>
+            <p class="danger" ng-if="emailError">{{ errorMessage }}</p>
+            <p class="success" ng-if="emailSuccess">{{ successMessage }}</p>
+          </div>
+
+
+          <h6 ng-show="methods.rss">Via RSS</h6>
+          <div class="feed" ng-show="methods.rss">
+            <a href="#" target="_blank" class="rss-link">http://rss.uptimerobot.com/1jQM3FMGE/777712030</a>
+          </div>
+        </div>
+      </div>
+      <!-- /Subscribe -->
+    </div>
+  </header>
+  <!-- /MAIN HEADER -->
+
+  <!-- PAGE-CONTAINER -->
+  <div id="page-container">
+    <!-- ANNOUNCEMENTS -->
+    <section id="announcements" ng-if="psp.hasActiveAnnounce">
+      <div class="wrapper">
+
+        <div class="announcement-panel">
+
+          <header class="anouncement-header" ng-click="anouncementOpen = !anouncementOpen">
+            <h3 class="left">Announcements ({{ psp.activeAnnouncements }})</h3>
+            <p><span>{{ psp.announcements[0].title }}:</span> {{ psp.announcements[0].desc }}</p>
+            <span class="arrow" ng-class="{open: anouncementOpen}"></span>
+          </header>
+
+          <div class="anouncement-content" ng-show="anouncementOpen">
+            <ul class="announcement-list">
+              <li class="announcement-item cf" ng-repeat="announce in psp.announcements">
+                <img ng-if="announce.type === 1" src="/images/info.png" alt="">
+                <img ng-if="announce.type === 2" src="/images/warning.png" alt="">
+                <div class="content-wrapper block left">
+                  <h4>{{ announce.title }}</h4>
+                  <label ng-if="announce.label" ng-class="{'resolved': announce.label === 'resolved'}">{{ announce.label }}</label>
+                  <p>{{ announce.desc }}</p>
+                  <small ng-if="announce.label === 'in progress'">ends {{announce.ends}}</small>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- /ANNOUNCEMENTS -->
+
+    <!-- MONITORS -->
+    <section id="monitors">
+      <div class="wrapper">
+        <h2>Monitors</h2>
+        <div class="monitor-table">
+          <table>
+            <thead>
+            <tr>
+              <th class="padded">Status</th>
+              <th class="padded">Last 7 Days</th>
+              <th class="padded"></th>
+              <th class="padded">Type</th>
+              <th colspan="7"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Days Row -->
+            <tr>
+              <td colspan="4"></td>
+              <td class="date" ng-repeat="day in days">{{ day }}</td>
+
+            </tr>
+            <!-- /Days Row -->
+            <!-- Monitor List -->
+            <tr ng-repeat="monitor in psp.monitors">
+              <td>
+                <span class="bullet {{ monitor.statusLabel }}-bg"></span>
+              </td>
+              <td class="ratio {{ monitor.oneWeekRange.label }} padded">
+                {{ monitor.oneWeekRange.ratio | correctratio }}%
+              </td>
+              <td class="name padded flex-parent">
+                <a ng-href="{{ monitor.statusPageURL }}" title="{{ monitor.friendly_name }}" class="long-and-truncated">{{ monitor.friendly_name }}</a>
+
+              </td>
+              <td class="type padded">
+                {{ monitor.typeStr }}
+              </td>
+              <td ng-repeat="range in monitor.customuptimeranges track by $index">
+                <span class="table-status-item {{ range.label }}-bg">{{ range.ratio | correctratio }}%</span>
+              </td>
+            </tr>
+            <!-- /Monitor List -->
+            </tbody>
+
+          </table>
+        </div>
+        <!-- Pagination -->
+        <div class="text-center">
+          <ul class="pagination pagination-sm" ng-if="pagination.hidePagination !== true">
+            <li>
+              <!-- ng-if="pagination.firstActive === true" -->
+              <a ng-href="{{ pagination.firstHref }}">««</a>
+            </li>
+            <li>
+              <!-- ng-if="pagination.prevActive === true" -->
+              <a ng-href="{{ pagination.prevHref }}">«</a>
+            </li>
+            <li ng-repeat="page in pagination.pages">
+              <a href="?page={{page}}" ng-class="{'active': page == pageNumber }">{{ page }}</a>
+            </li>
+            <li>
+              <!-- ng-if="pagination.nextActive === true" -->
+              <a ng-href="{{ pagination.nextHref }}">»</a>
+            </li>
+            <li>
+              <!-- ng-if="pagination.lastActive === true" -->
+              <a ng-href="{{ pagination.lastHref }}">»»</a>
+            </li>
+          </ul>
+        </div>
+        <!-- /Pagination -->
+      </div>
+    </section>
+    <!-- /MONITORS -->
+
+    <!-- STATS OVERVIEW -->
+    <div id="overview">
+      <div class="seperator"></div>
+      <div class="wrapper cf">
+
+        <!-- Overall Uptime -->
+        <section id="overall-uptime" class="one-third">
+          <h2>Overall Uptime</h2>
+          <ul>
+            <li>
+              <strong class="{{ pspStats.ratios.l1.label }}">{{ pspStats.ratios.l1.ratio | correctratio }}%</strong>
+              (last 24 hours)
+              <p class="psp-down-duration">({{ pspStats.downDurationsComputed.l1s }})</p>
+            </li>
+            <li>
+              <strong class="{{ pspStats.ratios.l7.label }}">{{ pspStats.ratios.l7.ratio | correctratio }}%</strong>
+              (last 7 days)
+              <p class="psp-down-duration">({{ pspStats.downDurationsComputed.l7s }})</p>
+            </li>
+            <li>
+              <strong class="{{ pspStats.ratios.l30.label }}">{{ pspStats.ratios.l30.ratio | correctratio }}%</strong>
+              (last 30 days)
+              <p class="psp-down-duration">({{ pspStats.downDurationsComputed.l30s }})</p>
+            </li>
+          </ul>
+        </section>
+        <!-- /Overall Uptime -->
+
+
+        <!-- Latest Downtime -->
+        <section id="latest-downtime" class="one-third">
+          <h2>Latest Downtime</h2>
+          <p>{{ latestDownTimeStr }}</p>
+        </section>
+        <!-- /Latest Downtime -->
+
+
+        <!-- Quick Stats -->
+        <section id="quick-stats" class="one-third">
+          <h2>Quick stats</h2>
+
+          <div class="current-status status-success cf">
+            <span class="bullet bullet-sm block left" ng-class="{'success-bg': psp.downCount === 0, 'danger-bg': psp.downCount > 0}"></span>
+            <div class="status-information left">
+              <p class="success" ng-if="psp.downCount === 0 && hideRefreshRemaining !== true">All Clear</p>
+              <p class="danger" ng-if="psp.downCount > 0">{{ psp.downCount }} monitors down</p>
+              <p class="counter" ng-if="hideRefreshRemaining !== true">Refreshing in {{ refreshRemaining }} secs</p>
+            </div>
+          </div>
+
+          <ul class="stats">
+            <li class="cf">
+              <span class="bullet bullet-sm success-bg"></span>
+              <span class="success">Up</span>
+              <span class="success right">{{ pspStats.counts.up }}</span>
+            </li>
+
+            <li class="cf">
+              <span class="bullet bullet-sm danger-bg"></span>
+              <span class="danger fl">Down</span>
+              <span class="danger fr right">{{ pspStats.counts.down }}</span>
+            </li>
+
+            <li class="cf">
+              <span class="bullet bullet-sm paused-bg"></span>
+              <span class="paused fl">Paused</span>
+              <span class="paused fr right">{{ pspStats.counts.paused }}</span>
+            </li>
+          </ul>
+        </section>
+        <!-- /Quick Stats -->
+
+      </div>
+    </div>
+    <!-- /STATS OVERVIEW -->
+
+  </div>
+  <!-- /PAGE-CONTAINER -->
+
+  <!-- MAIN FOOTER -->
+  <footer id="main-footer">
+    <div class="wrapper" ng-if="showURLinks">
+      <span>Provided by:</span>
+      <a href="https://uptimerobot.com"><img src="/images/uptime-logo.png" alt="Uptime Robot Logo" /></a>
+    </div>
+  </footer>
+  <!-- /MAIN FOOTER -->
+
+  <!-- FLOATING STATUS VIEW -->
+  <div class="floating-status-overview cf status-page-overview" hide-stats>
+    <div class="current-status left cf">
+      <span class="bullet bullet block left" ng-class="{'success-bg': psp.downCount === 0, 'danger-bg': psp.downCount > 0}"></span>
+      <div class="status-information left">
+        <p class="success" ng-if="psp.downCount === 0 && hideRefreshRemaining !== true">All Clear</p>
+        <p class="danger" ng-if="psp.downCount > 0">{{ psp.downCount }} monitors down</p>
+        <p class="counter" ng-if="hideRefreshRemaining !== true">Refreshing in {{ refreshRemaining }} secs</p>
+      </div>
+    </div>
+
+    <ul class="stats left cf">
+      <li class="left">
+        <span class="bullet bullet-smr success-bg"></span>
+        <span class="success">UP</span>
+        <span class="success">{{ pspStats.counts.up }}</span>
+      </li>
+
+      <li class="left">
+        <span class="bullet bullet-smr danger-bg"></span>
+        <span class="danger">DOWN</span>
+        <span class="danger">{{ pspStats.counts.down }}</span>
+      </li>
+
+      <li class="left">
+        <span class="bullet bullet-smr paused-bg"></span>
+        <span class="paused">PAUSED</span>
+        <span class="paused">{{ pspStats.counts.paused }}</span>
+      </li>
+    </ul>
+
+  </div>
+  <!-- /FLOATING STATUS VIEW -->
+
+</div>
+<!-- 
+EDITABLE AREA ENDS HERE - EDITABLE AREA ENDS HERE - EDITABLE AREA ENDS HERE 
+-->
+<!-- LOADING & PASSWORD SCREEN -->
+  <div id="loader-overlay" class="fade-box">
+  <div ng-cloak class='loader-container'>
+    <div class="spinner">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  </div>
+</div>
+  <div class="password-overlay" ng-cloak ng-controller="PasswordCtrl" ng-if="passwordProtected">
+  <div class="password-inner">
+
+    <form ng-submit="submitPassword()">
+      <div class="form-group">
+        <p ng-if="!wrongPass">This is a password protected page.</p>
+        <p ng-if="wrongPass" class="danger">The password you entered is not valid.</p>
+        <div class="input-group">
+          <div class="input-group-addon"><i class="icon-lock"></i></div>
+          <input type="password" class="form-control" id="password-input" placeholder="Please enter the password..." ng-model="password">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+
+  </div>
+</div>
+  <!-- /LOADING & PASSWORD SCREEN -->
+
+  <!-- JAVASCRIPTS -->
+  <script type="text/javascript">
+    var pageID = "z6oyjUKo3";
+    var monitorID = "";
+    (function() {})(pageID, monitorID);
+    var noPrefix = 'true' === 'true';
+    var pageNumber = parseInt('1', 10);
+    var sortType = parseInt('1', 10);
+    (function noop() {})(pageID, noPrefix, pageNumber, sortType);
+  </script>
+
+  <script src="/build/lib.min.js"></script>
+  <script src="/build/status.min.js"></script>
+  <!-- /JAVASCRIPTS -->
+</body>
+</html>
+

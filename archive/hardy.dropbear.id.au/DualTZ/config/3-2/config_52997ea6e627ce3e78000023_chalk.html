@@ -1,0 +1,297 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>DualTZ config</title>
+
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.0/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.4.0/jquery.js"></script>
+    <script src="/tzdata-javascript.org//tzdata-javascript.js"></script>
+  </head>
+  <body>
+    <!-- Home -->
+    <div data-role="page" id="page1">
+      <div data-role="header">
+        <h3>DualTZ config</h3>
+	<a href="#help" data-icon="info" data-transition="slide" class="ui-btn-right">Help</a>
+      </div>
+      <div data-role="content">
+	<div data-role="collapsible-set">
+	  <div data-role="collapsible" data-collapsed="false">
+	    <h3>Timezone configuration</h3>
+	    <fieldset>
+	      <div data-role="fieldcontain">
+		<label for="utc-enable">Use UTC?</label>
+		<input type="checkbox" id="utc-enable" data-role="flipswitch" data-on-text="Yes" data-off-text="No">
+	      </div>
+	    </fieldset>
+	    <form class="ui-filterable">
+	      <label for="remotetz-input">Search for city:</label>
+	      <input type="text" data-type="search" id="remotetz-input">
+	    </form>
+	    <ul id="remotetz" data-role="listview" data-filter="true" data-input="#remotetz-input" data-filter-placeholder="Find city..."></ul>
+	  </div>
+	  <div data-role="collapsible">
+	    <h3>Watchface configuration</h3>
+	    <div class="ui-grid-a">
+	      <div class="ui-block-a">
+		<fieldset>
+		  <div data-role="fieldcontain">
+		    <label for="bluetooth-toggle">Bluetooth notification:</label>
+		    <input type="checkbox" id="bluetooth-toggle" data-role="flipswitch">
+		  </div>
+		</fieldset>
+	      </div>
+	      <div class="ui-block-b">
+		<fieldset>
+		  <div data-role="fieldcontain">
+		    <label for="lowbat-toggle">Low battery notification:</label>
+		    <input type="checkbox" id="lowbat-toggle" data-role="flipswitch">
+		  </div>
+		</fieldset>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+        <div class="ui-grid-a">
+          <div class="ui-block-a">
+            <a data-role="button" href="#settings" data-icon="delete" data-iconpos="left" id="b-cancel">Cancel</a>
+          </div>
+          <div class="ui-block-b">
+            <a data-role="button" href="#settings" data-icon="check" data-iconpos="left" id="b-submit">Save</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div data-role="page" id="help">
+      <div data-role="header" data-add-back-btn="true">
+	<h3>DualTZ help</h3>
+      </div>
+      <h3>Configuration</h3>
+      <h4>Timezone</h4>
+      <p>To select a timezone, start typing the name of a city or town in the
+	text box. Selecting a match from the drop-down list will configure
+	the watchface to display that city's time zone. The city name shown
+	<strong>in bold</strong> is also displayed on the watchface.</p>
+      <p>The Use UTC option configures the watchface to display UTC time.
+	Enabling this option will disable time zone search and selection.</p>
+      <h4>Watchface</h4>
+      <p>The bluetooth notification option will cause the watch to vibrate
+	and display a bluetooth icon when connection to the phone is lost.</p>
+      <p>The low battery notification option will cause the watch to display
+	an icon when the watch battery is low.</p>
+      <p>Both of these icons will be displayed in the bottom left of the
+	watch face.</p>
+      <h3>Usage</h3>
+      <p>The analogue face shows the time and date in the current time zone.
+	The digital portion will show the time in the configured time zone.</p>
+      <p>When the watch face starts running, it will attempt to fetch the
+	current time zone from its paired phone. If this fails (the phone
+	is switched off, for example), then it will fall back on the time
+	zone that was last retrieved from the phone.</p>
+      <p>In case of failure, ensure your phone is set to the correct time
+	zone, and then restart the watch app by entering the menu and
+	exiting again.</p>   
+    </div>
+    <script>
+      tzdata_javascript.settings.baseURL = 'http://hardy.dropbear.id.au/DualTZ/config/zoneinfo/';
+
+      var query_in_progress = 0;
+      var query_timezone = '';
+      var configuration = new Object();
+      configuration.timezone = new Object();
+
+      $.urlParam = function(name) {
+        var results = new RegExp("[\\?&]" + name + "=([^&#]*)").exec(window.location.href);
+        if (!results) { return 0; }
+        return results[1] || 0;
+      }
+
+      function updateControls() {
+        var options = JSON.parse(decodeURIComponent($.urlParam("data")));
+        if (options != null) {
+          if (options.hasOwnProperty("utc") && options.utc) {
+            $("#utc-enable").prop("checked", true);
+            $("#utc-enable").flipswitch("refresh");
+            var infield = $("#remotetz").filterable("option", "input");
+            $(infield).val("");
+            $(infield).textinput("disable");
+            $("#remotetz").filterable("disable");
+          } else {
+            var remote_tz_name="", adminname="", country="";
+            if (options.hasOwnProperty("timezone")) {
+              if (options.timezone.hasOwnProperty("remote_tz_name")) {
+                remote_tz_name = options.timezone.remote_tz_name;
+                configuration.timezone.remote_tz_name = remote_tz_name;
+              }
+              if (options.timezone.hasOwnProperty("adminname")) {
+                adminname = options.timezone.adminname;
+                configuration.timezone.adminname = adminname;
+              }
+              if (options.timezone.hasOwnProperty("country")) {
+                country = options.timezone.country;
+                configuration.timezone.country = country;
+              }
+              if (options.timezone.hasOwnProperty("tz")) {
+                configuration.timezone.tz = options.timezone.tz;
+              }
+              if (options.timezone.hasOwnProperty("remote_tz_offset")) {
+                configuration.timezone.remote_tz_offset = options.timezone.remote_tz_offset;
+              }
+            }
+
+            if (remote_tz_name != "") {
+              var display = remote_tz_name+", "+adminname+", "+country;
+              var infield = $("#remotetz").filterable("option", "input");
+              $(infield).val(display);
+            }
+          }
+          if (options.hasOwnProperty("bluetooth") && options.bluetooth) {
+            configuration.bluetooth = options.bluetooth;
+            $("#bluetooth-toggle").prop("checked", true);
+            $("#bluetooth-toggle").flipswitch("refresh");
+          }
+          if (options.hasOwnProperty("lowbat") && options.lowbat) {
+            configuration.lowbat = options.lowbat;
+            $("#lowbat-toggle").prop("checked", true);
+            $("#lowbat-toggle").flipswitch("refresh");
+          }
+        }
+      }
+
+      $().ready(function () {
+
+        function emptyFilterableList() {
+          $("#remotetz").html("");
+          $("#remotetz").listview("refresh");
+          $("#remotetz").trigger("updatelayout");
+        }
+
+        function requestTimeout() {
+          if (query_in_progress > 0) {
+            console.log('TZ request timeout: ' + query_timezone);
+            // TODO: better notification
+            $('#b-submit .ui-btn-text').text('TZ timeout');
+            window.clearTimeout(query_in_progress);
+            query_in_progress = 0;
+          }
+        }
+
+        function tzCallback(timezone, zoneinfo) {
+          console.log('Got TZ info: ' + timezone);
+          if (query_in_progress > 0 && timezone === query_timezone) {
+            var now = new Date();
+            configuration.timezone.remote_tz_offset = zoneinfo.localtime(now).ttinfo.offset/1000;
+            console.log('Remote TZ: ' + configuration.timezone.remote_offset);
+            query_in_progress = 0;
+            $('#b-submit .ui-btn-text').text('Save');
+            $('#b-submit').removeClass('ui-disabled');
+          }
+        }
+
+        function updateZone(name) {
+          console.log('Requesting TZ info: ' + name);
+          var city = name.split('/').pop().replace('_', ' ');
+          $('#remote-tz-name').val(city);
+          if (query_in_progress > 0) {
+            window.clearTimeout(query_in_progress);
+            query_in_progress = 0;
+          }
+          query_timezone = name;
+          query_in_progress = window.setTimeout(requestTimeout, 10000);
+          $('#b-submit').addClass('ui-disabled');
+          $('#b-submit .ui-btn-text').text('Fetching data...');
+          new tzdata_javascript.zoneinfo(name, tzCallback);
+        }
+
+        $("#remotetz").on("filterablebeforefilter", function ( e, data ) {
+          var $ul = $(this),
+                    $input = $(data.input),
+                    value = $input.val(),
+                    html = "";
+          $ul.html( "" );
+          if ( value && value.length > 2 ) {
+            $ul.html( "<li><div class='ui-loader'><span class='ui-icon ui-icon-loading'></span></div></li>" );
+            $ul.listview("refresh");
+            $.ajax({
+                    url: "http://api.geonames.org/searchJSON",
+                    dataType: "jsonp",
+                    crossDomain: true,
+                    data: {
+                      username: "dualtz",
+                      featureClass: "P",
+                      style: "full",
+                      maxRows: 12,
+                      name_startsWith: $input.val()
+                    }
+            })
+            .then( function ( response ) {
+              $.each(response.geonames, function ( i, val ) {
+                html += "<li data-name='"+val.name+"' data-adminname='"+val.adminName1+"' data-country='"+val.countryName+"' data-tz='"+val.timezone.timeZoneId+"'><strong>" + val.name + "</strong>" + (val.adminName1 ? ", " + val.adminName1 : "") + ", " + val.countryName + "</li>";
+              });
+              $ul.html(html);
+              $ul.listview("refresh");
+              $ul.trigger("updatelayout");
+            });
+          }
+        });
+
+        $('#remotetz').on('click', 'li', function() {
+          var remote_tz_name = $(this).data("name"),
+              adminname = $(this).data("adminname"),
+              country = $(this).data("country"),
+              tz = $(this).data("tz");
+          var display = remote_tz_name+", "+adminname+", "+country;
+          var infield = $('#remotetz').filterable("option", "input");
+          $(infield).val(display);
+          emptyFilterableList();
+          updateZone(tz);
+          configuration.timezone.remote_tz_name = remote_tz_name;
+          configuration.timezone.adminname = adminname;
+          configuration.timezone.country = country;
+          configuration.timezone.tz = tz;
+        });
+
+        $('#utc-enable').change(function() {
+          configuration.utc = $(this).is(":checked");
+          var infield = $("#remotetz").filterable("option", "input");
+          if ($(this).is(':checked')) {
+            console.log('UTC selected');
+            $(infield).val("");
+            $(infield).textinput("disable");
+            $("#remotetz").filterable("disable");
+            emptyFilterableList();
+          } else {
+            console.log('UTC deselected');
+            $("#remotetz").filterable("enable");
+            $(infield).textinput("enable");
+          }
+        });
+
+        $('#bluetooth-toggle').change(function() {
+          configuration.bluetooth = $(this).is(':checked');
+        });
+        $('#lowbat-toggle').change(function() {
+          configuration.lowbat = $(this).is(':checked');
+        });
+
+        $('#b-cancel').click(function() {
+          console.log('Cancel');
+          document.location = 'pebblejs://close#';
+        });
+
+        $('#b-submit').click(function() {
+          console.log(JSON.stringify(configuration));
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(configuration));
+          document.location = location;
+        });
+      });
+
+      $('#page1').bind('pageinit', updateControls);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Time Vortex Configuration</title>
+		
+		<link rel="stylesheet" type="text/css" href="/zerion7.com/pebble/vortex/slate/css/slate.css">
+	</head>
+	<body>
+		<div class="item-container">
+			<div class="item-container-header">Framerate</div>
+			<div class="item-container-content">
+				<label class="item">
+					<input type="range" class="item-slider" name="framerate" id="framerate-slider" value="10" min="1" max="30" step="1">
+					<div class="item-input-wrapper item-slider-text">
+						<input type="number" class="item-input" name="framerate" id="framerate-input" value="10" min="1" max="30" step="1">
+					</div>
+				</label>
+			</div>
+		</div>
+		
+		<div class="item-container">
+			<div class="item-container-header">Color</div>
+			<div class="item-container-content">
+				<label class="item">
+					Mask
+					<input type="text" class="item-color item-color-normal" id="colormask" value="#ffffff">
+				</label>
+			</div>
+		</div>
+		
+		<div class="item-container">
+			<div class="button-container">
+				<input type="button" class="item-button" id="save" value="Save">
+			</div>
+		</div>
+		
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				var config = {
+					'framerate': 10,
+					'colormask': '#ffffff'
+				};
+				
+				var	framerateSlider = document.getElementById('framerate-slider'),
+					framerateInput = document.getElementById('framerate-input'),
+					colormask = document.getElementById('colormask'),
+					button = document.getElementById('save');
+				
+				var	query = location.search.substring(1),
+					vars = query.split('&');
+				
+				for(var i = 0; i < vars.length; ++i) {
+					var pair = vars[i].split('=');
+					
+					if(pair[0] == 'config') {
+						config = JSON.parse(decodeURIComponent(pair[1]));
+						break;
+					}
+				}
+				
+				framerateSlider.value = config['framerate'];
+				framerateInput.value = config['framerate'];
+				colormask.value = config['colormask'];
+				
+				button.addEventListener('click', function() {
+					config['framerate'] = parseInt(framerateInput.value);
+					config['colormask'] = colormask.value;
+					
+					location.href = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(config));
+				});
+			});
+		</script>
+		<script src="/zerion7.com/pebble/vortex/slate/js/slate.js"></script>
+	</body>
+</html>

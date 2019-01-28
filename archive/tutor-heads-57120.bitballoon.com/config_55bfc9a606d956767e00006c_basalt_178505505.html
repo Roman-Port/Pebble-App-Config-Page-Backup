@@ -1,0 +1,90 @@
+<html>
+<head>
+<script type='text/javascript' src='/code.jquery.com//jquery-2.js'></script>
+<script type='text/javascript' src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+  
+
+<script type='text/javascript'>
+ var config = {
+        'units': "c",
+        'show_weather_forecast': "true",
+        'show_sunrise': "true"
+    };
+
+$(window).load(function(){
+$("#btn_save").click(function () {
+    save();
+});
+set();
+
+function save() {
+       config = {
+        'units': slc_units.value,
+        'show_weather_forecast': true,
+        'show_sunrise': true
+    };
+    //config.units = slc_units.value;
+    // Some example configuration values
+   
+    // Return data to watchapp
+    loc = getQueryParam('return_to', 'pebblejs://close#') + encodeURIComponent(JSON.stringify(config));
+    //alert(loc);
+    location.href = loc;
+}
+
+function set() {
+config = JSON.parse(decodeURIComponent(getQueryParam('config', JSON.stringify(config))));
+//alert(JSON.stringify(config));
+$("#slc_units").val(config.units).flipswitch("refresh");
+//$("#slc_show_weather_forecast").val(config.show_weather_forecast.toString()).flipswitch("refresh");
+//$("#slc_show_sunrise").val(config.show_sunrise.toString()).flipswitch("refresh");
+}
+});
+
+
+function getQueryParam(variable, defaultValue) {
+  // Find all URL parameters
+  var query = location.search.substring(1);
+  var vars = query.split('&');
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split('=');
+
+    // If the query variable parameter is found, decode it to use and return it for use
+    if (pair[0] === variable) {
+      return decodeURIComponent(pair[1]);
+    }
+  }
+  return defaultValue || false;
+}
+</script>
+
+
+</head>
+<body>
+
+     <h2>Settings</h2>
+
+    <label for="flip-1">Weather units:</label>
+    <select name="flip-1" id="slc_units" data-role="flipswitch" data-mini="true">
+        <option value="f">°F</option>
+         <option value="c">°C</option>
+    </select>
+    <!--<label for="flip-1">Show weather forecast:</label>
+    <select name="flip-2" id="slc_show_weather_forecast" data-role="flipswitch" data-mini="true">
+        <option value="false">no</option>
+        <option value="true">yes</option>
+    </select>
+    <label for="flip-3">Show sunrise / sunset:</label>
+    <select name="flip-3" id="slc_show_sunrise" data-role="flipswitch" data-mini="true">
+        <option value="false">no</option>
+        <option value="true">yes</option>
+    </select>-->
+    <button id="btn_save" class="ui-btn ui-mini">Save</button>
+    <!--<button class="ui-btn ui-mini">Close</button>-->
+
+  
+</body>
+
+
+</html>

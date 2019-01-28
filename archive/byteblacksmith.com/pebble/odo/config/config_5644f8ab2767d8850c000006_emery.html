@@ -1,0 +1,72 @@
+﻿<!DOCTYPE hmtl>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel='stylesheet' type='text/css' href='/byteblacksmith.com/pebble/odo/config/bower_components/Slate/dist/css/slate.css'>
+  <link rel='stylesheet' type='text/css' href='/byteblacksmith.com/pebble/odo/config/css/style.css'>
+</head>
+<body>
+ <h1 class='title'>Odometer Watchface</h1>
+  <div class='item-container'>
+    <div class='item-container-header'>Appearance</div>
+    <div class='item-container-content'>
+      <label class='item'>
+  Background color
+<input id='backgroundColorPicker' type='text' class='item-color item-color-sunny' value='#FFFFFF'>
+      </label>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Battery Conservation</div>
+    <div class='item-container-content'>
+      <label class='item'>
+        Scrolling odometer animation
+      <input id='enableAnimate' type='checkbox' class='item-toggle'>
+      </label>
+     <label class="item">
+      Animation scrolling smoothness
+      <select id="scrollSpeed" name="scrollSpeed" dir='rtl' class="item-select">
+        <option class="item-select-option" value="0">Fine</option>
+        <option class="item-select-option" value="1" selected="">Medium</option>
+        <option class="item-select-option" value="2">Coarse</option>
+      </select>
+    </label>
+      <label class='item'>
+        Animate on tap
+      <input id='animateOnTap' type='checkbox' class='item-toggle' checked="">
+      </label>
+      <label class='item'>
+	Stop animation during sleep	
+      <input id='sleepPeriod' type='checkbox' class='item-toggle' checked="">
+      </label>
+    <label class="item">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;between
+      <input id="startSleepTime" type="time" class="item-time" name="startSleepTime" value="22:00">
+    </label>
+    <label class="item">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and
+      <input id="endSleepTime" type="time" class="item-time" name="endSleepTime" value="07:00">
+    </label>
+  </div>
+</div>
+    <div class='item-container-footer'>
+This watchface consumes power heavily while animating. Running with all
+battery savings turned off (When set to animate, "Fine" scrolling,
+and no sleeping) consumes roughly 30-40% battery per day.
+However, it also looks cool.
+<br><br>If you recharge your Pebble nightly, no need to worry.
+But to maximize your Pebble's battery life, use these controls to scale
+back on the animation as you find reasonable.
+</div>
+
+ <div class='item-container'>
+   <div class='button-container'>
+     <input id='submitButton' type='button' class='item-button' value='SAVE'>
+   </div>
+ </div>
+  <script src='/byteblacksmith.com/pebble/odo/config/bower_components/Slate/dist/js/slate.js'></script>
+  <script src='/byteblacksmith.com/pebble/odo/config/js/main.js'></script>
+</body>
+</html>

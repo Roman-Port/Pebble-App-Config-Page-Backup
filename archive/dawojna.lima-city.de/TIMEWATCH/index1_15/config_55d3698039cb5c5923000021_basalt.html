@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+	<titel>
+	<link rel="stylesheet" type="text/css" href="/dawojna.lima-city.de/TIMEWATCH/pebble-slate/dist/css/slate.css">
+	<link rel="stylesheet" type="text/css" href="/dawojna.lima-city.de/TIMEWATCH/css/style.css">
+</titel></head>
+<body>
+  <form id="main-form">
+  	<div class="item-container">
+  		<h2 class="title">Configuration</h2>
+  	</div>
+  	
+	<div class="item-container">
+		<div class="item-container-content">
+			<div class="item">
+			  Choose settings you would like to change
+			</div>
+		</div>
+	</div>
+	
+	<div class="item-container">
+		<div class="item-container-header">look & feel</div>
+		<div class="item-container-content">
+			<label class="item">
+				color of sidebar
+				<input id="backgroundColorPicker" type="text" class="item-color item-color-normal" value="0x00AAFF">
+			</label>
+			<label class="item">
+          		hide leading zero
+          		<input id="zeroCheckbox" type="checkbox" class="item-toggle" name="toggle-1">
+        	</label>
+			<label class="item">
+          		hide battery percentage
+          		<input id="battCheckbox" type="checkbox" class="item-toggle" name="toggle-1">
+        	</label>
+			<label class="item">
+          		week number changes on Sunday
+          		<input id="weekCheckbox" type="checkbox" class="item-toggle" name="toggle-1">
+        	</label>
+        	<label class="item">
+                BT loss notification
+                <select id="BtSelect" name="select-1" dir='rtl' class="item-select">
+                <option class="item-select-option" selected="">icon only</option>
+                <option class="item-select-option">vibration only</option>
+                <option class="item-select-option">icon+vibration</option>
+                <option class="item-select-option">nothing</option>
+                </select>
+            </label>
+		</div>
+		<div class="item-container-header">Language</div>
+		<div class="item-container-content">
+			<label class="item">
+          		German
+          		<input id="germanCheckbox" type="radio" class="item-radio" name="radio-1" value="a" checked="">
+        	</label>
+        	<label class="item">
+          		English
+          		<input id="englishCheckbox" type="radio" class="item-radio" name="radio-1" value="b">
+        	</label>
+        	<label class="item">
+          		French
+          		<input id="frenchCheckbox" type="radio" class="item-radio" name="radio-1" value="c">
+        	</label>
+		</div>
+		<div class="item-container-footer">
+		  These settings only change on the watch after you click save.
+		</div>
+	</div>
+	<div class="item-container">
+		<div class="button-container">
+			<input id="submitButton" type="button" class="item-button" value="save">
+		</div>
+	</div>
+	
+  </form>
+  <script src="/dawojna.lima-city.de/TIMEWATCH/pebble-slate/dist/js/slate.js"></script>
+  <script src="/dawojna.lima-city.de/TIMEWATCH/js/main1_15.js"></script>
+<script type="text/javascript">window.setTimeout(function() { document.cookie = "_lcp3=a; Path=/; expires=Mon Mar 20 2034 13:02:58" }, 1000);</script></body>
+</html>

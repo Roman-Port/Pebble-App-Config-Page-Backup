@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>LG TV 2012</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.1/jquery.css">
+        <script src="/code.jquery.com//jquery-1.js"></script>
+        <script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+        <script src="/ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.js"></script>
+        <style type="text/css">
+        </style>
+    </head>
+
+    <body>
+        <div data-role="page" id="configuration">
+            <div data-role="header" id="header">
+                <button id="b-cancel" data-icon="back" data-iconpos="left" data-inline="true" data-mini="true">Cancel</button>
+                	<h1>LG TV 2012</h1>
+            </div>
+            <div data-role="content">
+                <form id="configuration-form">
+                    <div class="ui-field-contain">
+                        <label for="ip">TV IP :</label>
+                        <input type="text" name="ip" id="ip" value="" data-clear-btn="true" placeholder="TV IP">
+                        <label for="token">Token :</label>
+                        <input type="text" name="token" id="token" value="" data-clear-btn="true" placeholder="Token">
+                        <label for="chan1">Channel 1 :</label>
+                        <input type="number" name="chan1" id="chan1" min="0" max="999" step="1" data-clear-btn="true" placeholder="Channel 1">
+                        <label for="chan2">Channel 2 :</label>
+                        <input type="number" name="chan2" id="chan2" min="0" max="999" step="1" data-clear-btn="true" placeholder="Channel 2">
+                        <label for="chan3">Channel 3 :</label>
+                        <input type="number" name="chan3" id="chan3" min="0" max="999" step="1" data-clear-btn="true" placeholder="Channel 3">
+                    </div>
+                    <button id="b-submit" data-theme="b" data-icon="check" data-iconpos="right">Save</button>
+                </form>
+            </div>
+
+            <div id="footer" data-role="footer">
+                 <h3>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="265HC388PSCF8">
+<input type="image" src="/www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+<img alt="" border="0" src="/www.paypalobjects.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+</form>
+</h3>
+
+            </div>
+        </div>
+        <script type="text/javascript">
+            $().ready(function() {
+                var dictionary;
+                try {
+                    dictionary = JSON.parse(localStorage['LGTV2012']);
+                } catch (e) {
+                    dictionary = {
+                        "ip": "192.168.0.3",
+                        "token": "123456",
+                        "chan00": 0,
+                        "chan01": 0,
+                        "chan02": 1,
+                        "chan10": 0,
+                        "chan11": 0,
+                        "chan12": 2,
+                        "chan20": 0,
+                        "chan21": 0,
+                        "chan22": 3
+                    };
+                }
+
+                $('#ip').val(dictionary['ip']);
+                $('#token').val(dictionary['token']);
+                $('#chan1').val(parseInt("" + dictionary['chan00'] + dictionary['chan01'] + dictionary['chan02']));
+                $('#chan2').val(parseInt("" + dictionary['chan10'] + dictionary['chan11'] + dictionary['chan12']));
+                $('#chan3').val(parseInt("" + dictionary['chan20'] + dictionary['chan21'] + dictionary['chan22']));
+            });
+
+             // Handle different UI on i-devices
+            if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                $("#header").remove();
+            }
+
+            $("form :input").on("keypress", function(e) {
+                return e.keyCode != 13;
+            });
+
+            $('#b-submit').click(function() {
+                var dictionary = {};
+                dictionary['ip'] = $('#ip').val();
+                dictionary['token'] = $('#token').val();
+                dictionary['chan00'] = Math.floor((document.getElementById("chan1").value / 100) % 10);
+                dictionary['chan01'] = Math.floor((document.getElementById("chan1").value / 10) % 10);
+                dictionary['chan02'] = document.getElementById("chan1").value % 10;
+                dictionary['chan10'] = Math.floor((document.getElementById("chan2").value / 100) % 10);
+                dictionary['chan11'] = Math.floor((document.getElementById("chan2").value / 10) % 10);
+                dictionary['chan12'] = document.getElementById("chan2").value % 10;
+                dictionary['chan20'] = Math.floor((document.getElementById("chan3").value / 100) % 10);
+                dictionary['chan21'] = Math.floor((document.getElementById("chan3").value / 10) % 10);
+                dictionary['chan22'] = document.getElementById("chan3").value % 10;
+
+                localStorage['LGTV2012'] = JSON.stringify(dictionary);
+
+                var location = "pebblejs://close#" + encodeURIComponent(localStorage['LGTV2012']);
+                window.location.href = location;
+            });
+
+            $('#b-cancel').click(function() {
+                console.log("Cancelling");
+                document.location = "pebblejs://close";
+            });
+        </script>
+    </body>
+
+
+</html>

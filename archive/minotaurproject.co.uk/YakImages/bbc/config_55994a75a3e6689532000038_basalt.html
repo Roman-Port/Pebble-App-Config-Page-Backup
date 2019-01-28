@@ -1,0 +1,165 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title></title>
+  <link rel="stylesheet" href="/minotaurproject.co.uk/YakImages/slate/dist/css/slate.css">
+   <script src='/minotaurproject.co.uk/YakImages/slate/dist/js/slate.js'></script>
+</head>
+<body>
+
+    <div class="item-container">
+      <div class="item-container-content">
+        <div class="item">
+         BBC watchface configuration
+        </div>
+      </div>
+    </div>
+ 
+     <div class="item-container">
+      <div class="item-container-header">Second hand display</div>
+      <div class="item-container-content">
+        <label class="item">
+          Show second hand
+          <input id="seconds_select_checkbox" type="checkbox" class="item-toggle">
+        </label>
+      </div>
+      <div class="item-container-footer">
+        Turning off the second hand extends battery life.
+      </div>
+    </div>
+ 
+      <div class="item-container">
+      <div class="item-container-header">Extended colour</div>
+      <div class="item-container-content">
+        <label class="item">
+          Use extended colour
+          <input id="colour_select_checkbox" type="checkbox" class="item-toggle">
+        </label>
+      </div>
+      <div class="item-container-footer">
+        Draws faces from all eras with extended colours, incorporating battery level info into the display.
+      </div>
+    </div>
+
+     <div class="item-container">
+      <div class="item-container-header">Era</div>
+      <div class="item-container-content">
+        <label class="item">
+          1953
+		  <img src="/minotaurproject.co.uk/YakImages/bbc1953.png">
+          <input type="radio" class="item-radio" name="radio_1" value="3">
+        </label>
+        <label class="item">
+          1963
+		  <img src="/minotaurproject.co.uk/YakImages/bbc1963.png">
+          <input type="radio" class="item-radio" name="radio_1" value="4">
+        </label>
+        <label class="item">
+          1964
+		  <img src="/minotaurproject.co.uk/YakImages/bbc1964.png">
+          <input type="radio" class="item-radio" name="radio_1" value="5">
+        </label>
+		<label class="item">
+          1966
+		  <img src="/minotaurproject.co.uk/YakImages/bbc1966.png">
+          <input type="radio" class="item-radio" name="radio_1" value="6">
+        </label>	
+		 <label class="item">
+          1968
+		  <img src="/minotaurproject.co.uk/YakImages/bbc1968.png">
+          <input type="radio" class="item-radio" name="radio_1" value="7">
+        </label>
+		 <label class="item">
+          1970
+		  <img src="/minotaurproject.co.uk/YakImages/bbc1970.png">
+          <input type="radio" class="item-radio" name="radio_1" value="0" checked="">
+        </label>
+		 <label class="item">
+          1978
+		  <img src="/minotaurproject.co.uk/YakImages/bbc1978.png">
+          <input type="radio" class="item-radio" name="radio_1" value="1">
+        </label>
+		 <label class="item">
+          1981
+		  <img src="/minotaurproject.co.uk/YakImages/bbc1981.png">
+          <input type="radio" class="item-radio" name="radio_1" value="2">
+        </label>
+		 <label class="item">
+          1991
+		   <img src="/minotaurproject.co.uk/YakImages/bbc1991.png">
+          <input type="radio" class="item-radio" name="radio_1" value="8">
+        </label>
+      </div>
+    </div>
+ 
+
+	<div class="item-container">
+      <div class="button-container">
+        <input id="save_button" type="button" class="item-button" value="SUBMIT">
+      </div>
+    </div>
+ 
+
+
+
+	
+
+
+  <script>
+  
+
+  
+    //Setup to allow easy adding more options later
+    function saveOptions() {
+    var secondsSelect = document.getElementById("seconds_select_checkbox");
+	var colourSelect=document.getElementById("colour_select_checkbox");
+	var radiobutts=document.getElementsByName("radio_1");
+	var i;
+	var eraSelected="none";
+	for(i=0;i<radiobutts.length;i++)
+	{
+		if(radiobutts[i].checked)
+		{
+			eraSelected=radiobutts[i].value;
+			break;
+		}
+	}
+
+	var options = {
+      "seconds": secondsSelect.checked,
+	  "xcol":colourSelect.checked,
+	  "era":eraSelected,
+	  }
+	  localStorage['seconds'] = options['seconds'];
+	  localStorage['xcol']=options['xcol'];
+	  return options;
+  };
+ console.log("Moo.");
+ 
+ var secondsSelect = document.getElementById("seconds_select_checkbox");
+ var colourSelect=document.getElementById("colour_select_checkbox");
+    // Load any previously saved configuration, if available
+  if(localStorage['seconds']) secondsSelect.checked = JSON.parse(localStorage['seconds']);
+   if(localStorage['xcol']) colourSelect.checked = JSON.parse(localStorage['xcol']);    
+    
+ 
+  var submitButton = document.getElementById("save_button");
+  submitButton.addEventListener("click", 
+    function() {
+      console.log("Submit");
+ 
+      var options = saveOptions();
+      var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+       
+      document.location = location;
+    }, 
+  false);
+
+  
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,80 @@
+html {
+  background-color: lightgrey;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-size: 0.85em;
+  color:#363636;
+}
+
+a {
+  color: #4a5d75;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #369;
+  text-decoration: underline;
+}
+
+#banner { }
+
+#container {
+  margin: 0 auto;
+  padding: 0 10px 5px 10px;
+  width: 90%;
+  border-radius: 10px;
+  box-shadow: 10px 10px 5px #888888;
+  background-color: darkgrey;
+}
+.note {
+    font-size: 0.8em;
+}
+.resource {
+	font-size: 0.9em;
+}
+
+h1 {
+  font-size: 2.0em;
+}
+h2 {
+  font-size: 1.5em;
+}
+form {
+  padding: 0.5em;
+  font-size: 0.85em;
+}
+form ul {
+	padding: 0;
+	list-style-type: none;
+}
+form ul li {
+	display: inline;
+}
+label {
+  float: left;
+  width: 42%;
+  margin-right: 0.5em;
+  padding-top: 0.2em;
+  text-align: right;
+  font-weight: bold;
+  color:#363636;
+}
+input {
+  margin-bottom: 8px;
+}
+button {
+	display: block;
+	clear: both;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 6px 12px;
+}
+
+footer {
+  color: #666666;
+  font-size: 0.85em;
+  text-align: center;
+}

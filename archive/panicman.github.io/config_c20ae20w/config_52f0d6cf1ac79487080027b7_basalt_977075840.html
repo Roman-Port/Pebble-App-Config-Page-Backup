@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+		<script src="/code.jquery.com//jquery-1.js"></script>
+		<script>$(document).bind('mobileinit',function() { $.mobile.pushStateEnabled = false; });</script> <!-- Chrome Security override -->
+		<script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+		<style type="text/css">
+			.ui-header .ui-title {margin-right: 1%; margin-left: 1%;}
+		</style>
+		<title>Configuration</title>
+	</head>
+	
+	<body>
+		<div data-role="page" id="page1">
+			<div data-role="header" data-id="header" data-theme="b" data-position="fixed" style="background: #3388cc">
+				<h1>Configuration</h1>
+			</div>		
+			<div data-role="content" style="margin:0 auto;margin-left:auto;margin-right:auto;align:center;text-align:center;">
+				
+				<fieldset class="ui-grid-a">
+					<div class="ui-block-a">
+						<legend>Inverter: </legend>
+						<select name="inv" id="inv" data-background="" data-role="slider">
+							<option value="no">No</option>
+							<option value="yes">Yes</option>
+						</select>
+					</div>
+					<div class="ui-block-b"> 
+						<legend>Show Date Mode: </legend>
+						<select name="datemode" id="datemode" data-background="" data-role="slider">
+							<option value="no">No</option>
+							<option value="yes">Yes</option>
+						</select>
+					</div>
+				</fieldset>
+				
+				<fieldset class="ui-grid-a">
+					<div class="ui-block-a"> 
+						<legend>Hourly vibrate: </legend>
+						<select name="vibr" id="vibr" data-background="" data-role="slider">
+							<option value="no">No</option>
+							<option value="yes">Yes</option>
+						</select>
+					</div>
+					<div class="ui-block-b">
+						<legend>BT Loss vibrate: </legend>
+						<select name="vibr_bt" id="vibr_bt" data-background="" data-role="slider">
+							<option value="no">No</option>
+							<option value="yes">Yes</option>
+						</select>
+					</div>
+				</fieldset>
+				
+				<fieldset class="ui-grid-a">
+					<div class="ui-block-a">
+						<legend>Show Second Digits: </legend>
+						<select name="secs" id="secs" data-background="" data-role="slider">
+							<option value="no">No</option>
+							<option value="yes">Yes</option>
+						</select>
+					</div>
+					<div class="ui-block-b"> 
+						<legend>Show seconds interval:</legend>
+						<select name="showsec" id="showsec">
+							<option value="all" selected="selected">allways</option>
+							<option value="nev">never</option>
+							<option value="05s">every 5s</option>
+							<option value="10s">every 10s</option>
+							<option value="15s">every 15s</option>
+							<option value="30s">every 30s</option>
+						</select>
+					</div>
+				</fieldset>
+				
+				<legend>Choose date Format:</legend>
+				<select name="datefmt" id="datefmt">
+					<option value="ger">dd.mm.yyyy</option>
+					<option value="fra">dd-mm-yyyy</option>
+					<option value="eng">dd/mm/yyyy</option>
+					<option value="usa">mm/dd/yyyy</option>
+					<option value="iso">yyyy-mm-dd</option>
+				</select>
+				
+				<div data-role="footer" data-theme="a" data-position="fixed" style="background: #3388cc">
+					<div data-role="navbar" data-mini="false" data-iconpos="left">
+						<ul>
+							<li><button type="submit" data-theme="b" id="b-cancel" data-icon="delete">Cancel</button></li>
+							<li><button type="submit" data-theme="b" style="background: green" id="b-submit" data-icon="check">Save</button></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			<!-- from http://snipplr.com/view/26662/get-url-parameters-with-jquery--improved/ -->
+			$.urlParam = function(name){
+				var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+				if (!results) { return 0; }
+				return results[1] || 0;
+			}
+			
+			function updateControls() {
+				console.log("updateControls");
+				var title = decodeURIComponent($.urlParam("title"));
+				var inv = decodeURIComponent($.urlParam("inv"));
+				var datemode = decodeURIComponent($.urlParam("datemode"));
+				var vibr = decodeURIComponent($.urlParam("vibr"));        
+				var vibr_bt = decodeURIComponent($.urlParam("vibr_bt"));        
+				var secs = decodeURIComponent($.urlParam("secs"));
+				var showsec = decodeURIComponent($.urlParam("showsec"));
+				var datefmt = decodeURIComponent($.urlParam("datefmt"));
+				
+				$("[data-role='header'] h1").text(title+' Configuration');
+				
+				if (inv === '0') 
+					inv = 'no';
+				$("#inv").val(inv).slider("refresh");
+				
+				if (datemode === '0') 
+					datemode = 'no';
+				$("#datemode").val(datemode).slider("refresh");
+				if (datemode === 'yes') 
+					$("#secs").slider('disable');
+				
+				if (vibr === '0')
+					vibr = 'no';
+				$("#vibr").val(vibr).slider("refresh");
+				
+				if (vibr_bt === '0')
+					vibr_bt = 'yes';
+				$("#vibr_bt").val(vibr_bt).slider("refresh");
+				
+				if (secs === '0') 
+					secs = 'yes';
+				$("#secs").val(secs).slider("refresh");
+				
+				if (showsec === '0')
+					showsec = 'all';
+				$('#showsec').val(showsec).selectmenu('refresh');
+				
+				if (datefmt === '0')
+					datefmt = 'ger';
+				$('#datefmt').val(datefmt).selectmenu('refresh');
+			}
+			
+			function saveOptions() {
+				var options = {
+					'theme': $("input[name='theme']:checked").val(),
+					'inv': $("#inv").val(),
+					'datemode': $("#datemode").val(),
+					'vibr': $("#vibr").val(),
+					'vibr_bt': $("#vibr_bt").val(),
+					'secs': $("#secs").val(),
+					'showsec': $('#showsec').val(),
+					'datefmt': $('#datefmt').val(),
+				}
+				return options;
+			}
+			
+			// Workaround to work with CloudPebble
+			function getQueryParam(variable, default_) {
+				var query = location.search.substring(1);
+				var vars = query.split('&');
+				for (var i = 0; i < vars.length; i++) {
+					var pair = vars[i].split('=');
+					if (pair[0] == variable)
+					return decodeURIComponent(pair[1]);
+				}
+				return default_ || false;
+			}	  
+			
+			$().ready(function() {
+				$("#b-cancel").click(function() {
+					console.log("Cancel");
+					var return_to = getQueryParam('return_to', 'pebblejs://close#');
+					document.location = return_to;
+				});
+				
+				$("#b-submit").click(function() {
+					console.log("Submit");
+					var return_to = getQueryParam('return_to', 'pebblejs://close#');
+					var location = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
+					console.log(location);
+					document.location = location;
+				});
+			});
+
+			$.fn.fix_radios = function() {
+				function focus() {
+					if ( !this.checked ) return;
+					if ( !this.was_checked ) {
+						$( this ).change();
+					}
+				}
+				
+				function change( e ) {
+					if ( this.was_checked ) {
+						e.stopImmediatePropagation();
+						return;
+					}
+				
+					$( "input[name=" + this.name + "]" ).each( function() {
+						this.was_checked = this.checked;
+					} );
+				}
+				
+				return this.focus( focus ).change( change );
+			}
+				
+			$(function() {
+				$("input[type=radio]").fix_radios();
+				
+				$("#datemode").change(function() {
+					if ($("#datemode").val() == 'yes'){
+						$("#secs").val('no').slider("refresh");
+						$("#secs").slider('disable');
+					} else {
+						$("#secs").slider('enable');
+					}
+				});
+			});
+			$('#page1').bind('pageinit', updateControls);
+		</script>
+	</body>
+</html>

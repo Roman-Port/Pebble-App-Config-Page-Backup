@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Modern Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/rawgit.com/nikojo/modern/master/config/css/slate.css'>
+  <script src='/rawgit.com/nikojo/modern/master/config/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Modern Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Customize</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Minute Hand Color
+          <input id='minute_hand_color_picker' type='text' class='item-color item-color-normal' value='#AAAA00'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Hour Hand Color
+          <input id='hour_hand_color_picker' type='text' class='item-color item-color-normal' value='#AAAAFF'>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+    var minuteHandColorPicker = document.getElementById('minute_hand_color_picker');
+    var hourHandColorPicker = document.getElementById('hour_hand_color_picker');
+ 
+    var options = {
+      'minute_hand_color': minuteHandColorPicker.value,
+      'hour_hand_color': hourHandColorPicker.value
+    };
+
+    // Save for next launch
+    localStorage['minute_hand_color'] = options['minute_hand_color'];
+    localStorage['hour_hand_color'] = options['hour_hand_color'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var minuteHandColorPicker = document.getElementById('minute_hand_color_picker');
+    var hourHandColorPicker = document.getElementById('hour_hand_color_picker');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['minute_hand_color']) {
+      minuteHandColorPicker.value = localStorage['minute_hand_color'];
+      hourHandColorPicker.value = localStorage['hour_hand_color'];
+    }
+  })();
+  </script>
+</html>

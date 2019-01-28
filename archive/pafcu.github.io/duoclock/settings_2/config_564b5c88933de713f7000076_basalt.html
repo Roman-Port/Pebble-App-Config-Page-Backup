@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Configure DuoClock</title>
+  <link rel='stylesheet' type='text/css' href='/pafcu.github.io/duoclock/css/slate.css'>
+  <script src='/pafcu.github.io/duoclock/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Configure DuoClock</h1>
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Configure DuoClock here.
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Language</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Language
+          <select class="item-select" id="language">
+            <option value='0' class="item-select-option">French</option>
+            <option value='1' class="item-select-option">English</option>
+            <option value='2' class="item-select-option">Finnish</option>
+            <option value='3' class="item-select-option">Swedish</option>
+            <option value='4' class="item-select-option">German</option>
+            <option value='5' class="item-select-option">Spanish</option>
+            <option value='6' class="item-select-option">Russian</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Duolingo integration</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Username
+          <div class="item-input-wrapper">
+            <input type="text" class="item-input" id="username" placeholder="Enter your Duolingo username here">
+          </div>
+        </label>
+	<p>To show the correct words you have to change the active course on <a href='/duolingo.com//.html'>duolingo.com</a> to match the language you chose above. This is due to technical limitations in the Pebble software. <em>NOTE</em>: Changing the active course on duolingo.com applies to all devices, i.e. if you later change course on e.g. your laptop your Pebble may stop showing words.</p>
+        <!--<label class='item'>
+          Password
+          <div class="item-input-wrapper">
+            <input type="password" class="item-input" id="password" placeholder="Enter your Duolingo password here" disabled='disabled'>
+          </div>
+        </label>
+        <div id='waiver_div'>
+        <label class='item'>
+          I acknowledge I'm being irresponsible with my Duolingo password <input type='checkbox' id='waiver' class='item-toggle' onclick='handleWaiver()'>
+        </label>
+        <div class="item-container-footer">
+        </div>-->
+      </div>
+      </div>
+    
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+    var username = document.getElementById('username');
+    var language = document.getElementById('language');
+    /*var password = document.getElementById('password');
+    var waiver = document.getElementById('waiver');*/
+
+    var options = {
+      'username': username.value,
+      'language': language.value,
+      /*'password': password.value,
+      'waiver': waiver.checked,*/
+    };
+
+    // Save for next launch
+    localStorage['username'] = options['username'];
+    localStorage['language'] = options['language'];
+    /*localStorage['password'] = options['password'];
+    localStorage['waiver'] = options['waiver'];*/
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+  (function() {
+    var username = document.getElementById('username');
+    var language = document.getElementById('language');
+    /*var password = document.getElementById('password');
+    var waiver = document.getElementById('waiver');*/
+    // Load any previously saved configuration, if available
+    if(localStorage['username']) {
+      username.value = localStorage['username'];
+    }
+    if(localStorage['language']) {
+      language.selectedIndex = localStorage['language'];
+    }
+    /*if(localStorage['password']) {
+      password.value = localStorage['password'];
+    }
+    if(localStorage['waiver']) {
+      waiver.checked = localStorage['waiver'];
+      if(waiver.checked) {
+        document.getElementById('password').disabled = false;
+      }
+    }
+    if(getQueryParam('iknowwhatimdoing', false)) {
+      document.getElementById('waiver_div').style.display='none';
+      document.getElementById('password').disabled = false;
+    }*/
+  })();
+
+  /*function handleWaiver() {
+    document.getElementById("password").disabled = !document.getElementById("waiver").checked;
+    if(!document.getElementById("waiver").checked) {
+      document.getElementById("password").value = '';
+    }
+  }*/
+  </script>
+</html>

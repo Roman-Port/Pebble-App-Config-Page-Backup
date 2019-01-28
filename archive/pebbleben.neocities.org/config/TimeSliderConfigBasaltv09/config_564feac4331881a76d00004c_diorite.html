@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Time Slide Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/pebbleben.neocities.org/config/css/slate.css'>
+  <script src='/pebbleben.neocities.org/config/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+      <div class='item-container'>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Battery Status
+          <input id='header_battery_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>    
+      <div class='item-container-content'>
+        <label class='item'>
+          Bluetooth Status
+          <input id='header_bluetooth_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Bluetooth Vibration Alert
+          <input id='header_bluetooth_buzz_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Show Minute Slider
+          <input id='slide_min_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Show Year Slider
+          <input id='slide_year_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      
+      <br>
+      <div class='item-container-content'>
+        <label class='item'>
+          Theme
+          <select id='theme_name_select' type='text' class='item-select'>
+             <option selected="" value='custom'>CUSTOM THEME</option>
+             <option value='red'>01-RED</option> 
+             <option value='orange'>02-ORANGE</option>
+             <option value='yellow'>03-YELLOW</option>
+             <option value='green'>04-GREEN</option>
+             <option value='aqua'>05-AQUA</option>
+             <option value='blue'>06-BLUE</option>
+             <option value='purple'>07-PURPLE</option>
+             <option value='brown'>08-BROWN</option>
+             <option value='black'>09-BLACK</option>
+             <option value='white'>10-WHITE</option>
+          </select>
+        </label>
+      </div>
+      <div class='item-container-header' align="center">Custom Theme Only</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Custom Background 
+          <input id='background_color_picker' type='text' class='item-color item-color-normal' value='#000000'> 
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Custom Epoch Line 
+          <input id='epochline_color_picker' type='text' class='item-color item-color-normal' value='#FF0000'> 
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          <i>Custom Past Time</i>
+          <input id='past_color_picker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+        </label>
+      </div>  
+      <div class='item-container-content'>
+        <label class='item'>
+          Custom Current Time 
+          <input id='now_color_picker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+        </label>
+      </div>  
+      <div class='item-container-content'>
+        <label class='item'>
+          <i>Custom Future Time</i>
+          <input id='future_color_picker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+        </label>
+     </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Custom Header Background
+          <input id='header_background_color_picker' type='text' class='item-color item-color-normal' value='#555555'>
+        </label>
+      </div> 
+      <div class='item-container-content'>
+        <label class='item'>
+          Custom Header Text/Status
+          <input id='header_text_color_picker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+        </label>
+      </div> 
+
+     <br>    
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Show Header w/ Time
+          <input id='header_boxntime_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div> 
+      <div class='item-container-content'>
+        <label class='item'>
+          Show Header Seconds
+          <input id='header_seconds_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div> 
+      <div class='item-container-content'>
+        <label class='item'>
+          Checkered Background
+          <input id='background_checkered_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          24 Hour Mode
+          <input id='twentyfour_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Localization
+          <select id='localization_select' type='text' class='item-select'>
+             <option selected="" value='English'>English</option>
+             <option value='Norwegian'>Norwegian</option> 
+             <option value='Spanish'>Spanish</option>
+             <option value='French'>French</option>
+          </select>
+        </label>
+      </div>
+
+</div> 
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>    
+
+	    <br><div align="center"><font size="2">Special Thanks To Tony V on Andriod Fix & French!</font></div>    
+      <div align="center"><font size="2">If you like this watchface, please pay it forward.</font></div>
+      <div align="center">(C) 2015 Ben Ben Developer</div><br>
+ 
+  </body>
+
+  <script>
+  function getConfigData() {
+    var twentyfourcheckbox = document.getElementById('twentyfour_checkbox');
+    var slidemincheckbox = document.getElementById('slide_min_checkbox');
+    var slideyearcheckbox = document.getElementById('slide_year_checkbox');
+    var backgroundcheckeredcheckbox = document.getElementById('background_checkered_checkbox');
+    var backgroundcolorpicker = document.getElementById('background_color_picker');
+    var epochlinecolorpicker = document.getElementById('epochline_color_picker');
+    var localizationselect = document.getElementById('localization_select');
+    var themenameselect = document.getElementById('theme_name_select');
+    var pastcolorpicker = document.getElementById('past_color_picker');
+    var nowcolorpicker = document.getElementById('now_color_picker');
+    var futurecolorpicker = document.getElementById('future_color_picker');
+    var headerbackgroundcolorpicker = document.getElementById('header_background_color_picker');
+    var headertextcolorpicker = document.getElementById('header_text_color_picker');
+    var headerboxntimecheckbox = document.getElementById('header_boxntime_checkbox');
+    var headersecondscheckbox = document.getElementById('header_seconds_checkbox');
+    var headerbatterycheckbox = document.getElementById('header_battery_checkbox');
+    var headerbluetoothcheckbox = document.getElementById('header_bluetooth_checkbox');
+    var headerbluetoothbuzzcheckbox = document.getElementById('header_bluetooth_buzz_checkbox');
+ 
+    var options = {
+      'twentyfour_tf': twentyfourcheckbox.checked,
+      'slide_minute_tf': slidemincheckbox.checked,
+      'slide_year_tf': slideyearcheckbox.checked,
+      'background_checkered_tf': backgroundcheckeredcheckbox.checked,
+      'background_color': backgroundcolorpicker.value,
+      'epochline_color': epochlinecolorpicker.value,
+      'localization': localizationselect.value,
+      'themename': themenameselect.value,
+      'past_color': pastcolorpicker.value,
+      'now_color': nowcolorpicker.value,
+      'future_color': futurecolorpicker.value,
+      'header_background_color': headerbackgroundcolorpicker.value,
+      'header_text_color': headertextcolorpicker.value,
+      'header_boxntime_tf': headerboxntimecheckbox.checked,
+      'header_seconds_tf': headersecondscheckbox.checked,
+      'header_battery_tf': headerbatterycheckbox.checked,
+      'header_bluetooth_tf': headerbluetoothcheckbox.checked,
+      'header_bluetooth_buzz_tf': headerbluetoothbuzzcheckbox.checked
+    };
+
+    // Save for next launch
+    localStorage['twentyfour_tf'] = options['twentyfour_tf'];
+    localStorage['slide_minute_tf'] = options['slide_minute_tf'];
+    localStorage['slide_year_tf'] = options['slide_year_tf'];
+    localStorage['background_checkered_tf'] = options['background_checkered_tf'];
+    localStorage['background_color'] = options['background_color'];
+    localStorage['epochline_color'] = options['epochline_color'];
+    localStorage['localization'] = options['localization'];
+    localStorage['themename'] = options['themename'];
+    localStorage['past_color'] = options['past_color'];
+    localStorage['now_color'] = options['now_color'];
+    localStorage['future_color'] = options['future_color'];
+    localStorage['header_background_color'] = options['header_background_color'];
+    localStorage['header_text_color'] = options['header_text_color'];
+    localStorage['header_boxntime_tf'] = options['header_boxntime_tf'];
+    localStorage['header_seconds_tf'] = options['header_seconds_tf'];
+    localStorage['header_battery_tf'] = options['header_battery_tf'];
+    localStorage['header_bluetooth_tf'] = options['header_bluetooth_tf'];
+    localStorage['header_bluetooth_buzz_tf'] = options['header_bluetooth_buzz_tf'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var twentyfourcheckbox = document.getElementById('twentyfour_checkbox');
+    var slidemincheckbox = document.getElementById('slide_min_checkbox');
+    var slideyearcheckbox = document.getElementById('slide_year_checkbox');
+    var backgroundcheckeredcheckbox = document.getElementById('background_checkered_checkbox');
+    var backgroundcolorpicker = document.getElementById('background_color_picker');
+    var epochlinecolorpicker = document.getElementById('epochline_color_picker');
+    var localizationselect = document.getElementById('localization_select');
+    var themenameselect = document.getElementById('theme_name_select');
+    var pastcolorpicker = document.getElementById('past_color_picker');
+    var nowcolorpicker = document.getElementById('now_color_picker');
+    var futurecolorpicker = document.getElementById('future_color_picker');
+    var headerbackgroundcolorpicker = document.getElementById('header_background_color_picker');
+    var headertextcolorpicker = document.getElementById('header_text_color_picker');
+    var headerboxntimecheckbox = document.getElementById('header_boxntime_checkbox');
+    var headersecondscheckbox = document.getElementById('header_seconds_checkbox');
+    var headerbatterycheckbox = document.getElementById('header_battery_checkbox');
+    var headerbluetoothcheckbox = document.getElementById('header_bluetooth_checkbox');
+    var headerbluetoothbuzzcheckbox = document.getElementById('header_bluetooth_buzz_checkbox');
+
+    // Load any previously saved configuration, if available
+     twentyfourcheckbox.checked = JSON.parse(localStorage['twentyfour_tf']);
+     slidemincheckbox.checked = JSON.parse(localStorage['slide_minute_tf']);
+     slideyearcheckbox.checked = JSON.parse(localStorage['slide_year_tf']);
+     backgroundcheckeredcheckbox.checked = JSON.parse(localStorage['background_checkered_tf']);
+     backgroundcolorpicker.value = localStorage['background_color'];
+     epochlinecolorpicker.value = localStorage['epochline_color'];
+     localizationselect.value = localStorage['localization'];
+     themenameselect.value = localStorage['themename'];
+     pastcolorpicker.value = localStorage['past_color'];
+     nowcolorpicker.value = localStorage['now_color'];
+     futurecolorpicker.value = localStorage['future_color'];
+     headerbackgroundcolorpicker.value = localStorage['header_background_color'];
+     headertextcolorpicker.value = localStorage['header_text_color'];
+     headerboxntimecheckbox.checked = JSON.parse(localStorage['header_boxntime_tf']);
+     headersecondscheckbox.checked = JSON.parse(localStorage['header_seconds_tf']);
+     headerbatterycheckbox.checked = JSON.parse(localStorage['header_battery_tf']);
+     headerbluetoothcheckbox.checked = JSON.parse(localStorage['header_bluetooth_tf']);
+     headerbluetoothbuzzcheckbox.checked = JSON.parse(localStorage['header_bluetooth_buzz_tf']);
+  })();
+  </script>
+</html>

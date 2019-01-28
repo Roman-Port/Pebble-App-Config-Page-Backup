@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html class='v2' dir='ltr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+<link href='https://www.blogger.com/static/v1/widgets/2727757643-css_bundle_v2.css' rel='stylesheet' type='text/css'/>
+<meta content='width=1100' name='viewport'/>
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+<meta content='blogger' name='generator'/>
+<link href='https://rpi-experiences.blogspot.com/favicon.ico' rel='icon' type='image/x-icon'/>
+<link href='https://rpi-experiences.blogspot.com/' rel='canonical'/>
+<link rel="alternate" type="application/atom+xml" title="&#160;RPi-Experiences - Atom" href="https://rpi-experiences.blogspot.com/feeds/posts/default" />
+<link rel="alternate" type="application/rss+xml" title="&#160;RPi-Experiences - RSS" href="https://rpi-experiences.blogspot.com/feeds/posts/default?alt=rss" />
+<link rel="service.post" type="application/atom+xml" title="&#160;RPi-Experiences - Atom" href="https://www.blogger.com/feeds/573184945135512804/posts/default" />
+<!--[if IE]><script type="text/javascript" src="https://www.blogger.com/static/v1/jsbin/864213505-ieretrofit.js"></script>
+<![endif]-->
+<meta content='Blog about Raspeberry Pi, home automation, open source devices running on Linux' name='description'/>
+<meta content='https://rpi-experiences.blogspot.com/' property='og:url'/>
+<meta content=' RPi-Experiences' property='og:title'/>
+<meta content='Blog about Raspeberry Pi, home automation, open source devices running on Linux' property='og:description'/>
+<!--[if IE]> <script> (function() { var html5 = ("abbr,article,aside,audio,canvas,datalist,details," + "figure,footer,header,hgroup,mark,menu,meter,nav,output," + "progress,section,time,video").split(','); for (var i = 0; i < html5.length; i++) { document.createElement(html5[i]); } try { document.execCommand('BackgroundImageCache', false, true); } catch(e) {} })(); </script> <![endif]-->
+<title>
+&#160;RPi-Experiences
+</title>
+<style id='page-skin-1' type='text/css'><!--
+/*
+-----------------------------------------------
+Blogger Template Style
+Name:     Simple
+Designer: Josh Peterson
+URL:      www.noaesthetic.com
+----------------------------------------------- */
+/* Variable definitions
+====================
+<Variable name="keycolor" description="Main Color" type="color" default="#66bbdd"/>
+<Group description="Page Text" selector="body">
+<Variable name="body.font" description="Font" type="font"
+default="normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="body.text.color" description="Text Color" type="color" default="#222222"/>
+</Group>
+<Group description="Backgrounds" selector=".body-fauxcolumns-outer">
+<Variable name="body.background.color" description="Outer Background" type="color" default="#66bbdd"/>
+<Variable name="content.background.color" description="Main Background" type="color" default="#ffffff"/>
+<Variable name="header.background.color" description="Header Background" type="color" default="transparent"/>
+</Group>
+<Group description="Links" selector=".main-outer">
+<Variable name="link.color" description="Link Color" type="color" default="#2288bb"/>
+<Variable name="link.visited.color" description="Visited Color" type="color" default="#888888"/>
+<Variable name="link.hover.color" description="Hover Color" type="color" default="#33aaff"/>
+</Group>
+<Group description="Blog Title" selector=".header h1">
+<Variable name="header.font" description="Font" type="font"
+default="normal normal 60px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="header.text.color" description="Title Color" type="color" default="#3399bb" />
+</Group>
+<Group description="Blog Description" selector=".header .description">
+<Variable name="description.text.color" description="Description Color" type="color"
+default="#777777" />
+</Group>
+<Group description="Tabs Text" selector=".tabs-inner .widget li a">
+<Variable name="tabs.font" description="Font" type="font"
+default="normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="tabs.text.color" description="Text Color" type="color" default="#999999"/>
+<Variable name="tabs.selected.text.color" description="Selected Color" type="color" default="#000000"/>
+</Group>
+<Group description="Tabs Background" selector=".tabs-outer .PageList">
+<Variable name="tabs.background.color" description="Background Color" type="color" default="#f5f5f5"/>
+<Variable name="tabs.selected.background.color" description="Selected Color" type="color" default="#eeeeee"/>
+</Group>
+<Group description="Post Title" selector="h3.post-title, .comments h4">
+<Variable name="post.title.font" description="Font" type="font"
+default="normal normal 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+</Group>
+<Group description="Date Header" selector=".date-header">
+<Variable name="date.header.color" description="Text Color" type="color"
+default="#222222"/>
+<Variable name="date.header.background.color" description="Background Color" type="color"
+default="transparent"/>
+</Group>
+<Group description="Post Footer" selector=".post-footer">
+<Variable name="post.footer.text.color" description="Text Color" type="color" default="#666666"/>
+<Variable name="post.footer.background.color" description="Background Color" type="color"
+default="#f9f9f9"/>
+<Variable name="post.footer.border.color" description="Shadow Color" type="color" default="#eeeeee"/>
+</Group>
+<Group description="Gadgets" selector="h2">
+<Variable name="widget.title.font" description="Title Font" type="font"
+default="normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif"/>
+<Variable name="widget.title.text.color" description="Title Color" type="color" default="#000000"/>
+<Variable name="widget.alternate.text.color" description="Alternate Color" type="color" default="#999999"/>
+</Group>
+<Group description="Images" selector=".main-inner">
+<Variable name="image.background.color" description="Background Color" type="color" default="#ffffff"/>
+<Variable name="image.border.color" description="Border Color" type="color" default="#eeeeee"/>
+<Variable name="image.text.color" description="Caption Text Color" type="color" default="#222222"/>
+</Group>
+<Group description="Accents" selector=".content-inner">
+<Variable name="body.rule.color" description="Separator Line Color" type="color" default="#eeeeee"/>
+<Variable name="tabs.border.color" description="Tabs Border Color" type="color" default="#eeeeee"/>
+</Group>
+<Variable name="body.background" description="Body Background" type="background"
+color="#66bbdd" default="$(color) none repeat scroll top left"/>
+<Variable name="body.background.override" description="Body Background Override" type="string" default=""/>
+<Variable name="body.background.gradient.cap" description="Body Gradient Cap" type="url"
+default="url(//www.blogblog.com/1kt/simple/gradients_light.png)"/>
+<Variable name="body.background.gradient.tile" description="Body Gradient Tile" type="url"
+default="url(//www.blogblog.com/1kt/simple/body_gradient_tile_light.png)"/>
+<Variable name="content.background.color.selector" description="Content Background Color Selector" type="string" default=".content-inner"/>
+<Variable name="content.padding" description="Content Padding" type="length" default="10px"/>
+<Variable name="content.padding.horizontal" description="Content Horizontal Padding" type="length" default="10px"/>
+<Variable name="content.shadow.spread" description="Content Shadow Spread" type="length" default="40px"/>
+<Variable name="content.shadow.spread.webkit" description="Content Shadow Spread (WebKit)" type="length" default="5px"/>
+<Variable name="content.shadow.spread.ie" description="Content Shadow Spread (IE)" type="length" default="10px"/>
+<Variable name="main.border.width" description="Main Border Width" type="length" default="0"/>
+<Variable name="header.background.gradient" description="Header Gradient" type="url" default="none"/>
+<Variable name="header.shadow.offset.left" description="Header Shadow Offset Left" type="length" default="-1px"/>
+<Variable name="header.shadow.offset.top" description="Header Shadow Offset Top" type="length" default="-1px"/>
+<Variable name="header.shadow.spread" description="Header Shadow Spread" type="length" default="1px"/>
+<Variable name="header.padding" description="Header Padding" type="length" default="30px"/>
+<Variable name="header.border.size" description="Header Border Size" type="length" default="1px"/>
+<Variable name="header.bottom.border.size" description="Header Bottom Border Size" type="length" default="1px"/>
+<Variable name="header.border.horizontalsize" description="Header Horizontal Border Size" type="length" default="0"/>
+<Variable name="description.text.size" description="Description Text Size" type="string" default="140%"/>
+<Variable name="tabs.margin.top" description="Tabs Margin Top" type="length" default="0" />
+<Variable name="tabs.margin.side" description="Tabs Side Margin" type="length" default="30px" />
+<Variable name="tabs.background.gradient" description="Tabs Background Gradient" type="url"
+default="url(//www.blogblog.com/1kt/simple/gradients_light.png)"/>
+<Variable name="tabs.border.width" description="Tabs Border Width" type="length" default="1px"/>
+<Variable name="tabs.bevel.border.width" description="Tabs Bevel Border Width" type="length" default="1px"/>
+<Variable name="date.header.padding" description="Date Header Padding" type="string" default="inherit"/>
+<Variable name="date.header.letterspacing" description="Date Header Letter Spacing" type="string" default="inherit"/>
+<Variable name="date.header.margin" description="Date Header Margin" type="string" default="inherit"/>
+<Variable name="post.margin.bottom" description="Post Bottom Margin" type="length" default="25px"/>
+<Variable name="image.border.small.size" description="Image Border Small Size" type="length" default="2px"/>
+<Variable name="image.border.large.size" description="Image Border Large Size" type="length" default="5px"/>
+<Variable name="page.width.selector" description="Page Width Selector" type="string" default=".region-inner"/>
+<Variable name="page.width" description="Page Width" type="string" default="auto"/>
+<Variable name="main.section.margin" description="Main Section Margin" type="length" default="15px"/>
+<Variable name="main.padding" description="Main Padding" type="length" default="15px"/>
+<Variable name="main.padding.top" description="Main Padding Top" type="length" default="30px"/>
+<Variable name="main.padding.bottom" description="Main Padding Bottom" type="length" default="30px"/>
+<Variable name="paging.background"
+color="#ffffff"
+description="Background of blog paging area" type="background"
+default="transparent none no-repeat scroll top center"/>
+<Variable name="footer.bevel" description="Bevel border length of footer" type="length" default="0"/>
+<Variable name="mobile.background.overlay" description="Mobile Background Overlay" type="string"
+default="transparent none repeat scroll top left"/>
+<Variable name="mobile.background.size" description="Mobile Background Size" type="string" default="auto"/>
+<Variable name="mobile.button.color" description="Mobile Button Color" type="color" default="#ffffff" />
+<Variable name="startSide" description="Side where text starts in blog language" type="automatic" default="left"/>
+<Variable name="endSide" description="Side where text ends in blog language" type="automatic" default="right"/>
+*/
+/* Content
+----------------------------------------------- */
+body {
+font: normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #222222;
+background: #66bbdd none repeat scroll top left;
+padding: 0 40px 40px 40px;
+}
+html body .region-inner {
+min-width: 0;
+max-width: 100%;
+width: auto;
+}
+a:link {
+text-decoration:none;
+color: #2288bb;
+}
+a:visited {
+text-decoration:none;
+color: #1177aa;
+}
+a:hover {
+text-decoration:underline;
+color: #33aaff;
+}
+.body-fauxcolumn-outer .fauxcolumn-inner {
+background: transparent url(//www.blogblog.com/1kt/simple/body_gradient_tile_light.png) repeat scroll top left;
+_background-image: none;
+}
+.body-fauxcolumn-outer .cap-top {
+position: absolute;
+z-index: 1;
+height: 400px;
+width: 100%;
+background: #66bbdd none repeat scroll top left;
+}
+.body-fauxcolumn-outer .cap-top .cap-left {
+width: 100%;
+background: transparent url(//www.blogblog.com/1kt/simple/gradients_light.png) repeat-x scroll top left;
+_background-image: none;
+}
+.content-outer {
+-moz-box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+-webkit-box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+-goog-ms-box-shadow: 0 0 10px #333333;
+box-shadow: 0 0 40px rgba(0, 0, 0, .15);
+margin-bottom: 1px;
+}
+.content-inner {
+padding: 10px 10px;
+}
+.content-inner {
+background-color: #ffffff;
+}
+/* Header
+----------------------------------------------- */
+.header-outer {
+background: transparent none repeat-x scroll 0 -400px;
+_background-image: none;
+}
+.Header h1 {
+font: normal normal 60px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #3399bb;
+text-shadow: -1px -1px 1px rgba(0, 0, 0, .2);
+}
+.Header h1 a {
+color: #3399bb;
+}
+.Header .description {
+font-size: 140%;
+color: #777777;
+}
+.header-inner .Header .titlewrapper {
+padding: 22px 30px;
+}
+.header-inner .Header .descriptionwrapper {
+padding: 0 30px;
+}
+/* Tabs
+----------------------------------------------- */
+.tabs-inner .section:first-child {
+border-top: 1px solid #eeeeee;
+}
+.tabs-inner .section:first-child ul {
+margin-top: -1px;
+border-top: 1px solid #eeeeee;
+border-left: 0 solid #eeeeee;
+border-right: 0 solid #eeeeee;
+}
+.tabs-inner .widget ul {
+background: #f5f5f5 url(//www.blogblog.com/1kt/simple/gradients_light.png) repeat-x scroll 0 -800px;
+_background-image: none;
+border-bottom: 1px solid #eeeeee;
+margin-top: 0;
+margin-left: -30px;
+margin-right: -30px;
+}
+.tabs-inner .widget li a {
+display: inline-block;
+padding: .6em 1em;
+font: normal normal 14px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #999999;
+border-left: 1px solid #ffffff;
+border-right: 1px solid #eeeeee;
+}
+.tabs-inner .widget li:first-child a {
+border-left: none;
+}
+.tabs-inner .widget li.selected a, .tabs-inner .widget li a:hover {
+color: #000000;
+background-color: #eeeeee;
+text-decoration: none;
+}
+/* Columns
+----------------------------------------------- */
+.main-outer {
+border-top: 0 solid #eeeeee;
+}
+.fauxcolumn-left-outer .fauxcolumn-inner {
+border-right: 1px solid #eeeeee;
+}
+.fauxcolumn-right-outer .fauxcolumn-inner {
+border-left: 1px solid #eeeeee;
+}
+/* Headings
+----------------------------------------------- */
+h2 {
+margin: 0 0 1em 0;
+font: normal bold 11px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+color: #000000;
+}
+/* Widgets
+----------------------------------------------- */
+.widget .zippy {
+color: #999999;
+text-shadow: 2px 2px 1px rgba(0, 0, 0, .1);
+}
+.widget .popular-posts ul {
+list-style: none;
+}
+/* Posts
+----------------------------------------------- */
+.date-header span {
+background-color: transparent;
+color: #222222;
+padding: inherit;
+letter-spacing: inherit;
+margin: inherit;
+}
+.main-inner {
+padding-top: 30px;
+padding-bottom: 30px;
+}
+.main-inner .column-center-inner {
+padding: 0 15px;
+}
+.main-inner .column-center-inner .section {
+margin: 0 15px;
+}
+.post {
+margin: 0 0 25px 0;
+}
+h3.post-title, .comments h4 {
+font: normal normal 22px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
+margin: .75em 0 0;
+}
+.post-body {
+font-size: 110%;
+line-height: 1.4;
+position: relative;
+}
+.post-body img, .post-body .tr-caption-container, .Profile img, .Image img,
+.BlogList .item-thumbnail img {
+padding: 2px;
+background: #ffffff;
+border: 1px solid #eeeeee;
+-moz-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+-webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+box-shadow: 1px 1px 5px rgba(0, 0, 0, .1);
+}
+.post-body img, .post-body .tr-caption-container {
+padding: 5px;
+}
+.post-body .tr-caption-container {
+color: #222222;
+}
+.post-body .tr-caption-container img {
+padding: 0;
+background: transparent;
+border: none;
+-moz-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+-webkit-box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+}
+.post-header {
+margin: 0 0 1.5em;
+line-height: 1.6;
+font-size: 90%;
+}
+.post-footer {
+margin: 20px -2px 0;
+padding: 5px 10px;
+color: #666666;
+background-color: #f9f9f9;
+border-bottom: 1px solid #eeeeee;
+line-height: 1.6;
+font-size: 90%;
+}
+#comments .comment-author {
+padding-top: 1.5em;
+border-top: 1px solid #eeeeee;
+background-position: 0 1.5em;
+}
+#comments .comment-author:first-child {
+padding-top: 0;
+border-top: none;
+}
+.avatar-image-container {
+margin: .2em 0 0;
+}
+#comments .avatar-image-container img {
+border: 1px solid #eeeeee;
+}
+/* Comments
+----------------------------------------------- */
+.comments .comments-content .icon.blog-author {
+background-repeat: no-repeat;
+background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB9sLFwMeCjjhcOMAAAD+SURBVDjLtZSvTgNBEIe/WRRnm3U8RC1neQdsm1zSBIU9VVF1FkUguQQsD9ITmD7ECZIJSE4OZo9stoVjC/zc7ky+zH9hXwVwDpTAWWLrgS3QAe8AZgaAJI5zYAmc8r0G4AHYHQKVwII8PZrZFsBFkeRCABYiMh9BRUhnSkPTNCtVXYXURi1FpBDgArj8QU1eVXUzfnjv7yP7kwu1mYrkWlU33vs1QNu2qU8pwN0UpKoqokjWwCztrMuBhEhmh8bD5UDqur75asbcX0BGUB9/HAMB+r32hznJgXy2v0sGLBcyAJ1EK3LFcbo1s91JeLwAbwGYu7TP/3ZGfnXYPgAVNngtqatUNgAAAABJRU5ErkJggg==);
+}
+.comments .comments-content .loadmore a {
+border-top: 1px solid #999999;
+border-bottom: 1px solid #999999;
+}
+.comments .comment-thread.inline-thread {
+background-color: #f9f9f9;
+}
+.comments .continue {
+border-top: 2px solid #999999;
+}
+/* Accents
+---------------------------------------------- */
+.section-columns td.columns-cell {
+border-left: 1px solid #eeeeee;
+}
+.blog-pager {
+background: transparent none no-repeat scroll top center;
+}
+.blog-pager-older-link, .home-link,
+.blog-pager-newer-link {
+background-color: #ffffff;
+padding: 5px;
+}
+.footer-outer {
+border-top: 0 dashed #bbbbbb;
+}
+/* Mobile
+----------------------------------------------- */
+body.mobile  {
+background-size: auto;
+}
+.mobile .body-fauxcolumn-outer {
+background: transparent none repeat scroll top left;
+}
+.mobile .body-fauxcolumn-outer .cap-top {
+background-size: 100% auto;
+}
+.mobile .content-outer {
+-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+box-shadow: 0 0 3px rgba(0, 0, 0, .15);
+}
+body.mobile .AdSense {
+margin: 0 -40px;
+}
+.mobile .tabs-inner .widget ul {
+margin-left: 0;
+margin-right: 0;
+}
+.mobile .post {
+margin: 0;
+}
+.mobile .main-inner .column-center-inner .section {
+margin: 0;
+}
+.mobile .date-header span {
+padding: 0.1em 10px;
+margin: 0 -10px;
+}
+.mobile h3.post-title {
+margin: 0;
+}
+.mobile .blog-pager {
+background: transparent none no-repeat scroll top center;
+}
+.mobile .footer-outer {
+border-top: none;
+}
+.mobile .main-inner, .mobile .footer-inner {
+background-color: #ffffff;
+}
+.mobile-index-contents {
+color: #222222;
+}
+.mobile-link-button {
+background-color: #2288bb;
+}
+.mobile-link-button a:link, .mobile-link-button a:visited {
+color: #ffffff;
+}
+.mobile .tabs-inner .section:first-child {
+border-top: none;
+}
+.mobile .tabs-inner .PageList .widget-content {
+background-color: #eeeeee;
+color: #000000;
+border-top: 1px solid #eeeeee;
+border-bottom: 1px solid #eeeeee;
+}
+.mobile .tabs-inner .PageList .widget-content .pagelist-arrow {
+border-left: 1px solid #eeeeee;
+}
+
+--></style>
+<style id='template-skin-1' type='text/css'><!--
+body {
+min-width: 980px;
+}
+.content-outer, .content-fauxcolumn-outer, .region-inner {
+min-width: 980px;
+max-width: 980px;
+_width: 980px;
+}
+.main-inner .columns {
+padding-left: 0px;
+padding-right: 300px;
+}
+.main-inner .fauxcolumn-center-outer {
+left: 0px;
+right: 300px;
+/* IE6 does not respect left and right together */
+_width: expression(this.parentNode.offsetWidth -
+parseInt("0px") -
+parseInt("300px") + 'px');
+}
+.main-inner .fauxcolumn-left-outer {
+width: 0px;
+}
+.main-inner .fauxcolumn-right-outer {
+width: 300px;
+}
+.main-inner .column-left-outer {
+width: 0px;
+right: 100%;
+margin-left: -0px;
+}
+.main-inner .column-right-outer {
+width: 300px;
+margin-right: -300px;
+}
+#layout {
+min-width: 0;
+}
+#layout .content-outer {
+min-width: 0;
+width: 800px;
+}
+#layout .region-inner {
+min-width: 0;
+width: auto;
+}
+--></style>
+<script type='text/javascript'>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-18642541-6', 'auto', 'blogger');
+        ga('blogger.send', 'pageview');
+      </script>
+<link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=573184945135512804&amp;zx=ed3bb83a-18d8-4a77-a65e-1a8ab16fdf75' media='none' onload='if(media!=&#39;all&#39;)media=&#39;all&#39;' rel='stylesheet'/><noscript><link href='https://www.blogger.com/dyn-css/authorization.css?targetBlogID=573184945135512804&amp;zx=ed3bb83a-18d8-4a77-a65e-1a8ab16fdf75' rel='stylesheet'/></noscript>
+
+</head>
+<body class='loading'>
+<div class='navbar section' id='navbar'><div class='widget Navbar' data-version='1' id='Navbar1'><script type="text/javascript">
+    function setAttributeOnload(object, attribute, val) {
+      if(window.addEventListener) {
+        window.addEventListener('load',
+          function(){ object[attribute] = val; }, false);
+      } else {
+        window.attachEvent('onload', function(){ object[attribute] = val; });
+      }
+    }
+  </script>
+<div id="navbar-iframe-container"></div>
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+<script type="text/javascript">
+      gapi.load("gapi.iframes:gapi.iframes.style.bubble", function() {
+        if (gapi.iframes && gapi.iframes.getContext) {
+          gapi.iframes.getContext().openChild({
+              url: 'https://www.blogger.com/navbar.g?targetBlogID\x3d573184945135512804\x26blogName\x3d%C2%A0RPi-Experiences\x26publishMode\x3dPUBLISH_MODE_BLOGSPOT\x26navbarType\x3dLIGHT\x26layoutType\x3dLAYOUTS\x26searchRoot\x3dhttps://rpi-experiences.blogspot.com/search\x26blogLocale\x3den\x26v\x3d2\x26homepageUrl\x3dhttps://rpi-experiences.blogspot.com/\x26vt\x3d-6017579027089200183',
+              where: document.getElementById("navbar-iframe-container"),
+              id: "navbar-iframe"
+          });
+        }
+      });
+    </script><script type="text/javascript">
+(function() {
+var script = document.createElement('script');
+script.type = 'text/javascript';
+script.src = '//pagead2.googlesyndication.com/pagead/js/google_top_exp.js';
+var head = document.getElementsByTagName('head')[0];
+if (head) {
+head.appendChild(script);
+}})();
+</script>
+</div></div>
+<div itemscope='itemscope' itemtype='http://schema.org/Blog' style='display: none;'>
+<meta content=' RPi-Experiences' itemprop='name'/>
+<meta content='Blog about Raspeberry Pi, home automation, open source devices running on Linux' itemprop='description'/>
+</div>
+<div class='body-fauxcolumns'>
+<div class='fauxcolumn-outer body-fauxcolumn-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</div>
+<div class='content'>
+<div class='content-fauxcolumns'>
+<div class='fauxcolumn-outer content-fauxcolumn-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</div>
+<div class='content-outer'>
+<div class='content-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left content-fauxborder-left'>
+<div class='fauxborder-right content-fauxborder-right'></div>
+<div class='content-inner'>
+<header>
+<div class='header-outer'>
+<div class='header-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left header-fauxborder-left'>
+<div class='fauxborder-right header-fauxborder-right'></div>
+<div class='region-inner header-inner'>
+<div class='header section' id='header'><div class='widget Header' data-version='1' id='Header1'>
+<div id='header-inner'>
+<div class='titlewrapper'>
+<h1 class='title'>
+&#160;RPi-Experiences
+</h1>
+</div>
+<div class='descriptionwrapper'>
+<p class='description'>
+<span>
+Software and hardware experiences with a Raspberry Pi. Official web site of RPi-Monitor.
+</span>
+</p>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+<div class='header-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</header>
+<div class='tabs-outer'>
+<div class='tabs-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left tabs-fauxborder-left'>
+<div class='fauxborder-right tabs-fauxborder-right'></div>
+<div class='region-inner tabs-inner'>
+<div class='tabs section' id='crosscol'><div class='widget PageList' data-version='1' id='PageList1'>
+<h2>
+Pages
+</h2>
+<div class='widget-content'>
+<ul>
+<li class='selected'><a href='https://rpi-experiences.blogspot.com/'>Home</a></li>
+<li><a href='https://xavierberger.github.io/RPi-Monitor-docs/01_features.html'>RPi-Monitor keys features</a></li>
+<li><a href='https://xavierberger.github.io/RPi-Monitor-docs/index.html'>RPi-Monitor documentation</a></li>
+<li><a href='https://xavierberger.github.io/RPi-Monitor-docs/14_faq.html'>RPi-Monitor FAQ</a></li>
+</ul>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=573184945135512804&widgetType=PageList&widgetId=PageList1&action=editWidget&sectionId=crosscol' onclick='return _WidgetManager._PopupConfig(document.getElementById("PageList1"));' rel='nofollow' target='configPageList1' title='Edit'>
+<img alt='' height='18' src='https://resources.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div>
+</div></div>
+<div class='tabs no-items section' id='crosscol-overflow'></div>
+</div>
+</div>
+<div class='tabs-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<div class='main-outer'>
+<div class='main-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left main-fauxborder-left'>
+<div class='fauxborder-right main-fauxborder-right'></div>
+<div class='region-inner main-inner'>
+<div class='columns fauxcolumns'>
+<div class='fauxcolumn-outer fauxcolumn-center-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<div class='fauxcolumn-outer fauxcolumn-left-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<div class='fauxcolumn-outer fauxcolumn-right-outer'>
+<div class='cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left'>
+<div class='fauxborder-right'></div>
+<div class='fauxcolumn-inner'>
+</div>
+</div>
+<div class='cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<!-- corrects IE6 width calculation -->
+<div class='columns-inner'>
+<div class='column-center-outer'>
+<div class='column-center-inner'>
+<div class='main section' id='main'><div class='widget Blog' data-version='1' id='Blog1'>
+<div class='blog-posts hfeed'>
+<!--Can't find substitution for tag [defaultAdStart]-->
+
+                                        <div class="date-outer">
+                                      
+<h2 class='date-header'>
+<span>
+Saturday, March 10, 2018
+</span>
+</h2>
+
+                                        <div class="date-posts">
+                                      
+<div class='post-outer'>
+<div class='post hentry' itemprop='blogPost' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
+<meta content='https://2.bp.blogspot.com/-BrNUENGEASM/WqOpUiKE1LI/AAAAAAAACow/67OZvXRTPg4Z5pFy7IDWThy7EHVhvAgEACLcBGAs/s320/7773963086_60de7b9496_z.jpg' itemprop='image_url'/>
+<meta content='573184945135512804' itemprop='blogId'/>
+<meta content='8134991913996143102' itemprop='postId'/>
+<a name='8134991913996143102'></a>
+<h3 class='post-title entry-title' itemprop='name'>
+<a href='https://rpi-experiences.blogspot.com/2018/03/rpi-monitor-documentation.html'>
+RPi-Monitor documentation
+</a>
+</h3>
+<div class='post-header'>
+<div class='post-header-line-1'></div>
+</div>
+<div class='post-body entry-content' id='post-body-8134991913996143102' itemprop='articleBody'>
+<div style="text-align: center;">
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><b>RPi-Monitor</b> documentation is available (in early access - Work is still in progress).</span></div>
+<br />
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
+<tr><td style="text-align: center;"><a href="https://2.bp.blogspot.com/-BrNUENGEASM/WqOpUiKE1LI/AAAAAAAACow/67OZvXRTPg4Z5pFy7IDWThy7EHVhvAgEACLcBGAs/s1600/7773963086_60de7b9496_z.jpg" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" data-original-height="438" data-original-width="640" height="219" src="https://2.bp.blogspot.com/-BrNUENGEASM/WqOpUiKE1LI/AAAAAAAACow/67OZvXRTPg4Z5pFy7IDWThy7EHVhvAgEACLcBGAs/s320/7773963086_60de7b9496_z.jpg" width="320" /></a></td></tr>
+<tr><td class="tr-caption" style="text-align: center;"><div style="text-align: center;">
+<span style="font-size: x-small;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Photo from flickr</span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"> <a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">cc-by-nc-nd</a> by</span> <a href="https://www.flickr.com/photos/pwkpwkpwk/">pwkpwkpwk</a></span></i></span></span></div>
+</td></tr>
+</tbody></table>
+<br />
+<div style="text-align: center;">
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: x-large;"><b><a href="https://xavierberger.github.io/RPi-Monitor-docs/index.html">RPi-Monitor Documentation</a></b></span> </span></div>
+<br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">This blog was gathering information example showing how <b>RPi-Monitor</b> could be installed, used and configured.&nbsp; As <b>RPi-Monitor</b> become a mature software, we reached the limit of such blog based documentation. Then I dicided to gather all information, examples, tips and trick into one unique location: <a href="https://xavierberger.github.io/RPi-Monitor-docs/index.html">RPi-Monitor-docs</a>.</span><br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><br /></span>
+<h2>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif; font-size: large;">Work in progress</span></h2>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://xavierberger.github.io/RPi-Monitor-docs/_images/wip.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" data-original-height="800" data-original-width="800" height="200" src="https://xavierberger.github.io/RPi-Monitor-docs/_images/wip.png" width="200" /></a></div>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">As specified in introduction, the documentation is not completed yet and work is still in progress.</span><br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><br /></span>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">On some pages, you will see a "Work in progress" ribbon.<br />This means that data of the page is not yet validated and may contains mistake of fuzzy information.</span><br />
+<br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="color: red;"><b>Warning</b>: <span style="color: black;">The documentation is refering to v2.13 of <b>RPi-Monitor</b> which is not yet published</span></span>. Some features such as snmp may not be present on your version of <b>RPi-Monitor</b>. But even if the current documentation is not fully completed, it should be clearer than articles of this blog.&nbsp; So, </span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><a href="https://xavierberger.github.io/RPi-Monitor-docs/index.html">RPi-Monitor-docs</a> </span>become from now the official source of documentation for <b>RPi-Monitor</b>.</span><br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"></span><br />
+<br />
+<h2>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif; font-size: large;">A new logo</span></h2>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://xavierberger.github.io/RPi-Monitor-docs/_images/logo.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="126" data-original-width="500" src="https://xavierberger.github.io/RPi-Monitor-docs/_images/logo.png" /></a></div>
+<div style="text-align: center;">
+<br /></div>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">The next version of <b>RPi-Monitor</b> will introduce a new logo and a new catchline </span><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">"Real time monitoring for embedded devices" </span></b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">because, even is <b>RPi-Monitor</b> was initially designed for Raspberry Pi, it can do much more...</span><br />
+
+<div style='clear: both;'></div>
+</div>
+<div class='post-footer'>
+<div class='post-footer-line post-footer-line-1'>
+<span class='post-author vcard'>
+Publié par
+<span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+<meta content='https://plus.google.com/118321123159949482668' itemprop='url'/>
+<a class='g-profile' href='https://plus.google.com/118321123159949482668' rel='author' title='author profile'>
+<span itemprop='name'>
+Xavier B
+</span>
+</a>
+</span>
+</span>
+<span class='post-comment-link'>
+<a class='comment-link' href='https://rpi-experiences.blogspot.com/2018/03/rpi-monitor-documentation.html#comment-form' onclick=''>
+1 comment
+                                      :
+                                    </a>
+</span>
+<span class='post-icons'>
+<span class='item-control blog-admin pid-289887677'>
+<a href='https://www.blogger.com/post-edit.g?blogID=573184945135512804&postID=8134991913996143102&from=pencil' title='Edit Post'>
+<img alt="" class="icon-action" height="18" src="//img2.blogblog.com/img/icon18_edit_allbkg.gif" width="18">
+</a>
+</span>
+</span>
+<div class='post-share-buttons goog-inline-block'>
+<a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=8134991913996143102&target=email' target='_blank' title='Email This'>
+<span class='share-button-link-text'>
+Email This
+</span>
+</a>
+<a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=8134991913996143102&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'>
+<span class='share-button-link-text'>
+BlogThis!
+</span>
+</a>
+<a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=8134991913996143102&target=twitter' target='_blank' title='Share to Twitter'>
+<span class='share-button-link-text'>
+Share to Twitter
+</span>
+</a>
+<a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=8134991913996143102&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'>
+<span class='share-button-link-text'>
+Share to Facebook
+</span>
+</a>
+<div class='goog-inline-block dummy-container'>
+<g:plusone source='blogger:blog:plusone' href='http://rpi-experiences.blogspot.com/2018/03/rpi-monitor-documentation.html' size='medium' width='300' annotation='inline'/>
+</div>
+</div>
+</div>
+<div class='post-footer-line post-footer-line-2'>
+<span class='post-labels'>
+</span>
+</div>
+<div class='post-footer-line post-footer-line-3'></div>
+</div>
+</div>
+</div>
+<!--Can't find substitution for tag [defaultAdEnd]-->
+<div class='inline-ad'>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-6853682829194266";
+google_ad_host = "ca-host-pub-1556223355139109";
+google_ad_host_channel = "L0007";
+/* rpi-experiences_main_Blog1_300x250_as */
+google_ad_slot = "2876944524";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<!--Can't find substitution for tag [adStart]-->
+
+                                          </div></div>
+                                        
+
+                                        <div class="date-outer">
+                                      
+<h2 class='date-header'>
+<span>
+Thursday, February 8, 2018
+</span>
+</h2>
+
+                                        <div class="date-posts">
+                                      
+<div class='post-outer'>
+<div class='post hentry' itemprop='blogPost' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
+<meta content='https://4.bp.blogspot.com/-x8fXNef-QBM/WnyqR6tDXeI/AAAAAAAACn4/ZRO70S4-pyQoC8xIwxJrbATkDMaKGgtswCPcBGAYYCw/s320/Docker-Image.png' itemprop='image_url'/>
+<meta content='573184945135512804' itemprop='blogId'/>
+<meta content='3613000918378363022' itemprop='postId'/>
+<a name='3613000918378363022'></a>
+<h3 class='post-title entry-title' itemprop='name'>
+<a href='https://rpi-experiences.blogspot.com/2018/02/rpi-monitor-docker-container.html'>
+RPi-Monitor Docker Container
+</a>
+</h3>
+<div class='post-header'>
+<div class='post-header-line-1'></div>
+</div>
+<div class='post-body entry-content' id='post-body-3613000918378363022' itemprop='articleBody'>
+<div style="text-align: center;">
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://4.bp.blogspot.com/-x8fXNef-QBM/WnyqR6tDXeI/AAAAAAAACn4/ZRO70S4-pyQoC8xIwxJrbATkDMaKGgtswCPcBGAYYCw/s1600/Docker-Image.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="1208" data-original-width="1354" height="285" src="https://4.bp.blogspot.com/-x8fXNef-QBM/WnyqR6tDXeI/AAAAAAAACn4/ZRO70S4-pyQoC8xIwxJrbATkDMaKGgtswCPcBGAYYCw/s320/Docker-Image.png" width="320"></a></div>
+<br>
+<div style="text-align: left;">
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif; font-size: small;"><span class="attribute-value"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span class="attribute-value"><a href="https://www.michaelmiklis.de/rpi-monitor-docker-container/"><b>Michael Miklis</b></a> did create a <a href="https://www.docker.com/">Docker</a> image for <b>RPi-Monitor</b>.</span></span>&#160; </span></span></div>
+<div style="text-align: left;">
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif; font-size: small;"><span class="attribute-value">Let&#39;s have a look to the capabilities of this image and how to use this container.</span></span></div>
+<div style="text-align: left;">
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span class="attribute-value"><b></b></span></span><br>
+</div></div>
+<div style='clear: both;'></div>
+</div>
+<div class='jump-link'>
+<a href='https://rpi-experiences.blogspot.com/2018/02/rpi-monitor-docker-container.html#more' title='RPi-Monitor Docker Container'>
+Read more &#187;
+</a>
+</div>
+<div class='post-footer'>
+<div class='post-footer-line post-footer-line-1'>
+<span class='post-author vcard'>
+Publié par
+<span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+<meta content='https://plus.google.com/118321123159949482668' itemprop='url'/>
+<a class='g-profile' href='https://plus.google.com/118321123159949482668' rel='author' title='author profile'>
+<span itemprop='name'>
+Xavier B
+</span>
+</a>
+</span>
+</span>
+<span class='post-comment-link'>
+<a class='comment-link' href='https://rpi-experiences.blogspot.com/2018/02/rpi-monitor-docker-container.html#comment-form' onclick=''>
+1 comment
+                                      :
+                                    </a>
+</span>
+<span class='post-icons'>
+<span class='item-control blog-admin pid-289887677'>
+<a href='https://www.blogger.com/post-edit.g?blogID=573184945135512804&postID=3613000918378363022&from=pencil' title='Edit Post'>
+<img alt="" class="icon-action" height="18" src="//img2.blogblog.com/img/icon18_edit_allbkg.gif" width="18">
+</a>
+</span>
+</span>
+<div class='post-share-buttons goog-inline-block'>
+<a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=3613000918378363022&target=email' target='_blank' title='Email This'>
+<span class='share-button-link-text'>
+Email This
+</span>
+</a>
+<a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=3613000918378363022&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'>
+<span class='share-button-link-text'>
+BlogThis!
+</span>
+</a>
+<a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=3613000918378363022&target=twitter' target='_blank' title='Share to Twitter'>
+<span class='share-button-link-text'>
+Share to Twitter
+</span>
+</a>
+<a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=3613000918378363022&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'>
+<span class='share-button-link-text'>
+Share to Facebook
+</span>
+</a>
+<div class='goog-inline-block dummy-container'>
+<g:plusone source='blogger:blog:plusone' href='http://rpi-experiences.blogspot.com/2018/02/rpi-monitor-docker-container.html' size='medium' width='300' annotation='inline'/>
+</div>
+</div>
+</div>
+<div class='post-footer-line post-footer-line-2'>
+<span class='post-labels'>
+</span>
+</div>
+<div class='post-footer-line post-footer-line-3'></div>
+</div>
+</div>
+</div>
+<!--Can't find substitution for tag [adEnd]-->
+<div class='inline-ad'>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-6853682829194266";
+google_ad_host = "ca-host-pub-1556223355139109";
+google_ad_host_channel = "L0007";
+/* rpi-experiences_main_Blog1_300x250_as */
+google_ad_slot = "2876944524";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+</div>
+<!--Can't find substitution for tag [adStart]-->
+
+                                          </div></div>
+                                        
+
+                                        <div class="date-outer">
+                                      
+<h2 class='date-header'>
+<span>
+Saturday, August 26, 2017
+</span>
+</h2>
+
+                                        <div class="date-posts">
+                                      
+<div class='post-outer'>
+<div class='post hentry' itemprop='blogPost' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
+<meta content='https://c1.staticflickr.com/9/8267/10272784296_40f9b1d174_o.jpg' itemprop='image_url'/>
+<meta content='573184945135512804' itemprop='blogId'/>
+<meta content='8861064937453035267' itemprop='postId'/>
+<a name='8861064937453035267'></a>
+<h3 class='post-title entry-title' itemprop='name'>
+<a href='https://rpi-experiences.blogspot.com/2017/08/the-version-2.html'>
+RPi-Monitor: Version 2.12 is available
+</a>
+</h3>
+<div class='post-header'>
+<div class='post-header-line-1'></div>
+</div>
+<div class='post-body entry-content' id='post-body-8861064937453035267' itemprop='articleBody'>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">The version 2.<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">1</span>2-r<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">0</span> of&nbsp;<b>RPi-Monitor</b>&nbsp;has been released.</span><br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><br /></span>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">If you don't know yet what<b>&nbsp;RPI-Monitor</b>&nbsp;do, have a look to&nbsp;<a href="https://xavierberger.github.io/RPi-Monitor-docs/index.html">RPi-Monitor Documentation</a>.</span><br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><b>...bug fixing...</b> </span></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://c1.staticflickr.com/9/8267/10272784296_40f9b1d174_o.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="229" data-original-width="370" height="198" src="https://c1.staticflickr.com/9/8267/10272784296_40f9b1d174_o.jpg" width="320" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<span id="goog_1534014729"></span><span id="goog_1534014730"></span></div>
+<div style="text-align: center;">
+<span style="font-size: x-small;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Photo from flickr</span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"> <a href="https://creativecommons.org/licenses/by/2.0/">cc-by</a> by</span> <a href="https://www.flickr.com/photos/vuhung/">Nguyen Vu Hung (vuhung)</a></span></i></span></span></div>
+<br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">What's new in this version?</span></span><br />
+<br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">This version is coming with few internal changes, improvement and mainly bug fixes to ensure compatibility with Raspbian (Stretch).</span><br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><br /></span>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Here is the changelog of version 2.<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">12-r<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">0</span></span>:</span><br />
+<ul>
+<li><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Fix interactive configuration mode to accept commands with parameters</span></span></span></li>
+<li><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Fix various bug occuring with raspbian stretch</span></span></span></li>
+<li><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Fix info updated packages after upgrade</span></span></span></li>
+<li><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Fix typos and other bugs</span></span></span></li>
+<li><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Add configuration and tools (<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">/usr/share/rpimonitor/scripts/</span>) for OrangePi and Allwinner_H3</span></span></span></li>
+</ul>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><b>Note</b>: Due to a change on network interface name, it is not possible to create a generic configuration file which will work on every installation. If you want to activate this feature, you will need to do a customization of <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">network.conf</span>.</span></span></span><br />
+<br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Keep in mind that <b>RPi-Monitor</b> is a tool designed to be 
+customized to your need and it will never cover all the situation 
+without customization. The default configuration files proposed are 
+installed in a directory named <b>template</b>. These templates are showing examples of what can be done and should help you during the customization.</span></span></span><br />
+<br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">RPi-Monitor installation, customization and usage</span></span></span><br />
+<br />
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">To perform installation refer to <a href="https://rpi-experiences.blogspot.fr/2018/03/rpi-monitor-documentation.html">RPi-Monitor Documentation</a>.</span> </span></span></span><br />
+<br />
+<div style='clear: both;'></div>
+</div>
+<div class='post-footer'>
+<div class='post-footer-line post-footer-line-1'>
+<span class='post-author vcard'>
+Publié par
+<span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+<meta content='https://plus.google.com/118321123159949482668' itemprop='url'/>
+<a class='g-profile' href='https://plus.google.com/118321123159949482668' rel='author' title='author profile'>
+<span itemprop='name'>
+Xavier B
+</span>
+</a>
+</span>
+</span>
+<span class='post-comment-link'>
+<a class='comment-link' href='https://rpi-experiences.blogspot.com/2017/08/the-version-2.html#comment-form' onclick=''>
+4 comments
+                                      :
+                                    </a>
+</span>
+<span class='post-icons'>
+<span class='item-control blog-admin pid-289887677'>
+<a href='https://www.blogger.com/post-edit.g?blogID=573184945135512804&postID=8861064937453035267&from=pencil' title='Edit Post'>
+<img alt="" class="icon-action" height="18" src="//img2.blogblog.com/img/icon18_edit_allbkg.gif" width="18">
+</a>
+</span>
+</span>
+<div class='post-share-buttons goog-inline-block'>
+<a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=8861064937453035267&target=email' target='_blank' title='Email This'>
+<span class='share-button-link-text'>
+Email This
+</span>
+</a>
+<a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=8861064937453035267&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'>
+<span class='share-button-link-text'>
+BlogThis!
+</span>
+</a>
+<a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=8861064937453035267&target=twitter' target='_blank' title='Share to Twitter'>
+<span class='share-button-link-text'>
+Share to Twitter
+</span>
+</a>
+<a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=8861064937453035267&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'>
+<span class='share-button-link-text'>
+Share to Facebook
+</span>
+</a>
+<div class='goog-inline-block dummy-container'>
+<g:plusone source='blogger:blog:plusone' href='http://rpi-experiences.blogspot.com/2017/08/the-version-2.html' size='medium' width='300' annotation='inline'/>
+</div>
+</div>
+</div>
+<div class='post-footer-line post-footer-line-2'>
+<span class='post-labels'>
+</span>
+</div>
+<div class='post-footer-line post-footer-line-3'></div>
+</div>
+</div>
+</div>
+
+                                          </div></div>
+                                        
+
+                                        <div class="date-outer">
+                                      
+<h2 class='date-header'>
+<span>
+Wednesday, August 24, 2016
+</span>
+</h2>
+
+                                        <div class="date-posts">
+                                      
+<div class='post-outer'>
+<div class='post hentry' itemprop='blogPost' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
+<meta content='https://i.ytimg.com/vi/Y6ljFaKRTrI/0.jpg' itemprop='image_url'/>
+<meta content='573184945135512804' itemprop='blogId'/>
+<meta content='885806966252447772' itemprop='postId'/>
+<a name='885806966252447772'></a>
+<h3 class='post-title entry-title' itemprop='name'>
+<a href='https://rpi-experiences.blogspot.com/2016/08/rpi-monitor-version-211-is-available.html'>
+RPi-Monitor: Version 2.11 is available
+</a>
+</h3>
+<div class='post-header'>
+<div class='post-header-line-1'></div>
+</div>
+<div class='post-body entry-content' id='post-body-885806966252447772' itemprop='articleBody'>
+<div style="text-align: center;">
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif; font-size: large;"><i>Note: A new version of&#160;</i><b><i>RPi-Monitor</i></b><i>&#160;is available.</i></span></div>
+<div style="text-align: center;">
+<div style="text-align: center;">
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif; font-size: large;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">For alla details about RPi-Monitor refer to <a href="https://rpi-experiences.blogspot.fr/2018/03/rpi-monitor-documentation.html">RPi-Monitor Documentation</a>.</span></span></span></span></div>
+<span style="font-size: large;"><br></span></div>
+<br>
+<br>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">The version 2.<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">1</span>1-r<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">5</span> of&#160;<b>RPi-Monitor</b>&#160;has been released.</span><br>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><br></span>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">If you don&#39;t know yet what<b>&#160;RPI-Monitor</b>&#160;do, have a look to&#160;<a href="http://rpi-experiences.blogspot.fr/p/rpi-monitor.html">RPi-Monitor Overview</a>.</span><br>
+<br>
+<div class="separator" style="clear: both; text-align: center;">
+<br></div>
+<div class="separator" style="clear: both; text-align: center;">
+<iframe allowfullscreen="" class="YOUTUBE-iframe-video" data-thumbnail-src="https://i.ytimg.com/vi/Y6ljFaKRTrI/0.jpg" frameborder="0" height="266" src="https://www.youtube.com/embed/Y6ljFaKRTrI?feature=player_embedded" width="320"></iframe></div>
+<div style="text-align: center;">
+<span style="font-size: x-small;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><b>RPi-Monitor</b> is <i>Still Alive (</i></span></span><span style="font-size: x-small;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><i>clip by Jonathan Coulton)</i></span></span></div>
+<br>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;">What&#39;s new in this version?</span></span><br>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">This version is coming with internal changes, improvement and bug fixes.</span><br>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><br></span>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Here is the changelog of version 2.<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">11-r<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">5</span></span>:</span><br>
+<ul>
+<li><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">New</span> repository <span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">hosted <span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">on </span></span></span></b></span></b><a href="http://giteduberger.fr/"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">http://giteduberger.fr</span></span></span></span></a><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"> to avoid issue <span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">with github</span></span></span></span></b></span></b></li>
+<li><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Add multicolumn view in status page for large screen </span></span></b></span></b></li>
+<li><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Add alert feature able to execute script when necessary (Recovery action, SMS, e-mail, etc.<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">)</span> </span></span></b></span></b><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><br></span></span></b></span></b></li>
+<li><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Add possibility to use result of KPI into source or in alert commands with keyword &#39;<span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">data.&lt;kpi&gt;</span>&#39;<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">&#160;</span></span></span></b></span></b></li>
+<li><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">A</span></span></span></span><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">dd logfile in configurable destination (Default: <span style="font-family: &quot;courier new&quot; , &quot;courier&quot; , monospace;">/var/log/rpimonitor.log</span>)</span></span></span></li>
+<li><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Add arch configuration files</span></span></span></li>
+<li><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Add possibility to set a default value for KPI when source is not existin<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">g</span></span></span></span></li>
+<li><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Add possibility to set interval to reduce the number of data extraction frequency</span></span></span></li>
+<li><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Set Status <span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">P</span>age as default landing page</span></span></span></li>
+<li><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;">Bug fixes and cleanup code</span></span></span><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><b><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><br></span></span></b></span></b></li>
+</ul>
+<span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-size: large;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"><span style="font-family: &quot;arial&quot; , &quot;helvetica&quot; , sans-serif;"></span></span></span></span><br>
+<div style='clear: both;'></div>
+</div>
+<div class='jump-link'>
+<a href='https://rpi-experiences.blogspot.com/2016/08/rpi-monitor-version-211-is-available.html#more' title='RPi-Monitor: Version 2.11 is available'>
+Read more &#187;
+</a>
+</div>
+<div class='post-footer'>
+<div class='post-footer-line post-footer-line-1'>
+<span class='post-author vcard'>
+Publié par
+<span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+<meta content='https://plus.google.com/118321123159949482668' itemprop='url'/>
+<a class='g-profile' href='https://plus.google.com/118321123159949482668' rel='author' title='author profile'>
+<span itemprop='name'>
+Xavier B
+</span>
+</a>
+</span>
+</span>
+<span class='post-comment-link'>
+<a class='comment-link' href='https://rpi-experiences.blogspot.com/2016/08/rpi-monitor-version-211-is-available.html#comment-form' onclick=''>
+No comments
+                                      :
+                                    </a>
+</span>
+<span class='post-icons'>
+<span class='item-control blog-admin pid-289887677'>
+<a href='https://www.blogger.com/post-edit.g?blogID=573184945135512804&postID=885806966252447772&from=pencil' title='Edit Post'>
+<img alt="" class="icon-action" height="18" src="//img2.blogblog.com/img/icon18_edit_allbkg.gif" width="18">
+</a>
+</span>
+</span>
+<div class='post-share-buttons goog-inline-block'>
+<a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=885806966252447772&target=email' target='_blank' title='Email This'>
+<span class='share-button-link-text'>
+Email This
+</span>
+</a>
+<a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=885806966252447772&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'>
+<span class='share-button-link-text'>
+BlogThis!
+</span>
+</a>
+<a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=885806966252447772&target=twitter' target='_blank' title='Share to Twitter'>
+<span class='share-button-link-text'>
+Share to Twitter
+</span>
+</a>
+<a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=885806966252447772&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'>
+<span class='share-button-link-text'>
+Share to Facebook
+</span>
+</a>
+<div class='goog-inline-block dummy-container'>
+<g:plusone source='blogger:blog:plusone' href='http://rpi-experiences.blogspot.com/2016/08/rpi-monitor-version-211-is-available.html' size='medium' width='300' annotation='inline'/>
+</div>
+</div>
+</div>
+<div class='post-footer-line post-footer-line-2'>
+<span class='post-labels'>
+</span>
+</div>
+<div class='post-footer-line post-footer-line-3'></div>
+</div>
+</div>
+</div>
+
+                                          </div></div>
+                                        
+
+                                        <div class="date-outer">
+                                      
+<h2 class='date-header'>
+<span>
+Sunday, June 7, 2015
+</span>
+</h2>
+
+                                        <div class="date-posts">
+                                      
+<div class='post-outer'>
+<div class='post hentry' itemprop='blogPost' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
+<meta content='http://4.bp.blogspot.com/-S_yttnRFK68/VXRbniqywSI/AAAAAAAACXU/S7OsOhBxgQY/s400/test_test.jpg' itemprop='image_url'/>
+<meta content='573184945135512804' itemprop='blogId'/>
+<meta content='7562738946314204819' itemprop='postId'/>
+<a name='7562738946314204819'></a>
+<h3 class='post-title entry-title' itemprop='name'>
+<a href='https://rpi-experiences.blogspot.com/2015/06/rpi-monitor-version-211-beta-is-ready.html'>
+RPi-Monitor: Version 2.11 Beta is ready for test
+</a>
+</h3>
+<div class='post-header'>
+<div class='post-header-line-1'></div>
+</div>
+<div class='post-body entry-content' id='post-body-7562738946314204819' itemprop='articleBody'>
+<span style="font-family: Arial,Helvetica,sans-serif;">The version 2.11 <u><b>beta</b></u> of&#160;<b>RPi-Monitor</b> is ready for test.</span><br>
+<span style="font-family: Arial,Helvetica,sans-serif;"></span><br>
+<span style="font-family: Arial,Helvetica,sans-serif;"></span><br>
+<span style="font-family: Arial,Helvetica,sans-serif;"></span>
+
+<table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left: auto; margin-right: auto; text-align: center;"><tbody>
+<tr><td style="text-align: center;"><a href="//4.bp.blogspot.com/-S_yttnRFK68/VXRbniqywSI/AAAAAAAACXU/S7OsOhBxgQY/s1600/test_test.jpg" imageanchor="1" style="margin-left: auto; margin-right: auto;"><img border="0" height="320" src="//4.bp.blogspot.com/-S_yttnRFK68/VXRbniqywSI/AAAAAAAACXU/S7OsOhBxgQY/s400/test_test.jpg" width="400"></a></td></tr>
+<tr><td class="tr-caption" style="text-align: center;"><span style="font-family: Arial,Helvetica,sans-serif;">Photo from flickr </span><span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-family: Arial,Helvetica,sans-serif;"><a href="https://creativecommons.org/licenses/by/2.0/">cc-by</a> </span>by <a href="https://www.flickr.com/photos/sidelong/246816211/in/photolist-nNZRV-nNe787-8brFdR-2rgLtK-qamDHE-2jLUeT-odvyqn-8rojkb-6BbGeU-nyGQf6-4qNGRA-hDdevj-jQNHdH-pxXJSz-9urXjF-nSEXge-o87857-nYQEZ2-9zNLoL-FY3iE-hDbMPZ-nSEuhB-71Ewbs-oa1FFN-7V7tww-oKGbEU-kE9eJ1-6vMKp9-jX1A8v-e6Hqek-5YRPuc-hgdUec-hDa1KJ-nR8JT3-nSEaQ6-cA5Lw3-bzHzXh-gmycgt-7yf7Yo-bzVzdP-bs146-rymJ3B-qhsUF-9eZEWF-p3de8a-94jpev-9TGhB4-5UaXfg-8hy3kB-92eVtj" target="_blank">DaveBleasdale</a></span> </td></tr>
+</tbody></table>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<span style="font-family: Arial,Helvetica,sans-serif;"></span>
+
+<span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-size: large;">Test and validation requires your help.</span></span> </span><br>
+<h4>
+<span style="font-family: Arial,Helvetica,sans-serif;">A new model of publication </span></h4>
+<span style="font-family: Arial,Helvetica,sans-serif;">I&#39;m changing the way to publish <b>RPi-Monitor</b>. Until now, I was immediately publishing stable versions. From now, when version will be ready for publication, I will create a beta version and ask user to try and test this version. From my point of view, the quality of beta version will be the same as the previous release but it will let me the chance to correct or </span><span style="font-family: Arial,Helvetica,sans-serif;"><span style="font-family: Arial,Helvetica,sans-serif;">improve</span> some features before official release.</span><br>
+<span style="font-family: Arial,Helvetica,sans-serif;"><b> </b></span><br>
+<h4>
+<span style="font-family: Arial,Helvetica,sans-serif;">Why changing the model of publication<b> </b></span></h4>
+<span style="font-family: Arial,Helvetica,sans-serif;"><b>RPi-Monitor</b> has more and more functionalities and testing them become more and more complex. You are a user of <b>RPi-Monitor</b> and want to try the new feature in advance? You can then install this beta version and give your feedback on new functionalities and share your feeling about the current developments.</span><br>
+<br>
+<span style="font-family: Arial,Helvetica,sans-serif;">If you don&#39;t know yet what<b>&#160;RPI-Monitor</b>&#160;do, you should better install a stable releae and have a look to&#160;<a href="http://rpi-experiences.blogspot.fr/p/rpi-monitor.html">RPi-Monitor Overview</a>.</span><br>
+<span style="font-family: Arial,Helvetica,sans-serif;"></span><br>
+<div style='clear: both;'></div>
+</div>
+<div class='jump-link'>
+<a href='https://rpi-experiences.blogspot.com/2015/06/rpi-monitor-version-211-beta-is-ready.html#more' title='RPi-Monitor: Version 2.11 Beta is ready for test'>
+Read more &#187;
+</a>
+</div>
+<div class='post-footer'>
+<div class='post-footer-line post-footer-line-1'>
+<span class='post-author vcard'>
+Publié par
+<span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
+<meta content='https://plus.google.com/118321123159949482668' itemprop='url'/>
+<a class='g-profile' href='https://plus.google.com/118321123159949482668' rel='author' title='author profile'>
+<span itemprop='name'>
+Xavier B
+</span>
+</a>
+</span>
+</span>
+<span class='post-comment-link'>
+<a class='comment-link' href='https://rpi-experiences.blogspot.com/2015/06/rpi-monitor-version-211-beta-is-ready.html#comment-form' onclick=''>
+4 comments
+                                      :
+                                    </a>
+</span>
+<span class='post-icons'>
+<span class='item-control blog-admin pid-289887677'>
+<a href='https://www.blogger.com/post-edit.g?blogID=573184945135512804&postID=7562738946314204819&from=pencil' title='Edit Post'>
+<img alt="" class="icon-action" height="18" src="//img2.blogblog.com/img/icon18_edit_allbkg.gif" width="18">
+</a>
+</span>
+</span>
+<div class='post-share-buttons goog-inline-block'>
+<a class='goog-inline-block share-button sb-email' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=7562738946314204819&target=email' target='_blank' title='Email This'>
+<span class='share-button-link-text'>
+Email This
+</span>
+</a>
+<a class='goog-inline-block share-button sb-blog' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=7562738946314204819&target=blog' onclick='window.open(this.href, "_blank", "height=270,width=475"); return false;' target='_blank' title='BlogThis!'>
+<span class='share-button-link-text'>
+BlogThis!
+</span>
+</a>
+<a class='goog-inline-block share-button sb-twitter' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=7562738946314204819&target=twitter' target='_blank' title='Share to Twitter'>
+<span class='share-button-link-text'>
+Share to Twitter
+</span>
+</a>
+<a class='goog-inline-block share-button sb-facebook' href='https://www.blogger.com/share-post.g?blogID=573184945135512804&postID=7562738946314204819&target=facebook' onclick='window.open(this.href, "_blank", "height=430,width=640"); return false;' target='_blank' title='Share to Facebook'>
+<span class='share-button-link-text'>
+Share to Facebook
+</span>
+</a>
+<div class='goog-inline-block dummy-container'>
+<g:plusone source='blogger:blog:plusone' href='http://rpi-experiences.blogspot.com/2015/06/rpi-monitor-version-211-beta-is-ready.html' size='medium' width='300' annotation='inline'/>
+</div>
+</div>
+</div>
+<div class='post-footer-line post-footer-line-2'>
+<span class='post-labels'>
+Libellés :
+<a href='https://rpi-experiences.blogspot.com/search/label/RPi-Monitor' rel='tag'>
+RPi-Monitor
+</a>
+</span>
+</div>
+<div class='post-footer-line post-footer-line-3'></div>
+</div>
+</div>
+</div>
+
+                                      </div></div>
+                                    
+<!--Can't find substitution for tag [adEnd]-->
+</div>
+<div class='blog-pager' id='blog-pager'>
+<span id='blog-pager-older-link'>
+<a class='blog-pager-older-link' href='https://rpi-experiences.blogspot.com/search?updated-max=2015-06-07T21:44:00%2B02:00&amp;max-results=5' id='Blog1_blog-pager-older-link' title='Older Posts'>
+Older Posts
+</a>
+</span>
+<a class='home-link' href='https://rpi-experiences.blogspot.com/'>
+Home
+</a>
+</div>
+<div class='clear'></div>
+<div class='blog-feeds'>
+<div class='feed-links'>
+Subscribe to:
+<a class='feed-link' href='https://rpi-experiences.blogspot.com/feeds/posts/default' target='_blank' type='application/atom+xml'>
+Posts
+                                      (
+                                      Atom
+                                      )
+                                    </a>
+</div>
+</div>
+<script type="text/javascript">window.___gcfg = {'lang': 'en'};</script>
+</div></div>
+</div>
+</div>
+<div class='column-left-outer'>
+<div class='column-left-inner'>
+<aside>
+</aside>
+</div>
+</div>
+<div class='column-right-outer'>
+<div class='column-right-inner'>
+<aside>
+<div class='sidebar section' id='sidebar-right-1'><div class='widget LinkList' data-version='1' id='LinkList1'>
+<h2>
+Continue the Experiences on
+</h2>
+<div class='widget-content'>
+<ul>
+<li>
+<a href='http://linuxfr.org/news/rpi-monitor-un-outil-de-supervision-a-personnaliser'>
+Dépêche sur linuxfr.org
+</a>
+</li>
+<li>
+<a href='http://xberger.free.fr/'>
+Linux - What's up doc!
+</a>
+</li>
+<li>
+<a href='https://github.com/XavierBerger/RPi-Monitor'>
+Github - RPi-Monitor
+</a>
+</li>
+<li>
+<a href='https://github.com/XavierBerger/RPi-Monitor-deb'>
+Github - RPi-Monitor-deb
+</a>
+</li>
+<li>
+<a href='http://rpi-experiences.blogspot.fr/2014/10/rpi-monitor-peeble-rpi-monitor-is-now.html'>
+RPi-Monitor-Pebble
+</a>
+</li>
+<li>
+<a href='https://github.com/XavierBerger/pcd8544'>
+Github - pcd8544 library
+</a>
+</li>
+<li>
+<a href='http://giteduberger.fr'>
+Holidays: Gite du berger
+</a>
+</li>
+</ul>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=573184945135512804&widgetType=LinkList&widgetId=LinkList1&action=editWidget&sectionId=sidebar-right-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("LinkList1"));' rel='nofollow' target='configLinkList1' title='Edit'>
+<img alt='' height='18' src='https://resources.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div>
+</div><div class='widget HTML' data-version='1' id='HTML3'>
+<h2 class='title'>Support RPi-Monitor</h2>
+<div class='widget-content'>
+<center>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick" />
+<input type="hidden" name="hosted_button_id" value="CQMEQL8WK4R3L" />
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - la solution de paiement en ligne la plus simple et la plus sécurisée !" />
+<img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1" />
+</form>
+</center>
+</div>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=573184945135512804&widgetType=HTML&widgetId=HTML3&action=editWidget&sectionId=sidebar-right-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML3"));' rel='nofollow' target='configHTML3' title='Edit'>
+<img alt='' height='18' src='https://resources.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div><div class='widget AdSense' data-version='1' id='AdSense1'>
+<div class='widget-content'>
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-6853682829194266";
+google_ad_host = "ca-host-pub-1556223355139109";
+google_ad_host_channel = "L0001";
+/* rpi-experiences_sidebar-right-1_AdSense1_200x200_as */
+google_ad_slot = "9299764529";
+google_ad_width = 200;
+google_ad_height = 200;
+//-->
+</script>
+<script type="text/javascript" src="//pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=573184945135512804&widgetType=AdSense&widgetId=AdSense1&action=editWidget&sectionId=sidebar-right-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("AdSense1"));' rel='nofollow' target='configAdSense1' title='Edit'>
+<img alt='' height='18' src='https://resources.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div>
+</div><div class='widget PlusOne' data-version='1' id='PlusOne1'>
+<div class='widget-content'>
+<g:plusone annotation='bubble' href='http://rpi-experiences.blogspot.com/' size='standard' source='blogger:blog:plusone' width='250'></g:plusone>
+<script type='text/javascript'>
+      window.___gcfg = {"lang": "en"};
+    </script>
+</div>
+</div><div class='widget Translate' data-version='1' id='Translate1'>
+<h2 class='title'>
+Translate
+</h2>
+<div id='google_translate_element'></div>
+<script>
+          function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+              pageLanguage: 'en',
+              autoDisplay: 'true',
+              layout: google.translate.TranslateElement.InlineLayout.VERTICAL
+            }, 'google_translate_element');
+                                                  }
+        </script>
+<script src='//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit'></script>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=573184945135512804&widgetType=Translate&widgetId=Translate1&action=editWidget&sectionId=sidebar-right-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("Translate1"));' rel='nofollow' target='configTranslate1' title='Edit'>
+<img alt='' height='18' src='https://resources.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div><div class='widget Label' data-version='1' id='Label1'>
+<h2>
+Labels
+</h2>
+<div class='widget-content cloud-label-widget-content'>
+<span class='label-size label-size-3'>
+<a dir='ltr' href='https://rpi-experiences.blogspot.com/search/label/Electronic%20assembly'>
+Electronic assembly
+</a>
+<span class='label-count' dir='ltr'>
+                    (
+                    4
+                    )
+                  </span>
+</span>
+<span class='label-size label-size-1'>
+<a dir='ltr' href='https://rpi-experiences.blogspot.com/search/label/LCD'>
+LCD
+</a>
+<span class='label-count' dir='ltr'>
+                    (
+                    1
+                    )
+                  </span>
+</span>
+<span class='label-size label-size-2'>
+<a dir='ltr' href='https://rpi-experiences.blogspot.com/search/label/Linux'>
+Linux
+</a>
+<span class='label-count' dir='ltr'>
+                    (
+                    3
+                    )
+                  </span>
+</span>
+<span class='label-size label-size-1'>
+<a dir='ltr' href='https://rpi-experiences.blogspot.com/search/label/Nokia%205110'>
+Nokia 5110
+</a>
+<span class='label-count' dir='ltr'>
+                    (
+                    1
+                    )
+                  </span>
+</span>
+<span class='label-size label-size-1'>
+<a dir='ltr' href='https://rpi-experiences.blogspot.com/search/label/PCD8544'>
+PCD8544
+</a>
+<span class='label-count' dir='ltr'>
+                    (
+                    1
+                    )
+                  </span>
+</span>
+<span class='label-size label-size-3'>
+<a dir='ltr' href='https://rpi-experiences.blogspot.com/search/label/Raspberry%20Pi'>
+Raspberry Pi
+</a>
+<span class='label-count' dir='ltr'>
+                    (
+                    4
+                    )
+                  </span>
+</span>
+<span class='label-size label-size-5'>
+<a dir='ltr' href='https://rpi-experiences.blogspot.com/search/label/RPi-Monitor'>
+RPi-Monitor
+</a>
+<span class='label-count' dir='ltr'>
+                    (
+                    29
+                    )
+                  </span>
+</span>
+<span class='label-size label-size-1'>
+<a dir='ltr' href='https://rpi-experiences.blogspot.com/search/label/RPi-Monitor-Pebble'>
+RPi-Monitor-Pebble
+</a>
+<span class='label-count' dir='ltr'>
+                    (
+                    1
+                    )
+                  </span>
+</span>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=573184945135512804&widgetType=Label&widgetId=Label1&action=editWidget&sectionId=sidebar-right-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("Label1"));' rel='nofollow' target='configLabel1' title='Edit'>
+<img alt='' height='18' src='https://resources.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div>
+</div><div class='widget BlogArchive' data-version='1' id='BlogArchive1'>
+<h2>
+Blog Archive
+</h2>
+<div class='widget-content'>
+<div id='ArchiveList'>
+<div id='BlogArchive1_ArchiveList'>
+<ul class='hierarchy'>
+<li class='archivedate expanded'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy toggle-open'>
+                &#9660;&#160;
+              </span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2018/'>
+2018
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                2
+                )
+              </span>
+<ul class='hierarchy'>
+<li class='archivedate expanded'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy toggle-open'>
+                &#9660;&#160;
+              </span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2018/03/'>
+March
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                1
+                )
+              </span>
+<ul class='posts'>
+<li>
+<a href='https://rpi-experiences.blogspot.com/2018/03/rpi-monitor-documentation.html'>
+RPi-Monitor documentation
+</a>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2018/02/'>
+February
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                1
+                )
+              </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2017/'>
+2017
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                1
+                )
+              </span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2017/08/'>
+August
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                1
+                )
+              </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2016/'>
+2016
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                1
+                )
+              </span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2016/08/'>
+August
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                1
+                )
+              </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2015/'>
+2015
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                3
+                )
+              </span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2015/06/'>
+June
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                1
+                )
+              </span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2015/01/'>
+January
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                2
+                )
+              </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2014/'>
+2014
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                8
+                )
+              </span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2014/10/'>
+October
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                2
+                )
+              </span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2014/09/'>
+September
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                1
+                )
+              </span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2014/08/'>
+August
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                2
+                )
+              </span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2014/03/'>
+March
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                3
+                )
+              </span>
+</li>
+</ul>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2013/'>
+2013
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                22
+                )
+              </span>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2013/10/'>
+October
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                1
+                )
+              </span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2013/09/'>
+September
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                2
+                )
+              </span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2013/08/'>
+August
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                2
+                )
+              </span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2013/07/'>
+July
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                3
+                )
+              </span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2013/06/'>
+June
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                5
+                )
+              </span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2013/05/'>
+May
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                7
+                )
+              </span>
+</li>
+</ul>
+<ul class='hierarchy'>
+<li class='archivedate collapsed'>
+<a class='toggle' href='javascript:void(0)'>
+<span class='zippy'>
+
+                  &#9658;&#160;
+                
+</span>
+</a>
+<a class='post-count-link' href='https://rpi-experiences.blogspot.com/2013/04/'>
+April
+</a>
+<span class='post-count' dir='ltr'>
+                (
+                2
+                )
+              </span>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=573184945135512804&widgetType=BlogArchive&widgetId=BlogArchive1&action=editWidget&sectionId=sidebar-right-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("BlogArchive1"));' rel='nofollow' target='configBlogArchive1' title='Edit'>
+<img alt='' height='18' src='https://resources.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div>
+</div></div>
+</aside>
+</div>
+</div>
+</div>
+<div style='clear: both'></div>
+<!-- columns -->
+</div>
+<!-- main -->
+</div>
+</div>
+<div class='main-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+<footer>
+<div class='footer-outer'>
+<div class='footer-cap-top cap-top'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+<div class='fauxborder-left footer-fauxborder-left'>
+<div class='fauxborder-right footer-fauxborder-right'></div>
+<div class='region-inner footer-inner'>
+<div class='foot section' id='footer-1'><div class='widget HTML' data-version='1' id='HTML1'>
+<div class='widget-content'>
+<center><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="https://lh3.googleusercontent.com/proxy/eDkejwkG2UCtFKbRV89BJIWfDKvL27tvqntnsOLvPwTfeJEWkiRaJw9Joqyh9Bp-uYXZLYLoPjqX78GYTFt4itBPT5xgug=s0-d"></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_US">Creative Commons Attribution-ShareAlike 3.0 Unported License</a>.</center>
+</div>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=573184945135512804&widgetType=HTML&widgetId=HTML1&action=editWidget&sectionId=footer-1' onclick='return _WidgetManager._PopupConfig(document.getElementById("HTML1"));' rel='nofollow' target='configHTML1' title='Edit'>
+<img alt='' height='18' src='https://resources.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div></div>
+<!-- outside of the include in order to lock Attribution widget -->
+<div class='foot section' id='footer-3'><div class='widget Attribution' data-version='1' id='Attribution1'>
+<div class='widget-content' style='text-align: center;'>
+&#169; Xavier Berger 2013. Powered by <a href='https://www.blogger.com' target='_blank'>Blogger</a>.
+</div>
+<div class='clear'></div>
+<span class='widget-item-control'>
+<span class='item-control blog-admin'>
+<a class='quickedit' href='//www.blogger.com/rearrange?blogID=573184945135512804&widgetType=Attribution&widgetId=Attribution1&action=editWidget&sectionId=footer-3' onclick='return _WidgetManager._PopupConfig(document.getElementById("Attribution1"));' rel='nofollow' target='configAttribution1' title='Edit'>
+<img alt='' height='18' src='https://resources.blogblog.com/img/icon18_wrench_allbkg.png' width='18'/>
+</a>
+</span>
+</span>
+<div class='clear'></div>
+</div></div>
+</div>
+</div>
+<div class='footer-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</footer>
+<!-- content -->
+</div>
+</div>
+<div class='content-cap-bottom cap-bottom'>
+<div class='cap-left'></div>
+<div class='cap-right'></div>
+</div>
+</div>
+</div>
+<script type='text/javascript'>
+      window.setTimeout(function() {
+        document.body.className = document.body.className.replace('loading', '');
+                                                                  }, 10);
+    </script>
+<script src='https://apis.google.com/js/plusone.js' type='text/javascript'></script>
+
+<script type="text/javascript" src="https://www.blogger.com/static/v1/widgets/211300122-widgets.js"></script>
+<script type='text/javascript'>
+window['__wavt'] = 'AOuZoY75WLIcNOYdwcgC_AJl65Dar76CqQ:1548526891597';_WidgetManager._Init('//www.blogger.com/rearrange?blogID\x3d573184945135512804','//rpi-experiences.blogspot.com/','573184945135512804');
+_WidgetManager._SetDataContext([{'name': 'blog', 'data': {'blogId': '573184945135512804', 'title': '&#160;RPi-Experiences', 'url': 'https://rpi-experiences.blogspot.com/', 'canonicalUrl': 'https://rpi-experiences.blogspot.com/', 'homepageUrl': 'https://rpi-experiences.blogspot.com/', 'searchUrl': 'https://rpi-experiences.blogspot.com/search', 'canonicalHomepageUrl': 'https://rpi-experiences.blogspot.com/', 'blogspotFaviconUrl': 'https://rpi-experiences.blogspot.com/favicon.ico', 'bloggerUrl': 'https://www.blogger.com', 'hasCustomDomain': false, 'httpsEnabled': true, 'enabledCommentProfileImages': true, 'gPlusViewType': 'FILTERED_POSTMOD', 'adultContent': false, 'analyticsAccountNumber': 'UA-18642541-6', 'encoding': 'UTF-8', 'locale': 'en', 'localeUnderscoreDelimited': 'en', 'languageDirection': 'ltr', 'isPrivate': false, 'isMobile': false, 'isMobileRequest': false, 'mobileClass': '', 'isPrivateBlog': false, 'feedLinks': '\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22&#160;RPi-Experiences - Atom\x22 href\x3d\x22https://rpi-experiences.blogspot.com/feeds/posts/default\x22 /\x3e\n\x3clink rel\x3d\x22alternate\x22 type\x3d\x22application/rss+xml\x22 title\x3d\x22&#160;RPi-Experiences - RSS\x22 href\x3d\x22https://rpi-experiences.blogspot.com/feeds/posts/default?alt\x3drss\x22 /\x3e\n\x3clink rel\x3d\x22service.post\x22 type\x3d\x22application/atom+xml\x22 title\x3d\x22&#160;RPi-Experiences - Atom\x22 href\x3d\x22https://www.blogger.com/feeds/573184945135512804/posts/default\x22 /\x3e\n', 'meTag': '', 'adsenseClientId': 'ca-pub-6853682829194266', 'adsenseHostId': 'ca-host-pub-1556223355139109', 'adsenseHasAds': true, 'ieCssRetrofitLinks': '\x3c!--[if IE]\x3e\x3cscript type\x3d\x22text/javascript\x22 src\x3d\x22https://www.blogger.com/static/v1/jsbin/864213505-ieretrofit.js\x22\x3e\x3c/script\x3e\n\x3c![endif]--\x3e', 'view': '', 'dynamicViewsCommentsSrc': '//www.blogblog.com/dynamicviews/4224c15c4e7c9321/js/comments.js', 'dynamicViewsScriptSrc': '//www.blogblog.com/dynamicviews/9ef4ae9f0eac6437', 'plusOneApiSrc': 'https://apis.google.com/js/plusone.js', 'sharing': {'platforms': [{'name': 'Get link', 'key': 'link', 'shareMessage': 'Get link', 'target': ''}, {'name': 'Facebook', 'key': 'facebook', 'shareMessage': 'Share to Facebook', 'target': 'facebook'}, {'name': 'BlogThis!', 'key': 'blogThis', 'shareMessage': 'BlogThis!', 'target': 'blog'}, {'name': 'Twitter', 'key': 'twitter', 'shareMessage': 'Share to Twitter', 'target': 'twitter'}, {'name': 'Pinterest', 'key': 'pinterest', 'shareMessage': 'Share to Pinterest', 'target': 'pinterest'}, {'name': 'Google+', 'key': 'googlePlus', 'shareMessage': 'Share to Google+', 'target': 'googleplus'}, {'name': 'Email', 'key': 'email', 'shareMessage': 'Email', 'target': 'email'}], 'disableGooglePlus': false, 'googlePlusShareButtonWidth': 300, 'googlePlusBootstrap': '\x3cscript type\x3d\x22text/javascript\x22\x3ewindow.___gcfg \x3d {\x27lang\x27: \x27en\x27};\x3c/script\x3e'}, 'hasCustomJumpLinkMessage': false, 'jumpLinkMessage': 'Read more', 'pageType': 'index', 'pageName': '', 'pageTitle': '&#160;RPi-Experiences', 'metaDescription': 'Blog about Raspeberry Pi, home automation, open source devices running on Linux'}}, {'name': 'features', 'data': {'sharing_get_link_dialog': 'true', 'sharing_native': 'false'}}, {'name': 'messages', 'data': {'edit': 'Edit', 'linkCopiedToClipboard': 'Link copied to clipboard!', 'ok': 'Ok', 'postLink': 'Post Link'}}, {'name': 'template', 'data': {'name': 'custom', 'localizedName': 'Custom', 'isResponsive': false, 'isAlternateRendering': false, 'isCustom': true}}, {'name': 'view', 'data': {'classic': {'name': 'classic', 'url': '?view\x3dclassic'}, 'flipcard': {'name': 'flipcard', 'url': '?view\x3dflipcard'}, 'magazine': {'name': 'magazine', 'url': '?view\x3dmagazine'}, 'mosaic': {'name': 'mosaic', 'url': '?view\x3dmosaic'}, 'sidebar': {'name': 'sidebar', 'url': '?view\x3dsidebar'}, 'snapshot': {'name': 'snapshot', 'url': '?view\x3dsnapshot'}, 'timeslide': {'name': 'timeslide', 'url': '?view\x3dtimeslide'}, 'isMobile': false, 'title': '&#160;RPi-Experiences', 'description': 'Blog about Raspeberry Pi, home automation, open source devices running on Linux', 'url': 'https://rpi-experiences.blogspot.com/', 'type': 'feed', 'isSingleItem': false, 'isMultipleItems': true, 'isError': false, 'isPage': false, 'isPost': false, 'isHomepage': true, 'isArchive': false, 'isLabelSearch': false}}]);
+_WidgetManager._RegisterWidget('_NavbarView', new _WidgetInfo('Navbar1', 'navbar', document.getElementById('Navbar1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HeaderView', new _WidgetInfo('Header1', 'header', document.getElementById('Header1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PageListView', new _WidgetInfo('PageList1', 'crosscol', document.getElementById('PageList1'), {'title': 'Pages', 'links': [{'isCurrentPage': true, 'href': 'https://rpi-experiences.blogspot.com/', 'title': 'Home'}, {'isCurrentPage': false, 'href': 'https://xavierberger.github.io/RPi-Monitor-docs/01_features.html', 'title': 'RPi-Monitor keys features'}, {'isCurrentPage': false, 'href': 'https://xavierberger.github.io/RPi-Monitor-docs/index.html', 'title': 'RPi-Monitor documentation'}, {'isCurrentPage': false, 'href': 'https://xavierberger.github.io/RPi-Monitor-docs/14_faq.html', 'title': 'RPi-Monitor FAQ'}], 'mobile': false}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogView', new _WidgetInfo('Blog1', 'main', document.getElementById('Blog1'), {'cmtInteractionsEnabled': false, 'lightboxEnabled': true, 'lightboxModuleUrl': 'https://www.blogger.com/static/v1/jsbin/528065718-lbx.js', 'lightboxCssUrl': 'https://www.blogger.com/static/v1/v-css/368954415-lightbox_bundle.css'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LinkListView', new _WidgetInfo('LinkList1', 'sidebar-right-1', document.getElementById('LinkList1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML3', 'sidebar-right-1', document.getElementById('HTML3'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AdSenseView', new _WidgetInfo('AdSense1', 'sidebar-right-1', document.getElementById('AdSense1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_PlusOneView', new _WidgetInfo('PlusOne1', 'sidebar-right-1', document.getElementById('PlusOne1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_TranslateView', new _WidgetInfo('Translate1', 'sidebar-right-1', document.getElementById('Translate1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_LabelView', new _WidgetInfo('Label1', 'sidebar-right-1', document.getElementById('Label1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_BlogArchiveView', new _WidgetInfo('BlogArchive1', 'sidebar-right-1', document.getElementById('BlogArchive1'), {'languageDirection': 'ltr', 'loadingMessage': 'Loading\x26hellip;'}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_HTMLView', new _WidgetInfo('HTML1', 'footer-1', document.getElementById('HTML1'), {}, 'displayModeFull'));
+_WidgetManager._RegisterWidget('_AttributionView', new _WidgetInfo('Attribution1', 'footer-3', document.getElementById('Attribution1'), {}, 'displayModeFull'));
+</script>
+</body>
+</html>

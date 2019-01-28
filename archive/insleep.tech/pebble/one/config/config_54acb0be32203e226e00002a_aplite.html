@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>One &ndash; Settings</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="/maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <style>
+    * {
+        padding-left: 10px;
+    }
+    </style>
+</head>
+
+<body>
+    <h1>One Watchface Settings</h1>
+    <p>Choose watchface settings</p>
+
+    <p>Invert watchface:
+        <select id="invert_select">
+            <option value="off">Off</option>
+            <option value="on">On</option>
+        </select>
+    </p>
+
+    <p>
+        <button id="save_button">Save</button>
+    </p>
+</body>
+<script>
+    //Setup to allow easy adding more options later
+    function saveOptions() {
+        var invertSelect = document.getElementById("invert_select");
+
+        var options = {
+            "invert": invertSelect.options[invertSelect.selectedIndex].value
+        }
+
+        return options;
+    };
+
+    var submitButton = document.getElementById("save_button");
+    submitButton.addEventListener("click",
+        function() {
+            console.log("Submit");
+
+            var options = saveOptions();
+            var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+
+            document.location = location;
+        },
+        false);
+</script>
+
+</html>

@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+        <head>
+                <title>WorldMetric</title>
+                <meta charset='utf-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1'>
+                <link rel='stylesheet' href='/code.jquery.com/mobile/1.3.2/jquery.css'>
+                <script src='/code.jquery.com//jquery-1.js'></script>
+                <script src='/code.jquery.com/mobile/1.3.2/jquery.js'></script>
+                <style>
+                        .ui-header .ui-title { margin-left: 1em; margin-right: 1em; text-overflow: clip; }
+                </style>
+        </head>
+                <body>
+<div data-role="page" id="page1">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <h3>World Metric Configuration</h3>
+    </div>
+    <div data-role="content">
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <input id="cancel" value="Cancel" type="submit">
+            </div>
+            <div class="ui-block-b">
+                <input id="save" data-theme="a" value="Save" type="submit">
+            </div>
+        </div>
+            <div data-role="fieldcontain">
+            <label for="twentyfourhours">
+                24 Hour Mode
+            </label>
+            <select name="twentyfourhours" id="twentyfourhours" data-theme="" data-role="slider">
+<option value="0" selected="">Off</option><option value="1">On</option>                        </select>
+</div>
+<div data-role="fieldcontain"> 
+<fieldset data-role="controlgroup">
+	<legend>Date Format:</legend>
+	<input type="radio" name="dateformat" id="dateformat1" value="1" checked="checked"><label for="dateformat1">Mon, January 10</label><input type="radio" name="dateformat" id="dateformat2" value="2"><label for="dateformat2">Mon, 10. January</label><input type="radio" name="dateformat" id="dateformat3" value="3"><label for="dateformat3">Mon, Jan 10</label><input type="radio" name="dateformat" id="dateformat4" value="4"><label for="dateformat4">Mon, 10. Jan</label></fieldset>
+</div>
+<div data-role="fieldcontain"> 
+<fieldset data-role="controlgroup">
+	<legend>Date Language:</legend>
+	<input type="radio" name="lang" id="lang1" value="1" checked="checked"><label for="lang1">English</label><input type="radio" name="lang" id="lang2" value="2"><label for="lang2">German</label></fieldset>
+</div>
+<div data-role="fieldcontain"> 
+<fieldset data-role="controlgroup">
+	<legend>Temperature:</legend>
+	<input type="radio" name="tempmode" id="tempmode1" value="1" checked="checked"><label for="tempmode1">Celsius</label><input type="radio" name="tempmode" id="tempmode2" value="2"><label for="tempmode2">Fahrenheit</label></fieldset>
+</div>
+        </div>
+</div>
+
+<script>
+function saveOptions() {
+var options = {
+'twentyfourhours': parseInt($("#twentyfourhours").val(), 10),
+//'semicolon': parseInt($("#semicolon").val(), 10),
+'dateformat': parseInt($("input:radio[name=dateformat]:checked").val()),
+'lang': parseInt($("input:radio[name=lang]:checked").val()),
+'tempmode': parseInt($("input:radio[name=tempmode]:checked").val())
+}
+return options;
+}
+
+$().ready(function() {
+$("#cancel").click(function() {
+console.log("Cancel");
+document.location = "pebblejs://close#";
+});
+
+$("#save").click(function() {
+console.log("Submit");
+var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+console.log("Close: " + location);
+console.log(location);
+document.location = location;
+});
+
+});
+</script>
+</body>
+</html>

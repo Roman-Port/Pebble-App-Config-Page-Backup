@@ -1,0 +1,41 @@
+.container h2 {
+  margin-bottom: 1em;
+}
+
+.container label.warnings {
+  color: #ff5544;
+}
+
+.container .group-buttons {
+  text-align: center;
+}
+
+.container .group-buttons .btn {
+  width: 100px;
+}
+
+.container .group-buttons .button-submit {
+  margin-left: 20px;
+}
+
+.container .submit-group {
+  margin-top: 1em;
+}
+
+.container .field-selected {
+  color: #3f7cbc;
+}
+
+.container .feedInterval-group > .radio {
+  margin-bottom: 1.5em;
+}
+
+.container .footer-addr {
+  margin-bottom: 1em;
+}
+
+.container .radio, .container .checkbox {
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+

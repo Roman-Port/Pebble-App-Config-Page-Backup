@@ -1,0 +1,126 @@
+<html>
+<head>
+<title>Miyamoto Pebble App</title>
+<style>
+p {
+  font-family:Arial;
+	font-size:11pt;
+}
+
+h1 {
+	font-family:Arial;
+	font-size:18pt;
+}
+</style>
+<style style="text/css">
+body {
+  background-image: url("bg_miyamoto.jpg");
+  background-position: 50% 50%;
+  background-repeat: repeat;
+}
+</style>
+
+ <script src="/code.jquery.com//jquery.js"></script>
+</head>
+<body>
+<h1>Miyamoto Setup</h1>
+
+<p>Analog or Digital?
+	<select id="themeOption" name="themeOption">
+		<option value="0">Analog</option>
+		<option value="1">Digital</option>
+	</select>
+</p>
+
+<p>Use Base?
+	<select id="useBase" name="useBase">
+		<option value="1">Yes</option>
+		<option value="0">No</option>
+	</select>
+</p>
+
+
+
+<p>
+	<button id="save_button">Save</button>
+</p>
+
+</body>
+</html>
+
+
+<script>
+
+(function () {
+	loadOptions();
+})();
+
+function loadOptions() {
+	var $themeOption = $('#themeOption');
+	var $useBase = $('#useBase');
+
+if (localStorage.themeOption) {
+		$themeOption[0].value = localStorage.themeOption;
+		$useBase[0].value = localStorage.useBase;
+	}
+}
+
+function getAndStoreConfigData() {
+	var $themeOption = $('#themeOption');
+	var $useBase = $('#useBase');
+
+	var options = {
+		themeOption: $themeOption.val(),
+		useBase: $useBase.val(),
+	};
+
+	localStorage.themeOption = options.themeOption;
+	localStorage.useBase = options.useBase;
+
+	console.log('Got options: ' + JSON.stringify(options));
+	return options;
+}
+
+// Something like this to get query variables.
+function getQueryParam(variable, defaultValue) {
+// Find all URL parameters
+var query = location.search.substring(1);
+var vars = query.split('&');
+for (var i = 0; i < vars.length; i++) {
+	var pair = vars[i].split('=');
+
+	// If the query variable parameter is found, decode it to use and return it for use
+	if (pair[0] === variable) {
+		return decodeURIComponent(pair[1]);
+	}
+}
+return defaultValue || false;
+}
+
+
+  //Setup to allow easy adding more options later
+  function saveOptions() {
+
+  var e = document.getElementById("themeOption");
+  var f = document.getElementById("useBase");
+  
+  var themeOptionValue = e.options[e.selectedIndex].value;
+  var useBaseValue = f.options[f.selectedIndex].value;
+
+  var options = {
+      'themeOption': themeOptionValue,
+      'useBase': useBaseValue,
+    }
+    return options;
+  };
+
+ $("#save_button").click(function () {	
+	console.log("Submit");
+	var options = saveOptions();
+    getAndStoreConfigData() 
+  // Set the return URL depending on the runtime environment
+  var return_to = getQueryParam('return_to', 'pebblejs://close#');
+  document.location.href = return_to + encodeURIComponent(JSON.stringify(options));
+ });
+
+</script>

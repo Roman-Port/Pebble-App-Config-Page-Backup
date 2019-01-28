@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/oddbloke.github.io/steelers-pebble-face/css/bootstrap.css" rel="stylesheet">
+    <link href="/oddbloke.github.io/steelers-pebble-face/css/material-switch.css" rel="stylesheet">
+    <style>
+      .my-container:after {
+        content: ' ';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -999999;
+        opacity: 0.6;
+        display: block;
+        background-image: url("img/logo.png");
+        background-repeat: no-repeat;
+        -ms-background-size: 180%;
+        -o-background-size: 180%;
+        -moz-background-size: 180%;
+        -webkit-background-size: 180%;
+        background-size: 180%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="my-container">
+    <div class="container-fluid">
+      <h2>Steelers Watchface</h2>
+
+      <div class="panel panel-default">
+        <ul class="list-group">
+          <li class="list-group-item">
+            Enable animations
+            <div class="material-switch pull-right">
+              <input id="AppKeyAnimations" type="checkbox">
+              <label for="AppKeyAnimations" class="label-success"></label>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <input class="btn btn-default" id="submit_button" type="button" value="Done">
+    </div>
+    </div>
+    <script src="/ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+    <script src="/oddbloke.github.io/steelers-pebble-face/js/bootstrap.js"></script>
+  </body>
+  <script>
+    // Get a handle to the button's HTML element
+  var submitButton = document.getElementById('submit_button');
+
+  function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+  }
+
+  // Add a 'click' listener
+  submitButton.addEventListener('click', function() {
+    // Get the config data from the UI elements
+    var animationsCheckbox = document.getElementById('AppKeyAnimations');
+
+    // Make a data object to be sent, coercing value types to integers
+    var options = {
+      'AppKeyAnimations': animationsCheckbox.checked ? 1 : 0
+    };
+
+    // Determine the correct return URL (emulator vs real watch)
+    var return_to = getParameterByName('return_to') || 'pebblejs://close#';
+
+    // Encode and send the data when the page closes
+    document.location = return_to + encodeURIComponent(JSON.stringify(options));
+  });
+
+  $(document).ready(function() {
+    var animationsEnabled = getParameterByName('AppKeyAnimations');
+    document.getElementById('AppKeyAnimations').checked = animationsEnabled == 1;
+  });
+</script>
+</html>

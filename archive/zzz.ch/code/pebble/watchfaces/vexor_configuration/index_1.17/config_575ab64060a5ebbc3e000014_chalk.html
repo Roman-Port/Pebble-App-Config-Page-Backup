@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel='stylesheet' type='text/css' href='/zzz.ch/code/pebble/watchfaces/vexor_configuration/css/slate.css'>
+</head>
+
+<body>
+  <div class='item-container'>
+    <h1 class='title'>Vexor</h1>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <div class='item'>
+        Customize your Vexor app a bit.
+      </div>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Display</div>
+    
+    <div class='item-container-content'>      
+      <label class='item'>
+        seconds
+        <input id='secondsCheckbox' type='checkbox' class='item-checkbox' checked="">
+      </label>
+      
+       <label class='item'>
+        display time bold
+        <input id='boldHourCheckbox' type='checkbox' class='item-checkbox' checked="">
+      </label>
+      
+       <label class='item'>
+        display date bold
+        <input id='boldDateCheckbox' type='checkbox' class='item-checkbox'>
+      </label>
+
+  	  <label class='item'>
+        date
+        <input id='dateCheckbox' type='checkbox' class='item-checkbox' checked="">
+      </label>
+   
+    	<label class='item'>
+        show if date displayed
+        <select id='dateTextDisplay' type='list' class='item-select'>
+  			<option value="m">month</option>
+  			<option value="d" selected="">day</option>
+  			<option value="n">none</option>
+  		</select>
+		
+      </label>
+
+  	  <label class='item'>
+        step graph<br>
+        solid box is yesterday's value, white line is today
+        <input id='healthCheckbox' type='checkbox' class='item-checkbox'>
+      </label>
+      
+     <label class='item'>
+        health text display<br>
+        steps in hSteps (X), energy in hCal (E), distance in hm (D)   h=x100
+        <select id='healthTextDisplay' type='list' class='item-select'>
+  			<option value="s" selected="">steps</option>
+  			<option value="e">energy</option>
+  			<option value="d">distance</option>
+  			<option value="n">none</option>
+  		</select>
+		
+      </label>
+
+     
+   	  <label class='item'>
+        white background
+        <input id='whiteBackgroundCheckbox' type='checkbox' class='item-checkbox'>
+      </label>
+
+    </div>
+    
+  <div class='item-container-footer'>
+      These settings only change on the watch after you click submit.
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='button-container'>
+      <input id='submitButton' type='button' class='item-button' value='SUBMIT'>
+    </div>
+  </div>
+
+  <script src='/zzz.ch/code/pebble/watchfaces/vexor_configuration/js/slate.bin'></script>
+  <script src='/zzz.ch/code/pebble/watchfaces/vexor_configuration/js/main_1.bin'></script>
+</body>
+</html>

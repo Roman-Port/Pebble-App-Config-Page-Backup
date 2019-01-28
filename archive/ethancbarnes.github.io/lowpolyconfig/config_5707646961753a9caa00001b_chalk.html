@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Low Poly Settings</title>
+    <link type="text/css" rel="stylesheet" href="/ethancbarnes.github.io//lowpolyconfig.css">
+    <link type="text/css" rel="stylesheet" href="/ethancbarnes.github.io//slate.css">
+    <script src="/ethancbarnes.github.io//slate.js"></script>
+  </head>
+  <body>
+    <div class="item-container">
+        <div class="item-container-content">
+            <h1>Low Poly Watchface</h1>
+        </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Background color</div>
+      <div class="item-container-content">
+        <label class="item">
+          Blue
+          <input type="radio" class="item-radio" name="color" value="blue" id="blue">
+        </label>
+        <label class="item">
+          Red
+          <input type="radio" class="item-radio" name="color" value="red" id="red">
+        </label>
+        <label class="item">
+          Green
+          <input type="radio" class="item-radio" name="color" value="green" id="green">
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-content">
+        <label class="item">
+          Leading zero
+          <input type="checkbox" class="item-toggle" name="toggle-1" id='zero_checkbox'>
+        </label>
+      </div>
+    </div>
+    <div class="item-container">
+      <div class="item-container-content">
+        <label class="item">
+          Show seconds
+          <input type="checkbox" class="item-toggle" name="toggle-1" id='seconds_checkbox'>
+        </label>
+      </div>
+    </div>
+    <div class="item-container">
+      <div class="item-container-content">
+        <label class="item">
+          Vibrate on disconnect
+          <input type="checkbox" class="item-toggle" name="toggle-1" id='vibrate_checkbox'>
+        </label>
+      </div>
+    </div>
+    <div class="item-container">
+      <div class="item-container-content">
+        <label class="item">
+          Show battery meter
+          <input type="checkbox" class="item-toggle" name="toggle-1" id='battery_checkbox'>
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="button-container">
+        <input type="button" class="item-button" value="SEND" id="submit_button">
+      </div>
+    </div>
+
+    <div class="item-container-footer" style="margin:15px; text-align:center;">
+        <p>Low Poly watchface designed and built by Ethan Barnes</p>
+        <p>Configuration page built using the Slate framework</p>
+    </div>
+
+    <script>
+      if(window.localStorage.getItem("leadingzero")=="true"){
+        document.getElementById("zero_checkbox").checked = true;
+      }
+      if(window.localStorage.getItem("seconds")=="true"){
+        document.getElementById("seconds_checkbox").checked = true;
+      }
+      if(window.localStorage.getItem("vibrate")=="true"){
+        document.getElementById("vibrate_checkbox").checked = true;
+      }
+      if(window.localStorage.getItem("batterymeter")=="true"){
+        document.getElementById("battery_checkbox").checked = true;
+      }
+      if(window.localStorage.getItem("backgroundcolor")=="blue"){
+        document.getElementById("blue").checked = true;
+      } else if(window.localStorage.getItem("backgroundcolor")=="red"){
+        document.getElementById("red").checked = true;
+      } else if(window.localStorage.getItem("backgroundcolor")=="green"){
+        document.getElementById("green").checked = true;
+      }
+    </script>
+
+    <script>
+      var submitButton = document.getElementById('submit_button');
+
+      submitButton.addEventListener('click', function() {
+        // Getting the selected radio button
+        var value;
+        var radios = document.getElementsByName('color');
+        for (var i = 0, length = radios.length; i < length; i++) {
+          if (radios[i].checked) {
+            value = radios[i].value;
+            break;
+          }
+        }
+
+        if(value==null){
+            alert("Please select a color!");
+        } else {
+            var color;
+            if(value=="blue"){
+              color = 1;
+            } else if(value=="red"){
+              color = 2;
+            } else if(value=="green"){
+              color = 3;
+            }
+
+            // leading zero, vibrate on disconnect, and battery meter checkbox
+            var zeroCheckbox = document.getElementById('zero_checkbox');
+            var secondsCheckbox = document.getElementById('seconds_checkbox');
+            var vibrateCheckbox = document.getElementById('vibrate_checkbox');
+            var batteryCheckbox = document.getElementById('battery_checkbox');
+
+            var options = {
+              'leadingzero': zeroCheckbox.checked == true ? 1 : 0,
+              'seconds': secondsCheckbox.checked == true ? 1 : 0,
+              'vibrate': vibrateCheckbox.checked == true ? 1 : 0,
+              'batterymeter': batteryCheckbox.checked == true ? 1 : 0,
+              'background_color': color
+            };
+
+            // Save for next launch
+            if(options['leadingzero']==1){
+              localStorage.setItem('leadingzero',"true");
+            } else {
+              localStorage.setItem('leadingzero',"false");
+            }
+            if(options['seconds']==1){
+              localStorage.setItem('seconds',"true");
+            } else {
+              localStorage.setItem('seconds',"false");
+            }
+            if(options['vibrate']==1){
+              window.localStorage.setItem("vibrate","true");
+            } else {
+              window.localStorage.setItem("vibrate","false");
+            }
+            if(options['batterymeter']==1){
+              window.localStorage.setItem("batterymeter","true");
+            } else {
+              window.localStorage.setItem("batterymeter","false");
+            }
+
+            if(options['background_color']==1){
+              window.localStorage.setItem("backgroundcolor","blue");
+            } else if(options['background_color']==2){
+              window.localStorage.setItem("backgroundcolor","red");
+            } else if(options['background_color']==3){
+              window.localStorage.setItem("backgroundcolor","green");
+            }
+
+
+            // Determine the correct return URL (emulator vs real watch)
+            // Line 62-77 are taken from the Pebble config tutorial
+            function getQueryParam(variable, defaultValue) {
+              var query = location.search.substring(1);
+              var vars = query.split('&');
+              for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (pair[0] === variable) {
+                  return decodeURIComponent(pair[1]);
+                }
+              }
+              return defaultValue || false;
+            }
+            var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+            // Encode and send the data when the page closes
+            document.location = return_to + encodeURIComponent(JSON.stringify(options));
+        }
+      });
+    </script>
+
+  </body>
+</html>

@@ -1,0 +1,270 @@
+﻿
+<!DOCTYPE html>
+<html>
+    <title>Settings</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel="stylesheet" href="/www.themapman.com/pebblewatch/marks-slate.css">
+<link rel="stylesheet" href="/www.themapman.com/pebblewatch/jquery.css">
+<link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+<script src="/code.jquery.com//jquery-1.js"></script>
+<script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+    <style>
+      .ui-header .ui-title { margin-left: 1em; margin-right: 1em; text-overflow: clip; }
+      /*.ui-radio { width: 50%; }*/
+	 
+    </style>
+  
+  
+  <body>
+    <div data-role='page' id='main'>
+      <div data-role='header' class='jqm-header' data-theme='a'>
+  <h1>Settings</h1>
+      </div>
+<p>
+
+ <h2>Weather</h2>
+       
+          <label for="gps_switch"><h4>Use GPS</h4></label>
+          Disable, and enter a location below, to conserve some battery.<br>
+          <select name="gps_switch" id="gps_switch" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+  
+ <p>
+ 
+          <label for="location">Enter your <strong>Location</strong> if <strong>Use GPS</strong> is <strong>NO</strong> eg. London</label>
+          
+<input type="text" name="location" id="location" value=" ">
+ <p>
+
+          <fieldset data-role="controlgroup" data-type="horizontal">
+            <legend><h4>Units</h4></legend>
+
+            <label for="celsius">Celsius</label>
+            <input type="radio" id="celsius" name="units" value="celsius" data-theme="a">
+
+            <label for="fahrenheit">Fahrenheit</label>
+            <input type="radio" id="fahrenheit" name="units" value="fahrenheit" data-theme="a">
+          </fieldset>
+        </p>
+        
+         <label for="circles"><h4>Hide wether info (and circles)</h4></label>
+          <select name="circles" id="circles" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>        
+        
+        
+        <br>
+        
+        <hr>
+
+          <h2>Display</h2>
+
+         <label for="seconds"><h4>Seconds</h4></label>
+          <select name="seconds" id="seconds" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+          <!--
+        <label for="dateformat"><h4>Date Format</h4></label>
+          <select name="dateformat" id="dateformat" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">Long</option>
+            <option value="true">Short</option>
+          </select>
+          -->
+   		<label for="random"><h4>Random Behaviour</h4></label>
+       <small>Picture changes every..</small><br>
+          <select name="random" id="random" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">Minute</option>
+            <option value="true">Hour</option>
+          </select>
+          <br>
+ 
+  <label for="background"><h4>Watch Images</h4></label>
+            <small>Select an option from the dropdown below</small><br>
+
+ <img src="/www.themapman.com/pebblewatch/images/themes/theme0.png" id="theme">
+          <select name="background" id="background">
+   <!--         <option value=0>loading</option>  -->
+            <option value="2">Landmarks</option>
+            <option value="3">Pets</option>
+            <option value="4">Active People</option>
+            <option value="5">Space</option>
+            <option value="6">All themes random/mixed</option>
+
+	<!--		<option class="select-dash" disabled="disabled"> or, set an individual pic </option>
+            <option value=6>Golden Gate Bridge</option>
+            <option value=7>Taj Mahal</option>
+            <option value=8>Sydney Opera House</option>
+            <option value=9>Forbidden City</option>
+            <option value=10>Eiffel Tower</option>
+            <option value=11>Big Ben</option>
+            <option value=12>Giza Pyramids</option>
+            <option value=13>Christ The Redeemer</option>
+            <option value=14>Tie Fighter</option>
+            <option value=15>Green Nebula</option>
+            <option value=16>X-Wing</option>
+            <option value=17>Earth</option>
+            <option value=18>Horsehead Nebula</option>
+            <option value=19>Galaxy</option>
+            <option value=20>Star Trek</option>
+            <option value=22>Puppy on the floor</option>
+            <option value=23>Sad Pug</option>
+            <option value=24>Lazy Black Cat</option>
+            <option value=25>My Russian blue</option>
+            <option value=26>Nervous Kitten</option>
+            <option value=27>Yellow cat eye</option>
+            <option value=28>Cat & Dog</option>
+            <option value=29>Dogs</option>
+            <option value=30>Seated person</option>
+            <option value=31>Skater</option>
+            <option value=32>Rock Climber</option>
+            <option value=33>Hiker</option>
+            <option value=34>Person standing</option>
+            <option value=35>Victorious</option>
+            <option value=36>Runner</option> -->
+          </select>
+          </p>
+          
+             <br>    
+        <hr>
+          <h2>Vibration</h2>
+        
+          <label for="bluetoothvibe"><h4>Bluetooth</h4></label>
+          <select name="bluetoothvibe" id="bluetoothvibe" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        
+          <label for="hourlyvibe"><h4>Hourly</h4></label>
+          <select name="hourlyvibe" id="hourlyvibe" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        <p>
+  <hr>
+  <br>      
+        <div class='ui-body ui-body-b'>
+          <fieldset class='ui-grid-a'>
+            <div class='ui-block-a'><button type='submit' data-theme='d' id='b-cancel'>Cancel</button></div>
+            <div class='ui-block-b'><button type='submit' data-theme='b' id='b-submit'>Submit</button></div>
+          </fieldset>
+        </div>
+   <br>
+<p align="center">
+  <a href="/www.paypal.me//markchopsreed.html" title="Support"><img src="/www.themapman.com/pebblewatch/paypalwider.png" width="200" height="35"></a>
+    <br><br>
+<em>If you find this watchface useful, please consider making a small donation via the link above. Thankyou.</em>
+</p>
+    </div>
+   <script>
+
+ var imagesArray = [
+  "images/themes/theme0.png", // represents val 0,
+  "images/themes/theme0.png", // 1,
+  "images/themes/theme2.png",  // 2 landmarks..
+  "images/themes/theme3.png",  // 3 pets...
+  "images/themes/theme4.png",  // 4 people...
+  "images/themes/theme5.png",  // 5 space...
+  "images/themes/theme7.png"  // 6 random...
+/*  "images/themes/theme8.png",  // 7 ...
+  "images/themes/theme9.png",  // 8 ...
+  "images/themes/theme10.png",  // 9 ...
+  "images/themes/theme11.png",  // 10 ...
+  "images/themes/theme12.png",  // 11 ...
+  "images/themes/theme13.png",  // 12 ...
+  "images/themes/theme14.png",  // 13 ...
+  "images/themes/theme15.png",  // 14 ...
+  "images/themes/theme16.png",  // 15 ...
+  "images/themes/theme17.png",  // 16 ...
+  "images/themes/theme18.png", // 17 ...
+  "images/themes/theme19.png",  // 18 ...
+  "images/themes/theme20.png",  // 19 ...
+  "images/themes/theme21.png",  // 20 ...
+  "images/themes/theme22.png",  // 21 ...
+  "images/themes/theme23.png",  // 22 ...
+  "images/themes/theme24.png",  // 23 ...
+  "images/themes/theme25.png",  // 24 ...
+  "images/themes/theme26.png",  // 25 ...
+  "images/themes/theme27.png",  // 26 ...
+  "images/themes/theme28.png", // 27 ...
+  "images/themes/theme29.png",  // 28 ...
+  "images/themes/theme30.png",  // 29 ...
+  "images/themes/theme31.png", // 30 ...
+  "images/themes/theme32.png",  // 31 ...
+  "images/themes/theme33.png",  // 32 ...
+  "images/themes/theme34.png",  // 33 ...
+  "images/themes/theme35.png",  // 34 ...
+  "images/themes/theme36.png",  // 35 ...
+  "images/themes/theme37.png"  // 36 ...*/
+];
+
+$('#background').change(function(){
+  $('#theme')[0].src = imagesArray[this.value];
+});  
+
+      function getQueryVariable(variable) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (pair[0] == variable)
+            return decodeURIComponent(pair[1]);
+        }
+        return false;
+      }
+
+      function saveOptions() {
+        var options = {
+          'use_gps': $('#gps_switch').val(),
+          'location': $('#location').val(),
+          'units': $('input:radio[name=units]:checked').val(),
+		  'background': parseInt( $("#background :selected").val() ),
+		  'bluetoothvibe': $('#bluetoothvibe').val(),
+          'hourlyvibe': $('#hourlyvibe').val(),
+          'seconds': $('#seconds').val(),
+          'circles': $('#circles').val(),
+          'random': $('#random').val(),
+          'dateformat': $('#dateformat').val()
+
+        }
+        return options;
+      }
+
+      $().ready(function() {
+        $('#b-cancel').click(function() {
+          document.location = 'pebblejs://close#';
+        });
+        $('#b-submit').click(function() {
+          document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(saveOptions()));
+        });
+
+        $('#gps_switch').val(getQueryVariable('use_gps')).change();
+        $('#location').val(getQueryVariable('location'));
+        if (getQueryVariable('units') == "celsius") {
+          $('input:radio[name=units][value=celsius]').prop('checked', true).trigger("click");
+        } else {
+          $('input:radio[name=units][value=fahrenheit]').prop('checked', true).trigger("click");
+        }
+
+		$('#background').val(getQueryVariable('background')).change();
+		$('#bluetoothvibe').val(getQueryVariable('bluetoothvibe')).change();
+        $('#hourlyvibe').val(getQueryVariable('hourlyvibe')).change();
+        $('#seconds').val(getQueryVariable('seconds')).change();
+        $('#circles').val(getQueryVariable('circles')).change();
+        $('#random').val(getQueryVariable('random')).change();
+        $('#dateformat').val(getQueryVariable('dateformat')).change();
+
+
+        // Disable location field based on GPS toggle
+        $('#location').prop('disabled', $('#gps_switch').val() == "true");
+        $('#gps_switch').change(function() {
+          $('#location').prop('disabled', $('#gps_switch').val() == "true");
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html><!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!--><html class="no-js"><!--<![endif]--><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>BN0046</title><meta name="description" content=""><meta name="viewport" content="width=device-width"><!-- Place favicon.ico and apple-touch-icon.png in the root directory --><link rel="stylesheet" href="/ryck.github.io/BN0046/styles/vendor.css"><link rel="stylesheet" href="/ryck.github.io/BN0046/styles/main.css"><script src="/ryck.github.io/BN0046/bower_components/modernizr/modernizr.js"></script><body class="config"><!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]--><div id="configure-form" class="container config-container"><form class="form-horizontal form-config" role="form"><div class="form-group"><label for="show-date" class="col-sm-3 control-label">Show date</label><div class="col-sm-6"><input type="checkbox" name="show-date" id="show-date" data-on-color="success"></div></div><div class="form-group"><label for="show-seconds" class="col-sm-3 control-label">Show seconds</label><div class="col-sm-6"><input type="checkbox" name="show-seconds" id="show-seconds" data-on-color="success"></div></div><div class="form-group hidden"><label for="show-moon" class="col-sm-3 control-label">Show moon</label><div class="col-sm-6"><input type="checkbox" name="show-moon" id="show-moon" data-on-color="success"></div></div><div class="form-group"><label class="col-sm-3 control-label">Date format</label><div class="col-sm-3"><div class="date-format-label date-format-label-default"></div><input id="date-format-default" type="radio" name="date-format" value="1" data-on-color="success"></div><div class="col-sm-3"><div class="date-format-label date-format-label-non-us"></div><input id="date-format-non-us" type="radio" name="date-format" value="2" data-on-color="success"></div><div class="col-sm-3"><div class="date-format-label date-format-label-us"></div><input id="date-format-us" type="radio" name="date-format" value="3" data-on-color="success"></div></div><div class="form-group"><div class="col-sm-offset-3 col-sm-9"><button type="submit" id="submit" class="btn btn-primary btn-lg btn-block">Save</button></div></div></form><!--             <div class="mastfoot">
+                <div class="inner">
+                  <p><a href="http://ryck.me" title="ryck.me">ryck.me</a></p>
+                </div>
+            </div> --></div><script src="/ryck.github.io/BN0046/scripts/vendor.js"></script><script>var mDate;
+          var mSeconds;
+          var mMoon;
+          var mDateFormat;
+          var mInverse;
+
+          $().ready(function () {
+
+            mDate = parseInt(localStorage.getItem("date"));
+            if(isNaN(mDate)) {
+              mDate = 1;
+            }
+            if(mDate) {
+                $('#show-date').bootstrapSwitch('state', true);
+            } else {
+                $('#show-date').bootstrapSwitch('state', false);
+            }
+
+            mSeconds = parseInt(localStorage.getItem("seconds"));
+            if(isNaN(mSeconds)) {
+              mSeconds = 1;
+            }
+            if(mSeconds) {
+                $('#show-seconds').bootstrapSwitch('state', true);
+            } else {
+                $('#show-seconds').bootstrapSwitch('state', false);
+            }
+
+            mMoon = parseInt(localStorage.getItem("moon"));
+            if(isNaN(mMoon)) {
+              mMoon = 0;
+            }
+            if(mMoon) {
+                $('#show-moon').bootstrapSwitch('state', true);
+            } else {
+                $('#show-moon').bootstrapSwitch('state', false);
+            }
+
+            mDateFormat = parseInt(localStorage.getItem("format"));
+            if(isNaN(mDateFormat)) {
+              mDateFormat = 1;
+            }
+            switch (mDateFormat) {
+                case 1:
+                $('#date-format-default').bootstrapSwitch('state', true);
+                break
+                case 2:
+                $('#date-format-non-us').bootstrapSwitch('state', true);
+                break
+                case 3:
+                $('#date-format-us').bootstrapSwitch('state', true);
+                break
+            }
+
+        });
+
+          $("#configure-form").submit(function(e) {
+
+            mDate = $('#show-date').prop('checked') ? 1 : 0;
+            localStorage.setItem("date", mDate);
+
+            mSeconds = $('#show-seconds').prop('checked') ? 1 : 0;
+            localStorage.setItem("seconds", mSeconds);
+
+            mMoon = $('#show-moon').prop('checked') ? 1 : 0;
+            localStorage.setItem("moon", mMoon);
+
+            mDateFormat = $('input[name=date-format]:checked', '#configure-form').val()
+            localStorage.setItem("format", mDateFormat);
+
+            var j = {
+              show_date : parseInt(mDate),
+              show_seconds : parseInt(mSeconds),
+              show_moon : parseInt(mMoon),
+              date_format : parseInt(mDateFormat)
+            };
+
+            window.location.href = "pebblejs://close#" + JSON.stringify(j);
+
+
+            var location = "pebblejs://close#" + JSON.stringify(j);
+            console.log("Warping to: " + location);
+            console.log(location);
+            // document.location = location;
+
+            e.preventDefault();
+          });</script><!-- Google Analytics: change UA-XXXXX-X to be your site's ID. --><script>(function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
+            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+            e.src='//www.google-analytics.com/analytics.js';
+            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+            ga('create','UA-48095891-1');ga('send','pageview');</script><script src="/ryck.github.io/BN0046/scripts/plugins.js"></script><script src="/ryck.github.io/BN0046/scripts/main.js"></script></body></head></html>

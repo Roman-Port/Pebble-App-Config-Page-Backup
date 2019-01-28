@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DirectTV - Remote - Connect </title>
+    <meta charset="utf-8" name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+    <script type="text/javascript" src="lib/rollbar.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/async/0.9.0/async.js"></script>
+    <script type="text/javascript"
+            src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="lib/dtv-remote.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <h4><a href="javascript:history.back()" class="glyphicon glyphicon-chevron-left pull-left" style="margin-right: 10px"></a>Test
+            Connection
+        </h4>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <form>
+                <div class="form-group">
+                    <label for="ipAddress">IP Address</label>
+                    <input type="ipAddress" class="form-control" id="ipAddress">
+                </div>
+                <button type="submit" class="btn btn-default cmd-connect">Test connection</button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12">
+            <h5>Status</h5>
+            <ul id="messages" class="list-group">
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        //Helpers
+        function getQueryParams(queryString) {
+            var query = (queryString || window.location.search).substring(1); // delete ?
+            if (!query) {
+                return false
+            }
+            return _
+                    .chain(query.split('&'))
+                    .map(function (params) {
+                        var p = params.split('=')
+                        return [p[0], decodeURIComponent(p[1])]
+                    })
+                    .object()
+                    .value()
+        }
+
+        var remote;
+        var itemHTML = "<li class=\"list-group-item\">{{message}}</li>";
+
+        var params = getQueryParams();
+        if (params["token"]) {
+            Rollbar.configure({payload: {person: {token: params.token}}});
+            console.log("token: " + params.token)
+        }
+        var renderItemHTML = function (target, message) {
+            $(target).append(itemHTML.replace("{{message}}", message));
+        };
+
+        $(".cmd-connect").on("click", function (e) {
+            e.preventDefault();
+            $('#messages').empty()
+            remote = new DirecTV.Remote({
+                ipAddress: $('#ipAddress').val()
+            });
+
+            async.waterfall([
+                function (callback) {
+                    renderItemHTML("#messages", "Connecting......")
+                    remote.validate({callback: callback})
+                },
+                function (validateResponse, callback) {
+                    renderItemHTML('#messages', validateResponse.status.msg);
+                    callback();
+                },
+                function (callback) {
+                    remote.getTuned({callback: callback})
+                },
+                function (tuneResponse, callback) {
+                    renderItemHTML('#messages', "You are watching: " + tuneResponse.title);
+                    callback();
+                }
+            ], function (err) {
+                var message = (err && err.status) ? err.status.msg : "An unknown error: " + JSON.stringify(err)
+                if (err) {
+                    renderItemHTML('#messages', message)
+                    Rollbar.error(message);
+                }
+            });
+        });
+    })
+</script>
+</body>
+</html>

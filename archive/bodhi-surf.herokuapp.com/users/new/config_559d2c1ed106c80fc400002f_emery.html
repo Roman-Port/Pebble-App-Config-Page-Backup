@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"d5e363ea49","applicationID":"26569001","transactionName":"JgsITEVaXwgEFhdHQgAWFRdZUEQ=","queueTime":3,"applicationTime":87,"agent":""}</script>
+<script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1118.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);</script>
+  <title>Bodhi</title>
+  <link rel="stylesheet" media="all" href="/bodhi-surf.herokuapp.com/assets/application-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" data-turbolinks-track="true">
+  <script src="/bodhi-surf.herokuapp.com/assets/application-f6d0ca5cdf0a83774ed323748a567099dd3bdc4bdbc32252c8628eed24713d66.js" data-turbolinks-track="true"></script>
+  
+</head>
+<body>
+
+<!doctype html>
+<html>
+<head>
+  <title>Bodhi Configuration</title>
+
+  <!-- Include meta tag to ensure proper rendering and touch zooming -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bits for the location picker-->
+  <script type="text/javascript" src="/maps.googleapis.com/maps/api/js_2132708568.js"></script>
+  <link rel="stylesheet" media="all" href="/bodhi-surf.herokuapp.com/assets/jquery.css" data-turbolinks-track="true">
+  <link rel="stylesheet" media="all" href="/bodhi-surf.herokuapp.com/assets/slate.css" data-turbolinks-track="true">
+  <link rel="stylesheet" media="all" href="/bodhi-surf.herokuapp.com/assets/user-fe3ebf88315c221c45120e080cb37b6a57f639d67f3badcf8ad81082626d3e84.css" data-turbolinks-track="true">
+  <script src="/bodhi-surf.herokuapp.com/assets/jquery.js" data-turbolinks-track="true"></script>
+  <script src="/bodhi-surf.herokuapp.com/assets/slate.js" data-turbolinks-track="true"></script>
+  <script src="/bodhi-surf.herokuapp.com/assets/gmaps.js" data-turbolinks-track="true"></script>
+
+  
+
+</head>
+
+<body>
+<div class="item-container">
+  <div class="item-container-header">Favorite Spot location</div>
+  <div class="item-container-content">
+    <div class="item-container-content">
+      <label class="item">
+        <div class="item-input-wrapper item-input-wrapper-button">
+          <input type="text" class="item-input searchField" id="search-name" name="place_name" placeholder="Search a spot or a city by name">
+        </div>
+        <input type="button" class="item-button item-input-button searchButton" value="FIND" id="search-spot">
+      </label>
+
+      <div id="map" class="map">Google Maps</div>
+      <input type="text" class="hidden" id="lat" name="lat" value="43.6976">
+      <input type="text" class="hidden" id="lon" name="lon" value="-1.4409">
+      <input type="text" class="hidden" id="spot_id" name="spot_id" value="210330c7-3f40-4696-8ae6-792886e48f4c">
+      <input type="text" class="hidden" id="spot_name" name="spot_name" value="Les Bourdaines">
+    </div>
+  </div>
+</div>
+<div class="item-container-footer">
+  Tap a pin to select a spot. Drag the map to reveal new spots or search a specific one using the text field above the
+  map
+</div>
+<br>
+
+<div class="item-container">
+  <div class="item-container-header">Forecast type</div>
+  <div class="item-container-content">
+    <div class="item tab-buttons">
+      <a name="forecast_type" id="both" class="tab-button active">Tide & Swell</a>
+      <a name="forecast_type" id="tide" class="tab-button">Tide</a>
+      <a name="forecast_type" id="swell" class="tab-button">Swell</a>
+    </div>
+  </div>
+</div>
+
+<div class="item-container">
+  <div class="item-container-header">Forecast language</div>
+  <div class="item-container-content">
+    <label class="item">
+      <br>
+      <select id="language" dir='rtl' class="item-select">
+        <option class="item-select-option" value="de">Deutsch</option>
+        <option class="item-select-option" value="en" selected="">English</option>
+        <option class="item-select-option" value="es">Español</option>
+        <option class="item-select-option" value="fr">Français</option>
+        <option class="item-select-option" value="it">Italiano</option>
+        <option class="item-select-option" value="pt">Português</option>
+        <option class="item-select-option" value="ja">???</option>
+        <option class="item-select-option" value="zh">??</option>
+      </select>
+    </label>
+  </div>
+</div>
+
+<div class="item-container">
+  <div class="item-container-header">Units</div>
+  <div class="item-container-content">
+    <div class="item tab-buttons">
+      <a name="units" id="eu" class="tab-button active">EU</a>
+      <a name="units" id="us" class="tab-button">US</a>
+      <a name="units" id="uk" class="tab-button">UK</a>
+      <a name="units" id="ca" class="tab-button">CA</a>
+    </div>
+  </div>
+  <div class="item-container-footer">
+    <br>
+    <table class="table" id="units-table">
+      <tr>
+        <th>&nbsp;</th>
+        <th>Swell height</th>
+        <th>Wind Speed</th>
+        <th>Tide Height</th>
+        <th>Temp.</th>
+      </tr>
+      
+      <tbody>
+      <tr>
+        <td>EU</td>
+        <td>m</td>
+        <td>kph</td>
+        <td>m</td>
+        <td>&deg;c</td>
+      </tr>
+      <tr>
+        <td>US</td>
+        <td>ft</td>
+        <td>mph</td>
+        <td>ft</td>
+        <td>&deg;f</td>
+      </tr>
+      <tr>
+        <td>UK</td>
+        <td>ft</td>
+        <td>mph</td>
+        <td>m</td>
+        <td>&deg;c</td>
+      </tr>
+      <tr>
+        <td>Canada</td>
+        <td>ft</td>
+        <td>mph</td>
+        <td>ft</td>
+        <td>&deg;c</td>
+      </tr>
+    </tbody></table>
+  </div>
+</div>
+
+<div id="swell_settings">
+
+  <div class="item-container-header">Swell forecast time frame</div>
+  <div class="item-container-content">
+    <label class="item">
+      <br><br>
+      <input type="hidden" class="forecast-time-frame-slider" value="6.0,21.0" id="forecast_time_frame">
+      <br><br>
+    </label>
+  </div>
+  <div class="item-container-footer">
+    Set the timeframe of the day when forecast should be sent. Maybe you don't want to know that the set is perfect at 3
+    in the morning :)
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Swell forecast interval (Hour)</div>
+    <div class="item-container-content">
+      <div class="item tab-buttons">
+        <a name="forecast_interval" id="1" class="tab-button">1</a>
+        <a name="forecast_interval" id="3" class="tab-button active">3</a>
+        <a name="forecast_interval" id="6" class="tab-button">6</a>
+        <a name="forecast_interval" id="12" class="tab-button">12</a>
+        <a name="forecast_interval" id="24" class="tab-button">24</a>
+      </div>
+    </div>
+    <div class="item-container-footer">
+      Daily swell forecast are sent at noon.
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Surf Alert</div>
+    <div class="item-container-content">
+      <label class="item">
+        Send surf alert
+        <input type="checkbox" class="item-toggle" id="surf_alert_toggle">
+      </label>
+    </div>
+    <div class="item-container-footer">
+      If enabled, you will receive surf alerts if forecasted surf conditions match the settings above.
+      <br>
+      Surf alerts are sent 1 day before and 1 hour before the forecasted conditions time.
+    </div>
+    <br>
+
+    <div id="surf_alert_settings">
+
+      <div class="item-container-header">Swell height (m)</div>
+      <div class="item-container-content">
+        <label class="item">
+          <br><br>
+          <input type="hidden" class="swell-range-slider" id="swell_range" value="0.8,1.8">
+          <br><br>
+        </label>
+      </div>
+
+      <div class="item-container-header">Minimum period (s)</div>
+      <div class="item-container-content">
+        <label class="item">
+          <br><br>
+          <input type="hidden" class="period-range-slider" value="10" id="period_range">
+          <br><br>
+        </label>
+      </div>
+
+      <div class="item-container-header">Swell direction</div>
+      <div class="item-container-content">
+        <div class="item tab-buttons">
+          <a name="swell_direction" id="ALL" class="tab-button active">All</a>
+          <a name="swell_direction" id="N" class="tab-button">North</a>
+          <a name="swell_direction" id="S" class="tab-button">South</a>
+          <a name="swell_direction" id="W" class="tab-button">West</a>
+          <a name="swell_direction" id="E" class="tab-button">East</a>
+        </div>
+      </div>
+      <div class="item-container-footer">
+        Swell coming from side direction will also be taken into account. For example, an alert will be sent if East
+        side
+        is selected and the swell comes from NE or SE.
+      </div>
+
+      <div class="item-container-header">Maximum wind speed (kmph)</div>
+      <div class="item-container-content">
+        <label class="item">
+          <br><br>
+          <input type="hidden" class="wind-range-slider" value="10" id="wind_range">
+          <br><br>
+        </label>
+      </div>
+
+      <div class="item-container-header">Wind direction</div>
+      <div class="item-container-content">
+        <div class="item tab-buttons">
+          <a name="wind_direction" id="ALL" class="tab-button active">All</a>
+          <a name="wind_direction" id="N" class="tab-button">North</a>
+          <a name="wind_direction" id="S" class="tab-button">South</a>
+          <a name="wind_direction" id="W" class="tab-button">West</a>
+          <a name="wind_direction" id="E" class="tab-button">East</a>
+        </div>
+      </div>
+      <div class="item-container-footer">
+        Wind coming from side direction will also be taken into account. For example, an alert will be sent if East side
+        is selected and the wind comes from NE or SE.
+      </div>
+
+      <div class="item-container-header">Alert time frame</div>
+      <div class="item-container-content">
+        <label class="item">
+          <br><br>
+          <input type="hidden" class="alert-time-frame-slider" value="6.0,21.0" id="alert_time_frame">
+          <br><br>
+        </label>
+      </div>
+      <div class="item-container-footer">
+        Set the timeframe of the day when surf alert should be sent. It's better indeed to not receive surf alert when
+        you're stuck at work on a morning :(
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<br>
+
+<div class='item-container'>
+  <div class='button-container'>
+    <input id='submit_button' type='button' class='item-button' value='SAVE CONFIGURATION'>
+  </div>
+</div>
+
+</body>
+<script type="text/javascript">
+    var $ = jQuery.noConflict();
+    var map;
+    var minZoom = 14;
+    var rootUrl = 'https://bodhi-surf.herokuapp.com';
+
+    $(document).ready(function () {
+
+        //initializing map
+        map = new GMaps({
+            el: '#map',
+            lat: document.getElementById("lat").value,
+            lng: document.getElementById("lon").value,
+            zoom: minZoom,
+            dragend: function (e) {
+                loadSpotPinsByPosition();
+            }
+        });
+
+        $(".forecast-time-frame-slider").jRange({
+            from: 0,
+            to: 23,
+            step: 1,
+            scale: [0, 6, 9, 12, 15, 18, 20, 23],
+            format: "%s",
+            width: 300,
+            showLabels: true,
+            isRange: true
+        });
+        $('.swell-range-slider').jRange({
+            from: 0,
+            to: 6.0,
+            step: 0.1,
+            scale: [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0],
+            format: "%s",
+            showLabels: true,
+            isRange: true
+        });
+        $(".period-range-slider").jRange({
+            from: 0,
+            to: 24,
+            step: 1,
+            scale: [0, 6, 12, 18, 24],
+            format: "%s",
+            width: 300,
+            showLabels: true,
+            isRange: false
+        });
+        $(".wind-range-slider").jRange({
+            from: 0,
+            to: 60,
+            step: 1,
+            scale: [0, 10, 20, 30, 40, 50, 60],
+            format: "%s",
+            width: 300,
+            showLabels: true,
+            isRange: false
+        });
+        $(".alert-time-frame-slider").jRange({
+            from: 0,
+            to: 23,
+            step: 1,
+            scale: [0, 6, 9, 12, 15, 18, 20, 23],
+            format: "%s",
+            width: 300,
+            showLabels: true,
+            isRange: true
+        });
+
+        var button = document.getElementById("surf_alert_toggle"); // Assumes element with id="button"
+        button.onclick = function () {
+            hideSurfAlertSettings();
+        };
+
+        //hidding/displaying surf alert if necessary
+        hideSurfAlertSettings();
+
+        var forecast_typePicker = document.getElementsByName("forecast_type");
+        for (var i = 0, length = forecast_typePicker.length; i < length; i++) {
+            if (forecast_typePicker[i].id == 'tide') {
+                forecast_typePicker[i].onclick = function () {
+                    hideSwellSettings(true);
+                };
+                //hidding settings if already active
+                hideSwellSettings(forecast_typePicker[i].classList.contains("active"));
+            } else {
+                forecast_typePicker[i].onclick = function () {
+                    hideSwellSettings(false);
+                }
+            }
+        }
+
+
+        //loading a first batch of pins
+        loadSpotPinsByPosition();
+
+        //selecting the marker if it's the selected spot already
+        $.each(map.markers, function (key, marker) {
+            if (marker.title == document.getElementById('spot_name').value) {
+                marker.infoWindow.open(map, marker);
+
+            }
+        });
+    });
+
+    var searchButton = document.getElementById("search-spot");
+    searchButton.addEventListener("click", function () {
+        console.log("Search");
+        loadSpotPinsByName();
+    });
+
+    function loadSpotPinsByPosition() {
+        var Httpreq = new XMLHttpRequest(); // a new request
+        var position = map.getCenter();
+        Httpreq.open("GET", rootUrl + '/spots?lat=' + position.lat() + '&lon=' + position.lng(), false);
+        Httpreq.send(null);
+        var spots = JSON.parse(Httpreq.responseText);
+        displaySpotPins(spots);
+    }
+
+    function loadSpotPinsByName() {
+        var Httpreq = new XMLHttpRequest(); // a new request
+        var name = document.getElementById("search-name").value;
+        Httpreq.open("GET", rootUrl + '/spots?name=' + name, false);
+        Httpreq.send(null);
+        var spots = JSON.parse(Httpreq.responseText);
+        if (spots.length > 0) {
+            //deleting all pins
+            map.removeMarkers();
+            displaySpotPins(spots);
+            //fiting zoom
+            map.fitZoom();
+            //setting at least a zoom of 14 if needed
+            console.log("zoom " + map.getZoom());
+            if (map.getZoom() > minZoom) {
+                map.setZoom(minZoom)
+            }
+        }else{
+            alert("No spot or city found for '"+name+"'");
+        }
+
+    }
+
+    function displaySpotPins(spots) {
+        $.each(spots, function (key, spot) {
+            //checking if the marker has already been displayed
+            var skip = false;
+            $.each(map.markers, function (key, marker) {
+                if (marker.title == spot.name) {
+                    skip = true;
+                }
+            });
+
+            if (skip == false) {
+                map.addMarker({
+                    lat: spot.lat,
+                    lng: spot.lon,
+                    title: spot.name,
+                    icon: {
+                        size: new google.maps.Size(64, 64),
+                        url: rootUrl + '/forecast_template/images/bodhi_pin@2x.png'
+                    },
+                    infoWindow: {
+                        content: '<span style="color: #4EC0E8; font-size: medium; line-height: 20pt; horiz-align: center"><b>SPOT SELECTED<br></span><span style="font-size: medium; line-height: 20pt; horiz-align: center">' + spot.name + '</span></b><br><i>' + spot.city + ' ' + spot.country + '</i>'
+                    },
+                    click: function (e) {
+//                        console.log("click on spot " + spot.name)
+                        document.getElementById("lat").value = spot.lat
+                        document.getElementById("lon").value = spot.lon
+                        document.getElementById("spot_id").value = spot.id
+                        document.getElementById("spot_name").value = spot.name
+                    }
+                });
+            }
+        });
+    }
+
+
+    function hideSurfAlertSettings() {
+        var div = document.getElementById("surf_alert_settings");
+        if (document.getElementById("surf_alert_toggle").checked) {
+            div.style.display = "block";
+        }
+        else {
+            div.style.display = "none";
+        }
+    }
+
+    function hideSwellSettings(hide) {
+        var div = document.getElementById("swell_settings");
+        if (hide) {
+            div.style.display = "none";
+        } else {
+            div.style.display = "block";
+        }
+    }
+
+    function getConfigData() {
+        var latPicker = document.getElementById("lat");
+        var lonPicker = document.getElementById("lon");
+        var spotIdPicker = document.getElementById("spot_id");
+        var spotNamePicker = document.getElementById("spot_name");
+
+        var forecast_typePicker = document.getElementsByName("forecast_type");
+        var forecast_type;
+        for (var i = 0, length = forecast_typePicker.length; i < length; i++) {
+            if (forecast_typePicker[i].classList.contains("active")) {
+                forecast_type = forecast_typePicker[i].id;
+                break;
+            }
+        }
+
+        var forecast_intervalPicker = document.getElementsByName("forecast_interval");
+        var forecast_interval;
+        for (var i = 0, length = forecast_intervalPicker.length; i < length; i++) {
+            if (forecast_intervalPicker[i].classList.contains("active")) {
+                forecast_interval = forecast_intervalPicker[i].id;
+                break;
+            }
+        }
+
+        var languagePicker = document.getElementById("language");
+
+        var unitsPicker = document.getElementsByName("units");
+        var units;
+        for (var i = 0, length = unitsPicker.length; i < length; i++) {
+            if (unitsPicker[i].classList.contains("active")) {
+                units = unitsPicker[i].id;
+                break;
+            }
+        }
+
+
+        var alertSwitch = document.getElementById("surf_alert_toggle");
+        var swellRangeSlider = document.getElementById("swell_range");
+        var periodMaxSlider = document.getElementById("period_range");
+        var swellDirectionPicker = document.getElementsByName("swell_direction");
+        var windMaxSlider = document.getElementById("wind_range");
+        var windDirectionPicker = document.getElementsByName("wind_direction");
+        var alertTimeFrameSlider = document.getElementById("alert_time_frame");
+
+        var options = {
+            "units": units,
+            "spot_id": spotIdPicker.value,
+            "forecast_type": forecast_type,
+            "forecast_time_frame": alertTimeFrameSlider.value,
+            "language": languagePicker.options[languagePicker.selectedIndex].value,
+            "forecast_interval": forecast_interval
+        };
+
+        if (alertSwitch.checked) {
+            options["swell_range"] = swellRangeSlider.value;
+            options["min_period"] = periodMaxSlider.value;
+            for (var i = 0, length = swellDirectionPicker.length; i < length; i++) {
+                if (swellDirectionPicker[i].classList.contains("active")) {
+                    options["swell_direction"] = swellDirectionPicker[i].id;
+                    break;
+                }
+            }
+            options["max_wind"] = windMaxSlider.value;
+            for (var i = 0, length = windDirectionPicker.length; i < length; i++) {
+                if (windDirectionPicker[i].classList.contains("active")) {
+                    options["wind_direction"] = windDirectionPicker[i].id;
+                    break;
+                }
+            }
+            options["alert_time_frame"] = alertTimeFrameSlider.value;
+        }
+
+        // Save for next launch
+        localStorage["units"] = options["units"];
+        localStorage["lat"] = latPicker.value;
+        localStorage["lon"] = lonPicker.value;
+        localStorage["spot_id"] = options["spot_id"];
+        localStorage["spot_name"] = spotNamePicker.value;
+        localStorage["forecast_type"] = options["forecast_type"];
+        localStorage["forecast_time_frame"] = options["forecast_time_frame"];
+        localStorage["language"] = options["language"];
+        localStorage["forecast_interval"] = options["forecast_interval"];
+
+        if (alertSwitch.checked) {
+            localStorage["alert_activated"] = true;
+            localStorage["swell_range"] = options["swell_range"];
+            localStorage["min_period"] = options["min_period"];
+            localStorage["swell_direction"] = options["swell_direction"];
+            localStorage["max_wind"] = options["max_wind"];
+            localStorage["wind_direction"] = options["wind_direction"];
+            localStorage["alert_time_frame"] = options["alert_time_frame"];
+        } else {
+            localStorage["alert_activated"] = false;
+        }
+
+        console.log("Got options: " + JSON.stringify(options));
+        return options;
+    }
+
+    function getQueryParam(variable, defaultValue) {
+        var query = location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] === variable) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        return defaultValue || false;
+    }
+
+    var submitButton = document.getElementById("submit_button");
+    submitButton.addEventListener("click", function () {
+        console.log("Submit");
+        if (document.getElementById("spot_id") === null) {
+            alert("You need to select a spot first !")
+        } else {
+            document.location = getQueryParam("return_to", "pebblejs://close#") + encodeURIComponent(JSON.stringify(getConfigData()));
+        }
+    });
+
+    (function () {
+        var latPicker = document.getElementById("lat");
+        var lonPicker = document.getElementById("lon");
+        var spotIdPicker = document.getElementById("spot_id");
+        var spotNamePicker = document.getElementById("spot_name");
+        var forecast_typePicker = document.getElementsByName("forecast_type");
+        var forecastTimeFrameSlider = document.getElementById("forecast_time_frame");
+        var forecast_intervalPicker = document.getElementsByName("forecast_interval");
+        var languagePicker = document.getElementById("language");
+        var unitsPicker = document.getElementsByName("units");
+        var alertSwitch = document.getElementById("surf_alert_toggle");
+        var swellRangeSlider = document.getElementById("swell_range");
+        var swellDirectionPicker = document.getElementsByName("swell_direction");
+        var periodMaxSlider = document.getElementById("period_range");
+        var windMaxSlider = document.getElementById("wind_range");
+        var windDirectionPicker = document.getElementsByName("wind_direction");
+        var alertTimeFrameSlider = document.getElementById("alert_time_frame");
+
+        // Load any previously saved configuration, if available
+        if (localStorage["lat"] && localStorage["lon"] && localStorage["spot_id"] && localStorage["spot_name"]) {
+            latPicker.value = localStorage["lat"];
+            lonPicker.value = localStorage["lon"];
+            spotIdPicker.value = localStorage["spot_id"]
+            spotNamePicker.value = localStorage["spot_name"]
+
+        }
+
+        if (localStorage["units"]) {
+            for (var i = 0, length = unitsPicker.length; i < length; i++) {
+                //removing class
+                unitsPicker[i].classList.remove("active");
+                if (unitsPicker[i].id == localStorage["units"]) {
+                    unitsPicker[i].classList.add("active");
+                }
+            }
+        }
+
+        //setting the forecast_time_frame from 6am to 9pm if null (happend when user has storage from a previous version of Bodhi)
+        if (localStorage["forecast_time_frame"] == null) {
+            localStorage["forecast_time_frame"] = "6.0,21.0";
+        }
+        forecastTimeFrameSlider.value = localStorage["forecast_time_frame"];
+
+        if (localStorage["language"]) {
+            languagePicker.value = localStorage["language"];
+        }
+
+        if (localStorage["forecast_type"]) {
+            for (var i = 0, length = forecast_typePicker.length; i < length; i++) {
+                //removing class
+                forecast_typePicker[i].classList.remove("active");
+                if (forecast_typePicker[i].id == localStorage["forecast_type"]) {
+                    forecast_typePicker[i].classList.add("active");
+                }
+            }
+        }
+
+        if (localStorage["forecast_interval"]) {
+            for (var i = 0, length = forecast_intervalPicker.length; i < length; i++) {
+                //removing class
+                forecast_intervalPicker[i].classList.remove("active");
+                if (forecast_intervalPicker[i].id == localStorage["forecast_interval"]) {
+                    forecast_intervalPicker[i].classList.add("active");
+                }
+            }
+        }
+
+        alertSwitch.checked = localStorage["alert_activated"] == "true";
+
+        // Load any previously saved configuration, if available
+        if (localStorage["alert_activated"] == "true") {
+            swellRangeSlider.value = localStorage["swell_range"];
+            periodMaxSlider.value = localStorage["min_period"];
+            //setting the swell_direction to all if null (happend when user has storage from a previous version of Bodhi)
+            if (localStorage["swell_direction"] == null) {
+                localStorage["swell_direction"] = "ALL";
+            }
+            for (var i = 0, length = swellDirectionPicker.length; i < length; i++) {
+                //removing class
+                swellDirectionPicker[i].classList.remove("active");
+                if (swellDirectionPicker[i].id == localStorage["swell_direction"]) {
+                    swellDirectionPicker[i].classList.add("active");
+                }
+            }
+            windMaxSlider.value = localStorage["max_wind"];
+            for (var i = 0, length = windDirectionPicker.length; i < length; i++) {
+                //removing class
+                windDirectionPicker[i].classList.remove("active");
+                if (windDirectionPicker[i].id == localStorage["wind_direction"]) {
+                    windDirectionPicker[i].classList.add("active");
+                }
+            }
+            //setting the alert_time_frame from 6am to 9pm if null (happend when user has storage from a previous version of Bodhi)
+            if (localStorage["alert_time_frame"] == null) {
+                localStorage["alert_time_frame"] = "6.0,21.0";
+            }
+            alertTimeFrameSlider.value = localStorage["alert_time_frame"];
+        }
+    })();
+</script>
+</html>
+
+</body>
+</html>

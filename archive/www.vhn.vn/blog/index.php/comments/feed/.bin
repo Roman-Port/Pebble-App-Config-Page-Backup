@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>Comments for VHNVN&#039;s blog</title>
+	<atom:link href="https://www.vhn.vn/blog/index.php/comments/feed/" rel="self" type="application/rss+xml" />
+	<link>https://www.vhn.vn/blog</link>
+	<description>Smile with the life, it will smile with you!</description>
+	<lastBuildDate>Mon, 30 Nov 2015 03:05:00 +0000</lastBuildDate>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.9.9</generator>
+	<item>
+		<title>Comment on Một bài toán tính tổng by Tung Thanh</title>
+		<link>https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/#comment-3</link>
+		<dc:creator><![CDATA[Tung Thanh]]></dc:creator>
+		<pubDate>Mon, 30 Nov 2015 03:05:00 +0000</pubDate>
+		<guid isPermaLink="false">https://www.vhn.vn/blog/?p=49#comment-3</guid>
+		<description><![CDATA[vanhoa ơi đọc được thì email cho mình nhé .  lee@muhanam.com hay icq 600999719 . thanks]]></description>
+		<content:encoded><![CDATA[<p>vanhoa ơi đọc được thì email cho mình nhé .  <a href="mailto:lee@muhanam.com">lee@muhanam.com</a> hay icq 600999719 . thanks</p>
+]]></content:encoded>
+	</item>
+</channel>
+</rss>

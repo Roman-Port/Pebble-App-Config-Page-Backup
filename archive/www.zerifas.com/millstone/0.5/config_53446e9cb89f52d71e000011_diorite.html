@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no">
+        <link rel="stylesheet" href="/www.zerifas.com/millstone/0.5/css/style.css">
+        <title>Millstone Config</title>
+    </head>
+    <body>
+        <header>
+            <h1>Millstone v0.5</h1>
+        </header>
+
+        <div>
+            <label>
+                Hostname:
+                <input type="url" id="hostname" autocapitalize="none" autocorrect="off" placeholder="company" data-next-field="username">
+                <span class="hostname-suffix">.harvestapp.com</span>
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Username:
+                <input type="email" id="username" autocapitalize="none" autocorrect="off" placeholder="you@company.tld" data-next-field="password">
+            </label>
+        </div>
+
+        <div>
+            <label>
+                Password:
+                <input type="password" id="password" autocapitalize="none" autocorrect="off">
+            </label>
+        </div>
+
+        <div class="controls">
+            <button id="saveButton">Save</button>
+        </div>
+
+        <script src="/www.zerifas.com/millstone/0.5/js/config.js"></script>
+    </body>
+</html>

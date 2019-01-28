@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Textové hodinky</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+		<script src="/code.jquery.com//jquery-1.js"></script>
+		<script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+	</head>
+	<body>
+
+		<!-- Home -->
+		<div data-role="page" id="main">
+			<div data-theme="a" data-role="header">
+				<h4>
+					Textové hodinky
+				</h4>
+			</div>
+			<div data-role="content">
+				<div data-role="fieldcontain">
+					<label for="tapToLanguage">Změnit jazyk poklepem - change language with TAP:</label>
+					<select name="tapToLanguage" id="tapToLanguage" data-theme="b" data-role="slider" data-mini="true">
+						<option value="0">Off</option>
+						<option value="1">On</option>
+					</select>
+				</div>
+				<div data-role="fieldcontain">
+					<label for="language">Zvolte jazyk - select language:</label>
+					<select name="language" id="language" data-theme="b" data-mini="true">
+						<option value="0">čeština - Czech</option>
+						<option value="1">slovenčina - Slovak</option>
+						<option value="2">deutsch - German</option>
+					</select>
+				</div>
+				<div class="ui-body ui-body-b">
+					<fieldset class="ui-grid-a">
+						<div class="ui-block-a">
+							<button id="b-cancel" type="submit" data-inline="true" data-theme="c" data-icon="delete" data-iconpos="left" value="Zruš - Cancel"></button>
+						</div>
+						<div class="ui-block-b">
+							<button id="b-submit" type="submit" data-inline="true" data-theme="b" data-icon="plus" data-iconpos="left" value="Ok"></button>
+						</div>
+					</fieldset>
+				</div>
+
+			</div>
+		</div>
+		<script>
+			$.params = function(param_name) {
+				var value = new RegExp('[\\?&]' + param_name + '=([^&#]*)').exec(window.location.href);
+				return value[1];
+			}
+
+			function saveOptions() {
+				console.log("saveOptions");
+				var options = {
+					'language': parseInt($("#language :selected").val()),
+					'tapToLanguage': parseInt($("#tapToLanguage :selected").val()),
+				}
+				//console.log("res = "+options);
+				return options;
+			}
+
+			$().ready(function() {
+				// Handle cancel button
+				$("#b-cancel").click(function() {
+					console.log("Cancel");
+					document.location = "pebblejs://close";
+				});
+
+				// Handle submit button
+				$("#b-submit").click(function() {
+					console.log("Submit");
+
+					//var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+					var location = "pebblejs://close#" + JSON.stringify(saveOptions());
+					console.log("Warping to: " + location);
+					document.location = location;
+				});
+
+			});
+
+			// Set initial values
+			$("[name=language]").val($.params("language"));
+			$("[name=tapToLanguage]").val($.params("tapToLanguage"));
+		</script>
+	</body>
+</html>

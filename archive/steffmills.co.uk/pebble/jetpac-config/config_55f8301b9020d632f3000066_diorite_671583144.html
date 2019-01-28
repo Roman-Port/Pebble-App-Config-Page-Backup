@@ -1,0 +1,307 @@
+﻿<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>JetPac - Pebble Settings</title>
+	<link href='http://fonts.googleapis.com/css?family=Press+Start+2P' rel='stylesheet' type='text/css'>
+	<style>
+		html { font-family: 'Press Start 2P', cursive; }
+		body { background-color: black; color: white; font-size: 7pt; }
+		table { border: 0px; table-layout: fixed; }
+		input { width: 2em; }
+		#tblJetPacSettings { text-transform: uppercase; font-weight: lighter; border: 0px; margin-top: 3em; }
+		#thHeader { text-align: left; }
+		.hidden { display: none; }
+		@keyframes blink {  
+			0% { background: black; color: white; }
+			50% { background: black; color: white; }
+			100% { background: white; color: black; }
+		}
+		@-webkit-keyframes blink {
+			0% { background: black; color: white; }
+			50% { background: black; color: white; }
+			100% { background: white; color: black; }
+		}
+		.blink {
+			animation: blink 1s step-start 0s infinite;
+			-webkit-animation: blink 1s step-start 0s infinite;
+		}		
+	</style>
+	<script>
+		// quick shortcut function
+		function g(strElementID) { return document.getElementById(strElementID); }
+		
+		// default vars
+		var blnDebug = 0;
+		var blnShowBatteryLevel = 1;
+		var blnSmallIcons = 0;
+		var blnShowConnectedStatus = 1;
+		var blnBluetoothVibe = 0;
+		var numWhichFloor = 1;
+		
+        // pull vars out of the url
+        function getUrlVars() {
+            var vars = {};
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+		// toggle the settings on click
+		function toggleVar(objElement) {
+			// default these up here
+			var strThisRow = objElement.id;
+			var strThisElement = "";
+			var numThisValue = "";
+			var numNewValue = 1;
+			// set the form element id based on tr
+			switch (strThisRow) {
+				case "trShowIndicators":
+					strThisElement = "blnShowBatteryLevel";
+					break;
+				case "trSmallIcons":
+					strThisElement = "blnSmallIcons";
+					break;
+				case "trShowConnectedStatus":
+					strThisElement = "blnShowConnectedStatus";
+					break;
+				case "trBluetoothVibe":
+					strThisElement = "blnBluetoothVibe";
+					break;
+				case "trWhichFloor":
+					strThisElement = "numWhichFloor";
+					break;
+			}
+			// toggle the value based on element
+			numThisValue = g(strThisElement).value;
+			if(strThisElement == "numWhichFloor") {
+				if(numThisValue == 1) { numNewValue = 2; }
+			} else {
+				if(numThisValue == 1) { numNewValue = 0; }
+			}
+			// set relevant form field with the new value
+			g(strThisElement).value = numNewValue;
+			// call function to reset the blinks in tandem
+			blinkSelected();
+		}
+		
+		// function to set the blinking elements
+		function blinkSelected() {
+			// remove previous classes
+			g("trShowIndicators").className="";
+			g("trSmallIcons").className="";
+			g("trShowConnectedStatus").className="";
+			g("trBluetoothVibe").className="";
+			g("trWhichFloor").className="";
+			// set class based on current value
+			if(g("blnShowBatteryLevel").value == 1) { g("trShowIndicators").className="blink"; }
+			if(g("blnSmallIcons").value == 1) { g("trSmallIcons").className="blink"; }
+			if(g("blnShowConnectedStatus").value == 1) { g("trShowConnectedStatus").className="blink"; }
+			if(g("blnBluetoothVibe").value == 1) { g("trBluetoothVibe").className="blink"; }
+			if(g("numWhichFloor").value == 2) { g("trWhichFloor").className="blink"; }
+		}
+		
+		// build options variable
+		function saveOptions() {
+			// pull these back from the current values
+			var blnShowBatteryLevel = g("blnShowBatteryLevel").value;
+			var blnSmallIcons = g("blnSmallIcons").value;
+			var blnShowConnectedStatus = g("blnShowConnectedStatus").value;
+			var blnBluetoothVibe = g("blnBluetoothVibe").value;
+			var numWhichFloor = g("numWhichFloor").value;
+			// build the return var
+			var options = {
+				"ShowBatteryLevel": blnShowBatteryLevel,
+				"SmallIcons": blnSmallIcons,
+				"ShowConnectedStatus": blnShowConnectedStatus,
+				"BluetoothVibe": blnBluetoothVibe,
+                "WhichFloor": numWhichFloor
+			}
+			// return the options
+			return options;
+		}
+	</script>
+	</head>
+<!--
+	settings inside the pebble app that can be configured and their defaults
+		numPixelsToScroll = 4;		// the number of pixels we scroll the floor by for each loop
+		blnShowIndicators = 1;		// do we show the additional info?								1= yes		0= blank
+		blnUseImageForFloor = 1;	// do we show the floor image?									1= image	0= solid bar (no scroll)
+		blnShowConnectedStatus = 1;	// do we alert connected status?								1= yes		0= no
+		blnBluetoothVibe = 1;		// do we vibrate when bluetooth is lost?						1= yes		0= no
+		blnSmallIcons = 0;			// do we use small icons for the disconnect / charging icons?	1= yes		0= no
+		numChanceToFireWeapon = 20;	// how frequently do we fire the laser?							1 in "x" chance of firing
+		blnShowDeathAnimation = 0;	// do we show the death animation?								1= yes		0= no
+		numChanceOfDeath = 3;		// how frequently do we die?									1 in "x" chance of dying
+
+		#define KEY_BLUETOOTHVIBE		1
+		#define KEY_SHOWCONNECTEDSTATUS	2
+		#define KEY_SHOWINDICATORS		3
+		#define KEY_SMALLICONS			4
+		#define KEY_USEIMAGEFORFLOOR	5
+
+-->
+<body>
+	<table cellspacing="0" cellpadding="2" id="tblJetPacSettings">
+		<thead>
+			<tr>
+				<th></th>
+				<th colspan="2" id="thHeader">JetPac 20:15 Pebble Settings</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr><td></td><td width="40">&nbsp;</td><td width="280">&nbsp;</td></tr>
+		<tr id="trShowIndicators" onclick="toggleVar(this)">
+			<td></td>
+			<td>1</td>
+			<td>Show Battery Level</td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr id="trSmallIcons" onclick="toggleVar(this)">
+			<td></td>
+			<td>2</td>
+			<td>Use Small Icons</td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr id="trShowConnectedStatus" onclick="toggleVar(this)">
+			<td></td>
+			<td>3</td>
+			<td>Show When Disconnected</td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr id="trBluetoothVibe" onclick="toggleVar(this)">
+			<td></td>
+			<td>4</td>
+			<td>Vibrate When Bluetooth Lost</td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr id="trWhichFloor" onclick="toggleVar(this)">
+			<td></td>
+			<td>5</td>
+			<td>Use Floor From Lunar Jetman</td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr id="trSaveSettings">
+			<td></td>
+			<td>0</td>
+			<td><label for="btnSave">Save Settings</label></td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr id="trDefaultValues" class="hidden">
+			<td></td>
+			<td>Dflt:</td>
+			<td>
+				<!-- defaults -->
+				<input type="text" name="blnDefShowBatteryLevel" id="blnDefShowBatteryLevel" value="0">
+				<input type="text" name="blnDefSmallIcons" id="blnDefSmallIcons" value="0">
+				<input type="text" name="blnDefShowConnectedStatus" id="blnDefShowConnectedStatus" value="0">
+				<input type="text" name="blnDefBluetoothVibe" id="blnDefBluetoothVibe" value="0">
+				<input type="text" name="numDefWhichFloor" id="numDefWhichFloor" value="0">
+			</td>
+		</tr>
+		<tr id="trLoadedValues" class="hidden">
+			<td></td>
+			<td>Load:</td>
+			<td>
+				<!-- hidden form vars -->
+				<input type="text" name="LoadShowBatteryLevel" id="LoadShowBatteryLevel" value="">
+				<input type="text" name="LoadSmallIcons" id="LoadSmallIcons" value="">
+				<input type="text" name="LoadShowConnectedStatus" id="LoadShowConnectedStatus" value="">
+				<input type="text" name="LoadBluetoothVibe" id="LoadBluetoothVibe" value="">
+				<input type="text" name="LoadWhichFloor" id="LoadWhichFloor" value="">
+			</td>
+		</tr>
+		<tr id="trCurrentValues" class="hidden">
+			<td></td>
+			<td>Curr:</td>
+			<td>
+				<!-- hidden form vars -->
+				<input type="text" name="blnShowBatteryLevel" id="blnShowBatteryLevel" value="0">
+				<input type="text" name="blnSmallIcons" id="blnSmallIcons" value="0">
+				<input type="text" name="blnShowConnectedStatus" id="blnShowConnectedStatus" value="0">
+				<input type="text" name="blnBluetoothVibe" id="blnBluetoothVibe" value="0">
+				<input type="text" name="numWhichFloor" id="numWhichFloor" value="0">
+			</td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>
+		<tr><td>&nbsp;</td></tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3" id="tdFooter">&copy;2015&nbsp;&nbsp;S.G.M.&nbsp;&nbsp;&nbsp;PEBBLE&nbsp;WATCHFACE&nbsp;v1.00</td>
+			</tr>
+		</tfoot>
+	</table>
+	
+	<script>
+        // show debug vars if needed
+		if(blnDebug) { g("trDefaultValues").className=""; }
+		if(blnDebug) { g("trLoadedValues").className=""; }
+		if(blnDebug) { g("trCurrentValues").className=""; }
+		// tag the save function on the button
+		var submitButton = g("trSaveSettings");
+			submitButton.addEventListener("click", 
+				function() {
+					console.log("Submit");
+					var options = saveOptions();
+					var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+					document.location.href = location;
+				}, 
+			false);
+        /*	----------------------------------------------
+			pull the settings passed in the url
+			----------------------------------------------
+            "ShowBatteryLevel": blnShowBatteryLevel,
+            "SmallIcons": blnSmallIcons,
+            "ShowConnectedStatus": blnShowConnectedStatus,
+            "BluetoothVibe": blnBluetoothVibe,
+            "WhichFloor": numWhichFloor
+        */
+        var ShowBatteryLevel = getUrlVars()["ShowBatteryLevel"];
+        var SmallIcons = getUrlVars()["SmallIcons"];
+        var ShowConnectedStatus = getUrlVars()["ShowConnectedStatus"];
+        var BluetoothVibe = getUrlVars()["BluetoothVibe"];
+        var WhichFloor = getUrlVars()["WhichFloor"];
+        // if we're debugging
+        if(blnDebug) {
+            // populate hidden inputs with defaults
+            g("blnDefShowBatteryLevel").value = blnShowBatteryLevel;
+            g("blnDefSmallIcons").value = blnSmallIcons;
+            g("blnDefShowConnectedStatus").value = blnShowConnectedStatus;
+            g("blnDefBluetoothVibe").value = blnBluetoothVibe;
+            g("numDefWhichFloor").value = numWhichFloor;
+            // log loaded vars for debug
+            g("LoadShowBatteryLevel").value = ShowBatteryLevel;
+            g("LoadSmallIcons").value = SmallIcons;
+            g("LoadShowConnectedStatus").value = ShowConnectedStatus;
+            g("LoadBluetoothVibe").value = BluetoothVibe;
+            g("LoadWhichFloor").value = WhichFloor;
+        }
+		// pre-populate with defaults
+		g("blnShowBatteryLevel").value = blnShowBatteryLevel;
+		g("blnSmallIcons").value = blnSmallIcons;
+		g("blnShowConnectedStatus").value = blnShowConnectedStatus;
+		g("blnBluetoothVibe").value = blnBluetoothVibe;
+		g("numWhichFloor").value = numWhichFloor;
+		// over-ride the html vars if we successfully pulled saved settings
+		if(!isNaN(ShowBatteryLevel)) { g("blnShowBatteryLevel").value = ShowBatteryLevel; }
+		if(!isNaN(SmallIcons)) { g("blnSmallIcons").value = SmallIcons; }
+		if(!isNaN(ShowConnectedStatus)) { g("blnShowConnectedStatus").value = ShowConnectedStatus; }
+		if(!isNaN(BluetoothVibe)) { g("blnBluetoothVibe").value = BluetoothVibe; }
+		if(!isNaN(WhichFloor)) { g("numWhichFloor").value = WhichFloor; }
+		// pull these back from the current values
+		blnShowBatteryLevel = g("blnShowBatteryLevel").value;
+		blnSmallIcons = g("blnSmallIcons").value;
+		blnShowConnectedStatus = g("blnShowConnectedStatus").value;
+		blnBluetoothVibe = g("blnBluetoothVibe").value;
+		numWhichFloor = g("numWhichFloor").value;
+		// gentlemen start your blinking
+		blinkSelected()
+	</script>
+</body>
+</html>

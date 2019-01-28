@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="/ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.js"></script>
+<link rel="stylesheet" href="/ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.css">
+<script src="/ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.js"></script>
+</head>
+<body>
+    <div data-role="page">
+
+	<div data-role="header">
+		<h1>59Dub</h1>
+	</div><!-- /header -->
+
+	<div role="main" class="ui-content">
+            <form>
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>Vibrate when Bluetooth disconnects:</legend>
+                    <input type="radio" name="BT" id="bt-on" value="1" checked="checked">
+                    <label for="bt-on">On</label>
+                    <input type="radio" name="BT" id="bt-off" value="0">
+                    <label for="bt-off">Off</label>
+                </fieldset>
+
+
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>Vibrate every hour:</legend>
+                    <input type="radio" name="SIGNAL" id="signal-on" value="1" checked="checked">
+                    <label for="signal-on">On</label>
+                    <input type="radio" name="SIGNAL" id="signal-off" value="0">
+                    <label for="signal-off">Off</label>
+                </fieldset>
+
+                <fieldset data-role="controlgroup" data-type="horizontal">
+            <legend>Date Format:</legend>
+                    <input type="radio" name="DATE_FORMAT" id="date-format-ddmm" value="2" checked="checked">
+            <label for="date-format-ddmm">DD MM</label>
+            <input type="radio" name="DATE_FORMAT" id="date-format-mmdd" value="1">
+            <label for="date-format-mmdd">MM DD</label>
+            </fieldset>
+		<input type="submit" value="Save">
+            </form>
+	</div><!-- /content -->
+
+	<div data-role="footer">
+	    <h4>&copy; Leigh Murray</h4>
+	</div><!-- /footer -->
+</div><!-- /page -->
+<script>
+    $(function() {
+
+        var options = window.location.search;
+        if (options.length) options = options.substr(1);
+        var optionPairs = options.split('&');
+        console.log(optionPairs);
+
+	for (var i=0; i<optionPairs.length; i++) {
+            console.log("nice");
+            var optionPair = optionPairs[i];
+	    var optionArray = optionPair.split('=');
+            if (optionArray.length != 2) {
+                console.log(optionArray);
+                continue;
+            }
+	    var optionKey = optionArray[0];
+	    var optionValue = optionArray[1];
+            console.log("Setting " + optionKey + " to " + optionValue);
+            $('[name="' + optionKey + '"]').val(optionValue).checkboxradio('refresh');
+	}
+
+    });
+</script>
+</body>
+</html>

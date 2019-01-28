@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"bam.nr-data.net","errorBeacon":"bam.nr-data.net","licenseKey":"2391b64adb","applicationID":"8943572","transactionName":"cwwNRUNWXw5QFk1GU1cKEEVDWEcLWgoRG1hVFA==","queueTime":0,"applicationTime":117,"agent":""}</script>
+<script type="text/javascript">window.NREUM||(NREUM={}),__nr_require=function(e,n,t){function r(t){if(!n[t]){var o=n[t]={exports:{}};e[t][0].call(o.exports,function(n){var o=e[t][1][n];return r(o||n)},o,o.exports)}return n[t].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<t.length;o++)r(t[o]);return r}({1:[function(e,n,t){function r(){}function o(e,n,t){return function(){return i(e,[c.now()].concat(u(arguments)),n?null:this,t),n?void 0:this}}var i=e("handle"),a=e(3),u=e(4),f=e("ee").get("tracer"),c=e("loader"),s=NREUM;"undefined"==typeof window.newrelic&&(newrelic=s);var p=["setPageViewName","setCustomAttribute","setErrorHandler","finished","addToTrace","inlineHit","addRelease"],d="api-",l=d+"ixn-";a(p,function(e,n){s[n]=o(d+n,!0,"api")}),s.addPageAction=o(d+"addPageAction",!0),s.setCurrentRouteName=o(d+"routeName",!0),n.exports=newrelic,s.interaction=function(){return(new r).get()};var m=r.prototype={createTracer:function(e,n){var t={},r=this,o="function"==typeof n;return i(l+"tracer",[c.now(),e,t],r),function(){if(f.emit((o?"":"no-")+"fn-start",[c.now(),r,o],t),o)try{return n.apply(this,arguments)}catch(e){throw f.emit("fn-err",[arguments,this,e],t),e}finally{f.emit("fn-end",[c.now()],t)}}}};a("actionText,setName,setAttribute,save,ignore,onEnd,getContext,end,get".split(","),function(e,n){m[n]=o(l+n)}),newrelic.noticeError=function(e,n){"string"==typeof e&&(e=new Error(e)),i("err",[e,c.now(),!1,n])}},{}],2:[function(e,n,t){function r(e,n){if(!o)return!1;if(e!==o)return!1;if(!n)return!0;if(!i)return!1;for(var t=i.split("."),r=n.split("."),a=0;a<r.length;a++)if(r[a]!==t[a])return!1;return!0}var o=null,i=null,a=/Version\/(\S+)\s+Safari/;if(navigator.userAgent){var u=navigator.userAgent,f=u.match(a);f&&u.indexOf("Chrome")===-1&&u.indexOf("Chromium")===-1&&(o="Safari",i=f[1])}n.exports={agent:o,version:i,match:r}},{}],3:[function(e,n,t){function r(e,n){var t=[],r="",i=0;for(r in e)o.call(e,r)&&(t[i]=n(r,e[r]),i+=1);return t}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],4:[function(e,n,t){function r(e,n,t){n||(n=0),"undefined"==typeof t&&(t=e?e.length:0);for(var r=-1,o=t-n||0,i=Array(o<0?0:o);++r<o;)i[r]=e[n+r];return i}n.exports=r},{}],5:[function(e,n,t){n.exports={exists:"undefined"!=typeof window.performance&&window.performance.timing&&"undefined"!=typeof window.performance.timing.navigationStart}},{}],ee:[function(e,n,t){function r(){}function o(e){function n(e){return e&&e instanceof r?e:e?f(e,u,i):i()}function t(t,r,o,i){if(!d.aborted||i){e&&e(t,r,o);for(var a=n(o),u=v(t),f=u.length,c=0;c<f;c++)u[c].apply(a,r);var p=s[y[t]];return p&&p.push([b,t,r,a]),a}}function l(e,n){h[e]=v(e).concat(n)}function m(e,n){var t=h[e];if(t)for(var r=0;r<t.length;r++)t[r]===n&&t.splice(r,1)}function v(e){return h[e]||[]}function g(e){return p[e]=p[e]||o(t)}function w(e,n){c(e,function(e,t){n=n||"feature",y[t]=n,n in s||(s[n]=[])})}var h={},y={},b={on:l,addEventListener:l,removeEventListener:m,emit:t,get:g,listeners:v,context:n,buffer:w,abort:a,aborted:!1};return b}function i(){return new r}function a(){(s.api||s.feature)&&(d.aborted=!0,s=d.backlog={})}var u="nr@context",f=e("gos"),c=e(3),s={},p={},d=n.exports=o();d.backlog=s},{}],gos:[function(e,n,t){function r(e,n,t){if(o.call(e,n))return e[n];var r=t();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(e,n,{value:r,writable:!0,enumerable:!1}),r}catch(i){}return e[n]=r,r}var o=Object.prototype.hasOwnProperty;n.exports=r},{}],handle:[function(e,n,t){function r(e,n,t,r){o.buffer([e],r),o.emit(e,n,t)}var o=e("ee").get("handle");n.exports=r,r.ee=o},{}],id:[function(e,n,t){function r(e){var n=typeof e;return!e||"object"!==n&&"function"!==n?-1:e===window?0:a(e,i,function(){return o++})}var o=1,i="nr@id",a=e("gos");n.exports=r},{}],loader:[function(e,n,t){function r(){if(!E++){var e=x.info=NREUM.info,n=l.getElementsByTagName("script")[0];if(setTimeout(s.abort,3e4),!(e&&e.licenseKey&&e.applicationID&&n))return s.abort();c(y,function(n,t){e[n]||(e[n]=t)}),f("mark",["onload",a()+x.offset],null,"api");var t=l.createElement("script");t.src="https://"+e.agent,n.parentNode.insertBefore(t,n)}}function o(){"complete"===l.readyState&&i()}function i(){f("mark",["domContent",a()+x.offset],null,"api")}function a(){return O.exists&&performance.now?Math.round(performance.now()):(u=Math.max((new Date).getTime(),u))-x.offset}var u=(new Date).getTime(),f=e("handle"),c=e(3),s=e("ee"),p=e(2),d=window,l=d.document,m="addEventListener",v="attachEvent",g=d.XMLHttpRequest,w=g&&g.prototype;NREUM.o={ST:setTimeout,SI:d.setImmediate,CT:clearTimeout,XHR:g,REQ:d.Request,EV:d.Event,PR:d.Promise,MO:d.MutationObserver};var h=""+location,y={beacon:"bam.nr-data.net",errorBeacon:"bam.nr-data.net",agent:"js-agent.newrelic.com/nr-1118.min.js"},b=g&&w&&w[m]&&!/CriOS/.test(navigator.userAgent),x=n.exports={offset:u,now:a,origin:h,features:{},xhrWrappable:b,userAgent:p};e(1),l[m]?(l[m]("DOMContentLoaded",i,!1),d[m]("load",r,!1)):(l[v]("onreadystatechange",o),d[v]("onload",r)),f("mark",["firstbyte",u],null,"api");var E=0,O=e(5)},{}]},{},["loader"]);</script>
+<title>Members</title>
+<link rel="stylesheet" media="screen" href="/assets/application-38451465307adadc8bf0a85f64b24b7e730719bb8cd4f1473ee35fbec5393d4e.css" />
+<link rel="stylesheet" media="screen" href="//fonts.googleapis.com/css?family=Oswald:400,700,300" />
+<link rel="stylesheet" media="screen" href="//fonts.googleapis.com/css?family=Roboto:400,700,500,400italic,500italic,700italic" />
+<meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="iDcQXIl5vbY5EoOPhNW7Scyz3h6pwLd61Xwqa94d5tP3+Gq5VUm+isc2igrHz4AW3d8ELhSvuRIqMkdSYZnsZQ==" />
+</head>
+<body class='body-orange'>
+<div class='mini-navbar mini-navbar-dark hidden-xs'>
+<div class='container'>
+<div class='col-sm-10'>
+<a class="first-child" target="_blank" href="https://openweathermap.desk.com/customer/portal/emails/new"><i class='fa fa-envelope'></i>
+<span class='hidden-sm'>Support Center</span>
+</a><a class="pull-right" href="/"><a class="pull-right" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;Navbar&#39;, &#39;Main&#39;, &#39;register&#39;]);" href="/users/sign_up"><i class='fa fa-arrow-circle-down'></i>
+Sign Up
+</a><a class="pull-right" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;Navbar&#39;, &#39;Main&#39;, &#39;signin&#39;]);" href="/users/sign_in"><i class='fa fa-sign-in'></i>
+Sign In
+</a></a><a class="pull-right animated flipInX" id="nav-search" href="#"><i class='fa fa-search' onclick='_gaq.push([&#39;_trackEvent&#39;, &#39;Navbar&#39;, &#39;Main&#39;, &#39;search&#39;]);'></i>
+Weather in your city
+</a><a class="pull-right hidden" id="nav-search-close" href="#"><i class='fa fa-times'></i>
+</a><form class="pull-right hidden" id="nav-search-form" action="https://openweathermap.org/find" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+<div class='input-group'>
+<input type="text" name="q" id="q" class="form-control" placeholder="Search" />
+<div class='input-group-btn'>
+<button class='btn btn-default' type='submit'>
+<i class='fa fa-search'></i>
+</button>
+</div>
+</div>
+</form>
+
+</div>
+<div class='col-sm-2'></div>
+</div>
+</div>
+<div class='sticky-wrapper' id='undefined-sticky-wrapper' style='height: 75px;'>
+<div class='navbar navbar-dark navbar-static-top' role='navigation'>
+<div class='container'>
+<div class='navbar-header'>
+<button class='navbar-toggle' data-target='.navbar-collapse' data-toggle='collapse' type='button'>
+<span class='sr-only'>Toggle navigation</span>
+<span class='icon-bar'></span>
+<span class='icon-bar'></span>
+<span class='icon-bar'></span>
+</button>
+<a class="navbar-brand" href="https://openweathermap.org"><img style="vertical-align:bottom; height:30px;" src="/assets/logo_OpenWeatherMap_orange_website-04422775ccee2bbe88f4f2d55678c28b17c2cfeca05619f9138cf376fe53043e.png" alt="Logo openweathermap orange website" />
+</a></div>
+<div class='navbar-collapse collapse'>
+<ul class='nav navbar-nav navbar-right'>
+<li>
+<a class="bg-hover-color" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;Navbar&#39;, &#39;Main&#39;, &#39;weather&#39;]);" href="https://openweathermap.org/city">Weather</a>
+</li>
+<li class='dropdown'>
+<a class="dropdown-toggle bg-hover-color" data-toggle="dropdown" href="#">Maps
+<b class='caret'></b>
+</a><ul class='dropdown-menu'>
+<li><a class="bg-hover-color" href="https://openweathermap.org/maps">Weather maps</a></li>
+<li><a class="bg-hover-color" href="https://openweathermap.org/help/sat.html">Current satellite maps</a></li>
+<li><a class="bg-hover-color" href="http://owm.io/beautiful_maps">Beautiful places</a></li>
+</ul>
+</li>
+<li>
+<a class="bg-hover-color" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;Navbar&#39;, &#39;Main&#39;, &#39;api&#39;]);" href="https://openweathermap.org/api">API</a>
+</li>
+<li>
+<a class="bg-hover-color" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;Navbar&#39;, &#39;Main&#39;, &#39;price&#39;]);" href="https://openweathermap.org/price">Price</a>
+</li>
+<li>
+<a class="bg-hover-color" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;Navbar&#39;, &#39;Main&#39;, &#39;partners&#39;]);" href="https://openweathermap.org/examples">Partners</a>
+</li>
+<li>
+<a class="bg-hover-color" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;Navbar&#39;, &#39;Main&#39;, &#39;station&#39;]);" href="https://openweathermap.org/stations">Stations</a>
+</li>
+<li>
+<a class="bg-hover-color" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;Navbar&#39;, &#39;Main&#39;, &#39;station&#39;]);" href="https://openweathermap.org/widgets-constructor">Widgets</a>
+</li>
+<li>
+<a class="bg-hover-color" onclick="_gaq.push([&#39;_trackEvent&#39;, &#39;Navbar&#39;, &#39;Main&#39;, &#39;news&#39;]);" href="https://openweathermap.org/news">News</a>
+</li>
+<li class='dropdown'>
+<a class="dropdown-toggle bg-hover-color" data-toggle="dropdown" href="#">About
+<b class='caret'></b>
+</a><ul class='dropdown-menu'>
+<li><a class="bg-hover-color" href="https://openweathermap.org/about">About company</a></li>
+<li><a class="bg-hover-color" href="https://openweathermap.org/team">Team</a></li>
+<li><a class="bg-hover-color" href="https://openweathermap.org/technology">Weather model</a></li>
+</ul>
+</li>
+</ul>
+<form class="navbar-form navbar-left visible-xs" role="search" action="https://openweathermap.org/find" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+<div class='form-group'>
+<input type="text" name="q" id="q" class="form-control" placeholder="Search" />
+</div>
+<button class='btn btn-default' type='submit'>Go!</button>
+</form>
+
+</div>
+</div>
+</div>
+</div>
+
+<div class='wrapper'>
+<div id='alert_body'></div>
+<div id='flash'></div>
+
+<div class='container'>
+
+<div class="row"><div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2"><div class="sign-form"><h3 class="first-child">Create New Account</h3><hr /><form novalidate="novalidate" class="simple_form new_user" id="new_user" action="/users" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="nEo8IfRYSPO2d24ImJgw25zPT1moad9DUJhQDI7i7bvc6uaBxSPVn0i/Wps4vf+NbGOE0pcVj2MAmGen43Dz2Q==" /><div class="form-group string required user_username"><input class="form-control string required" placeholder="Username" type="text" value="" name="user[username]" id="user_username" /></div><div class="form-group email optional user_email"><input class="form-control string email optional" placeholder="Enter email" type="email" value="" name="user[email]" id="user_email" /></div><div class="form-group password optional user_password"><div class="row"><div class="col-sm-6"><input placeholder="Password" class="form-control margin-bottom-xs" type="password" name="user[password]" id="user_password" /></div><div class="col-sm-6"><input placeholder="Repeat Password" class="form-control margin-bottom-xs" type="password" name="user[password_confirmation]" id="user_password_confirmation" /></div></div></div><hr /><div style="text-align: justify; text-justify: inter-word;">We will use information you provided for management and administration purposes, and for keeping youinformed by mail, telephone, email and SMS of other products and services from us and our partners.&nbsp;You can proactively manage your preferences or opt-out of communications with us at any time using&nbsp;Privacy Centre. You have the right to access your data held by us or to request your data to be deleted.&nbsp;For full details please see the OpenWeather <a target="_blank" href="https://openweather.co.uk/privacy-policy">Privacy Policy</a>.</div><br /><div class="form-group"><input name="agreement[is_age_confirmed]" type="hidden" value="0" /><input type="checkbox" name="agreement[is_age_confirmed]" id="agreement_is_age_confirmed" value="1" class="checkbox-right-indent chk-age-confirm" />I am 16 years old and over</div><div class="form-group"><input name="agreement[is_accepted]" type="hidden" value="0" /><input type="checkbox" name="agreement[is_accepted]" id="agreement_is_accepted" value="1" class="checkbox-right-indent chk-accept" />I agree with <a target="_blank" href="https://openweather.co.uk/privacy-policy">Privacy Policy</a>,&nbsp;<a target="_blank" href="https://openweather.co.uk/storage/app/media/Terms/Openweather_terms_and_conditions_of_sale.pdf">Terms and conditions of sale</a>&nbsp;and&nbsp;<a target="_blank" href="https://openweather.co.uk/storage/app/media/Terms/Openweather_website_terms_and_conditions_of_use.pdf">Websites terms and conditions of use</a></div><hr />I consent to receive communications from OpenWeather Group of Companies and their partners:<br /><br /><div class="form-group"><input name="mailing[system]" type="hidden" value="0" /><input type="checkbox" name="mailing[system]" id="mailing_system" value="1" class="checkbox-right-indent" />System news (API usage alert, system update, temporary system shutdown, etc)</div><div class="form-group"><input name="mailing[product]" type="hidden" value="0" /><input type="checkbox" name="mailing[product]" id="mailing_product" value="1" class="checkbox-right-indent" />Product news (change to price, new product features, etc)</div><div class="form-group"><input name="mailing[news]" type="hidden" value="0" /><input type="checkbox" name="mailing[news]" id="mailing_news" value="1" class="checkbox-right-indent" />Corporate news (our life, the launch of a new service, etc)</div><br /><div class="form-group"><script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<div class="g-recaptcha " data-sitekey="6LfOfhQUAAAAAFIMgtwcp1CBRsxWw0JxlFpD90aq"></div>
+          <noscript>
+            <div>
+              <div style="width: 302px; height: 422px; position: relative;">
+                <div style="width: 302px; height: 422px; position: absolute;">
+                  <iframe
+                    src="https://www.google.com/recaptcha/api/fallback?k=6LfOfhQUAAAAAFIMgtwcp1CBRsxWw0JxlFpD90aq"
+                    frameborder="0" scrolling="no"
+                    style="width: 302px; height:422px; border-style: none;">
+                  </iframe>
+                </div>
+              </div>
+              <div style="width: 300px; height: 60px; border-style: none;
+                bottom: 12px; left: 25px; margin: 0px; padding: 0px; right: 25px;
+                background: #f9f9f9; border: 1px solid #c1c1c1; border-radius: 3px;">
+                <textarea id="g-recaptcha-response" name="g-recaptcha-response"
+                  class="g-recaptcha-response"
+                  style="width: 250px; height: 40px; border: 1px solid #c1c1c1;
+                  margin: 10px 25px; padding: 0px; resize: none;" value="">
+                </textarea>
+              </div>
+            </div>
+          </noscript>
+</div><div class="form-group"><input type="submit" name="commit" value="Create Account" class="btn btn-color btn-submit" disabled="disabled" data-disable-with="Processing..." /></div></form></div></div></div>
+</div>
+</div>
+<footer class='footer-dark'>
+<div class='container'>
+<div class='row'>
+<!-- API -->
+<div class='col-sm-4'>
+<h3 class='text-color'>
+Weather in your city
+</h3>
+<ul>
+<li><a href="https://openweathermap.org/find?q=">Find your city</a></li>
+<li><a href="https://openweathermap.org/weathermap">Weather maps</a></li>
+</ul>
+<h3 class='text-color'>
+Weather APIs
+</h3>
+<div class='content'>
+<ul>
+<li><a href="https://openweathermap.org/appid">How to start</a></li>
+<li><a href="https://openweathermap.org/API">Weather APIs for developers</a></li>
+<li><a href="https://openweathermap.org/current">Current weather</a></li>
+<li><a href="https://openweathermap.org/forecast5">5 day / 3 hour weather forecast</a></li>
+<li><a href="https://openweathermap.org/forecast16">16 day / daily weather forecast</a></li>
+<li><a href="https://openweathermap.org/history">Hourly historical data</a></li>
+<li><a href="https://openweathermap.org/history-bulk">History bulk</a></li>
+<li><a href="https://openweathermap.org/examples">Examples of API use</a></li>
+</ul>
+</div>
+</div>
+<!-- Map layers -->
+<div class='col-sm-4'>
+<h3 class='text-color'>
+Map layers
+</h3>
+<div class='content'>
+<ul>
+<li><a href="https://openweathermap.org/api/weathermaps#examples">Examples of weather map layers</a></li>
+<li><a href="https://openweathermap.org/api/weathermaps#legend">Map styles legend</a></li>
+<li><a href="https://openweathermap.org/api/weathermaps#library">Libraries to connect weather layers</a></li>
+</ul>
+<h3 class='text-color'>
+How to subscribe
+</h3>
+<ul>
+<li><a href="https://openweathermap.org/price">Price-list</a></li>
+<li><a href="https://openweathermap.org/price_subscribe">Subscribe to APIs</a></li>
+</ul>
+<div class='alert alert-info'>
+Found a bug? Have a question or idea? Welcome to
+<a target="_blank" class="alert-link" href="https://openweathermap.desk.com/customer/portal/emails/new">Support center
+</a></div>
+<div class='clearfix'></div>
+</div>
+</div>
+<!-- Column 3 -->
+<div class='col-sm-4'>
+<h3 class='text-color'>
+Weather station network
+</h3>
+<ul>
+<li><a href="https://openweathermap.org/stations">How to connect your weather station</a></li>
+</ul>
+<h3 class='text-color'>
+About
+</h3>
+<ul>
+<li><a href="https://openweathermap.org/team">Team</a></li>
+<li><a href="https://openweathermap.org/technology">Weather model</a></li>
+</ul>
+<h3 class='text-color'>
+Go Social
+</h3>
+<div class='content social'>
+<p>
+Follow OpenWeatherMap on
+<a href='https://twitter.com/OpenWeatherMap' target='_blank'>Twitter,</a>
+<a href='https://www.facebook.com/groups/270748973021342' target='_blank'>Facebook,</a>
+<a href='https://plus.google.com/u/0/communities/101265402580965077532' target='_blank'>Google+,</a>
+<a href='https://t.me/openweathermap' target='_blank'>Telegram,</a>
+and
+<a href='https://github.com/search?q=openweathermap&amp;ref=cmdform' target='_blank'>Github.</a>
+</p>
+<div class='clearfix'></div>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col-sm-12'>
+<hr>
+</div>
+</div>
+<!-- Copyrights -->
+<div class='row'>
+<div class='col-sm-12'>
+<p>
+© 2012 —
+<span id='template-current-year'> 2018 </span>
+OpenWeatherMap, Inc. 
+<a href="https://openweathermap.org/about">About company</a>
+|
+<a href="https://openweathermap.org/privacy-policy">Privacy Policy</a>
+|
+<a href="https://openweathermap.org/terms">Terms of Service</a>
+</p>
+</div>
+</div>
+</div>
+</footer>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-31601618-7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-31601618-7');
+</script>
+
+<script src="/assets/application-1eb00bf7be176f82f74441889e9d3497d46fdfe3b49a7be32b42eb91f42035d3.js"></script>
+
+
+</body>
+<div class='loader-layout' style='display: none;'>
+<div class='redirect'>
+<img src="/assets/owm-b168522712c309b0319074cbd035ceb35a90d47dd9f01e622f2c76e7703181f3.gif" alt="Owm" />
+<p>
+<b class='msg'>Please wait...</b>
+</p>
+</div>
+</div>
+
+</html>

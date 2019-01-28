@@ -1,0 +1,91 @@
+﻿	
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html> 
+<head> 
+	<title>BubbleLevel Configuration</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="/code.jquery.com/mobile/1.2.1/jquery.css">
+	<script src="/code.jquery.com//jquery-1.js"></script>
+	<script src="/code.jquery.com/mobile/1.2.1/jquery.js"></script>
+	<style>.ui-field-contain div.ui-slider-switch { width: 7em }</style>
+</head> 
+<body> 
+
+<div data-role="page" data-theme="b">
+				<div data-role="header">
+					<h1>BubbleLevel<br>Configuration</h1>
+				</div><!-- /header -->
+				<div data-role="content">
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <input id="cancel" value="Cancel" type="submit">
+            </div>
+            <div class="ui-block-b">
+                <input id="save" data-theme="a" value="Save" type="submit">
+            </div>
+        </div>
+    	<div data-role="fieldcontain">
+            <label for="option1">
+                Highlight when at zero
+            </label>
+            <select name="option1" id="option1" data-theme="" data-role="slider">
+                <option value="0">
+                    Off
+                </option>
+                <option value="1">
+                    On
+                </option>
+            </select>
+        </div>
+        
+
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-type="vertical">
+                <legend>
+                    Preferred orientation
+                </legend>
+
+                <input id="radio0" name="option2" value="0" data-theme="c" type="radio" checked="checked">
+                <label for="radio0">
+                    X/Y
+                </label>
+                <input id="radio1" name="option2" value="1" data-theme="c" type="radio">
+                <label for="radio1">
+                    Horizontal
+                </label>
+                <input id="radio2" name="option2" value="2" data-theme="c" type="radio">
+                <label for="radio2">
+                    Vertical
+                </label>
+                
+            </fieldset>
+        </div>
+	</div><!-- /content -->
+		</div><!-- /page -->
+   <script>
+      function saveOptions() {
+        var options = {'option1': parseInt($("#option1").val(), 10),
+'option2': parseInt($("input[name=option2]:checked").val(), 10) }
+        return options;
+      }
+
+      $().ready(function() {
+        
+        $("#cancel").click(function() {
+          document.location = "pebblejs://close#";
+        });
+
+        $("#save").click(function() {
+          console.log("Submit");
+          
+          //alert(JSON.stringify(saveOptions()));
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          document.location = location;
+        });
+      });
+    </script>
+
+</body>
+</html>

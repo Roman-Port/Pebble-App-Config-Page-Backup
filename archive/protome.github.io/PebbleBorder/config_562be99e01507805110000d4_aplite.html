@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Rectangle Border Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/protome.github.io/PebbleBorder/css/slate.css'>
+  <script src='/protome.github.io/PebbleBorder/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Rectangle Border Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          I made this watchface to learn, so if you have any suggestions for improvements send me a tweet!
+          <br>
+          <a href="/twitter.com/intent/tweet_160321565.html" class="twitter-mention-button" data-size="large" data-related="Protome">Tweet to @Protome</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Colours</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Colour
+          <input id='backgroundColourPicker' type='text' class='item-color item-color-sunny' value='0x000000'>
+        </label>
+        <label class='item'>
+          Text Colour
+          <input id='textColourPicker' type='text' class='item-color item-color-sunny' value='0xFFFFFF'>
+        </label>
+        <label class='item'>
+          Top Bar Color
+          <input id='topColourPicker' type='text' class='item-color item-color-sunny' value='0x00FFFF'>
+        </label>
+        <label class='item'>
+          Left Bar Colour
+          <input id='leftColourPicker' type='text' class='item-color item-color-sunny' value='0xAA00AA'>
+        </label>
+        <label class='item'>
+          Right Bar Colour
+          <input id='rightColourPicker' type='text' class='item-color item-color-sunny' value='0xFF0000'>
+        </label>
+        <label class='item'>
+          Bottom Bar Colour
+          <input id='bottomColourPicker' type='text' class='item-color item-color-sunny' value='0xFF5500'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the colours for each rectangle which forms the border. Or make them the same if you want, I'm not your boss.
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='item-container-header'>Alerts</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Disconnection Alert
+          <input id='disconnectCheckbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        If this is activated, the watchface will turn grey when disconnected and back to colours when reconnected. It'll also vibrate when the connection changes.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='resetButton' type='button' class='item-button' value='RESET TO DEFAULTS'>
+      </div>
+   </div>
+   <div class='item-container'>
+      <div class='button-container'>
+        <input id='submitButton' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+    function getConfigData() {
+    var backgroundColorPicker = document.getElementById('backgroundColourPicker');
+    var textColourPicker = document.getElementById('textColourPicker');
+    var topColourPicker = document.getElementById('topColourPicker');
+    var leftColourPicker = document.getElementById('leftColourPicker');
+    var rightColourPicker = document.getElementById('rightColourPicker');
+    var bottomColourPicker = document.getElementById('bottomColourPicker');
+    var disconnectCheckbox = document.getElementById('disconnectCheckbox');
+ 
+    var options = {
+      'backgroundColor': backgroundColorPicker.value,
+      'textColor': textColourPicker.value,
+      'topColor': topColourPicker.value,
+      'leftColor': leftColourPicker.value,
+      'rightColor': rightColourPicker.value,
+      'bottomColor': bottomColourPicker.value,
+      'disconnectAlert': disconnectCheckbox.checked
+    };
+    // Save for next launch
+    localStorage['backgroundColor'] = options['backgroundColor'];
+    localStorage['textColor'] = options['textColor'];
+    localStorage['topColor'] = options['topColor'];
+    localStorage['leftColor'] = options['leftColor'];
+    localStorage['rightColor'] = options['rightColor'];
+    localStorage['bottomColor'] = options['bottomColor'];
+    localStorage['disconnectAlert'] = options['disconnectAlert'];
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+ }
+ 
+ function setDefaults() {
+    var backgroundColorPicker = document.getElementById('backgroundColourPicker');
+    var textColourPicker = document.getElementById('textColourPicker');
+    var topColourPicker = document.getElementById('topColourPicker');
+    var leftColourPicker = document.getElementById('leftColourPicker');
+    var rightColourPicker = document.getElementById('rightColourPicker');
+    var bottomColourPicker = document.getElementById('bottomColourPicker');
+     
+    backgroundColorPicker.value = '0x000000';
+    textColourPicker.value = '0xFFFFFF';
+    topColourPicker.value = '0x84F5F1';
+    leftColourPicker.value = '0xAA00AA';
+    rightColourPicker.value = '0xE35462';
+    bottomColourPicker.value = '0xE66E6B';
+    
+    getConfigData();
+ }
+  
+ function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+ }
+
+ var resetButton = document.getElementById('resetButton');
+    resetButton.addEventListener('click', function() {
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    setDefaults()
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+ });
+
+ var submitButton = document.getElementById('submitButton');
+ submitButton.addEventListener('click', function() {
+    console.log('Submit');
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+ });
+	
+(function() {
+	var backgroundColorPicker = document.getElementById('backgroundColourPicker');
+  var textColourPicker = document.getElementById('textColourPicker');
+  var topColourPicker = document.getElementById('topColourPicker');
+  var leftColourPicker = document.getElementById('leftColourPicker');
+  var rightColourPicker = document.getElementById('rightColourPicker');
+  var bottomColourPicker = document.getElementById('bottomColourPicker');
+  var disconnectCheckbox = document.getElementById('disconnectCheckbox');
+
+	if(localStorage['backgroundColor']) {
+		backgroundColorPicker.value = localStorage['backgroundColor'];
+    textColourPicker.value = localStorage['textColor'];
+    topColourPicker.value = localStorage['topColor'];
+    leftColourPicker.value = localStorage['leftColor'];
+    rightColourPicker.value = localStorage['rightColor'];
+    bottomColourPicker.value = localStorage['bottomColor'];
+    disconnectCheckbox.checked = JSON.parse(localStorage['disconnectAlert']);
+	}
+})();
+    </script>
+</html>

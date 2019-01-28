@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Count-it-all configuration page</title>
+  <link rel='stylesheet' type='text/css' href='/cdn.rawgit.com/susundberg/pebble-countit-all/master/config/css/slate.css'>
+  <script src='/cdn.rawgit.com/susundberg/pebble-countit-all/master/config/js/slate.js'></script>
+        
+  <style>
+   .title {
+      padding: 15px 10px;
+      text-transform: uppercase;
+      font-family: 'PT Sans', sans-serif;
+      font-size: 1.2em;
+      font-weight: 500;
+      color: #888888;
+      text-align: center;
+   }
+  </style>
+</head>
+
+  <body>
+<h1 class='title'>Count-it-all configuration</h1>
+
+<div class="item-container">
+  <div class="item-container-header">Button 1 action configuration </div>
+  <div class="item-container-content" id="button0-radio">
+    <label class="item">
+      Single 
+      <input type="radio" class="item-radio" name="button1-radion" value="S" checked="">
+    </label>
+    <label class="item">
+      Duration
+      <input type="radio" class="item-radio" name="button1-radion" value="D">
+    </label>
+    <label class="item">
+      Disabled
+      <input type="radio" class="item-radio" name="button1-radion" value="X">
+    </label>
+  </div>
+  <label class="item">
+    Icon to use
+    <input type="text" class="item-color item-icon" id="button0-icon" value="icon_000.png">
+  </label>
+</div>
+
+<div class="item-container">
+  <div class="item-container-header">Button 2 action configuration </div>
+  <div class="item-container-content" id="button1-radio">
+    <label class="item">
+      Single 
+      <input type="radio" class="item-radio" name="button2-radion" value="S" checked="">
+    </label>
+    <label class="item">
+      Duration
+      <input type="radio" class="item-radio" name="button2-radion" value="D">
+    </label>
+    <label class="item">
+      Disabled
+      <input type="radio" class="item-radio" name="button2-radion" value="X">
+    </label>
+  </div>
+  <label class="item">
+    Icon to use
+    <input type="text" class="item-color item-icon" id="button1-icon" value="icon_001.png">
+  </label>
+</div>
+
+<div class="item-container">
+  <div class="item-container-header">Button 3 action configuration </div>
+  <div class="item-container-content" id="button2-radio">
+    <label class="item">
+      Single 
+      <input type="radio" class="item-radio" name="button3-radion" value="S" checked="">
+    </label>
+    <label class="item">
+      Duration
+      <input type="radio" class="item-radio" name="button3-radion" value="D">
+    </label>
+    <label class="item">
+      Disabled
+      <input type="radio" class="item-radio" name="button3-radion" value="X">
+    </label>
+  </div>
+  <label class="item">
+    Icon to use
+    <input type="text" class="item-color item-icon" id="button2-icon" value="icon_002.png">
+  </label>
+</div>
+
+
+
+<div class='item-container'>
+  <div class='button-container'>
+     <input id='submit_button' type='button' class='item-button' value='SAVE'>
+  </div>   
+</div>
+
+<div class="item-container">
+  <div class="item-container-header">Get the data</div>
+  <div class="item-container-content">
+    <div class="item tab-buttons">
+      <a id="data_clear_all" name="tab-1" class="tab-button active">Clear all</a>
+      <a id="data_button_0" name="tab-1" class="tab-button ">Get button 1</a>
+      <a id="data_button_1" name="tab-1" class="tab-button ">Get button 2</a>
+      <a id="data_button_2" name="tab-1" class="tab-button ">Get button 3</a>
+    </div>
+  </div>
+</div>
+
+</body>
+
+
+<script>
+
+
+function getConfigData() 
+{
+    /// Load the data from the elements to be option hash
+    var options = { "type" : "config" };
+    for ( var loop_button = 0; loop_button < 3; loop_button ++ )
+    {
+       var prefix="button" + (loop_button);
+       var value_icon = document.getElementById( prefix + "-icon" ).value;
+       var tab = document.getElementById( prefix + "-radio" );
+       var selected = tab.getElementsByClassName('item-radio');
+       var value_type  = "X";
+       for ( var i = 0; i < selected.length; i ++ )
+       {
+         if ( selected[i].checked == true )
+         {
+           value_type = selected[i].value ;
+           break;
+         }
+       }
+       // save for next launch
+       var val = JSON.stringify( { 'icon' : value_icon, 'type' : value_type } );;
+       localStorage.setItem('config-' + prefix, val );
+       // set plain dict for easy url-passing
+       options[ prefix + "-icon" ] = value_icon;
+       options[ prefix + "-type" ] = value_type;
+    }
+    // console.log("GOT:" + JSON.stringify(options) );
+    return options;
+}
+
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  // ============================= THESE ARE RUNNED ON LOAD ============================
+  function do_submit( dict ) 
+  {
+    dict = JSON.stringify(dict);
+    console.log('Closing the view, doing submit on:' + dict );
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent( dict );
+  }
+  
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() { do_submit( getConfigData() ) } );
+  var clear_button = document.getElementById('data_clear_all');
+  clear_button.addEventListener( 'click', function() { do_submit( { 'type' : 'data_clear_all' } ) } );
+    
+  for (var loop = 0; loop < 3; loop ++ )
+  {
+     var button_name = 'data_button_' + (loop) ;
+     var data_button = document.getElementById(button_name);
+     // thanks javascript, closures are really fun. If you remove this factory function the function will be evalutaed with last loop value. 
+     function fun_factory (loop) 
+     { 
+        return function() { do_submit( { 'type' : 'button_data', 'id' : loop } ); }
+     }
+     data_button.addEventListener( 'click', fun_factory(loop) );
+  }
+
+  (function() 
+  {
+  
+    function apply_options( prefix, options )
+    { // apply given options on given prefix
+       console.log("Appylying for " + prefix + ":" + JSON.stringify( options ) );
+       document.getElementById( prefix + "-icon" ).value = options["icon"];
+       var radio = document.getElementById( prefix + "-radio" );
+       var radio_items = radio.getElementsByClassName('item-radio');
+       var selected_value  = null;
+       for ( var i = 0; i < radio_items.length; i ++ )
+       {
+          if ( radio_items[i].value == options["type"] )
+          {
+             radio_items[i].checked = true;
+          }
+          else
+          {
+             radio_items[i].checked = false;
+          }
+       }
+    }
+    
+    // Load any previously saved configuration, if available
+    for ( var loop_button = 0; loop_button < 3; loop_button ++ )
+    {
+       var prefix="button" + (loop_button);
+       
+       if( localStorage.getItem('config-' + prefix)) 
+       {
+          console.log("Options found for: " + prefix );
+          var button_options = JSON.parse( localStorage.getItem('config-' + prefix) );
+          apply_options( prefix, button_options  );
+       }
+       else
+       {
+          console.log("No previous options found for: " + prefix );
+       }
+    }
+  })();
+
+</script>
+</html>

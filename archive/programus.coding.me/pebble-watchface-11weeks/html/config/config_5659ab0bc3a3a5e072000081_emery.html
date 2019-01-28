@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+  <title>11 Weeks Configuration</title>
+  <meta charset='UTF-8'>
+  <link rel='stylesheet' type='text/css' href='/programus.coding.me/pebble-watchface-11weeks/html/css/slate.css'>
+  <script src='/programus.coding.me/pebble-watchface-11weeks/html/js/slate.js'></script>
+  <script src='/programus.coding.me/pebble-watchface-11weeks/html/js/anim-lib.js'></script>
+  <script src='/programus.coding.me/pebble-watchface-11weeks/html/js/watch-11w.js'></script>
+  <style>
+  ul {
+    list-style: none;
+    margin-left: 0;
+    padding-left: 1em;
+    text-indent: -0.5em;
+  }
+
+  ul li:before {
+    content: "*";
+    display: inline-block;
+    text-align: center;
+    width: 0.5em;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
+  }
+
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+
+  .watch {
+    text-align: center;
+  }
+
+  .watch div, canvas {
+    height: 168px;
+  }
+
+  #watch-background {
+    background-color: black;
+    width: 144px;
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+  }
+
+  #watch {
+    background-color: black;
+    opacity: 0.8;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>
+      <div class='en'>11 Weeks Configuration</div>
+      <div class='zh-Hans'>11周 表盘配置</div>
+      <div class='zh-Hant'>11周 錶盤設定</div>
+      <div class='ja'>11週間　設定</div>
+    </h1>
+
+    <div class='item-container'>
+      <div class='item-container-header'>
+        <div class='en'>Preview</div>
+        <div class='zh-Hans'>预览</div>
+        <div class='zh-Hant'>預覽</div>
+        <div class='ja'>プレビュー</div>
+      </div>
+      <div class='item-container-content watch'>
+        <div class='item'>
+          <div id='watch-background'>
+            <canvas id='watch' width='144' height='168'>
+              <div class='en'>I am sorry that the preview (using &lt;canvas&gt;) is not supported by your device.</div>
+              <div class='zh-Hans'>很抱歉，您的设备不支持（使用了&lt;canvas&gt;的）预览。</div>
+              <div class='zh-Hant'>很抱歉，您的設備不支持（使用了&lt;canvas&gt;的）預覽。</div>
+              <div class='ja'>&lt;canvas&gt;をサポートしないデバイスを使っているため、プレビューできません。</div>
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>
+        <div class='en'>Optional Components</div>
+        <div class='zh-Hans'>可选组件</div>
+        <div class='zh-Hant'>可選部件</div>
+        <div class='ja'>オプショナルコンポーネント</div>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          <div class='en'>Seconds (refresh per sec)</div>
+          <div class='zh-Hans'>记秒</div>
+          <div class='zh-Hant'>記秒</div>
+          <div class='ja'>秒</div>
+          <input id='sec-layer' type='checkbox' class='item-toggle' checked='checked'>
+        </label>
+        <label class='item'>
+          <div class='en'>Outline Frame (refresh per sec)</div>
+          <div class='zh-Hans'>计时外框</div>
+          <div class='zh-Hant'>計時外框</div>
+          <div class='ja'>外枠</div>
+          <input id='frame-layer' type='checkbox' class='item-toggle' checked='checked'>
+        </label>
+        <label class='item'>
+          <div class='en'>Pebble Battery</div>
+          <div class='zh-Hans'>手表电量</div>
+          <div class='zh-Hant'>手錶電量</div>
+          <div class='ja'>時計電池量</div>
+          <input id='battery-layer' type='checkbox' class='item-toggle' checked='checked'>
+        </label>
+        <label class='item'>
+          <div class='en'>Phone Battery &amp; Bluetooth</div>
+          <div class='zh-Hans'>手机电量与蓝牙</div>
+          <div class='zh-Hant'>手機電量與藍牙</div>
+          <div class='ja'>携帯電池量とBluetooth</div>
+          <input id='bt-phone-layer' type='checkbox' class='item-toggle' checked='checked'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        <div class='en'>
+          <ul>
+            <li>The outline frame is using a timer and second tick, which will increase battery usage.</li>
+            <li>The seconds part need second tick, which will increase battery usage a little.</li>
+            <li>Minute tick will be used when outline frame and seconds be hidden, which will save power.</li>
+          </ul>
+        </div>
+        <div class='zh-Hans'>
+          <ul>
+            <li>计时外框需使用定时器并需要每秒刷新，会增加电量消耗。</li>
+            <li>记秒需要每秒刷新，会稍增加电量消耗。</li>
+            <li>隐藏计时外框和记秒部分，将改为每分刷新，可节省部分电量。</li>
+          </ul>
+        </div>
+        <div class='zh-Hant'>
+          <ul>
+            <li>計時外框需使用定時器並需每秒更新，將增加電量消耗。</li>
+            <li>記秒需每秒更新，將稍許增加電量消耗。</li>
+            <li>隱藏計時外框和記秒部分，將切為每分更新，可節省部分電量。</li>
+          </ul>
+        </div>
+        <div class='ja'>
+          <ul>
+            <li>「外枠」はタイマーと秒更新が必要なため、電池使用量が増えることになります。</li>
+            <li>「秒」は秒更新が必要なため、電池使用量が少し増えることになります。</li>
+            <li>「外枠」と「秒」を非表示にしたら、分更新になるため、電池使用量が少なくなります。</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE'>
+        <div id='submit_button-en' style='display:none;'>SAVE</div>
+        <div id='submit_button-zh-Hans' style='display:none;'>保存</div>
+        <div id='submit_button-zh-Hant' style='display:none;'>存儲</div>
+        <div id='submit_button-ja' style='display:none;'>保存</div>
+      </div>
+    </div>
+  </body>
+  <script>
+  var keys = {
+    'sec-layer': 1, 
+    'frame-layer': 2,
+    'battery-layer': 4,
+    'bt-phone-layer': 8
+  };
+  function getConfigData(needSave) {
+
+    var options = {};
+
+    for (var key in keys) {
+      var ctrl = document.getElementById(key);
+      var value = ctrl.checked;
+      options[key] = value;
+
+      if (needSave) {
+        // if need save, save for next launch
+        if (!value) {
+          localStorage.setItem(key, '1');
+        } else {
+          localStorage.removeItem(key);
+        }
+      }
+    }
+
+    // console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+
+  function getConfigFlags() {
+    var options = getConfigData(true);
+    var config = 0;
+    for (var key in keys) {
+      if (!options[key]) {
+        config |= keys[key];
+      }
+    }
+    return {
+      'config': config
+    };
+  }
+
+  function drawWatch(canvas) {
+    var canvas = document.getElementById('watch');
+    images.init(function () {
+      watch.getConfig = getConfigData;
+      watch.setCanvas(canvas);
+      watch.beginDraw();
+    });
+  }
+
+  function getSupportedLanguage(lang) {
+    var ret = 'en',
+        hans = ['-hans', '-cn'], 
+        i,
+        isHans = false;
+    if (lang) {
+      lang = lang.toLowerCase();
+      if (lang.startsWith('zh')) {
+        for (i = 0; i < hans.length; i++) {
+          if (lang.indexOf(hans[i]) >= 0) {
+            isHans = true;
+            break;
+          }
+        }
+
+        ret = isHans ? 'zh-Hans' : 'zh-Hant';
+      } else if (lang.startsWith('ja')) {
+        ret = 'ja';
+      }
+    }
+
+    return ret;
+  }
+
+  function setUILanguage(lang) {
+    lang = getSupportedLanguage(lang);
+    var ctrls = {
+      'submit_button': 'value'
+    }, langClasses = [
+      'en', 'zh-Hans', 'zh-Hant', 'ja'
+    ], lables, i, j, isSame;
+
+    for (i = 0; i < langClasses.length; i++) {
+      labels = document.getElementsByClassName(langClasses[i]);
+      isSame = lang === langClasses[i];
+      for (j = 0; j < labels.length; j++) {
+        labels[j].classList.remove(isSame ? 'hide' : 'show');
+        labels[j].classList.add(isSame ? 'show' : 'hide');
+      }
+    }
+    document.getElementsByTagName('html')[0].setAttribute('lang', lang);
+
+    for (var c in ctrls) {
+      var ctrl = document.getElementById(c);
+      var div = document.getElementById(c + '-' + lang);
+      if (ctrl && div) {
+        ctrl[ctrls[c]] = div.innerHTML;
+      }
+    }
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigFlags()));
+  });
+
+  (function() {
+    // Load any previously saved configuration, if available
+    for (var key in keys) {
+      var ctrl = document.getElementById(key);
+      var value = localStorage[key];
+      ctrl.checked = value ? false : true;
+    }
+    drawWatch();
+    setUILanguage(navigator.language || navigator.userLanguage);
+  })();
+  </script>
+</html>

@@ -1,0 +1,21 @@
+h1 {
+	margin: 0;
+	padding: 0;
+	font-family: 'PT Sans', sans-serif;
+	font-size: 1.2em;
+	font-weight: 500;
+	text-align: center;
+	text-transform: uppercase;
+	color: #666666;
+}
+.item-styled-color .value {
+	top: 7px;
+	height: 30px;
+}
+.item-input {
+	padding: 5px 10px;
+}
+
+.hidden {
+	display: none;
+}

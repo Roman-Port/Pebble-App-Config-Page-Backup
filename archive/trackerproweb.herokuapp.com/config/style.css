@@ -1,0 +1,83 @@
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+
+/*.navbar-header{
+  width:100%;
+}
+*/
+.right-button{
+    float:right;
+    margin-right: 10px;
+    margin-top: 8px;
+}
+
+.ui-loading, .ui-loader, .panel-template {
+    display: none;
+}
+
+/*.container {
+    margin-top: 20px;
+}
+
+.btn-save {
+    margin-bottom: 20px;
+}
+*/
+/*.add-subscription {
+    text-align: center;
+}
+
+.btn-add-subscription {
+    width: 99%;
+}
+*/
+.panel-container {
+    margin-bottom: 20px;
+}
+
+.panel-heading {
+    font-weight: bold;
+}
+
+/*.panel-heading .accordion-toggle:after {
+    font-family: 'FontAwesome';
+    content: '\f078';
+    float: right;
+    color: #fff;
+}
+
+.panel-heading .accordion-toggle.collapsed:after {
+    content: '\f054';
+}
+*/
+
+/*.handle {
+    padding-right: 10px;
+    color: #fff;
+}
+*/
+
+.btn-test {
+    float: right;
+    display: none;
+    padding: 3px 5px 3px 5px;
+    margin: -2px -2px 0px 0px;
+}
+
+.grp-cb-enable {
+    float: right;
+    display: none;
+    padding: 3px 5px 3px 5px;
+    margin: -2px -2px 0px 0px;
+}
+
+
+.btn-delete {
+    /*display: none;*/
+    padding: 3px 5px 3px 5px;
+    margin: -2px 12px 0px 0px;
+    float: left;
+}
+

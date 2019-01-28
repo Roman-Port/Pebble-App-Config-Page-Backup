@@ -1,0 +1,199 @@
+﻿<html>
+   <head>
+    <title>Plex Advance Remote</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='/code.jquery.com/mobile/1.3.2/jquery.css'>
+    <script src='/code.jquery.com//jquery-1.js'></script>
+    <script src='/code.jquery.com/mobile/1.3.2/jquery.js'></script>
+    <style>
+      .ui-header .ui-title { margin-left: 1em; margin-right: 1em; text-overflow: clip; }
+      /*.ui-radio { width: 50%; }*/
+    </style>
+
+  </head>
+  
+  <body>
+    <div data-role='page' id='main'>
+      <div data-role='header' class='jqm-header' data-theme='a'>
+        <h1>Plex Advance Remote</h1>
+      </div>
+      
+      <div class="container">
+                <div class="configure">
+                        <h2>Configure</h2>
+                    <form id="configure-form" class="form-configure well" action="#" method="POST">
+                            <h3>Server</h3>
+                        <div class="form-group">
+                                <label for="plexServer">Plex Server</label>
+                                <input type="text" id="plexServer" name="plexServer" class="form-control" placeholder="192.168.1.117:32400">
+                                <input type="hidden" id="plexClientPort" value="0">
+                                <input type="hidden" id="plexClientPort2" value="0">
+                                <input type="hidden" id="plexClientHost" value="0">
+                                <input type="hidden" id="plexClientHost2" value="0">
+                                </div>        
+                                <p class="help-block">Enter a hostname or IP address of a Plex Server before selecting a Plex Client (version 2.1.0 WatchApp only use IP - version 2.1.2 use IP:PORT usually is 32400 ).</p>
+                                <input id="getClients" type="button" value="Get Clients" onclick="">
+                               
+                                <br>
+                                <div class="form-group">
+                                <label for="plexClient">Plex Client 1</label>
+                                <select id="plexClient" name="plexClient" class="form-control">
+                                        <option value="" selected="">Select a Client 1</option>
+                                       
+                                        
+                                </select>
+                                
+                                
+                                <label for="plexClient2">Plex Client 2</label>
+                                <select id="plexClient2" name="plexClient2" class="form-control">
+                                        <option value="" selected="">Select a Client 2</option>
+                                </select>
+                                
+                                
+                        </div>
+                        <input class="btn btn-lg btn-primary btn-block" id="save" type="submit" value="Save">
+              </form>
+          </div>
+        </div>
+        
+        
+        <script type="text/javascript">
+              
+                $().ready(function () {
+                        $("#getClients").click(function(){
+                                $.ajax({
+                                        "url" : "http://" + $("#plexServer").val() + "/clients",
+                                        "dataType" : "xml",
+                                        "type" : "GET",
+                                        "statusCode": {
+                                                401: function() {
+                                                        $("#configure-form").addClass("hide");
+                                                        $("#login-form").removeClass("hide");
+                                                        $("#username").focus();
+                                                }
+                                        },
+                                        "beforeSend": function (xhr) {
+                                             xhr.setRequestHeader("X-Plex-Token", localStorage.getItem("plexToken"));
+                                                xhr.setRequestHeader("X-Plex-Device", "Pebble");
+                                                xhr.setRequestHeader("X-Plex-Model", "V2R2");
+                                                xhr.setRequestHeader("X-Plex-Client-Identifier", "V2R2");
+                                                xhr.setRequestHeader("X-Plex-Device-Name", "pebble-plex-remote");
+                                                xhr.setRequestHeader("X-Plex-Platform", "PebbleOS");
+                                                xhr.setRequestHeader("X-Plex-Client-Platform", "PebbleOS");
+                                                xhr.setRequestHeader("X-Plex-Platform-Version", "2.0B2");
+                                                xhr.setRequestHeader("X-Plex-Product", "pebble-plex-remote");
+                                                xhr.setRequestHeader("X-Plex-Version", "1.0");
+                                        },
+                                        "success" : function (data) {
+                                                $("#clientSelect").empty();
+                                                var $clients = $(data).find("Server");
+                                                $.each($clients, function (i,item) {
+                                                        var client = $("<option>", {
+                                                                "value" :  $(item).attr("host") + "-" + $(item).attr("port") + "-" + "+" + $(item).attr("name") ,
+                                                                "html" : $(item).attr("name") + " (" + $(item).attr("host") +") " + $(item).attr("port")
+                                                        }).appendTo($("#plexClient"));
+                                                        
+                                                });       
+                                                         var $clients1 = $(data).find("Server");
+                                                         $.each($clients1, function (i,item) {
+                                                         var client1 = $("<option>", {
+                                                                "value" :  $(item).attr("host") + "-" + $(item).attr("port") + "-" + "+" + $(item).attr("name") ,
+                                                                "html" : $(item).attr("name") + " (" + $(item).attr("host") +") " + $(item).attr("port")
+                                                        }).appendTo($("#plexClient2"));
+                                                });
+                                        },
+                                        
+                                       
+                                        "error" : function (jqXHR, textStatus, errorThrown) {
+
+                                        }
+
+                                });
+                        });
+
+                });
+               
+                $("#plexServer").val(localStorage.getItem("plexServer"));
+                $("#plexClient").val(localStorage.getItem("plexClient"));
+                $("#plexClientPort").val(localStorage.getItem("plexClientPort"));
+                $("#plexClientHost").val(localStorage.getItem("plexClientHost"));
+                
+                $("#plexClient2").val(localStorage.getItem("plexClient2"));
+                $("#plexClientPort2").val(localStorage.getItem("plexClientPort2"));
+                $("#plexClientHost2").val(localStorage.getItem("plexClientHost2"));
+                
+                $("#configure-form").submit(function(e) {
+                        var s = $("#plexServer").val();
+                        
+                        var c = $("#plexClient").val();
+                        
+                        var t = $("#plexClient").val();
+                        
+                        var p = $("#plexClientPort").val();
+                        var h = $("#plexClientHost").val();
+                        
+                        var c2 = $("#plexClient2").val();
+                        
+                        var t2 = $("#plexClient2").val();
+                         
+                        var p2 = $("#plexClientPort2").val();
+                        var h2 = $("#plexClientHost2").val();
+                        
+                        //alert("cl:"+c);
+                        //alert("c2:"+c2);
+                        
+          
+                        var cc = c.split('-'); 
+                        c=cc[0];
+                        p=cc[1];
+                        
+                        var gg = t.split('+');
+                        h=gg[1];
+                        
+                        
+                        //alert("c:"+c);
+                        //alert("p"+p);
+                        //alert("h"+h);
+                        
+                        var cc2 = c2.split('-'); 
+                        c2=cc2[0];
+                        p2=cc2[1];
+                        
+                        var gg2 = t2.split('+');
+                        h2=gg2[1];
+                        
+                       //alert("c:"+c2);
+                        //alert("p"+p2);
+                        //alert("h"+h2);
+                        
+                        var j = {
+                                plexServer : s,
+                                plexClient : c,
+                                plexClientPort : p,
+                                plexClientHost : h,
+                                plexClient2 : c2,
+                                plexClientPort2 : p2,
+                                plexClientHost2 : h2
+                        };
+                        
+                    localStorage.setItem("plexServer", s);  
+                    localStorage.setItem("plexClient", c);
+                    localStorage.setItem("plexClientPort", p); 
+                    localStorage.setItem("plexClientHost", h);
+                    
+                    localStorage.setItem("plexClient2", c2);
+                    localStorage.setItem("plexClientPort2", p2);
+                    localStorage.setItem("plexClientHost2", h2);
+
+                        window.location.href = "pebblejs://close#" + JSON.stringify(j);
+
+                        e.preventDefault();
+                });
+                
+</script>
+      
+      
+  </div></body>
+</html>
+

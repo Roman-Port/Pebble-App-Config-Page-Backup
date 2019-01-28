@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Alien Analog Binary</title>
+  <link rel='stylesheet' type='text/css' href='/robertames.com/pebble/pebble/analog-binary/watchface/config/css/slate.css'>
+  <script src='/robertames.com/pebble/pebble/analog-binary/watchface/config/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <!-- <h1 class='title'>Alien Analog Binary</h1> -->
+
+    <div class='item' id='foobar'>
+      Choose sleek and minimal or go full alien
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Looks</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Alien Mode
+          <input id='checkbox_KEY_ALIEN' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Dark
+          <input id='checkbox_KEY_DARK' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Minimalistic
+          <input id='checkbox_KEY_MINIMAL' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        These options affect how the watchface looks.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Time</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Show Seconds
+          <input id='checkbox_KEY_SECONDS' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-content' style='display: none;'>
+        <label class='item'>
+          Show Date
+          <input id='checkbox_KEY_DATE' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Options are related to time display.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Demo Mode
+          <input id='checkbox_KEY_DEMO' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Learn how the watchface works and show off your Pebble!<br>
+        Hours count to 12 around the outside.  Minutes count to 60 following a path with zero minutes at 12:00, fifteen minutes at 3:00, thirty minutes at 6:00 and 45 minutes at 9:00.  It looks binary but it's really analog with the accuracy of digital.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+    var checkbox_KEY_ALIEN = document.getElementById('checkbox_KEY_ALIEN');
+    var checkbox_KEY_DARK = document.getElementById('checkbox_KEY_DARK');
+    var checkbox_KEY_SECONDS = document.getElementById('checkbox_KEY_SECONDS');
+    var checkbox_KEY_DATE = document.getElementById('checkbox_KEY_DATE');
+    var checkbox_KEY_MINIMAL = document.getElementById('checkbox_KEY_MINIMAL');
+    var checkbox_KEY_DEMO = document.getElementById('checkbox_KEY_DEMO');
+ 
+    var options = {
+      'KEY_ALIEN': checkbox_KEY_ALIEN.checked,
+      'KEY_DARK': checkbox_KEY_DARK.checked,
+      'KEY_SECONDS': checkbox_KEY_SECONDS.checked,
+      'KEY_DATE': checkbox_KEY_DATE.checked,
+      'KEY_MINIMAL': checkbox_KEY_MINIMAL.checked,
+      'KEY_DEMO': checkbox_KEY_DEMO.checked
+    };
+
+    // Save for next launch
+    localStorage['KEY_ALIEN'] = options['KEY_ALIEN'];
+    localStorage['KEY_DARK'] = options['KEY_DARK'];
+    localStorage['KEY_SECONDS'] = options['KEY_SECONDS'];
+    localStorage['KEY_DATE'] = options['KEY_DATE'];
+    localStorage['KEY_MINIMAL'] = options['KEY_MINIMAL'];
+    localStorage['KEY_DEMO'] = options['KEY_DEMO'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+    //alert( JSON.stringify(getConfigData()) );
+
+    console.log( "GOT: " + JSON.stringify(getConfigData()) );
+    //document.getElementById('foobar').innerHTML = JSON.stringify(getConfigData());
+    document.getElementById('foobar').innerHTML = "AALKJALKAJ";
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var checkbox_KEY_ALIEN = document.getElementById('checkbox_KEY_ALIEN');
+    var checkbox_KEY_DARK = document.getElementById('checkbox_KEY_DARK');
+    var checkbox_KEY_DATE = document.getElementById('checkbox_KEY_DATE');
+    var checkbox_KEY_SECONDS = document.getElementById('checkbox_KEY_SECONDS');
+    var checkbox_KEY_MINIMAL = document.getElementById('checkbox_KEY_MINIMAL');
+    var checkbox_KEY_DEMO = document.getElementById('checkbox_KEY_DEMO');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['KEY_ALIEN']) {
+      checkbox_KEY_ALIEN.checked = JSON.parse(localStorage['KEY_ALIEN']);
+    }
+    if(localStorage['KEY_DARK']) {
+      checkbox_KEY_DARK.checked = JSON.parse(localStorage['KEY_DARK']);
+    }
+    if(localStorage['KEY_SECONDS']) {
+      checkbox_KEY_SECONDS.checked = JSON.parse(localStorage['KEY_SECONDS']);
+    }
+    if(localStorage['KEY_DATE']) {
+      checkbox_KEY_DATE.checked = JSON.parse(localStorage['KEY_DATE']);
+    }
+    if(localStorage['KEY_MINIMAL']) {
+      checkbox_KEY_MINIMAL.checked = JSON.parse(localStorage['KEY_MINIMAL']);
+    }
+    if(localStorage['KEY_DEMO']) {
+      checkbox_KEY_DEMO.checked = JSON.parse(localStorage['KEY_DEMO']);
+    }
+  })();
+  </script>
+</html>

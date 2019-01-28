@@ -1,0 +1,16 @@
+<html>
+<head>
+   <script>
+      window.onload = function(e) {
+         var query = window.location.search.substring(1);
+         if (query != '')
+         {
+            query = '?' + query;
+         }
+         document.body.innerHTML='<object width="100%" height="100%" type="text/html" data="http://rawgit.com/honourity/PBWeather/master/Config/pebbleConfig.html' + query + '"></object>';
+      }
+   </script>
+</head>
+   <body>
+   </body>
+</html>

@@ -1,0 +1,70 @@
+﻿<html>
+  <head>
+    <title>ARCHERY SCORES v1.0</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/app.31prime.com/ArcheryScoring/jquery.css">
+    <script src="/app.31prime.com/ArcheryScoring/jquery-1.js"></script>
+    <script src="/app.31prime.com/ArcheryScoring/jquery.js"></script>
+
+  </head>
+  <body>
+    <div data-role="page" id="main">
+
+
+      <div data-role="content">
+
+        <div data-role="fieldcontain">
+            <label for="ends">Number of ends:</label>
+            <input type="range" name="ends" id="ends" data-highlight="true" min="6" max="100" value="12">
+        </div>    
+
+        <div data-role="fieldcontain">
+            <label for="arrows">Number of arrows per end:</label>
+            <input type="range" name="arrows" id="arrows" data-highlight="true" min="3" max="12" value="6">
+        </div>
+
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <script>
+      function saveOptions() {
+        var options = {}
+        $('textarea, select, [type="hidden"], [type="password"], [type="text"]').each(function(){options[$(this).attr('id')] = $(this).val();})
+        $('[type="radio"], [type="checkbox"]').each(function(){options[$(this).attr('id')] = $(this).is(':checked');})
+        $('input, [type="range"]').each(function(){options[$(this).attr('id')] = $(this).val();})
+
+        return options;
+      }
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+
+        //Set form values to whatever is passed in.
+        var obj = jQuery.parseJSON(decodeURIComponent(window.location.search.substring(1)));
+        for(key in obj) {
+          $("#"+[key]).val(obj[key]);
+          $("#"+[key]).val(obj[key]).slider("refresh");       
+        }
+      });
+    </script>
+  </body>
+</html>

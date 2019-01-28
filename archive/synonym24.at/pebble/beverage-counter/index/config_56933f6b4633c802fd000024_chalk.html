@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Beverage Counter Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/synonym24.at/pebble/beverage-counter/css/slate.css'>
+  <script src='/synonym24.at/pebble/beverage-counter/js/slate.js'></script>
+  <script src='/synonym24.at/pebble/beverage-counter/js/zepto.js'></script>
+  <style>
+  * {
+    color: #000;
+  }
+
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888;
+    text-align: center;
+  }
+
+  .delete-item {
+    top: 6px;
+    right: 40px;
+  }
+
+  .item-button {
+    min-width: 150px;
+    width: 40%;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Beverage Counter Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Configure your beverages for today!
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Customizability</div>
+      <div class='item-container-content'>
+        <div class='item-draggable-list item-dynamic-list' id='beverage_list'>
+          <label class="item"><input id='beverage-0' type='text' class='item-input' onfocus='addInput(this)' onblur='removeInput(this)' placeholder='Beverage name...'><div class='delete-item'></div></label>
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='num_beverages' type='hidden' value='1'>
+        <input id='reset_button' type="button" class="item-button" value="Reset all beverages">
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+  var beverageId = 1;
+
+  function getConfigData() {
+    var beverages = [];
+    var numBeverages = document.getElementById('num_beverages').value;
+
+    var list = $('#beverage_list label');
+    list.each(function (i, item) {
+      console.log(item.children[0].value);
+      if (item.children[0].value.trim() != "") {
+        beverages.push(item.children[0].value);
+      }
+    });
+
+    /*
+    for (i = 0; i < numBeverages; ++i) {
+      beverages[i] = document.getElementById('beverage-' + i).value;
+      console.log(document.getElementById('beverage-' + i).value);
+    }
+    */
+ 
+    var options = {
+      'beverages': beverages
+    };
+
+    // Save for next launch
+    localStorage['beverages'] = JSON.stringify(options['beverages']);
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    console.log(localStorage);
+    // Load any previously saved configuration, if available
+    if(localStorage['beverages']) {
+      var arrayBeverages = JSON.parse(localStorage['beverages']);
+      var numBeverages = arrayBeverages.length;
+      //highContrastCheckbox.checked = JSON.parse(localStorage['high_contrast']);
+      beverageId = 0;
+      for (var i = 0; i < numBeverages; ++i) {
+        document.getElementById('beverage-' + i).value = arrayBeverages[i];
+        console.log('beverage ' + i + ': ' + arrayBeverages[i]);
+        addInput(document.getElementById('beverage-' + i));
+      }
+    }
+
+    setTimeout(function() {
+        $('.add-item').remove();
+      }, 100);
+
+    $('#reset_button').on('click', function(e) {
+      $('input.item-input').each(function(i, item) {
+        console.log('item', item);
+        if (item.value.trim() != '') {
+          item.parentElement.remove();
+        }
+      });
+      document.getElementById('num_beverages').value = 1;
+    });
+  })();
+
+  function addInput(e) {
+    console.log(e);
+    var numBeverages = document.getElementById('num_beverages');
+    var list = $('#beverage_list');
+
+    for (var i = 0; i < list[0].children.length; ++i) {
+      if (e.id == list[0].children[i].children[0].id &&
+        i + 1 == list[0].children.length &&
+        i + 1 == numBeverages.value) {
+        console.log("focused item found!");
+        list.append("<label class='item'><input id='beverage-" + ++beverageId + "' type='text' class='item-input' onfocus='addInput(this)' onblur='removeInput(this)' placeholder='Beverage name...'><div class='delete-item'></div><div class='item-draggable-handle'><div class='item-draggable-handle-bar'></div><div class='item-draggable-handle-bar'></div><div class='item-draggable-handle-bar'></div></div></label>");
+        ++numBeverages.value;
+        break;
+      }
+    }
+  }
+
+  function removeInput(e) {
+    console.log(e);
+    var numBeverages = document.getElementById('num_beverages');
+    var list = $('#beverage_list');
+
+    if (e.value.trim() == "") {
+      for (var i = 0; i < list[0].children.length - 1; ++i) {
+        if (e.id == list[0].children[i].children[0].id &&
+          i + 1 <= list[0].children.length &&
+          list[0].children[i + 1].children[0].value.trim() == "") {
+          $('#' + list[0].children[i + 1].children[0].id).parent().remove();
+          --numBeverages.value;
+          console.log("numBeverages", numBeverages.value);
+          break;
+        }
+      }
+    }
+  }
+  </script>
+</html>

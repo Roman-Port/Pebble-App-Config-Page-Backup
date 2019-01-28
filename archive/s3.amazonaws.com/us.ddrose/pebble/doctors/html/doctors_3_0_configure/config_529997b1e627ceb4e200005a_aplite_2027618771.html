@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>12 Doctors</title>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel='stylesheet' href='/s3.amazonaws.com/us.ddrose/pebble/doctors/html/jquery.css'>
+        <script src='/s3.amazonaws.com/us.ddrose/pebble/doctors/html/jquery-1.bin'></script>
+        <script src='/s3.amazonaws.com/us.ddrose/pebble/doctors/html/jquery.bin'></script>
+        <script src='/s3.amazonaws.com/us.ddrose/pebble/doctors/html/purl.bin'></script>
+        <style>
+          .ui-header .ui-title { margin-left: 1em; margin-right: 1em; text-overflow: clip; }
+        </style>
+    </head>
+    <body>
+    <div data-role="page" id="page1">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <h3>12 Doctors Configuration</h3>
+    </div>
+    <div data-role="content">
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <input id="cancel" value="Cancel" type="submit">
+            </div>
+            <div class="ui-block-b">
+                <input id="save" data-theme="a" value="Save" type="submit">
+            </div>
+        </div>
+
+<script src="/s3.amazonaws.com/us.ddrose/pebble/doctors/html/doctors_3_0_configure.bin"></script>
+        
+    </div>
+</div>
+
+<script>
+
+function cancel_func() {
+  document.location = "pebblejs://close#";
+}
+
+function save_func() {
+  var return_to = $.url().param("return_to") || "pebblejs://close#"
+  var location = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
+  document.location = location;
+}
+
+$().ready(function() {
+  $("#cancel").click(cancel_func);
+  $("#save").click(save_func);
+});
+
+</script>
+</body>
+</html>

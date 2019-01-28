@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!-- Dec 2015, By S.G. Productions -->
+<!-- Special Thanks to Chris Lewis, for much of this code is made possible from his
+tutorials at https://ninedof.wordpress.com/pebble-sdk-tutorial/, and also the guides from
+https://developer.getpebble.com -->
+<!-- Uses the Slate CSS Library by Pebble Technology, under the license here:
+https://github.com/pebble/slate/blob/master/LICENSE -->
+<html>
+  <head>
+  <title>VerTexT Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/sgproductions.github.io/VerTexT/css/slate.css'>
+  <script src='/sgproductions.github.io/VerTexT/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>VerTexT Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to customize the VerTexT watchface.
+        </div>
+      </div>
+    </div>
+
+	<div class='item-container'>
+      <div class='item-container-header'>Background Color</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Hour Stripe 1
+          <input id='bg_color_hour_1' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+        </label>
+        <label class='item'>
+          Hour Stripe 2
+          <input id='bg_color_hour_2' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+        </label>
+        <label class='item'>
+          Minute Stripe 1
+          <input id='bg_color_min_1' type='text' class='item-color item-color-normal' value='#000000'>
+        </label>
+        <label class='item'>
+          Minute Stripe 2
+          <input id='bg_color_min_2' type='text' class='item-color item-color-normal' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Change the colors of the background stripes. (Note: Original Pebble only supports B/W)
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Text</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Hour Stripe 1
+          <input id='tx_color_hour_1' type='text' class='item-color item-color-normal' value='#000000'>
+        </label>
+        <label class='item'>
+          Hour Stripe 2
+          <input id='tx_color_hour_2' type='text' class='item-color item-color-normal' value='#000000'>
+        </label>
+        <label class='item'>
+          Minute Stripe 1
+          <input id='tx_color_min_1' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+        </label>
+        <label class='item'>
+          Minute Stripe 2
+          <input id='tx_color_min_2' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+        </label>
+        <label class="item">
+          Time Font
+          <select id="font_select" name="select-1" dir='rtl' class="item-select">
+            <option class="item-select-option" value="LECO">LECO</option>
+            <option class="item-select-option" value="SQUARE" selected="">Square</option>
+            <option class="item-select-option" value="LATO">Lato</option>
+          </select>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Change the color and font of the text. (Note: Original Pebble only supports B/W)
+      </div>
+    </div>
+ 
+ 	<div class='item-container'>
+      <div class='item-container-header'>Misc Options</div>
+      <div class='item-container-content'>
+        <label class="item">
+          Flick to see date
+          <input id="accel_select" type="checkbox" class="item-toggle" name="toggle-2" checked="">        
+          
+        </label>
+        <label class="item">
+          Animated time transitions
+          <input id="anim_select" type="checkbox" class="item-toggle" name="toggle-2" checked="">        
+          
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Activate the ability to display date and animated time transitions.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  
+    <div class="item-container">
+	  <div class='item-container-header'>Font Credits</div>
+	  <div class="item-container-content">
+		<div class="item">
+		  LECO 2014 by Josen Fonts, placed in the Public Domain.<br>
+		  Lato by Lukasz Dziedzic, used under the terms of the <a href="http://scripts.sil.org/OFL"> SIL Open Font License 1.1</a>.<br>
+		  Square by Wouter van Oortmerssen, used under the terms of the <a href="/creativecommons.org/licenses/by/3.0/deed.html">Creative Commons Attribution 3.0 Unported License</a>.<br>
+		</div>
+	  </div>
+	  <div class='item-container-footer'>
+        The above notice only serves to acknowledge the intellectual property of the font creators of the fonts used in this watchface, when applicable: it 
+        does not in any way suggest their endorsement of this watchface.
+      </div>
+  </div>
+  
+  <script>
+  // Retrieving options from user selection
+  function saveOptions() {
+	var backgroundColorHour1 = document.getElementById('bg_color_hour_1')
+	var backgroundColorHour2 = document.getElementById('bg_color_hour_2')
+	var backgroundColorMin1 = document.getElementById('bg_color_min_1')
+	var backgroundColorMin2 = document.getElementById('bg_color_min_2')
+	var textColorHour1 = document.getElementById('tx_color_hour_1')
+	var textColorHour2 = document.getElementById('tx_color_hour_2')
+	var textColorMin1 = document.getElementById('tx_color_min_1')
+	var textColorMin2 = document.getElementById('tx_color_min_2')
+ 	var fontSelect = document.getElementById('font_select');
+ 	var accelSelect = document.getElementById('accel_select');
+ 	var animSelect = document.getElementById('anim_select');
+ 	
+    var options = {
+	  "x1": GColorFromHex(backgroundColorHour1.value),
+	  "x2": GColorFromHex(backgroundColorHour2.value),
+	  "x3": GColorFromHex(backgroundColorMin1.value),
+	  "x4": GColorFromHex(backgroundColorMin2.value),
+	  "t1": GColorFromHex(textColorHour1.value),
+	  "t2": GColorFromHex(textColorHour2.value),
+	  "t3": GColorFromHex(textColorMin1.value),
+	  "t4": GColorFromHex(textColorMin2.value),
+      "font": fontSelect.options[fontSelect.selectedIndex].value,
+      "accel": accelParse(accelSelect.checked),
+      "anim": accelParse(animSelect.checked)
+    }
+    
+    // Save for next launch
+    localStorage['bg_color_hour_1'] = backgroundColorHour1.value;
+    localStorage['bg_color_hour_2'] = backgroundColorHour2.value;
+    localStorage['bg_color_min_1'] = backgroundColorMin1.value;
+    localStorage['bg_color_min_2'] = backgroundColorMin2.value;
+    localStorage['tx_color_hour_1'] = textColorHour1.value;
+    localStorage['tx_color_hour_2'] = textColorHour2.value;
+    localStorage['tx_color_min_1'] = textColorMin1.value;
+    localStorage['tx_color_min_2'] = textColorMin2.value;
+    localStorage['font'] = options["font"];
+    localStorage['accel'] = accelSelect.checked;
+    localStorage['anim'] = animSelect.checked;
+     
+    return options;
+  };
+  
+  // Convert a hex color (e.g. FFFFFF) into a GColor8 value used by the
+  // Pebble SDK.
+  // Copyright © 2015 Matthew Tole
+  // Used here under the terms of the MIT License, available:
+  // https://gist.github.com/matthewtole/49da38377b0b0a423407
+  function GColorFromHex(hex) {
+    var hexNum = parseInt(hex, 16);
+    var a = 192;
+    var r = (((hexNum >> 16) & 0xFF) >> 6) << 4;
+    var g = (((hexNum >>  8) & 0xFF) >> 6) << 2;
+    var b = (((hexNum >>  0) & 0xFF) >> 6) << 0;
+    return a + r + g + b;
+  }
+  
+  // Just an interim solution to avoid fixing main watch face code
+  function accelParse(element){
+  	var result;
+  	if (element) {
+  		result = "on";
+  	} 
+  	else {
+  		result = "off";
+  	}
+  	return result;
+  };
+ 
+  // Get query variables:
+  function getQueryParam(variable, default_) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] == variable)
+      return decodeURIComponent(pair[1]);
+    }
+	  return default_ || false;
+  };
+  
+  var submitButton = document.getElementById("submit_button");
+  submitButton.addEventListener("click", 
+    function() {
+      console.log("Submit");
+ 
+      var options = saveOptions();
+
+      var return_to = getQueryParam('return_to', 'pebblejs://close#');
+      document.location = return_to + encodeURIComponent(JSON.stringify(options));
+      
+      //document.location = location;
+    }, 
+  false);
+  
+  (function() {
+	var backgroundColorHour1 = document.getElementById('bg_color_hour_1')
+	var backgroundColorHour2 = document.getElementById('bg_color_hour_2')
+	var backgroundColorMin1 = document.getElementById('bg_color_min_1')
+	var backgroundColorMin2 = document.getElementById('bg_color_min_2')
+	var textColorHour1 = document.getElementById('tx_color_hour_1')
+	var textColorHour2 = document.getElementById('tx_color_hour_2')
+	var textColorMin1 = document.getElementById('tx_color_min_1')
+	var textColorMin2 = document.getElementById('tx_color_min_2')
+ 	var fontSelect = document.getElementById('font_select');
+ 	var accelSelect = document.getElementById('accel_select');
+ 	var animSelect = document.getElementById('anim_select');
+ 	
+    // Load any previously saved configuration, if available
+    if(localStorage['bg_color_hour_1']) {
+      backgroundColorHour1.value = localStorage['bg_color_hour_1'];
+      backgroundColorHour2.value = localStorage['bg_color_hour_2'];
+      backgroundColorMin1.value = localStorage['bg_color_min_1'];
+      backgroundColorMin2.value = localStorage['bg_color_min_2'];
+      textColorHour1.value = localStorage['tx_color_hour_1'];
+      textColorHour2.value = localStorage['tx_color_hour_2'];
+      textColorMin1.value = localStorage['tx_color_min_1'];
+      textColorMin2.value = localStorage['tx_color_min_2'];
+      fontSelect.value = localStorage['font'];
+      accelSelect.checked = JSON.parse(localStorage['accel']);
+      animSelect.checked = JSON.parse(localStorage['anim']);
+    }
+  })();
+  </script>
+</html>

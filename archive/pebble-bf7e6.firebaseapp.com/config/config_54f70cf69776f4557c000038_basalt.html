@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+        <title>Dualtime Config</title>
+        <style type="text/css">
+            * {
+                -webkit-box-sizing:border-box;
+                -moz-box-sizing:border-box;
+                box-sizing:border-box;
+                margin:0;
+                padding:0;
+                border:none;
+                font-size:1.5rem;
+                font-weight:normal;
+                font-style: normal;
+                color:inherit;
+                text-decoration:none;
+            }
+            html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            html {
+                font-size:62.5%;
+                /* initialise 'root' font so that 1 rem/em equates to 10px */
+                -ms-text-size-adjust: 100%;
+                -webkit-text-size-adjust: 100%;
+            }
+            body {
+                position: relative;
+                font-family:'Roboto Condensed', Arial, sans-serif;
+                font-weight: 300;
+                min-height: 100%;
+                background-color: #FFF;
+            }
+            .hide {
+                display:none;
+            }
+            .invisible {
+                visibility:hidden;
+            }
+            .toTheLeft {
+                float: left;
+            }
+            .toTheRight {
+                float: right;
+            }
+            .clearFix::after {
+                content:"";
+                display: table;
+                clear: both;
+            }
+            /* Fonts */
+            strong {
+                font-weight: bold;
+            }
+            p {
+                color: #6B6B6B;
+                margin-bottom: .5rem;
+            }
+            a {
+                color: #6B6B6B;
+            }
+            h2 {
+                background-color: #FF4700;
+                padding: 1.5rem 3rem;
+                color: #FFF;
+                font-size: 1.8rem;
+            }
+            h3 {
+                text-transform: uppercase;
+                color: #FF4700;
+                margin: 0 0 1rem 0;
+                font-size: 1.6rem;
+            }
+            h4 {
+                color: #FF4700;
+                font-size: 1.5rem;
+            }
+            .tile {
+                margin: 1rem 3rem;
+            }
+            #backToApp {
+                margin-top: 4rem;
+                font-size: 1.3rem;
+                display: block;
+            }
+            /* Form */
+            form {
+                margin-top: 2rem;
+            }
+            fieldset {
+                border: 0;
+                padding: 0;
+            }
+            .row {
+                margin-bottom: 1rem;
+                font-size: 0;
+                /* Allows display:inline-block elements to have a width of 50% and not stack, like the default behaviour */
+            }
+            label {
+                color: #6B6B6D;
+                display: block;
+                margin: 0 0 .5rem 0;
+            }
+            input {
+                width: 100%;
+                border: 1px solid #6B6B6B;
+                padding: .6rem .5rem;
+                font-size: 1.3rem;
+                
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                border-radius: 0;
+            }
+            select {
+                width: 100%;
+                border: 1px solid #6B6B6B;
+                background-color: #FFF;
+                padding: 0.5rem 0;
+				-webkit-transition: border 0.5s ease;
+				-moz-transition: border 0.5s ease;
+				-ms-transition: border 0.5s ease;
+				-o-transition: border 0.5s ease;
+				transition: border 0.5s ease
+            }
+            button, input[type="submit"] {
+                border: medium none;
+                background-color: #FF4700;
+                color: #FFF;
+                padding: .8rem;
+                width: 48%;
+                font-size: 1.3rem;
+            }
+            button:first-child {
+                margin-right: 1rem;
+            }
+            /* Spinner */
+            #spinner {
+                height: 5rem;
+            }
+            .loader,
+            .loader:before,
+            .loader:after {
+                background: #FF4700;
+                -webkit-animation: load1 1s infinite ease-in-out;
+                animation: load1 1s infinite ease-in-out;
+                width: 1em;
+                height: 4em;
+            }
+            .loader:before,
+            .loader:after {
+                position: absolute;
+                top: 0;
+                content: '';
+            }
+            .loader:before {
+                left: -1.5em;
+                -webkit-animation-delay: -0.32s;
+                animation-delay: -0.32s;
+            }
+            .loader {
+                text-indent: -9999em;
+                margin: 0 auto;
+                position: relative;
+                font-size: 11px;
+                -webkit-transform: translateZ(0);
+                -ms-transform: translateZ(0);
+                transform: translateZ(0);
+                -webkit-animation-delay: -0.16s;
+                animation-delay: -0.16s;
+            }
+            .loader:after {
+                left: 1.5em;
+            }
+			.error{
+				border: 2px solid #FF4700;
+			}
+            @-webkit-keyframes load1 {
+                0%,
+                80%,
+                100% {
+                    box-shadow: 0 0 #FFF;
+                    height: 2em;
+                }
+                40% {
+                    box-shadow: 0 -2em #ffffff;
+                    height: 3em;
+                }
+            }
+            @keyframes load1 {
+                0%,
+                80%,
+                100% {
+                    box-shadow: 0 0 #FFF;
+                    height: 2em;
+                }
+                40% {
+                    box-shadow: 0 -2em #ffffff;
+                    height: 3em;
+                }
+            }
+            </style>
+    </head>
+
+    <body>
+    	<h2>DualTime Config</h2>
+        <!-- Timezone -->
+        <div class="tile">
+            <h3>Configure your secondary clock</h3>
+
+            <div id="selection">
+                <h4>Current:</h4>
+                <p>
+                	<strong id="city">&#160;</strong>
+                	<span id="timezoneid">&#160;</span>
+                </p>
+                <p>
+                    <span id="timezonename">&#160;</span>
+                </p>
+            </div>
+            <form action="#" autocomplete="off" onsubmit="return handleSubmit()">
+                <div id="spinner" class="hide">
+                    <div class="loader">Loading...</div>
+                </div>
+                
+                <div id="fuzzySearch" class="row">
+                    <label for="location">Location (city,country)</label>
+                    <input name="location" placeholder="Input more then 3 letters" id="location">
+                </div>
+
+                <div id="searchresults" class="row hide">
+                    <label for="locations">Select from the list</label>
+                    <select name="locations" id="locations"></select>
+                </div>
+
+                <div class="row clearFix">
+                    <button type="button" id="b-reset" class="toTheLeft hide">Reset</button>
+                    <input type="submit" id="b-find" value="Find" class="toTheRight invisible" disabled="disabled">
+                    <!--<button type="button" id="b-find" class="toTheRight">Find</button>-->
+                    <button type="button" id="b-save" class="hide">Save</button>
+                </div>
+            </form>
+
+             <a href="pebblejs://close#" id="backToApp">&laquo; Back to App</a>
+        </div>
+
+        <script type="text/javascript">
+            //var DEBUG = false;
+            var PRESENT_SETTINGS = {},
+                NEW_SETTINGS = {},
+                SPINNER = document.getElementById('spinner');
+            
+			/*
+			 * Setup current setting with PRESENT_SETTINGS 
+			 */
+			function setupCurrent(){
+                if (PRESENT_SETTINGS.location != null) {
+                    document.getElementById('city').innerHTML = PRESENT_SETTINGS.location;
+                    document.getElementById('timezoneid').innerHTML = PRESENT_SETTINGS.timezoneid;
+                    document.getElementById('timezonename').innerHTML = PRESENT_SETTINGS.timezonename;
+                } else {
+                    document.getElementById('selection').className = 'invisible';
+                }
+			}
+
+            /*
+             * Get all the query parameters
+             *
+             */
+             (function() {
+
+                //DEBUG ? console.log("page load, get query parameters") : null;
+
+                var regex = /[?&]([^=#]+)=([^&#]*)/g,
+                    match;
+                while (match = regex.exec(window.location.href)) {
+                    PRESENT_SETTINGS[match[1]] = decodeURIComponent(match[2]).replace(/\+/g, ' ');
+                }
+
+                setupCurrent();
+                
+                //DEBUG ? console.log("query parameters loaded :" + JSON.stringify(PRESENT_SETTINGS)) : null;
+
+            })();
+
+            /*
+             * Enable 'Find' button only when there are three letters or more.
+             *
+             */
+            document.getElementById('location').addEventListener('keyup', function() {
+                var findSubmitButton = document.getElementById('b-find');
+                
+                if (this.value.length >= 3) {
+                    findSubmitButton.classList.remove('invisible');
+                    findSubmitButton.disabled = false;
+                }
+                else {
+                    findSubmitButton.classList.add('invisible');
+                    findSubmitButton.disabled = true;
+                }
+            });
+
+            /*
+             * Submit values back to app
+             *
+             */
+            document.getElementById('b-save').addEventListener('click', function() {
+                //DEBUG ? console.log("Submitting back to Pebble: " + JSON.stringify(NEW_SETTINGS)) : null;
+                //no offset would mean user havent' selected any location, show error
+                if(NEW_SETTINGS.offset == null){
+					document.getElementById('locations').classList.add('error');
+					setTimeout(function(){
+						document.getElementById('locations').classList.remove('error')
+					},1000);
+					
+					return false;
+                } 
+                
+                // all good, send data to Pebble
+                document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(NEW_SETTINGS));
+            });
+            
+            /*
+             * Handle submit
+             *
+             */
+            function handleSubmit() {
+                var url = "";
+
+                document.getElementById('b-find').classList.add('hide');
+
+                //DEBUG ? console.log("Find location: " + document.getElementById('location').value) : null;
+                
+                //hide search field and show spinner while we get location results
+                //document.getElementById('fuzzySearch').classList.add('hide');
+                SPINNER.classList.remove('hide');
+                
+                url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + document.getElementById('location').value + "&sensor=false";
+
+                callAjax(url, getLocation);
+                
+                return false;
+            }
+
+            /*
+             * Reset page.
+             *
+             */
+            document.getElementById('b-reset').addEventListener('click', function() {
+
+                //DEBUG ? console.log("reset Clicked") : null;
+
+                NEW_SETTINGS = {}; //empty new settings
+                document.getElementById('fuzzySearch').classList.remove('hide');
+                document.getElementById('location').value = '';
+                document.getElementById('searchresults').classList.add('hide');
+                document.getElementById('b-reset').classList.add('hide');
+                document.getElementById('b-save').classList.add('hide');
+                document.getElementById('b-find').classList.remove('hide');
+                document.getElementById('b-find').classList.add('invisible');
+                document.getElementById('b-find').disabled = true;
+
+                setupCurrent();
+
+            });
+
+            /*
+             * On change of location selector get timezone data.
+             *
+             */
+            document.getElementById('locations').addEventListener('change', function() {
+
+                var selector = document.getElementById('locations'),
+                    location = selector.value,
+                    timestamp = Date.now() / 1000,
+                    url = "";
+
+                if (location === "") {
+                    return false;
+                }
+
+                //DEBUG ? console.log("Select location: " + location) : null;
+
+                document.getElementById('city').innerHTML = selector.options[selector.selectedIndex].text;
+                
+                //show spinner whilst we get timezone data for the selected city
+                SPINNER.classList.remove('hide');
+
+                url = "https://maps.googleapis.com/maps/api/timezone/json?" + "location=" + location + "&timestamp=" + timestamp + "&sensor=false";
+
+                callAjax(url, getTimeZone);
+            });
+
+            /*
+             * Present all the location data returned from ajax call.
+             * It creates dropdown for available locations.
+             *
+             * @data	Object	Data returned from ajax call
+             */
+
+            function getLocation(data) {
+
+                //DEBUG ? console.log("Location data: " + JSON.stringify(data)) : null;
+
+                var option,
+                    select = document.getElementById('locations');
+
+                //empty select dropdown
+                select.options.length = 0;
+
+                //create "Select..." option and append
+                option = document.createElement('option');
+                option.value = '';
+                option.textContent = 'Select...';
+                select.appendChild(option);
+
+                //create other options
+                data.results.forEach(function(address) {
+                    option = document.createElement('option');
+                    option.value = address.geometry.location.lat + ',' + address.geometry.location.lng;
+                    option.textContent = address.formatted_address;
+                    select.appendChild(option);
+                });
+
+                if (select.options.length === 1) {
+                    //no results found for search
+                    document.getElementById('b-reset').click();
+                    document.getElementById('location').placeholder = 'No results found. Try again!';
+                    document.getElementById('b-find').classList.remove('hide');
+                } else {
+                    //show search results dropdown with reset and save action buttons
+                    document.getElementById('fuzzySearch').classList.add('hide');
+                    document.getElementById('searchresults').classList.remove('hide');
+                    document.getElementById('b-reset').classList.remove('hide');
+                    document.getElementById('b-save').classList.remove('hide');
+                }
+                
+                //hide spinner
+                SPINNER.classList.add('hide');
+            }
+
+            /*
+             * Show timezone data returned from ajax call.
+             *
+             * @data	Object 	data from ajax call
+             */
+
+            function getTimeZone(data) {
+
+                //DEBUG ? console.log("Timezone: " + JSON.stringify(data)) : null;
+                
+                //hide spinner and show selected information
+                SPINNER.classList.add('hide');
+                document.getElementById('selection').classList.remove('hide');
+                
+                NEW_SETTINGS.offset = parseInt(data.rawOffset) + parseInt(data.dstOffset); //timezone offset
+                NEW_SETTINGS.location = document.getElementById('city').innerHTML;
+                NEW_SETTINGS.timezoneid = document.getElementById('timezoneid').innerHTML = data.timeZoneId;
+                NEW_SETTINGS.timezonename = document.getElementById('timezonename').innerHTML = data.timeZoneName;
+                
+                document.getElementById('selection').classList.remove('invisible');
+
+            }
+
+            /*Ajax call wrapper
+             *
+             * @url : 		string 		url to fetch data from
+             * @callback : 	string 		callback function
+             */
+
+            function callAjax(url, callback) {
+
+                //DEBUG ? console.log("Calling URL: " + url) : null;
+
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        callback(JSON.parse(xmlhttp.responseText));
+                    }
+                };
+                xmlhttp.open("GET", url, true);
+                xmlhttp.send();
+            }
+        </script>
+    </body>
+
+</html>

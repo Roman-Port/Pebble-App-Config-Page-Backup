@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en-AU" prefix="og: http://ogp.me/ns#">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="profile" href="http://gmpg.org/xfn/11" />
+    <link rel="alternate" type="application/rss+xml" title="@madpilot makes" href="http://feeds.feedburner.com/myleseftosblog">
+    <link rel="pingback" href="https://myles.eftos.id.au/xmlrpc.php" />
+    <meta content="width=device-width, maximum-scale=1.0, minimum-scale=1.0" name="viewport">
+    <title>@madpilot makes - Follow me on my making adventures! Using Arduinos and 3D printing</title>
+    <script type="text/javascript" src="//use.typekit.net/mwc7ndl.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+    <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+    <link rel="stylesheet" href="https://myles.eftos.id.au/wp-content/themes/myles-blog/stylesheets/icons.css" type="text/css" media="all">
+    <link rel="stylesheet" href="https://myles.eftos.id.au/wp-content/themes/myles-blog/stylesheets/common.css" type="text/css" media="all">
+    <link rel="stylesheet" href="https://myles.eftos.id.au/wp-content/themes/myles-blog/stylesheets/large.css" type="text/css" media="screen and (min-width: 1180px)">
+    <link rel="stylesheet" href="https://myles.eftos.id.au/wp-content/themes/myles-blog/stylesheets/medium.css" type="text/css" media="screen and (max-width: 1180px)">
+    <link rel="stylesheet" href="https://myles.eftos.id.au/wp-content/themes/myles-blog/stylesheets/small.css" type="text/css" media="screen and (max-width: 640px)">
+    <script type="text/javascript" src="https://myles.eftos.id.au/wp-content/themes/myles-blog/javascripts/modernizr.js"></script> 
+    <script type="text/javascript" src="https://myles.eftos.id.au/wp-content/themes/myles-blog/javascripts/jquery.2.min.js"></script> 
+    <script type="text/javascript" src="https://myles.eftos.id.au/wp-content/themes/myles-blog/javascripts/prettyify.min.js"></script> 
+    <script type="text/javascript" src="https://myles.eftos.id.au/wp-content/themes/myles-blog/javascripts/application.js"></script> 
+    
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon.ico" rel="icon" sizes="16x16 32x32 48x48 64x64">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-57.png" rel="apple-touch-icon-precomposed">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-72.png" rel="apple-touch-icon-precomposed" sizes="72x72">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-114.png" rel="apple-touch-icon-precomposed" sizes="114x114">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-120.png" rel="apple-touch-icon-precomposed" sizes="120x120">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-144.png" rel="apple-touch-icon-precomposed" sizes="144x144">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-152.png" rel="apple-touch-icon-precomposed" sizes="152x152">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-32.png" rel="icon" type="image/png">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-57.png" rel="icon" sizes="57x57" type="image/png">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-64.png" rel="icon" sizes="64x64" type="image/png">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-72.png" rel="icon" sizes="72x72" type="image/png">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-96.png" rel="icon" sizes="96x96" type="image/png">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-114.png" rel="icon" sizes="114x114" type="image/png">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-120.png" rel="icon" sizes="120x120" type="image/png">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-128.png" rel="icon" sizes="128x128" type="image/png">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-144.png" rel="icon" sizes="144x144" type="image/png">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-152.png" rel="icon" sizes="152x152" type="image/png">
+    <link href="https://myles.eftos.id.au/wp-content/themes/myles-blog/favicon-195.png" rel="icon" sizes="195x195" type="image/png">
+    <meta content="#58960f" name="msapplication-TileColor">
+    <meta content="/favicon-144.png" name="msapplication-TileImage">
+    <meta content="@madpilot Rants" name="apple-mobile-web-app-title">
+    <meta content="@madpilot Rants" name="application-name">
+ 
+    
+<!-- This site is optimized with the Yoast SEO plugin v9.5 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Follow me on my making adventures! Using Arduinos and 3D printing"/>
+<link rel="canonical" href="https://myles.eftos.id.au/" />
+<link rel="next" href="https://myles.eftos.id.au/page/2/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="@madpilot rants" />
+<meta property="og:description" content="Don&#039;t make me angry. You won&#039; like me when I&#039;m angry" />
+<meta property="og:url" content="https://myles.eftos.id.au/" />
+<meta property="og:site_name" content="@madpilot makes" />
+<meta property="og:image" content="https://myles.eftos.id.au/wp-content/uploads/2016/08/headshot-square-3.jpg" />
+<meta property="og:image:secure_url" content="https://myles.eftos.id.au/wp-content/uploads/2016/08/headshot-square-3.jpg" />
+<meta property="og:image:width" content="1080" />
+<meta property="og:image:height" content="1080" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:description" content="Follow me on my making adventures! Using Arduinos and 3D printing" />
+<meta name="twitter:title" content="@madpilot makes - Follow me on my making adventures! Using Arduinos and 3D printing" />
+<meta name="twitter:site" content="@madpilot" />
+<meta name="twitter:image" content="http://myles.eftos.id.au/wp-content/uploads/2016/08/headshot-square-3.jpg" />
+<script type='application/ld+json'>{"@context":"https://schema.org","@type":"WebSite","@id":"https://myles.eftos.id.au/#website","url":"https://myles.eftos.id.au/","name":"@madpilot makes","potentialAction":{"@type":"SearchAction","target":"https://myles.eftos.id.au/?s={search_term_string}","query-input":"required name=search_term_string"}}</script>
+<meta name="msvalidate.01" content="0AD29D133CA242E452787CEC6145398C" />
+<meta name="google-site-verification" content="google47c22035faa114c8" />
+<!-- / Yoast SEO plugin. -->
+
+<link rel='dns-prefetch' href='//s.w.org' />
+<!-- This site uses the Google Analytics by MonsterInsights plugin v7.4.1 - Using Analytics tracking - https://www.monsterinsights.com/ -->
+<script type="text/javascript" data-cfasync="false">
+	var mi_version         = '7.4.1';
+	var mi_track_user      = true;
+	var mi_no_track_reason = '';
+	
+	var disableStr = 'ga-disable-UA-43331813-1';
+
+	/* Function to detect opted out users */
+	function __gaTrackerIsOptedOut() {
+		return document.cookie.indexOf(disableStr + '=true') > -1;
+	}
+
+	/* Disable tracking if the opt-out cookie exists. */
+	if ( __gaTrackerIsOptedOut() ) {
+		window[disableStr] = true;
+	}
+
+	/* Opt-out function */
+	function __gaTrackerOptout() {
+	  document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
+	  window[disableStr] = true;
+	}
+	
+	if ( mi_track_user ) {
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','__gaTracker');
+
+		__gaTracker('create', 'UA-43331813-1', 'auto');
+		__gaTracker('set', 'forceSSL', true);
+		__gaTracker('require', 'linkid', 'linkid.js');
+		__gaTracker('send','pageview');
+	} else {
+		console.log( "" );
+		(function() {
+			/* https://developers.google.com/analytics/devguides/collection/analyticsjs/ */
+			var noopfn = function() {
+				return null;
+			};
+			var noopnullfn = function() {
+				return null;
+			};
+			var Tracker = function() {
+				return null;
+			};
+			var p = Tracker.prototype;
+			p.get = noopfn;
+			p.set = noopfn;
+			p.send = noopfn;
+			var __gaTracker = function() {
+				var len = arguments.length;
+				if ( len === 0 ) {
+					return;
+				}
+				var f = arguments[len-1];
+				if ( typeof f !== 'object' || f === null || typeof f.hitCallback !== 'function' ) {
+					console.log( 'Not running function __gaTracker(' + arguments[0] + " ....) because you are not being tracked. " + mi_no_track_reason );
+					return;
+				}
+				try {
+					f.hitCallback();
+				} catch (ex) {
+
+				}
+			};
+			__gaTracker.create = function() {
+				return new Tracker();
+			};
+			__gaTracker.getByName = noopnullfn;
+			__gaTracker.getAll = function() {
+				return [];
+			};
+			__gaTracker.remove = noopfn;
+			window['__gaTracker'] = __gaTracker;
+					})();
+		}
+</script>
+<!-- / Google Analytics by MonsterInsights -->
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/myles.eftos.id.au\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.0.3"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='openid-css'  href='https://myles.eftos.id.au/wp-content/plugins/openid/f/openid.css?ver=519' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://myles.eftos.id.au/wp-includes/css/dist/block-library/style.min.css?ver=5.0.3' type='text/css' media='all' />
+<script type='text/javascript'>
+/* <![CDATA[ */
+var monsterinsights_frontend = {"js_events_tracking":"true","download_extensions":"doc,exe,js,pdf,ppt,tgz,zip,xls","inbound_paths":"[]","home_url":"https:\/\/myles.eftos.id.au","hash_tracking":"false"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://myles.eftos.id.au/wp-content/plugins/google-analytics-for-wordpress/assets/js/frontend.min.js?ver=7.4.1'></script>
+<link rel='https://api.w.org/' href='https://myles.eftos.id.au/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://myles.eftos.id.au/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://myles.eftos.id.au/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.0.3" />
+
+			<link rel="openid2.provider" href="https://myles.eftos.id.au/?openid=server" />
+			<link rel="openid2.local_id" href="https://myles.eftos.id.au/blog/author/myles/" />
+			<link rel="openid.server" href="https://myles.eftos.id.au/?openid=server" />
+			<link rel="openid.delegate" href="https://myles.eftos.id.au/blog/author/myles/" /><style type="text/css" id="syntaxhighlighteranchor"></style>
+  </head>
+  <body class="home blog">
+    <header>
+			<h1><a href="https://myles.eftos.id.au/" title="@madpilot makes" rel="home">@madpilot makes</a></h1>
+      <nav>
+        <nav><ul>
+<li class="page_item page-item-2"><a href="https://myles.eftos.id.au/about/">About Me</a></li>
+<li class="page_item page-item-143"><a href="https://myles.eftos.id.au/presentations/">Presentations</a></li>
+</ul></nav>
+      </nav>
+    </header>
+    <div id="content">
+                  <article id="" class="post-3389 post type-post status-publish format-standard hentry category-projects tag-cnc tag-hardware tag-makibox tag-pcb-mill">
+  <h2><a href="https://myles.eftos.id.au/blog/2018/12/06/converting-a-makibox-into-a-pcb-mill-reprogramming-the-control-board/">Converting a Makibox into a PCB Mill – Reprogramming the control board</a></h2>
+  <div class="content">
+            <p>The version of the Makibox that I purchased came with a printrboard, however I fried that years ago. Makibox shipped me a replacement Print5D D8 controller.</p>
+<p>I knew very little about this board, and I wondered how I was going to adapt it for CNC use. </p>
+<p>I had some questions:</p>
+<ol>
+<li>How do I send it G-Code? Do I need to use the software that came with the Makibox?</li>
+<li>Controlling the three axes and endstops was easy, but how would I run the spindle?</li>
+<li>After more research about milling PCBs, I found out that using a bed levelling algorithm would give the best results &#8211; could the board do that?</li>
+</ol>
+<p>After some googling, I found that a kind user had archived all of the original Makibox forums. A post about the D8 firmware lead me to the <a href="https://bitbucket.org/makible">Makible bitbucket account</a>, which not only housed the <a href="https://bitbucket.org/makible/5dprint-firmware">original firmware source</a>, it also had the <a href="https://bitbucket.org/makible/5dprint-d8-controller-board">schematics</a>!</p>
+<p>Some more random googling yielded another interesting tidbit of information: Marlin has hardware definitions for the D8 board.</p>
+<p>The original firmware (from 2014) was based on Sprinter which was forked and became Marlin. </p>
+<p>Fun fact: Marlin is also what my Lulzbot Mini uses.</p>
+<h3>Sending G-Code</h3>
+<p>I know had an answer to question 1: Marlin appears as a serial device that you can simply send G-Code to. If you have screen installed on your *nix like computer you can just connect (by passing the path to your TTY device) and directly enter G-Codes &#8211; although using a G-Code sender is easier.</p>
+<p>After wiring up the endstops and motors (only the X and Z because I’m still waiting on the slides for the Y) I entered G28 which runs the homing routine. It worked!</p>
+<p>The next problem to solve was driving the spindle. The Makibox schematic revealed the drive circuit for both the hotbed and hotend use a MOSFET to switch a 24V line (using PWM). The MOSFET is rated to 40A, which is plenty to run the 5A spindle I have.</p>
+<h3>Welcome to 2018</h3>
+<p>This current firmware is ancient, is tuned to the Makibox build area and doesn’t support autolevelling or controlling a spindle, so I needed to upgrade to the latest Marlin. This was far easier than anticipated.</p>
+<p>The board is based on the printrboard which is based on the teensy 2.0++, so the first step is to load the teensy board definitions into the Arduino IDE. Unfortunately, this isn’t via the usual method of adding a URL to the board manager &#8211; there is a installable which manually handles installation, and adds a bunch of wizards that, if you have done any Arduino development, kind of get in the way.</p>
+<p>Regardless, it allowed me to choose the teensy 2.0+ as a build target.</p>
+<p>Next, I modified the <a href="https://github.com/madpilot/Marlin/blob/maki-carve/Marlin/Configuration.h">configuration.h</a> and <a href="https://github.com/madpilot/Marlin/blob/maki-carve/Marlin/Configuration_adv.h">configuration_adv.h</a> file with the new build area parameters, and set the various options. A number of these settings hadn’t changed since Sprinter, and I was able to just copy the values. I did have to modify a <a href="https://github.com/madpilot/Marlin/blob/maki-carve/Marlin/SanityCheck.h">non-configuration file</a> to allow pin 15 to be defined as a PWM pin.</p>
+<p>After compiling, I put the board in bootloader mode by placing a jumper over the boot pins and clicking reset. </p>
+<p>Once in bootloader mode I erased the EEPROM and uploaded the binary hex file via dfl-programmer.</p>
+<pre class="brush: bash; title: ; notranslate" title="">
+sudo dfu-programmer at90usb1286 erase
+sudo dfu-programmer at90usb1286 flash Marlin.hex
+</pre>
+<p>The spindle parameters took a little bit of trial and error to get right:</p>
+<p>To calculate the SPEED_POWER_SLOPE use the formula:</p>
+<pre class="brush: cpp; title: ; notranslate" title="">(SPEED_POWER_MAX - SPEED_POWER_MIN) / 255</pre>
+<p>I decided to use 0%-100% as my MIN and MAX, so the value I needed was (100 &#8211; 0) / 255 = .392156863. </p>
+<p>Using that range allows me to use different gear ratios and to drive a laser cutter without modifying the firmware.</p>
+<p>I have purchased a copy of <a href="https://www.cnccookbook.com/">GWizard</a> which calculates spindle speeds and feed rates, and it will output a power percentage based on the profile of the spindle, which makes the calculation easy.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/12/Screen-Shot-2018-12-06-at-8.12.08-pm.png"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/12/Screen-Shot-2018-12-06-at-8.12.08-pm.png" alt="Screenshot from GWizard" width="2390" height="1918" class="alignnone size-full wp-image-3393" /></a></p>
+<p>I’m not entirely sure what SPEED_POWER_INTERCEPT is, but I’d guess that it is a way of offsetting the speed. I’m not sure why you would need to do that.</p>
+<p>The new firmware has given me the ability to set the spindle speed via M3, M4 and M5 (M3 and M4 do the same thing because the hardware can’t reverse the direction of the spindle), and in theory perform an auto-level &#8211; I say in theory, because I don’t have a levelling probe, nor do I have the Y-axis linear slides. I have now followed up with the AliExpress seller to see where they are.</p>
+<p>So once again, I’m blocked &#8211; but progress has been made!</p>
+      </div>
+  <div class="meta-data">
+        <a href="https://myles.eftos.id.au/blog/2018/12/06/converting-a-makibox-into-a-pcb-mill-reprogramming-the-control-board/" title="7:17 PM" rel="bookmark" class="datetime"><time class="date" datetime="2018-12-06T19:17:01+00:00"><span class="day">06</span><span class="month">Dec</span><span class="year">2018</span></time></a> <span class="categories"><a href="https://myles.eftos.id.au/blog/category/projects/" rel="category tag">Projects</a></span> <span class="tags"><a href="https://myles.eftos.id.au/blog/tag/cnc/" rel="tag">CNC</a>, <a href="https://myles.eftos.id.au/blog/tag/hardware/" rel="tag">Hardware</a>, <a href="https://myles.eftos.id.au/blog/tag/makibox/" rel="tag">Makibox</a>, <a href="https://myles.eftos.id.au/blog/tag/pcb-mill/" rel="tag">PCB Mill</a></span> <div class="addthis_toolbox addthis_default_style sharing"><a class="addthis_button_twitter"></a><a class="addthis_button_facebook"></a><a class="addthis_button_google_plusone_share"></a><a class="addthis_button_tumblr"></a><a class="addthis_button_hackernews"></a><a class="addthis_button_email"></a></div>  </div>
+</article>
+ 
+                <article id="" class="post-3385 post type-post status-publish format-standard hentry category-projects tag-cnc tag-hardware tag-makibox tag-pcb-mill">
+  <h2><a href="https://myles.eftos.id.au/blog/2018/11/13/converting-a-makibox-into-a-pcb-mill-rebuilding-the-x-axis/">Converting a Makibox into a PCB Mill – Rebuilding the X-axis</a></h2>
+  <div class="content">
+            <p>In my previous post, I realised that the 4mm steel rods weren’t going to cut it when milling &#8211; they had way too much play, so I promptly ordered two <a href="https://www.aliexpress.com/item/2018-Real-Limited-Cnc-Router-Parts-Axk-Axk-12mm-Linear-Rail-Sbr12-200mm-And-2-Pcs/32838636867.html?spm=a2g0s.9042311.0.0.27424c4divSg1y">200mm linear rails</a> (for the X-axis), <a href="https://www.aliexpress.com/item/2018-Sale-Axk-Cnc-Router-Parts-Axk-12mm-Linear-Rail-Sbr12-L-400mm-Support-Rails-2/32838628287.html?spm=a2g0s.9042311.0.0.27424c4divSg1y">two 400mm linear rails</a> (for the Y-axis) and two <a href="https://www.aliexpress.com/item/RDBB-12mm-linear-shaft-150mm-Chromed-Hardened-Rod-Linear-Motion-Shaft-cnc-parts-3d-printer/32894031592.html?spm=a2g0s.9042311.0.0.27424c4divSg1y">150mm 12mm linear rods</a> and <a href="https://www.aliexpress.com/item/Hot-Sale-2pc-Lm12uu-Linear-Bushing-12mm-Cnc-Linear-Bearings/32844095002.html?spm=a2g0s.9042311.0.0.27424c4divSg1y">bearings</a> (Z-axis).</p>
+<p>The 200mm slides and the 150mm rods arrived promptly, but there was a delay on the 400mm slides. That, plus me needing a fair chunk of time to measure, drill and tap a bunch of holes meant I parked the project for a couple of weeks.</p>
+<p>I finally managed to get a couple of days off while I changed jobs, so I arranged a hot date with my drill press.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/11/DSC_0068.jpg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/11/DSC_0068.jpg" alt="The redesigned X axis, and Z-axis" width="3008" height="2000" class="alignnone size-full wp-image-3386" /></a></p>
+<h3>The Tappening</h3>
+<p>The x-axis slide has four mounting screws which required tapped holes to be drilled into the two horizontal 4040 aluminium extrusions. Now, I’ve not done much in the way of metalwork since year 11 (some 18 years ago) and it took me ages to mark, drill and tap the holes. This was a good warm up for Z-axis face plate.</p>
+<p>The face place required a total of 20 holes: four 2.5mm tapped to an M3 and sixteen 5.5mm counterbored to 10mm. It’s not the neatest job in the world, but it is functional. And I only misaligned one hole, which am actually amazed by.</p>
+<p>I have stuck with 3D printed anti-backlash nut holders, with the intention of milling them out of aluminium once the mill is completed. This is why they are the shape they are &#8211; so they will be easy to mill.</p>
+<h3>The Z-axis</h3>
+<p>The same applies to the Z-axis end caps &#8211; I added grub screws to hold the linear rail which adds some rigidity &#8211; and they will be especially helpful on the milled version.</p>
+<p>After doing a fit test it became clear that the motor couplers were too springy (the ones I bought are designed to deal with things being out of alignment) so I’ve now ordered some rigid ones that will eliminate any slop.</p>
+<p>I 3D printed a Z-axis carriage to test fit, but it became clear it was too big (90mm tall) which meant my Z-axis would be less than my 70mm design goal. I’ve simplified it to be more box like (easier to mill down the track), and reduced the height to 60mm, by cutting down the flange on the anti-backlash nut, and by making it a two piece part. At this point, I calculate a 78mm of travel in the Z direction.</p>
+<p>I now need to fabricate the aluminium face part part, which the carriage and the spindle screw in to.</p>
+      </div>
+  <div class="meta-data">
+        <a href="https://myles.eftos.id.au/blog/2018/11/13/converting-a-makibox-into-a-pcb-mill-rebuilding-the-x-axis/" title="8:33 PM" rel="bookmark" class="datetime"><time class="date" datetime="2018-11-13T20:33:01+00:00"><span class="day">13</span><span class="month">Nov</span><span class="year">2018</span></time></a> <span class="categories"><a href="https://myles.eftos.id.au/blog/category/projects/" rel="category tag">Projects</a></span> <span class="tags"><a href="https://myles.eftos.id.au/blog/tag/cnc/" rel="tag">CNC</a>, <a href="https://myles.eftos.id.au/blog/tag/hardware/" rel="tag">Hardware</a>, <a href="https://myles.eftos.id.au/blog/tag/makibox/" rel="tag">Makibox</a>, <a href="https://myles.eftos.id.au/blog/tag/pcb-mill/" rel="tag">PCB Mill</a></span> <div class="addthis_toolbox addthis_default_style sharing"><a class="addthis_button_twitter"></a><a class="addthis_button_facebook"></a><a class="addthis_button_google_plusone_share"></a><a class="addthis_button_tumblr"></a><a class="addthis_button_hackernews"></a><a class="addthis_button_email"></a></div>  </div>
+</article>
+ 
+                <article id="" class="post-3357 post type-post status-publish format-standard hentry category-projects tag-curing tag-food tag-salami">
+  <h2><a href="https://myles.eftos.id.au/blog/2018/10/30/curing-meats-making-salami/">Curing Meats &#8211; Making Salami</a></h2>
+  <div class="content">
+            <p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/10/DSC_0031.jpg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/10/DSC_0031.jpg" alt="Salami&#039;s hanging" width="3008" height="2000" class="alignnone size-full wp-image-3371" /></a></p>
+<p>One of my other hobbies is food. I do a lot of cooking, with a particular interest in slow cooking: I regularly fire up my smoker and cook a pork shoulder or brisket, and I’ve started learning the finer points of sous vide cooking. One thing I have been interested in is curing meat.</p>
+<p>My mates Matt and Lachlan also expressed an interest, so we booked to a course at <a href="https://artisansbottega.com.au/" rel="noopener" target="_blank">The Artisan&#8217;s Bottega</a>. During the course the instructor explained to us that there was only a couple of weeks of meat curing weather left &#8211; they need to be done before it got too hot. None of us wanted to wait a whole year, so we &#8211; with help from some other friends: Remo and Dan &#8211; decided to do our first ever batch the weekend after.</p>
+<h3>Ordering the meat</h3>
+<p>To keep things manageable, we ordered 12kg of pork shoulder from <a href="https://paddocktotable.com.au/" rel="noopener" target="_blank">Paddock to Table in Laverton</a> (we also ordered 3kg of pork belly to make bacon). Luckily the butcher was himself an experienced salami maker, and knew exactly what we needed. Since I have a Kitchenaid with a mincing and sausage attachment, we opted for it to be boned, but not minced.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/10/DSC_0001.jpg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/10/DSC_0001.jpg" alt="Matt and Dan cutting up the meat ready for mincing" width="3008" height="2000" class="alignnone size-full wp-image-3363" /></a></p>
+<p>Having it boned cost a couple of bucks a kilo more, but meant we didn’t have to do it &#8211; saving us a bunch of time. It’s better to mince it fresh though, as minced meat has a much bigger surface area than unminced meat, which bacteria loves. Something that bacteria doesn’t love is curing salt, so we quickly minced the meat, got it salted and flavoured.</p>
+<h3>Flavours</h3>
+<p>We did two batches: a very traditional one, and a second moroccan inspired one (global head of flavour, Lachlan was freestyling).</p>
+<h4>Salami 1</h4>
+<ul>
+<li>5kg pork + fat</li>
+<li>8 cloves garlic</li>
+<li>5 tbs smokey paprika</li>
+<li>5 tbs chilli flakes</li>
+<li>1.5 tbs ground fennel seeds</li>
+<li>0.5 tbs garlic powder</li>
+<li>1tbs ground cumin</li>
+<li>150g passata</li>
+<li>110g flaked salt</li>
+<li>2 cups Sangiovese</li>
+</ul>
+<h4>Salami 2</h4>
+<ul>
+<li>5kg pork + fat</li>
+<li>2 tbs ground cumin</li>
+<li>2 tbs ground coriander seed</li>
+<li>2 tbs Hungarian paprika</li>
+<li>1 tsp cayenne pepper</li>
+<li>1 tsp ground cloves</li>
+<li>1 tsp cracked black pepper</li>
+<li>150g passata</li>
+<li>110g table salt</li>
+<li>1 cup Sangiovese</li>
+</ul>
+<p>We were advised to cook up a little bit to test for flavours (which is what you do when you make fresh sausages), but to bear in mind that the sample will taste saltier than the final product (more on this later).</p>
+<h3>Lunch</h3>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/10/DSC_0017.jpg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/10/DSC_0017.jpg" alt="Lunch!" width="3008" height="2000" class="alignnone size-full wp-image-3364" /></a></p>
+<p>The salami kits we got given during the course had enough stuff to make 10kg, so we turned the remaining 2kg of meat into fresh sausages. This turned out to be an excellent idea: not only did it use up the remaining sausage cases I had, it provided us all with a delicious lunch.</p>
+<h3>Prepping the casings</h3>
+<p>The kits we had gave us synthetic casings, which we needed to be soaked in water before use &#8211; we threw them in a bowl<br />
+of water for 30 minutes while we prepped the mince.</p>
+<h3>Equipment</h3>
+<p>We used the following:</p>
+<p>1. Kitchenaid with the meat grinder and sausage attachment. Use the coarse plate (the one with the bigger holes)<br />
+2. Two plastic tubs for mixing the meat<br />
+3. An old tennis ball tube and beer bottle to help get the netting on.<br />
+4. A metal bowl for soaking the casings<br />
+5. Food safe Latex gloves</p>
+<h3>Cleaning</h3>
+<p>Bacteria loves raw meat, so we cleaned all of our equipment using a 1:1 mixture of white vinegar and water.</p>
+<p>You can apparently also get food safe cleaning alcohol, but we used what we had.</p>
+<h3>Prepping the mince</h3>
+<p>Using the coarse grinding attachment on the Kitchenaid we ground the meat into plastic trays &#8211; 5kg in to each.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/10/DSC_0014.jpg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/10/DSC_0014.jpg" alt="Matt Mincing the Meat" width="3008" height="2000" class="alignnone size-full wp-image-3365" /></a></p>
+<p>Next, we sprinkled the regular salt and curing salt, poured over the sauce and combined. You really need to combine the meat well &#8211; the mixture should be quite dense. Use a grabbing action, and don’t forget to scoop up the meat from the bottom of the tray to make sure it all gets a good massage.</p>
+<p>Our instructor gave us a handy hint: if you grab a handful of meat and hold it upside down, it should stick to your hand.</p>
+<h3>Stuffing the casings</h3>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/10/DSC_0020.jpg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/10/DSC_0020.jpg" alt="Lachlan and Remo stuffing the casings" width="3008" height="2000" class="alignnone size-full wp-image-3367" /></a></p>
+<p>Using the sausage attachment on the Kitchenaid, we filled each casing. This is a pretty crucial step to get right, as there can be no air with in the sausage &#8211; air breeds bacteria. While the sausage attachment did an ok job, there are <a href="https://artisansbottega.com.au/equip-pro-meat-sausage-filler-3133.html" rel="noopener" target="_blank">dedicated sausage stuffers</a> that looks like a massive syringe that will do a much better job.</p>
+<h3>Tying off</h3>
+<p>The final step is to tie off each sausage. As we were using synthetic casings, one end was already closed, so we only needed to do one knot. We first pinched the end to get out as much air as possible, then twisted to give us a spot to tie the butcher’s string.</p>
+<p>The knot will be used to hang the salami, so make sure they are tight &#8211; we used an under and over technique, so there was around three single knots, finishing with a final double knot. Leave enough string to create a loop.</p>
+<p>Give the end of the casing a little rinse in water to get rid of any meat that may have lodged there.</p>
+<p>To get out any extra air, we also tied a string around the middle of the salami and pulled it tight (the synthetic casings are pretty strong &#8211; I imagine the natural casings wouldn’t take as much pressure). Tie the string off.</p>
+<h3>Netting</h3>
+<p>The final step before hanging is to put the salami in netting. This helps keep the pressure on the salami as they dry and shrink. The netting is quite difficult to stretch, so putting it on without the assistance of a tool is really difficult. There are plastic tools you can buy to help, but we didn’t have one, so we improvised with a tennis ball can and a long neck beer bottle.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/10/IMG_0282.jpeg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/10/IMG_0282.jpeg" alt="Our tennis ball contraption" width="3024" height="4032" class="alignnone size-full wp-image-3366" /></a></p>
+<p>We took the end caps off the tube, placed the base of the beer bottle at one end and slowly pushed up the neck of the bottle, past the body and on to the tube &#8211; leave a bit of netting hanging off the end.</p>
+<p>Drop each salami through the tube &#8211; it should catch the netting that is hanging, allowing you to pull it through, encasing the salami in the netting.</p>
+<p>Cut the netting at the end &#8211; be careful not to cut the string!</p>
+<p>Repeat for all the other salamis</p>
+<h3>Hanging</h3>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/10/IMG_0285.jpeg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/10/IMG_0285.jpeg" alt="Matt hanging the first salami" width="3024" height="4032" class="alignnone size-full wp-image-3374" /></a></p>
+<p>I have an enclosed garage, which I don’t park a car in, so we hung them up there on a piece of wire.</p>
+<p>We were told that it should take about six-weeks.</p>
+<h3>Things to look for</h3>
+<p>Of course, like most cooking, time is just a easy proxy for doneness &#8211; having actual indicators is a much better system,</p>
+<p>Weight: During the two weeks the salami lose a lot of moisture and should drop around 30% of their weight and visibly shrink. If that doesn’t happen you may have air in the centre which has rotted the meat.</p>
+<p>Hardness: the loss of moisture also causes the salami to get hard.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/10/IMG_0624.jpg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/10/IMG_0624.jpg" alt="Junior Salami maker, Hugo, testing the salamis for hardness" width="1512" height="2016" class="alignnone size-full wp-image-3373" /></a></p>
+<p>At the end of the six weeks they had both shrunk and got really hard, so I pulled them down and cut them open.</p>
+<h3>The opening</h3>
+<p>I sliced each open either side of the middle tie, and cut the ends off. I was looking for a nice dark red colour &#8211; brown or grey is bad.</p>
+<p>I had a suspicion that the casings has dried out &#8211; a problem caused by low humidity, and cutting them open confirmed that. Some of the casings had lifted from the meat at the end, and the meat had gone off at these points. So I discarded those sections. All in all we lost about two salami worth &#8211; not a bad yield for first timers.</p>
+<h3>Taste test</h3>
+<p>The traditional recipe was good, but nothing spectacular &#8211; it probably had a little too much fennel. The Moroccan inspired recipe was delicious with a nice heat to it. Both were possibly a little too salty.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/10/C8633B2E-36E8-4723-9E57-1DD5DF29280B.jpg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/10/C8633B2E-36E8-4723-9E57-1DD5DF29280B.jpg" alt="The finished product" width="1048" height="1312" class="alignnone size-full wp-image-3381" /></a></p>
+<h3>Things to fix</h3>
+<p>Avoid spoilage &#8211; We need a proper sausage stuffer. The sausage attachment on the Kitchenaid is not ideal, and curing meats is way more prone to bacteria infection than fresh sausages that are cooked with in a couple of days.</p>
+<p>Dry casings &#8211; there is possibly two issues here:</p>
+<p>1. More humidity. Looking at my graphs my garage humidity was too low: around 50-60%. I’m looking into building a curing chamber so I can control that (and the temperature) with science.<br />
+2. Using synthetic casings &#8211; they are more plasticity than natural ones.<br />
+I suspect the humidity is the main culprit here, so I’ll stick with the casings for the next batch, so as to not change too many dependent variables.</p>
+<p>Improve efficiency &#8211; I would also like to get a clamping gun to ensure all the ends are properly sealed, which should further reduce spoilage. I would also look into getting a netting tool, because trying to get the nets on is a pain without one.</p>
+      </div>
+  <div class="meta-data">
+        <a href="https://myles.eftos.id.au/blog/2018/10/30/curing-meats-making-salami/" title="8:51 AM" rel="bookmark" class="datetime"><time class="date" datetime="2018-10-30T08:51:04+00:00"><span class="day">30</span><span class="month">Oct</span><span class="year">2018</span></time></a> <span class="categories"><a href="https://myles.eftos.id.au/blog/category/projects/" rel="category tag">Projects</a></span> <span class="tags"><a href="https://myles.eftos.id.au/blog/tag/curing/" rel="tag">curing</a>, <a href="https://myles.eftos.id.au/blog/tag/food/" rel="tag">food</a>, <a href="https://myles.eftos.id.au/blog/tag/salami/" rel="tag">salami</a></span> <div class="addthis_toolbox addthis_default_style sharing"><a class="addthis_button_twitter"></a><a class="addthis_button_facebook"></a><a class="addthis_button_google_plusone_share"></a><a class="addthis_button_tumblr"></a><a class="addthis_button_hackernews"></a><a class="addthis_button_email"></a></div>  </div>
+</article>
+ 
+                <article id="" class="post-3349 post type-post status-publish format-standard hentry category-projects tag-cnc tag-hardware tag-makibox tag-pcb-mill">
+  <h2><a href="https://myles.eftos.id.au/blog/2018/09/26/converting-a-makibox-into-a-pcb-mill-building-the-x-axis/">Converting a Makibox into a PCB Mill – Building the X-axis</a></h2>
+  <div class="content">
+            <p>Re-designing the X-axis of my Makibox to PCB mill conversion has been a challenge in constraints. Due to an ordering mishap, and lack of engineering designs for the spindle I have been racking my brain to re-use the parts I have to create a workable X-axis.</p>
+<p>The three constraints I have to work with:</p>
+<ul>
+<li>The spindle can’t be too low &#8211; I want at least 70mm of vertical travel</li>
+<li>The spindle can’t be too high &#8211; The further the cutting tool is from the centre of the holder, the more torque it needs to deal with</li>
+<li>The spindle can’t be too far forward &#8211; I’d like the cutting tool to sit as close to the centre of the frame, so it can reach the full range of motion. The shaft of the spindle sits around 40mm from it’s mounting plate, which puts it out nearly 80mm when you include the Z-axis linear driver.</li>
+</ul>
+<p>I looked at mounting the stepper motor on top of the vertical extrusion, but it failed constraint 3. It also gave me no where to mount the top steel rod. I toyed around with moving the steel rods but centred either side of the lead screw seems the best place for them.</p>
+<p>I settled on a design where the motor hangs off the side of the vertical extrusion, with the steel rods mounted either side.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/09/X-Axis-Render.png"><img class="alignnone size-full wp-image-3350" src="https://myles.eftos.id.au/wp-content/uploads/2018/09/X-Axis-Render.png" alt="Render of the original PCB Mill X-Axis design" width="1600" height="1200" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/09/X-Axis-Render.png 1600w, https://myles.eftos.id.au/wp-content/uploads/2018/09/X-Axis-Render-300x225.png 300w, https://myles.eftos.id.au/wp-content/uploads/2018/09/X-Axis-Render-768x576.png 768w, https://myles.eftos.id.au/wp-content/uploads/2018/09/X-Axis-Render-1024x768.png 1024w" sizes="(max-width: 1600px) 100vw, 1600px" /></a></p>
+<h3>The test build</h3>
+<p>After printing motor and bearing holders, and the carriage I put everything together. I held the spindle against the carriage to get an idea of placement, and it became clear that the 4mm steel rods were going to flex too much under load.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/09/DSC_0068.jpg"><img class="alignnone size-full wp-image-3351" src="https://myles.eftos.id.au/wp-content/uploads/2018/09/DSC_0068.jpg" alt="Photograph of the PCB Mill X-Axis" width="722" height="480" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/09/DSC_0068.jpg 722w, https://myles.eftos.id.au/wp-content/uploads/2018/09/DSC_0068-300x199.jpg 300w" sizes="(max-width: 722px) 100vw, 722px" /></a></p>
+<p>They would be fine for a 3D printer or as a laser cutter, but even the small forces from a PCB mill bit would cause issues. It was time to replace the rods with something more robust.</p>
+<p>I jumped on Aliexpress and found these <a href="https://www.aliexpress.com/item/2018-Sale-Axk-Cnc-Router-Parts-Axk-12mm-Linear-Rail-Sbr12-L-400mm-Support-Rails-2/32838628287.html" target="_blank" rel="noopener">200mm linear guides</a> that have a 12mm steel rod, and support for the full length, so bending should not be an issue.</p>
+<p>I also decided to replace the Y-axis rods with the <a href="https://www.aliexpress.com/item/2018-Sale-Axk-Cnc-Router-Parts-Axk-12mm-Linear-Rail-Sbr12-L-400mm-Support-Rails-2/32838628287.html" target="_blank" rel="noopener">400mm version of the linear guide</a>. This will remove the flex in the bed and will make alignment easier (the three points of contact design I used was difficult to square).</p>
+<p>While I was at it I ordered some <a href="https://www.aliexpress.com/item/RDBB-12mm-linear-shaft-150mm-Chromed-Hardened-Rod-Linear-Motion-Shaft-cnc-parts-3d-printer/32894031592.html" target="_blank" rel="noopener">plain 12mm rod</a>, and <a href="https://www.aliexpress.com/item/Hot-Sale-2pc-Lm12uu-Linear-Bushing-12mm-Cnc-Linear-Bearings/32844095002.html" target="_blank" rel="noopener">linear bearings</a> for the Z-axis for good measure.</p>
+<h3>A substantial redesign.</h3>
+<p>I have one 205mm cross bar, which a perfect support for one of the linear rails &#8211; I’ll need another one. I’ll also need another two, taller vertical extrusions to hold the cross bars. The two shorter vertical extrusions will hold the motor.</p>
+<p>Here is a rough render without any joining hardware so you get the idea.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/09/Redesign.png"><img class="alignnone size-full wp-image-3352" src="https://myles.eftos.id.au/wp-content/uploads/2018/09/Redesign.png" alt="Render of the redesigned PCB Mill frame" width="1600" height="1200" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/09/Redesign.png 1600w, https://myles.eftos.id.au/wp-content/uploads/2018/09/Redesign-300x225.png 300w, https://myles.eftos.id.au/wp-content/uploads/2018/09/Redesign-768x576.png 768w, https://myles.eftos.id.au/wp-content/uploads/2018/09/Redesign-1024x768.png 1024w" sizes="(max-width: 1600px) 100vw, 1600px" /></a></p>
+<p>I’ve had to move the vertical extrusions to the rear of the frame (which is fine, there are still two connection points there), giving the spindle plenty of room.</p>
+<p>I’m going to design and print some new motor and bearing mounts for the X and Y axis. They will be much simpler as they no longer need to support the steel rods.</p>
+<p>The rear support for the Z-axis will be 10mm aluminium, as I can get the supplier to cut it to the required 138mm length. The end caps &#8211; which act as a motor holder and rod support &#8211; will be plastic to start (I don’t have facilities to mill aluminium… yet). My intention is to mill replacements once the machine is complete.</p>
+      </div>
+  <div class="meta-data">
+        <a href="https://myles.eftos.id.au/blog/2018/09/26/converting-a-makibox-into-a-pcb-mill-building-the-x-axis/" title="10:03 PM" rel="bookmark" class="datetime"><time class="date" datetime="2018-09-26T22:03:39+00:00"><span class="day">26</span><span class="month">Sep</span><span class="year">2018</span></time></a> <span class="categories"><a href="https://myles.eftos.id.au/blog/category/projects/" rel="category tag">Projects</a></span> <span class="tags"><a href="https://myles.eftos.id.au/blog/tag/cnc/" rel="tag">CNC</a>, <a href="https://myles.eftos.id.au/blog/tag/hardware/" rel="tag">Hardware</a>, <a href="https://myles.eftos.id.au/blog/tag/makibox/" rel="tag">Makibox</a>, <a href="https://myles.eftos.id.au/blog/tag/pcb-mill/" rel="tag">PCB Mill</a></span> <div class="addthis_toolbox addthis_default_style sharing"><a class="addthis_button_twitter"></a><a class="addthis_button_facebook"></a><a class="addthis_button_google_plusone_share"></a><a class="addthis_button_tumblr"></a><a class="addthis_button_hackernews"></a><a class="addthis_button_email"></a></div>  </div>
+</article>
+ 
+                <article id="" class="post-3318 post type-post status-publish format-standard hentry category-business-2 category-system-ops tag-aws tag-bizops tag-devops tag-lambda tag-rev tag-transcription tag-twilio">
+  <h2><a href="https://myles.eftos.id.au/blog/2018/09/19/call-recording-with-twilio-aws-lamba-rev/">Twilio + AWS Lamba + Rev = Easy call recording!</a></h2>
+  <div class="content">
+            <p>I have been doing a bunch of user interviews at work. It&#8217;s been difficult to get our users in front of a computer, or to get them to install video conferencing software, so I&#8217;ve been calling them on the telephone. I find that taking notes while I interview people kills my flow, and I&#8217;m really not very good at it, so I needed a way to easily record these phone calls, and then get them transcribed. </p>
+<p>There are a bunch of solutions out there, but they all seem to rely on a third party app that make a VoIP call. This presented me with three problems:</p>
+<p>1. Our spotty office wifi caused drop outs &#8211; and when it did work, the quality was terrible (thanks Australia!);<br />
+2. The incoming number was a either blocked or some weird overseas number, which users promptly ignored<br />
+3. Automatic transcription of phone calls is woeful &#8211; because of the low bandwidth, the audio signal isn&#8217;t great, and computers do a really bad job at translating it to text.</p>
+<p>When I was last at JSConf, I got chatting to <a href="https://philna.sh/">Phil Nash</a> who is a developer evangelist at <a href="https://twilio.com">Twilio</a>. I asked him whether I could setup a number that I could call, have me enter a number, dial that number and record the call. He said it should be easy.</p>
+<p>Challenge accepted.</p>
+<p>Spoiler alert: It is.</p>
+<p><strong>Note:</strong> This code and deployment process isn&#8217;t actually the one I used at work. We use Golang, which is way more lines of code, and has way more boiler plate &#8211; and I needed to write an abstraction around TwiML &#8211; so I chose to rewrite it in Python here for simplicity&#8217;s sake. We also use CloudFormation to create Lambdas and API gateways, and have a CI build pipeline to deploy them, which isn&#8217;t conducive to a pithy blog post. Does this process work? Yes. Would you use it in real world in a production environment? Up to you. 🤷‍♀️</p>
+<h3>An overview</h3>
+<p>At a high level, this is what happens when you dial the number and request an outgoing call:</p>
+<ol>
+<li>Twilio answers your call</li>
+<li>Twilio makes a request to an Amazon Lambda via an API Gateway, which returns some <a href="https://www.twilio.com/docs/voice/twiml">TwiML</a> instructing Twilio&#8217;s voice engine to ask you to enter a phone number.</li>
+<li>It waits for you to enter the phone number followed by the hash key</li>
+<li>When it detected the hash key, it makes another request to the lambda, this time with the number you entered. The lambda returns an instruction to dial the number (after some normalisation &#8211; more on this later), join the calls, and to record both sides of the conversation.</li>
+</ol>
+<p>After this happens, you can log in to the Twilio console, download the MP3, and upload that to <a href="http://Rev.com">Rev.com</a> where real-life humans transcribe the conversation.</p>
+<h3>The code</h3>
+<pre class="brush: python; title: ; notranslate" title="">
+from twilio.twiml.voice_response import VoiceResponse, Say, Gather, Dial
+from urllib.parse import parse_qs
+
+LANGUAGE=&quot;en-AU&quot;
+AUTHORISED_NUMBERS = ['ADD YOUR PHONE NUMBER HERE IN INTERNATIONAL FORMAT ie +61400000000']
+
+def authorized_number(number):
+    return number in AUTHORISED_NUMBERS
+
+def say(words):
+    return Say(words, voice=&quot;alice&quot;, language=LANGUAGE)
+
+def get_outgoing_number(request):
+    response = VoiceResponse()
+
+    action = &quot;/&quot; + request['requestContext']['stage'] + &quot;/ivr&quot;
+    words = say(&quot;Please dial the number you would like to call, followed by the hash key.&quot;)
+
+    gather = Gather(action=action)
+    gather.append(words)
+    response.append(gather)
+
+    return response
+
+def add_country_code(number):
+    if number[0] == &quot;+&quot;:
+        return number
+    elif number[0] == &quot;0&quot;:
+        return &quot;+61&quot; + number[1:]
+    elif number[0:2] == &quot;13&quot;:
+        return &quot;+61&quot; + number
+    elif number[0:2] == &quot;1800&quot;:
+        return &quot;+61&quot; + number
+
+def hangup():
+    response = VoiceResponse()
+    response.hangup()
+    return response
+
+def handle_ivr_input(params):
+    to = params['Digits'][0]
+    dial = Dial(add_country_code(to), record=&quot;record-from-answer-dual&quot;, caller_id=params['Caller'])
+
+    response = VoiceResponse()
+    response.append(say(&quot;Calling.&quot;))
+    response.append(dial)
+    return response
+
+def handler(request, context):
+    path = request['path']
+    params = parse_qs(request['body'])
+
+    response = &quot;&quot;
+    if path == &quot;/incoming&quot;:
+        if authorized_number(params[&quot;Caller&quot;][0]):
+            response = get_outgoing_number(request)
+        else:
+            response = hangup()
+    elif path == &quot;/ivr&quot;:
+        response = handle_ivr_input(params)
+    else:
+        return {
+            'body': &quot;Action not defined&quot;,
+            'statusCode': 404,
+            'isBase64Encoded': False,
+            'headers': { 'context_type': 'text/plain' }
+        }
+
+    return {
+        'body': str(response),
+        'statusCode': 200,
+        'isBase64Encoded': False,
+        'headers': { 'content_type': 'text/xml' }
+    }
+
+</pre>
+<p>Code is also on <a href="https://github.com/madpilot/twilio_call_recorder">GitHub</a>.</p>
+<p>I&#8217;m in Australia, so there is a little bit of localization happing here: I set the voice of Alice (the most human sounding robot that Twilio has) to Australian, and I insert the Australian country code if it is not already set. Twilio doesn&#8217;t do this automatically, and it&#8217;s a pain to replace the first 0 with a +61 for every call.</p>
+<p>When the call is made, the caller ID is set to the number you called from, so the call looks like it came from you. You need to <a href="https://support.twilio.com/hc/en-us/articles/223180048-Adding-a-Verified-Phone-Number-or-Caller-ID-with-Twilio">authorise Twilio</a> to do that.</p>
+<p>I&#8217;ve included a hard-coded allow-list (AUTHORISED_NUMBERS) of phone numbers who can make outgoing phone calls. If a number that is not on the list tries to call the number, they just get hung up on. You wouldn&#8217;t want someone accidentally stumbling across the number and racking up phone bills. I guess at least you would have recordings as evidence&#8230;</p>
+<p><strong>Note:</strong> the code doesn&#8217;t know about area codes, so if you are calling land lines (<a href="https://en.wikipedia.org/wiki/Landline">Wikipedia entry</a> if you are under 30 and don&#8217;t know what they are) you will always need to include your area code.</p>
+<p>Cool. So what do you do with this code? It needs packaging and uploading to Amazon.</p>
+<h3>Packaging the script</h3>
+<p>(Want to skip this bit? <a href="https://myles.eftos.id.au/wp-content/uploads/2018/09/lambda.zip">Here is the ZIP</a> &#8211; you can edit it in the Lambda console once you upload)</p>
+<p>You will need Python 3.6 for this. Instructions for <a href="https://docs.python-guide.org/starting/install3/osx/">OSX</a>, <a href="https://docs.python-guide.org/starting/install3/linux/">Linux</a> and <a href="https://www.howtogeek.com/197947/how-to-install-python-on-windows/">Windows</a>. Good Luck.</p>
+<pre class="brush: bash; title: ; notranslate" title="">
+git clone git https://github.com/madpilot/twilio-call-recorder
+cd twilio-call-recorder
+pip install twilio -t ./
+find . | grep -E &quot;(__pycache__|\.pyc|\.pyo$)&quot; | xargs rm -rf
+zip -r lambda.zip *
+</pre>
+<h3>Creating the Lambda</h3>
+<ol>
+<li>Log in to your AWS account, and go to <a href="https://console.aws.amazon.com/lambda/home">https://console.aws.amazon.com/lambda/home</a></li>
+<li>Click <em>Create function</em></li>
+<li>Then <em>Author from scratch</em></li>
+<li>Name your lambda: <em>twilioCallRecorder</em></li>
+<li>Select <em>Python 3.6</em> as the runtime</li>
+<li>Select the <em>Create new role from template(s)</em> option</li>
+<li>Name the role: <em>twilioCallRecorderRole</em></li>
+<li>Click <em>Create Function</em></li>
+</ol>
+<p>Your screen should look similar to this:</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/09/Screen-Shot-2018-09-19-at-12.26.29-pm.png"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/09/Screen-Shot-2018-09-19-at-12.26.29-pm.png" alt="Screen Capture of the AWS Lambda Setup." width="1390" height="1529" class="alignnone size-full wp-image-3326" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/09/Screen-Shot-2018-09-19-at-12.26.29-pm.png 1390w, https://myles.eftos.id.au/wp-content/uploads/2018/09/Screen-Shot-2018-09-19-at-12.26.29-pm-273x300.png 273w, https://myles.eftos.id.au/wp-content/uploads/2018/09/Screen-Shot-2018-09-19-at-12.26.29-pm-768x845.png 768w, https://myles.eftos.id.au/wp-content/uploads/2018/09/Screen-Shot-2018-09-19-at-12.26.29-pm-931x1024.png 931w" sizes="(max-width: 1390px) 100vw, 1390px" /></a></p>
+<p><strong>Important!</strong> Don&#8217;t Add a trigger from this screen! We need to set the API gateway in a non-standard way, and it just means you&#8217;ll have to delete the one this page sets up.</p>
+<h3>Uploading the Code</h3>
+<ol>
+<li>Upload ZIP File</li>
+<li>Set the handler to <em>recorder.handler</em></li>
+<li>Click <em>Save</em></li>
+<li>In the code editor, Add all the phone numbers who can make outgoing calls to the <em>AUTHORISED_NUMBERS</em> list (include +61 at the beginning)</li>
+<li>Click <em>Test</em></li>
+<li>Set the event name to <em>Incoming&#8221;</em>
+<li>Set the payload to
+<pre class="brush: jscript; title: ; notranslate" title="">
+{
+  &quot;path&quot;: &quot;/incoming&quot;,
+  &quot;body&quot;: &quot;Caller=%2B61400000000&quot;,
+  &quot;requestContext&quot;: {
+    &quot;stage&quot;: &quot;default&quot;
+  }
+}
+</pre>
+</li>
+<li>Click <em>Create</em></li>
+<li>Click <em>Test</em></li>
+</ol>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/09/Upload-Your-Code.gif"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/09/Upload-Your-Code.gif" alt="GIF of the Code uploading Process" width="1390" height="1529" class="alignnone size-full wp-image-3330" /></a></p>
+<h3>Setting up the Web API Gateway</h3>
+<ol>
+<li>Click <em>Get Started</em></li>
+<li>Click <em>New API</em></li>
+<li>Name the API <em>Twilio Call Recorder</em></li>
+<li>Click <em>Create API</em></li>
+<li>From the <em>Actions</em> menu, select <em>Create Resource</em>
+<li>Check the <em>Configure as Proxy Resource</em> option</li>
+<li>Click <em>Create Resource</em></li>
+<li>Start typing the name you gave the Lambda (twilioCallRecorder) &#8211; it should suggest the full name</li>
+<li>Click <em>Save</em></li>
+<li>Click <em>Ok</em></li>
+<li>Click <em>Test</em></li>
+<li>Select <em>Post</em> in the <em>Method</em> drop down</li>
+<li>Select <em>/incoming</em> as path</li>
+<li>Set RequestBody to
+<pre class="brush: bash; title: ; notranslate" title="">Caller=%2B61400000000</pre>
+<p> replacing 61400000000 with one of the numbers in your allow list</li>
+<li>Click <em>Test</em></li>
+</ol>
+<p>If that all worked, you should see a success message.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/09/API-Gateway.gif"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/09/API-Gateway.gif" alt="Screen Captures of setting up the API gateway" width="1390" height="1529" class="alignnone size-full wp-image-3336" /></a></p>
+<h3>Deploy the API Gateway</h3>
+<ol>
+<li>From the <em>Actions</em> menu, select <em>Deploy API</em></li>
+<li>Enter <em>Default</em> as the name</li>
+<li>Click <em>Deploy</em></li>
+<ol>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/09/Deploy.gif"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/09/Deploy.gif" alt="Screen Captures of the Deployment" width="1390" height="1529" class="alignnone size-full wp-image-3340" /></a></p>
+<p>Copy the invoke URL. In a terminal (if you are on a Mac):</p>
+<pre class="brush: bash; title: ; notranslate" title="">
+curl `pbpaste`/incoming -d &quot;Caller=%2B61400000000&quot;
+</pre>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/09/Screen-Shot-2018-09-19-at-12.46.08-pm.png"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/09/Screen-Shot-2018-09-19-at-12.46.08-pm.png" alt="Testing the endpoint in the command line" width="682" height="564" class="alignnone size-full wp-image-3338" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/09/Screen-Shot-2018-09-19-at-12.46.08-pm.png 682w, https://myles.eftos.id.au/wp-content/uploads/2018/09/Screen-Shot-2018-09-19-at-12.46.08-pm-300x248.png 300w" sizes="(max-width: 682px) 100vw, 682px" /></a></p>
+<p>Congratulations! You have setup the API Gateway and Lambda correctly!</p>
+<h3>Setup Twilio</h3>
+<p>See the <a href="https://support.twilio.com/hc/en-us/articles/223135027-Configuring-Phone-Numbers-to-Receive-Voice-Calls#webhook">documentation around webhooks on the Twilio website</a> &#8211; paste in the URL from the API gateway, and you are good to go.</p>
+<h3>Making a call</h3>
+<p>The part you have been waiting for! Pick up your phone, and dial the incoming number you setup at Twilio. If all is well, you should hear a lovely woman&#8217;s voice asking you the number you wish to dial. Enter the number, and hit the hash key. After a moment, the call will be connected! </p>
+<p>Once you hang up, you can log in to the Twilio console, browse to the <a href="https://www.twilio.com/console/voice/dashboard">Programmable Voice section</a> and click the <a href="https://www.twilio.com/console/voice/calls/logs">Call log</a>. You should see the call you made. Click on it and you will be able to download a WAV or MP3 version of the recording.</p>
+<p>Now, you just need to download it (I chose the MP3, because it will be faster), and upload it to <a href="https://rev.com">Rev.com</a>. After a couple of hours, you will have a high quality transcription of your conversation. It&#8217;s really very easy!</p>
+      </div>
+  <div class="meta-data">
+        <a href="https://myles.eftos.id.au/blog/2018/09/19/call-recording-with-twilio-aws-lamba-rev/" title="3:56 PM" rel="bookmark" class="datetime"><time class="date" datetime="2018-09-19T15:56:04+00:00"><span class="day">19</span><span class="month">Sep</span><span class="year">2018</span></time></a> <span class="categories"><a href="https://myles.eftos.id.au/blog/category/business-2/" rel="category tag">Business</a>, <a href="https://myles.eftos.id.au/blog/category/system-ops/" rel="category tag">System Ops</a></span> <span class="tags"><a href="https://myles.eftos.id.au/blog/tag/aws/" rel="tag">aws</a>, <a href="https://myles.eftos.id.au/blog/tag/bizops/" rel="tag">bizops</a>, <a href="https://myles.eftos.id.au/blog/tag/devops/" rel="tag">devops</a>, <a href="https://myles.eftos.id.au/blog/tag/lambda/" rel="tag">lambda</a>, <a href="https://myles.eftos.id.au/blog/tag/rev/" rel="tag">rev</a>, <a href="https://myles.eftos.id.au/blog/tag/transcription/" rel="tag">transcription</a>, <a href="https://myles.eftos.id.au/blog/tag/twilio/" rel="tag">twilio</a></span> <div class="addthis_toolbox addthis_default_style sharing"><a class="addthis_button_twitter"></a><a class="addthis_button_facebook"></a><a class="addthis_button_google_plusone_share"></a><a class="addthis_button_tumblr"></a><a class="addthis_button_hackernews"></a><a class="addthis_button_email"></a></div>  </div>
+</article>
+ 
+                <article id="" class="post-3311 post type-post status-publish format-standard hentry category-projects tag-cnc tag-hardware tag-makibox tag-pcb-mill">
+  <h2><a href="https://myles.eftos.id.au/blog/2018/07/16/converting-a-makibox-building-the-y-axis/">Converting a Makibox – Building the Y-axis</a></h2>
+  <div class="content">
+            <p>I&#8217;ve now built the aluminium frame and completed the Y-axis. Of course, this was not without it&#8217;s problems.</p>
+<p>Firstly, I misordered &#8211; I was one set of uprights short. This may not be a massive problem though, as I hadn&#8217;t taken into account the size of the spindle when designing the X-axis, and it wouldn&#8217;t have fitted in the configuration I had designed for &#8211; That&#8217;s what you get for forging ahead with out good engineering drawings.</p>
+<p>Other minor issues were easily fixed by reprinting some parts &#8211; I added limit switches into the motor and bearing holders (though I haven&#8217;t worked out how to make the switch on the bearing holder work yet), I made the driver carriage wider so the whole anti-backlash nut fitted completely and I changed the shape of the passenger carriage so it could slide over the entire stroke.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/07/Y-Axis-Revised.png"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/07/Y-Axis-Revised.png" alt="A render of the new Y-Axis" width="2048" height="1536" class="alignnone size-full wp-image-3313" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/07/Y-Axis-Revised.png 2048w, https://myles.eftos.id.au/wp-content/uploads/2018/07/Y-Axis-Revised-300x225.png 300w, https://myles.eftos.id.au/wp-content/uploads/2018/07/Y-Axis-Revised-768x576.png 768w, https://myles.eftos.id.au/wp-content/uploads/2018/07/Y-Axis-Revised-1024x768.png 1024w" sizes="(max-width: 2048px) 100vw, 2048px" /></a></p>
+<p>Everything went together quite well &#8211; I did my best to square everything up, using a shim I printed &#8211; the holders may not be exactly in the middle, but they are all consistently out, which is the main thing.</p>
+<p>I was a little concerned that both carriages were rotating around the z-axis, but realised that was because they weren&#8217;t joined yet, so there was only two points of contact, rather than four. </p>
+<p>To fix that, I cut out a 205mm x 205mm MDF spoil board, and attached it using a 0.33mm feeler gauge squared it against one of the uprights.</p>
+<p>I&#8217;m not sure I can do more alignment without having a X-axis, which requires a redesign.<br />
+See the video below for the test! (Excuse the upright video &#8211; I need to get an iPhone holder)</p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/-uTOFuBneCg" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
+      </div>
+  <div class="meta-data">
+        <a href="https://myles.eftos.id.au/blog/2018/07/16/converting-a-makibox-building-the-y-axis/" title="9:58 AM" rel="bookmark" class="datetime"><time class="date" datetime="2018-07-16T09:58:35+00:00"><span class="day">16</span><span class="month">Jul</span><span class="year">2018</span></time></a> <span class="categories"><a href="https://myles.eftos.id.au/blog/category/projects/" rel="category tag">Projects</a></span> <span class="tags"><a href="https://myles.eftos.id.au/blog/tag/cnc/" rel="tag">CNC</a>, <a href="https://myles.eftos.id.au/blog/tag/hardware/" rel="tag">Hardware</a>, <a href="https://myles.eftos.id.au/blog/tag/makibox/" rel="tag">Makibox</a>, <a href="https://myles.eftos.id.au/blog/tag/pcb-mill/" rel="tag">PCB Mill</a></span> <div class="addthis_toolbox addthis_default_style sharing"><a class="addthis_button_twitter"></a><a class="addthis_button_facebook"></a><a class="addthis_button_google_plusone_share"></a><a class="addthis_button_tumblr"></a><a class="addthis_button_hackernews"></a><a class="addthis_button_email"></a></div>  </div>
+</article>
+ 
+                <article id="" class="post-3291 post type-post status-publish format-standard hentry category-projects tag-arduino tag-ikea-microwave tag-lcd tag-rotary-encoder">
+  <h2><a href="https://myles.eftos.id.au/blog/2018/07/13/ikea-hacks-duktig-microwave/">IKEA hacks: A microwave interface for the Duktig kids kitchen</a></h2>
+  <div class="content">
+            <p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/07/DSC_0012.jpg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/07/DSC_0012.jpg" alt="The finished product" width="722" height="480" class="alignnone size-full wp-image-3303" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/07/DSC_0012.jpg 722w, https://myles.eftos.id.au/wp-content/uploads/2018/07/DSC_0012-300x199.jpg 300w" sizes="(max-width: 722px) 100vw, 722px" /></a></p>
+<p>Hugo just turned one, and to celebrate we bought him a <a href="https://www.ikea.com/au/en/catalog/products/40319973/">Duktig kitchen</a> from IKEA. Like everyone else we painted and added fake subway tiles, but I wanted to take it a bit further and add a working microwave panel.</p>
+<p>Hugo is obsessed with pressing buttons and turning knobs &#8211; We were staying at an AirBNB recently that had a microwave that you controlled using one big knob and he loved it &#8211; so I thought I would model that.</p>
+<p>I ordered a 4-digit 7 segment display, a rotary encoder and an aluminium knob, which I planned to run off an Arduino Nano.</p>
+<h3>Rotary Encoders</h3>
+<p>A <a href="https://www.aliexpress.com/item/2PC-YT2004Y-Rotary-Encoder-with-Switch-EC11-Audio-Digital-Potentiometer-Handle-length-15mm-Rotary-Coding-Switch/32826453253.htm">rotary encoder</a> looks a lot like a potentiometer, however they work quite differently. For starters, there is no limiter so they rotate through a full 360 degrees.</p>
+<p>But the main difference is how you interface with them: they output a digital code called a <a href="https://en.wikipedia.org/wiki/Gray_code">Gray code</a>. Named after Frank Gray, it ensures that one-bit only ever changes at one time so we can be sure of the direction the shaft turns.</p>
+<p>Of course, the library we are using hides this from us, so all we care about is the value that comes back.</p>
+<p>The encoder I’m using also has a push button, which I’ll use to start and stop the timer. The <a href="https://github.com/0xPIT/encoder">library</a> also abstracts this.</p>
+<h3>The display</h3>
+<p>The <a href="https://www.aliexpress.com/item/0-36-Inch-0-36-4-Digit-Red-Green-Yellow-Blue-White-LED-Display-Tube-Decimal/32866984077.html">four-digit seven-segment display</a> has a built in driver chip that means we only need two pins to drive it: a clock and data. Again, there is a <a href="https://github.com/avishorp/TM1637">convenient library</a> that deals with pushing data to the board.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/07/DSC_0009.jpg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/07/DSC_0009.jpg" alt="Buld progress" width="722" height="480" class="alignnone size-full wp-image-3296" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/07/DSC_0009.jpg 722w, https://myles.eftos.id.au/wp-content/uploads/2018/07/DSC_0009-300x199.jpg 300w" sizes="(max-width: 722px) 100vw, 722px" /></a></p>
+<h3>The LEDs</h3>
+<p>I had six yellow LEDs that I pulled out of the night light I gutted to make <a href="https://myles.eftos.id.au/blog/tag/hugos-night-light/#.W0gDAtgzbUI">an interim night light</a>, so I repurposed them for this project. As the draw a total of about 120mA when on, they can’t be driven by the Arduino directly &#8211; I’m using a BC547 transistor to drive them.</p>
+<h3>The speaker</h3>
+<p>I added a cheap, 8 ohm streaker than I’m driving directly off one of the Arduino digital outputs. There is a <a href="https://www.arduino.cc/reference/en/language/functions/advanced-io/tone/">tone library</a> that turns a GPIO on and off quickly enough to create a tone. I maybe regretting this already though &#8211; it can get quite annoying.</p>
+<h3>Sleeping</h3>
+<p>This microwave controller needs to be battery operated. To do that without costing me a small fortune in batteries, the controller needs to turn itself off. Luckily, the Arduino Nano supports a deep sleep which reduces it’s current draw. The Nano can then be woken up by a pulse on either pin 2 or pin 3.</p>
+<p>By feeding the signal from the rotary encoder and the switch into those pins, any rotation of button pressing will wake up the processor.</p>
+<p>There is a slight problem though: there are two pins on the rotary encoder, and one on the switch: we need another input.</p>
+<p>Or do we?</p>
+<p>Rotary encoders have a physical “click” (called a segment). On the particular encoder I have, each click goes through a complete Gray code cycle, meaning there is a guaranteed two logic level transitions on each pin per segment. And, if you have ever watched a small child spin a knob, you would have noticed that their developing fine motor skills result in big rotations. In this case I can happily take the output of one of the encoder pins, and be confident that it will always wake.</p>
+<p>So, the switch is wired to GPIO 2, encoder pin A is wired to GPIO 3 and pin B is wired to GPIO 4.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/07/Controller.png"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/07/Controller.png" width="2092" height="1222" class="alignnone size-full wp-image-3298" alt="The Controller Schematic" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/07/Controller.png 2092w, https://myles.eftos.id.au/wp-content/uploads/2018/07/Controller-300x175.png 300w, https://myles.eftos.id.au/wp-content/uploads/2018/07/Controller-768x449.png 768w, https://myles.eftos.id.au/wp-content/uploads/2018/07/Controller-1024x598.png 1024w" sizes="(max-width: 2092px) 100vw, 2092px" /></a></p>
+<h3>The code</h3>
+<p>There are four main parts of the code: reading the encoder, the display code, the code that puts the MCU to sleep, and the interupt handler that wakes it back up again.</p>
+<p>Most of the heavy lifting for interfacing with the encoder and display is done by two libraries.</p>
+<p>The encoder library uses polling rather than hardware interrupts (which is good because I would have run out of interruptible pins). Every millisecond it checks the state of the encoder, and can work out if it has been spun or not. This library exposes the delta, we we use to increment or decrement the display.</p>
+<p>The library also provides a callback that is fired on button clicks. Each clock toggles the <em>running</em> variable and the returns control back to the loop.</p>
+<p>The display library at it’s lower levels takes four bytes &#8211; one for each number. Each bit of each byte represents a segment of the display. Thankfully there are some helper methods to display common things like numbers.</p>
+<p>You can download the <a href="https://github.com/madpilot/IkeaMicrowave/blob/master/IkeaMicrowave.ino">code on Github</a>.</p>
+<h3>The loop</h3>
+<p>Because all of the inputs are handled via interupts, the loop just needs to deal with updating the display.</p>
+<p>The <em>left</em> variable represents the number of seconds remaining. The first thing to do is adjust it if the encoder changed. We simply add the delta to it. Note that his happens regardless of whether the timer is running or not &#8211; this means you can add or remove time even when the microwave is running.</p>
+<p>If the timer is running and the LED is off, I turn it on (and vis-e-versa).</p>
+<p>If the timer is running the variable automatically gets decremented every 1000 milliseconds.</p>
+<p>If the variable is 0, the timer stops and I display the word end and sound the beeper. (The LEDs will also go off)</p>
+<p>The display routine gets called every 500ms. Why every half second? So we can flash the dot to show that the timer is running!</p>
+<h3>The build</h3>
+<p>I was hoping this would be a quick weekend project, so I threw the circuit together using perf board. Of course everything always takes longer than you expect, but it kind of worked out well, because the perf board made the feature creep easier to deal with.</p>
+<p>I 3D printed a “case” though my printer’s build area was too small to cover the whole area, so I made an MDF backing plate. Pro tip: don’t use pin to mark construction lines: paint won’t stick to it. Also: prime MDF &#8211; it absorbs paint like no body’s business. What should have been two coats required four.</p>
+<h3>Power</h3>
+<p>During testing I realised that there were LEDs on both the Arduino and the display that stayed on regardless of whether the Arduino was asleep or not. I measure the power draw whilst sleeping at it was sitting at about 15mA. A AA battery has a capacity of around 2400mAH, so a set would last around 160 hours or 6 days.</p>
+<p>Clearly that is too high.</p>
+<p>I removed the LEDs and that brought the draw down to 2mA, which buys me 1200 hours or 50 days. Better, but not amazing. Unfortunately, the Nano isn’t great as a lower power device. If I could be bothered removing the chip from the perf board, I could remove the FTDI drive and power regulator and probably claw back a bit of quiescent current.</p>
+<p>I have ordered a boost converter so I can run the board off two batteries at 95% efficiency rather than the four at the moment so I might just use a couple of C cells which have 8,000 mAH capacity (nearly half a year).</p>
+<p>See the microwave in action!</p>
+<p><iframe width="560" height="315" src="https://www.youtube.com/embed/hhDEglUDhdU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></p>
+      </div>
+  <div class="meta-data">
+        <a href="https://myles.eftos.id.au/blog/2018/07/13/ikea-hacks-duktig-microwave/" title="11:46 AM" rel="bookmark" class="datetime"><time class="date" datetime="2018-07-13T11:46:39+00:00"><span class="day">13</span><span class="month">Jul</span><span class="year">2018</span></time></a> <span class="categories"><a href="https://myles.eftos.id.au/blog/category/projects/" rel="category tag">Projects</a></span> <span class="tags"><a href="https://myles.eftos.id.au/blog/tag/arduino/" rel="tag">arduino</a>, <a href="https://myles.eftos.id.au/blog/tag/ikea-microwave/" rel="tag">ikea-microwave</a>, <a href="https://myles.eftos.id.au/blog/tag/lcd/" rel="tag">lcd</a>, <a href="https://myles.eftos.id.au/blog/tag/rotary-encoder/" rel="tag">rotary-encoder</a></span> <div class="addthis_toolbox addthis_default_style sharing"><a class="addthis_button_twitter"></a><a class="addthis_button_facebook"></a><a class="addthis_button_google_plusone_share"></a><a class="addthis_button_tumblr"></a><a class="addthis_button_hackernews"></a><a class="addthis_button_email"></a></div>  </div>
+</article>
+ 
+                <article id="" class="post-3285 post type-post status-publish format-standard hentry category-projects tag-cnc tag-hardware tag-makibox tag-pcb-mill">
+  <h2><a href="https://myles.eftos.id.au/blog/2018/06/02/converting-a-makibox-aluminium-frame-is-done/">Converting a Makibox – Aluminium frame is done</a></h2>
+  <div class="content">
+            <p>I’m pretty happy with how the aluminium frame has come together. I’ve kept the X-axis pretty simple, though I tried a few iterations before coming to this shape.</p>
+<p>Originally I had the vertical X-axis supports butted on the top of the horizontal Y axis base, but I was concerned with keeping the vertical… vertical. I could have used right angle brackets, but decided that by putting them in the inside of the base, I can add additional points of contact that would better support them. This configuration also gives a slightly larger base, so should make it slightly more stable. They are now attached in two dimensions which effectively works like a right-angle bracket.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/06/Frame_2018-Jun-01_12-29-30PM-000_CustomizedView10721117244.png"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/06/Frame_2018-Jun-01_12-29-30PM-000_CustomizedView10721117244.png" alt="" width="2048" height="1536" class="alignnone size-full wp-image-3286" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/06/Frame_2018-Jun-01_12-29-30PM-000_CustomizedView10721117244.png 2048w, https://myles.eftos.id.au/wp-content/uploads/2018/06/Frame_2018-Jun-01_12-29-30PM-000_CustomizedView10721117244-300x225.png 300w, https://myles.eftos.id.au/wp-content/uploads/2018/06/Frame_2018-Jun-01_12-29-30PM-000_CustomizedView10721117244-768x576.png 768w, https://myles.eftos.id.au/wp-content/uploads/2018/06/Frame_2018-Jun-01_12-29-30PM-000_CustomizedView10721117244-1024x768.png 1024w" sizes="(max-width: 2048px) 100vw, 2048px" /></a></p>
+<p>The motor mount and bearing mounts are pretty simple, bridging the two verticals on each side. I toyed with running the bolts in a horizontal extrusion that would stop them from slipping down, but that would stop me from adjusting the heights when tramming.</p>
+<p>On the topic of adjustments, I&#8217;m starting to regret the dual-carriage design, as there is an extra dimension that needs to be aligned &#8211; not only do I need to align the X, Y and Z axes, I need to make sure both slides are exactly parallel. I&#8217;ve bought a <a href="https://www.aliexpress.com/item/0-00005-Digital-Micrometer-0-001mm-Digital-Micrometer-Gauge-Metric-Inch-Dial-Indicator-Meter-Range-0/32818185370.html?spm=a2g0s.9042311.0.0.659f4c4dqssmEv">digital dial indicator</a> which should help in squaring everything up &#8211; we&#8217;ll see how that goes.</p>
+<p>I now have a complete bill of materials for the frame:</p>
+<table>
+<thead>
+<tr>
+<th>Qty</th>
+<th>Description</th>
+<th>Length</th>
+</tr>
+<tr>
+<td>3</td>
+<td>40&#215;40 Aluminium Extrusion</td>
+<td>285mm</td>
+</tr>
+<tr>
+<td>4</td>
+<td>40&#215;40 Aluminium Extrusion</td>
+<td>260mm</td>
+</tr>
+<tr>
+<td>2</td>
+<td>40&#215;40 Aluminium Extrusion</td>
+<td>401mm</td>
+</tr>
+<tr>
+<td>1</td>
+<td>40&#215;40 Aluminium Extrusion</td>
+<td>205mm</td>
+</tr>
+<tr>
+<td>16</td>
+<td>8mm Square Washer</td>
+<td></td>
+</tr>
+<tr>
+<td>32</td>
+<td>16x16x6/M8 Square nut</td>
+<td></td>
+</tr>
+<tr>
+<td>32</td>
+<td>M8x16 Button Head Socket Screw</td>
+<td></td>
+</tr>
+<tr>
+<td>8</td>
+<td>End cap 40&#215;40 Black</td>
+<td></td>
+</tr>
+</table>
+<p>The order cost me just shy of $200, which already takes me over my $250 budget, but I&#8217;ve been reconsidering how much I&#8217;m spending, as I assumed I could use my Dremel 4300. After a bunch of reading, I think I&#8217;ll need to by a different spindle that has less runout.</p>
+      </div>
+  <div class="meta-data">
+        <a href="https://myles.eftos.id.au/blog/2018/06/02/converting-a-makibox-aluminium-frame-is-done/" title="2:20 PM" rel="bookmark" class="datetime"><time class="date" datetime="2018-06-02T14:20:36+00:00"><span class="day">02</span><span class="month">Jun</span><span class="year">2018</span></time></a> <span class="categories"><a href="https://myles.eftos.id.au/blog/category/projects/" rel="category tag">Projects</a></span> <span class="tags"><a href="https://myles.eftos.id.au/blog/tag/cnc/" rel="tag">CNC</a>, <a href="https://myles.eftos.id.au/blog/tag/hardware/" rel="tag">Hardware</a>, <a href="https://myles.eftos.id.au/blog/tag/makibox/" rel="tag">Makibox</a>, <a href="https://myles.eftos.id.au/blog/tag/pcb-mill/" rel="tag">PCB Mill</a></span> <div class="addthis_toolbox addthis_default_style sharing"><a class="addthis_button_twitter"></a><a class="addthis_button_facebook"></a><a class="addthis_button_google_plusone_share"></a><a class="addthis_button_tumblr"></a><a class="addthis_button_hackernews"></a><a class="addthis_button_email"></a></div>  </div>
+</article>
+ 
+                <article id="" class="post-3279 post type-post status-publish format-standard hentry category-projects tag-3d-printing tag-arduino tag-hugos-night-light tag-resin-casting">
+  <h2><a href="https://myles.eftos.id.au/blog/2018/05/28/hugos-nightlight-modelling-and-printing-the-mold-master/">Hugo’s Nightlight: Modelling and Printing the Mold Master</a></h2>
+  <div class="content">
+            <p>Initially I thought about mounting the electronics in the back of the H, trying to fit everything in the footprint of the mold. But if I could get lights on the back, there would be some cool effects I could achieve. To get a consistent glow, the LEDs would need to be wedged in the middle of the H.</p>
+<p>This did make mounting the PCB difficult though. I decided that I would mount the H on a small plyth that would house the electronics.</p>
+<p>Autodesk Fusion 360 can extrude type, so all I needed to do was pick my type face. I wanted something childlike (not Comic Sans) so I went <a href="https://www.fontsquirrel.com/fonts/titan-one">with Titan One</a>.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/05/Modelled-H.png"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/05/Modelled-H.png" alt="" width="3098" height="1878" class="alignnone size-full wp-image-3281" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/05/Modelled-H.png 3098w, https://myles.eftos.id.au/wp-content/uploads/2018/05/Modelled-H-300x182.png 300w, https://myles.eftos.id.au/wp-content/uploads/2018/05/Modelled-H-768x466.png 768w, https://myles.eftos.id.au/wp-content/uploads/2018/05/Modelled-H-1024x621.png 1024w" sizes="(max-width: 3098px) 100vw, 3098px" /></a></p>
+<p>Next, shelled, then mirrored to form the two halves. I added some alignment holes, to make gluing easier and finally created some nubs that will act as anchors for the plyth. The nubs were printed as separate parts so I didn’t need to print supports.</p>
+<h3>Printing</h3>
+<p>Each of the two halves took around 2 hours to print. Of course, because of how FDM printing works, the result was pretty streaky. The silicon I had literally talks about how fine detail it is, so I would need to do something about the streaks.</p>
+<p>My dad used to make scale model aeroplanes, and I always remember him filling the joints with wood putty and then sanding to get a smooth finish, so I thought I would try that.</p>
+<p>It turns out the gaps were just too big, and using a water based putty while wet and dry sanding meant the putty would come off.</p>
+<p>Next I tried an auto sealer that was supposedly sandable. This didn’t work either because it was too rubbery.</p>
+<p>At this point I spent AGES wet and dry sanding, starting at 80-grit and worked my way up to 240 before I found out about <a href="http://www.supercheapauto.com.au/Product/SCA-Primer-Filler-400g/288527">auto primer/filler</a>.</p>
+<p>This stuff is designed to cover up small scratches in car body work, and is sandable, allowing you to get a really smooth finish.</p>
+<p>I did two coats, and sanded with wet and dry, 400 grit, and then a final coat before finishing with an 800 grit. It worked really well. It also saved a lot of time &#8211; sanding to a smooth finish is hard.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/05/DSC_0005.jpg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/05/DSC_0005.jpg" alt="" width="1024" height="681" class="alignnone size-full wp-image-3283" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/05/DSC_0005.jpg 1024w, https://myles.eftos.id.au/wp-content/uploads/2018/05/DSC_0005-300x200.jpg 300w, https://myles.eftos.id.au/wp-content/uploads/2018/05/DSC_0005-768x511.jpg 768w" sizes="(max-width: 1024px) 100vw, 1024px" /></a></p>
+      </div>
+  <div class="meta-data">
+        <a href="https://myles.eftos.id.au/blog/2018/05/28/hugos-nightlight-modelling-and-printing-the-mold-master/" title="8:54 PM" rel="bookmark" class="datetime"><time class="date" datetime="2018-05-28T20:54:07+00:00"><span class="day">28</span><span class="month">May</span><span class="year">2018</span></time></a> <span class="categories"><a href="https://myles.eftos.id.au/blog/category/projects/" rel="category tag">Projects</a></span> <span class="tags"><a href="https://myles.eftos.id.au/blog/tag/3d-printing/" rel="tag">3D Printing</a>, <a href="https://myles.eftos.id.au/blog/tag/arduino/" rel="tag">arduino</a>, <a href="https://myles.eftos.id.au/blog/tag/hugos-night-light/" rel="tag">Hugos Night Light</a>, <a href="https://myles.eftos.id.au/blog/tag/resin-casting/" rel="tag">Resin Casting</a></span> <div class="addthis_toolbox addthis_default_style sharing"><a class="addthis_button_twitter"></a><a class="addthis_button_facebook"></a><a class="addthis_button_google_plusone_share"></a><a class="addthis_button_tumblr"></a><a class="addthis_button_hackernews"></a><a class="addthis_button_email"></a></div>  </div>
+</article>
+ 
+                <article id="" class="post-3267 post type-post status-publish format-standard hentry category-personal tag-cnc tag-hardware tag-makibox tag-pcb-mill">
+  <h2><a href="https://myles.eftos.id.au/blog/2018/04/24/designing-the-y-axis/">Converting a Makibox &#8211; Designing the Y-Axis</a></h2>
+  <div class="content">
+            <p>I’ve been iterating the Y-axis in Fusion 360. A common design I have seen on other moving-bed designs is four linear bearings &#8211; one bearing at each corner of the bed. The problem with this design is you lose the distance between the bearings in travel. Since I have only have a maximum of 165mm on this axis, I didn’t want to lose too much to dead play.</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/04/moving-bed-example.jpg"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/04/moving-bed-example.jpg" alt="Example of a moving bed with 4 bearings" width="640" height="538" class="alignnone size-full wp-image-3269" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/04/moving-bed-example.jpg 640w, https://myles.eftos.id.au/wp-content/uploads/2018/04/moving-bed-example-300x252.jpg 300w" sizes="(max-width: 640px) 100vw, 640px" /></a></p>
+<h3>Round 1 &#8211; Two Bearings</h3>
+<p>My first thought was use a single bearing on each side, introducing a minimum lost travel of 12mm (the width of the bearing). This looked like it would cause rotation problems, though &#8211; especially when dive cutting in the outer edges of the build area.​​​</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/04/single-bearing-side-profile.png"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/04/single-bearing-side-profile.png" alt="Drilling on one side of the axis, causes excessive rotational forces at the bearing" width="1920" height="1080" class="alignnone size-full wp-image-3270" srcset="https://myles.eftos.id.au/wp-content/uploads/2018/04/single-bearing-side-profile.png 1920w, https://myles.eftos.id.au/wp-content/uploads/2018/04/single-bearing-side-profile-300x169.png 300w, https://myles.eftos.id.au/wp-content/uploads/2018/04/single-bearing-side-profile-768x432.png 768w, https://myles.eftos.id.au/wp-content/uploads/2018/04/single-bearing-side-profile-1024x576.png 1024w" sizes="(max-width: 1920px) 100vw, 1920px" /></a></p>
+<h3>Round 2 &#8211; Four Bearings</h3>
+<p>I went back and looked the parts I could salvage from the Makibox, and it turns out I have four 170mm linear rods at my disposal. This means I can create a passenger carriage &#8211; one that isn’t driven by the lead screw, but instead is pushed along it’s rails by the bed itself. This design gives four points of contact, eliminating the radial moment of the two bearing design (Note: this doesn’t deal with linear rod or bed flex, just the rotation issue). The disadvantage is the base is now double the size, but as the bed would have moved outside of the frame envelope during operations, it’s not that big of a deal.</p>
+<p>Here is a render of the Y-axis. If you imagine a bed on top of it, attached to the two carriages &#8211; the left (driver) carriage is driven by the lead screw, while the right (passenger carriage is pushed by the bed. (I tried making a video, but the Fusion 360 animation workspace doesn’t support animating joints!)</p>
+<p><a href="https://myles.eftos.id.au/wp-content/uploads/2018/04/Dual-Y-Axis.png"><img src="https://myles.eftos.id.au/wp-content/uploads/2018/04/Dual-Y-Axis.png" alt="Dual Y Axis Render" width="1920" height="1080" class="alignnone size-full wp-image-3268" /></a></p>
+<p>The Y-axis will have a 131mm travel &#8211; the loss is 7mm from the ball bearing, 7mm from the coupler and 20mm from the anti-backlash nut.</p>
+<h3>Issues</h3>
+<p>There are still a couple of side issues I still need to work out:</p>
+<ol>
+<li>​The mount holes for the anti backlash nut are too close to the shaft, so I can’t heat fit brass inserts to screw in to &#8211; I may have to thread the plastic. I may be able to find some small nuts to secure it. Ideally once the mill is working I’ll be able to machine a bracket from a small plate of aluminium</li>
+<li>I have brass inserts in the carriages because I initially thought I would screw the bed down from the top &#8211; making replacement of the spoil board easier. This may not be an actual problem though &#8211; I’m not sure how often the spoil board needs changing. I may just make them screw holes, and be done with it. I have to think about it a bit more.</li>
+</ol>
+<p>Next up: the X-axis</p>
+      </div>
+  <div class="meta-data">
+        <a href="https://myles.eftos.id.au/blog/2018/04/24/designing-the-y-axis/" title="9:38 AM" rel="bookmark" class="datetime"><time class="date" datetime="2018-04-24T09:38:32+00:00"><span class="day">24</span><span class="month">Apr</span><span class="year">2018</span></time></a> <span class="categories"><a href="https://myles.eftos.id.au/blog/category/personal/" rel="category tag">Personal</a></span> <span class="tags"><a href="https://myles.eftos.id.au/blog/tag/cnc/" rel="tag">CNC</a>, <a href="https://myles.eftos.id.au/blog/tag/hardware/" rel="tag">Hardware</a>, <a href="https://myles.eftos.id.au/blog/tag/makibox/" rel="tag">Makibox</a>, <a href="https://myles.eftos.id.au/blog/tag/pcb-mill/" rel="tag">PCB Mill</a></span> <div class="addthis_toolbox addthis_default_style sharing"><a class="addthis_button_twitter"></a><a class="addthis_button_facebook"></a><a class="addthis_button_google_plusone_share"></a><a class="addthis_button_tumblr"></a><a class="addthis_button_hackernews"></a><a class="addthis_button_email"></a></div>  </div>
+</article>
+ 
+        <div class="paging">
+    <span class="previous"></span>
+    <span class="next"><a href="https://myles.eftos.id.au/page/2/" >Next</a></span>
+  </div>
+    </div>
+    <footer>
+      <span class="copyright">&copy; 2019 Myles Eftos</span>
+      &bull;
+      <span class="url"><a href="https://myles.eftos.id.au">https://myles.eftos.id.au</a></span>
+      &bull;
+      <span class="rss"><a href="http://feeds.feedburner.com/myleseftosblog">RSS</a></span>
+      &bull;
+      <span class="gpg"><a href="/gpg.pub">GPG</a></span>
+    </footer>
+
+    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52122657077bb2f2"></script>
+    <script type='text/javascript' src='https://myles.eftos.id.au/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://myles.eftos.id.au/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushBash.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://myles.eftos.id.au/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushCpp.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://myles.eftos.id.au/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPython.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://myles.eftos.id.au/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0.9b'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://myles.eftos.id.au/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['auto-links'] = false;
+	SyntaxHighlighter.defaults['gutter'] = false;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['smart-tabs'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.defaults['wrap-lines'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<script type='text/javascript' src='https://myles.eftos.id.au/wp-includes/js/wp-embed.min.js?ver=5.0.3'></script>
+  </body>
+</html>

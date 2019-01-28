@@ -1,0 +1,805 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>Kiezel Watchfaces Configuration Pages</title>
+
+    <!-- Autocomplete textbox -->
+    <style>
+        .autocomplete-suggestions { border: 1px solid #999; background: #FFF; cursor: default; overflow: auto; -webkit-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); -moz-box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); box-shadow: 1px 4px 3px rgba(50, 50, 50, 0.64); }
+        .autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+        .autocomplete-no-suggestion { padding: 2px 5px;}
+        .autocomplete-selected { background: #F0F0F0; }
+        .autocomplete-suggestions strong { font-weight: bold; color: #000; }
+        .autocomplete-group { padding: 2px 5px; }
+        .autocomplete-group strong { font-weight: bold; font-size: 16px; color: #000; display: block; border-bottom: 1px solid #000; }
+    </style>
+
+    <!-- Path to Framework7 Library CSS-->
+    <link rel="stylesheet" href="/kiezelwatchfaces.com/watchfaceConfig/css/framework7.css">
+    <!-- Path to your custom app styles-->
+    <link rel="stylesheet" href="/kiezelwatchfaces.com/watchfaceConfig/css/my-app.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css">
+    <!-- Google Fonts -->
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="/kiezelwatchfaces.com/watchfaceConfig/js/jquery.js"></script>
+    <script type="text/javascript" src="/kiezelwatchfaces.com/watchfaceConfig/js/jquery.js"></script>
+</head>
+<body>
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-64095502-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+    <!-- Views-->
+    <div class="views">
+        <!-- Your main view, should have "view-main" class-->
+        <div class="view view-main">
+            <!-- Top Navbar-->
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <!-- We have home navbar without left link-->
+                    <div class="center sliding" id="header-logo">KIEZEL</div>
+                </div>
+            </div>
+            <!-- Pages, because we need fixed-through navbar and toolbar, it has additional appropriate classes-->
+            <div class="pages navbar-through toolbar-through">
+                <!-- Page, data-page contains page name-->
+                <div data-page="index" class="page">
+                    <!-- Scrollable page content-->
+                    <div class="page-content">
+
+                                                        <div class="col-100 list-block-label intro-text">In order to continue customizing this face after the trial you need to sign in or buy a license. Click the button below to purchase.</div>
+
+                                                        <div class="row">
+                                <div class="col-100">
+                                    <a href="/www.kiezelwatchfaces.com/purchase/index_358248597.html" class="button purchase-button external">Purchase package</a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-100">
+                                    <a href="/kiezelwatchfaces.com/watchfaceConfig/login_358248597.html" class="button signin-button external">Sign In</a>
+                                </div>
+                            </div>
+                                                        <div class='content-block-title'>YOU MIGHT ALSO LIKE</div>
+                            <div data-pagination='.swiper-pagination-c3' data-space-between='10' data-slides-per-view='3' class='swiper-container swiper-init ks-carousel-slider preset-thumbnails'>
+                                <div class='swiper-pagination'></div>
+                                <div class='swiper-wrapper'>
+                                                                        <div class='swiper-slide'><a href='/www.kiezelwatchfaces.com/purchase/index_358248597.html' class="external">
+                                        <img src='/www.kiezelwatchfaces.com/images/top/image1c.png'></a>
+                                    </div>
+                                                                        <div class='swiper-slide'><a href='/www.kiezelwatchfaces.com/purchase/index_358248597.html' class="external">
+                                        <img src='/www.kiezelwatchfaces.com/images/top/image2c.png'></a>
+                                    </div>
+                                                                        <div class='swiper-slide'><a href='/www.kiezelwatchfaces.com/purchase/index_358248597.html' class="external">
+                                        <img src='/www.kiezelwatchfaces.com/images/top/image3c.png'></a>
+                                    </div>
+                                                                        <div class='swiper-slide'><a href='/www.kiezelwatchfaces.com/purchase/index_358248597.html' class="external">
+                                        <img src='/www.kiezelwatchfaces.com/images/top/image4c.png'></a>
+                                    </div>
+                                                                        <div class='swiper-slide'><a href='/www.kiezelwatchfaces.com/purchase/index_358248597.html' class="external">
+                                        <img src='/www.kiezelwatchfaces.com/images/top/image5c.png'></a>
+                                    </div>
+                                                                        <div class='swiper-slide'><a href='/www.kiezelwatchfaces.com/purchase/index_358248597.html' class="external">
+                                        <img src='/www.kiezelwatchfaces.com/images/top/image6c.png'></a>
+                                    </div>
+                                                                        <div class='swiper-slide'><a href='/www.kiezelwatchfaces.com/purchase/index_358248597.html' class="external">
+                                        <img src='/www.kiezelwatchfaces.com/images/top/image7c.png'></a>
+                                    </div>
+                                                                        <div class='swiper-slide'><a href='/www.kiezelwatchfaces.com/purchase/index_358248597.html' class="external">
+                                        <img src='/www.kiezelwatchfaces.com/images/top/image8c.png'></a>
+                                    </div>
+                                                                    </div>
+                            </div>
+                        
+            <div class='content-block-title'>PRESET COLORS</div>
+            <div data-pagination='.swiper-pagination-c3' data-space-between='10' data-slides-per-view='3' class='swiper-container swiper-init ks-carousel-slider preset-thumbnails'>
+                <div class='swiper-pagination'></div>
+                <div class='swiper-wrapper'><div class='swiper-slide'><img src='/www.kiezelwatchfaces.com/images/presets/Essential-11.png' onclick='setPresetValues(preset_0)'></div><div class='swiper-slide'><img src='/www.kiezelwatchfaces.com/images/presets/Essential-12.png' onclick='setPresetValues(preset_1)'></div><div class='swiper-slide'><img src='/www.kiezelwatchfaces.com/images/presets/Essential-13.png' onclick='setPresetValues(preset_2)'></div><div class='swiper-slide'><img src='/www.kiezelwatchfaces.com/images/presets/Essential-14.png' onclick='setPresetValues(preset_3)'></div><div class='swiper-slide'><img src='/www.kiezelwatchfaces.com/images/presets/Essential-15.png' onclick='setPresetValues(preset_4)'></div><div class='swiper-slide'><img src='/www.kiezelwatchfaces.com/images/presets/Essential-16.png' onclick='setPresetValues(preset_5)'></div><div class='swiper-slide'><img src='/www.kiezelwatchfaces.com/images/presets/essentialc5.png' onclick='setPresetValues(preset_6)'></div><div class='swiper-slide'><img src='/www.kiezelwatchfaces.com/images/presets/essentialc1.png' onclick='setPresetValues(preset_7)'></div><div class='swiper-slide'><img src='/www.kiezelwatchfaces.com/images/presets/essentialc2.png' onclick='setPresetValues(preset_8)'></div><div class='swiper-slide'><img src='/www.kiezelwatchfaces.com/images/presets/essentialc3.png' onclick='setPresetValues(preset_9)'></div><div class='swiper-slide'><img src='/www.kiezelwatchfaces.com/images/presets/essentialc4.png' onclick='setPresetValues(preset_10)'></div>  </div>
+            </div>
+                <div class="content-block-title hide_for_bgColor">Background Color</div>
+                <div class="list-block hide_for_bgColor">
+                <ul>
+            <li class="hide_for_bgColor">
+                <a href="/kiezelwatchfaces.com/watchfaceConfig/colorpick.html" onclick="setActiveColorPicker('bgColor', 'Background Color')" class="item-link item-content">
+                    <div class="item-media">
+                        <div class="color-swatch" id="bgColor_preview"></div>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title">Background Color</div>
+                    </div>
+                </a>
+            </li>
+        </ul></div><div class="content-block-title">Time</div>
+                <div class="list-block">
+                <ul>
+          <li class="hide_for_timeSeparator"><a href="#" class="item-link smart-select" data-back-on-select="true">
+              <select id="timeSeparator"><option value="0">Colon</option><option value="1">Dot</option>
+          </select>
+          <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">Time separator</div>
+                </div>
+              </div></a></li>
+          <li>
+            <li class="hide_for_timeBgColor">
+                <a href="/kiezelwatchfaces.com/watchfaceConfig/colorpick.html" onclick="setActiveColorPicker('timeBgColor', 'Time Background Color')" class="item-link item-content">
+                    <div class="item-media">
+                        <div class="color-swatch" id="timeBgColor_preview"></div>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title">Time Background Color</div>
+                    </div>
+                </a>
+            </li>
+        
+            <li class="hide_for_timeTxtColor">
+                <a href="/kiezelwatchfaces.com/watchfaceConfig/colorpick.html" onclick="setActiveColorPicker('timeTxtColor', 'Time Text Color')" class="item-link item-content">
+                    <div class="item-media">
+                        <div class="color-swatch" id="timeTxtColor_preview"></div>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title">Time Text Color</div>
+                    </div>
+                </a>
+            </li>
+        
+            <li class="hide_for_timeBoxLineColor">
+                <a href="/kiezelwatchfaces.com/watchfaceConfig/colorpick.html" onclick="setActiveColorPicker('timeBoxLineColor', 'Time box line color')" class="item-link item-content">
+                    <div class="item-media">
+                        <div class="color-swatch" id="timeBoxLineColor_preview"></div>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title">Time box line color</div>
+                    </div>
+                </a>
+            </li>
+        </ul></div><div class="content-block-title">Icon 1</div>
+                <div class="list-block">
+                <ul>
+          <li class="hide_for_showIcon1"><a href="#" class="item-link smart-select" data-back-on-select="true">
+              <select id="showIcon1"><option value="0">Nothing</option><option value="1" selected="selected">Date</option><option value="2">Weather</option><option value="3">Battery</option><option value="4">Steps</option>
+          </select>
+          <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">Show</div>
+                </div>
+              </div></a></li>
+          <li>
+            <li class="hide_for_icon1StrokeColor">
+                <a href="/kiezelwatchfaces.com/watchfaceConfig/colorpick.html" onclick="setActiveColorPicker('icon1StrokeColor', 'Icon stroke color')" class="item-link item-content">
+                    <div class="item-media">
+                        <div class="color-swatch" id="icon1StrokeColor_preview"></div>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title">Icon stroke color</div>
+                    </div>
+                </a>
+            </li>
+        
+            <li class="hide_for_icon1FillColor">
+                <a href="/kiezelwatchfaces.com/watchfaceConfig/colorpick.html" onclick="setActiveColorPicker('icon1FillColor', 'Icon fill color')" class="item-link item-content">
+                    <div class="item-media">
+                        <div class="color-swatch" id="icon1FillColor_preview"></div>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title">Icon fill color</div>
+                    </div>
+                </a>
+            </li>
+        
+            <li class="hide_for_icon1TextColor">
+                <a href="/kiezelwatchfaces.com/watchfaceConfig/colorpick.html" onclick="setActiveColorPicker('icon1TextColor', 'Icon text color')" class="item-link item-content">
+                    <div class="item-media">
+                        <div class="color-swatch" id="icon1TextColor_preview"></div>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title">Icon text color</div>
+                    </div>
+                </a>
+            </li>
+        </ul></div><div class="content-block-title">Icon 2</div>
+                <div class="list-block">
+                <ul>
+          <li class="hide_for_showIcon2"><a href="#" class="item-link smart-select" data-back-on-select="true">
+              <select id="showIcon2"><option value="0">Nothing</option><option value="1">Date</option><option value="2" selected="selected">Weather</option><option value="3">Battery</option><option value="4">Steps</option>
+          </select>
+          <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">Show</div>
+                </div>
+              </div></a></li>
+          <li>
+            <li class="hide_for_icon2StrokeColor">
+                <a href="/kiezelwatchfaces.com/watchfaceConfig/colorpick.html" onclick="setActiveColorPicker('icon2StrokeColor', 'Icon stroke color')" class="item-link item-content">
+                    <div class="item-media">
+                        <div class="color-swatch" id="icon2StrokeColor_preview"></div>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title">Icon stroke color</div>
+                    </div>
+                </a>
+            </li>
+        
+            <li class="hide_for_icon2FillColor">
+                <a href="/kiezelwatchfaces.com/watchfaceConfig/colorpick.html" onclick="setActiveColorPicker('icon2FillColor', 'Icon fill color')" class="item-link item-content">
+                    <div class="item-media">
+                        <div class="color-swatch" id="icon2FillColor_preview"></div>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title">Icon fill color</div>
+                    </div>
+                </a>
+            </li>
+        
+            <li class="hide_for_icon2TextColor">
+                <a href="/kiezelwatchfaces.com/watchfaceConfig/colorpick.html" onclick="setActiveColorPicker('icon2TextColor', 'Icon text color')" class="item-link item-content">
+                    <div class="item-media">
+                        <div class="color-swatch" id="icon2TextColor_preview"></div>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title">Icon text color</div>
+                    </div>
+                </a>
+            </li>
+        </ul></div>
+                <div class="content-block-title hide_for_batteryInsideColor">Battery Fill Color</div>
+                <div class="list-block hide_for_batteryInsideColor">
+                <ul>
+            <li class="hide_for_batteryInsideColor">
+                <a href="/kiezelwatchfaces.com/watchfaceConfig/colorpick.html" onclick="setActiveColorPicker('batteryInsideColor', 'Battery Fill Color')" class="item-link item-content">
+                    <div class="item-media">
+                        <div class="color-swatch" id="batteryInsideColor_preview"></div>
+                    </div>
+                    <div class="item-inner">
+                        <div class="item-title">Battery Fill Color</div>
+                    </div>
+                </a>
+            </li>
+        </ul></div><div class="content-block-title">Animated Snow</div>
+                <div class="list-block">
+                <ul>
+          <li class="hide_for_snowBehaviour"><a href="#" class="item-link smart-select" data-back-on-select="true">
+              <select id="snowBehaviour"><option value="0">Off</option><option value="1">Animate only once at start</option><option value="2">Constant snow falling on shake</option><option value="3">Snow globe on shake</option>
+          </select>
+          <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">Snowing Mode</div>
+                </div>
+              </div></a></li>
+          <li>
+          <li class="hide_for_snowMountains">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Snow Mountains on Time</div>
+                <div class="item-input-right">
+                  <label class="label-switch">
+                    <input type="checkbox" id="snowMountains">
+                    <div class="checkbox"></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </li></ul></div><div class="content-block-title hide_for_weatherSection">Weather</div>
+                <div class="list-block hide_for_weatherSection">
+                <ul>
+          <li class="hide_for_tempUnit"><a href="#" class="item-link smart-select" data-back-on-select="true">
+              <select id="tempUnit"><option value="1" selected="selected">Fahrenheit</option><option value="2">Celsius</option>
+          </select>
+          <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">Temperature unit</div>
+                </div>
+              </div></a></li>
+          <li>
+          <li class="hide_for_wtrUpdate"><a href="#" class="item-link smart-select" data-back-on-select="true">
+              <select id="wtrUpdate"><option value="5">5 minutes</option><option value="15">15 minutes</option><option value="30">30 minutes</option><option value="60">hour</option><option value="120" selected="selected">2 hours</option>
+          </select>
+          <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">Update weather info every</div>
+                </div>
+              </div></a></li>
+          <li>
+          <li class="hide_for_wtrProvider"><a href="#" class="item-link smart-select" data-back-on-select="true">
+              <select id="wtrProvider"><option value="0">OpenWeatherMap</option><option value="1">Weather Underground</option><option value="2">Yahoo Weather</option>
+          </select>
+          <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">Weather provider</div>
+                </div>
+              </div></a></li>
+          <li>
+          <li class="hide_for_wtrWundergroundKey">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Weather Underground API key</div>
+                <div class="item-input-right item-after">
+                  <input type="text" id="wtrWundergroundKey" placeholder="Enter API Key">
+                </div>
+              </div>
+            </div>
+          </li>
+        
+          <li class="hide_for_wtrUseFixedLocation">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Choose fixed location</div>
+                <div class="item-input-right">
+                  <label class="label-switch">
+                    <input type="checkbox" id="wtrUseFixedLocation">
+                    <div class="checkbox"></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="hide_for_wtrLocation">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Location</div>
+                <div class="item-input-right item-after">
+                  <input type="text" id="wtrLocation" placeholder="Enter Location">
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul></div><div class="content-block-title">Bluetooth Status</div>
+                <div class="list-block">
+                <ul>
+          <li class="hide_for_btVibrate"><a href="#" class="item-link smart-select" data-back-on-select="true">
+              <select id="btVibrate"><option value="0">No vibration</option><option value="1">Short vibration</option><option value="2">Long vibration</option>
+          </select>
+          <div class="item-content">
+                <div class="item-inner">
+                  <div class="item-title">Vibrate on disconnect</div>
+                </div>
+              </div></a></li>
+          <li>
+          <li class="hide_for_btInvert">
+            <div class="item-content">
+              <div class="item-inner">
+                <div class="item-title">Show in B/W on disconnect</div>
+                <div class="item-input-right">
+                  <label class="label-switch">
+                    <input type="checkbox" id="btInvert">
+                    <div class="checkbox"></div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </li></ul></div>                    </div>
+                </div>
+            </div>
+
+                            <!-- Show the save button -->
+                <!-- Bottom Toolbar-->
+                <div class="toolbar">
+                    <div class="toolbar-inner"><a href="#" class="link"></a><a href="#" class="link" id="save">Save<span id="trialCountDownDisplay" style="margin-left: 10px; font-size: small"></span></a><a href="#" class="link"></a></div>
+                </div>
+                    </div>
+        <div id="googleAttributions"></div>
+    </div>
+
+    <!-- Path to Framework7 Library JS-->
+    <script type="text/javascript" src="/kiezelwatchfaces.com/watchfaceConfig/js/framework7.js"></script>
+
+    <!-- Path to your app js-->
+    <script type="text/javascript" src="/kiezelwatchfaces.com/watchfaceConfig/js/my-app.js"></script>
+
+    <script>
+<!--<pre>-->
+        var preset_0 = {"bgColor":"#aa0000","timeBgColor":"#FFFFFF","timeTxtColor":"#000000","timeBoxLineColor":"#000000","icon1StrokeColor":"#000000","icon1FillColor":"#FFFFFF","icon1TextColor":"#FFFFFF","icon2StrokeColor":"#000000","icon2FillColor":"#FFFFFF","icon2TextColor":"#FFFFFF"};
+var preset_1 = {"bgColor":"#005555","timeBgColor":"#FFFFFF","timeTxtColor":"#000000","timeBoxLineColor":"#000000","icon1StrokeColor":"#000000","icon1FillColor":"#FFFFFF","icon1TextColor":"#FFFFFF","icon2StrokeColor":"#000000","icon2FillColor":"#FFFFFF","icon2TextColor":"#FFFFFF"};
+var preset_2 = {"bgColor":"#aaffff","timeBgColor":"#FFFFFF","timeTxtColor":"#000000","timeBoxLineColor":"#000000","icon1StrokeColor":"#000000","icon1FillColor":"#FFFFFF","icon1TextColor":"#000000","icon2StrokeColor":"#000000","icon2FillColor":"#FFFFFF","icon2TextColor":"#000000"};
+var preset_3 = {"bgColor":"#55aaff","timeBgColor":"#FFFFFF","timeTxtColor":"#000000","timeBoxLineColor":"#000000","icon1StrokeColor":"#000000","icon1FillColor":"#FFFFFF","icon1TextColor":"#000000","icon2StrokeColor":"#000000","icon2FillColor":"#FFFFFF","icon2TextColor":"#000000"};
+var preset_4 = {"bgColor":"#005500","timeBgColor":"#FFFFFF","timeTxtColor":"#000000","timeBoxLineColor":"#000000","icon1StrokeColor":"#000000","icon1FillColor":"#FFFFFF","icon1TextColor":"#FFFFFF","icon2StrokeColor":"#000000","icon2FillColor":"#FFFFFF","icon2TextColor":"#FFFFFF"};
+var preset_5 = {"bgColor":"#550000","timeBgColor":"#FFFFFF","timeTxtColor":"#000000","timeBoxLineColor":"#000000","icon1StrokeColor":"#000000","icon1FillColor":"#FFFFFF","icon1TextColor":"#FFFFFF","icon2StrokeColor":"#000000","icon2FillColor":"#FFFFFF","icon2TextColor":"#FFFFFF"};
+var preset_6 = {"bgColor":"#ff5555","timeBgColor":"#FFFFFF","timeTxtColor":"#000000","timeBoxLineColor":"#000000","icon1StrokeColor":"#000000","icon1FillColor":"#FFFFFF","icon1TextColor":"#FFFFFF","icon2StrokeColor":"#000000","icon2FillColor":"#FFFFFF","icon2TextColor":"#FFFFFF"};
+var preset_7 = {"bgColor":"#FFAA00","timeBgColor":"#FFFFFF","timeTxtColor":"#000000","timeBoxLineColor":"#000000","icon1StrokeColor":"#000000","icon1FillColor":"#FFFFFF","icon1TextColor":"#FFFFFF","icon2StrokeColor":"#000000","icon2FillColor":"#FFFFFF","icon2TextColor":"#FFFFFF"};
+var preset_8 = {"bgColor":"#00aaff","timeBgColor":"#FFFFFF","timeTxtColor":"#000000","timeBoxLineColor":"#000000","icon1StrokeColor":"#000000","icon1FillColor":"#FFFFFF","icon1TextColor":"#FFFFFF","icon2StrokeColor":"#000000","icon2FillColor":"#FFFFFF","icon2TextColor":"#FFFFFF"};
+var preset_9 = {"bgColor":"#5500ff","timeBgColor":"#000000","timeTxtColor":"#FFFFFF","timeBoxLineColor":"#FFFFFF","icon1StrokeColor":"#FFFFFF","icon1FillColor":"#000000","icon1TextColor":"#FFFFFF","icon2StrokeColor":"#FFFFFF","icon2FillColor":"#000000","icon2TextColor":"#FFFFFF"};
+var preset_10 = {"bgColor":"#005555","timeBgColor":"#000000","timeTxtColor":"#FFFFFF","timeBoxLineColor":"#FFFFFF","icon1StrokeColor":"#FFFFFF","icon1FillColor":"#000000","icon1TextColor":"#FFFFFF","icon2StrokeColor":"#FFFFFF","icon2FillColor":"#000000","icon2TextColor":"#FFFFFF"};
+var batteryInsideColor_values = [];
+
+function batteryInsideColor_value_check() {
+                    var success = false;
+                    for (var i = 0; i < batteryInsideColor_values.length; i++) {
+                        if (batteryInsideColor_values[i] == '3') {
+                            success = true;
+                            $('.hide_for_batteryInsideColor').show()
+                            break;
+                        }
+                    }
+
+                    if (!success) {
+                        $('.hide_for_batteryInsideColor').hide();
+                    }
+                }
+
+var resolvedWeatherCoords = {};
+var weatherSection_values = [];
+
+function weatherSection_value_check() {
+                    var success = false;
+                    for (var i = 0; i < weatherSection_values.length; i++) {
+                        if (weatherSection_values[i] == '2') {
+                            success = true;
+                            $('.hide_for_weatherSection').show()
+                            break;
+                        }
+                    }
+
+                    if (!success) {
+                        $('.hide_for_weatherSection').hide();
+                    }
+                }
+        //variable that will hold all selected colors
+        var selectedColors = [];
+
+                var trialDurationInSeconds = 86400;
+        
+        $().ready(function () {
+            controltypes['bgColor'] = 'colorpicker';
+setControlValue('bgColor', EightBitColorToHex(194));
+controltypes['timeSeparator'] = 'dropdown';
+controltypes['timeBgColor'] = 'colorpicker';
+setControlValue('timeBgColor', EightBitColorToHex(255));
+controltypes['timeTxtColor'] = 'colorpicker';
+setControlValue('timeTxtColor', EightBitColorToHex(192));
+controltypes['timeBoxLineColor'] = 'colorpicker';
+setControlValue('timeBoxLineColor', EightBitColorToHex(192));
+controltypes['showIcon1'] = 'dropdown';
+controltypes['icon1StrokeColor'] = 'colorpicker';
+setControlValue('icon1StrokeColor', EightBitColorToHex(192));
+controltypes['icon1FillColor'] = 'colorpicker';
+setControlValue('icon1FillColor', EightBitColorToHex(255));
+controltypes['icon1TextColor'] = 'colorpicker';
+setControlValue('icon1TextColor', EightBitColorToHex(255));
+controltypes['showIcon2'] = 'dropdown';
+controltypes['icon2StrokeColor'] = 'colorpicker';
+setControlValue('icon2StrokeColor', EightBitColorToHex(192));
+controltypes['icon2FillColor'] = 'colorpicker';
+setControlValue('icon2FillColor', EightBitColorToHex(255));
+controltypes['icon2TextColor'] = 'colorpicker';
+setControlValue('icon2TextColor', EightBitColorToHex(255));
+controltypes['batteryInsideColor'] = 'colorpicker';
+setControlValue('batteryInsideColor', EightBitColorToHex(213));
+batteryInsideColor_values[0] = $('#showIcon1').val();
+
+$('#showIcon1').change(function() {
+                                                        batteryInsideColor_values[0] = $('#showIcon1').val();
+                                                        batteryInsideColor_value_check();
+                                                    });
+batteryInsideColor_values[1] = $('#showIcon2').val();
+
+$('#showIcon2').change(function() {
+                                                        batteryInsideColor_values[1] = $('#showIcon2').val();
+                                                        batteryInsideColor_value_check();
+                                                    });
+
+batteryInsideColor_value_check();
+controltypes['snowBehaviour'] = 'dropdown';
+controltypes['snowMountains'] = 'checkbox';
+controltypes['tempUnit'] = 'dropdown';
+controltypes['wtrUpdate'] = 'dropdown';
+controltypes['wtrProvider'] = 'dropdown';
+controltypes['wtrWundergroundKey'] = 'textbox';
+
+                if ($('#wtrProvider').val() != '1') {
+                    $('.hide_for_wtrWundergroundKey').hide();
+                }
+            
+
+$('#wtrProvider').change(function() {
+                if ($(this).val() == '1') {
+                    $('.hide_for_wtrWundergroundKey').show()
+                }
+                else {
+                    $('.hide_for_wtrWundergroundKey').hide();
+                }
+            });
+controltypes['wtrUseFixedLocation'] = 'checkbox';
+controltypes['wtrLocation'] = 'textbox';
+
+                if (!$('#wtrUseFixedLocation').is(':checked')) {
+                    $('.hide_for_wtrLocation').hide();
+                }
+            
+
+$('#wtrUseFixedLocation').change(function() {
+                if ($(this).is(':checked')) {
+                    $('.hide_for_wtrLocation').show()
+                }
+                else {
+                    $('.hide_for_wtrLocation').hide();
+                }
+            });
+weatherSection_values[0] = $('#showIcon1').val();
+
+$('#showIcon1').change(function() {
+                                                        weatherSection_values[0] = $('#showIcon1').val();
+                                                        weatherSection_value_check();
+                                                    });
+weatherSection_values[1] = $('#showIcon2').val();
+
+$('#showIcon2').change(function() {
+                                                        weatherSection_values[1] = $('#showIcon2').val();
+                                                        weatherSection_value_check();
+                                                    });
+
+weatherSection_value_check();
+controltypes['btVibrate'] = 'dropdown';
+controltypes['btInvert'] = 'checkbox';
+
+                        var display = document.querySelector('#trialCountDownDisplay');
+            startTrialExpirationTimer(trialDurationInSeconds, display);
+            
+            //get a callback when the colorpicker page is loaded
+            myApp.onPageBeforeAnimation("colorpick", function (page) {
+                //set the correct title so the user knows for which item he/she is picking a color
+                var maxLength = 30;
+                if (activeColorPickerOptionName.length > maxLength) {
+                    $('#colorPickerTitle').text(activeColorPickerOptionName.substring(0, maxLength - 3) + "...");
+                }
+                else {
+                    $('#colorPickerTitle').text(activeColorPickerOptionName);
+                }
+            });
+
+            $(':text').focus(function(){
+                $(this).one('mouseup', function(event){
+                    event.preventDefault();
+                }).select();
+            });
+        });
+
+                function initGeoCompleteService() {
+            var places_autocomplete_service = new google.maps.places.AutocompleteService();
+            var places_service = new google.maps.places.PlacesService(document.getElementById('googleAttributions'));
+
+            
+
+             $('#wtrLocation').autocomplete({
+                minChars: 1,
+                lookup: function (query, done) {
+                    //lookup the place predictions
+                    places_autocomplete_service.getPlacePredictions(
+                        { input: query, types: ['(cities)'] },
+                        function(predictions, status) {
+                            //call autocomplete box callback
+                            done({
+                                suggestions: $.map(predictions, function(prediction) {
+                                    return { value: prediction.description, data: prediction };
+                                })
+                            });
+                        });
+                },
+                onSelect: function (suggestion) {
+                    //get selected place details
+                    places_service.getDetails({ placeId: suggestion.data.place_id }, function(place, status) {
+                            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                                resolvedWeatherCoords = { lat: place.geometry.location.lat(), lon: place.geometry.location.lng() };
+                            }
+                            else {
+                                resolvedWeatherCoords = {};
+                            }
+                        });
+                }
+             });
+        
+        }
+        
+        //catch save button click
+        $("#save").click(function() {
+            try {
+                ga('send', 'event', 'button', 'click', 'save');
+            }
+            catch (e) {}
+
+            //json containing the config settings
+                        var configJson = {
+                "email": null,"licenseCode": "",
+                "licenseCheck": ""            };
+            
+            
+            //add all color settings
+            for (var key in selectedColors) {
+                configJson[key] = selectedColors[key];
+            }
+
+            //put all config settings in the json object
+            configJson.timeSeparator = getControlValue('timeSeparator');
+configJson.showIcon1 = getControlValue('showIcon1');
+configJson.showIcon2 = getControlValue('showIcon2');
+configJson.snowBehaviour = getControlValue('snowBehaviour');
+configJson.snowMountains = getControlValue('snowMountains');
+configJson.tempUnit = getControlValue('tempUnit');
+configJson.wtrUpdate = getControlValue('wtrUpdate');
+configJson.wtrProvider = getControlValue('wtrProvider');
+configJson.wtrWundergroundKey = getControlValue('wtrWundergroundKey');
+configJson.wtrUseFixedLocation = getControlValue('wtrUseFixedLocation');
+configJson.wtrLocation = getControlValue('wtrLocation');
+configJson.resolvedWeatherCoords = JSON.stringify(resolvedWeatherCoords);
+configJson.btVibrate = getControlValue('btVibrate');
+configJson.btInvert = getControlValue('btInvert');
+
+                        //add trial settings
+            configJson.isInTrial = true;
+            configJson.trialDurationInSeconds = trialDurationInSeconds;
+            
+            var configSettingsAsJson = JSON.stringify(configJson);
+
+                        // to allow debugging with cloudpebble
+            console.log(configSettingsAsJson);
+            var return_to = getQueryParam('return_to', 'pebblejs://close#');
+            //var encodedData = encodeURIComponent(configSettingsAsJson).replace(/%2B/g, "%252B");
+			var encodedData = encodeURIComponent(configSettingsAsJson);
+            //console.log(encodedData);
+            document.location = return_to + encodedData;
+                    });
+
+        $('#loginButton').on('click', function() {
+            try {
+                ga('send', 'event', 'button', 'click', 'login');
+            }
+            catch (e) {}
+        });
+        $('#purchaseButton').on('click', function() {
+            try {
+                ga('send', 'event', 'button', 'click', 'purchase');
+            }
+            catch (e) {}
+        });
+
+        function getQueryParam(variable, default_) {
+            var query = location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (pair[0] == variable)
+                    return decodeURIComponent(pair[1]);
+            }
+            return default_ || false;
+        }
+
+        var activeColorPicker = null;
+        var activeColorPickerOptionName = null;
+        function setActiveColorPicker(pickerId, optionName) {
+            activeColorPicker = pickerId;
+            activeColorPickerOptionName = optionName;
+        }
+
+        function setColor(color) {
+            //store selected color
+            selectedColors[activeColorPicker] = hexToEightBitColor(color);
+
+            //also show to the user
+            $('#' + activeColorPicker + '_preview').css('background-color', EightBitColorToHex(selectedColors[activeColorPicker]));
+        }
+
+        function hexToEightBitColor(hex) {
+            // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+            var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+            hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+                return r + r + g + g + b + b;
+            });
+
+            var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+            //convert 32 bits rgb value to 8 bits argb color integer value
+            return 192 + ((parseInt(result[1], 16) / 85) * 16) + ((parseInt(result[2], 16) / 85) * 4) + (parseInt(result[3], 16) / 85);
+        }
+
+        function EightBitColorToHex(color) {
+            color -= 192;   //remove alpha channel
+            var eightBitR = Math.floor(color / 16);
+            color -= (eightBitR * 16);
+            var eightBitG = Math.floor(color / 4);
+            color -= (eightBitG * 4);
+            var eightBitB = color;
+
+            //convert to hex
+            return rgbToHex(eightBitR*85, eightBitG*85, eightBitB*85);
+        }
+
+        function componentToHex(c) {
+            var hex = c.toString(16);
+            return hex.length == 1 ? "0" + hex : hex;
+        }
+
+        function rgbToHex(r, g, b) {
+            return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+        }
+
+        //function value getter and setter helpers
+        var controltypes = {};
+        function getControlValue(controlId) {
+            if (controlId && controltypes[controlId]) {
+                switch(controltypes[controlId]) {
+                    case "checkbox":
+                        return $('#' + controlId).prop('checked');
+                    case "dropdown":
+                    case "textbox":
+                        return $('#' + controlId).val();
+                    case "colorpicker":
+                        return selectedColors[controlId];
+                }
+            }
+        }
+
+        function setControlValue(controlId, value) {
+            if (controlId && controltypes[controlId]) {
+                switch (controltypes[controlId]) {
+                    case "checkbox":
+                        $('#' + controlId).prop('checked', value);
+                        break;
+                    case "dropdown":
+                        $('#' + controlId + ' option[value=\'' + value + '\']').prop('selected', true);
+                        break;
+                    case "textbox":
+                        $('#' + controlId).val(value);
+                        break;
+                    case "colorpicker":
+                        selectedColors[controlId] = hexToEightBitColor(value);
+                        $('#' + controlId + '_preview').css('background-color', value);
+                        break;
+                }
+            }
+        }
+
+        //set all preset values in the set
+        function setPresetValues(presetValues) {
+            for (var controlId in presetValues) {
+                if (presetValues.hasOwnProperty(controlId)) {
+                    setControlValue(controlId, presetValues[controlId]);
+                }
+            }
+        }
+
+        //trial countdown timer!
+        //http://stackoverflow.com/questions/20618355/the-simplest-possible-javascript-countdown-timer
+        function startTrialExpirationTimer(duration, display) {
+            var start = Date.now(),
+                diff,
+                hours,
+                minutes;
+            function timer() {
+                // get the number of seconds that have elapsed since
+                // startTimer() was called
+                diff = duration - (((Date.now() - start) / 1000) | 0);
+                trialDurationInSeconds = diff;      //store the final duration to send to the watch!
+
+                // does the same job as parseInt truncates the float
+                hours = (diff / 3600) | 0;
+                diff -= (hours*3600);
+                minutes = (diff / 60) | 0;
+
+                hours = hours < 10 ? "0" + hours : hours;
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+
+                display.textContent = "(trial ends: " + hours + "hr " + minutes + "m)";
+            };
+            // we don't want to wait a full second before the timer starts
+            timer();
+            setInterval(timer, 60000);
+        }
+    </script>
+    <!--</pre>
+    </div>-->
+
+            <script type="text/javascript" src="/maps.googleapis.com/maps/api/js_1256387817.js" async="" defer=""></script>
+    </body>
+</html>
+

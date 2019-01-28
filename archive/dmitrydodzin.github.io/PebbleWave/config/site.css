@@ -1,0 +1,16 @@
+
+.item.not-supported{
+	color: lightgray;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.item.not-supported:before{
+	content: attr(version);
+	color: #333333;
+}
+
+.item.not-supported > *{
+	display: none;
+}

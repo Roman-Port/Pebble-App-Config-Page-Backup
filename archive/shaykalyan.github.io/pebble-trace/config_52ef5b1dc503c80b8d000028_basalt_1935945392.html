@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Configure Trace</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Configure Trace</h1>
+      </div>
+
+      <div data-role="content">
+
+        <p><strong>Note:</strong> New features require the latest version of the watch face to be installed. Please ensure you have v1.3.1.</p>
+        <hr><hr>
+
+        <div data-role="fieldcontain">
+          <label for="KEY_INVERTED">Invert - White On Black Background</label>
+          <select name="KEY_INVERTED" id="KEY_INVERTED" data-role="slider">
+            <option value="off">Off</option>
+            <option value="on">On</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="KEY_VIBRATE_5">Vibrate - Every 5 Minutes</label>
+          <select name="KEY_VIBRATE_5" id="KEY_VIBRATE_5" data-role="slider">
+            <option value="off">Off</option>
+            <option value="on">On</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="KEY_FLICK">Flick View</label>
+          <select name="KEY_FLICK" id="KEY_FLICK" data-role="slider">
+            <option value="off">Off</option>
+            <option value="on">On</option>
+          </select>
+        </div>
+
+        <div data-role="collapsible">
+          <h3>Flick View Styles: </h3>
+          <div class="fieldcontain">
+            <label for="KEY_FLICK_0">Style A</label>
+            <input type="radio" name="KEY_FLICK_STYLE" id="KEY_FLICK_0" value="0">
+            <img src="http://xshay.github.io/pebble-trace/other/screenshot_style_a.png" alt="Style_A">
+          </div>
+          <div class="fieldcontain">
+            <label for="KEY_FLICK_1">Style B</label>
+            <input type="radio" name="KEY_FLICK_STYLE" id="KEY_FLICK_1" value="1">
+            <img src="http://xshay.github.io/pebble-trace/other/screenshot_style_b.png" alt="Style_B">
+          </div>
+
+          <div class="fieldcontain">
+            <label for="KEY_FLICK_2">Style C</label>
+            <input type="radio" name="KEY_FLICK_STYLE" id="KEY_FLICK_2" value="2">
+            <img src="http://xshay.github.io/pebble-trace/other/screenshot_style_c.png" alt="Style_C">
+          </div>
+        </div>
+
+
+
+
+        <div class="ui-body-a ui-body-b" data-position="fixed">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+            </fieldset>
+        </div>
+      </div>
+    </div>
+
+    <script>
+
+      function saveOptions() {
+        var options = {
+          'KEY_INVERTED'    : $("#KEY_INVERTED").val(),
+          'KEY_VIBRATE_5'   : $("#KEY_VIBRATE_5").val(),
+          'KEY_FLICK'       : $("#KEY_FLICK").val(),
+          'KEY_FLICK_STYLE' : $('input[name="KEY_FLICK_STYLE"]:checked').val()
+        }
+        return options;
+      }
+
+      function getUrlOptions() {
+          var params = {};
+          var bits = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/g, function (match, key, value) {
+            params[key] = value;
+          });
+          return params;
+      }
+
+      function setUrlOptions() {
+        var params = getUrlOptions();
+
+        for (key in params) {
+          var value = decodeURIComponent(params[key]);
+          if (key == "KEY_FLICK_STYLE") {
+            $("#KEY_FLICK_" + value).prop('checked', 'checked').checkboxradio("refresh");
+          } else {
+            var field = $("#"+key);
+            if (field !== null) {
+              field.val(value).slider("refresh");
+            }
+          }
+        }
+      }
+
+      $(document).ready(function() {
+        setUrlOptions();
+
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+          console.log(JSON.stringify(saveOptions()));
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+
+      });
+    </script>
+  </body>
+</html>

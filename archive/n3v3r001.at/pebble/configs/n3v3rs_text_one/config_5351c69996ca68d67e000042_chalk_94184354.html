@@ -1,0 +1,155 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Einstellungen</title>
+	<link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+	<script src="/code.jquery.com//jquery-1.js"></script>
+	<script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+</head>
+
+<body>
+	<div data-role="page" id="main">
+		<div data-role="header" class="jqm-header">
+			<h1>Einstellungen</h1>
+		</div>
+
+		<div data-role="content">
+
+			<!--
+			<div data-role="fieldcontain">
+			<label for="KEY_INVERTED">Invert (black on white)</label>
+			<select name="KEY_INVERTED" id="KEY_INVERTED" data-role="slider">
+			<option value="off">Nein</option>
+			<option value="on">Ja</option>
+			</select>
+			</div>
+			-->
+			
+			<div data-role="fieldcontain">
+				<label for="KEY_DATE">Datum anzeigen</label>
+				<select name="KEY_DATE" id="KEY_DATE" data-role="slider">
+					<option value="off">Nein</option>
+					<option value="on">Ja</option>
+				</select>
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="KEY_WEEKDAY">Wochentag anzeigen</label>
+				<select name="KEY_WEEKDAY" id="KEY_WEEKDAY" data-role="slider">
+					<option value="off">Nein</option>
+					<option value="on">Ja</option>
+				</select>
+			</div>
+
+			<hr>
+			
+			<div data-role="fieldcontain">
+				<label for="KEY_BLUETOOTH">Bluetooth Icon</label>
+				<select name="KEY_BLUETOOTH" id="KEY_BLUETOOTH" data-role="slider">
+					<option value="off">Nein</option>
+					<option value="on">Ja</option>
+				</select>
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="KEY_VIBE">Vibrieren bei Bluetooth verlust</label>
+				<select name="KEY_VIBE" id="KEY_VIBE" data-role="slider">
+					<option value="off">Nein</option>
+					<option value="on">Ja</option>
+				</select>
+			</div>
+
+			<hr>
+			
+			<div data-role="fieldcontain">
+				<label for="KEY_BATT_IMG">Batterieanzeige</label>
+				<select name="KEY_BATT_IMG" id="KEY_BATT_IMG" data-role="slider">
+					<option value="off">Nein</option>
+					<option value="on">Ja</option>
+				</select>
+			</div>
+
+			<hr>
+			
+			<div data-role="fieldcontain">
+				<label for="KEY_TEXT_WIEN">"viertel elf" f&uuml;r 10:15</label>
+				<select name="KEY_TEXT_WIEN" id="KEY_TEXT_WIEN" data-role="slider">
+					<option value="off">Nein</option>
+					<option value="on">Ja</option>
+				</select>
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="KEY_TEXT_NRW">"viertel vor elf" f&uuml;r 10:45</label>
+				<select name="KEY_TEXT_NRW" id="KEY_TEXT_NRW" data-role="slider">
+					<option value="off">Nein</option>
+					<option value="on">Ja</option>
+				</select>
+			</div>		
+		
+			<div class="ui-body ui-body-b">
+				<fieldset class="ui-grid-a">
+					<div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+					<div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+				</fieldset>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function saveOptions() {
+			var options = {
+				'KEY_INVERTED': $("#KEY_INVERTED").val(),
+				'KEY_BLUETOOTH': $("#KEY_BLUETOOTH").val(),
+				'KEY_VIBE': $("#KEY_VIBE").val(),
+				'KEY_BATT_IMG': $("#KEY_BATT_IMG").val(),
+				'KEY_TEXT_NRW': $("#KEY_TEXT_NRW").val(),
+				'KEY_TEXT_WIEN': $("#KEY_TEXT_WIEN").val(),
+				'KEY_DATE': $("#KEY_DATE").val(),
+				'KEY_WEEKDAY': $("#KEY_WEEKDAY").val()
+			}
+			return options;
+		}
+
+		function getUrlOptions() {
+			var params = {};
+			var bits = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/g, function (match, key, value) {
+				params[key] = value;
+			});
+			return params;
+		}
+
+		function setUrlOptions() {
+			var params = getUrlOptions();
+			for (key in params) {
+				var field = $("#"+key);
+				if (field !== null) {
+					var value = decodeURIComponent(params[key]);
+					field.val(value).slider("refresh");
+				}
+			}
+		}
+
+		$().ready(function() {
+			setUrlOptions();
+
+			$("#b-cancel").click(function() {
+				console.log("Cancel");
+				document.location = "pebblejs://close";
+			});
+
+			$("#b-submit").click(function() {
+				console.log("Submit");
+
+				var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+				console.log("Warping to: " + location);
+				console.log(location);
+				document.location = location;
+			});
+		});
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Slate Example Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/cdn.rawgit.com/KiwiLab/Fruit/master/css/slate.css'>
+  <script src='/cdn.rawgit.com/KiwiLab/Fruit/master/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Orange</h1>
+    
+    <div class='item-container'>
+      <div class='item-container-header'>Digital clock</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Color Text
+          <input id='color_label_id' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+         
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='item-container-header'>Analog clock</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Enable arrow
+          <input id='analog_id' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Second hand
+          <input id='second_id' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Hour hand color
+          <input id='color_hour_id' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Minute hand color
+          <input id='color_minute_id' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Second hand color
+          <input id='color_second_id' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+         
+      </div>
+    </div>
+    
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE'>
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='button-container'>
+        <label class='item'>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+	<input type="hidden" name="cmd" value="_donations">
+	<input type="hidden" name="business" value="spoonman@list.ru">
+	<input type="hidden" name="lc" value="US">
+	<input type="hidden" name="no_note" value="0">
+	<input type="hidden" name="currency_code" value="USD">
+	<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+	<input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+	<img alt="" border="0" src="/www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+	</form>
+        </label>
+      </div>
+    </div>
+    
+
+    
+  </body>
+  <script>
+  function getConfigData() {
+    var analog = document.getElementById('analog_id');
+    var second = document.getElementById('second_id');
+    var color_label = document.getElementById('color_label_id');
+    var color_hour = document.getElementById('color_hour_id');
+    var color_minute = document.getElementById('color_minute_id');
+    var color_second = document.getElementById('color_second_id');
+ 
+    var options = {
+      'analog_set': analog.checked,
+      'second_set': second.checked,
+      'color_label_set': color_label.value,
+      'color_hour_set': color_hour.value,
+      'color_minute_set': color_minute.value,
+      'color_second_set': color_second.value
+    };
+
+    // Save for next launch
+    localStorage['analog_save'] = options['analog_set'];
+    localStorage['second_save'] = options['second_set'];
+    localStorage['color_label_save'] = options['color_label_set'];
+    localStorage['color_hour_save'] = options['color_hour_set'];
+    localStorage['color_minute_save'] = options['color_minute_set'];
+    localStorage['color_second_save'] = options['color_second_set'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var analog = document.getElementById('analog_id');
+    var second = document.getElementById('second_id');
+    var color_label = document.getElementById('color_label_id');
+    var color_hour = document.getElementById('color_hour_id');
+    var color_minute = document.getElementById('color_minute_id');
+    var color_second = document.getElementById('color_second_id');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['analog_save']) {
+      analog.checked = JSON.parse(localStorage['analog_save']);
+      second.checked = JSON.parse(localStorage['second_save']);
+   	color_label.value = localStorage['color_label_save'];
+    color_hour.value = localStorage['color_hour_save'];
+    color_minute.value = localStorage['color_minute_save'];
+    color_second.value = localStorage['color_second_save'];
+    }
+  })();
+  </script>
+</html>

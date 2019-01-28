@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel='stylesheet' type='text/css' href='bower_components/pebble-slate/dist/css/slate.min.css'>
+  <link rel='stylesheet' type='text/css' href='css/style.css'>
+</head>
+<body>
+  <div class='item-container'>
+    <h1 class='title'>Watchface<br>Configuration Page</h1>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <div class='item'>
+        Use this configuration page to choose the settings you would like
+        applied to this app.
+      </div>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Customizability</div>
+    <div class='item-container-content'>
+      <label class='item'>
+        Battery Background Color
+        <input id='backgroundColorPicker' type='text' class='item-color item-color-sunny' value='#000000'>
+      </label>
+      
+      <label class='item'>
+        Date Background Color
+        <input id='backgroundColorPicker1' type='text' class='item-color item-color-sunny' value='#000000'>
+      </label>
+
+      <label class='item'>
+        Time Background Color
+        <input id='backgroundColorPicker2' type='text' class='item-color item-color-sunny' value='#000000'>
+      </label>
+
+      <label class='item'>
+        Health Background Color
+        <input id='backgroundColorPicker3' type='text' class='item-color item-color-sunny' value='#000000'>
+      </label>
+      <label class='item'>
+        24-Hour Format
+        <input id='timeFormatCheckbox' type='checkbox' class='item-checkbox' checked="">
+      </label>
+
+  </div>
+ </div>
+
+
+   <div class="item-container">
+    <div class="item-container-header">Notifications</div>
+    <div class="item-container-content">
+    <label class="item"> Wear-Aware
+       <input id='wearawareCheckbox' type="checkbox" class="item-toggle" name="toggle-1" checked="">
+    </label>
+   <div class="item-container-footer">
+      Alerts you when you keep off your mobile or when it is lost.
+  </div>
+   </div>
+
+    <div class='item-container-footer'>
+      These settings only change on the watch after you click submit.
+    </div>
+   </div>
+
+  <div class='item-container'>
+    <div class='button-container'>
+      <input id='submitButton' type='button' class='item-button' value='SUBMIT'>
+    </div>
+  </div>
+
+
+  <script src='bower_components/pebble-slate/dist/js/slate.min.js'></script>
+  <script src='js/main.js'></script>
+</body>
+</html>

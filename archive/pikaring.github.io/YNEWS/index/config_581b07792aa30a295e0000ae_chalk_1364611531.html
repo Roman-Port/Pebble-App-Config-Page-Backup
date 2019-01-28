@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="imagetoolbar" content="no">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="/pikaring.github.io./YNEWS/css/common.css" type="text/css"> 
+<script type="text/javascript" src="/ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.js"></script>
+<script src="/code.jquery.com//jquery-1.js"></script>
+<script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+<script type="text/javascript" src="/pikaring.github.io./YNEWS/js/jquery.js"></script>
+<script type="text/javascript" src="/pikaring.github.io./YNEWS/js/common.js"></script>
+<title>Y-News</title>
+</head>
+<body>
+<div id="top">
+<div id="header">
+</div><!-- /#header-->
+<div id="contents">
+<h1>記事の更新速度</h1>
+<form>
+<select id="seconds" size="3">
+	<option value="2">4秒</option>
+	<option value="3" selected="">6秒</option>
+	<option value="4">8秒</option>
+	<option value="5">10秒</option>
+	<option value="6">12秒</option>
+	<option value="7">14秒</option>
+	<option value="8">16秒</option>
+	<option value="9">18秒</option>
+	<option value="10">20秒</option>
+	<option value="15">30秒</option>
+</select>
+</form>
+<h1>背景色</h1>
+<form>
+<select id="bg-color" size="3">
+	<option value="1">White</option>
+	<option value="2" selected="">Black</option>
+	<option value="3">Cyan</option>
+	<option value="4">Green</option>
+	<option value="5">Magenta</option>
+	<option value="6">Yellow</option>
+</select>
+</form>
+<h1>文字色（見出し）</h1>
+<form>
+<select id="index-color" size="3">
+	<option value="1">White</option>
+	<option value="2">Black</option>
+	<option value="3">Cyan</option>
+	<option value="4" selected="">Green</option>
+	<option value="5">Magenta</option>
+	<option value="6">Yellow</option>
+</select>
+</form>
+<h1>文字色（本文）</h1>
+<form>
+<select id="news-color" size="3">
+	<option value="1" selected="">White</option>
+	<option value="2">Black</option>
+	<option value="3">Cyan</option>
+	<option value="4">Green</option>
+	<option value="5">Magenta</option>
+	<option value="6">Yellow</option>
+</select>
+<p><input type="submit" id="b-save" value="save"></p>
+<p><input type="submit" id="b-cancel" value="cancel"></p>
+</form>
+
+</div><!-- /#contents-->
+<div id="footer">
+</div><!-- /#footer-->
+</div><!-- /#top-->
+
+<script>
+
+function saveOptions() {
+	var seconds = parseInt($('#seconds').val());
+	var bg = parseInt($('#bg-color').val());
+	var index = parseInt($('#index-color').val());
+	var news = parseInt($('#news-color').val());
+	var sendValue =[seconds,bg,index,news];
+<!--alert(sendValue);-->	
+	return sendValue;
+}
+
+$().ready(function() 
+	{
+	$("#b-cancel").click(function() 
+		{
+		console.log("Canceling");
+		document.location = "pebblejs://close";
+	});
+	$("#b-save").click(function() {
+		console.log("Save");
+		var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+		document.location = location;
+	});
+});
+</script>
+</body>
+</html>

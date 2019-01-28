@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>PebbleBucks</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link href="/esw148.github.io/PebbleBucks/css/bootstrap.css" rel="stylesheet">
+		<link href="/esw148.github.io/PebbleBucks/css/configure.css" rel="stylesheet">
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-static-top" role="navigation">
+			<div class="navbar-header">
+				<h1 class="navbar-brand">PebbleBucks</h1>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="alert alert-info">
+				<p><strong>*Update - 2015-02-07*</strong></p>
+				<p>I've been contacted by many people stating that the login is no longer working. 
+				It appears that Starbucks has changed their login form to use randomly generated field names.
+				I'm working to see if I can get around this.
+				In the meantime, the barcode portion of the app should still work, but the balance/stars information will not.
+				</p>
+				<p><strong>Hey, there!</strong></p>
+				<p>This is based on the 2.0.1 version of the PebbleBucks app by Alexsander Akers. 
+				His 3.0 version is currently not working for a large group of users, so I'm putting this modified/fixed version of 2.0.1 up for people to use in the interim.
+				<ul>
+				<li>I have fixed the balance and stars information.</li>
+				<li>I added an option to choose whether to pull current total star count or remaining stars before free drink.</li>
+				<li>I added long-press option to Top button to turn on backlight. Single-press Top button to turn light back off.</li>
+				</ul>
+				</p>
+				<p class="text-right"><strong>Thanks, Eric Wood</strong></p>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<h2>Send Barcode to Pebble
+					<form role="form" id="barcode-form">
+						<div class="form-group">
+							<label for="card-number">Starbucks Card Number</label>
+							<input type="text" pattern="[0-9]*" maxlength="16" size="16" class="form-control" id="card-number" name="card-number" placeholder="Enter Starbucks card number.">
+							<span id="card-number-hint" class="help-block">There should be 16 more digits.</span>
+						</div>
+						<button type="submit" class="btn btn-default" disabled="disabled" id="generate-barcode">
+							<span class="glyphicon glyphicon-barcode"></span>
+							Generate Barcode
+						</button>
+
+						<div id="barcode-container">
+							<div class="form-group">
+								<label>Preview</label>
+								<canvas id="barcode"></canvas>
+							</div>
+						</div>
+					</form>
+				</h2></div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<h2>Starbucks Credentials
+					<form role="form" id="creds-form">
+						<div class="form-group">
+							<label for="username">Username / Email</label>
+							<input type="text" maxlength="200" size="200" class="form-control" id="username" name="username" placeholder="">
+						</div>
+						<div class="form-group">
+							<label for="password">Password</label>
+							<input type="password" maxlength="200" size="200" class="form-control" id="password" name="password" placeholder="">
+						</div>
+					</form>
+				</h2></div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<h2>Options
+					<form role="form" id="options-form">
+						<div class="form-group">
+							<label for="star_type">Star Type</label>
+							<select name="star_type" id="star_type" class="form-control">
+								<option value="0">Remaining stars for free drinks</option>
+								<option value="1">Current number of stars earned</option>
+							</select>
+							
+						</div>
+					</form>
+				</h2></div>
+			</div>			
+
+			<div class="row">
+				<div class="col-xs-12">
+					<a href="#" class="btn btn-default" id="save-and-close">
+						<span class="glyphicon glyphicon-cloud-download"></span>
+						Save &amp; Close
+					</a>
+				</div>
+			</div>
+		</div>
+
+		<script src="/esw148.github.io/PebbleBucks/js/configure.js"></script>
+	</body>
+</html>

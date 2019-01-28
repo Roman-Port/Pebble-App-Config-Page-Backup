@@ -1,0 +1,227 @@
+<!DOCTYPE HTML>
+<html>
+<body>
+
+
+  <script> 
+
+	function getURLVariable(name)  {
+	  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+	  var regexS = "[\\?&]"+name+"=([^&#]*)",
+		  regex = new RegExp(regexS),
+		  results = regex.exec(window.location.href);
+	  if (results == null) return "";
+	  else return results[1];
+	}
+
+
+	window.onload = function () {
+		onLoad();
+	};
+	
+	function onLoad()
+	{
+		//Pebble gives over standards which are loaded here. Let's set defaults anyways, so we have them.
+		document.getElementById("READING_CARD_NUMBER").value  = "Six";
+		document.getElementById("READING_CARD_SUIT").value  = "Spades";
+		document.getElementById("WRITING_CARD_NUMBER").value  = "Ten";
+		document.getElementById("WRITING_CARD_SUIT").value  = "Hearts";
+
+		var aElements = ["READING_CARD_NUMBER", "READING_CARD_SUIT", "WRITING_CARD_NUMBER", "WRITING_CARD_SUIT"];
+		for (var i = 0; i < aElements.length; i++)
+		{
+		var priorSearch = decodeURI(getURLVariable(aElements[i]));
+		  if (priorSearch) 
+			{	
+				document.getElementById(aElements[i]).value  = priorSearch;
+			}
+		}
+}
+
+    function ToggleMode()
+    {
+		if (document.getElementById("readNumber").style.display == 'none')
+		{
+			document.getElementById("ReadText").style.display = 'block';
+			document.getElementById("readNumber").style.display = 'block';
+			document.getElementById("readSuit").style.display = 'block';
+			document.getElementById("writeNumber").style.display = 'none';
+			document.getElementById("writeSuit").style.display = 'none';
+			document.getElementById("WriteText").style.display = 'none';
+		}
+		else
+		{
+			document.getElementById("ReadText").style.display = 'none';
+			document.getElementById("readNumber").style.display = 'none';
+			document.getElementById("readSuit").style.display = 'none';
+			document.getElementById("writeNumber").style.display = 'block';
+			document.getElementById("writeSuit").style.display = 'block';
+			document.getElementById("WriteText").style.display = 'block';
+		}
+    }
+
+    function closeConfiguration()
+    {
+	
+		var readingCardNumber = READING_CARD_NUMBER.value;
+		var writingCardNumber = WRITING_CARD_NUMBER.value;
+		var readingCardSuit = READING_CARD_SUIT.value;
+		var writingCardSuit = WRITING_CARD_SUIT.value;
+		
+		if ( (readingCardNumber == "") || (writingCardNumber == "") || (readingCardSuit == "") || (writingCardSuit == "") )
+		{
+			alert("Please fill out all values (reading AND writing) before closing.");
+			return;
+		}
+	
+	  var options = {
+          'readingCardNumber': readingCardNumber,
+          'writingCardNumber': writingCardNumber,
+          'readingCardSuit': readingCardSuit,
+          'writingCardSuit': writingCardSuit,
+        }
+		
+		var location="pebblejs://close#"+encodeURIComponent(JSON.stringify(options));
+		window.location.href=location;
+
+    }
+	
+	function cancelConfiguration()
+	{
+		window.location.href="pebblejs://close#failure";
+	}
+
+	function toggleHelp()
+	{
+		if (document.getElementById("HelpText").style.display == 'none')
+		{
+			document.getElementById("HelpText").style.display = 'block';
+		}
+		else
+		{
+			document.getElementById("HelpText").style.display = 'none';
+		}
+	}
+  </script>
+<p style="font-family: Georgia, 'Verdana', serif; font-size: 32px; font-weight:bold; text-align: center ">
+
+    Magic Settings
+</p>
+
+<p style="font-family: Georgia, 'Verdana', serif; text-align: center ">
+<body link="#C0C0C0" vlink="#808080" alink="#FF0000"> 
+  
+<a href="#" onclick="ToggleMode();" id='WriteText' style="display: block; text-decoration:none"><font color="000000">Choose which card should be written</font></a>
+<a href="#" onclick="ToggleMode();" id='ReadText' style="display: none;">Choose which card should be read</a>
+
+<span id="readNumber" style="display: none;">
+	<br>
+	Number to read<br>
+	<select name="top5" size="5" id="READING_CARD_NUMBER"> 
+		<option>Two</option> 
+		<option>Three</option> 
+		<option>Four</option> 
+		<option>Five</option>
+		<option>Six</option>
+		<option>Seven</option>
+		<option>Eight</option>
+		<option>Nine</option>
+		<option>Ten</option>
+		<option>Jack</option>
+		<option>Queen</option>
+		<option>King</option>
+		<option>Ace</option>
+	</select>
+</span>
+
+<span id="readSuit" style="display: none;">
+	<br>
+	<br>
+	Suit to read<br>
+	<select name="top5" size="4" id="READING_CARD_SUIT"> 
+		 <option>Spades</option> 
+		 <option>Hearts</option> 
+		 <option>Clubs</option> 
+		 <option>Diamonds</option> 
+	</select>
+</span>
+
+
+<span id="writeNumber" style="display: block;">
+	<br>
+	Number to write<br>
+	<select name="top5" size="5" id="WRITING_CARD_NUMBER"> 
+		<option>Two</option> 
+		<option>Three</option> 
+		<option>Four</option> 
+		<option>Five</option>
+		<option>Six</option>
+		<option>Seven</option>
+		<option>Eight</option>
+		<option>Nine</option>
+		<option>Ten</option>
+		<option>Jack</option>
+		<option>Queen</option>
+		<option>King</option>
+		<option>Ace</option>
+	</select>
+</span>
+
+<span id="writeSuit" style="display: block;">
+	<br>
+	<br>
+	Suit to write<br>
+	<select name="top5" size="4" id="WRITING_CARD_SUIT"> 
+		 <option>Spades</option> 
+		 <option>Hearts</option> 
+		 <option>Clubs</option> 
+		 <option>Diamonds</option> 
+	</select>
+</span>
+
+<br>
+<p>
+<table border="0" width="100%" cellpadding="4" cellspacing="3">
+   <tr>
+	  <td align="LEFT"></td>
+      <td align="LEFT"><a title="Close this" onclick="closeConfiguration();" href="#">Save</a> </td>
+	  <td align="CENTER"></td>
+      <td align="RIGHT"><a title="Close this" onclick="cancelConfiguration();" href="#">Cancel</a></td>
+	  <td align="LEFT"></td>
+   </tr>
+</table>
+
+<br>
+<p style="font-family: Georgia, 'Verdana', serif; text-align: center ">
+<a href="#" onclick="toggleHelp();"><img src="/schatzschloss.de/nohttps/help.png" style="border:1px solid black;" ismap="" alt="Grafik" align="CENTER"></a>
+
+
+<span id="HelpText" style="display: none;">
+<br>
+Thanks for using this pebble time app. Here you will get some information on how to use this app. <br>
+The text <i>Choose which card should be written</i> is actually a button, which lets you toggle between choosing the card to read and the card to write on the pebble itself.<br>
+On the pebble you may press the right center button to go on to <i>read</i> the card and again to <i>write</i> the card. <br>
+<br>
+Here a possible presentation (which I abbreviated from my equivalent phone presentation):<br>
+For this example you need your deck of cards prepared to have the two of clubs as the top card and the seven of hearts as the second card from the top.<br><br>
+<i>"I finally got a smart watch. They really are smart, they got some sensors NFC, RFID or whatever included, which are actually able to read and write information. 
+I got this app here, which actually allows me to set the card I want to write."<br></i><br>
+Open the application settings (this page).<br><br>
+<i>"Ok.. Let me pick a card and a suit here.. How about the two of clubs?"</i><br><br>
+Select the two of clubs and save. The app should be open on your phone now, if it is not; Open it.<br><br>
+<i>"The app started. Let's get going. Let me just put this on here."</i><br><br>
+Lay down your pebble time onto your deck of cards. And press the right center button to start <i>reading</i> the card.<br><br>
+<i>"Alright. It's reading. SO SMART THESE WATCHES!1!one!!"</i><br><br>
+The app shows what was configured as the reading card. In this example the seven of hearts. Remove the watch and perform a double lift while saying<br><br>
+<i>"Right. The seven of hearts. Isn't that cool? Now let's write the card we previously configured. What was it again? Ah right, the two of clubs</i><br><br>
+Perform another double lift, put the watch on the deck and press the button again while mumbling some bull**** about smartwatches or something. 
+After the card was written, present it on the watch, remove the watch and present the top card of the deck<br><br>
+<i>"And there we go. I really like my new pebble time. I'm glad I kickstarted it instead buying it from retail."</i><br><br>
+Put the pebble back to your wrist, if you want to, let the spectator inspect the deck and change the subject by performing another magic trick (like wksb's "Magic Mindreader" for Android ;)).<br><br><br>
+
+GLHF :)<br><br>
+I am happy to receive feedback. If you got something to say (good or bad), please don't hesitate to push me a mail to pebble_norand_schatzschloss.de - with _norand_ being an @.
+</span>
+</p>
+</body>
+</body></html>

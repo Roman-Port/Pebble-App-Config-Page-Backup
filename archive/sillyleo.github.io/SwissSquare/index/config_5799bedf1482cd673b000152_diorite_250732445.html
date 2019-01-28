@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+   <head>
+      <title>Mondaine watch face configuration</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+      <script src="/code.jquery.com//jquery-1.js"></script>
+      <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+   </head>
+   <body>
+      <div data-role="page" id="main">
+         <div data-role="header" class="jqm-header">
+            <h1 style="margin:0.6em;">Mondaine watch face configuration</h1>
+         </div>
+         <div data-role="content">
+            <div data-role="fieldcontain">
+               <label for="dialcolor">Dial color:</label>
+               <select name="dialcolor" id="dialcolor">
+                  <option value="white">White</option>
+		  <option value="white_nl">White (No Logo)</option>
+                  <option value="black">Black</option>
+		  <option value="black_nl">Black (No Logo)</option>
+               </select>
+            </div>
+            <div data-role="fieldcontain">
+               <label for="secondhandoption">Second hand option:</label>
+               <select name="secondhandoption" id="secondhandoption">
+                  <option value="quartz">Quartz</option>
+                  <option value="stop2go">Stop2Go</option>
+                  <option value="off">Off</option>
+               </select>
+            </div>
+            <div data-role="fieldcontain">
+               <label for="dateoption">Date option:</label>
+               <select name="dateoption" id="dateoption">
+                  <option value="nodate">No Date</option>
+		  <option value="date">Date</option>
+		  <!--<option value="daydate">Day Date</option>-->
+               </select>
+            </div>
+	    <div data-role="fieldcontain">
+               <label for="hourlyvibration">Hourly vibration:</label>
+               <select name="hourlyvibration" id="hourlyvibration">
+                  <option value="off">Off</option>
+		  <option value="short">Short</option>
+		  <option value="long">Long</option>
+		  <option value="double">Double</option>
+		  <!--<option value="daydate">Day Date</option>-->
+               </select>
+            </div>
+		
+	   <div data-role="fieldcontain">
+               <label for="bluetoothstatusdetection">Enable Bluetooth status detection?
+	       <input type="checkbox" name="bluetoothstatusdetection" id="bluetoothstatusdetection" value="1"></label>
+           </div>
+
+            <div class="ui-body ui-body-b">
+               <fieldset class="ui-grid-a">
+                  <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+                  <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+               </fieldset>
+            </div>
+         </div>
+	 <div data-role="footer">
+            
+        </div>
+      </div>
+      <script>
+	function saveConfigs() {
+	    var configs = {
+		'dialcolor': $("#dialcolor").val(),
+		'secondhandoption': $("#secondhandoption").val(),
+		'dateoption': $("#dateoption").val(),
+		'hourlyvibration': $("#hourlyvibration").val(),
+		'bluetoothstatusdetection': ($("#bluetoothstatusdetection").is(":checked") ? 1 : 0)
+	    }
+	    return configs;
+	}
+
+	// Something like this to get query variables.
+	function getQueryParam(variable, defaultValue) {
+	    // Find all URL parameters
+	    var query = location.search.substring(1);
+	    var vars = query.split('&');
+	    for (var i = 0; i < vars.length; i++) {
+		var pair = vars[i].split('=');
+
+		// If the query variable parameter is found, decode it to use and return it for use
+		if (pair[0] === variable) {
+		    return decodeURIComponent(pair[1]);
+		}
+	    }
+	    return defaultValue || false;
+	}
+
+
+	$().ready(function() {
+	    // Load save configs
+            var configs = JSON.parse(getQueryParam('configs', '{}'));
+	    $.each(configs, function (i, v){
+	        
+	        if ($("[name='" + i + "']").is("select")) {
+		    $("[name='" + i + "']").val(v);
+     	            $("[name='" + i + "']").selectmenu("refresh", true);
+	        }
+	
+		if ($("[name='" + i + "']").is("input[type='checkbox']") && $("[name='" + i + "']").val() == v) {
+ 		    $("[name='" + i + "']").prop("checked", true);
+		    $("[name='" + i + "']").checkboxradio('refresh');
+		}
+
+            });
+
+	    $("#b-cancel").click(function() {
+		console.log("Cancel");
+		document.location = "pebblejs://close";
+	    });
+
+	    $("#b-submit").click(function() {
+		console.log("Submit");
+
+		// Set the return URL depending on the runtime environment
+		var return_to = getQueryParam('return_to', 'pebblejs://close#');
+		var location = return_to + encodeURIComponent(JSON.stringify(saveConfigs()));
+		console.log("Warping to: " + location);
+		console.log(location);
+		document.location = location;
+	    });
+
+	});
+      </script>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-64777915-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+   </body>
+</html>

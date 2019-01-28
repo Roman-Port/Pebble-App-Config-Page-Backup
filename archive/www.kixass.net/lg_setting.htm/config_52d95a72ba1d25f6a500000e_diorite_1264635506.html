@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>LG Remote</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+		<link rel="stylesheet" href="/d10ajoocuyu32n.cloudfront.net/mobile/1.3.1/jquery.css"> 
+		<style>
+			* {
+				font-family: Arial;
+				font-size: 10pt;
+			}
+
+			.ui-bar-b {
+				background-color: #13485c;
+			}
+			.ui-bar-b{
+				border:1px solid #13485c;background:#13485c;color:#fff;font-weight:bold;text-shadow:0 -1px 1px #254f7a;background: #13485c; /* Old browsers */
+				background: -moz-linear-gradient(top, #13485c 0%, #06101e 100%); /* FF3.6+ */
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#13485c), color-stop(100%,#06101e)); /* Chrome,Safari4+ */
+				background: -webkit-linear-gradient(top, #13485c 0%,#06101e 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-linear-gradient(top, #13485c 0%,#06101e 100%); /* Opera 11.10+ */
+				background: -ms-linear-gradient(top, #13485c 0%,#06101e 100%); /* IE10+ */
+				background: linear-gradient(to bottom, #13485c 0%,#06101e 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#13485c', endColorstr='#06101e',GradientType=0 );
+			}
+
+			body {
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+		
+		<!-- jQuery and jQuery Mobile -->
+		<script src="/d10ajoocuyu32n.cloudfront.net//jquery-1.js"></script>
+		<script src="/d10ajoocuyu32n.cloudfront.net/mobile/1.3.1/jquery.js"></script>
+		<script>
+			function doSave()
+			{
+				var loc = document.getElementById('lgip').value;
+				var port = document.getElementById('localport').value;
+				var key = document.getElementById('pairkey').value;
+
+				window.localStorage.setItem("lgip", loc);
+				window.localStorage.setItem("localport", port);
+				window.localStorage.setItem("pairkey", key);
+				
+				var settings = JSON.stringify( {localip: loc, localport: port, pairkey: key} );
+
+				document.location = "pebblejs://close#" + settings;
+			}
+		</script>
+	</head>
+	<body>
+		<div data-role="page" id="page1">
+			<div data-role="content">
+				<p id="msg" style="margin: 2px; font-weight: bold;">
+				On your TV go to the Menu -> Network -> Network status. Here you'll find the IP-adress of your TV. Put this in the field 'Local IP'. For the local port you can keep the default. After putting in the IP, click 'Request Pairing Key'.
+				<table>
+					<tr>
+						<td>Local IP:</td><td><input type="text" id="lgip" value=""></td>
+					</tr>
+					<tr>
+						<td>Local port:</td><td><input type="number" id="localport" value=""></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td><td><button onclick="doSave();">Request Pairing Key</button></td>
+					</tr>
+					<tr>
+						<td colspan="2">If the settings are correct, your TV will show you the pairing-key. On the Pebble app, go back to the settings and put the key in the field 'Pairing key'.</td>
+					</tr>
+					<tr>
+						<td>Pairing key:</td><td><input type="number" id="pairkey" value=""></td>
+					</tr>
+					<tr>
+						<td>&nbsp;</td><td><button onclick="doSave();">Save</button></td>
+					</tr>
+				</table>
+				<hr>
+				Note: This is not an official app from LG, but a home-made app.<br>
+				<br>
+				&copy; <a href="mailto:lg@kixass.net">KixAss</a>
+
+				<script>
+					document.getElementById('lgip').value = window.localStorage.getItem("lgip");
+					document.getElementById('localport').value = window.localStorage.getItem("localport");
+					if (document.getElementById('localport').value == "")
+						document.getElementById('localport').value = "8080";
+
+					document.getElementById('pairkey').value = window.localStorage.getItem("pairkey");
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

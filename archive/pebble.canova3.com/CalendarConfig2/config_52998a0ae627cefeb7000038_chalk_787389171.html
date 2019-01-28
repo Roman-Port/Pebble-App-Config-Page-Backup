@@ -1,0 +1,154 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html> 
+<head> 
+	<title>Calendar Configuration</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="/code.jquery.com/mobile/1.2.1/jquery.css">
+	<script src="/code.jquery.com//jquery-1.js"></script>
+	<script src="/code.jquery.com/mobile/1.2.1/jquery.js"></script>
+	<style>.ui-field-contain div.ui-slider-switch { width: 7em }</style>
+</head> 
+<body> 
+
+<div data-role="page" data-theme="b">
+
+	<div data-role="header">
+		<h1>Calendar<br>Configuration</h1>
+	</div><!-- /header -->
+
+    <div data-role="content">
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <input id="cancel" value="Cancel" type="submit">
+            </div>
+            <div class="ui-block-b">
+                <input id="save" data-theme="a" value="Save" type="submit">
+            </div>
+        </div>
+    	<div data-role="fieldcontain">
+            <label for="inverted">
+                Background
+            </label>
+            <select name="inverted" id="inverted" data-theme="" data-role="slider">
+                <option value="0">
+                    Black
+                </option>
+                <option value="1">
+                    White
+                </option>
+            </select>
+        </div>
+        
+
+        <div data-role="fieldcontain">
+            <label for="monday_start">
+                Week starts on
+            </label>
+            <select name="monday_start" id="monday_start" data-theme="" data-role="slider">
+                <option value="0">
+                    Sunday
+                </option>
+                <option value="1">
+                    Monday
+                </option>
+            </select>
+        </div>
+		
+        <div data-role="fieldcontain">
+            <label for="weeknums">
+                Week numbers
+            </label>
+            <select name="weeknums" id="weeknums" data-theme="" data-role="slider">
+                <option value="0">
+                    Off
+                </option>
+                <option value="1">
+                    On
+                </option>
+            </select>
+        </div>
+		
+		<!-- Gestures don't work well enough, so don't publish this yet...
+        <div data-role="fieldcontain">
+            <label for="tilt">
+                Change month with gesture
+            </label>
+            <select name="tilt" id="tilt" data-theme="" data-role="slider">
+                <option value="0" >
+                    Off
+                </option>
+                <option value="1"  >
+                    On
+                </option>
+            </select>
+        </div> -->
+        
+		<!-- Language selection is functional now -->
+        <div id="language" data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-type="vertical">
+                <legend>
+                    Language
+                </legend>
+
+                <input id="radio0" name="language" value="0" data-theme="c" type="radio" checked="checked">
+                <label for="radio0">
+                    English
+                </label>
+                <input id="radio2" name="language" value="2" data-theme="c" type="radio">
+                <label for="radio2">
+                    French
+                </label>
+                <input id="radio3" name="language" value="3" data-theme="c" type="radio">
+                <label for="radio3">
+                    German
+                </label>
+                <input id="radio4" name="language" value="4" data-theme="c" type="radio">
+                <label for="radio4">
+                    Italian
+                </label>
+                <input id="radio1" name="language" value="1" data-theme="c" type="radio">
+                <label for="radio1">
+                    Spanish
+                </label>
+                
+            </fieldset>
+        </div>
+
+	</div><!-- /content -->
+</div><!-- /page -->
+
+   <script>
+      function saveOptions() {
+        var options = {
+          'inverted': parseInt($("#inverted").val(), 10),
+		  //'tilt': parseInt($("#tilt").val(), 10),
+          'monday': parseInt($("#monday_start").val(), 10),
+          'weeknums': parseInt($("#weeknums").val(), 10),
+          'language': parseInt($("input[name=language]:checked").val(), 10),
+        }
+        return options;
+      }
+
+      $().ready(function() {
+    	 $("#update").click(function() {
+              window.open("http://pebble.canova3.com/downloads/TBD.pbw");
+         });
+          
+        $("#cancel").click(function() {
+          document.location = "pebblejs://close#";
+        });
+
+        $("#save").click(function() {
+          console.log("Submit");
+          
+          //alert(JSON.stringify(saveOptions()));
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          document.location = location;
+        });
+      });
+    </script>
+
+</body>
+</html>

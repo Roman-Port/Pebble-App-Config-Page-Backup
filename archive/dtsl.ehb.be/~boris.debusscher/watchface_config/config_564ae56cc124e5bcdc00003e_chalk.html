@@ -1,0 +1,507 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BOLD</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+<link href="/dtsl.ehb.be/~boris.debusscher/watchface_config/style.css" rel="stylesheet" type="text/css">
+<link href="/dtsl.ehb.be/~boris.debusscher/watchface_config/animate.css" rel="stylesheet" type="text/css">
+<script src="/code.jquery.com//jquery-1.js"></script>
+<script src="/code.jquery.com//jquery-migrate-1.js"></script>
+</head>
+
+<body>
+
+    <article class="animated fadeIn main-container">
+        <header>
+            <h1 class="title">WATCHFACE SETTINGS</h1>
+        </header>
+        <section id="watch-preview">
+            <h1>Preview</h1>
+            <div class="watch">
+                <svg version="1.1" id="dots-off" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 276.3 276.3" enable-background="new 0 0 276.3 276.3" xml:space="preserve">
+                <circle cx="138.2" cy="8.1" r="8.1"></circle>
+                <circle cx="203.2" cy="25.5" r="8.1"></circle>
+                <circle cx="250.8" cy="73" r="8.1"></circle>
+                <circle cx="268.3" cy="138" r="8.1"></circle>
+                <circle cx="250.9" cy="203" r="8.1"></circle>
+                <circle cx="203.4" cy="250.7" r="8.1"></circle>
+                <circle cx="138.5" cy="268.3" r="8.1"></circle>
+                <circle cx="73.4" cy="251" r="8.1"></circle>
+                <circle cx="25.7" cy="203.6" r="8.1"></circle>
+                <circle cx="8.1" cy="138.6" r="8.1"></circle>
+                <circle cx="25.2" cy="73.5" r="8.1"></circle>
+                <circle cx="72.6" cy="25.8" r="8.1"></circle>
+                </svg>
+                <svg version="1.1" id="dots-on" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="0 0 276.3 276.3" enable-background="new 0 0 276.3 276.3" xml:space="preserve">
+                <circle cx="138.2" cy="8.1" r="8.1"></circle>
+                <circle cx="203.2" cy="25.5" r="8.1"></circle>
+                <circle cx="250.8" cy="73" r="8.1"></circle>
+                <circle cx="268.3" cy="138" r="8.1"></circle>
+                </svg>
+                <h1>21</h1>
+                <span class="rotateM arm_m"></span>
+                <span class="rotateH arm_h"></span>
+                <span class="ellipse_m"></span>
+                <span class="ellipse_h"></span>
+            </div>
+        </section>
+        <section class="hide" id="themes">
+            <ul class="theme-list">
+                <li class="theme-none"></li>
+                <li class="theme-default"></li>
+                <li class="theme-red"></li>
+                <li class="theme-red"></li>
+                <li class="theme-red"></li>
+                <li class="theme-red"></li>
+            </ul>
+        </section>
+        <section id="date">
+            <h1>Date</h1>
+            <div id="date" class="hide color-box">
+            </div>
+            <ul class="hide color-list">
+                <li>000000</li>
+                <li>555555</li>
+                <li>AAAAAA</li>
+                <li>FFFFFF</li>
+                <li>000055</li>
+                <li>0000AA</li>
+                <li>0055AA</li>
+                <li>5555AA</li>
+                <li>5555FF</li>
+                <li>0000FF</li>
+                <li>0055FF</li>
+                <li>5500FF</li>
+                <li>AAAAFF</li>
+                <li>00AAFF</li>
+                <li>55AAFF</li>
+                <li>00FFFF</li>
+                <li>55FFFF</li>
+                <li>AAFFFF</li>
+                <li>AA0055</li>
+                <li>5500AA</li>
+                <li>AA00AA</li>
+                <li>AA55FF</li>
+                <li>AA00FF</li>
+                <li>550055</li>
+                <li>AA55AA</li>
+                <li>550000</li>
+                <li>FF00FF</li>
+                <li>FF55FF</li>
+                <li>FFAAFF</li>
+                <li>FF55AA</li>
+                <li>FF00AA</li>
+                <li>AA0000</li>
+                <li>AA5555</li>
+                <li>FF0055</li>
+                <li>FF0000</li>
+                <li>FF5555</li>
+                <li>FFAAAA</li>
+                <li>FF5500</li>
+                <li>FFAA55</li>
+                <li>FFAA00</li>
+                <li>AA5500</li>
+                <li>FFFF00</li>
+                <li>FFFF55</li>
+                <li>FFFFAA</li>
+                <li>005555</li>
+                <li>005500</li>
+                <li>555500</li>
+                <li>AAAA00</li>
+                <li>AAAA55</li>
+                <li>55AA00</li>
+                <li>55AA55</li>
+                <li>55AAAA</li>
+                <li>00AAAA</li>
+                <li>00AA55</li>
+                <li>00AA00</li>
+                <li>55FF00</li>
+                <li>AAFF00</li>
+                <li>AAFF55</li>
+                <li>00FF00</li>
+                <li>55FF55</li>
+                <li>AAFFAA</li>
+                <li>00FF55</li>
+                <li>55FFAA</li>
+                <li>00FFAA</li>
+            </ul>
+            <div class="switch">
+                <p>|</p>
+                <p>0</p>
+                <div class="switch-button"></div>
+                <input type="text" class="hide" id="date-switch" value="1">
+            </div>
+            <input type="text" class="hide" id="date_color" value="ffffff">
+        </section>
+        <section id="background">
+            <h1>Background color</h1>
+            <div id="bg" class="color-box">
+            </div>
+            <ul class="hide color-list">
+                <li>000000</li>
+                <li>555555</li>
+                <li>AAAAAA</li>
+                <li>FFFFFF</li>
+                <li>000055</li>
+                <li>0000AA</li>
+                <li>0055AA</li>
+                <li>5555AA</li>
+                <li>5555FF</li>
+                <li>0000FF</li>
+                <li>0055FF</li>
+                <li>5500FF</li>
+                <li>AAAAFF</li>
+                <li>00AAFF</li>
+                <li>55AAFF</li>
+                <li>00FFFF</li>
+                <li>55FFFF</li>
+                <li>AAFFFF</li>
+                <li>AA0055</li>
+                <li>5500AA</li>
+                <li>AA00AA</li>
+                <li>AA55FF</li>
+                <li>AA00FF</li>
+                <li>550055</li>
+                <li>AA55AA</li>
+                <li>550000</li>
+                <li>FF00FF</li>
+                <li>FF55FF</li>
+                <li>FFAAFF</li>
+                <li>FF55AA</li>
+                <li>FF00AA</li>
+                <li>AA0000</li>
+                <li>AA5555</li>
+                <li>FF0055</li>
+                <li>FF0000</li>
+                <li>FF5555</li>
+                <li>FFAAAA</li>
+                <li>FF5500</li>
+                <li>FFAA55</li>
+                <li>FFAA00</li>
+                <li>AA5500</li>
+                <li>FFFF00</li>
+                <li>FFFF55</li>
+                <li>FFFFAA</li>
+                <li>005555</li>
+                <li>005500</li>
+                <li>555500</li>
+                <li>AAAA00</li>
+                <li>AAAA55</li>
+                <li>55AA00</li>
+                <li>55AA55</li>
+                <li>55AAAA</li>
+                <li>00AAAA</li>
+                <li>00AA55</li>
+                <li>00AA00</li>
+                <li>55FF00</li>
+                <li>AAFF00</li>
+                <li>AAFF55</li>
+                <li>00FF00</li>
+                <li>55FF55</li>
+                <li>AAFFAA</li>
+                <li>00FF55</li>
+                <li>55FFAA</li>
+                <li>00FFAA</li>
+            </ul>
+            <input type="text" class="hide" id="bg_color" value="555555">
+        </section>
+        <section id="minutes">
+            <h1>Minutes color</h1>
+            <div id="minutes" class="color-box">
+            </div>
+            <ul class="hide color-list">
+                <li>000000</li>
+                <li>555555</li>
+                <li>AAAAAA</li>
+                <li>FFFFFF</li>
+                <li>000055</li>
+                <li>0000AA</li>
+                <li>0055AA</li>
+                <li>5555AA</li>
+                <li>5555FF</li>
+                <li>0000FF</li>
+                <li>0055FF</li>
+                <li>5500FF</li>
+                <li>AAAAFF</li>
+                <li>00AAFF</li>
+                <li>55AAFF</li>
+                <li>00FFFF</li>
+                <li>55FFFF</li>
+                <li>AAFFFF</li>
+                <li>AA0055</li>
+                <li>5500AA</li>
+                <li>AA00AA</li>
+                <li>AA55FF</li>
+                <li>AA00FF</li>
+                <li>550055</li>
+                <li>AA55AA</li>
+                <li>550000</li>
+                <li>FF00FF</li>
+                <li>FF55FF</li>
+                <li>FFAAFF</li>
+                <li>FF55AA</li>
+                <li>FF00AA</li>
+                <li>AA0000</li>
+                <li>AA5555</li>
+                <li>FF0055</li>
+                <li>FF0000</li>
+                <li>FF5555</li>
+                <li>FFAAAA</li>
+                <li>FF5500</li>
+                <li>FFAA55</li>
+                <li>FFAA00</li>
+                <li>AA5500</li>
+                <li>FFFF00</li>
+                <li>FFFF55</li>
+                <li>FFFFAA</li>
+                <li>005555</li>
+                <li>005500</li>
+                <li>555500</li>
+                <li>AAAA00</li>
+                <li>AAAA55</li>
+                <li>55AA00</li>
+                <li>55AA55</li>
+                <li>55AAAA</li>
+                <li>00AAAA</li>
+                <li>00AA55</li>
+                <li>00AA00</li>
+                <li>55FF00</li>
+                <li>AAFF00</li>
+                <li>AAFF55</li>
+                <li>00FF00</li>
+                <li>55FF55</li>
+                <li>AAFFAA</li>
+                <li>00FF55</li>
+                <li>55FFAA</li>
+                <li>00FFAA</li>
+            </ul>
+            <input type="text" class="hide" id="minutes_color" value="55AAFF">
+        </section>
+        <section id="hours">
+            <h1>Hours color</h1>
+            <div id="hours" class="color-box">
+            </div>
+            <ul class="hide color-list">
+                <li>000000</li>
+                <li>555555</li>
+                <li>AAAAAA</li>
+                <li>FFFFFF</li>
+                <li>000055</li>
+                <li>0000AA</li>
+                <li>0055AA</li>
+                <li>5555AA</li>
+                <li>5555FF</li>
+                <li>0000FF</li>
+                <li>0055FF</li>
+                <li>5500FF</li>
+                <li>AAAAFF</li>
+                <li>00AAFF</li>
+                <li>55AAFF</li>
+                <li>00FFFF</li>
+                <li>55FFFF</li>
+                <li>AAFFFF</li>
+                <li>AA0055</li>
+                <li>5500AA</li>
+                <li>AA00AA</li>
+                <li>AA55FF</li>
+                <li>AA00FF</li>
+                <li>550055</li>
+                <li>AA55AA</li>
+                <li>550000</li>
+                <li>FF00FF</li>
+                <li>FF55FF</li>
+                <li>FFAAFF</li>
+                <li>FF55AA</li>
+                <li>FF00AA</li>
+                <li>AA0000</li>
+                <li>AA5555</li>
+                <li>FF0055</li>
+                <li>FF0000</li>
+                <li>FF5555</li>
+                <li>FFAAAA</li>
+                <li>FF5500</li>
+                <li>FFAA55</li>
+                <li>FFAA00</li>
+                <li>AA5500</li>
+                <li>FFFF00</li>
+                <li>FFFF55</li>
+                <li>FFFFAA</li>
+                <li>005555</li>
+                <li>005500</li>
+                <li>555500</li>
+                <li>AAAA00</li>
+                <li>AAAA55</li>
+                <li>55AA00</li>
+                <li>55AA55</li>
+                <li>55AAAA</li>
+                <li>00AAAA</li>
+                <li>00AA55</li>
+                <li>00AA00</li>
+                <li>55FF00</li>
+                <li>AAFF00</li>
+                <li>AAFF55</li>
+                <li>00FF00</li>
+                <li>55FF55</li>
+                <li>AAFFAA</li>
+                <li>00FF55</li>
+                <li>55FFAA</li>
+                <li>00FFAA</li>
+            </ul>
+            <input type="text" class="hide" id="hours_color" value="ffffff">
+        </section>
+        <section id="dots-off">
+            <h1>seconds color off</h1>
+            <div id="dots-off" class="color-box">
+            </div>
+            <ul class="hide color-list">
+                <li>000000</li>
+                <li>555555</li>
+                <li>AAAAAA</li>
+                <li>FFFFFF</li>
+                <li>000055</li>
+                <li>0000AA</li>
+                <li>0055AA</li>
+                <li>5555AA</li>
+                <li>5555FF</li>
+                <li>0000FF</li>
+                <li>0055FF</li>
+                <li>5500FF</li>
+                <li>AAAAFF</li>
+                <li>00AAFF</li>
+                <li>55AAFF</li>
+                <li>00FFFF</li>
+                <li>55FFFF</li>
+                <li>AAFFFF</li>
+                <li>AA0055</li>
+                <li>5500AA</li>
+                <li>AA00AA</li>
+                <li>AA55FF</li>
+                <li>AA00FF</li>
+                <li>550055</li>
+                <li>AA55AA</li>
+                <li>550000</li>
+                <li>FF00FF</li>
+                <li>FF55FF</li>
+                <li>FFAAFF</li>
+                <li>FF55AA</li>
+                <li>FF00AA</li>
+                <li>AA0000</li>
+                <li>AA5555</li>
+                <li>FF0055</li>
+                <li>FF0000</li>
+                <li>FF5555</li>
+                <li>FFAAAA</li>
+                <li>FF5500</li>
+                <li>FFAA55</li>
+                <li>FFAA00</li>
+                <li>AA5500</li>
+                <li>FFFF00</li>
+                <li>FFFF55</li>
+                <li>FFFFAA</li>
+                <li>005555</li>
+                <li>005500</li>
+                <li>555500</li>
+                <li>AAAA00</li>
+                <li>AAAA55</li>
+                <li>55AA00</li>
+                <li>55AA55</li>
+                <li>55AAAA</li>
+                <li>00AAAA</li>
+                <li>00AA55</li>
+                <li>00AA00</li>
+                <li>55FF00</li>
+                <li>AAFF00</li>
+                <li>AAFF55</li>
+                <li>00FF00</li>
+                <li>55FF55</li>
+                <li>AAFFAA</li>
+                <li>00FF55</li>
+                <li>55FFAA</li>
+                <li>00FFAA</li>
+            </ul>
+            <input type="text" class="hide" id="svg_off_color" value="AAAAAA">
+        </section>
+        <section id="dots-on">
+            <h1>seconds color on</h1>
+            <div id="dots-on" class="color-box">
+            </div>
+            <ul class="hide color-list">
+                <li>000000</li>
+                <li>555555</li>
+                <li>AAAAAA</li>
+                <li>FFFFFF</li>
+                <li>000055</li>
+                <li>0000AA</li>
+                <li>0055AA</li>
+                <li>5555AA</li>
+                <li>5555FF</li>
+                <li>0000FF</li>
+                <li>0055FF</li>
+                <li>5500FF</li>
+                <li>AAAAFF</li>
+                <li>00AAFF</li>
+                <li>55AAFF</li>
+                <li>00FFFF</li>
+                <li>55FFFF</li>
+                <li>AAFFFF</li>
+                <li>AA0055</li>
+                <li>5500AA</li>
+                <li>AA00AA</li>
+                <li>AA55FF</li>
+                <li>AA00FF</li>
+                <li>550055</li>
+                <li>AA55AA</li>
+                <li>550000</li>
+                <li>FF00FF</li>
+                <li>FF55FF</li>
+                <li>FFAAFF</li>
+                <li>FF55AA</li>
+                <li>FF00AA</li>
+                <li>AA0000</li>
+                <li>AA5555</li>
+                <li>FF0055</li>
+                <li>FF0000</li>
+                <li>FF5555</li>
+                <li>FFAAAA</li>
+                <li>FF5500</li>
+                <li>FFAA55</li>
+                <li>FFAA00</li>
+                <li>AA5500</li>
+                <li>FFFF00</li>
+                <li>FFFF55</li>
+                <li>FFFFAA</li>
+                <li>005555</li>
+                <li>005500</li>
+                <li>555500</li>
+                <li>AAAA00</li>
+                <li>AAAA55</li>
+                <li>55AA00</li>
+                <li>55AA55</li>
+                <li>55AAAA</li>
+                <li>00AAAA</li>
+                <li>00AA55</li>
+                <li>00AA00</li>
+                <li>55FF00</li>
+                <li>AAFF00</li>
+                <li>AAFF55</li>
+                <li>00FF00</li>
+                <li>55FF55</li>
+                <li>AAFFAA</li>
+                <li>00FF55</li>
+                <li>55FFAA</li>
+                <li>00FFAA</li>
+            </ul>
+            <input type="text" class="hide" id="svg_on_color" value="ffffff">
+        </section>
+        
+        <input type="submit" id="submit_config" name="submit_config" value="save">
+    </article>
+    
+    <script src="/dtsl.ehb.be/~boris.debusscher/watchface_config/js/slate.js"></script>
+    <script src="/dtsl.ehb.be/~boris.debusscher/watchface_config/js/main.js"></script>
+    <script type="text/javascript" src="/dtsl.ehb.be/~boris.debusscher/watchface_config/js/app.js"></script>
+    
+</body>
+</html>

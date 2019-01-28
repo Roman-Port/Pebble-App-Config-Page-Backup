@@ -1,0 +1,274 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Around the Clock 1.0</title>
+<link rel="stylesheet" type="text/css" href="/matthewkingston.com/pebble/slate/dist/css/slate.css">
+<script src="/matthewkingston.com/pebble/slate/dist/js/slate.js"></script>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+</head>
+<body>
+<h1 class=" title">Around the Clock 1.0</h1>
+<form>
+<div class=" item-container">
+<div class=" item-container-header">
+Default Configurations
+</div>
+<div class=" item-container-content">
+<label class=" item">&nbsp;<select id="DEFAULTS" class="OptionUpdate item-select" name="DEFAULTS" dir="rtl"><option class="item-select-option" value="" selected="TRUE">Choose a default configuration</option>
+<option class="item-select-option" value="000000|FFFFFF|FFFF00|FF0000|2|1">White/Yellow on Black/Red</option>
+<option class="item-select-option" value="FFFFFF|000000|0000FF|55FFFF|2|1">Black/Blue on White/LightBlue</option>
+<option class="item-select-option" value="00AA00|FFFFAA|FFFF00|00FF00|2|1">Greens</option>
+</select></label>
+
+</div><div class=" item-container-footer">
+To save or load a custom configuration string, scroll to the bottom of this page.<br><br> 
+			<font size="+1"><b>Suggestions for color defaults?</b> <a href="mailto:matt@hitormiss.org">Copy/Email the Configuration 
+			String at the bottom of the page to Matt</a>.</font>
+</div>
+</div>
+
+<div class=" item-container">
+<div class=" item-container-header">
+Settings
+</div>
+<div class=" item-container-content">
+<label class=" item">Rotate Minutes?<input type="checkbox" id="ROTATE_MINUTES" class="OptionUpdate item-toggle" checked="1" name="ROTATE_MINUTES" value="1"></label>
+<label class=" item">A) Dial around clock<input type="radio" id="FORMAT_MINUTES" class=" item-radio" checked="1" name="FORMAT_MINUTES" value="2"></label>
+
+<label class=" item">B) Color behind minutes<input type="radio" id="FORMAT_MINUTES" class=" item-radio" name="FORMAT_MINUTES" value="1"></label>
+
+<label class=" item">C) or, Plain<input type="radio" id="FORMAT_MINUTES" class=" item-radio" name="FORMAT_MINUTES" value="0"></label>
+
+
+</div></div>
+
+<div class=" item-container">
+<div class=" item-container-header">
+Colors
+</div>
+<div class=" item-container-content">
+<label class=" item">Background<input type="text" id="COLOR_BACKGROUND" class="OptionUpdate item-color item-color-normal" name="COLOR_BACKGROUND" value="#000000"></label>
+<label class=" item">Hour Numbers<input type="text" id="COLOR_NUMBERS_HOURS" class="OptionUpdate item-color item-color-normal" name="COLOR_NUMBERS_HOURS" value="#FFFFFF"></label>
+<label class=" item">Minute Numbers<input type="text" id="COLOR_NUMBERS_MINUTES" class="OptionUpdate item-color item-color-normal" name="COLOR_NUMBERS_MINUTES" value="#FFFF00"></label>
+<label class=" item">Minute Backing/Dial<input type="text" id="COLOR_DIAL_MINUTES" class="OptionUpdate item-color item-color-normal" name="COLOR_DIAL_MINUTES" value="#FF0000"></label>
+
+</div></div>
+
+<div class="item-container">
+<div class="button-container">
+<input type="button" class="item-button" style="width: 40%;" name="BUTTON_SUBMIT" value="UPDATE"> <input type="button" class="item-button" style="width: 40%;" name="BUTTON_CANCEL" value="CANCEL">
+</div>
+</div>
+<div class=" item-container">
+<div class=" item-container-header">
+Custom Configuration String
+</div>
+<div class=" item-container-content">
+<textarea readonly="" id="CONFIG_STRING" value="" style="padding: 10px; width: 100%; height: 100%; background: transparent; resize: none; padding: 0; border: none; outline: none; boxshadow: none;"></textarea>
+</div></div>
+
+<div class="item-container">
+<div class="button-container">
+<input type="button" class="item-button" style="width: 40%;" name="BUTTON_COPY" value="COPY"> <input type="button" class="item-button" style="width: 40%;" name="BUTTON_PASTE" value="PASTE">
+</div>
+</div>
+</form>
+</body>
+</html>
+<style>
+	BODY { padding: 5px; }	
+	
+	#CONFIG_STRING {
+	    -webkit-touch-callout: text;
+	    -webkit-user-select: text;
+	    -khtml-user-select: text;
+	    -moz-user-select: text;
+	    -ms-user-select: text;
+	    user-select: text;
+	}
+	
+</style>
+<script language="javascript">
+
+	function saveOptions() 
+	{
+		var options = {
+			'KEY_CONFIG': FormatConfigString() + '|'
+		};
+		return options;
+	}
+
+	function FormatConfigString()
+	{
+//COLOR_BACKGROUND|COLOR_NUMBERS_HOURS|COLOR_NUMBERS_MINUTES|COLOR_DIAL_MINUTES|FORMAT_MINUTES|ROTATE_MINUTES
+
+		var ConfigArray = []; 
+
+		ConfigArray[0] = $("#COLOR_BACKGROUND").val().substring(1);
+		ConfigArray[1] = $("#COLOR_NUMBERS_HOURS").val().substring(1);
+		ConfigArray[2] = $("#COLOR_NUMBERS_MINUTES").val().substring(1);
+		ConfigArray[3] = $("#COLOR_DIAL_MINUTES").val().substring(1);
+		ConfigArray[4] = $("input[name='FORMAT_MINUTES']:checked").val();
+		ConfigArray[5] = Number($("#ROTATE_MINUTES").is(':checked'));
+
+		var ConfigString = ConfigArray.join("|"); //+'|';
+		return ConfigString.toUpperCase();	
+	}
+
+	function UpdateConfigString()
+	{
+		$("#CONFIG_STRING").val(FormatConfigString()+'_AROUND-THE-CLOCK_1.0');
+	}
+
+	function LoadConfigString(UseString)
+	{
+//COLOR_BACKGROUND|COLOR_NUMBERS_HOURS|COLOR_NUMBERS_MINUTES|COLOR_DIAL_MINUTES|FORMAT_MINUTES|ROTATE_MINUTES
+
+		if (!UseString) return;
+		console.log("UseString - " + UseString);
+		
+		UseString = UseString.trim();
+		UseString = UseString.replace(/\n|\r/g, "");
+		
+		StringArray = UseString.split('_');
+		UseString = StringArray[0];
+		
+		ConfigArray = UseString.split('|');
+		if (ConfigArray)
+		{
+			$("#COLOR_BACKGROUND").val('#'+ConfigArray[0]);
+			$("#COLOR_NUMBERS_HOURS").val('#'+ConfigArray[1]);
+			$("#COLOR_NUMBERS_MINUTES").val('#'+ConfigArray[2]);
+			$("#COLOR_DIAL_MINUTES").val('#'+ConfigArray[3]);
+			$('#FORMAT_MINUTES[value="' + ConfigArray[4] + '"]').prop('checked', true);
+			if (ConfigArray[5]==1) $("#ROTATE_MINUTES").prop("checked", "true");
+			else $("#ROTATE_MINUTES").prop("checked", 0);
+		}
+		UpdateConfigString();
+		$('.item-color').change();
+		$('#FORMAT_MINUTES').change();
+	}
+	
+	// Something like this to get query variables.
+	function getQueryParam(variable, defaultValue)
+	{
+		// Find all URL parameters
+		var query = location.search.substring(1);
+		var vars = query.split('&');
+		for (var i = 0; i < vars.length; i++) 
+		{
+			var pair = vars[i].split('=');
+			// If the query variable parameter is found, decode it to use and return it for use
+			if (pair[0] === variable) 
+			{
+				return decodeURIComponent(pair[1]);
+			}
+		}
+		return defaultValue || false;
+	}
+	
+	$().ready(function()
+    {
+		// LOAD FORM WITH SAVED OPTION SETTINGS   	
+    	if (typeof window.localStorage !== "undefined") 
+    	{
+    		console.log("Not undefined :)");
+    		var SavedString = window.localStorage.AroundTheClock10;
+    		LoadConfigString(SavedString);
+    		console.log("Load string from local storage: " + SavedString);			
+		}
+    	
+    	// INITIAL DISPLAY OF CUSTOM CONFIGUATION STRING
+		UpdateConfigString();
+		
+		// SET FORM OPTIONS TO UPDATE CONFIG STRING WHEN CHANGED
+		$(".OptionUpdate").change(function(){
+			UpdateConfigString();
+			//alert($(this).val());
+		});
+
+		$(document).on('click','input[type="radio"]', function(){       
+			UpdateConfigString();
+		});
+
+
+		// LOAD DEFAULT
+		$('#DEFAULTS').change(function()
+		{
+			if ($(this).val()) 
+			{
+				LoadConfigString($(this).val());
+				//alert($(this).val());
+			}
+    	});            
+
+		$("input[name=BUTTON_SUBMIT]").click(function() 
+		{
+			console.log("Submit");
+			var ConfigString = FormatConfigString();
+			if (typeof window.localStorage !== "undefined")
+			{
+				window.localStorage.AroundTheClock10 = ConfigString;
+			}
+			console.log("String: " + ConfigString);
+
+			// Set the return URL depending on the runtime environment
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+    		console.log("Save string to local storage: " + ConfigString);				
+			console.log("Return to: " + return_to);
+			console.log("Parameters: " + encodeURIComponent(ConfigString));
+
+			var return_value = JSON.stringify(saveOptions());
+			loc = return_to + encodeURIComponent(return_value);
+			console.log("Warping to: " + loc);
+			
+			//console.log(location);
+			document.location = loc;
+		});
+		
+		$("input[name=BUTTON_CANCEL]").click(function() 
+		{
+			console.log("Cancel");
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+			document.location = return_to;
+		});
+		
+		var copyTextareaBtn = document.querySelector('input[name=BUTTON_COPY]');
+		copyTextareaBtn.addEventListener('click', function(event)
+		{
+			var copyTextarea = document.querySelector('#CONFIG_STRING');
+			copyTextarea.select();
+			
+			try
+			{
+				var successful = document.execCommand('copy');
+				if (!successful) alert('This doesn\'t work with your browser (you must copy the Configuration String manually).');
+				//var msg = successful ? 'successful' : 'unsuccessful';
+				//console.log('Copying text command was ' + msg);
+			}
+			catch (err) 
+			{
+				console.log('Oops, unable to copy');
+			}
+		});
+		
+		$("input[name=BUTTON_PASTE]").click(function() 
+		{
+			var PasteString = prompt("Please paste a custom configuration string", "");
+		    if (PasteString != null) LoadConfigString(PasteString);
+		});
+		
+	});
+
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64921467-6', 'auto');
+  ga('send', 'pageview');
+</script>

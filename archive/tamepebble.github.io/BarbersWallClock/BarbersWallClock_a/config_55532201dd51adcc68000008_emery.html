@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<title>Barber's Wall Clock Configuration</title>
+		<link rel='stylesheet' type='text/css' href='/tamepebble.github.io/slate/css/slate.css'>
+		<script src='/tamepebble.github.io/slate/js/slate.js'></script>
+		<link rel='stylesheet' type='text/css' href='/tamepebble.github.io/css/tamegoro.css'>
+
+	</head>
+
+	<body>
+
+		<h1 class='title'>Barber's Wall Clock</h1>
+
+		<div class="item-container">
+			<div class="item-container-content">
+			</div>
+		</div>
+	
+		<form id="main-form">
+
+			<div class='item-container'>
+
+				<div class='item-container-header'>
+					Hand
+				</div>
+
+				<div class='item-container-content'>
+
+					<label class="item">
+						<img src="/tamepebble.github.io/BarbersWallClock/hand_diamond.png">
+						<input type="radio" class="item-radio" id="radio-hand-diamond" name="groupe-radio-hand" checked="">
+					</label>
+
+					<label class="item">
+						<img src="/tamepebble.github.io/BarbersWallClock/hand_trapezoid.png">
+						<input type="radio" class="item-radio" id="radio-hand-trapezoid" name="groupe-radio-hand">
+					</label>
+
+					<label class="item">
+						<img src="/tamepebble.github.io/BarbersWallClock/hand_pentagon.png">
+						<input type="radio" class="item-radio" id="radio-hand-pentagon" name="groupe-radio-hand">
+					</label>
+
+					<label class="item">
+						<img src="/tamepebble.github.io/BarbersWallClock/hand_arrow.png">
+						<input type="radio" class="item-radio" id="radio-hand-arrow" name="groupe-radio-hand">
+					</label>
+
+					<label class="item">
+						<img src="/tamepebble.github.io/BarbersWallClock/hand_rectangle.png">
+						<input type="radio" class="item-radio" id="radio-hand-rectangle" name="groupe-radio-hand">
+					</label>
+
+					<label class="item">
+						<img src="/tamepebble.github.io/BarbersWallClock/hand_round.png">
+						<input type="radio" class="item-radio" id="radio-hand-round" name="groupe-radio-hand">
+					</label>
+
+				</div>
+
+				<div class='item-container-footer'>
+				</div>
+
+			</div>
+
+			<div class='item-container'>
+
+				<div class='item-container-header'>
+					Color
+				</div>
+
+				<div class='item-container-content'>
+
+					<label class="item">
+						Invert
+						<input type="checkbox" class="item-toggle" id="toggle-invert">
+					</label>
+
+				</div>
+
+				<div class='item-container-footer'>
+				</div>
+
+			</div>
+
+			<div class='item-container'>
+
+				<div class='item-container-header'>
+					Item
+				</div>
+
+				<div class='item-container-content'>
+
+					<label class="item">
+						Second Hand
+						<input type="checkbox" class="item-toggle" id="toggle-item-secondhand" checked="">
+					</label>
+					<label class="item">
+						Date
+						<input type="checkbox" class="item-toggle" id="toggle-item-date" checked="">
+					</label>
+					<label class="item">
+						Number
+						<input type="checkbox" class="item-toggle" id="toggle-item-number" checked="">
+					</label>
+					<label class="item">
+						Index
+						<input type="checkbox" class="item-toggle" id="toggle-item-index" checked="">
+					</label>
+
+				</div>
+
+				<div class='item-container-footer'>
+				</div>
+
+			</div>
+
+			<div class='item-container'>
+
+				<div class='item-container-header'>
+					Vibration
+				</div>
+
+				<div class='item-container-content'>
+
+					<label class="item">
+						Time Signal (dot dot dot...)
+						<input type="checkbox" class="item-toggle" id="toggle-vibration-time-signal">
+					</label>
+					<label class="item">
+						Connection Lost (dash dot dot)
+						<input type="checkbox" class="item-toggle" id="toggle-vibration-connection" checked="">
+					</label>
+
+				</div>
+
+				<div class='item-container-footer'>
+				</div>
+
+			</div>
+
+			<div class='item-container'>
+
+				<div class='item-container-header'>
+					Tap
+				</div>
+
+				<div class='item-container-content'>
+
+					<label class="item">
+						None
+						<input type="radio" class="item-radio" id="radio-tap-none" name="groupe-radio-tap">
+					</label>
+					<label class="item">
+						Show Digital Watch
+						<input type="radio" class="item-radio" id="radio-tap-digital" name="groupe-radio-tap" checked="">
+					</label>
+
+				</div>
+
+				<div class='item-container-footer'>
+				</div>
+
+			</div>
+
+			<div class='item-container'>
+
+				<div class='item-container-header'>
+					Time Shift
+				</div>
+
+				<div class='item-container-content'>
+					<label class="item">
+						+[HH:MM]
+						<input type="time" class="item-time" id="time-shift" value="00:00">
+					</label>
+				</div>
+
+				<div class='item-container-footer'>
+				</div>
+
+			</div>
+
+			<div class='item-container'>
+
+				<div class='button-container'>
+					<input id='button-cancel' type='button' class='item-button' value='CANCEL'>
+					<input id='button-save' type='button' class='item-button' value='SAVE'>
+				</div>
+
+			</div>
+
+		</form>
+	
+	</body>
+
+<script src='/tamepebble.github.io/BarbersWallClock/BarbersWallClock_a.js'></script>
+
+</html>
+

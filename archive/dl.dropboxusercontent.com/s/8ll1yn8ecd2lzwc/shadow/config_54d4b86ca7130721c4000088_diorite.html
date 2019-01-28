@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Minute Shadow Configuration</title>
+  </head>
+  <body>
+    <h1>Minute Shadow Configuration</h1>
+    <p>Choose the settings for the Minute Shadow watchapp</p>
+
+    <p>Shadow orientation:
+    <select id="shadow_select">
+      <option value="horizontal">Horizontal</option>
+      <option value="vertical">Vertical</option>
+    </select>
+    </p>
+
+    <p>
+    <button id="save_button">Save</button>
+    </p>
+
+    <script>
+      //Setup to allow easy adding more options later
+      function saveOptions() {
+        var shadowSelect = document.getElementById("shadow_select");
+
+        var options = {
+          "shadow": shadowSelect.options[shadowSelect.selectedIndex].value
+        }
+        
+        return options;
+      };
+
+      var submitButton = document.getElementById("save_button");
+      submitButton.addEventListener("click", 
+        function() {
+          console.log("Submit");
+
+          var options = saveOptions();
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+          
+          document.location = location;
+        }, 
+      false);
+    </script>
+  </body>
+</html>
+

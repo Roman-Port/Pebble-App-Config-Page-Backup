@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Preference</title>
+    <!--
+         This page uses the Slate framework.
+         https://github.com/pebble/slate
+         Slate is licensed under MIT license.
+         See slate/LICENSE for details.
+       -->
+    <link rel="stylesheet" href="/www.tatapa.org/~takuo/hide_n_seek/slate/css/slate.css">
+  </head>
+  <body>
+    <div class="item-container">
+      <div class="item-container-header">Presets</div>
+      <div class="item-container-content">
+        <label class="item">
+          Presets
+          <select id="preset" name="preset" class="item-select">
+            <option class="item-select-option" value="original" selected="">Original</option>
+            <option class="item-select-option" value="white">White</option>
+            <option class="item-select-option" value="black">Black</option>
+            <option class="item-select-option" value="blue_lake">Blue Lake</option>
+            <option class="item-select-option" value="pink_candy">Pink Candy</option>
+            <option class="item-select-option" value="pink_alternative">Pink Alternative</option>
+            <option class="item-select-option" value="purple_on_green">Purple on Green</option>
+            <option class="item-select-option" value="blue_window">Blue Window</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Colors</div>
+      <div class="item-container-content">
+        <label class="item">
+          Background
+          <input type="text" class="item-color item-color-normal" id="background-color" name="background-color" value="#FFFFFF">
+        </label>
+
+        <label class="item">
+          Hour Hand
+          <input type="text" class="item-color item-color-normal" id="hour-hand-color" name="hour-hand-color" value="#FF5500">
+        </label>
+
+        <label class="item">
+          Minute Hand
+          <input type="text" class="item-color item-color-normal" id="minute-hand-color" name="minute-hand-color" value="#0055FF">
+        </label>
+
+        <label class="item">
+          Add Outlines for Hands
+          <input type="checkbox" class="item-toggle" id="hand-outline-color-enabled" name="hand-outline-color-enabled" checked="">
+        </label>
+
+        <label class="item">
+          Outlines for Hands
+          <input type="text" class="item-color item-color-normal" id="hand-outline-color" name="hand-outline-color" value="#000000">
+        </label>
+
+        <label class="item">
+          Ticks around Hour Hand
+          <input type="text" class="item-color item-color-normal" id="hour-tick-color" name="hour-tick-color" value="#FF5500">
+        </label>
+
+        <label class="item">
+          Ticks around Minute Hand
+          <input type="text" class="item-color item-color-normal" id="minute-tick-color" name="minute-tick-color" value="#0055FF">
+        </label>
+
+        <label class="item">
+          Add Outlines for Ticks
+          <input type="checkbox" class="item-toggle" id="tick-outline-color-enabled" name="tick-outline-color-enabled" checked="">
+        </label>
+
+        <label class="item">
+          Outlines for Ticks
+          <input type="text" class="item-color item-color-normal" id="tick-outline-color" name="tick-outline-color" value="#000000">
+        </label>
+
+        <label class="item">
+          Show Date
+          <input type="checkbox" class="item-toggle" id="date-color-enabled" name="date-color-enabled" checked="">
+        </label>
+      </div>
+      <div class="item-container-content">
+        <label class="item">
+          Date
+          <input type="text" class="item-color item-color-normal" id="date-color" name="date-color" value="#000000">
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Outline Width</div>
+      <div class="item-container-content">
+        <label class="item">
+          <input type="range" class="item-slider" name="outline-width" min="4" max="20" step="2" value="8">
+          <div class="item-input-wrapper item-slider-text">
+            <input id="outline-width" type="text" class="item-input" name="outline-width" value="8">
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="button-container">
+        <input id="submit" type="button" class="item-button" value="SAVE">
+      </div>
+    </div>
+
+    <script src="/www.tatapa.org/~takuo/hide_n_seek/slate/js/slate.js"></script>
+    <script src="/www.tatapa.org/~takuo/hide_n_seek/config.js"></script>
+    <script src="/www.tatapa.org/~takuo/hide_n_seek/config_3.js"></script>
+  </body>
+</html>

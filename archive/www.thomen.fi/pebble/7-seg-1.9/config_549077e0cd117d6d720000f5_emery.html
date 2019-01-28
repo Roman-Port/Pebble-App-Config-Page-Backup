@@ -1,0 +1,98 @@
+<html>
+ <head> 
+  <title>Configure 7-Seg</title>
+  <link rel="stylesheet" href="/www.thomen.fi/pebble/css/main.css">
+  <script language="javascript">
+
+var config;
+var halftone;
+var blink;
+var vibrate;
+var showtop;
+var showbottom;
+
+function load() {
+	var href=window.location.href;
+	var query=decodeURIComponent(href.slice(href.indexOf("#")+1));
+
+	config=JSON.parse(query);
+
+	halftone=document.getElementById("halftone");
+	blink=document.getElementById("blink");
+	vibrate=document.getElementById("vibrate");
+	showtop=document.getElementById("showtop");
+	showbottom=document.getElementById("showbottom");
+
+	halftone.checked=config.halftone;
+	blink.checked=config.blink;
+	vibrate.checked=config.vibrate;
+
+	/* upgraded from 1.4 */
+	if (typeof config.showtop === undefined) {
+		config.showtop = true;	
+		config.showbottom = true;	
+	}
+
+	showtop.checked=config.showtop;
+	showbottom.checked=config.showbottom;
+}
+
+function save() {
+	config={
+		halftone: halftone.checked,
+		blink: blink.checked,
+		vibrate: vibrate.checked,
+		showtop: showtop.checked,
+		showbottom: showbottom.checked
+	};
+
+	location.href="pebblejs://close#" +
+		encodeURIComponent(JSON.stringify(config));
+}
+
+function defaults() {
+	location.href="pebblejs://close#default";
+}
+
+function cancel() {
+	location.href="pebblejs://close#cancel";
+		
+}
+  </script>
+
+ </head>
+
+ <body onload="load()">
+  <h1>7-Seg v1.9</h1>
+  <h2>Options</h2>
+  <form>
+   <fieldset class="option">
+    <input type="checkbox" id="halftone">
+    <label>Use halftone shading</label>
+   </fieldset>
+   <fieldset class="option">
+    <input type="checkbox" id="blink">
+    <label>Blink colon every second</label>
+   </fieldset>
+   <fieldset>
+    <input type="checkbox" id="vibrate">
+    <label>Vibrate on bluetooth events</label>
+   </fieldset>
+   <fieldset>
+    <input type="checkbox" id="showtop">
+    <label>Show date row (top)</label>
+   </fieldset>
+   <fieldset>
+    <input type="checkbox" id="showbottom">
+    <label>Show info line (bottom)</label>
+   </fieldset>
+   <fieldset id="buttons">
+    <input onclick="javascript:cancel()" type="button" value="Cancel">
+    <input onclick="javascript:save()" type="button" value="Save">
+   </fieldset>
+   <fieldset id="reset">
+    <input onclick="javascript:defaults()" type="button" value="Factory defaults">
+   </fieldset>
+  </form>
+ </body>
+</html>

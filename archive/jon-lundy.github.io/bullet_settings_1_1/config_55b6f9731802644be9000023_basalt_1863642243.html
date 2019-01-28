@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Bullets Configuration</title>
+            <style>
+                body {
+                    background-color: black;
+                    color: white;
+                }
+                a:link {
+                    color: #00FFFF
+                }
+                a:visited {
+                    color: #FF0000
+                }
+                a:hover {
+                    color: #FF0000
+                }
+            </style>
+    </head>
+    <body>
+        <h1>Bullets</h1>
+        <h3>Configuration</h3>
+        <p>Choose settings, then press Save</p>
+        <p><input type="checkbox" id="use_12h"> Use 12-hour time</p>
+        <p><input type="checkbox" id="hide_battery"> Hide battery indicator</p>
+        <p><input type="checkbox" id="hide_date"> Hide date</p>
+        <p><button id="save_button">Save</button></p>
+        <div>
+            <p><em>Enjoying Bullets?</em> Consider sending a few bits for coffee...</p> 
+            <a href="bitcoin:1BGxAuEu9sCUXBs6RMY6VMVvhpit2xpz2v?amount=0.01&label=Bullet%20Watchface">
+            <img src="/jon-lundy.github.io//bullet_donation_qr.png"> 1BGxAuEu9sCUXBs6RMY6VMVvhpit2xpz2v</a>
+        </div>
+      </body>
+</html>
+<script>
+"use strict";
+
+function saveOptions() {
+    var use12hTime = document.getElementById("use_12h").checked
+        ? 1
+        : 0;
+    var hideBattery = document.getElementById("hide_battery").checked
+        ? 1
+        : 0;
+    var hideDate = document.getElementById("hide_date").checked
+        ? 1
+        : 0;
+
+    var options = {
+        use12hTime: use12hTime,
+        hideBattery: hideBattery,
+        hideDate: hideDate
+    };
+
+    return options;
+}
+
+function getQueryParam(variable, default_) {
+    var query = location.search.substring(1); //removes the ? from start of search string
+    var items = query.split('&');
+    var i, pair;
+    for (i = 0; i < items.length; i += 1) {
+        pair = items[i].split('=');
+        if (pair[0] === variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    return default_ || false;
+}
+
+function onClick() {
+    var options = saveOptions();
+    var return_to = getQueryParam("return_to", "pebblejs://close#");
+    var location = return_to + encodeURIComponent(JSON.stringify(options));
+    document.location = location;
+}
+
+// register event handler for save button
+var submitButton = document.getElementById("save_button");
+submitButton.addEventListener("click", onClick, false);
+
+// update checkboxes with starting values
+if (getQueryParam("use12hTime", 0) === "1") {
+    document.getElementById("use_12h").checked = true;
+}
+if (getQueryParam("hideBattery", 0) === "1") {
+    document.getElementById("hide_battery").checked = true;
+}
+if (getQueryParam("hideDate", 0) === "1") {
+    document.getElementById("hide_date").checked = true;
+}
+</script>

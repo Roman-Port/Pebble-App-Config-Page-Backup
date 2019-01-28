@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/joker512.github.io/treant-js/Treant.css">
+    <link rel="stylesheet" href="/joker512.github.io//connectors.css">
+    <title>Task Tracker Tree</title>
+  </head>
+
+  <body>
+    <div class="chart" id="taskTreeChart"> --@-- </div>
+    <script src="/joker512.github.io/treant-js/vendor/raphael.js"></script>
+    <script src="/joker512.github.io/treant-js/Treant.js"></script>
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/joker512.github.io//connectors.js"></script>
+
+    <div class="buttons">
+	<input type="submit" value="Submit" id="submit">
+	<input type="submit" value="Exit" id="cancel">
+    </div>
+    <script>
+        $().ready(function() {
+            $("#cancel").click(function() {
+                document.location = "pebblejs://close#";
+            });
+            $("#submit").click(function() {
+		var rootNode = chartConfig.nodeStructure;
+		clean(rootNode);
+                document.location = "pebblejs://close#" + encodeURIComponent(JSON.stringify([rootNode.children, rootNode.text.total, rootNode.text.accTotal]));
+            });
+            $(".ui-loader").remove();
+            $(".ui-btn-inner").remove();
+        });
+    </script>
+  </body>
+</html>

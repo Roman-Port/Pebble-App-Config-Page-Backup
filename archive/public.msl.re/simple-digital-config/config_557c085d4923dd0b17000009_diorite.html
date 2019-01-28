@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Digital Configuration</title>
+  </head>
+  <body>
+    <h2>Simple Digital Configuration</h2>
+    <p>
+      Choose settings, click 'Save' and reload app to apply.
+    </p>
+
+    <table>
+      <tr><td>Show date</td><td><input id='check_date' type='checkbox'></td></tr>
+    </table>
+
+    <p>
+    <button id='save_button'>Save</button>
+    </p>
+
+
+    <script>
+      function persistWrite(key, value) {
+        localStorage.setItem(key, value);
+      }
+
+      var persistRead = function(key, defaultValue) {
+        if(localStorage.getItem(key) === null) {
+          return defaultValue;
+        } else {
+          return localStorage.getItem(key);
+        }
+      };
+
+      function firstTimeSetup() {
+        if(!persistRead('first-time', false)) {
+          persistWrite('first-time', true);
+          console.log('This is the first launch!');
+
+          // Align with watchapp defaults
+          persistWrite('date', 'true');
+        }
+      }
+
+      function loadConfig() {
+        document.getElementById('check_date').checked = persistRead('date', 'false') === 'true';
+      }
+
+
+      var submitButton = document.getElementById('save_button');
+      submitButton.addEventListener('click',
+        function() {
+          var options = {
+            'date': document.getElementById('check_date').checked ? 'true' : 'false'
+          };
+          var location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(options));
+
+          persistWrite('date', options.date);
+
+          document.location = location;
+        },
+      false);
+
+      //getAppVersionAndNews();
+      firstTimeSetup();
+      loadConfig();
+    </script>
+  </body>
+</html>

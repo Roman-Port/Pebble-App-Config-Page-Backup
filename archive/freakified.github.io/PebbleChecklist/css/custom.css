@@ -1,0 +1,36 @@
+.main-toolbar {
+  background-color: #FF4700;
+  height: 48px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+
+.main-toolbar h1 {
+  font-size: 1.2em;
+  color: white;
+  padding: 0;
+  font-weight: 300;
+  position: absolute;
+  top: 14px;
+  left: 16px;
+}
+
+.main-toolbar h1::before {
+  content: '‹';
+  font-size: 40px;
+  position: absolute;
+  opacity: 0.6;
+  left: -12px;
+  top: -14px;
+}
+
+.item-button.disabled {
+  opacity: 0.4;
+  background-color: #BBB;
+}
+
+.hidden {
+  display: none;
+}

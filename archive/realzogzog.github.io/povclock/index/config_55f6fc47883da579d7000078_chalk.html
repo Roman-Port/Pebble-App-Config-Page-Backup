@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>POVClock Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/realzogzog.github.io/povclock/css/slate.css'>
+  <script src='/realzogzog.github.io/povclock/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>POVClock Configuration</h1>
+    
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Please choose the settings you would like applied to POVClock watch-face.
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+    
+      <div class='item-container-header'>Colors</div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Background
+          <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Major Led
+          <input id='maj_color_picker' type='text' class='item-color item-color-sunny' value='#FF0000'>
+        </label>
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Minor Led
+          <input id='min_color_picker' type='text' class='item-color item-color-sunny' value='#AA0000'>
+        </label>
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Circles
+          <input id='cir_color_picker' type='text' class='item-color item-color-sunny' value='#550000'>
+        </label>
+      </div>
+
+      <div class='item-container-footer'>
+        Caution: some colors combinations can render the watchface unreadable !
+      </div>
+
+		<div class='item-container-content'>
+		</div>
+
+    </div>
+    
+	<div class='item-container'>
+    
+      <div class='item-container-header'>Layout</div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Circles
+          <input id='cir_checkbox' type='checkbox' class='item-toggle' name="toggle-2">
+        </label>
+        <div class='item-container-footer'>
+        Draw background circles
+      </div>
+      </div>
+      
+      <div class='item-container-content'>
+		</div>
+      
+    </div>
+
+<div class="item-container">
+  <div class="button-container">
+    <input id='resetR_button' type="button" class="item-button" value="Default Red">    
+  </div>
+</div>
+
+<div class="item-container">
+  <div class="button-container">
+    <input id='resetG_button' type="button" class="item-button" value="Default Green">    
+  </div>
+</div>
+
+<div class="item-container">
+  <div class="button-container">
+    <input id='resetB_button' type="button" class="item-button" value="Default Blue">    
+  </div>
+</div>
+
+<br>
+
+<div class='item-container'>
+	<div class='button-container'>
+	  <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+	</div>
+</div>
+
+  </body>
+  <script>
+  function getConfigData() {
+  	var backgroundColorPicker = document.getElementById('background_color_picker');
+  	var majColorPicker = document.getElementById('maj_color_picker');
+  	var minColorPicker = document.getElementById('min_color_picker');
+  	var cirColorPicker = document.getElementById('cir_color_picker');
+  	var cirCheckbox = document.getElementById('cir_checkbox');
+
+  	var options = {
+  		'background_color': backgroundColorPicker.value,
+  		'maj_color': majColorPicker.value,
+  		'min_color': minColorPicker.value,
+  		'cir_color': cirColorPicker.value,
+  		'set_cir':cirCheckbox.checked
+  	};
+
+  	// Save for next launch
+  	localStorage['background_color'] = options['background_color'];
+  	localStorage['maj_color'] = options['maj_color'];
+  	localStorage['min_color'] = options['min_color'];
+  	localStorage['cir_color'] = options['cir_color'];
+  	localStorage['set_cir'] = options['set_cir'];
+
+  	console.log('Got options: ' + JSON.stringify(options));
+  	return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+  	var query = location.search.substring(1);
+  	var vars = query.split('&');
+  	for (var i = 0; i < vars.length; i++) {
+  		var pair = vars[i].split('=');
+  		if (pair[0] === variable) {
+  			return decodeURIComponent(pair[1]);
+  		}
+  	}
+  	return defaultValue || false;
+  }
+
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+  	console.log('Submit');
+
+  	// Set the return URL depending on the runtime environment
+  	var return_to = getQueryParam('return_to', 'pebblejs://close#');
+  	document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  var resetRButton = document.getElementById('resetR_button');
+  resetRButton.addEventListener('click', function() {
+  	console.log('Reset 2 Red');
+
+  	var backgroundColorPicker = document.getElementById('background_color_picker');
+  	var majColorPicker = document.getElementById('maj_color_picker');
+  	var minColorPicker = document.getElementById('min_color_picker');
+  	var cirColorPicker = document.getElementById('cir_color_picker');
+  	var cirCheckbox = document.getElementById('cir_checkbox');
+
+  	cirCheckbox.checked = true;
+  	backgroundColorPicker.value = '0x000000';
+  	majColorPicker.value = '0xFF0000';
+  	minColorPicker.value = '0xAA0000';
+  	cirColorPicker.value = '0x550000';
+
+  	// Save for next launch
+  	localStorage['background_color'] = '0x000000';
+  	localStorage['maj_color'] = '0xFF0000';
+  	localStorage['min_color'] = '0xAA0000';
+  	localStorage['cir_color'] = '0x550000';
+	localStorage['set_cir'] = true;
+  	window.location.reload();
+  });
+
+  var resetGButton = document.getElementById('resetG_button');
+  resetGButton.addEventListener('click', function() {
+  	console.log('Reset 2 Green');
+
+  	var backgroundColorPicker = document.getElementById('background_color_picker');
+  	var majColorPicker = document.getElementById('maj_color_picker');
+  	var minColorPicker = document.getElementById('min_color_picker');
+  	var cirColorPicker = document.getElementById('cir_color_picker');
+  	var cirCheckbox = document.getElementById('cir_checkbox');
+
+  	cirCheckbox.checked = true;
+  	backgroundColorPicker.value = '0x000000';
+  	majColorPicker.value = '0x00FF00';
+  	minColorPicker.value = '0x00AA00';
+  	cirColorPicker.value = '0x005500';
+
+  	// Save for next launch
+  	localStorage['background_color'] = '0x000000';
+  	localStorage['maj_color'] = '0x00FF00';
+  	localStorage['min_color'] = '0x00AA00';
+  	localStorage['cir_color'] = '0x005500';
+	localStorage['set_cir'] = true;
+  	window.location.reload();
+  });
+
+
+  var resetBButton = document.getElementById('resetB_button');
+  resetBButton.addEventListener('click', function() {
+  	console.log('Reset 2 Blue');
+
+  	var backgroundColorPicker = document.getElementById('background_color_picker');
+  	var majColorPicker = document.getElementById('maj_color_picker');
+  	var minColorPicker = document.getElementById('min_color_picker');
+  	var cirColorPicker = document.getElementById('cir_color_picker');
+  	var cirCheckbox = document.getElementById('cir_checkbox');
+
+  	cirCheckbox.checked = true;
+  	backgroundColorPicker.value = '0x000000';
+  	majColorPicker.value = '0x0000FF';
+  	minColorPicker.value = '0x0000AA';
+  	cirColorPicker.value = '0x000055';
+
+  	// Save for next launch
+  	localStorage['background_color'] = '0x000000';
+  	localStorage['maj_color'] = '0x0000FF';
+  	localStorage['min_color'] = '0x0000AA';
+  	localStorage['cir_color'] = '0x000055';
+	localStorage['set_cir'] = true;
+  	window.location.reload();
+  });
+
+
+  (function() {
+  	var backgroundColorPicker = document.getElementById('background_color_picker');
+  	var majColorPicker = document.getElementById('maj_color_picker');
+  	var minColorPicker = document.getElementById('min_color_picker');
+  	var cirColorPicker = document.getElementById('cir_color_picker');
+  	var cirCheckbox = document.getElementById('cir_checkbox');
+
+  	// Load any previously saved configuration, if available
+  	if (localStorage['maj_color']) {
+  		
+  		cirCheckbox.checked = JSON.parse(localStorage['set_cir']);
+  		
+  		backgroundColorPicker.value = localStorage['background_color'];
+  		majColorPicker.value = localStorage['maj_color'];
+  		minColorPicker.value = localStorage['min_color'];
+  		cirColorPicker.value = localStorage['cir_color'];
+  	} else {
+  		cirCheckbox.checked = true;
+  	}
+  })();
+
+  </script>
+</html>

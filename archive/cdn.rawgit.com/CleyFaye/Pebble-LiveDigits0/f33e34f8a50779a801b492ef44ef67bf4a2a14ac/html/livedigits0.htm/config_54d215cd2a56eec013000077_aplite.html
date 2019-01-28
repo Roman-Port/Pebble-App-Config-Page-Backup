@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html><head><title>LiveDigits0</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="/code.jquery.com/mobile/1.4.2/jquery.css"><script type="text/javascript" src="/code.jquery.com//jquery-1.js"></script><script type="text/javascript" src="/code.jquery.com/mobile/1.4.2/jquery.js"></script><script type="text/javascript">function d(){var a={};$('textarea,select,[type="hidden"],[type="password"],[type="text"]').each(function(){$(this).is(".ui-slider-switch")?a[$(this).attr("id")]="on"==$(this).val()?"1":"0":a[$(this).attr("id")]=$(this).val()});$('[type="checkbox"]').each(function(){a[$(this).attr("id")]=$(this).is(":checked")?"1":"0"});$('[type="radio"]').each(function(){$(this).is(":checked")&&(a[$(this).attr("name")]=$(this).attr("value"))});return a}
+function e(){"function"===typeof doHandleChange&&doHandleChange()}
+function f(){var a=window.location.search.substring(1),a=0==a.length?loadDefaults():jQuery.parseJSON(decodeURIComponent(a)),c;for(c in a){var b="#"+c;0==$(b).length?($('input[name="'+c+'"][value="'+a[c]+'"]').attr("checked",!0).checkboxradio("refresh"),$("[name="+c+"]").bind("change",e)):($(b).is(".ui-slider-switch")?($(b).val("1"==a[c]?"on":"off"),$(b).slider("refresh")):$(b).is("select")?($(b).val(a[c]),$(b).selectmenu("refresh")):$(b).is('[type="checkbox"]')&&($(b).attr("checked","1"==a[c]),$(b).checkboxradio("refresh")),
+$(b).bind("change",e))}return!0}$().ready(function(){$("#b-cancel").click(function(){document.location="pebblejs://close"});$("#b-submit").click(function(){var a=d(),a=JSON.stringify(a);document.location="pebblejs://close#"+encodeURIComponent(a)});$("#force_button").click(function(){$("#config_box").show(600);$("#message_box").hide(600)});f()?$("#config_box").show(600):$("#message_box").show(600);$("#loading_box").hide(600);$("#tabs").tabs({a:0});e()});
+
+function loadDefaults() { return {"bluetooth_style": "3", "vibrate_every": "0", "vibrate_not_before": "7", "seconds_position": "4", "battery_style": "1", "skip_digits": "1", "bluetooth_position": "1", "base_layout": "0", "anim_speed_forced": "3", "minutes_position": "1", "invert_colors": "0", "anim_on_time": "1", "display_daytime": "1", "battery_position": "0", "seconds_style": "1", "vibrate_not_after": "21", "date_style": "1", "anim_on_load": "0", "hour_position": "0", "anim_on_shake": "0", "display_widgets": "0", "anim_speed_normal": "1", "date_position": "2"}; }</script></head><body><div data-role="page" id="main"><div data-role="header" class="jqm-header"><h1>LiveDigits0</h1></div><div data-role="content" id="loading_box">Please wait, loading...</div><div data-role="content" id="message_box" style="display: none;"><p>Thanks for installing this WatchFace! To open the configuration panel, make sure that the watchface is currently active on your Pebble. Then go to the Pebble App on your phone, select the watchface, and choose "Settings".</p><p>If after following this procedure you keep getting this message, <a href="#" id="force_button">touch here</a> to open it anyway. Note that in that case your old settings may not be displayed correctly.</p></div><div data-role="content" id="config_box" style="display: none;"><div id="batterybar" style="border: 1px solid black; ">
+    <div>Estimated battery impact: <span id="batteryimpact">-</span></div>
+    <div id="batterygradient" style="background: linear-gradient(to right, white, white, white, white, red, red);">&nbsp;</div>
+</div>
+<span>Version: 1.4</span>
+<script type="text/javascript">
+    $('#batteryimpact').html('Immense');
+    function getRadio(name) {
+        console.log('Getting radio:' + name);
+        console.log($('[name="' + name + '"]:checked').val());
+        return $('[name="' + name + '"]:checked').val();
+    }
+    function getSelect(name) {
+        return $('#' + name).val();
+    }
+    function doHandleChange() {
+        var score = 2;
+        // Battery impact is calculated on an hour (and using totally out of the blue estimates...)
+        // General tab:
+        // Vibration is worth 10 points for each short vibe. 10 for every hour, 600 for every minutes
+        switch ($('#vibrate_every').val()) {
+            case '1': score += 600; break;
+            case '2': score += 10; break;
+        }
+        // Max impact: 600
+        // Animation tab
+        // If digits are animated, speed sets the cost. Each animation step is roughly 2 for fast, 4 for slow.
+        // If fast wrap is activated, multiply the animation cost by 0.7
+        // From 0 to 0 there is 2+2+2+1+1+1+2+2+1+1=15 animations steps, 10 when merged.
+        if ($('#anim_on_time').val() == 'on') {
+            var anim_cost = 0;
+            switch (getRadio('anim_speed_normal')) {
+                case '0': anim_cost = 15 * 2 * 4; break;
+                case '1': anim_cost = 10 * 2 * 4; break;
+                case '2': anim_cost = 15 * 2 * 2; break;
+                case '3': anim_cost = 10 * 2 * 2; break;
+            }
+            if ($('#skip_digits').val() == 'on') {
+                anim_cost *= 0.7;
+            }
+            score += anim_cost;
+        }
+        // Max impact: 120
+        // Extra tab
+        // Almost the same calculation than normal anim, but with different conditions
+        // Half less important because it only move a little
+        var forced_anim_cost = 0;
+        switch (getRadio('anim_speed_forced')) {
+            case '0': forced_anim_cost = 15 * 2 * 4; break;
+            case '1': forced_anim_cost = 10 * 2 * 4; break;
+            case '2': forced_anim_cost = 15 * 2 * 2; break;
+            case '3': forced_anim_cost = 10 * 2 * 2; break;
+        }
+        if ($('#skip_digits').val() == 'on') {
+            forced_anim_cost *= 0.7;
+        }
+        forced_anim_cost /= 2;
+        var real_forced_anim_cost = 0;
+        // If light is forced during these anims, more battery cost
+        var usingLight = $('#force_light').val() == 'on';
+        if ($('#anim_on_shake').val() == 'on') {
+            // Assuming someone not shaking is watch continuously
+            real_forced_anim_cost += forced_anim_cost;
+            if (usingLight) {
+                real_forced_anim_cost += 100;
+            }
+        }
+        if ($('#anim_on_load').val() == 'on') {
+            // Load event is more rare
+            real_forced_anim_cost += forced_anim_cost / 2;
+            if (usingLight) {
+                real_forced_anim_cost += 50;
+            }
+        }
+        score += real_forced_anim_cost;
+        // Max impact: 240
+        // Widgets tab
+        // Displaying always mostly impact the seconds meter. On shake imply a minimal impact because it only refresh the screen twices
+        var widgets_multiplier = 0;
+        var widgets_long_multiplier = 0;
+        switch (getSelect('display_widgets')) {
+            case '0': widgets_multiplier = 0; widgets_long_multiplier = 20; break;
+            case '1': widgets_multiplier = 2; widgets_long_multiplier = 1; break;
+            case '2': widgets_multiplier = 2; widgets_long_multiplier = 2; break;
+            case '3': widgets_multiplier = 1; widgets_long_multiplier = 0; break;
+        }
+        // Date have no noticeable impact (not animated, not polled).
+        // Bluetooth is the same, except if it is set to vibrate on loss
+        var bluetooth_impact = 0;
+        if (getSelect('bluetooth_position') != '0') {
+            switch (getSelect('bluetooth_style')) {
+                case '3':
+                case '5':
+                bluetooth_impact = 5;
+            }
+        }
+        // Battery (ironically) have minimal impact. Display is changed every percent change.
+        var battery_static_impact = 0;
+        var battery_longrun_impact = 0;
+        if (getSelect('battery_position') != '0') {
+            switch (getSelect('battery_style')) {
+                case '0': battery_static_impact = 1; battery_longrun_impact = 0; break;
+                case '1': battery_static_impact = 1; battery_longrun_impact = 5; break;
+                case '2': battery_static_impact = 1; battery_longrun_impact = 0; break;
+            }
+        }
+        // Seconds. Less costly is static, most costly is animated digits.
+        var seconds_static_impact = 0;
+        var seconds_longrun_impact = 0;
+        if (getSelect('seconds_position') != '0') {
+            seconds_static_impact = 1;
+            switch (getSelect('seconds_style')) {
+                case '0': seconds_longrun_impact = 5; break;
+                case '1': seconds_longrun_impact = 0; break;
+                // We use fastest animation, which should last slightly less than one second. One "longrun" unit is three seconds.
+                case '2': seconds_longrun_impact = (40 * 3) / 2; break; // Divide by two because otherwise the value is just silly (although realistic)
+            }
+        }
+        var static_impact = seconds_static_impact + battery_static_impact;
+        static_impact *= widgets_multiplier;
+        var longrun_impact = seconds_longrun_impact + battery_longrun_impact;
+        longrun_impact *= widgets_long_multiplier;
+        score += static_impact + longrun_impact + bluetooth_impact;
+        // Max impact: 1200
+        
+        // Max: 2222
+        var batt_metter = score / 2300 * 31;
+        // Now it's from 0 to 31
+        // Build gradient
+        var gradient = '';
+        var i = 0;
+        var bad_color;
+        var impact;
+        if (score < 40) {
+            bad_color = 'green';
+        } else if (score < 200) {
+            bad_color = 'orange';
+        } else if (score < 2000) {
+            bad_color = 'red';
+        } else {
+            bad_color = 'black';
+        }
+        if (score < 10) {
+            impact = 'Negligible';
+        } else if (score < 40) {
+            impact = 'Very low';
+        } else if (score < 100) {
+            impact = 'Low';
+        } else if (score < 200) {
+            impact = 'Acceptable';
+        } else if (score < 500) {
+            impact = 'Large';
+        } else if (score < 1000) {
+            impact = 'Very large';
+        } else if (score < 2000) {
+            impact = 'Huge';
+        } else {
+            impact = 'Keep the Pebble plugged in!';
+        }
+        $('#batteryimpact').html(impact);
+        for (; i < 30 - batt_metter; ++i) {
+            gradient = gradient + 'white, ';
+        }
+        for (; i < 30; ++i) {
+            gradient = gradient + bad_color + ', ';
+        }
+        gradient = 'linear-gradient(to right, ' + gradient + bad_color + ')';
+        $('#batterygradient').css('background', gradient);
+        console.log('Score:' + score);
+    }
+</script>
+<div data-role="tabs" id="tabs"><div data-role="navbar"><ul><li><a href="#sec0" data-ajax="false">General</a></li><li><a href="#sec1" data-ajax="false">Anim.</a></li><li><a href="#sec2" data-ajax="false">Extra</a></li><li><a href="#sec3" data-ajax="false">Widgets</a></li></ul></div><div id="sec0"><div data-role="fieldcontain"><label for="hour_position">Hour position</label><select name="hour_position" id="hour_position"><option value="0">Left</option><option value="1">Right</option></select></div><div data-role="fieldcontain"><label for="minutes_position">Minutes position</label><select name="minutes_position" id="minutes_position"><option value="0">Left</option><option value="1">Right</option></select></div><div data-role="fieldcontain"><label for="base_layout">Basic layout</label><select name="base_layout" id="base_layout"><option value="0">Hour on top, Minute on bottom</option><option value="1">Minute on top, hour on bottom</option></select></div><div data-role="fieldcontain"><label for="invert_colors">Invert colors</label><input type="checkbox" name="invert_colors" id="invert_colors"></div><div data-role="fieldcontain"><label for="vibrate_every">Vibrate</label><select name="vibrate_every" id="vibrate_every"><option value="0">Disabled</option><option value="1">Every minutes</option><option value="2">Every hour</option></select></div><div data-role="fieldcontain"><label for="vibrate_not_before">Do not vibrate before (hour)</label><select name="vibrate_not_before" id="vibrate_not_before"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option></select></div><div data-role="fieldcontain"><label for="vibrate_not_after">Do not vibrate after (hour)</label><select name="vibrate_not_after" id="vibrate_not_after"><option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option></select></div><div data-role="fieldcontain"><label for="display_daytime">Display AM/PM in 12h mode</label><input type="checkbox" name="display_daytime" id="display_daytime"></div></div><div id="sec1"><div data-role="fieldcontain"><label for="skip_digits">Numbers wrap quickly (avoid displaying things like 49:83)</label><select name="skip_digits" id="skip_digits" data-role="slider"><option value="off">Off</option><option value="on">On</option></select></div><div data-role="fieldcontain"><label for="anim_on_time">Animate digits with time</label><select name="anim_on_time" id="anim_on_time" data-role="slider"><option value="off">Off</option><option value="on">On</option></select></div><fieldset data-role="controlgroup"><legend>Animation speed</legend><input type="radio" name="anim_speed_normal" id="anim_speed_normal_0" value="0"><label for="anim_speed_normal_0">Slow, separate each steps</label><input type="radio" name="anim_speed_normal" id="anim_speed_normal_1" value="1"><label for="anim_speed_normal_1">Slow, constant speed</label><input type="radio" name="anim_speed_normal" id="anim_speed_normal_2" value="2"><label for="anim_speed_normal_2">Fast, separate each steps</label><input type="radio" name="anim_speed_normal" id="anim_speed_normal_3" value="3"><label for="anim_speed_normal_3">Fast, constant speed</label></fieldset></div><div id="sec2"><div data-role="fieldcontain"><label for="anim_on_load">Animate when the watchface is loaded</label><select name="anim_on_load" id="anim_on_load" data-role="slider"><option value="off">Off</option><option value="on">On</option></select></div><div data-role="fieldcontain"><label for="anim_on_shake">Animate when the Pebble is shaked</label><select name="anim_on_shake" id="anim_on_shake" data-role="slider"><option value="off">Off</option><option value="on">On</option></select></div><fieldset data-role="controlgroup"><legend>Extra animation speed</legend><input type="radio" name="anim_speed_forced" id="anim_speed_forced_0" value="0"><label for="anim_speed_forced_0">Slow, separate each steps</label><input type="radio" name="anim_speed_forced" id="anim_speed_forced_1" value="1"><label for="anim_speed_forced_1">Slow, constant speed</label><input type="radio" name="anim_speed_forced" id="anim_speed_forced_2" value="2"><label for="anim_speed_forced_2">Fast, separate each steps</label><input type="radio" name="anim_speed_forced" id="anim_speed_forced_3" value="3"><label for="anim_speed_forced_3">Fast, constant speed</label></fieldset></div><div id="sec3"><div data-role="fieldcontain"><label for="display_widgets">Display widgets</label><select name="display_widgets" id="display_widgets"><option value="0">Always</option><option value="1">On shake (3s)</option><option value="2">On shake (6s)</option><option value="3">Never</option></select></div><div data-role="fieldcontain"><label for="date_position">Display date</label><select name="date_position" id="date_position"><option value="0">Disabled</option><option value="1">First line</option><option value="2">Second line</option><option value="3">Third line</option><option value="4">Fourth line</option></select></div><div data-role="fieldcontain"><label for="date_style">Date style</label><select name="date_style" id="date_style"><option value="0">Day only</option><option value="1">Day/Month</option><option value="2">Month only</option><option value="3">Month/Day</option></select></div><div data-role="fieldcontain"><label for="seconds_position">Display seconds</label><select name="seconds_position" id="seconds_position"><option value="0">Disabled</option><option value="1">First line</option><option value="2">Second line</option><option value="3">Third line</option><option value="4">Fourth line</option></select></div><div data-role="fieldcontain"><label for="seconds_style">Seconds style</label><select name="seconds_style" id="seconds_style"><option value="0">Blinking dot</option><option value="1">Fixed digits</option><option value="2">Animate</option></select></div><div data-role="fieldcontain"><label for="bluetooth_position">Display Bluetooth status</label><select name="bluetooth_position" id="bluetooth_position"><option value="0">Disabled</option><option value="1">First line</option><option value="2">Second line</option><option value="3">Third line</option><option value="4">Fourth line</option></select></div><div data-role="fieldcontain"><label for="bluetooth_style">Bluetooth style</label><select name="bluetooth_style" id="bluetooth_style"><option value="0">Always visible</option><option value="1">Only when connected</option><option value="2">Only when disconnected</option><option value="3">Only when disconnected (with vibration)</option><option value="4">Only when disconnected (force display)</option><option value="5">Only when disconnected (with vibration, force display)</option></select></div><div data-role="fieldcontain"><label for="battery_position">Display Pebble battery status</label><select name="battery_position" id="battery_position"><option value="0">Disabled</option><option value="1">First line</option><option value="2">Second line</option><option value="3">Third line</option><option value="4">Fourth line</option></select></div><div data-role="fieldcontain"><label for="battery_style">Battery style</label><select name="battery_style" id="battery_style"><option value="0">Percentage left</option><option value="1">Four-level states (&gt;75%, &gt;50%, &gt;25%, &lt;25%)</option></select></div></div></div><div class="ui-body ui-body-b"><fieldset class="ui-grid-a"><div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div><div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div></fieldset></div></div></div></body></html>

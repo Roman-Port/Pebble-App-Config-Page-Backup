@@ -1,0 +1,349 @@
+.header_53 .mycart {min-height:28px;}
+.ie6 .header_53 .mycart {height:28px;}
+.logo_row p {text-align:right;}
+.mainboard {border:1px solid #ddd; border-top:0; padding:15px 15px 0 15px; margin-bottom:5px;}
+.wrapper {overflow:hidden;}
+.ie6 .wrapper {zoom:1;}
+a img {border:0;}
+
+.cols2_r318 {padding-right:318px;}
+.cols2_r318_l {width:100%; float:left; margin-right:-318px; border-right:318px solid #fff;}
+.cols2_r318_r {width:318px; float:left; margin-right:-318px;} 
+.cols2_r318_l_in {padding-right:15px;}
+
+.frameMain .frw_l {background:url(../images/fr_main_bord.gif) left repeat-y;}
+.frameMain .frw_r {background:url(../images/fr_main_bord.gif) right repeat-y;}
+.frameMain .frw_t {background:#fff url(../images/fr_main_bord.gif) top repeat-x;}
+.frameMain .frw_b {background:url(../images/fr_main_bord.gif) bottom repeat-x;}
+.frameMain .frw_tl {background:url(../images/fr_main_t_l.gif) left top no-repeat;}
+.frameMain .frw_tr {background:url(../images/fr_main_t_r.gif) right top no-repeat;}
+.frameMain .frw_bl {background:url(../images/fr_main_b_l.gif) left bottom no-repeat;}
+.frameMain .frw_br {background:url(../images/fr_main_b_r.gif) right bottom no-repeat;}
+
+.frameMainBlue .frw_l {background:url(../images/fr_main_blue_bord.gif) left repeat-y;}
+.frameMainBlue .frw_r {background:url(../images/fr_main_blue_bord.gif) right repeat-y;}
+.frameMainBlue .frw_t {background:#f5fdff url(../images/fr_main_blue_t.gif) top repeat-x;}
+.frameMainBlue .frw_b {background:url(../images/fr_main_blue_bord.gif) bottom repeat-x;}
+.frameMainBlue .frw_tl {background:url(../images/fr_main_blue_t_l.gif) left top no-repeat;}
+.frameMainBlue .frw_tr {background:url(../images/fr_main_blue_t_r.gif) right top no-repeat;}
+.frameMainBlue .frw_bl {background:url(../images/fr_main_blue_b_l.gif) left bottom no-repeat;}
+.frameMainBlue .frw_br {background:url(../images/fr_main_blue_b_r.gif) right bottom no-repeat;}
+
+.b_continue {background:url(../images/b_continue.gif) no-repeat; width:188px; height:42px;}
+.b_place_order {background:url(../images/b_place_order_big.gif) no-repeat; width:217px; height:42px;}
+.b_finish {background:url(../images/b_finish.gif) no-repeat; width:154px; height:42px;}
+
+.form_wrap {width:585px; margin-left:auto; margin-right:auto; color:#000;}
+.f_steps {padding:9px 20px 15px 20px;}
+.f_steps fieldset {height:31px; overflow:hidden; font:bold 13px Arial, Helvetica, sans-serif; padding:0;}
+.f_steps fieldset div {border:1px solid #a4aeb4; float:left; height:21px; overflow:hidden; background:#fff;}
+.f_steps fieldset div.hover {  } /* border-color:#aab0ff; background-color:#e6f0ff; wechanged */
+.frameMainBlue .f_steps fieldset div.hover {  } /* border-color:#7788ff; background-color:#eee; wechanged */
+.f_steps fieldset div.focused {border-color:#397cca;} /* red:ff6c00 / green:5dbf00 / blue:397cca wechanged */
+.f_steps fieldset div.error {border:2px solid #f00; background:#fff7ac;}
+.f_steps fieldset div input {border:0; background:transparent; margin:0 8px; padding:3px 0; width:131px;}
+.f_steps .phone div input {width:141px;}
+.f_steps .eaddr div input {width:271px;}
+.f_steps .zip div input {width:105px !important;}
+.f_steps b {float:left; margin-top:6px; margin-left:7px; color:#000;}
+.f_steps em {float:left; font-style:normal; margin:4px 7px 0 7px;}
+.f_steps select {float:left; height:23px; padding:2px; margin-left:0px; } /* border:2px solid red; background-color:#fff8ac; wechanged */
+.f_steps select.foc {border:1px solid red;}
+.f_steps select.error {border:2px solid #f00; background:#fff7ac;}
+.f_steps .hr {height:7px; font-size:0; border-bottom:1px solid #cacaca;}
+.f_steps h2 {font:bold 19px Arial, Helvetica, sans-serif; padding:10px 0 4px 15px;}
+.f_steps p {padding:3px 0 17px 15px;}
+.f_steps a {float:left; margin-top:4px; font-weight:normal; font-size:11px; padding-left:1px; margin-left:10px;}
+.f_steps a:hover {text-decoration:none;}
+.f_steps label {float:left; width:122px; text-align:right; margin-right:13px; margin-top:3px; display:inline; color:#000;}
+.f_steps fieldset.security div input {width:48px;}
+/* ERROR STATE */
+.f_steps *.error {color:#f00000; border-color:#f00; background:#fff7ac;}
+
+.myOrderSummary .frameMain_in {padding:1px 1px 1px 1px;}
+.myOrderSummary small {font-size:11px;}
+.myOrderSummary em {font-style:normal; font-weight:bold;}
+.myOrderSummary .title {padding:0 20px 0 15px; height:33px; overflow:hidden; line-height:33px;}
+.myOrderSummary .title h2 {float:left; color:#000; font:bold 15px/33px Arial, Helvetica, sans-serif;}
+.myOrderSummary .title small {float:right; color:#7f7f7f;}
+.myOrderSummary ul {list-style:none; margin:0; padding:0; font-size:13px; line-height:31px; border-top:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1;}
+.myOrderSummary ul li {overflow:hidden; height:31px; margin:0; padding:0 27px 0 15px;}
+.myOrderSummary ul li.even {background:#f5f5f5;}
+.myOrderSummary ul b {float:left;}
+.myOrderSummary ul a {float:right; margin-left:5px; margin-top:6px; background:url(../images/mark_remove.gif) left -32px no-repeat; height:17px; width:17px; text-indent:-999px;}
+.myOrderSummary ul li.even a {background-position:left top;}
+.myOrderSummary ul a:hover {background-position:-17px -32px;}
+.myOrderSummary ul li.even a:hover {background-position:-17px top;}
+.myOrderSummary ul em {float:right; width:75px;}
+.myOrderSummary .subtotal {line-height:30px; height:30px; margin-right:14px; margin-left:auto; width:309px; border-bottom:1px solid #cbcbcb; overflow:hidden;}
+.myOrderSummary .subtotal span, .myOrderSummary .total em {float:right; width:110px; margin-left:37px;}
+.myOrderSummary .subtotal small, .myOrderSummary .total b {float:right;}
+.myOrderSummary .total {height:37px; overflow:hidden; line-height:37px; font-size:18px; padding-right:14px; padding-bottom:5px;}
+
+.placeOrder p {font-size:12px; padding:0 0 17px 25px;}
+.placeOrder p.nb {padding:0 0 0 135px;}
+.placeOrder form.f_steps {padding:19px 1px 20px 1px;}
+.placeOrder form.f_steps fieldset.submit {padding-top:2px; padding-left:135px; height:51px;}
+
+.columns296 .column {width:296px; float:left;}
+.columns296 .mr {margin-right:15px;}
+.columns296 .minheight {min-height:142px;}
+.ie6 .columns296 .minheight {height:142px;}
+
+.promise .frameMain_in {padding:0 10px 0 20px;}
+.promise h2 {padding:14px 0 4px 0; color:#007ece; font:bold 16px/19px Arial, Helvetica, sans-serif;}
+.promise img {float:left; margin-top:2px; margin-right:11px;}
+.promise p {line-height:21px; padding:0;}
+.promise p a:hover {text-decoration:none;}
+
+.usp .frameMain_in {padding:0 10px 0 20px;}
+.usp h2 {padding:14px 0 4px 0; color:#007ece; font:bold 16px/19px Arial, Helvetica, sans-serif;}
+.usp p {line-height:17px; padding:0;}
+.usp p.bottom {font-size:12px;}
+.usp big {display:block; font-weight:bold; font-size:23px; padding-top:7px; padding-bottom:2px;}
+
+.liveChat {background:url(../images/live_chat.jpg) no-repeat; width:211px; height:47px; padding-top:7px; padding-left:85px;}
+.liveChat h2 {height:18px; padding:0; overflow:hidden;}
+.liveChat h2 span {color:#007ece; font:bold 16px Arial, Helvetica, sans-serif; float:left; padding-right:25px; background:url(../images/i_chat.gif) right 50% no-repeat; height:16px; margin-right:10px;}
+.liveChat h2 a {font-weight:normal; font-size:11px; color:#317dca; float:left; margin-top:3px;}
+.liveChat h2 a:hover {text-decoration:none;}
+.liveChat p {font:11px Verdana, Arial, Helvetica, sans-serif; padding:4px 0 0 0;}
+
+.over3000 .frameMain_in {padding-left:20px; padding-right:10px;}
+.over3000 .height73 {min-height:73px;}
+.ie6 .over3000 .height73 {height:73px;}
+.over3000 h2 {padding:14px 0 5px 0; color:#007ece; font:bold 16px/19px Arial, Helvetica, sans-serif;}
+.over3000 p {padding:0;}
+.over3000 .logos {padding-top:13px;}
+.over3000 .logos a {vertical-align:bottom; margin-right:6px;}
+
+.stars10 {height:13px; display:inline-block; vertical-align:middle; background:url(../images/stars10_05.gif) left 50% no-repeat;}
+.stars10_1 {background-image:url(../images/stars10_04.gif); width:11px;}
+.stars10_2 {background-image:url(../images/stars10_04.gif); width:25px;}
+.stars10_3 {background-image:url(../images/stars10_04.gif); width:39px;}
+.stars10_4 {background-image:url(../images/stars10_04.gif); width:53px;}
+.stars10_5 {background-image:url(../images/stars10_05.gif); width:66px;}
+
+.testimonials_brief .frameMain_in {padding:18px 10px 14px 31px;}
+.testimonials_brief h2 {color:#007ece; font:bold 18px Arial, Helvetica, sans-serif; padding:9px 0 0 38px; height:22px; background:url(../images/i_lock.gif) left top no-repeat;}
+.testimonials_brief ul {list-style:none; margin:0; padding:7px 0 0 0; line-height:21px;}
+.testimonials_brief ul li {margin:0; padding:0 0 0 14px; background:url(../images/mark_blue_4x4.gif) left 8px no-repeat;}
+.testimonials_brief ul li a {color:#000;}
+.testimonials_brief ul li a:hover {color:#007ece;}
+
+.next_to_do {padding:0; line-height:19px;}
+.next_to_do strong {color:#007ece; font-size:16px;}
+
+.site_sign {border-top:1px solid #ccc; line-height:20px; padding-top:10px; padding-bottom:12px;}
+.site_sign p {padding:0; font-size:11px; color:#8a8a8a;}
+.site_sign p a {color:#0063e0;}
+.site_sign p a:hover {text-decoration:none;}
+
+.f_steps .steps_checkout h2 {font:bold 24px Arial, Helvetica, sans-serif; padding:0 0 4px 25px;}
+.f_steps .steps_checkout label.rght {width:auto; margin-left:11px; margin-right:7px;}
+.f_steps .steps_checkout fieldset div input.lastName {width:147px;}
+
+.f_steps .steps_payInfo p.cards {width:490px; background:url(../images/cards.gif) right top no-repeat;}
+.f_steps .steps_payInfo label {width:213px;}
+.f_steps .steps_payInfo fieldset div input {width:261px;}
+.f_steps .steps_payInfo fieldset.security div input {width:48px;}
+
+.f_steps .steps_billAddr label {width:213px;}
+.f_steps .steps_billAddr fieldset div input {width:261px;}
+.f_steps .steps_billAddr fieldset.submit {padding-top:15px; padding-left:226px; height:51px;}
+.f_steps .steps_billAddr fieldset.public {text-align:right; font-weight:normal; padding-top:6px; height:auto;}
+.f_steps .steps_billAddr fieldset.public * {vertical-align:middle;}
+.f_steps .steps_billAddr p.nb {padding:0; text-align:right;}
+.f_steps .steps_billAddr select.cc_country2 {border:1px solid #397cca;} /* wechanged */
+
+.f_steps .steps_cc {padding-top:10px;}
+.f_steps .steps_cc fieldset.cc_num {background:url(../images/cards.gif) right top no-repeat;}
+.f_steps .steps_cc fieldset.cc_num div input {width:239px;}
+.f_steps .steps_cc fieldset.cc_name div input {width:261px;}
+.f_steps .steps_cc fieldset.cc_cvv div input {width:38px;}
+.f_steps .steps_cc fieldset.cc_cvv label.rght {width:auto; margin-left:17px;}
+.f_steps .steps_cc select.cc_month {width:111px;}
+.f_steps .steps_cc select.cc_month2 {width:111px; border:1px solid #397cca;} /* wechanged */
+.f_steps .steps_cc select.cc_year {width:91px;}
+.f_steps .steps_cc select.cc_year2 {width:91px; border:1px solid #397cca;} /* wechanged */
+.f_steps .steps_cc select.cc_country {  } /* wechanged */
+
+a.b_goto_homepage {display:block; background:url(../images/b_goto_homepage.gif) no-repeat; width:215px; height:42px; text-indent:-999px; margin:auto;}
+a.b_goto_homepage:hover {background-position:left bottom;}
+
+.whatNext .frameMain_in {padding-left:20px; padding-right:10px;}
+.whatNext h2 {padding:14px 0 0 0; color:#007ece; font:bold 16px/19px Arial, Helvetica, sans-serif;}
+.whatNext p {padding:5px 0; line-height:19px;}
+
+.b_print {text-indent:-999px; display:block; background:url(../images/b_print.gif) no-repeat; width:72px; height:28px;}
+.b_print:hover {background-position:left bottom;}
+
+.relative {position:relative;}
+.relative .print {position:absolute; right:0; padding-left:29px; background:url(../images/i_printer.gif) left 4px no-repeat;}
+.ie6 .relative .print {margin-right:35px;}
+
+.orderConfirmation {width:585px; margin:0 auto;}
+.orderConfirmation .frameMain_in {padding:0 0 15px 21px;}
+.orderConfirmation h1 {font:bold 24px Arial, Helvetica, sans-serif; padding:15px 0 0 0;}
+.orderConfirmation p {line-height:19px; padding:0;}
+.orderConfirmation p em {font-style:normal; color:#ff6c00; font-weight:bold;}
+
+.orderSummary {width:585px; margin-left:auto; margin-right:auto; color:#000;}
+.orderSummary .frameMain_in {padding:1px 1px 1px 1px;}
+.orderSummary em {font-style:normal; float:right;}
+.orderSummary a {float:right;}
+.orderSummary span {float:left;}
+.orderSummary .title {padding:0 20px 0 15px; height:33px; overflow:hidden; line-height:33px;}
+.orderSummary .title h2 {float:left; color:#000; font:bold 15px/33px Arial, Helvetica, sans-serif;}
+.orderSummary ul {list-style:none; margin:0; padding:0; font-size:13px; line-height:31px; border-top:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1;}
+.orderSummary ul li {overflow:hidden; height:31px; margin:0; padding:0 26px 0 15px;}
+.orderSummary ul li.even {background:#f5f5f5;}
+.orderSummary .total {height:29px; overflow:hidden; line-height:29px; font-weight:bold; padding-left:15px; padding-right:26px;}
+.orderSummary ul a {float:right; margin-left:5px; margin-top:6px; background:url(../images/mark_remove.gif) left -32px no-repeat; height:17px; width:17px; text-indent:-999px;}
+.orderSummary ul li.even a {background-position:left top;}
+.orderSummary ul a:hover {background-position:-17px -32px;}
+.orderSummary ul li.even a:hover {background-position:-17px top;}
+.orderSummary .title small {float:right; color:#7f7f7f; font-size:11px;}
+
+.orderSummary2 ul a {margin-left:22px;}
+.orderSummary2 .title, .orderSummary2 ul li {padding:0 20px;}
+.orderSummary2 .total {padding:0 60px 0 20px;}
+
+.placeOrder2 .f_steps h2 {font-size:21px; padding:0; overflow:hidden; height:32px;}
+.placeOrder2 .f_steps h2 span {float:left; width:120px; margin-right:13px; text-align:right;}
+.placeOrder2 .f_steps h2 small {font-size:12px; font-weight:normal; float:left; margin-top:9px;}
+.placeOrder2 .f_steps label {width:119px;}
+.placeOrder2 .f_steps .steps_checkout fieldset div input {width:141px;}
+.placeOrder2 .f_steps fieldset.eaddr div input {width:327px;}
+.placeOrder2 .f_steps fieldset.phone div input {width:261px;}
+.placeOrder2 .f_steps .steps_billAddr {padding-top:10px;}
+.placeOrder2 .f_steps .steps_billAddr .state div input {width:211px;}
+.placeOrder2 .f_steps .steps_billAddr fieldset.public {text-align:left; padding-left:132px; padding-top:0;}
+.placeOrder2 .f_steps .steps_billAddr fieldset.public input {margin-left:0; padding-left:0; width:1.1em;}
+.placeOrder2 .f_steps fieldset.submit {padding:10px 0 0 132px; height:auto;}
+.placeOrder2 .f_steps p.nb {padding:10px 0 0 132px;}
+
+.cols2_r318 .f_steps {padding-left:24px; padding-right:24px;}
+.placeOrder2 .f_steps h2 {font-size:24px; padding-top:9px; padding-bottom:1px;}
+.cols2_r318 .f_steps .steps_checkout p {padding:0 0 15px 0;}
+.cols2_r318 .f_steps label {width:100px;}
+.cols2_r318 .placeOrder2 .f_steps fieldset div input {width:148px;}
+.cols2_r318 .placeOrder2 .f_steps fieldset.eaddr div input {width:271px;}
+.cols2_r318 .f_steps .steps_cc .cc_num div input, 
+.cols2_r318 .f_steps .steps_cc .cc_name div input {width:251px;}
+
+.cols2_r318 .myOrderSummary .title {height:48px;}
+.cols2_r318 .myOrderSummary .title h2 {font-size:18px; line-height:47px;}
+.cols2_r318_r .myOrderSummary ul {border:0;}
+.cols2_r318_r .myOrderSummary ul li {padding:0 8px 0 15px; border-bottom:1px solid #cacaca;}
+.cols2_r318_r .myOrderSummary ul li.titles {height:29px; overflow:hidden; background:#e8e8e7; font-size:11px; border-bottom:0;}
+.cols2_r318_r .myOrderSummary ul li.titles * {font-weight:normal;}
+.cols2_r318_r .myOrderSummary ul li em {width:65px;}	
+.cols2_r318_r .myOrderSummary ul li.titles span {float:right; width:40px; text-align:center;}
+.cols2_r318_r .myOrderSummary ul li a {margin-right:12px; margin-left:11px;}
+.cols2_r318_r .myOrderSummary .total {padding:0 1px 4px 15px; line-height:40px;}
+.cols2_r318_r .myOrderSummary .total b {float:left;}
+.cols2_r318_r .myOrderSummary .total em {width:114px; margin-left:0;}
+.cols2_r318_r .myOrderSummary p.nb {padding:0 15px 15px 15px;}
+.cols2_r318_r .myOrderSummary p.nb small {font-size:11px; color:#7f7f7f;}
+.cols2_r318_r .myOrderSummary .test3_2 ul li {padding-right:1px;}
+.cols2_r318_r .myOrderSummary .test3_2 ul li em {width:83px;}
+.cols2_r318_r .myOrderSummary .test3_2 .total em {width:83px; float:right;}
+
+.domainInfo .f_steps h2 {font-size:24px; padding:10px 0 5px 0; overflow:hidden;}
+.domainInfo .f_steps p.important {padding:0 0 20px 0; line-height:19px;}
+.domainInfo .f_steps p.important strong {color:#ff6c00;} 
+.domainInfo .f_steps p.nb {padding:0 0 0 197px;}
+.domainInfo .f_steps label {width:184px;}
+.domainInfo .f_steps fieldset.isAddr {height:auto; margin-bottom:8px;}
+.domainInfo .f_steps .isAddr label {float:none; display:inline;}
+.domainInfo .f_steps span {font-weight:normal;}
+.domainInfo .f_steps .isAddr * {vertical-align:middle;}
+.domainInfo .f_steps fieldset.submit {height:auto; padding-left:197px; padding-bottom:10px;}
+.domainInfo .f_steps fieldset.check {height:auto; padding-left:197px; padding-bottom:6px;}
+.domainInfo .f_steps .check * {vertical-align:middle;}
+.domainInfo .f_steps .check input {margin-left:0; padding-left:0; width:1.1em;}
+.domainInfo .f_steps fieldset div input {width:261px;}
+
+.loogos {text-align:right;}
+.loogos a {margin-left:6px;}
+
+.loogos .frameMain_in {text-align:center; padding:7px 1px 1px 1px; min-height:46px;}
+.ie6 .loogos .frameMain_in {height:46px;}
+.loogos .frameMain_in a {margin:0 10px;}
+
+.logo_row2 {height:74px; overflow:hidden; padding:0 0 0 20px;}
+.logo_row2 .logo {float:left; margin-top:14px;}
+.logo_row2 .logo img {border:0;}
+.logo_row2 div {float:right; margin:45px 0 0 auto; color:#000;}
+.logo_row2 div big {font-size:15px; font-weight:bold;}
+
+.topMenu {border:1px solid #dcdcdc; border-bottom:0; background:url(../images/header2_bg.gif) top repeat-x; height:36px;}
+
+.alert_please {background:url(../images/i_alert_please.gif) no-repeat; min-height:16px; color:#f00000; font-size:12px; padding-top:25px; padding-left:55px;}
+.ie6 .alert_please {height:16px;}
+.i_alert {background:url(../images/i_alert.gif) no-repeat; width:19px; height:18px; position:absolute; margin-top:4px; margin-left:-53px;}
+
+.popupNew {position:absolute; display:none; width:545px; z-index:100; top:249px; z-index:100; left:50%; margin-left:-272px;}
+.popupNew .popup_top {background:url(../images/popup_top.png) no-repeat; height:5px; font-size:0; overflow:hidden;}
+.popupNew .popup_bot {background:url(../images/popup_bot.png) no-repeat; height:5px; font-size:0; overflow:hidden;}
+.popupNew .popup_sub {background:url(../images/popup_bg.gif) left repeat-y;}
+.popupNew  .close {position:absolute; margin-left:456px; margin-top:16px; display:block; width:80px; height:17px; background:url(../images/b_close_popup.gif) right top no-repeat; font-size:12px;}
+.popupNew2 .close {margin-left:446px; margin-top:26px;}
+.popupNew  .close:hover {background-position:right bottom;}
+.popupNew  .popup_in {padding:10px 11px 11px 21px;}
+.popupNew2 .popup_in {padding:20px 33px 55px 30px;}
+.popupNew  h2 {color:#317dca; font:bold 26px/28px Arial, Helvetica, sans-serif; padding:0 0 3px 0;}
+.popupNew2 h2 {padding:0;}
+.popupNew h3 {color:#000; font:bold 13px Arial, Helvetica, sans-serif; padding:0;}
+.popupNew p {line-height:21px; padding:0;}
+.popupNew .scroller {height:350px; overflow-y:scroll; padding-right:14px;}
+
+#overlay {background:#000; display:none; width:100%;}
+
+#pop_whats_cvc p {padding:4px 0 19px 0; line-height:19px;}
+
+#pop_testim ul {list-style:none; margin:0; padding:0;}
+#pop_testim ul li {margin:0; padding:9px 0; border-top:1px solid #ccc; line-height:21px;}
+#pop_testim ul li.first {border-top:0;}
+
+#pop_terms h2 {padding-bottom:15px;}
+#pop_terms h3 {padding-bottom:21px;}
+#pop_terms p {padding:0 0 21px 0;}
+
+#pop_30days .popup_in img {float:left; margin-right:20px;}
+#pop_30days h2 {padding-bottom:12px;}
+#pop_30days p {padding-top:9px;}
+
+
+
+/* Payment Plan Cart */ 
+.f_paymentPlan_cart {padding:0;}
+.f_paymentPlan_cart .steps_checkout h2 {font-size:20px; overflow:hidden; padding:15px 0 6px 0;}
+.f_paymentPlan_cart .steps_checkout h2 span {float:left; width:122px; margin-right:13px; text-align:right;}
+.f_paymentPlan_cart .steps_checkout h2 small {font-size:12px; font-weight:normal; float:left; margin-top:8px;}
+.f_paymentPlan_cart fieldset.eaddr input {width:320px;}
+.f_paymentPlan_cart fieldset.phone input {width:258px;}
+.f_paymentPlan_cart .steps_billAddr label {width:122px;}
+.f_paymentPlan_cart .steps_billAddr fieldset.state div input {width:207px;}
+.f_paymentPlan_cart .steps_billAddr select {min-width:225px;}
+.f_paymentPlan_cart fieldset.public span {font-weight:normal;}
+.f_paymentPlan_cart fieldset.public * {vertical-align:middle;}
+.f_paymentPlan_cart .submit_box {padding-left:132px; padding-bottom:15px;}
+.f_paymentPlan_cart .submit_box fieldset.submit {height:auto;}
+.f_paymentPlan_cart .submit_box p {padding:7px 0 0 0; font-size:12px;}
+.paymentPlan .title {padding-top:6px; padding-bottom:4px;}
+.paymentPlan .title h2 {font-size:21px; line-height:normal; padding:4px 0 0 0;}
+.paymentPlan .title span {float:right; font-size:12px; color:#959595; margin-top:4px;}
+.paymentPlan .title span a {float:none; font-size:12px;}
+.paymentPlan ul {border-bottom:0;}
+.paymentPlan ul li {font-weight:bold; border-bottom:1px solid #e1e1e1;}
+.f_steps .paymentPlan ul li b {float:right; width:93px; margin:0;}
+.paymentPlan .agree {padding:13px 15px 11px 37px; background:url(../images/mark_arrow_6x11.gif) 21px 50% no-repeat;}
+.paymentPlan .agree * {vertical-align:middle;}
+.paymentPlan .agree .chbox {margin:0 4px 0 0; padding:0;}
+.paymentPlan .agree strong {margin-right:14px;}
+.paymentPlan .agree .printVersion {width:20px; height:19px; background:url(../images/i_print.gif) no-repeat; border:0; cursor:pointer;}
+.paymentPlan .terms {padding:0 20px 20px 20px;}
+.paymentPlan .terms div {border:1px solid #a3adb3; border-bottom-color:#b3b3b3; overflow-y:scroll; padding-left:20px; height:250px;}
+.paymentPlan .terms p {padding:10px 18px 0 0; line-height:19px; font-size:13px;} 

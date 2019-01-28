@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Configurable</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      
+      <div data-role="header" class="jqm-header">
+        <h1>CB WATCH</h1>
+      </div>
+      
+      <div data-role="content">
+        
+        <div>Use this configuration page to choose the settings you would like applied to this app (reload watchface required).</div>
+
+        <div data-role="fieldcontain">
+          <label for="backgrnd">Theme:</label>
+          <select name="backgrnd" id="backgrnd" data-role="slider">
+            <option value="0">Normal</option>
+            <option value="1" selected="selected">Invert</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup">
+            <legend>Margin (offset between numbers):</legend>
+            <input type="radio" id="margin_min" name="margin" value="0" checked="checked"><label for="margin_min">Min</label>
+            <input type="radio" id="margin_middle" name="margin" value="1"><label for="margin_middle">Middle</label>
+            <input type="radio" id="margin_max" name="margin" value="2"><label for="margin_max">Max</label>            
+          </fieldset>          
+        </div>
+
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup">
+            <legend>Grid between the numbers:</legend>
+            <input type="radio" id="grid_off" name="grid" value="0" checked="checked"><label for="grid_off">Off</label>
+            <input type="radio" id="grid_full" name="grid" value="1"><label for="grid_full">Full</label>
+            <input type="radio" id="grid_hor" name="grid" value="2"><label for="grid_hor">Horizontal</label>
+            <input type="radio" id="grid_ver" name="grid" value="3"><label for="grid_ver">Vertical</label>            
+          </fieldset>          
+        </div>            
+
+        <div data-role="fieldcontain">
+          <label for="bluetooth">Vibrations if change bluetooth connection:</label>
+          <select name="bluetooth" id="bluetooth" data-role="slider">
+            <option value="0" selected="selected">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+        
+        <div data-role="fieldcontain">
+          <label for="hand">Hand:</label>
+          <select name="hand" id="hand" data-role="slider">
+            <option value="0" selected="selected">Left</option>
+            <option value="1">Right</option>
+          </select>
+        </div>
+        
+        <div data-role="fieldcontain">
+          <label for="one">One align:</label>
+          <select name="one" id="one" data-role="slider">
+            <option value="0" selected="selected">Center</option>
+            <option value="1">Left</option>
+          </select>
+        </div>                 
+        
+                                 
+    <!--
+
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup">
+            <legend>Choose as many snacks as you'd like:</legend>
+            <input type="checkbox" name="checkbox-cheetos" id="checkbox-cheetos" class="custom" />
+            <label for="checkbox-cheetos">Cheetos</label>
+
+            <input type="checkbox" name="checkbox-doritos" id="checkbox-doritos" class="custom" />
+            <label for="checkbox-doritos">Doritos</label>
+
+            <input type="checkbox" name="checkbox-fritos" id="checkbox-fritos" class="custom" />
+            <label for="checkbox-fritos">Fritos</label>
+
+            <input type="checkbox" name="checkbox-sunchips" id="checkbox-sunchips" class="custom" />
+            <label for="checkbox-sunchips">Sun Chips</label>
+            </fieldset>
+          </div>
+        </div>
+-->
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+            </fieldset>
+          </div>
+          
+          <div style="text-align: center; margin-top: 10px;">
+            
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="V658NZJGC8XMG">
+            <input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="/www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+          </form>
+          
+          </div>
+          
+        </div>
+      </div>
+    
+    <script>
+      function saveOptions() {
+        var options = {}
+        //Add all textual values
+        $('textarea, select, [type="hidden"], [type="password"], [type="text"]').each(function(){options[$(this).attr('id')] = $(this).val();})
+        //Add all checkbox type values
+        $('[type="radio"], [type="checkbox"]').each(function(){options[$(this).attr('id')] = $(this).is(':checked');})
+        return options;
+      }
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+        $("#b-submit").click(function() {
+          console.log("Submit");
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+        //Set form values to whatever is passed in.
+        var obj = jQuery.parseJSON(decodeURIComponent(window.location.search.substring(1)));
+        for(key in obj) {
+          $("#"+[key]).val(obj[key]);
+          $("#"+[key]).val(obj[key]).slider("refresh");       
+        }
+      });
+    </script>
+  </body>
+</html>

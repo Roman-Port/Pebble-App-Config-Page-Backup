@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Color Configuration</title>
+     <link rel="stylesheet" type="text/css" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css">
+     <style>
+        .btnContain{
+          width: 75%;
+          float: right;
+          padding-top: 25px;
+        }
+        .makeCenter{
+          width: 50%;
+          margin:0 auto;
+        }
+        div.colorPicker-picker {
+          height: 32px;
+          width: 32px;
+          padding: 0 !important;
+          border: 2px solid #ccc;
+          cursor: pointer;
+          line-height: 32px;
+          font-size:1.5em;
+          font-weight:bold;
+          text-align: center;
+        }
+
+        div.colorPicker-palette {
+          width: 220px;
+          position: absolute;
+          border: 2px solid #598FEF;
+          background-color: #EFEFEF;
+          padding: 4px;
+          z-index: 9999;
+        }
+          div.colorPicker_hexWrap {width: 100%; float:left }
+          div.colorPicker_hexWrap label {font-size: 95%; color: #2F2F2F; margin: 5px 2px; width: 25%}
+          div.colorPicker_hexWrap input {margin: 5px 2px; padding: 0; font-size: 95%; border: 1px solid #000; width: 65%; }
+
+        div.colorPicker-swatch {
+          height: 24px;
+          width: 24px;
+          border: 2px solid #000;
+          margin: 4px;
+          float: left;
+          cursor: pointer;
+          line-height: 24px;
+        }
+     </style>
+  </head>
+  <body>
+    <h1 class="makeCenter">Synesthesia</h1>
+    <p class="makeCenter">Choose your colours</p>
+
+    <hr>
+    <div class="makeCenter">
+      <h3>0</h3> <input id="0" type="text" name="0" value="#ffaaff">
+      <h3>1</h3> <input id="1" type="text" name="1" value="#ff00ff">
+      <h3>2</h3> <input id="2" type="text" name="2" value="#ff00ff">
+      <h3>3</h3> <input id="3" type="text" name="3" value="#ff00ff">
+      <h3>4</h3> <input id="4" type="text" name="4" value="#ff00ff">
+      <h3>5</h3> <input id="5" type="text" name="5" value="#ff00ff">
+      <h3>6</h3> <input id="6" type="text" name="6" value="#ff00ff">
+      <h3>7</h3> <input id="7" type="text" name="7" value="#ff00ff">
+      <h3>8</h3> <input id="8" type="text" name="8" value="#ff00ff">
+      <h3>9</h3> <input id="9" type="text" name="9" value="#ff00ff">
+      <h3>Background</h3> <input id="background" type="text" name="background" value="#000000">
+    </div>  
+  <div class="btnContain"><button type="button" class="btn btn-default" id="defaultColor">Default Colours</button><button id="save_button" type="button" class="btn btn-default">Save Settings</button></div>
+  
+  </body>
+</html>
+
+<script language="javascript" type="text/javascript" src="/ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
+<script src="/jinalex.github.io//jquery.js"></script>
+
+  <script>
+
+  //Run the code when document ready
+  $(function() {    
+
+  var defaults = ['#555555','#ffffff','#ff0000','#ffaa55','#ffff55','#aaff55','#55ffff','#0000ff','#aa00ff','#ffaaff'];
+  var ID;
+  var tempColor;
+  var chooseColors = ['000000', '000055', '0000aa', '0000ff', '005500', '005555', '0055aa', '0055ff', '00aa00', '00aa55', '00aaaa', '00aaff', '00ff00', '00ff55', '00ffaa', '00ffff', '550000', '550055', '5500aa', '5500ff', '555500', '555555', '5555aa', '5555ff', '55aa00', '55aa55', '55aaaa', '55aaff', '55ff00', '55ff55', '55ffaa', '55ffff', 'aa0000', 'aa0055', 'aa00aa', 'aa00ff', 'aa5500', 'aa5555', 'aa55aa', 'aa55ff', 'aaaa00', 'aaaa55', 'aaaaaa', 'aaaaff', 'aaff00', 'aaff55', 'aaffaa', 'aaffff', 'ff0000', 'ff0055', 'ff00aa', 'ff00ff', 'ff5500', 'ff5555', 'ff55aa', 'ff55ff', 'ffaa00', 'ffaa55', 'ffaaaa', 'ffaaff', 'ffff00', 'ffff55', 'ffffaa', 'ffffff'];
+
+   $.fn.colorPicker.defaults.colors = chooseColors;
+   
+   // Activate colorpicker for each number
+   $("#background").colorPicker({showHexField: false});
+   for (i=0; i<10; i++){
+    ID = '#'+i.toString();
+    $(ID).colorPicker({showHexField: false});
+   };
+
+   var setDefault = function(){
+                  for(i=0;i<10;i++){
+                    ID = '#'+i.toString();
+                    tempColor = defaults[i];
+                    $(ID).val(tempColor);   
+                    $(ID).change();  
+                  }
+                  $("#background").val("#000000");
+                  $("#background").change();
+                 };
+
+   $("#defaultColor").click(function(){setDefault();});
+
+   if (localStorage.getItem("#1") === null) {
+      setDefault();
+   }else{
+      for(i=0;i<10;i++){
+        ID = '#'+i.toString();
+        tempColor = '#'+chooseColors[localStorage.getItem(ID)];
+        console.log(tempColor);
+        $(ID).val(tempColor);   
+        $(ID).change(); 
+      }
+      tempColor = '#'+chooseColors[localStorage.getItem("background")];
+      console.log(tempColor);
+      $("#background").val(tempColor);   
+      $("#background").change(); 
+
+   }
+
+  //Setup to allow easy adding more options later
+  function saveOptions() {
+ 
+    var options = [];
+    var hex;
+
+    for (i=0; i<10; i++){
+      ID = '#'+i.toString();
+      search = $(ID).val().substring(1);
+      options.push(chooseColors.indexOf(search));
+      localStorage.setItem(ID, chooseColors.indexOf(search));
+    }
+    search = $("#background").val().substring(1);
+    options.push(chooseColors.indexOf(search));
+    localStorage.setItem("background", chooseColors.indexOf(search));
+
+    console.log(options);
+
+    return options;
+  };
+
+  // Something like this to get query variables.
+  function getQueryParam(variable, defaultValue) {
+    // Find all URL parameters
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+
+      // If the query variable parameter is found, decode it to use and return it for use
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+   
+    var submitButton = document.getElementById("save_button");
+    submitButton.addEventListener("click", 
+      function() {
+        console.log("Submit");
+   
+        var options = saveOptions();
+        
+        // Set the return URL depending on the runtime environment
+        var return_to = getQueryParam('return_to', 'pebblejs://close#');
+        document.location = return_to + encodeURIComponent(JSON.stringify(options));
+        var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+
+      }, 
+    false);
+
+
+  });
+
+  </script>

@@ -1,0 +1,841 @@
+﻿﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Color Picker Tool</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600,700">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Inconsolata:400,700">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Nunito">
+    <!--<link rel="stylesheet" type="text/css" href="http://developer.getpebble.com/assets/css/main.css" />-->
+    <link rel="stylesheet" type="text/css" href="/nickespo.com/BigTimeColor/GetPebble/main.css">
+    <link rel="stylesheet" type="text/css" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <link rel="stylesheet" type="text/css" href="/thecodeplayer.com/uploads/fonts/font-awesome-4.0.1/css/font-awesome.css">
+    <script src="/code.jquery.com//jquery-2.js">
+    </script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js">
+    </script>
+
+    <!-- Accordion -->
+    <style type="text/css">
+        /*Basic reset*/
+        * {margin: 0; padding: 0;}
+
+        body {
+        background: #4EB889;
+        font-family: Nunito, arial, verdana;
+        }
+
+        #accordian {
+        background: #004050;
+        width: 100%;
+        margin: 0 auto 0 auto;
+        color: white;
+        /*Some cool shadow and glow effect*/
+
+        }
+
+        /*heading styles*/
+        #accordian h3 {
+        font-size: 16px;
+        line-height: 34px;
+        padding: 0 10px;
+        cursor: pointer;
+        /*fallback for browsers not supporting gradients*/
+        background: #003040;
+        background: linear-gradient(#003040, #002535);
+        }
+
+        /*heading hover effect*/
+        #accordian h3:hover {
+        text-shadow: 0 0 1px rgba(255, 255, 255, 0.7);
+        }
+
+        /*iconfont styles*/
+        #accordian h3 span {
+        font-size: 16px;
+        margin-right: 10px;
+        }
+
+        /*list items*/
+        #accordian li {
+        list-style-type: none;
+        }
+
+        /*links*/
+        #accordian ul ul li a {
+        color: white;
+        text-decoration: none;
+        font-size: 11px;
+        line-height: 27px;
+        display: block;
+        padding: 0 15px;
+        /*transition for smooth hover animation*/
+        /*transition: all 0.15s;*/
+        }
+
+        /*Lets hide the non active LIs by default*/
+        #accordian ul ul {
+        display: none;
+        }
+
+        #accordian .active ul {
+        display: block;
+        }
+
+        .ui-field-contain label.ui-slider {
+        width: 120px;
+        margin: 0px 0px 0px 0px;
+        }
+
+        label.ui-slider {
+        font-size: 12px;
+        }
+
+        .toast {
+            width:200px;
+            height:20px;
+            height:auto;
+            position:absolute;
+            left:50%;
+            margin-left:-100px;
+            bottom:10px;
+            background-color: #383838;
+            color: #F0F0F0;
+            font-family: Calibri;
+            font-size: 20px;
+            padding:10px;
+            text-align:center;
+            border-radius: 2px;
+            -webkit-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+            -moz-box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+            box-shadow: 0px 0px 24px -1px rgba(56, 56, 56, 1);
+            }
+
+    </style>
+    <style type="text/css">
+        .ui-field-contain div.ui-slider-switch, .ui-field-contain.ui-hide-label div.ui-slider-switch {
+        width:140px;
+        }
+    </style>
+    <script type="text/javascript">
+        var colorMappingSunlight = {
+        "#000000": "#000000",   "#000055": "#001e41",   "#0000aa": "#004387",   "#0000ff": "#0068ca",
+        "#005500": "#2b4a2c",   "#005555": "#27514f",   "#0055aa": "#16638d",   "#0055ff": "#007dce",
+        "#00aa00": "#5e9860",   "#00aa55": "#5c9b72",   "#00aaaa": "#57a5a2",   "#00aaff": "#4cb4db",
+        "#00ff00": "#8ee391",   "#00ff55": "#8ee69e",   "#00ffaa": "#8aebc0",   "#00ffff": "#84f5f1",
+        "#550000": "#4a161b",   "#550055": "#482748",   "#5500aa": "#40488a",   "#5500ff": "#2f6bcc",
+        "#555500": "#564e36",   "#555555": "#545454",   "#5555aa": "#4f6790",   "#5555ff": "#4180d0",
+        "#55aa00": "#759a64",   "#55aa55": "#759d76",   "#55aaaa": "#71a6a4",   "#55aaff": "#69b5dd",
+        "#55ff00": "#9ee594",   "#55ff55": "#9de7a0",   "#55ffaa": "#9becc2",   "#55ffff": "#95f6f2",
+        "#aa0000": "#99353f",   "#aa0055": "#983e5a",   "#aa00aa": "#955694",   "#aa00ff": "#8f74d2",
+        "#aa5500": "#9d5b4d",   "#aa5555": "#9d6064",   "#aa55aa": "#9a7099",   "#aa55ff": "#9587d5",
+        "#aaaa00": "#afa072",   "#aaaa55": "#aea382",   "#aaaaaa": "#ababab",   "#ffffff": "#ffffff",
+        "#aaaaff": "#a7bae2",   "#aaff00": "#c9e89d",   "#aaff55": "#c9eaa7",   "#aaffaa": "#c7f0c8",
+        "#aaffff": "#c3f9f7",   "#ff0000": "#e35462",   "#ff0055": "#e25874",   "#ff00aa": "#e16aa3",
+        "#ff00ff": "#de83dc",   "#ff5500": "#e66e6b",   "#ff5555": "#e6727c",   "#ff55aa": "#e37fa7",
+        "#ff55ff": "#e194df",   "#ffaa00": "#f1aa86",   "#ffaa55": "#f1ad93",   "#ffaaaa": "#efb5b8",
+        "#ffaaff": "#ecc3eb",   "#ffff00": "#ffeeab",   "#ffff55": "#fff1b5",   "#ffffaa": "#fff6d3"  };
+    </script>
+</head>
+
+<body>
+    <div data-role="page" id="main">
+        <div data-role="content">
+            <div id="accordian">
+                <ul>
+                    <li class="active">
+                        <h3><span class="icon-heart"></span>Donate</h3>
+                        <ul>
+                            <li>
+                                <div class='ui-body ui-body-a' style="text-align:center;">
+
+                                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                        <input type="hidden" name="cmd" value="_donations">
+                                        <input type="hidden" name="business" value="nickespo@gmail.com">
+                                        <input type="hidden" name="lc" value="US">
+                                        <input type="hidden" name="button_subtype" value="services">
+                                        <input type="hidden" name="no_note" value="0">
+                                        <input type="hidden" name="currency_code" value="USD">
+                                        <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynow_LG.gif:NonHostedGuest">
+                                        <table>
+                                            <tr><td style="padding:0px 0px"><input type="hidden" name="on0" value="Donation rewards!">Donation rewards!</td></tr>
+                                            <tr>
+                                                <td style="padding:0px 0px">
+                                                    <select name="os0">
+                                                        <option value=".02">$0.02 -- No thanks, but I'd like to make a suggestion! </option>
+                                                        <option value="1" selected="selected">$1.00 -- Thank you! </option>
+                                                        <option value="2">$2.00 -- Thank you (Special Extended Edition)!</option>
+                                                        <option value="5">$5.00 -- You'll be on my Christmas list!</option>
+                                                        <option value="10">$10.00 -- All of the above, plus I will dance at your wedding!</option>
+                                                        <option value="20">$20.00 -- All of the above, plus I will marry you!</option>
+                                                        <option value="50">$50.00 -- All of the above, plus I will not contest the ensuing divorce!</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr><td style="padding:0px 0px"><input type="hidden" name="on1" value="Requests & Suggestions">Requests <span onclick="test()">&</span> Suggestions</td></tr>
+                                            <tr><td style="padding:0px 0px"><input type="text" name="os1" maxlength="200"></td></tr>
+                                            <tr><td><div class='toast' style='display:none'>Test mode activated!</div></td></tr>
+                                        </table>
+                                        <input type="hidden" name="currency_code" value="USD">
+                                        <input type="hidden" name="option_select0" value="1">
+                                        <input type="hidden" name="option_amount0" value="1.00">
+                                        <input type="hidden" name="option_select1" value="2">
+                                        <input type="hidden" name="option_amount1" value="2.00">
+                                        <input type="hidden" name="option_select2" value="5">
+                                        <input type="hidden" name="option_amount2" value="5.00">
+                                        <input type="hidden" name="option_select3" value="10">
+                                        <input type="hidden" name="option_amount3" value="10.00">
+                                        <input type="hidden" name="option_select4" value="20">
+                                        <input type="hidden" name="option_amount4" value="20.00">
+                                        <input type="hidden" name="option_select5" value="50">
+                                        <input type="hidden" name="option_amount5" value="50.00">
+                                        <input type="hidden" name="option_index" value="0">
+                                        <input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                        <img alt="" border="0" src="/www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <h3><span class="icon-options"></span>General Options</h3>
+                        <ul>
+                            <li>
+                                <div data-role="fieldcontain">
+                                    <label for="secondhand" style="margin-left:20px">Show second hand:</label><br>
+                                    <div style="margin-left:30px; position:relative">
+                                        <select name="secondhand" id="secondhand" data-role="slider">
+                                            <option value="off">Off</option>
+                                            <option value="on">On</option>
+                                        </select>
+                                        <div style="position:absolute; left:100px; top:0px">Selecting this option may slightly increase battery usage (< 7%)</div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li id="ba">
+                                <div data-role="fieldcontain">
+                                    <label for="battery" style="margin-left:20px">Show battery level:</label><br>
+                                    <div style="margin-left:30px; position:relative">
+                                        <select name="battery" id="battery" data-role="slider">
+                                            <option value="off">Off</option>
+                                            <option value="on">On</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li id="bt">
+                                <div data-role="fieldcontain">
+                                    <label for="bluetooth" style="margin-left:20px">Show Bluetooth connection:</label><br>
+                                    <div style="margin-left:30px; position:relative">
+                                        <select name="bluetooth" id="bluetooth" data-role="slider">
+                                            <option value="off">Off</option>
+                                            <option value="on">On</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h3><span class="icon-heart"></span>Shake Options</h3>
+                        <ul>
+                            <li>
+                                <div data-role="fieldcontain">
+                                    <label for="shakedate" style="margin-left:20px">Shake for date:</label><br>
+                                    <div style="margin-left:30px">
+                                        <select name="shakedate" id="shakedate" data-role="slider">
+                                            <option value="off">Off</option>
+                                            <option value="on">On</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div data-role="fieldcontain">
+                                    <label for="duration" style="margin-left:20px">Duration (secs):</label><br>
+                                    <div style="margin-left:30px">
+                                        <input type="range" name="duration" id="duration" value="3" min="1" max="9" step="1">
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <h3><span class="icon-tasks"></span>Color</h3>
+                        <ul>
+                            <li>
+                                <div data-role="fieldcontain" style="position:relative">
+                                    <!--<div id="fontcolors" style="position:relative; top:25px; display:none">
+                                        <div data-role="fieldcontain" style="position:absolute">
+                                            <label for="monomulticolor" style="margin-left:35px;width:200px;font-size:large">&nbsp;&nbsp;Monotone, or<br />&nbsp;&nbsp;multiple colors?</label><br />
+                                            <div style="margin-left:30px;margin-top:10px">
+                                                <select name="monomulticolor" id="monomulticolor" data-role="slider">
+                                                    <option value="mono" selected=selected>Mono</option>
+                                                    <option value="multi">Multi</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>-->
+
+                                    <fieldset data-role="controlgroup">
+                                        <legend style="margin-left:20px">Select font color:</legend>
+                                        <div style="width:150px; max-width:150px; margin-left:20px">
+                                            <input id="isMulticolor" type="checkbox" style="width:140px; max-width:140px;" class="pull-right">
+                                            <label for="isMulticolor"><font style="font-size:10pt">Multicolor?</font></label>
+                                        </div>
+
+                                        <?xml version="1.0" encoding="utf-8" ?>
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewbox="435 240 355 345" enable-background="new 448.1 251.5 329.2 323.8" xml:space="preserve" id="color-picker" class="color-picker">
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#000055" style="background-color:#001E41" points="629.2,451.6 645.7,461.2 645.7,480.3 629.2,489.9 612.7,480.3 612.7,461.2 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#0000AA" style="background-color:#004387" points="596.2,451.6 612.7,461.2 612.7,480.3 596.2,489.9 579.7,480.3 579.7,461.2 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#0000FF" style="background-color:#0068CA" points="579.7,480.3 596.2,489.9 596.2,509 579.7,518.6 563.1,509 563.1,489.9 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#005500" style="background-color:#2B4A2C" points="579.7,365.5 596.2,375.1 596.2,394.2 579.7,403.8 563.1,394.2 563.1,375.1 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#005555" style="background-color:#27514F" points="596.2,394.2 612.7,403.8 612.7,422.9 596.2,432.5 579.7,422.9 579.7,403.8 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#0055AA" style="background-color:#16638D" points="579.7,422.9 596.2,432.5 596.2,451.6 579.7,461.2 563.1,451.6 563.1,432.5 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#0055FF" style="background-color:#007DCE" points="563.1,509 579.7,518.6 579.7,537.7 563.1,547.3 546.6,537.7 546.6,518.6 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#00AA00" style="background-color:#5E9860" points="530.1,336.9 546.6,346.4 546.6,365.5 530.1,375.1 513.6,365.6 513.6,346.4 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#00AA55" style="background-color:#5C9B72" points="513.6,365.6 530.1,375.1 530.1,394.2 513.6,403.8 497,394.3 497,375.1 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#00AAAA" style="background-color:#57A5A2" points="530.1,394.2 546.6,403.8 546.6,422.9 530.1,432.5 513.6,422.9 513.6,403.8 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#00AAFF" style="background-color:#4CB4DB" points="563.1,451.6 579.7,461.2 579.7,480.3 563.1,489.9 546.6,480.3 546.6,461.2 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#00FF00" style="background-color:#8EE391" points="513.6,308.2 530.1,317.7 530.1,336.9 513.6,346.4 497,336.9 497,317.7 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#00FF55" style="background-color:#8EE69E" points="497,336.9 513.6,346.4 513.6,365.6 497,375.1 480.5,365.6 480.5,346.4 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#00FFAA" style="background-color:#8AEBC0" points="497,394.3 513.6,403.8 513.6,422.9 497,432.5 480.5,423 480.5,403.8 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#00FFFF" style="background-color:#84F5F1" points="513.6,422.9 530.1,432.5 530.1,451.6 513.6,461.2 497,451.6 497,432.5 	"></polygon>                                            
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#550000" style="background-color:#4A161B" points="678.8,422.9 695.3,432.5 695.3,451.6 678.8,461.2 662.3,451.6 662.3,432.5 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#550055" style="background-color:#482748" points="662.3,451.6 678.8,461.2 678.8,480.3 662.3,489.9 645.7,480.3 645.7,461.2 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#5500AA" style="background-color:#40488A" points="645.7,480.3 662.3,489.9 662.3,509 645.7,518.6 629.2,509 629.2,489.9 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#5500FF" style="background-color:#2F6BCC" points="612.7,480.3 629.2,489.9 629.2,509 612.7,518.6 596.2,509 596.2,489.9 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#555500" style="background-color:#564E36" points="612.7,365.5 629.2,375.1 629.2,394.2 612.7,403.8 596.2,394.2 596.2,375.1 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#5555AA" style="background-color:#4F6790" points="629.2,509 645.7,518.6 645.7,537.7 629.2,547.2 612.7,537.7 612.7,518.6 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#5555FF" style="background-color:#4180D0" points="596.2,509 612.7,518.6 612.7,537.7 596.2,547.3 579.7,537.7 579.7,518.6 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#55AA00" style="background-color:#759A64" points="563.1,336.9 579.7,346.4 579.7,365.5 563.1,375.1 546.6,365.6 546.6,346.4 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#55AA55" style="background-color:#759D76" points="546.6,365.5 563.1,375.1 563.1,394.2 546.6,403.8 530.1,394.2 530.1,375.1 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#55AAAA" style="background-color:#71A6A4" points="563.1,394.2 579.7,403.8 579.7,422.9 563.1,432.5 546.6,422.9 546.6,403.8 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#55AAFF" style="background-color:#69B5DD" points="546.6,480.3 563.1,489.9 563.1,509 546.6,518.6 530.1,509 530.1,489.9 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#55FF00" style="background-color:#9EE594" points="530.1,279.5 546.6,289 546.6,308.2 530.1,317.7 513.6,308.2 513.6,289 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#55FF55" style="background-color:#9DE7A0" points="480.5,308.2 497,317.7 497,336.9 480.5,346.4 464,336.9 464,317.7 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#55FFAA" style="background-color:#9BECC2" points="480.5,365.6 497,375.1 497,394.3 480.5,403.8 464,394.3 464,375.1 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#55FFFF" style="background-color:#95F6F2" points="480.5,423 497,432.5 497,451.6 480.5,461.2 464,451.7 464,432.5 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AA0000" style="background-color:#99353F" points="711.8,422.9 728.4,432.5 728.4,451.6 711.8,461.2 695.3,451.6 695.3,432.5 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AA0055" style="background-color:#983E5A" points="695.3,451.6 711.8,461.2 711.8,480.3 695.3,489.9 678.8,480.3 678.8,461.2 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AA00AA" style="background-color:#955694" points="678.8,480.3 695.3,489.9 695.3,509 678.8,518.6 662.3,509 662.3,489.9 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AA00FF" style="background-color:#8F74D2" points="662.3,509 678.8,518.5 678.8,537.7 662.3,547.2 645.7,537.7 645.7,518.5 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AA5500" style="background-color:#9D5B4D" points="678.8,365.5 695.3,375.1 695.3,394.2 678.8,403.8 662.3,394.2 662.3,375.1 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AA5555" style="background-color:#9D6064" points="695.3,394.2 711.8,403.8 711.8,422.9 695.3,432.5 678.8,422.9 678.8,403.8 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AA55AA" style="background-color:#9A7099" points="695.3,509 711.8,518.5 711.8,537.6 695.3,547.2 678.8,537.7 678.8,518.5 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AA55FF" style="background-color:#9587D5" points="678.8,537.7 695.3,547.2 695.3,566.4 678.8,575.9 662.3,566.4 662.3,547.2 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AAAA00" style="background-color:#AFA072" points="629.2,336.8 645.7,346.4 645.7,365.5 629.2,375.1 612.7,365.5 612.7,346.4 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AAAA55" style="background-color:#AEA382" points="596.2,336.9 612.7,346.4 612.7,365.5 596.2,375.1 579.7,365.6 579.7,346.4 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AAAAFF" style="background-color:#A7BAE2" points="612.7,537.7 629.2,547.3 629.2,566.4 612.7,575.9 596.2,566.4 596.2,547.3 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AAFF00" style="background-color:#C9E89D" points="563.1,279.5 579.7,289 579.7,308.1 563.1,317.7 546.6,308.2 546.6,289 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AAFF55" style="background-color:#C9EAA7" points="546.6,250.8 563.1,260.3 563.1,279.5 546.6,289 530.1,279.5 530.1,260.3 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AAFFAA" style="background-color:#C7F0C8" points="464,279.5 480.5,289 480.5,308.2 464,317.7 447.5,308.2 447.5,289 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AAFFFF" style="background-color:#C3F9F7" points="464,451.7 480.5,461.2 480.5,480.4 464,489.9 447.5,480.4 447.5,461.2 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FF0000" style="background-color:#E35462" points="711.8,365.5 728.4,375.1 728.4,394.2 711.8,403.8 695.3,394.2 695.3,375.1 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FF0055" style="background-color:#E25874" points="728.4,394.2 744.9,403.8 744.9,422.9 728.4,432.4 711.8,422.9 711.8,403.8 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FF00AA" style="background-color:#E16AA3" points="728.4,451.6 744.9,461.2 744.9,480.3 728.4,489.9 711.8,480.3 711.8,461.2 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FF00FF" style="background-color:#DE83DC" points="711.8,480.3 728.4,489.9 728.4,509 711.8,518.5 695.3,509 695.3,489.9 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FF5500" style="background-color:#E66E6B" points="695.3,336.8 711.8,346.4 711.8,365.5 695.3,375.1 678.8,365.5 678.8,346.4 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FF5555" style="background-color:#E6727C" points="744.9,365.5 761.4,375.1 761.4,394.2 744.9,403.7 728.4,394.2 728.4,375.1 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FF55AA" style="background-color:#E37FA7" points="744.9,480.3 761.4,489.8 761.4,509 744.9,518.5 728.4,509 728.4,489.8 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FF55FF" style="background-color:#E194DF" points="728.4,509 744.9,518.6 744.9,537.7 728.4,547.2 711.8,537.7 711.8,518.6 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FFAA00" style="background-color:#F1AA86" points="662.3,336.8 678.8,346.4 678.8,365.5 662.3,375.1 645.7,365.5 645.7,346.4 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FFAA55" style="background-color:#F1AD93" points="678.8,308.1 695.3,317.7 695.3,336.8 678.8,346.4 662.3,336.8 662.3,317.7 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FFAAAA" style="background-color:#EFB5B8" points="761.4,336.8 777.9,346.4 777.9,365.5 761.4,375.1 744.9,365.5 744.9,346.4 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FFAAFF" style="background-color:#ECC3EB" points="761.4,509 777.9,518.5 777.9,537.6 761.4,547.2 744.9,537.7 744.9,518.5 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FFFF00" style="background-color:#FFEEAB" points="645.7,308.1 662.3,317.7 662.3,336.8 645.7,346.4 629.2,336.8 629.2,317.7 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FFFF55" style="background-color:#FFF1B5" points="662.3,279.4 678.8,289 678.8,308.1 662.3,317.7 645.7,308.1 645.7,289 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FFFFAA" style="background-color:#FFF6D3" points="645.7,250.7 662.3,260.3 662.3,279.4 645.7,289 629.2,279.4 629.2,260.3 	"></polygon>
+
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#555555" style="background-color:#545454" points="464,509 480.5,518.6 480.5,537.7 464,547.3 447.5,537.7 447.5,518.6 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#FFFFFF" style="background-color:#FFFFFF" points="497,509 513.6,518.6 513.6,537.7 497,547.3 480.5,537.7 480.5,518.6 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#000000" style="background-color:#000000" points="480.5,537.7 497,547.3 497,566.4 480.5,575.9 464,566.4 464,547.3 	"></polygon>
+                                            <polygon stroke="#FFFFFF" stroke-width="1.5" fill="#AAAAAA" style="background-color:#ABABAB" points="513.6,537.7 530.1,547.3 530.1,566.4 513.6,575.9 497,566.4 497,547.3 	"></polygon>
+                                        </svg>
+                                    </fieldset>
+
+                                    <!--<div id="quadrants" style="display:none">
+                                        <div id="bh1" style="position:absolute; left: 40px; top:145px; width:50px; height:50px; background-color:black">
+                                            <div id="h1" style="position:absolute; left: 5px; top:5px; width:40px; height:40px; background-color:yellow" />
+                                        </div>
+                                        <div id="bh2" style="position:absolute; left: 60px; top:0px; width:50px; height:50px; background-color:black">
+                                            <div id="h2" style="position:absolute; left: 5px; top:5px; width:40px; height:40px; background-color:blue" />
+                                        </div>
+                                        <div id="bm1" style="position:absolute; left: -60px; top:60px; width:50px; height:50px; background-color:black">
+                                            <div id="m1" style="position:absolute; left: 5px; top:5px; width:40px; height:40px; background-color:orange" />
+                                        </div>
+                                        <div id="bm2" style="position:absolute; left: 60px; top:0px; width:50px; height:50px; background-color:black">
+                                            <div id="m2" style="position:absolute; left: 5px; top:5px; width:40px; height:40px; background-color:mediumpurple" />
+                                        </div>
+                                        <div style="position:absolute; left:-57px;top:60px; width:110px; color:white">Touch quadrant, then select color on right</div>
+                                    </div>-->
+                                    <div id="quadrants" style="top: 0px; width:105px; height:105px; position:absolute; right:10px; position:absolute; display:none">
+                                        <img id="chalkwatch" src="/nickespo.com/BigTimeColor/images/chalk.png" style="position:absolute; z-index:0; left:0px; top:0px; width:105px; height:105px; display:none">
+                                        <img id="basaltwatch" src="/nickespo.com/BigTimeColor/images/watch.png" style="position:absolute; z-index:0; left:4px; top:0px; width:97px; height:105px; display:none">
+                                        <div id="bh1" style="position:absolute; z-index:1; left:22px; top:16px; width:29px; height:35px; background-color:black">
+                                            <div id="ch1" style="position:absolute; z-index:2; left:2px; top:2px; width:25px; height:31px;"></div>
+                                            <img id="h1" src="/nickespo.com/BigTimeColor/images/1s.png" style="position:absolute; z-index:3; left:0px; top:0px; width:25px; height:31px;">
+                                        </div>
+                                        <div id="bh2" style="position:absolute; z-index:1; left:32px; top:0px; width:29px; height:35px; background-color:black">
+                                            <div id="ch2" style="position:absolute; z-index:2; left:2px; top:2px; width:25px; height:31px;"></div>
+                                            <img id="h2" src="/nickespo.com/BigTimeColor/images/2s.png" style="position:absolute; z-index:3; left:0px; top:0px; width:25px; height:31px;">
+                                        </div>
+                                        <div id="bm1" style="position:absolute; z-index:1; left:-32px; top:39px; width:29px; height:35px; background-color:black">
+                                            <div id="cm1" style="position:absolute; z-index:2; left:2px; top:2px; width:25px; height:31px;"></div>
+                                            <img id="m1" src="/nickespo.com/BigTimeColor/images/3s.png" style="position:absolute; z-index:3; left:0px; top:0px; width:25px; height:31px;">
+                                        </div>
+                                        <div id="bm2" style="position:absolute; z-index:1; left:32px; top:0px; width:29px; height:35px; background-color:black">
+                                            <div id="cm2" style="position:absolute; z-index:2; left:2px; top:2px; width:25px; height:31px;"></div>
+                                            <img id="m2" src="/nickespo.com/BigTimeColor/images/4s.png" style="position:absolute; z-index:3; left:0px; top:0px; width:25px; height:31px;">
+                                        </div>
+                                        <div style="position:absolute; left:-41px;top:55px; width:87px; color:white; font-size:8pt; text-align:right">Touch quadrant, then select color below</div>
+
+                                    </div>
+
+
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li id="specialOptions">
+                        <h3><span class="icon-heart"></span>Special Options</h3>
+                        <ul>
+                            <li>
+                                <div data-role="fieldcontain">
+                                    <label for="opt1" style="margin-left:20px">Snow:</label><br>
+                                    <div style="margin-left:30px">
+                                        <select name="opt1" id="opt1" data-role="slider">
+                                            <option value="off">Off</option>
+                                            <option value="on">On</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li>
+                        <h3><span class="icon-options"></span>Release Notes</h3>
+                        <ul>
+                            <li>
+                                <table border="0" cellpadding="3" cellspacing="2">
+                                    <tr>
+                                        <td width="20">&nbsp;</td>
+                                        <td width="50" style="vertical-align:top">4.5</td>
+                                        <td>(Nov. 14, 2016) Now supports the new Pebble Time 2 (which has an increased pixel density, and so allows larger/smoother digits).</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td width="20">&nbsp;</td>
+                                        <td width="50" style="vertical-align:top">4.0</td>
+                                        <td>(Sept. 28, 2016) Support added for the new Pebble 2.</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td width="20">&nbsp;</td>
+                                        <td width="50" style="vertical-align:top">3.3</td>
+                                        <td>(Dec. 28, 2015) As promised, those of you with B&W Pebble and Pebble Steels now have two font colors (white and gray), and can customize their time font colors! Also, fixed a very embarrassing calendar issue in which December had 30 days! (Thank you, Rachel Y.!)</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td width="20">&nbsp;</td>
+                                        <td width="50" style="vertical-align:top">3.1</td>
+                                        <td>(Dec. 9, 2015) Added B&W (O.G. Pebble and Pebble Steel) support. No changes for Pebble Time.</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td width="20">&nbsp;</td>
+                                        <td width="50" style="vertical-align:top">3.0</td>
+                                        <td>(Dec. 4, 2015) Major new release. Added ability to set multiple colors, and for no adequately-explored reason (other than it's winter here in the Northern Hemisphere) -- optional snow-covered digits (no, not <i>falling</i> snow, that'd kill the battery)! Stay tuned for more...</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td style="vertical-align:top">2.5</td>
+                                        <td>(Oct. 31, 2015) Bug fix release, and modified some code to improve battery life.</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td style="vertical-align:top">2.4</td>
+                                        <td>(Oct. 28, 2015) Added optional battery indicator, made Bluetooth indicator optional, and for Pebble Round, moved the battery and Bluetooth indicators to the center-left and center-right of the screen.</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td style="vertical-align:top">2.3</td>
+                                        <td>(Oct. 17, 2015) REALLY fixed sporadic crashes due to shake/calendar functionality, and added Pebble Round compatibility.</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td style="vertical-align:top">2.1</td>
+                                        <td>(Oct. 11, 2015) Fixed sporadic crashes due to shake/calendar functionality</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td style="vertical-align:top">1.2</td>
+                                        <td>(Oct. 2, 2015) Fixed crash related to calendar month rollover</td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>&nbsp;</td>
+                                        <td style="vertical-align:top">1.0</td>
+                                        <td>(Sep. 7, 2015)First release</td>
+                                    </tr>
+                                </table>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
+            <div class="ui-body ui-body-b">
+                <fieldset class="ui-grid-a">
+                    <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+                    <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+                </fieldset>
+            </div>
+            <code style="visibility:hidden" id="rgbFore"></code>
+            <code style="visibility:hidden" id="rgbh1"></code>
+            <code style="visibility:hidden" id="rgbh2"></code>
+            <code style="visibility:hidden" id="rgbm1"></code>
+            <code style="visibility:hidden" id="rgbm2"></code>
+            <code style="visibility:hidden" id="monomulti"></code>
+            <code style="visibility:hidden" id="selectedQuadrant"></code>
+            <code style="visibility:hidden" id="opt1"></code>
+        </div>
+    </div>
+
+    <!--<script type="text/javascript" src="http://developer.getpebble.com/assets/js/tools/color-dict.js">-->
+    <script type="text/javascript" src="/nickespo.com/BigTimeColor/GetPebble/color-dict.js">
+    </script>
+
+    <script type="text/javascript">
+        var titleBackup = document.title;
+        var bTest = false;
+
+        function test() {
+//          $('#specialOptions').show();
+            bTest = true;
+            $('.toast').fadeIn(400).delay(3000).fadeOut(400); 
+            }
+
+        function getQueryParam(name, def) {
+            name                    = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+            var regex               = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+            results                 = regex.exec(location.search);
+            return results === null ? def : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+
+     /* When someone clicks on a color polygon */
+        function setFontColor($polygon) {
+            var hexValue            = $polygon.data('hex');
+         // var correctedHexValue   = $polygon.attr('fill');
+            var name                = color_picker_colors[hexValue].name;
+
+            $('#color-picker polygon').attr('stroke', '#fff').attr('stroke-width', '1.5');
+            $polygon.attr('stroke', '#000').attr('stroke-width', '3');
+            $polygon.parent().append($polygon);
+
+            if ($('#monomulti').text() === 'mono')
+                $('#rgbFore').text(hexValue);
+              else
+                switch ($('#selectedQuadrant').text()) {
+                    case '1': $('#rgbh1').text(hexValue);
+                              $('#ch1').css("background-color", hexValue);
+                              break;
+                    case '2': $('#rgbh2').text(hexValue);
+                              $('#ch2').css("background-color", hexValue);
+                              break;
+                    case '3': $('#rgbm1').text(hexValue);
+                              $('#cm1').css("background-color", hexValue);
+                              break;
+                    case '4': $('#rgbm2').text(hexValue);
+                              $('#cm2').css("background-color", hexValue);
+                              break;
+                    }
+            }
+
+        function selectUrlColor() {
+            var colorValue;
+            if ($('#monomulti').text() === 'mono')
+                colorValue = $('#rgbFore').text();
+            else
+                switch ($('#selectedQuadrant').text()) {
+                    case '1': colorValue = $('#rgbh1').text(); break;
+                    case '2': colorValue = $('#rgbh2').text(); break;
+                    case '3': colorValue = $('#rgbm1').text(); break;
+                    case '4': colorValue = $('#rgbm2').text(); break;
+                    default:  return; // deselect hexagon
+                    }
+
+            var polygon = $('#color-picker polygon[data-hex="' + colorValue + '"]');
+            if (polygon && polygon.length)
+                setFontColor(polygon);
+            }
+
+        function slideChange() {
+            if ($('#isMulticolor').is(':checked') === false) {
+                $('#quadrants').hide();
+                $('#monomulti').text('mono');
+                }
+            else {
+                $('#quadrants').show();
+                $('#monomulti').text('multi');
+                }
+
+            selectUrlColor();
+            }
+
+        function applyColorMap(map) {
+            $('#color-picker polygon').each(function (index, elem) {
+                if (map)
+                    $(elem).attr('fill', map[$(elem).data('hex').toLowerCase()]);
+                  else
+                    $(elem).attr('fill', $(elem).data('hex'));
+                });
+            }
+
+        function resetQuadrantBorders() {
+            $('#bh1').css("background-color", "#000000");
+            $('#bh2').css("background-color", "#000000");
+            $('#bm1').css("background-color", "#000000");
+            $('#bm2').css("background-color", "#000000");
+            }
+
+        $('#h1').click(function () {
+            $('#selectedQuadrant').text('1');
+            resetQuadrantBorders();
+            $('#bh1').css("background-color", "#FFFFFF");
+            selectUrlColor();
+            });
+
+        $('#h2').click(function () {
+            $('#selectedQuadrant').text('2');
+            resetQuadrantBorders();
+            $('#bh2').css("background-color", "#FFFFFF");
+            selectUrlColor();
+            });
+
+        $('#m1').click(function () {
+            $('#selectedQuadrant').text('3');
+            resetQuadrantBorders();
+            $('#bm1').css("background-color", "#FFFFFF");
+            selectUrlColor();
+            });
+
+        $('#m2').click(function () {
+            $('#selectedQuadrant').text('4');
+            resetQuadrantBorders();
+            $('#bm2').css("background-color", "#FFFFFF");
+            selectUrlColor();
+            });
+
+        function getHashQueryVariable(variable) {
+            var query = decodeURIComponent(window.location.hash.substr(1));
+            var vars = query.split('&');
+            for (var i=0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) == variable)
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+
+        $(function () {
+            var bShowSeconds    = localStorage.getItem("SHOW_SECOND_HAND");
+            var nMonoColor      = localStorage.getItem("KEY_FONT_COLOR");
+            var bShakeDate      = localStorage.getItem("SHAKE_FOR_DATE");
+            var nShakeDuration  = localStorage.getItem("SHAKE_DURATION");
+            var bShowBluetooth  = localStorage.getItem("SHOW_BLUETOOTH");
+            var bShowBattery    = localStorage.getItem("SHOW_BATTERY");
+            var h1color         = localStorage.getItem("KEY_H1_COLOR");
+            var h2color         = localStorage.getItem("KEY_H2_COLOR");
+            var m1color         = localStorage.getItem("KEY_M1_COLOR");
+            var m2color         = localStorage.getItem("KEY_M2_COLOR");
+            var isMono          = localStorage.getItem("KEY_MONO_MULTI");
+            var bOpt1           = localStorage.getItem("KEY_OPT_1");
+
+         // *********************************************************************
+         // If values don't exist, set default values                          **
+         // *********************************************************************
+
+            if (nMonoColor === null) nMonoColor = '#FF0000';
+            if (h1color === null) h1color = nMonoColor; 
+            if (h2color === null) h2color = nMonoColor;
+            if (m1color === null) m1color = nMonoColor;
+            if (m2color === null) m2color = nMonoColor;
+            if (isMono === null) isMono = 'mono';
+           
+            if (nMonoColor.charAt(0) != '#') nMonoColor = '#' + nMonoColor;
+            if (h1color.charAt(0)    != '#') h1color    = '#' + h1color;
+            if (h2color.charAt(0)    != '#') h2color    = '#' + h2color;
+            if (m1color.charAt(0)    != '#') m1color    = '#' + m1color;
+            if (m2color.charAt(0)    != '#') m2color    = '#' + m2color;
+
+            $('#rgbFore').text(nMonoColor);
+            $('#rgbh1').text(h1color);
+            $('#rgbh2').text(h2color);
+            $('#rgbm1').text(m1color);
+            $('#rgbm2').text(m2color);
+            $('#monomulti').text(isMono);
+            $('#selectedQuadrant').text('0');
+
+         // *********************************************************************
+         // Set up the display watch as the one attached to the app            **
+         // *********************************************************************
+            
+        if (getHashQueryVariable ('platform') === 'chalk') {
+            $('#chalkwatch').show();
+            $('#basaltwatch').hide();
+            }
+          else {
+            $('#chalkwatch').hide();
+            $('#basaltwatch').show();
+            }
+
+        // *********************************************************************
+        // Hide the snow option if emery                                      **
+        // *********************************************************************
+
+        if (getHashQueryVariable ('platform') === 'emery') {
+            $('#specialOptions').hide();
+            }
+
+        // *********************************************************************
+        // Set up the display with the saved values                           **
+        // *********************************************************************
+
+            resetQuadrantBorders();
+
+            $('#ch1').css("background-color", h1color);
+            $('#ch2').css("background-color", h2color);
+            $('#cm1').css("background-color", m1color);
+            $('#cm2').css("background-color", m2color);
+
+            if (isMono === 'mono') {
+                $('#isMulticolor').prop('checked', false).checkboxradio('refresh');;
+                $('#quadrants').hide();
+                }
+              else {
+                $('#isMulticolor').prop('checked', true).checkboxradio('refresh');;
+                $('#quadrants').show();
+                }
+
+            if (bShowSeconds === null) bShowSeconds = "on";
+                $('#secondhand').val(bShowSeconds).slider('refresh');
+
+            if (bShakeDate === null) bShakeDate = "on";
+                $('#shakedate').val(bShakeDate).slider('refresh');
+
+            if (nShakeDuration === null) nShakeDuration = 5;
+                $('#duration').val(nShakeDuration).slider('refresh');
+
+            if (bShowBluetooth === null) bShowBluetooth = "on";
+                $('#bluetooth').val(bShowBluetooth).slider('refresh');
+
+            if (bShowBattery === null) bShowBattery = "on";
+                $('#battery').val(bShowBattery).slider('refresh');
+
+            $('#color-picker polygon').on('click', function (event) {
+                setFontColor($(this));
+                });
+
+            if (bOpt1 === null) bOpt1 = "off";
+                $('#opt1').val(bOpt1).slider('refresh');
+
+            selectUrlColor();
+
+         // *********************************************************************
+         // Set up the click functions                                         **
+         // *********************************************************************
+
+            $('#isMulticolor').on('click', function (event, obj) {
+                slideChange();
+                });
+
+            $('#color-picker polygon').each(function (index, elem) {
+                $(elem).attr('data-hex', $(elem).attr('fill'));
+                if ($(elem).attr('data-hex') == (nMonoColor))
+                    setFontColor($(this));
+                });
+
+            $("#b-cancel").click(function () {
+                var return_to = getQueryParam('return_to', 'pebblejs://close#');
+                document.location = return_to;
+                });
+
+            $("#b-submit").click(function () {
+                var return_to = getQueryParam('return_to', 'pebblejs://close#');
+                var location = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
+                console.log("Warping to: " + location);
+                console.log(location);
+                document.location = location;
+                });
+
+            window.onpopstate = function (event) {
+                selectUrlColor();
+                };
+
+            $("#accordian h3").click(function () {
+                $("#accordian ul ul").slideUp();
+                if (!$(this).next().is(":visible"))
+                    $(this).next().slideDown();
+                });
+            });
+
+        function saveOptions() {
+            localStorage.setItem("KEY_FONT_COLOR",   $('#rgbFore').text().substr(1));
+            localStorage.setItem("SHOW_SECOND_HAND", $('#secondhand').val());
+            localStorage.setItem("SHAKE_FOR_DATE",   $('#shakedate').val());
+            localStorage.setItem("SHAKE_DURATION",   $('#duration').val());
+            localStorage.setItem("SHOW_BLUETOOTH",   $('#bluetooth').val());
+            localStorage.setItem("SHOW_BATTERY",     $('#battery').val());
+            localStorage.setItem("KEY_H1_COLOR",     $('#rgbh1').text().substr(1));
+            localStorage.setItem("KEY_H2_COLOR",     $('#rgbh2').text().substr(1));
+            localStorage.setItem("KEY_M1_COLOR",     $('#rgbm1').text().substr(1));
+            localStorage.setItem("KEY_M2_COLOR",     $('#rgbm2').text().substr(1));
+            localStorage.setItem("KEY_MONO_MULTI",   $('#monomulti').text());
+            localStorage.setItem("KEY_OPT_1",        $('#opt1').val());
+
+            var h1Color, h2Color, m1Color, m2Color;
+            if ($('#monomulti').text() == 'mono') {
+                h1Color = $('#rgbFore').text().substr(1);
+                h2Color = $('#rgbFore').text().substr(1);
+                m1Color = $('#rgbFore').text().substr(1);
+                m2Color = $('#rgbFore').text().substr(1);
+                }
+            else {
+                h1Color = $('#rgbh1').text().substr(1);
+                h2Color = $('#rgbh2').text().substr(1);
+                m1Color = $('#rgbm1').text().substr(1);
+                m2Color = $('#rgbm2').text().substr(1);
+                }
+
+            var options = { 'SHOW_SECOND_HAND': $('#secondhand').val(),
+                            'SHAKE_FOR_DATE'  : $('#shakedate').val(),
+                            'SHAKE_DURATION'  : $('#duration').val(),
+                            'SHOW_BLUETOOTH'  : $('#bluetooth').val(),
+                            'SHOW_BATTERY'    : $('#battery').val(),
+                            'KEY_H1_COLOR'    : h1Color,
+                            'KEY_H2_COLOR'    : h2Color,
+                            'KEY_M1_COLOR'    : m1Color,
+                            'KEY_M2_COLOR'    : m2Color,
+                            'KEY_OPT_1'       : $('#opt1').val() }
+            return options;
+            }
+    </script>
+</body>
+</html>

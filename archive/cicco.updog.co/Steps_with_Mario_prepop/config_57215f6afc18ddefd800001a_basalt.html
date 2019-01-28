@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Steps with Mario Settings</title>
+  </head>
+  <body onload="fillOptions()">
+	<img alt='' src='https://dl.dropboxusercontent.com/u/58117814/Steps_with_Mario/Banner.png'>
+
+	<p>Units:
+    <select id='units'>
+      <option value='S'>Steps</option>
+      <option value='D'>Miles</option>
+    </select>
+    </p>
+	
+	<p>Value:
+	<input id='unitval' type='number' data-type='int'>
+	</p>
+
+	<p>
+	<input id='save_button' type='button' value='Save'>
+	</p>
+	
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+	<input type="hidden" name="cmd" value="_s-xclick">
+	<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+	">
+	<input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+	<img alt="" border="0" src="/www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+	</form>
+
+    <script>
+	function fillOptions() {
+		var hashParams = window.location.hash.substr(1).split('&'); // substr(1) to remove the `#`		
+		for(var i = 0; i < hashParams.length; i++){
+			var p = hashParams[i].split('=');
+			document.getElementById(p[0]).value = decodeURIComponent(p[1]);
+		}
+	};
+	
+	function saveOptions() {
+		var unitSelect = document.getElementById('units');
+		var unitVal = document.getElementById('unitval');
+	
+		var options = {
+			'units': unitSelect.value,
+			'unitval': parseFloat(unitVal.value)
+		};		
+		return options;    
+	};
+	  
+    var submitButton = document.getElementById('save_button');
+    submitButton.addEventListener('click', 
+        function() {
+
+		var options = saveOptions();
+        var location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(options));
+          
+          document.location = location;
+        }, 
+      false);  
+	  
+	  
+    </script>
+	
+  </body>
+</html>

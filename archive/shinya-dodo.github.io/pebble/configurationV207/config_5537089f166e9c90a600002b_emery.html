@@ -1,0 +1,358 @@
+﻿
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Configuration</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.4.2/jquery.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+
+      <div class="ui-content" role="main">
+
+<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>BackGround Color:</legend>
+    		<label for="color">Color</label>
+		<input type="radio" id="color" name="bgcolor" value="3" data-theme="c" checked="checked">
+		
+        	<label for="black">Black</label>
+		<input type="radio" id="black" name="bgcolor" value="1" data-theme="c">
+		
+		<label for="white">White</label>
+		<input type="radio" id="white" name="bgcolor" value="2" data-theme="c">
+</fieldset>
+
+<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>Start of Week:</legend>
+        <input name="week" id="sunday" value="0" checked="checked" type="radio">
+        <label for="sunday">Sun</label>
+        <input name="week" id="monday" value="1" type="radio">
+        <label for="monday">Mon</label>
+</fieldset>
+
+<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>Hourly Vibration:</legend>
+        <input name="Hourly" id="Hourly_n" value="0" type="radio" checked="checked">
+        <label for="Hourly_n">None</label>
+        <input name="Hourly" id="Hourly_s" value="1" type="radio">
+        <label for="Hourly_s">Short</label>
+        <input name="Hourly" id="Hourly_l" value="2" type="radio">
+        <label for="Hourly_l">Long</label>
+        <input name="Hourly" id="Hourly_d" value="3" type="radio">
+        <label for="Hourly_d">Double</label>
+</fieldset>
+<fieldset data-type="horizontal" data-mini="true">
+    <legend>Enabled Hourly Vibration:</legend>
+    <label for="stTime">From</label>
+    <select id="stTime">
+		<option value="0">0</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8" selected="">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+		<option value="20">20</option>
+		<option value="21">21</option>
+		<option value="22">22</option>
+		<option value="23">23</option>
+	</select>
+	<label for="edTime">To</label>
+    <select id="edTime">
+		<option value="0">0</option>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+		<option value="8">8</option>
+		<option value="9">9</option>
+		<option value="10">10</option>
+		<option value="11">11</option>
+		<option value="12">12</option>
+		<option value="13">13</option>
+		<option value="14">14</option>
+		<option value="15">15</option>
+		<option value="16">16</option>
+		<option value="17">17</option>
+		<option value="18">18</option>
+		<option value="19">19</option>
+		<option value="20" selected="">20</option>
+		<option value="21">21</option>
+		<option value="22">22</option>
+		<option value="23">23</option>
+	</select>
+</fieldset>
+
+
+<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>Disconnect Vibration:</legend>
+        <input name="Disconnect" id="Disconnect_n" value="0" type="radio">
+        <label for="Disconnect_n">None</label>
+        <input name="Disconnect" id="Disconnect_s" value="1" type="radio">
+        <label for="Disconnect_s">Short</label>
+        <input name="Disconnect" id="Disconnect_l" value="2" type="radio">
+        <label for="Disconnect_l">Long</label>
+        <input name="Disconnect" id="Disconnect_d" value="3" type="radio" checked="checked">
+        <label for="Disconnect_d">Double</label>
+</fieldset>
+
+<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>Connect Vibration:</legend>
+        <input name="Connect" id="Connect_n" value="0" type="radio">
+        <label for="Connect_n">None</label>
+        <input name="Connect" id="Connect_s" value="1" type="radio" checked="checked">
+        <label for="Connect_s">Short</label>
+        <input name="Connect" id="Connect_l" value="2" type="radio">
+        <label for="Connect_l">Long</label>
+        <input name="Connect" id="Connect_d" value="3" type="radio">
+        <label for="Connect_d">Double</label>
+</fieldset>
+
+<fieldset id="DateFormat" data-role="controlgroup" data-type="vertical" data-mini="true">
+    <legend>Date Format:</legend>
+    <select name="ddlDate1" id="ddlDate1">
+		<option value="Y" selected="">YYYY</option>
+		<option value="m">MM</option>
+		<option value="d">DD</option>
+		<option value="G">GGYY</option>
+		<option value=""></option>
+	</select>
+	<select name="ddlDate2" id="ddlDate2">
+		<option value="/" selected="">/</option>
+		<option value="-">-</option>
+		<option value=".">.</option>
+		<option value=""></option>
+	</select>
+	<select name="ddlDate3" id="ddlDate3">
+		<option value="Y">YYYY</option>
+		<option value="m" selected="">MM</option>
+		<option value="d">DD</option>
+	</select>
+	<select name="ddlDate4" id="ddlDate4">
+		<option value="/" selected="">/</option>
+		<option value="-">-</option>
+		<option value=".">.</option>
+		<option value=""></option>
+	</select>
+	<select name="ddlDate5" id="ddlDate5">
+		<option value="Y">YYYY</option>
+		<option value="m">MM</option>
+		<option value="d" selected="">DD</option>
+		<option value=""></option>
+	</select>
+</fieldset>
+
+<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>24H / 12H:</legend>
+        <input name="ampm" id="24H" value="0" checked="checked" type="radio">
+        <label for="24H">24H</label>
+        <input name="ampm" id="12H" value="1" type="radio">
+        <label for="12H">12H</label>
+</fieldset>
+
+<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>ShowHoliday(JapaneseOnly):</legend>
+        <input name="holiday" id="HolidayOff" value="0" checked="checked" type="radio">
+        <label for="HolidayOff">Off</label>
+        <input name="holiday" id="HolidayOn" value="1" type="radio">
+        <label for="HolidayOn">On</label>
+</fieldset>
+
+<fieldset data-role="collapsible" data-mini="true">	
+    <legend>Days of Week:</legend>
+    <label for="keySun">Sunday:</label>
+    <input name="keySun" id="txtSun" value="Su" data-mini="true" type="text" maxlength="2">
+    <label for="keyMon">Monday:</label>
+    <input name="keyMon" id="txtMon" value="Mo" data-mini="true" type="text" maxlength="2">
+    <label for="keyTue">Tuesday:</label>
+    <input name="keyTue" id="txtTue" value="Tu" data-mini="true" type="text" maxlength="2">
+    <label for="keyWed">Wednesday:</label>
+    <input name="keyWed" id="txtWed" value="We" data-mini="true" type="text" maxlength="2">
+    <label for="keyThu">Thursday:</label>
+    <input name="keyThu" id="txtThu" value="Th" data-mini="true" type="text" maxlength="2">
+    <label for="keyFri">Friday:</label>
+    <input name="keyFri" id="txtFri" value="Fr" data-mini="true" type="text" maxlength="2">
+    <label for="keySat">Saturday:</label>
+    <input name="keySat" id="txtSat" value="Sa" data-mini="true" type="text" maxlength="2">
+</fieldset>
+    </div>
+
+<br>
+	<div class="ui-body ui-body-c">
+		<fieldset class="ui-grid-a">
+			<div class="ui-block-a">
+				<button type="submit" data-theme="d" id="btnCancel">Cancel</button>
+			</div>
+			<div class="ui-block-b">
+				<button type="submit" data-theme="b" id="btnSubmit">Submit</button>
+			</div>
+		</fieldset>
+	</div>
+</div>
+    <script>
+    		function utf8_to_b64(str) 
+    		{
+    			return window.btoa(unescape(encodeURIComponent(str)));
+      		}
+      
+		function saveOptions()
+		{
+			var df = $("#ddlDate1").val() +
+					 $("#ddlDate2").val() +
+					 $("#ddlDate3").val() +
+					 $("#ddlDate4").val() +
+					 $("#ddlDate5").val();
+			var options =
+			{
+				"bgcolor": parseInt($("input:radio[name=bgcolor]:checked").val()),
+				"week": parseInt($("input:radio[name=week]:checked").val()),
+				"dateformat": df,
+				"keySun": $("#txtSun").val(), 
+				"keyMon": $("#txtMon").val(), 
+				"keyTue": $("#txtTue").val(), 
+				"keyWed": $("#txtWed").val(), 
+				"keyThu": $("#txtThu").val(), 
+				"keyFri": $("#txtFri").val(), 
+				"keySat": $("#txtSat").val(),
+				"ampm": parseInt($("input:radio[name=ampm]:checked").val()),
+				"holiday": parseInt($("input:radio[name=holiday]:checked").val()),
+				"hourly": parseInt($("input:radio[name=Hourly]:checked").val()),
+				"stTime": parseInt($("#stTime").val()),
+				"edTime": parseInt($("#edTime").val()),
+				"disconnect": parseInt($("input:radio[name=Disconnect]:checked").val()),
+				"connect": parseInt($("input:radio[name=Connect]:checked").val())
+			}
+			return options;
+		}
+		
+		$().ready(function()
+		{
+			//localStorageにあれば読み込み
+			if (typeof window.localStorage !== "undefined") {
+				if (window.localStorage.getItem("pebble_DateTimeCalendar2_options")) 
+				{
+					ls_pto = JSON.parse(window.localStorage.getItem("pebble_DateTimeCalendar2_options"));
+					
+		  			$("input[name=bgcolor][value=" +ls_pto["bgcolor"] + "]").prop('checked',true);
+		  			$("input[name=bgcolor]").checkboxradio('refresh');	
+		  			
+		  			$("input[name=week][value=" +ls_pto["week"] + "]").prop('checked',true);
+		  			$("input[name=week]").checkboxradio('refresh');	
+		  			
+		  			if('dateformat' in ls_pto)
+		  			{
+		  				$("#ddlDate1").val(ls_pto["dateformat"].substr(0, 1));
+		  				$("#ddlDate2").val(ls_pto["dateformat"].substr(1, 1));
+		  				$("#ddlDate3").val(ls_pto["dateformat"].substr(2, 1));
+		  				$("#ddlDate4").val(ls_pto["dateformat"].substr(3, 1));
+		  				$("#ddlDate5").val(ls_pto["dateformat"].substr(4, 1));
+		  				$("#ddlDate1").selectmenu('refresh');
+		  				$("#ddlDate2").selectmenu('refresh');
+		  				$("#ddlDate3").selectmenu('refresh');
+		  				$("#ddlDate4").selectmenu('refresh');
+		  				$("#ddlDate5").selectmenu('refresh');
+		  			}
+		  			if('keySun' in ls_pto)
+		  			{
+		  				$("#txtSun").val(ls_pto["keySun"]);
+		  				$("#txtMon").val(ls_pto["keyMon"]);
+		  				$("#txtTue").val(ls_pto["keyTue"]);
+		  				$("#txtWed").val(ls_pto["keyWed"]);
+		  				$("#txtThu").val(ls_pto["keyThu"]);
+		  				$("#txtFri").val(ls_pto["keyFri"]);
+		  				$("#txtSat").val(ls_pto["keySat"]);
+		  			}
+		  			if('ampm' in ls_pto)
+		  			{
+	  					$("input[name=ampm][value=" +ls_pto["ampm"] + "]").prop('checked',true);
+		  				$("input[name=ampm]").checkboxradio('refresh');
+		  			}
+		  			if('holiday' in ls_pto)
+		  			{
+	  					$("input[name=holiday][value=" +ls_pto["holiday"] + "]").prop('checked',true);
+		  				$("input[name=holiday]").checkboxradio('refresh');
+		  			}
+		  			if('hourly' in ls_pto)
+		  			{
+	  					$("input[name=Hourly][value=" +ls_pto["hourly"] + "]").prop('checked',true);
+		  				$("input[name=Hourly]").checkboxradio('refresh');
+		  				$("#stTime").val(ls_pto["stTime"]);
+		  				$("#stTime").selectmenu('refresh');
+		  				$("#edTime").val(ls_pto["edTime"]);
+		  				$("#edTime").selectmenu('refresh');
+		  				
+		  				$("input[name=Disconnect][value=" +ls_pto["disconnect"] + "]").prop('checked',true);
+		  				$("input[name=Disconnect]").checkboxradio('refresh');
+		  				
+		  				$("input[name=Connect][value=" +ls_pto["connect"] + "]").prop('checked',true);
+		  				$("input[name=Connect]").checkboxradio('refresh');
+		  			}
+		  		}
+		  	}
+		  	
+			$("#btnCancel").click(function()
+			{
+				location.href = getQueryParam("return_to", "pebblejs://close#");
+			});
+			$("#btnSubmit").click(function()
+			{
+				ls_pto = JSON.stringify(saveOptions());
+				//localStorageに保存
+	          		if (typeof window.localStorage !== "undefined") 
+	          		{
+					window.localStorage.setItem("pebble_DateTimeCalendar2_options", ls_pto);
+				}
+				
+				var return_to = getQueryParam("return_to", "pebblejs://close#");
+				
+				location.href = return_to + utf8_to_b64(ls_pto);
+			});
+		});
+		function getQueryVariable(variable)
+		{
+			var query = location.search.substring(1);
+			var vars = query.split('&');
+			for(var i = 0; i < vars.length; i++)
+			{
+				var pair = vars[i].split('=');
+				if(pair[0] == variable)
+				{
+					return decodeURIComponent(pair[1]);
+				}
+			}
+			return false;
+		}
+		// Something like this to get query variables.
+		function getQueryParam(variable, default_) {
+		    var query = location.search.substring(1);
+		    var vars = query.split('&');
+		    for (var i = 0; i < vars.length; i++) {
+		        var pair = vars[i].split('=');
+		        if (pair[0] == variable)
+		            return decodeURIComponent(pair[1]);
+		    }
+		    return default_ || false;
+		}
+    </script>
+  </body>
+</html>

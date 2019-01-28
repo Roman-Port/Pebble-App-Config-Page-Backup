@@ -1,0 +1,455 @@
+﻿<!DOCTYPE html>
+<html lang="en" manifest="appcache3.manifest">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+	<title>Simply Big Watchface Configuration</title>
+	<link rel="stylesheet" href="/adorzjh.github.io/css/slate.css">
+</head>
+<body>
+
+<div class="item-container">
+	<div class="item-container-header">Time Format</div>
+	<div class="item-container-content">
+		<label class="item">Display leading zero
+			<input type="checkbox" class="item-toggle" name="leading-zero" id="leadingZ">
+		</label>
+	</div>
+
+	<div class="item-container-content">
+		<label class="item">Display separator
+			<input type="checkbox" class="item-toggle" name="colon" id="colon">
+		</label>
+	</div>
+
+	<div class="item-container-content">	
+		<div class="item tab-buttons">Format
+			<a name="timef" id="timef-2" class="tab-button"> Auto </a>
+			<a name="timef" id="timef-1" class="tab-button"> 12 h </a>
+			<a name="timef" id="timef-0" class="tab-button active"> 24 h </a>
+		</div>
+	</div>
+</div>
+
+
+<div class="item-container">
+	<div class="item-container-header">Date</div>
+	<div class="item-container-content">
+		<div class="item tab-buttons">Date format
+			<a name="datef" id="datef-0" class="tab-button active">MMM DD</a>
+			<a name="datef" id="datef-1" class="tab-button">DD. MMM</a>
+		</div>
+	</div>
+
+	<div class="item-container-content">
+		<label class="item">Show week number
+			<input type="checkbox" class="item-toggle" name="weekno" id="weekno">
+		</label>
+	</div>
+</div>
+
+<div class="item-container">
+	<div class="item-container-header">Vibrate On Disconnect</div>
+	<div class="item-container-content">
+		<div class="item tab-buttons">
+			<a name="vibebt" id="vibebt-0" class="tab-button active">Off</a>
+			<a name="vibebt" id="vibebt-2" class="tab-button">Short</a>
+			<a name="vibebt" id="vibebt-1" class="tab-button">Long</a>
+		</div>
+	</div>
+	<div class="item-container-header">Vibrate Hourly</div>
+	<div class="item-container-content">	
+		<div class="item tab-buttons item-subtitle-wrapper">
+			<a name="vibehr" id="vibehr-0" class="tab-button active">Off</a>
+			<a name="vibehr" id="vibehr-2" class="tab-button">Short</a>
+			<a name="vibehr" id="vibehr-1" class="tab-button">Long</a>
+		</div>
+	</div>
+	<div class="item-container-footer">Can have impact on battery</div>
+</div>
+
+<div class="item-container">
+  <div class="item-container-header">Battery</div>
+	<div class="item-container-content">
+		<label class="item">Show icon
+			<input type="checkbox" class="item-toggle" name="bat-ico" id="batico">
+		</label>
+	</div>
+	<div class="item-container-content">
+		<label class="item">Show numbers
+			<input type="checkbox" class="item-toggle" name="bat-num" id="batnum">
+		</label>
+	</div>
+</div>
+
+<div id='bwonly'>
+	<div class="item-container">
+		<div class="item-container-header">Colors</div>
+		<div class="item-container-content">
+			<label class="item">Invert
+				<input type="checkbox" class="item-toggle" name="invert" id="invert">
+			</label>
+		</div>
+	</div>
+</div>
+
+
+<div id='colorcapable'>
+	<div class="item-container">
+		<div class="item-container-header">Predefined Color Schemes</div>
+		<div class="item-container-content">
+			<label class="item">
+				Color scheme
+				<select name="theme" id="theme" dir="rtl" class="item-select">
+					<option class="item-select-option" value="0" selected="">Actual - no change</option>
+					<option class="item-select-option" value="1">Default</option>
+					<option class="item-select-option" value="2">Black on White</option>
+					<option class="item-select-option" value="3">White on Black</option>
+					<option class="item-select-option" value="4">Blue</option>
+					<option class="item-select-option" value="5">Red</option>
+					<option class="item-select-option" value="6">Color mix</option>
+					<option class="item-select-option" value="7">Green on White</option>
+					<option class="item-select-option" value="8">Red on White</option>
+					<option class="item-select-option" value="9">Orange and Pink (MiS)</option>
+				</select>
+			</label>	
+		</div>
+	</div>
+
+
+	<div style="padding: 20px 40%">
+	<div style="width: 88px; background-color: black; height: 98px; padding: 1px; font-family: sans serif; text-align: center; text-decoration: none; text-shadow: none !important;" id="preview0">
+		<div style="width: 88px; height: 24px; margin: 0; border: 0; padding: 0; font-size: 14px; color: yellow" id='ct-date'>AUG 22</div>
+		<div style="padding: 10px 0 ; margin: 0; border: 0;">
+			<span style="font-size: 24px; color: orange;" id='ct-hour'>12</span>
+			<span style="font-size: 20px; color: darkgray;" id='ct-colon'>:</span>
+			<span style="font-size: 24px; color: white;" id='ct-min'>00</span>
+		</div>
+		<div style="width: 88px; height: 24px; margin: 0; border: 0; padding: 0; text-align: center; font-size: 14px; color: yellow" id='ct-dow'><span style="font-size: 10px; color: white; padding-right: 10px;" id='ct-bat'>90 </span>SAT<span style="font-size: 10px; color: white; padding-left: 10px;" id='ct-week'> 05</span></div>
+	</div>
+	</div>
+
+	<div class="item-container">
+		<div class="item-container-header">Color scheme designer</div>
+		<div class="item-container-content">
+			<label class="item">
+				Background
+				<input type="text" class="item-color item-color-sunny" id="cp-bg" value="#000000">
+			</label>
+			<label class="item">
+				Hours
+				<input type="text" class="item-color item-color-sunny" id="cp-hour" value="#000000">
+			</label>
+			<label class="item">
+				Minutes
+				<input type="text" class="item-color item-color-sunny" id="cp-min" value="#000000">
+			</label>
+			<label class="item">
+				Separator (colon)
+				<input type="text" class="item-color item-color-sunny" id="cp-colon" value="#000000">
+			</label>
+			<label class="item">
+				Date
+				<input type="text" class="item-color item-color-sunny" id="cp-date" value="#000000">
+			</label>
+			<label class="item">
+				Day of week
+				<input type="text" class="item-color item-color-sunny" id="cp-dow" value="#000000">
+			</label>
+			<label class="item">
+			  Week number
+				<input type="text" class="item-color item-color-sunny" id="cp-week" value="#000000">
+			</label>
+			<label class="item">
+			  Battery
+				<input type="text" class="item-color item-color-sunny" id="cp-bat" value="#000000">
+			</label>
+			<label class="item">
+			  AM/PM indicator
+				<input type="text" class="item-color item-color-sunny" id="cp-ampm" value="#000000">
+			</label>
+		</div>
+	</div>
+</div>
+
+<div class="item-container">
+	<div class="item-container-content">
+		<label class="item">
+			Language
+			<select id="select-lang" name="select-lang" dir="rtl" class="item-select">
+				<option class="item-select-option" value="-1">Actual - no change</option>
+				<option class="item-select-option" value="0" selected="">English</option>
+				<option class="item-select-option" value="1">български</option>
+				<option class="item-select-option" value="2">Čeština</option>
+				<option class="item-select-option" value="3">Deutsch</option>
+				<option class="item-select-option" value="4">Dansk</option>
+				<option class="item-select-option" value="5">Español</option>
+				<option class="item-select-option" value="6">Català</option>
+				<option class="item-select-option" value="7">Eesti</option>
+				<option class="item-select-option" value="28">Suomi</option>
+				<option class="item-select-option" value="8">Français</option>
+				<option class="item-select-option" value="9">Ελληνικά</option>
+				<option class="item-select-option" value="10">Hrvatski</option>
+				<option class="item-select-option" value="11">Magyar</option>
+				<option class="item-select-option" value="12">Italiano</option>
+				<option class="item-select-option" value="13">Lietuvių</option>
+				<option class="item-select-option" value="14">Latviešu</option>
+				<option class="item-select-option" value="15">Nederlands</option>
+				<option class="item-select-option" value="16">Norsk Bokmål</option>
+				<option class="item-select-option" value="17">Norsk Nynorsk</option>
+				<option class="item-select-option" value="18">Polski</option>
+				<option class="item-select-option" value="19">Português</option>
+				<option class="item-select-option" value="20">Română</option>
+				<option class="item-select-option" value="21">Русский</option>
+				<option class="item-select-option" value="22">Slovenščina</option>
+				<option class="item-select-option" value="23">Slovenčina</option>
+				<option class="item-select-option" value="24">Српски</option>
+				<option class="item-select-option" value="25">Svenska</option>
+				<option class="item-select-option" value="26">Türkçe</option>
+				<option class="item-select-option" value="27">Tiếng Việt</option>
+			</select>
+		</label>	
+		<div class="item-container-footer">No patch necessary</div>
+	</div>
+</div>
+
+<div class="item-container">
+	<div class="button-container">
+		<input type="button" class="item-button" id="b-save" value="APPLY">
+	</div>
+</div>
+
+<script type="text/javascript" src="/adorzjh.github.io/js/gcolor.js"></script>
+<script type="text/javascript" src="/adorzjh.github.io/js/slate.js"></script>
+<!--
+<script type="text/javascript" src="../js/slate.js"></script>
+-->
+<script>
+	var settings = {};
+	var platform = '';
+
+	var DEFAULT_THEME = "C0F4F4FFFFFCFCD5D5FFFF";
+
+	var themeSet = [
+		"C0F4F4FFFFFCFCD5D5FFFF",
+		"C0F4F4FFFFFCFCD5D5FFFF",
+		"FFC0C0C0C0C0C0D5D5C0C0",
+		"C0FFFFFFFFFFFFFFFFFFFF",
+		"C0C7C7DBDBFCFCD5D5C7C7",
+		"C0E0E0F5F5FAFAD5D5E0E0",
+		"C0E7E7E5E5FAFED5D5E7E7",
+		"FFC4C4C4C4D5D5EAEAC4C4",
+		"FFD0D0E0E0E5E1EAEAD0D0",
+		"C0F4F4FFFFFAFAFFD5EEFA"
+		];
+
+	var themeItems = {
+		'bg':0, 'hour':1, 'hour2': 2, 'min':3, 'min2':4, 'date': 5, 'dow':6, 'colon': 7, 'ampm': 8, 'bat': 9, 'week': 10,
+	};
+
+	function getQueryParam(variable, default_) {
+		var query = location.search.substring(1);
+		var vars = query.split('&');
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split('=');
+			if (pair[0] == variable)
+				return decodeURIComponent(pair[1]);
+		}
+		return default_ || false;
+	}	 
+
+	function setPickers(colorset) {
+		var idx = 0;
+		Object.keys(themeItems).forEach(function(x) {
+			if (x != 'hour2' && x != 'min2') {
+				var v = GColor.expandHex(colorset.substr(idx*2,2));
+				var b = $('#cp-'+x);
+				var p = b.parent().find('.value'); 
+				b[0].value = '#'+v;
+				p.css('background-color', '#'+v);
+			}
+			idx++;
+		})
+	}
+
+	function CpColorChanged() {
+		$("#preview0").css('backgroundColor', $('#cp-bg').val().replace(/^0x/, '#'));
+		$("#ct-hour").css('color', $('#cp-hour').val().replace(/^0x/, '#'));
+		$("#ct-min").css('color', $('#cp-min').val().replace(/^0x/, '#'));
+		$("#ct-colon").css('color', $('#cp-colon').val().replace(/^0x/, '#'));
+		$("#ct-date").css('color', $('#cp-date').val().replace(/^0x/, '#'));
+		$("#ct-dow").css('color', $('#cp-dow').val().replace(/^0x/, '#'));
+		$("#ct-bat").css('color', $('#cp-bat').val().replace(/^0x/, '#'));
+		$("#ct-week").css('color', $('#cp-week').val().replace(/^0x/, '#'));
+		$("#ct-ampm").css('color', $('#cp-ampm').val().replace(/^0x/, '#'));
+	};
+
+	$('#theme').on('change', function(){
+		setPickers(themeSet[this.value]);
+		CpColorChanged();
+	});	
+
+	function getTabVal(name) {
+		var b = $('a[name='+name+'].active');
+		var v = parseInt(b[0].id.replace(name+'-','')); 
+		if (isNaN(v)) {
+			return 0;
+		}
+		return v;	
+	}
+
+	function setTabVal(name, value) {
+		$('a[name='+name+'].active').removeClass('active');
+		$('#'+name+'-'+value).addClass('active')
+	}
+
+	function saveSettings() {
+		settings.bt_vibe = getTabVal('vibebt');
+		settings.hr_vibe = getTabVal('vibehr');
+		settings.hrs_lzero = $('#leadingZ')[0].checked & 1; 
+		settings.colon = $('#colon')[0].checked & 1; 
+		settings.time_fmt = getTabVal('timef');
+		settings.day_first = getTabVal('datef');
+		settings.bat_ico = $('#batico')[0].checked & 1; 
+		settings.bat_num = $('#batnum')[0].checked & 1; 
+		settings.week_no = $('#weekno')[0].checked & 1; 
+
+		var l = parseInt($('#select-lang')[0].value);
+		if (l != -1) {
+			settings.lang = l;
+		}
+
+		if (platform === 'aplite') {
+			settings.invert = $('#invert')[0].checked & 1; 
+		} else {
+			var themeStr = "";
+			Object.keys(themeItems).forEach(function(x) {
+				themeStr += GColor.shortHex($('#cp-'+x.replace('2','')).val().replace(/#/, ''));
+			});
+			settings.color_theme = themeStr;
+			//alert(themeStr);
+		}
+	}
+
+	$().ready(function(){
+
+		platform = getQueryParam('platform', 'basalt');
+		if (platform === 'aplite') {
+			$('#colorcapable').hide();
+		} else {
+			$('#bwonly').hide();
+		}
+
+
+		$('#b-save').click(function(){
+			saveSettings();
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+			var save_set = JSON.stringify(settings);
+			localStorage.setItem("settings_sb", save_set);
+
+			var location	= return_to + encodeURIComponent(save_set);
+			//alert(location);
+			document.location = location;
+		});		
+
+		try {
+			settings = JSON.parse(getQueryParam('settings', ''));
+		} catch (err) {
+			settings = null;
+		}
+
+		if ((settings==null) || (typeof settings !== 'object') || Object.keys(settings).length<3) {
+			try {
+				settings = JSON.parse(localStorage.getItem("settings_sb"));
+			} catch (err) {
+				settings = null;
+			}	
+		}
+		
+		if ((settings === null) || (Object.keys(settings).length < 3)) {
+			settings = {};
+			settings.bt_vibe = 1;
+			settings.color_theme = DEFAULT_THEME;
+			settings.hr_vibe = 0;
+			settings.hrs_lzero = 1; 
+			settings.colon = 1; 
+			settings.time_fmt = 2;
+			settings.day_first = 0;
+			settings.lang = 0;
+			settings.bat_num = 1;
+			settings.bat_ico = 1;
+			settings.week_no = 1;
+			settings.invert = 0;
+		}
+
+		if (settings.bt_vibe) {
+			setTabVal('vibebt', settings.bt_vibe);
+		}
+
+		
+		if (settings.hr_vibe) {
+			 setTabVal('vibehr',settings.hr_vibe);
+		}
+
+		if (settings.time_fmt) {
+			setTabVal('timef', settings.time_fmt);
+		}
+
+		if (settings.day_first) {
+			setTabVal('datef', settings.day_first);
+		}
+
+		if (settings.hrs_lzero) {
+			$('#leadingZ')[0].checked = settings.hrs_lzero === 1;
+		}
+
+		if (settings.colon) {
+			$('#colon')[0].checked = settings.colon === 1; 
+		}
+	
+		if (settings.bat_ico) {
+			$('#batico')[0].checked = settings.bat_ico === 1; 
+		}
+	
+		if (settings.bat_num) {
+			$('#batnum')[0].checked = settings.bat_num === 1; 
+		}
+	
+		if (settings.week_no) {
+			$('#weekno')[0].checked = settings.week_no === 1; 
+		}
+	
+		if (settings.lang) {
+			$('#select-lang')[0].value = settings.lang;
+		}
+
+		if (settings.invert) {
+			$('#invert')[0].checked = settings.invert === 1;
+		}
+
+		var colors = DEFAULT_THEME;
+		if (settings.color_theme) {
+			colors = settings.color_theme;
+
+			if (colors.length == 16) {
+			  var hrs = colors.substr(2,4);
+        colors += "FF" + hrs;			
+				settings.color_theme = colors;
+			}
+
+			if (colors.length != 22) {
+				alert('Invalid color theme! '+ colors.length);
+				colors = DEFAULT_THEME;
+				settings.color_theme = colors;
+			}
+			themeSet[0] = colors;
+		}
+
+		//alert('Theme: ' + themeSet[0]);
+		setPickers(colors);
+		CpColorChanged();
+	});
+
+</script>
+</body>
+</html>

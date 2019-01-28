@@ -1,0 +1,483 @@
+﻿<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+
+<title>Unbenanntes Dokument</title>
+
+<style type="text/css">
+.optionGruppe {
+	font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", "DejaVu Sans", Verdana, sans-serif;
+	font-size: small;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 20px;
+	color: #707070;
+}
+.zeile1{background-color: #EDEDED;}
+.zeile2{background-color: #DFDFDF;
+}
+.clear {float:none;clear:left;}
+body {
+	padding: 0;
+	margin: 0;
+}
+select {margin:0px;font-size: medium;text-align: center;color:black;}
+label {font-size: large;}
+.titeltext {font-size: large;color: #000000;}
+.titeltext span {font-size: medium;color: #000000;}
+.titeltext span .rot {
+	font-size: small;
+	color: #B80003;
+	font-weight: bold;
+	line-height: 90%;
+}
+.text {
+	font-size: small;
+	color: #4D4D4D;
+	line-height: 44%;
+}
+.optionText {
+	font-size: small;
+	margin: 0px;
+}
+#submit_button{
+	width: 50%;
+	height: 50px;
+	font-size: medium;
+	min-width: 50px;
+	min-height: 30px;
+}
+</style>
+</head>
+
+
+<body bgcolor="#d9d9d9">
+
+<div class="optionGruppe">
+<p class="titeltext">"TimeFace One (Analog) V2.9"<br><span>
+<span>- Configuration-Panel -</span><p>
+
+
+
+
+
+<table width="100%" border="0" cellspacing="0" cellpadding="6">
+  <tbody>
+  
+    <tr class="zeile2">
+      <td width="45%" align="right"><p class="optionText">Marker-Color :</p></td>
+      <td width="55%" align="left"> <select id="ZBColorSelect">
+  <option value="0" selected="selected">white</option>
+  <option value="1">red</option>
+  <option value="2">orange</option>
+  <option value="3">yellow</option>
+  <option value="4">green</option>
+  <option value="5">blue</option>
+  <option value="6">violet</option>
+  <option value="7">no Markers</option>
+ </select>
+ 
+ 
+ </td>
+    </tr>
+	 <tr class="zeile1">
+      <td width="45%" align="right"><p class="optionText">Numbers-Count :</p></td>
+      <td width="55%" align="left"><select id="NUMModeSelect">
+  <option value="0">no Numbers</option>
+  <option value="1">only 12</option>
+  <option value="2">3,6,9,12</option>
+  <option value="3" selected="selected">All</option>
+ </select></td>
+    </tr>
+    <tr class="zeile2">
+      <td width="45%" align="right"><p class="optionText">Numbers-Color :</p></td>
+      <td width="55%" align="left"><select id="NUMColorSelect">
+  <option value="0" selected="selected">White</option>
+  <option value="1">light Gray</option>
+  <option value="2">dark Gray</option>
+  <option value="3">Red</option>
+  <option value="4">orange</option>
+  <option value="5">yellow</option>
+  <option value="6">green</option>
+  <option value="7">blue</option>
+  <option value="8">violet</option>
+</select></td>
+    </tr>
+    <tr class="zeile1">
+      <td align="right"><p class="optionText">Hands Color :</p></td>
+      <td align="left"><select id="HHColorSelect">
+  <option value="0" selected="selected">White</option>
+  <option value="1">Red</option>
+  <option value="2">Orange</option>
+  <option value="3">Yellow</option>
+  <option value="4">Green</option>
+  <option value="5">Blue</option>
+  <option value="6">Violet</option>
+</select></td>
+    </tr>
+        <tr class="zeile2">
+      <td align="right"><p class="optionText">Minute-Hand-Stroke :</p></td>
+      <td align="left"><select id="MHStrokeSelect">
+  <option value="0" selected="selected">Normal</option>
+  <option value="1">Thinner</option>
+  
+</select></td>
+      
+    </tr>
+    <tr class="zeile1">
+      <td align="right"><p class="optionText">Second-Hand-Color :</p></td>
+      <td align="left"><select id="SHColorSelect">
+   <option value="0" selected="selected">White</option>
+  <option value="1">light Gray</option>
+  <option value="2">dark Gray</option>
+  <option value="3">Red</option>
+  <option value="4">orange</option>
+  <option value="5">yellow</option>
+  <option value="6">green</option>
+  <option value="7">blue</option>
+  <option value="8">violet</option>
+</select></td>
+    </tr>
+ 
+    <tr class="zeile2">
+      <td align="right"><p class="optionText">Second-Hand-Mode :</p></td>
+      <td align="left"><select id="SHModeSelect">
+  <option value="0" selected="selected">hide</option>
+  <option value="1">show, but dont run</option>
+  <option value="2">show and run short</option>
+  <option value="3">show and run</option>
+
+</select></td>
+      
+    </tr>
+     <tr class="zeile1">
+      <td align="right"><p class="optionText">Date-Language :</p></td>
+      <td align="left"><select id="LanguageSelect">
+	  <option value="0" selected="selected">English</option>
+      <option value="1">French</option>
+      <option value="2">German</option>
+      <option value="3">Spanish</option>
+      <option value="4">Italian</option>
+      <option value="5">Irish</option>
+ </select></td>
+      
+    </tr>
+      <tr class="zeile2">
+      <td width="45%" align="right"><p class="optionText">Date-Color :</p></td>
+      <td width="55%" align="left"><select id="LangColorSelect">
+  <option value="0" selected="selected">White</option>
+  <option value="1">light Gray</option>
+  <option value="2">dark Gray</option>
+  <option value="3">Red</option>
+  <option value="4">orange</option>
+  <option value="5">yellow</option>
+  <option value="6">green</option>
+  <option value="7">blue</option>
+  <option value="8">violet</option>
+  <option value="9">no Date</option>
+</select></td>
+    </tr>
+       <tr class="zeile1">
+      <td align="right"><p class="optionText">Digital Time :</p></td>
+      <td align="left"><select id="DigiSelect">
+  		<option value="0" selected="selected">hide</option>
+  		<option value="1">24 HH:MM </option>
+  <option value="2">12 HH:MM AM/PM</option>
+  <option value="3">12 HH:MM am/pm</option>
+  <option value="4">12 HH:MM </option>
+ </select></td>
+      
+    </tr>
+      <tr class="zeile2">
+      <td width="45%" align="right"><p class="optionText">digital Time Color :</p></td>
+      <td width="55%" align="left"><select id="DigiColorSelect">
+  <option value="0">White</option>
+  <option value="1">light Gray</option>
+  <option value="2" selected="selected">dark Gray</option>
+  <option value="3">Red</option>
+  <option value="4">orange</option>
+  <option value="5">yellow</option>
+  <option value="6">green</option>
+  <option value="7">blue</option>
+  <option value="8">violet</option>
+</select></td>
+    </tr>
+    <tr class="zeile1">
+      <td align="right"><p class="optionText">Time Vibration :</p></td>
+      <td align="left"><select id="HRASelect"> 
+  <option value="0">No</option>
+  <option value="1" selected="selected">every Hour</option>
+  <option value="2">every 30 Minutes</option>
+  <option value="3">every 15 Minutes</option>
+ </select></td>
+      
+    
+    </tr>
+     <tr class="zeile2">
+      <td align="right"><p class="optionText">Time Vibration from</p></td>
+      <td align="left">
+  <select id="HRSSelect"> 
+  <option value="0">00</option>
+  <option value="1">01</option>
+  <option value="2">02</option>
+  <option value="3">03</option>
+  <option value="4">04</option>
+  <option value="5">05</option>
+  <option value="6">06</option>
+  <option value="7">07</option>
+  <option value="8" selected="selected">08</option>
+  <option value="9">09</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
+  <option value="18">18</option>
+  <option value="19">19</option>
+  <option value="20">20</option>
+  <option value="21">21</option>
+  <option value="22">22</option>
+  <option value="23">23</option>
+  </select> to 
+ <select id="HRESelect"> 
+  <option value="0">00</option>
+  <option value="1">01</option>
+  <option value="2">02</option>
+  <option value="3">03</option>
+  <option value="4">04</option>
+  <option value="5">05</option>
+  <option value="6">06</option>
+  <option value="7">07</option>
+  <option value="8">08</option>
+  <option value="9">09</option>
+  <option value="10">10</option>
+  <option value="11">11</option>
+  <option value="12">12</option>
+  <option value="13">13</option>
+  <option value="14">14</option>
+  <option value="15">15</option>
+  <option value="16">16</option>
+  <option value="17">17</option>
+  <option value="18" selected="selected">18</option>
+  <option value="19">19</option>
+  <option value="20">20</option>
+  <option value="21">21</option>
+  <option value="22">22</option>
+  <option value="23">23</option>
+  </select>
+  <font class="optionText">Hour</font>
+ </td>
+      
+    
+    </tr>
+    <tr class="zeile1">
+      <td align="right"><p class="optionText">Bluetooth Alert Vibration</p></td>
+      <td align="left"><select id="BTASelect">
+  <option value="0">No</option>
+  <option value="1" selected="selected">Yes</option>
+  </select></td>
+      
+    </tr>
+    <tr class="zeile2">
+      <td align="right"><p class="optionText"><b>Pebble HEALTH</b></p></td>
+      <td align="left"><select id="HEALTHSelect">
+  <option value="0" selected="selected">No</option>
+  <option value="1">Yes</option>
+  </select></td>
+      
+    </tr>
+      
+   
+  
+    
+    
+    
+    
+   
+    </tbody>
+</table>
+
+
+
+
+
+
+ 
+  <div class="clear"></div><br>
+  <div class="optionGruppe">
+    <input id='submit_button' type='button' class='item-button' value='Apply Config'>
+    <p>
+</div>
+
+<p class="text">If you like to support me, send Feedback</p>
+<p class="text">and feel free to donate a little money via PayPal :)</p>
+<p>
+<p class="titeltext">
+<span>With best thanks!</span><br>Alex</p>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="hosted_button_id" value="CAJV4Q89T4FY8">
+<input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="/www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+</span></div></body>
+
+<script type="text/javascript">
+	
+	var shMode=parseInt(localStorage.getItem("SHMode"));
+	var zbColor=parseInt(localStorage.getItem("ZBColor"));
+	var hhColor=parseInt(localStorage.getItem("HHColor"));
+	var shColor=parseInt(localStorage.getItem("SHColor"));
+	var mhStroke=parseInt(localStorage.getItem("MHStroke"));
+	var numColor=parseInt(localStorage.getItem("NUMColor"));
+	var numLang=parseInt(localStorage.getItem("NUMLanguage"));
+	var numBTA=parseInt(localStorage.getItem("NUMBTA"));
+	var numHRA=parseInt(localStorage.getItem("NUMHRA"));
+	var numHRS=parseInt(localStorage.getItem("NUMHRS"));
+	var numHRE=parseInt(localStorage.getItem("NUMHRE"));
+	var numDIGI=parseInt(localStorage.getItem("NUMDIGI"));
+	var numDIGIColor=parseInt(localStorage.getItem("NUMDIGIColor"));
+	var numLangColor=parseInt(localStorage.getItem("NUMLANGColor"));
+	var numMode=parseInt(localStorage.getItem("NUMMode"));
+	var hltMode=parseInt(localStorage.getItem("HLTMode"));
+	
+	document.getElementById("ZBColorSelect").selectedIndex = zbColor;
+	document.getElementById("HHColorSelect").selectedIndex = hhColor;
+	document.getElementById("SHColorSelect").selectedIndex = shColor;
+	document.getElementById("SHModeSelect").selectedIndex = shMode;
+	document.getElementById("MHStrokeSelect").selectedIndex = mhStroke;
+	document.getElementById("NUMColorSelect").selectedIndex = numColor;
+	document.getElementById("LanguageSelect").selectedIndex = numLang;
+	document.getElementById("BTASelect").selectedIndex = numBTA;
+	document.getElementById("HRASelect").selectedIndex = numHRA;
+	document.getElementById("HRSSelect").selectedIndex = numHRS;
+	document.getElementById("HRESelect").selectedIndex = numHRE;
+	document.getElementById("DigiSelect").selectedIndex = numDIGI;
+	document.getElementById("DigiColorSelect").selectedIndex = numDIGIColor;
+	document.getElementById("LangColorSelect").selectedIndex = numLangColor;
+	document.getElementById("NUMModeSelect").selectedIndex = numMode;
+	document.getElementById("HEALTHSelect").selectedIndex = hltMode;
+ 
+  function getConfigData() {
+   
+   
+ 
+   
+   
+ //   var sekundenMode = if (document.getElementById('SHMode_1').value;  NUMModeSelect
+
+	var e = document.getElementById("ZBColorSelect");
+    zbColor = e.options[e.selectedIndex].value;
+    e = document.getElementById("SHModeSelect");
+    shMode = e.options[e.selectedIndex].value;
+    e = document.getElementById("HHColorSelect");
+    hhColor = e.options[e.selectedIndex].value;
+    e = document.getElementById("SHColorSelect");
+    shColor = e.options[e.selectedIndex].value;
+    e = document.getElementById("MHStrokeSelect");
+    mhStroke = e.options[e.selectedIndex].value;
+	e = document.getElementById("NUMColorSelect");
+    numColor = e.options[e.selectedIndex].value;
+	e = document.getElementById("LanguageSelect");
+    numLang = e.options[e.selectedIndex].value;
+	 e = document.getElementById("BTASelect");
+    numBTA = e.options[e.selectedIndex].value;
+	 e = document.getElementById("HRASelect");
+    numHRA = e.options[e.selectedIndex].value;
+	e = document.getElementById("HRSSelect");
+    numHRS = e.options[e.selectedIndex].value;
+	 e = document.getElementById("HRESelect");
+    numHRE = e.options[e.selectedIndex].value;
+	 e = document.getElementById("DigiSelect");
+    numDIGI = e.options[e.selectedIndex].value;
+	e = document.getElementById("DigiColorSelect");
+    numDIGIColor = e.options[e.selectedIndex].value;
+	e = document.getElementById("LangColorSelect");
+    numLangColor = e.options[e.selectedIndex].value;
+	e = document.getElementById("NUMModeSelect");
+    numMode = e.options[e.selectedIndex].value;
+	e = document.getElementById("HEALTHSelect");
+    hltMode = e.options[e.selectedIndex].value;
+	
+    var options = {
+			'0': parseInt(zbColor),
+    		'1': parseInt(hhColor),
+    		'2': parseInt(shColor),
+    		'3': parseInt(mhStroke),
+		    '4': parseInt(shMode),
+			'5': parseInt(numColor),
+			'6': parseInt(numLang),
+			'7': parseInt(numBTA),
+			'8': parseInt(numHRA),
+			'9': parseInt(numHRS),
+			'10': parseInt(numHRE),
+			'11': parseInt(numDIGI),
+			'12': parseInt(numDIGIColor),
+			'13': parseInt(numLangColor),
+			'14': parseInt(numMode),
+			'15': parseInt(hltMode)
+    };
+ 
+    // Save for next launch 
+	localStorage.setItem("ZBColor", parseInt(zbColor));
+    localStorage.setItem("HHColor", parseInt(hhColor));
+    localStorage.setItem("SHColor", parseInt(shColor));
+    localStorage.setItem("SHMode", parseInt(shMode));
+    localStorage.setItem("MHStroke", parseInt(mhStroke));
+    localStorage.setItem("NUMColor", parseInt(numColor));
+	localStorage.setItem("NUMLanguage", parseInt(numLang));
+	localStorage.setItem("NUMBTA", parseInt(numBTA));
+	localStorage.setItem("NUMHRA", parseInt(numHRA));
+	localStorage.setItem("NUMHRS", parseInt(numHRS));
+	localStorage.setItem("NUMHRE", parseInt(numHRE));
+	localStorage.setItem("NUMDIGI", parseInt(numDIGI));
+	localStorage.setItem("NUMDIGIColor", parseInt(numDIGIColor));
+	localStorage.setItem("NUMLANGColor", parseInt(numLangColor));
+	localStorage.setItem("NUMLANGColor", parseInt(numLangColor));NUMModeSelect
+    localStorage.setItem("NUMMode", parseInt(numMode));
+    localStorage.setItem("HLTMode", parseInt(hltMode));
+	
+	
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+   // var backgroundColorPicker = document.getElementById('background_color_picker');
+   // var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['0']) {
+      var zbcolstore= JSON.parse(localStorage['1']);
+     alert("Gefunden:" + zbcolstore);
+    }
+  })();
+  </script>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.vhn.vn/blog/xmlrpc.php">
+
+<title>BKPCTF 2016 &#8211; VHNVN&#039;s blog</title>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//ajax.googleapis.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; Feed" href="https://www.vhn.vn/blog/index.php/feed/" />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; Comments Feed" href="https://www.vhn.vn/blog/index.php/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; BKPCTF 2016 Comments Feed" href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.vhn.vn\/blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.9"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='jquery-ui-css'  href='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css?ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-bootstrap-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/css/bootstrap/bootstrap.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-style-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/style.css?ver=4.9.9' type='text/css' media='all' />
+<style id='oria-style-inline-css' type='text/css'>
+body, .widget a { color:#717376}
+.site-title a, .site-title a:hover { color:#fff}
+.site-description { color:#bbb}
+.site-logo { max-width:200px; }
+.site-branding { padding-top:80px;padding-bottom:80px; }
+.site-title { font-size:62px; }
+.site-description { font-size:18px; }
+
+</style>
+<link rel='stylesheet' id='oria-body-fonts-css'  href='//fonts.googleapis.com/css?family=Lato%3A400%2C700%2C400italic%2C700italic&#038;ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-headings-fonts-css'  href='//fonts.googleapis.com/css?family=Oswald%3A300%2C700&#038;ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-fontawesome-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/fonts/font-awesome.min.css?ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack-widget-social-icons-styles-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/modules/widgets/social-icons/social-icons.css?ver=20170506' type='text/css' media='all' />
+<link rel='stylesheet' id='enlighter-local-css'  href='https://www.vhn.vn/blog/wp-content/plugins/enlighter/resources/EnlighterJS.min.css?ver=3.6' type='text/css' media='all' />
+<link rel='stylesheet' id='enlighter-webfonts-css'  href='//fonts.googleapis.com/css?family=Source+Code+Pro%3Aregular%2C700&#038;ver=3.6' type='text/css' media='all' />
+<link rel='stylesheet' id='social-logos-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/css/jetpack.css?ver=6.1.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/related-posts/related-posts.min.js?ver=20150408'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/jquery.fitvids.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/jquery.slicknav.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/parallax.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/scripts.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/imagesloaded.min.js?ver=3.2.0'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/masonry.min.js?ver=3.3.2'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/imagesloaded.pkgd.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/masonry-init.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/owl.carousel.min.js?ver=1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sliderOptions = {"slideshowspeed":"4000"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/slider-init.js?ver=1'></script>
+<link rel='https://api.w.org/' href='https://www.vhn.vn/blog/index.php/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.vhn.vn/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.vhn.vn/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Một bài toán tính tổng' href='https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/' />
+<link rel='next' title='0CTF 2016' href='https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/' />
+<link rel="canonical" href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/" />
+<link rel='shortlink' href='https://wp.me/p6MMNs-15' />
+<link rel="alternate" type="application/json+oembed" href="https://www.vhn.vn/blog/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vhn.vn%2Fblog%2Findex.php%2F2016%2F03%2F07%2Fbkpctf-2016%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.vhn.vn/blog/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vhn.vn%2Fblog%2Findex.php%2F2016%2F03%2F07%2Fbkpctf-2016%2F&#038;format=xml" />
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'/>
+<link rel='dns-prefetch' href='//i0.wp.com'/>
+<link rel='dns-prefetch' href='//i1.wp.com'/>
+<link rel='dns-prefetch' href='//i2.wp.com'/>
+<style type='text/css'>img#wpstats{display:none}</style><!--[if lt IE 9]>
+<script src="https://www.vhn.vn/blog/wp-content/themes/oria/js/html5shiv.js"></script>
+<![endif]-->
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<style type="text/css">
+/* <![CDATA[ */
+img.latex { vertical-align: middle; border: none; }
+/* ]]> */
+</style>
+		<style type="text/css">
+			.site-header {
+				background-image: url(https://www.vhn.vn/blog/wp-content/themes/oria/images/header.jpg);
+			}
+		</style>
+		
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="BKPCTF 2016" />
+<meta property="og:url" content="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/" />
+<meta property="og:description" content="Updating&#8230;" />
+<meta property="article:published_time" content="2016-03-07T15:48:51+00:00" />
+<meta property="article:modified_time" content="2016-03-08T18:12:41+00:00" />
+<meta property="og:site_name" content="VHNVN&#039;s blog" />
+<meta property="og:image" content="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-07-at-10.58.00-PM.png?fit=418%2C266&amp;ssl=1" />
+<meta property="og:image:width" content="418" />
+<meta property="og:image:height" content="266" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:text:title" content="BKPCTF 2016" />
+<meta name="twitter:image" content="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-07-at-10.58.00-PM.png?fit=418%2C266&#038;ssl=1&#038;w=640" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- End Jetpack Open Graph Tags -->
+</head>
+
+<body class="post-template-default single single-post postid-67 single-format-standard">
+
+<div class="preloader"><div id="preloader-inner"><div class="preload">&nbsp;</div></div></div>
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<div class="top-bar clearfix no-toggle">
+					
+					</div>
+
+		<div class="container">
+			<div class="site-branding">
+				<h1 class="site-title"><a href="https://www.vhn.vn/blog/" rel="home">VHNVN&#039;s blog</a></h1><h2 class="site-description">Smile with the life, it will smile with you!</h2>			</div><!-- .site-branding -->
+		</div>
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<div id="primary-menu" class="menu clearfix"></div>
+		</nav><!-- #site-navigation -->
+		<nav class="mobile-nav"></nav>
+
+	</header><!-- #masthead -->
+	
+	
+	<div id="content" class="site-content clearfix">
+				<div class="container content-wrapper">
+		
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-67" class="post-67 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+
+			<div class="single-thumb">
+			<img width="418" height="266" src="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-07-at-10.58.00-PM.png?fit=418%2C266&amp;ssl=1" class="attachment-oria-large-thumb size-oria-large-thumb wp-post-image" alt="" srcset="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-07-at-10.58.00-PM.png?w=418&amp;ssl=1 418w, https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-07-at-10.58.00-PM.png?resize=300%2C191&amp;ssl=1 300w" sizes="(max-width: 418px) 100vw, 418px" data-attachment-id="83" data-permalink="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/screen-shot-2016-03-07-at-10-58-00-pm/" data-orig-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-07-at-10.58.00-PM.png?fit=418%2C266&amp;ssl=1" data-orig-size="418,266" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screen Shot 2016-03-07 at 10.58.00 PM" data-image-description="" data-medium-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-07-at-10.58.00-PM.png?fit=300%2C191&amp;ssl=1" data-large-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-07-at-10.58.00-PM.png?fit=418%2C266&amp;ssl=1" />		</div>
+		
+	<header class="entry-header">
+		<h1 class="entry-title">BKPCTF 2016</h1>
+				<div class="entry-meta">
+			<span class="posted-on"><a href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/" rel="bookmark"><time class="entry-date published" datetime="2016-03-07T22:48:51+00:00">March 7, 2016</time><time class="updated" datetime="2016-03-09T01:12:41+00:00">March 9, 2016</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="https://www.vhn.vn/blog/index.php/author/vanhoavn/">vanhoavn</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<div class="su-accordion"><div class="su-spoiler su-spoiler-style-fancy su-spoiler-icon-plus"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>hmac_crc - 5 points</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<div class="su-quote su-quote-style-default"><div class="su-quote-inner su-clearfix">We&#8217;re trying a new mac here at BKP&#8212;HMAC-CRC. The hmac (with our key) of &#8220;zupe zecret&#8221; is &#8216;0xa57d43a032feb286&#8217;.  What&#8217;s the hmac of &#8220;BKPCTF&#8221;? https://s3.amazonaws.com/bostonkeyparty/2016/0c7433675c3c555afb77271d6a549bf5d941d2ab</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">#!/usr/bin/env python
+def to_bits(length, N):
+  return [int(i) for i in bin(N)[2:].zfill(length)]
+
+def from_bits(N):
+  return int("".join(str(i) for i in N), 2)
+
+CRC_POLY = to_bits(65, (2**64) + 0xeff67c77d13835f7)
+CONST = to_bits(64, 0xabaddeadbeef1dea)
+
+def crc(mesg):
+  mesg += CONST
+  shift = 0
+  while shift &lt; len(mesg) - 64:
+    if mesg[shift]:
+      for i in range(65):
+        mesg[shift + i] ^= CRC_POLY[i]
+    shift += 1
+  return mesg[-64:]
+
+INNER = to_bits(8, 0x36) * 8
+OUTER = to_bits(8, 0x5c) * 8
+
+def xor(x, y):
+  return [g ^ h for (g, h) in zip(x, y)]
+
+def hmac(h, key, mesg):
+  return h(xor(key, OUTER) + h(xor(key, INNER) + mesg))
+
+PLAIN_1 = "zupe zecret"
+PLAIN_2 = "BKPCTF"
+
+def str_to_bits(s):
+  return [b for i in s for b in to_bits(8, ord(i))]
+
+def bits_to_hex(b):
+  return hex(from_bits(b)).rstrip("L")
+
+if __name__ == "__main__":
+  with open("key.txt") as f:
+    KEY = to_bits(64, int(f.read().strip("\n"), 16))
+  print PLAIN_1, "=&gt;", bits_to_hex(hmac(crc, KEY, str_to_bits(PLAIN_1)))
+  print "BKPCTF{" + bits_to_hex(hmac(crc, KEY, str_to_bits(PLAIN_2))) + "}"
+</pre>
+<p>&nbsp;</p>
+</div></div>
+<p>Let&#8217;s write out the hashing function (hmac-crc):  <code class="EnlighterJSRAW" data-enlighter-language="null">hash(x,m) := crc( (x ⊕ C1) + crc( (x ⊕ C2) + m ) )</code>  where + is string concat.</p>
+<p>We dont have key, but have a (message, hash) pair (&#8220;zupe zecret&#8221;, 0xa57d43a032feb286), and need to find correct hash for message &#8220;BKPCTF&#8221;.</p>
+<p>The first approach i came up with was brute-forcing, and z3 refused to give me any answer after waiting some hour&#8230;</p>
+<p>Let&#8217;s go deeper, crc function is based on linear combinator of xor, so it&#8217;s linear over xor:</p>
+<p style="text-align: center;"> <code class="EnlighterJSRAW" data-enlighter-language="null">crc(x ⊕ y) = crc(x) ⊕ crc(y)</code>,</p>
+<p>which&#8217;s also mean that</p>
+<p style="text-align: center;"> <code class="EnlighterJSRAW" data-enlighter-language="null">crc(crc(x ⊕ y)) = crc(crc(x) ⊕ crc(y)) = crc(crc(x)) ⊕ crc(crc(y))</code>.</p>
+<p>Back to original hashing function, we can turn string concat into bitwise concat as</p>
+<p style="text-align: center;"><code class="EnlighterJSRAW" data-enlighter-language="null">x + y = (x&lt;&lt;y.bit_length()) | y</code></p>
+<p>which means our hashing function can be turned into pure integer operation form (note that this version of crc returns 64 bit data):</p>
+<p style="text-align: center;"><code class="EnlighterJSRAW" data-enlighter-language="null">hash(x,m) := crc( (x ⊕ C1)&lt;&lt;64 | crc( (x ⊕ C2) &lt;&lt; m.bit_length() | m ) )</code></p>
+<p>As crc is linear over xor, that form can be rewritten as:</p>
+<p style="text-align: center;"><code class="EnlighterJSRAW" data-enlighter-language="null">hash(x,m) := crc(x&lt;&lt;64) ⊕ crc(crc(x&lt;&lt;m.bit_length())) ⊕ f(m)</code></p>
+<p>&nbsp;</p>
+<p>Where f(m) is independent from x, and can be calculated by:</p>
+<p style="text-align: center;"><code class="EnlighterJSRAW" data-enlighter-language="null">f(m) := crc(x&lt;&lt;64) ⊕ crc(crc(x&lt;&lt;m.bit_length())) ⊕ hash(x,m)</code></p>
+<p>Let&#8217;s try if it&#8217;s constant:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">def f(x,m):
+  return xor(xor(crc(x+[0]*64),crc(crc(x+[0]*(len(m))))),hmac(crc,x,m))
+  
+print bits_to_hex(f(to_bits(64,0x273846),str_to_bits(PLAIN_1)))
+print bits_to_hex(f(to_bits(64,0x27384633),str_to_bits(PLAIN_1)))
+print bits_to_hex(f(to_bits(64,0xdeadbeef),str_to_bits(PLAIN_1)))
+</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">0xad441373f3df7919
+0xad441373f3df7919
+0xad441373f3df7919</pre>
+<p>&nbsp;</p>
+<p>So the constant for PLAIN_1 is <span style="color: #ff0000;">0xad441373f3df7919</span>, or <code class="EnlighterJSRAW" data-enlighter-language="null">crc(x&lt;&lt;64) ⊕ crc(crc(x&lt;&lt;m.bit_length())) == 0xa57d43a032feb286 ⊕ 0xad441373f3df7919 == </code>!</p>
+<p>Now, as the LHS is linear over xor, we can solve for x by bits.</p>
+<p>Let&#8217;s say g(x) is a linear function over xor, then <code class="EnlighterJSRAW" data-enlighter-language="null">g(x) = x0*g(2^0)+x1*g(2^1)+x2*g(2^2)</code>, where xi is bit i of x, so to solve for x from g(x), we just need to find x0, x1, x2,&#8230;</p>
+<p><span style="line-height: 1.5;">Ok, let&#8217;s calculate array {g(2^i)}:</span></p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">print map(lambda x: int(x[2:],16)^0xad441373f3df7919,[bits_to_hex(hmac(crc, to_bits(64, 2**i), str_to_bits(PLAIN_1))) for i in range(64)])</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">[6834908643740050077L, 8918261360326614375L, 3600904948819878547L, 11925816451771342203L, 7098953563970525020L, 250491143874901733L, 13871981502125061527L, 12141935756842272388L, 8684960005792719010L, 3998826113598822681L, 12145552072860297839L, 8691349026213935476L, 3984360580943489717L, 12170521405071002935L, 8667819726527657924L, 3955397618321405909L, 12373709570274539511L, 9148772311635821124L, 4295619248599194837L, 12775235449187295735L, 5409676984928710212L, 5789065119148442837L, 7412147678370845175L, 849648730292190131L, 15124753415683977019L, 9965726379648136156L, 4403455869246736914L, 13567263759751040121L, 5843346184221062488L, 7232655499200574189L, 1067334037898706311L, 15847930004167435091L, 11410109179131964172L, 1528755289798589362L, 17014177992982769465L, 17418665637690586072L, 14623638097115056666L, 13575463204758878622L, 5858618864078233238L, 7271915590215853425L, 1127839958837695167L, 15653736043036081443L, 11240125514458011628L, 2197594243193422450L, 18054418212176223417L, 15896248787898488024L, 10426727587354133530L, 639743797107778974L, 15542294092789453665L, 9719943529612364648L, 2616260629129296762L, 10298979513560477353L, 3772943349561078008L, 12594504273370790317L, 8365397508198080240L, 3341473552091702717L, 11154974181608723239L, 2025021915423886308L, 18321857654312619925L, 15352253859363582592L, 9483132146532092074L, 3365100990727388414L, 11175275768288584097L, 2282081819746938600L]
+</pre>
+<p>Solving it using SAGE:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">from sage.all import *
+
+A = [6834908643740050077L, 8918261360326614375L, 3600904948819878547L, 11925816451771342203L, 7098953563970525020L, 250491143874901733L, 13871981502125061527L, 12141935756842272388L, 8684960005792719010L, 3998826113598822681L, 12145552072860297839L, 8691349026213935476L, 3984360580943489717L, 12170521405071002935L, 8667819726527657924L, 3955397618321405909L, 12373709570274539511L, 9148772311635821124L, 4295619248599194837L, 12775235449187295735L, 5409676984928710212L, 5789065119148442837L, 7412147678370845175L, 849648730292190131L, 15124753415683977019L, 9965726379648136156L, 4403455869246736914L, 13567263759751040121L, 5843346184221062488L, 7232655499200574189L, 1067334037898706311L, 15847930004167435091L, 11410109179131964172L, 1528755289798589362L, 17014177992982769465L, 17418665637690586072L, 14623638097115056666L, 13575463204758878622L, 5858618864078233238L, 7271915590215853425L, 1127839958837695167L, 15653736043036081443L, 11240125514458011628L, 2197594243193422450L, 18054418212176223417L, 15896248787898488024L, 10426727587354133530L, 639743797107778974L, 15542294092789453665L, 9719943529612364648L, 2616260629129296762L, 10298979513560477353L, 3772943349561078008L, 12594504273370790317L, 8365397508198080240L, 3341473552091702717L, 11154974181608723239L, 2025021915423886308L, 18321857654312619925L, 15352253859363582592L, 9483132146532092074L, 3365100990727388414L, 11175275768288584097L, 2282081819746938600L]
+b = 0xa57d43a032feb286^0xad441373f3df7919
+m=[]
+for i in range(64):
+  for a in A:
+    m.append(int((a&gt;&gt;i)&amp;1))
+  m.append(int((b&gt;&gt;i)&amp;1))
+m = Matrix(GF(2),64,65,m)
+mr=m.rref()
+#print mr.str()
+print mr[:,64].transpose().str()</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1]
+</pre>
+<p>Um, seems wrong&#8230; Let&#8217;s relook at the crc function&#8230;</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">def crc(mesg):
+  mesg += CONST
+  shift = 0
+  while shift &lt; len(mesg) - 64:
+    if mesg[shift]:
+      for i in range(65):
+        mesg[shift + i] ^= CRC_POLY[i]
+    shift += 1
+  return mesg[-64:]
+</pre>
+<p>Found it! This crc function is padded with CONST, we just need to nullize it and change function f above.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python" data-enlighter-highlight="2">def _crc(mesg):
+  mesg += [0]*64
+  shift = 0
+  while shift &lt; len(mesg) - 64:
+    if mesg[shift]:
+      for i in range(65):
+        mesg[shift + i] ^= CRC_POLY[i]
+    shift += 1
+  return mesg[-64:]
+
+def f(x,m):
+ return xor(xor(_crc(x+[0]*64),_crc(_crc(x+[0]*(len(m))))),hmac(crc,x,m))
+</pre>
+<p>The constants now is <span style="color: #ff0000;">0xef6bbf832c7eced2</span>, regenerate the {g(2^i)} array, we obtain:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">A = [2086809031724160342, 4173618063448320684, 8347236126896641368, 16694472253793282736L, 2354010789588066455, 4708021579176132910, 9416043158352265820L, 16910874547544338767L, 4226771103552264041, 8453542207104528082, 16907084414209056164L, 4229569526062812863, 8459139052125625726, 16918278104251251452L, 4208021141449359375, 8416042282898718750, 16832084565797437500L, 4384635772785538447, 8769271545571076894, 17538543091142153788L, 665587708229949839, 1331175416459899678, 2662350832919799356, 5324701665839598712, 10649403331679197424L, 14439371256774722583L, 9165840333751074265, 18331680667502148530L, 1384875121671455379, 2769750243342910758, 5539500486685821516, 11079000973371643032L, 15886295027533749447L, 6275931173970513017, 12551862347941026034L, 12940008229072012307L, 9862379257203277265L, 18323483507405901397L, 1396769139689302365, 2793538279378604730, 5587076558757209460, 11174153117514418920L, 15695992938220920871L, 6652028455910995385, 13304056911821990770L, 11436186450250294035L, 15176147297687040977L, 5390667367170691669, 10781334734341383338L, 14180570601802398883L, 7377318259839126705, 14754636519678253410L, 8535309807767455539, 17070619615534911078L, 3906996125356534075, 7813992250713068150, 15627984501426136300L, 6788611577661193263, 13577223155322386526L, 10890132138416260427L, 13958192917995831137L, 7826290186278357813, 15652580372556715626L, 6738574311101372707]
+b = 0xa57d43a032feb286^0xef6bbf832c7eced2
+</pre>
+<p>And the output now is:</p>
+<pre class="EnlighterJSRAW" data-enlighter-theme="twilight">[0 0 0 1 0 0 0 1 0 0 1 1 1 0 1 1 0 1 1 1 0 0 1 1 0 1 0 1 1 1 0 0 0 0 0 0 1 1 1 0 1 1 1 0 1 0 0 0 0 1 1 0 1 0 1 0 0 1 1 1 0 1 0 1]
+</pre>
+<p>So the key in binary form is <span style="color: #ff0000;">1010111001010110000101110111000000111010110011101101110010001000</span>. Let&#8217;s calculate the hash now!</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">print bits_to_hex(hmac(crc, to_bits(64, 0b1010111001010110000101110111000000111010110011101101110010001000), str_to_bits(PLAIN_2)))
+</pre>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">0xd2db2b8b9002841f</pre>
+<p>And here&#8217;s the flag: <strong>BKPCTF{0xd2db2b8b9002841f}</strong>!</p>
+<p><span style="line-height: 1.5;"></div></div> </div></span></p>
+<p>Updating&#8230;</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-67" class="share-twitter sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-67" class="share-facebook sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-67" class="share-google-plus-1 sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/?share=google-plus-1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-67" class="share-linkedin sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/?share=linkedin" target="_blank" title="Click to share on LinkedIn"><span>LinkedIn</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/?share=reddit" target="_blank" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-pinterest"><a rel="nofollow" data-shared="sharing-pinterest-67" class="share-pinterest sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/?share=pinterest" target="_blank" title="Click to share on Pinterest"><span>Pinterest</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/#print" target="_blank" title="Click to print"><span>Print</span></a></li><li class="share-end"></li></ul></div></div></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div>			</div><!-- .entry-content -->
+
+		<footer class="entry-footer">
+		<span class="cat-links">Posted in <a href="https://www.vhn.vn/blog/index.php/category/uncategorized/" rel="category tag">Uncategorized</a></span>	</footer><!-- .entry-footer -->
+	</article><!-- #post-## -->
+
+			
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/" rel="prev">Một bài toán tính tổng</a></div><div class="nav-next"><a href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/" rel="next">0CTF 2016</a></div></div>
+	</nav>
+			
+<div id="disqus_thread"></div>
+
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	
+<div id="secondary" class="widget-area no-toggle" role="complementary">
+	<span class="sidebar-close"><i class="fa fa-times"></i></span>
+	<aside id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://www.vhn.vn/blog/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h4 class="widget-title">Recent Posts</h4>		<ul>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/">HITCON CTF 2017 Quals</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/10/19/hack-lu-2017/">hack.lu 2017</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/">Vue single file component and typescript</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/">0CTF 2016</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/">BKPCTF 2016</a>
+									</li>
+					</ul>
+		</aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h4 class="widget-title">Recent Comments</h4><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Tung Thanh</span> on <a href="https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/#comment-3">Một bài toán tính tổng</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h4 class="widget-title">Archives</h4>		<ul>
+			<li><a href='https://www.vhn.vn/blog/index.php/2017/11/'>November 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2017/10/'>October 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2017/07/'>July 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2016/03/'>March 2016</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/11/'>November 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/09/'>September 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/04/'>April 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/03/'>March 2015</a></li>
+		</ul>
+		</aside><aside id="categories-2" class="widget widget_categories"><h4 class="widget-title">Categories</h4>		<ul>
+	<li class="cat-item cat-item-2"><a href="https://www.vhn.vn/blog/index.php/category/ctf/" >CTF</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://www.vhn.vn/blog/index.php/category/trick/" >Trick</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://www.vhn.vn/blog/index.php/category/uncategorized/" >Uncategorized</a>
+</li>
+		</ul>
+</aside><aside id="meta-2" class="widget widget_meta"><h4 class="widget-title">Meta</h4>			<ul>
+			<li><a href="https://www.vhn.vn/blog/wp-login.php?action=register">Register</a></li>			<li><a href="https://www.vhn.vn/blog/wp-login.php">Log in</a></li>
+			<li><a href="https://www.vhn.vn/blog/index.php/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://www.vhn.vn/blog/index.php/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+			</aside></div><!-- #secondary -->
+
+		</div>
+	</div><!-- #content -->
+
+	
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="site-info container">
+			<a href="http://wordpress.org/" rel="nofollow">Proudly powered by WordPress</a><span class="sep"> | </span>Theme: <a href="http://justfreethemes.com/oria" rel="nofollow">Oria</a> by JustFreeThemes.		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+	<div style="display:none">
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/www.vhn.vn\/blog\/index.php\/2016\/03\/07\/bkpctf-2016\/":67};
+	</script>
+		<link rel='stylesheet' id='font-awesome-css'  href='//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css?ver=4.7.0' type='text/css' media='all' />
+<link rel='stylesheet' id='su-box-shortcodes-css'  href='https://www.vhn.vn/blog/wp-content/plugins/shortcodes-ultimate/assets/css/box-shortcodes.css?ver=5.0.3' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/widget.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/tabs.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/photon/photon.min.js?ver=20130122'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"vhnvn"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/disqus-comment-system/public/js/comment_count.js?ver=3.0.16'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.16"},"disqusIdentifier":"67 https:\/\/www.vhn.vn\/blog\/?p=67","disqusShortname":"vhnvn","disqusTitle":"BKPCTF 2016","disqusUrl":"https:\/\/www.vhn.vn\/blog\/index.php\/2016\/03\/07\/bkpctf-2016\/","postId":"67"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/disqus-comment-system/public/js/comment_embed.js?ver=3.0.16'></script>
+<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201905'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/skip-link-focus-fix.js?ver=20130115'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/comment-reply.min.js?ver=4.9.9'></script>
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/enlighter/resources/EnlighterJS.min.js?ver=3.6'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/wp-embed.min.js?ver=4.9.9'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var su_other_shortcodes = {"no_preview":"This shortcode doesn't work in live preview. Please insert it into editor and preview on the site."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/shortcodes-ultimate/assets/js/other-shortcodes.js?ver=5.0.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=6.1.1'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-google-plus-1', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-linkedin', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+</script>
+<script type="text/javascript">/* <![CDATA[ */EnlighterJS_Config = {"selector":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"language":"generic","theme":"enlighter","indent":2,"hover":"hoverEnabled","showLinenumbers":true,"rawButton":true,"infoButton":true,"windowButton":true,"rawcodeDoubleclick":false,"grouping":true,"cryptex":{"enabled":false,"email":"mail@example.tld"}};!function(){var a=function(a){var b="Enlighter Error: ";console.error?console.error(b+a):console.log&&console.log(b+a)};return window.addEvent?"undefined"==typeof EnlighterJS?void a("Javascript Resources not loaded yet!"):"undefined"==typeof EnlighterJS_Config?void a("Configuration not loaded yet!"):void window.addEvent("domready",function(){EnlighterJS.Util.Init(EnlighterJS_Config.selector.block,EnlighterJS_Config.selector.inline,EnlighterJS_Config)}):void a("MooTools Framework not loaded yet!")}();;/* ]]> */</script>
+<!-- Shortcodes Ultimate custom CSS - start -->
+<style type="text/css">
+.su-spoiler-content {
+	border-left: 1px dashed #999;
+}
+</style>
+<!-- Shortcodes Ultimate custom CSS - end -->
+<script type='text/javascript' src='https://stats.wp.com/e-201905.js' async='async' defer='defer'></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:6.1.1',blog:'100285338',post:'67',tz:'7',srv:'www.vhn.vn'} ]);
+	_stq.push([ 'clickTrackerInit', '100285338', '67' ]);
+</script>
+
+</body>
+</html>

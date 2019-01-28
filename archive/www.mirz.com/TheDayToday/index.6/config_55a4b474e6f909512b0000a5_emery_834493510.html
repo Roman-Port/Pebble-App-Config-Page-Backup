@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title>The Day Today for Pebble</title>
+  <link rel="stylesheet" href="/www.mirz.com/TheDayToday/dist/css/slate.css">
+</head>
+<body>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-62811138-1', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+  <form id="main-form">
+    <div class="item-container">
+      <div class="item-container-header"><h3>The Day Today</h3></div>
+      <div class="item-container-content">
+        <div class="item">
+          Choose from the available topics to embiggen your Pebble Timeline with daily topical nuggets of information.
+        </div>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Topics</div>
+      <div class="item-container-content">
+        <label class="item">
+          Famous Birthdays
+          <input type="checkbox" value="1" class="item-checkbox" name="famous_birthdays">
+        </label>
+        <label class="item">
+          Famous Deaths
+          <input type="checkbox" value="1" class="item-checkbox" name="famous_deaths">
+        </label>
+        <label class="item">
+          On this Day
+          <input type="checkbox" value="1" class="item-checkbox" name="on_this_day">
+        </label>
+        <label class="item">
+          Word of the Day
+          <input type="checkbox" value="1" class="item-checkbox" name="word_of_the_day">
+        </label>
+        <label class="item">
+          Motivational Quotes
+          <input type="checkbox" value="1" class="item-checkbox" name="motivational_quotes">
+        </label>
+        <label class="item">
+          Things You Didn't Know
+          <input type="checkbox" value="1" class="item-checkbox" name="things_you_didnt_know">
+        </label>
+        <label class="item">
+          On This Day In Music
+          <input type="checkbox" value="1" class="item-checkbox" name="on_this_day_in_music">
+        </label>
+        <label class="item">
+          DaysOfTheYear.com (<a href="/daysoftheyear.com//.html" target="_blank">website</a>)
+          <input type="checkbox" value="1" class="item-checkbox" name="daysoftheyear">
+        </label>
+        <label class="item">
+          Urban Word of the Day [NSFW]
+          <input type="checkbox" value="1" class="item-checkbox" name="urbanwordoftheday">
+        </label>
+        <label class="item">
+          That's Number Wang!
+          <input type="checkbox" value="1" class="item-checkbox" name="number_wang">
+        </label>
+        <label class="item">
+          katharine says...
+          <input type="checkbox" value="1" class="item-checkbox" name="katharine">
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Horoscopes</div>
+      <div class="item-container-content">
+        <label class="item">
+          Aries
+          <input type="checkbox" value="1" class="item-checkbox" name="horoscopes_Aries">
+        </label>
+        <label class="item">
+          Taurus
+          <input type="checkbox" value="1" class="item-checkbox" name="horoscopes_Taurus">
+        </label>
+        <label class="item">
+          Gemini
+          <input type="checkbox" value="1" class="item-checkbox" name="horoscopes_Gemini">
+        </label>
+        <label class="item">
+          Cancer
+          <input type="checkbox" value="1" class="item-checkbox" name="horoscopes_Cancer">
+        </label>
+        <label class="item">
+          Leo
+          <input type="checkbox" value="1" class="item-checkbox" name="horoscopes_Leo">
+        </label>
+        <label class="item">
+          Virgo
+          <input type="checkbox" value="1" class="item-checkbox" name="horoscopes_Virgo">
+        </label>
+        <label class="item">
+          Libra
+          <input type="checkbox" value="1" class="item-checkbox" name="horoscopes_Libra">
+        </label>
+        <label class="item">
+          Scorpio
+          <input type="checkbox" value="1" class="item-checkbox" name="horoscopes_Scorpio">
+        </label>
+        <label class="item">
+          Sagittarius
+          <input type="checkbox" value="1" class="item-checkbox" name="horoscopes_Sagittarius">
+        </label>
+        <label class="item">
+          Capricorn
+          <input type="checkbox" value="1" class="item-checkbox" name="horoscopes_Capricorn">
+        </label>
+        <label class="item">
+          Aquarius
+          <input type="checkbox" value="1" class="item-checkbox" name="horoscopes_Aquarius">
+        </label>
+        <label class="item">
+          Pisces
+          <input type="checkbox" value="1" class="item-checkbox" name="horoscopes_Pisces">
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="button-container">
+        <input type="button" class="item-button" value="Save">
+      </div>
+    </div>
+  </form>
+<p>&nbsp;</p>
+<!-- div class="item-container">
+  <div class="item-container-header">Love it? Why not donate!</div>
+  <div class="item-container-content">
+    <div class="item">I do this for love, but sometimes we all need a bit of encouragement (and bacon). I also had to pay my daughter to trawl the Internet looking for this information. Thanks to some kind benefactors, we now have data for 3 more months!</div>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" class="form-configure well">
+      <input type="hidden" name="cmd" value="_s-xclick"/>
+      <input type="hidden" name="hosted_button_id" value="93YLEYE2PW2TS"/>
+      <input type="hidden" name="on0" value="Gift"/>
+      <label class="item">Give bacon!
+        <select name="os0" class="item-select">
+          <option value="Thanks">2 rashers &pound;0.50 GBP</option>
+          <option value="Much love">Bacon sandwich &pound;1.00 GBP</option>
+          <option value="OMG">Full English breakfast &pound;5.00 GBP</option>
+        </select>
+      </label>
+      <div class="item">
+        <input type="hidden" name="currency_code" value="GBP"/>
+        <div class="button-container">
+          <input type="submit" class="item-button" value="Donate with PayPal">
+        </div>
+        <img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1"/>
+      </div>
+    </form>
+  </div>
+</div -->
+<div class="item-container">
+  <script async="" src="/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- Pebble -->
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5617121309965916" data-ad-slot="7637739388" data-ad-format="auto"></ins>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+
+</div>
+<div class="item-container">
+    <div class="item-container-header">About</div>
+    <div class="item-container-content">
+      <div class="item">
+        <p>The Day Today by <a href="/twitter.com//orviwan.html">orviwan</a></p>
+      </div>
+  </div>
+</div>
+
+
+
+
+  <script src="/www.mirz.com/TheDayToday/dist/js/slate.js"></script>
+  <script src="/code.jquery.com//jquery-2.js"></script>
+
+  <script>
+  (function( $ ){
+      $.fn.serializeJSON=function() {
+          var json = {};
+          jQuery.map($(this).serializeArray(), function(n, i) {
+              //only deals with 0/1 checked/unchecked
+              var val = $('.item-checkbox[name=' + n['name'] + ']').prop('checked') ? 1 : 0;
+              json[n['name']] = val;
+          });
+          return json;
+      };
+  })( jQuery );
+
+  // Something like this to get query variables.
+  function getQueryParam(variable, default_) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (pair[0] == variable)
+            return decodeURIComponent(pair[1]);
+    }
+    return default_ || false;
+  }
+
+  var config = {};
+
+  $().ready(function () {
+    config = JSON.parse(localStorage.getItem("config"));
+    $(".item-checkbox").each(function(index, item) {
+      //only for 1/0 checked/unchecked
+      var tmp = eval("config." + $(item).prop("name"));
+      if(typeof tmp !== 'undefined') {
+        $(".item-checkbox[name=" + $(item).prop("name") + "]").prop('checked', tmp);
+      }
+    });
+  });
+
+  $(".item-button").click(function(e) {
+    var btn = $(this).val();
+    if(btn == 'Save') {
+      config = $(".item-checkbox").serializeJSON();
+      localStorage.setItem("config", JSON.stringify(config));
+      var return_to = getQueryParam('return_to', 'pebblejs://close#');
+      document.location = return_to + encodeURIComponent(JSON.stringify(config));
+    }
+
+  });
+
+  </script>
+</body>
+</html>

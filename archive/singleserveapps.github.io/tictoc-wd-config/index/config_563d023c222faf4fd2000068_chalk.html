@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel='stylesheet' type='text/css' href='/singleserveapps.github.io/tictoc-wd-config/bower_components/pebble-slate/dist/css/slate.css'>
+	<link rel='stylesheet' type='text/css' href='/singleserveapps.github.io/tictoc-wd-config/css/style.css'>
+</head>
+<body>
+	<div class='item-container'>
+		<div class='item-container-header'>Color options</div>
+		<div class='item-container-content'>
+			<label class='item'>
+				Background
+				<input id='backgroundColorPicker' type='text' class='item-color item-color-normal' value='#000000'>
+			</label>
+			
+			<label class='item'>
+				Text
+				<input id='textColorPicker' type='text' class='item-color item-color-normal' value='0xffffff'>
+			</label>
+			
+			<label class='item'>
+				Hour hand
+				<input id='hourHandColorPicker' type='text' class='item-color item-color-normal' value='0xff0000'>
+			</label>
+			
+			<label class='item'>
+				Minute hand
+				<input id='minuteHandColorPicker' type='text' class='item-color item-color-normal' value='0xffffff'>
+			</label>
+
+			<label class='item'>
+				Seconds hand
+				<input id='secondsHandColorPicker' type='text' class='item-color item-color-normal' value='0xffffff'>
+			</label>
+			
+			<label class='item'>
+				Hour markers
+				<input id='hourMarkersColorPicker' type='text' class='item-color item-color-normal' value='0xff0000'>
+			</label>
+			
+			<label class='item'>
+				Minor markers
+				<input id='minorMarkersColorPicker' type='text' class='item-color item-color-normal' value='0xffffff'>
+			</label>
+			
+			<label class='item'>
+				Twelve o'clock marker
+				<input id='dotsColorPicker' type='text' class='item-color item-color-normal' value='0xffffff'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+		        Choose the background, text, hour/minute hands, and time markers colors for the watchface. 
+		</div>
+	</div>	
+	
+	<div class='item-container'>
+		<div class='item-container-header'>Weather options</div>
+		<div class='item-container-content'>
+			<label class='item'>
+				Use GPS for weather
+				<input id='useGPS' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+        <div class='item-container-footer'>
+	        Check to use current GPS location for weather conditions or manually enter weather location information below.
+		 </div>
+        <div class="item-container-content">
+            <label class="item">
+				Weather location
+			</label>
+            <div class="item-input-wrapper">
+                <input type="text" class="item-input" id="weatherLocation" placeholder="e.g. 'San Diego CA US', or '92103 US'">
+            </div>
+        </div>
+        <div class='item-container-footer'>
+	        Enter location for non-GPS weather condition retrieval, e.g. 'San Diego CA US', or '92103 US'
+		 </div>
+
+		<div class='item-container-content'>
+			<label class='item'>
+				Shake for Lo/Hi Temperature
+				<input id='shakeforLoHi' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+	        	Check to enable shake option to show today's lo and hi temperatures. Also temporarily displays last weather update time at bottom of screen.
+		 </div>
+
+		<div class='item-container-content'>
+			<label class='item'>
+				Use Celsius
+				<input id='useCelsius' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+	        	Check to display temperature in degrees Celsius. Uncheck to display in degrees Fahrenheit.
+		 </div>
+		 <div class='item-container-content'>
+    			<label class='item'>
+    				Weather update frequency
+      				<input type='range' class='item-slider' id='weatherFrequencySlider' name='weatherFrequencySlider' min='15' max='120' step='15' value='30'>
+      			<div class='item-input-wrapper item-slider-text'>
+        			<input type='text' class='item-input' name='weatherFrequencySlider' readonly="">
+      			</div>
+    			</label>
+  		</div>
+  		<div class='item-container-footer'>
+	        	Select how often weather information is updated (minutes).
+		 </div>	
+	</div>
+	
+	<div class='item-container'>
+		<div class='item-container-header'>Date options</div>		
+		<div class='item-container-content'>
+			<label class='item'>
+				Display date
+				<input id='displayDate' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+	        	Check to display current date information.
+		 </div>
+
+        <div class='item-container-content'>
+            <label class='item'>
+                Include month with date
+                <input id='displayMonth' type='checkbox' class='item-checkbox'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Check to include current month with date information.
+        </div>
+	</div>
+		
+	<div class='item-container'>
+	<div class='item-container-header'>Dial markers option</div>
+        <div class='item-container-content'>
+            <label class='item'>
+                Display minute indicators
+                <input id='displayMinuteLines' type='checkbox' class='item-checkbox'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Check to display line markers at minute positions on the dial. Also toggles display of dot marker in twelve o'clock position.
+        </div>
+	</div>
+	
+	<div class='item-container'>
+	<div class='item-container-header'>Display options</div>
+		<div class='item-container-content'>
+            <label class='item'>
+                Display battery information
+                <input id='displayBattery' type='checkbox' class='item-checkbox'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Check to display current battery charge level information.
+        </div>
+
+        <div class='item-container-content'>
+            <label class='item'>
+                Display digital time
+                <input id='displayDigitalTime' type='checkbox' class='item-checkbox'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Check to display current time in digital format.
+        </div>
+
+        <div class='item-container-content'>
+             <label class='item'>
+                Use larger font for text elements
+                <input id='weatherDateDTimeReadability' type='checkbox' class='item-checkbox'>
+             </label>
+          </div>
+          <div class='item-container-footer'>
+              Check to display weather, date, digital time and battery items using a larger font size.
+         </div>
+		 
+        <div class='item-container-content'>
+			<label class='item'>
+				Use thinner watch hands
+				<input id='useThinHands' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+	        	Check to use watch hands with a thinner width.
+		 </div>
+
+		<div class="item-container-content">
+		<label class="item">
+      			Display seconds hand
+      			<select id="displaySecondsHand" dir='rtl' class="item-select">
+        		<option class="item-select-option" value="0">Off</option>
+        		<option class="item-select-option" selected="" value="1">Shake</option>
+        		<option class="item-select-option" value="2">Always</option>
+      		</select>
+      	</label>
+          </div>
+          <div class='item-container-footer'>
+              Select to enable seconds hand - Off, Shake, or Always.
+         </div>	
+          <div class='item-container-footer'>
+              Shake option will briefly show a seconds hand. Seconds hand displays for just 15 seconds to save battery.
+         </div>	
+
+	</div>
+
+    <div class='item-container'>
+		<div class='item-container-header'>Additional options</div>		
+		<div class='item-container-content'>
+			<label class='item'>
+				Vibrate on Bluetooth disconnect
+				<input id='vibrateBT' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+	        	Check to vibrate on Bluetooth disconnect. Hour hand will also turn <font color="blue">blue</font> when disconnected.
+		 </div>
+	</div>
+	
+	<div class='item-container'>
+		<div class='button-container'>
+			<input id='submitButton' type='button' class='item-button' value='Save'>
+		</div>
+		<div class='item-container-footer'>
+			Note: Some display elements require that the watchface is relaunched to properly update alignment. 
+		 </div>
+	</div>
+
+	<script src='/singleserveapps.github.io/tictoc-wd-config/bower_components/pebble-slate/dist/js/slate.js'></script>
+	<script src='/singleserveapps.github.io/tictoc-wd-config/js/main.js'></script>
+</body>
+</html>

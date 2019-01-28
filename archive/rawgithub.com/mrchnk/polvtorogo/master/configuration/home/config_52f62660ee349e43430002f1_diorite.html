@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>полвторого - настройки</title>
+		<style>
+			body {
+				font-family : sans-serif;
+				font-size : 12pt;
+			}
+			dl, dd, dt, form, ul, li {
+				margin : 0; padding : 0;
+				font-size: 1em;
+				list-style-type: none;
+			}
+			dt {
+				color : #eed;
+				background : #443;
+				height : 2em;
+				line-height : 2em;
+			}
+			dd {
+				border : solid #443;
+				border-width : 0 1pt 1pt 1pt;
+				margin : 0 0 1em;
+				padding: 0 2pt 2pt;
+			}
+			li {
+				height: 2em;
+				line-height: 2em;
+				text-align: left;
+				padding-top : 2pt;
+				border-top : solid 1pt #443;
+			}
+			li:first-child {
+				border : none;
+			}
+			li label {
+				display : block;
+				height : 2em;
+				margin-top: -2em;
+				padding-left: 2em;
+				text-align : left;
+			}
+			form {
+				width : 80%;
+				max-width: 20em;
+				margin : 0 auto;
+				text-align : center;
+			}
+			
+		</style>
+		<script type="text/javascript">
+			
+			function _submit() {
+				var list = [ 'format', 'color', 'align' ];
+				var res = [];
+				for ( var i = 0; i < list.length; i++ ) {
+					var prop = list[ i ];
+					var radios = document.config[ prop ];
+					var radios = document.config[ prop ];
+					for ( var j = 0; j < radios.length; j++ ) {
+						var radio = radios[ j ];
+						if ( radio.checked ) {
+							res.push( prop + '=' + radio.value );
+							break;
+						}
+					}
+				}
+				document.location = 'pebblejs://close#' + res.join( '&' );
+				return false;
+			}
+			
+			function _load() {
+				var hash = document.location.hash;
+				if ( !hash || hash.length <= 1 ) {
+					return;
+				}
+				var hashArr = hash.substr(1).split( '&' );
+				for ( var i = 0; i < hashArr.length; i++ ) {
+					var hashComp = hashArr[ i ].split( '=' );
+					var prop = hashComp[ 0 ];
+					var val = hashComp[ 1 ];
+					var radios = document.config[ prop ];
+					for ( var j = 0; j < radios.length; j++ ) {
+						var radio = radios[ j ];
+						if ( radio.value == val ) {
+							radio.checked = true;
+							break;
+						}
+					}
+				}
+			}
+			
+			window.onload = _load;
+			
+		</script>
+	</head>
+	<body>
+		<form name="config" onsubmit="return _submit();">
+			<dl>
+			
+				<dt><label>Формат</label></dt>
+				<dd><ul>
+					<li><input type="radio" name="format" value="1" id="format_1"><label for="format_1">половина второго</label>
+					<li><input type="radio" name="format" value="2" id="format_2"><label for="format_2">час ноль пять</label>
+				</li></ul></dd>
+				
+				<dt><label>Цвета</label></dt>
+				<dd><ul>
+					<li><input type="radio" name="color" value="1" id="color_1"><label for="color_1">белым по черному</label>
+					<li><input type="radio" name="color" value="2" id="color_2"><label for="color_2">черным по белому</label>
+					<li><input type="radio" name="color" value="3" id="color_3"><label for="color_3">от времени суток</label>
+				</li></ul></dd>
+				
+				<dt><label>Выравнивание</label></dt>
+				<dd><ul>
+					<li><input type="radio" name="align" value="1" id="align_1"><label for="align_1">налево</label>
+					<li><input type="radio" name="align" value="2" id="align_2"><label for="align_2">по центру</label>
+					<li><input type="radio" name="align" value="3" id="align_3"><label for="align_3">направо</label>
+				</li></ul></dd>
+				
+			</dl>
+			<input type="submit" value="Сохранить">
+		</form>
+	</body>
+</html>

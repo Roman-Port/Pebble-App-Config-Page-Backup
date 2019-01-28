@@ -1,0 +1,544 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>PushNote</title>
+<link href="/code.jquery.com/mobile/1.4.5/jquery.css" rel="stylesheet" type="text/css">
+<script src="/code.jquery.com//jquery-1.js" type="text/javascript"></script>
+<script src="/code.jquery.com/mobile/1.4.5/jquery.js" type="text/javascript"></script>
+ <style>
+        .ui-header .ui-title {
+            margin-left: 1em;
+            margin-right: 1em;
+            text-overflow: clip;
+        }
+        .color-box {
+            width: 12vw;
+            height: 12vw;
+            border-style: none;
+            margin: 1.5vw;
+            display: inline-block;
+        }
+        .selected-color-box {
+            border-width: 1.5vw;
+            border-style: solid;
+            border-color: black;
+            margin: 0px;
+        }
+        .color-row {
+            border-style: none;
+            border-width: 0px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+<div data-role="page" id="PushNote">
+  <div data-role="header" data-theme="b">
+    <h1>PushNote</h1>
+  </div>
+  <div data-role="fieldcontain">
+<!--  <h2>ENTER TEXT THEN PUSH<h2>
+-->   		<label for="note">Note Title:</label>
+          <textarea cols="20" rows="1" name="note" id="note" style="color: #000; width: 100%;"></textarea>
+          
+ <label for="sub">Note Sub-Title:</label>
+          <textarea cols="20" rows="1" name="sub" id="sub" style="color: #000; width: 100%;"></textarea>
+  </div>
+  
+  <div data-role="footer" data-theme="b">
+    <p>
+      <input type="submit" id="b-submit" value="PUSH" data-icon="check">
+      <input type="button" id="b-cancel" value="Cancel" data-icon="delete"> 
+      <a href="#help" data-role="button" data-icon="info">Help</a>
+     <a href="#appearance" data-role="button" data-icon="camera">Colors</a>
+     <a href="#donate" data-role="button" data-icon="heart">Donate</a>
+     </p>
+   <!-- <p> 1100+ Installs! Keep on Pushing!</p> -->
+  </div>
+</div>
+<div data-role="page" id="help">
+  <div data-role="header" data-theme="b">
+    <h1>Help</h1>
+  </div>
+  <div data-role="content">
+   <!--START HELP-->
+    <div data-role="collapsible-set">
+      <div data-role="collapsible">
+        <h3>Push A Note</h3>
+        <p>1. Go To Main Menu</p>
+        <p>2. Enter Note Title</p>
+        <p>3. Enter Note Sub-Title</p>
+        <p>4. Click Push Note</p>
+        </div>
+
+        <div data-role="collapsible">
+        <h3>Delete A Note</h3>
+        <p>1. Highlight Note On Watch</p>
+        <p>2. Hold Select Button</p>
+        </div>
+          
+        <div data-role="collapsible">
+        <h3>Hide Notes</h3>
+        <p>1. Click Select Button On Watch</p>
+        <p>*Click Again To Show Notes</p>
+
+        </div> 
+         
+        <div data-role="collapsible" data-collapsed="true">
+        <h3>Coming Soon</h3>
+        <p>1. Rearrange Notes </p>
+        <p>2. Timeline Support</p>
+        <p>3. Expandable Note Menu</p>
+        <p>4. Different Config with Pebble/Pebble Time</p>
+
+        </div>
+
+
+       <div data-role="collapsible" data-collapsed="true">
+       <h3>Known Bugs</h3>
+        <p>No Current Bugs!</p>
+        <p>Send Developer A Message If You See One!</p>
+
+        </div>
+      <div data-role="collapsible" data-collapsed="true">
+        <h3>Message Developer</h3>
+        <p>Click Messsage Developer From Pebble App </p>
+
+
+      </div>
+
+    </div>
+  
+  </div>
+  <div data-role="footer" data-theme="b"> <a href="#PushNote" data-role="button" data-icon="carat-l">Main Menu</a> </div>
+</div>
+
+
+<!--DONATE START-->
+<div data-role="page" id="donate">
+  <div data-role="header" data-theme="b">
+    <h1>Donate</h1>
+  </div>
+  <div data-role="content">
+    <ul data-count-theme="a" data-role="listview" data-split-theme="a" data-divider-theme="a">
+      <li><a href="/www.paypal.com/cgi-bin/webscr_448226715.html">PayPal</a><a href="#">Default</a></li>
+<!--      <li><a href="bitcoin:19ZCDvmitqX1JGfyKwxKvk4zrfL7z9QnKD?amount=0.01&label=SchoolTime%20Donation">Bitcoin</a><a href="#">Default</a></li>      
+-->    </ul>
+  
+  
+  
+  
+  </div>
+  <div data-role="footer" data-theme="b">
+  <div data-role="footer"> <a href="#PushNote" data-role="button" data-icon="carat-l">Main Menu</a> </div>
+  </div>
+</div>
+<!--DONATE END-->
+
+
+
+<div data-role="page" id="appearance">
+        <div data-role="header" data-theme="b">
+
+            <h1>Colors</h1>
+            <h6>Pebble Time Only</h6>
+
+    </div>
+        <div data-role="content">
+            <!--START-->
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+
+                
+            
+                  <div id="nback-background" data-role="fieldcontain" class="ui-field-contain">
+					<label for="normal-background">Menu Background</label>
+					<a href="/ben624.com/PushNote/pushNoteColor.html" data-rel="page" class="ui-btn ui-corner-all" data-position-to="window" id="normal-background" style="height: 5vw; background-color: rgb(255, 255, 255);"></a>
+				</div>  
+            
+                    
+                    <div id="nfore-background" data-role="fieldcontain" class="ui-field-contain">
+					<label for="normal-foreground">Menu Text</label>
+					<a href="/ben624.com/PushNote/pushNoteColor.html" data-rel="page" class="ui-btn ui-corner-all" data-position-to="window" id="normal-foreground" style="height: 5vw; background-color: rgb(0 ,0 ,0);"></a>
+				</div>  
+                    
+                    
+                    
+                 <div id="hback-background" data-role="fieldcontain" class="ui-field-contain">
+					<label for="highlight-background">Selected Note Background</label>
+					<a href="/ben624.com/PushNote/pushNoteColor.html" data-rel="page" class="ui-btn ui-corner-all" data-position-to="window" id="highlight-background" style="height: 5vw; background-color: rgb(0,0,0);"></a>
+				</div>  
+                    
+                    
+             <div id="hfore-background" data-role="fieldcontain" class="ui-field-contain">
+					<label for="highlight-foreground">Selected Note Text</label>
+					<a href="/ben624.com/PushNote/pushNoteColor.html" data-rel="page" class="ui-btn ui-corner-all" data-position-to="window" id="highlight-foreground" style="height: 5vw; background-color: rgb(255,255,255);"></a>
+				</div>  
+                
+                
+              <div id="clock-foreground1" data-role="fieldcontain" class="ui-field-contain">
+					<label for="clock-foreground">Clock</label>
+					<a href="/ben624.com/PushNote/pushNoteColor.html" data-rel="page" class="ui-btn ui-corner-all" data-position-to="window" id="clock-foreground" style="height: 5vw; background-color: rgb(0,0,0);"></a>
+				</div>  
+                
+               <div id="clock-background1" data-role="fieldcontain" class="ui-field-contain">
+					<label for="clock-background">Clock Background</label>
+					<a href="/ben624.com/PushNote/pushNoteColor.html" data-rel="page" class="ui-btn ui-corner-all" data-position-to="window" id="clock-background" style="height: 5vw; background-color: rgb(255,255,255);"></a>
+				</div>                                  
+                          
+
+                </div>
+            </div>
+        </div>
+        <div data-role="footer" data-theme="b">
+            <a href="#PushNote" data-role="button" data-icon="carat-l">Main Menu</a>
+             <a href="/ben624.com/PushNote/pushNoteColor_87613439.html" div="" id="Reset" data-role="button" data-icon="refresh">Reset</a>
+           
+        </div>
+    </div>
+    <!--STOP-->
+
+
+
+
+
+
+<div data-role="page" id="color-picker">
+        <div data-role="header" data-theme="b">
+            <h1>Select Color</h1>
+            <a href="#appearance" data-role="button" data-icon="check">Save</a>
+
+        </div>
+        <div data-role="content">
+            <div class="color-row" id="color-row1">
+                <div class="color-box" id="color-box-000000" style="background:#000000;"></div>
+                <div class="color-box" id="color-box-555555" style="background:#555555;"></div>
+                <div class="color-box" id="color-box-AAAAAA" style="background:#AAAAAA;"></div>
+                <div class="color-box" id="color-box-FFFFFF" style="background:#FFFFFF;"></div>
+                <div class="color-box" id="color-box-550000" style="background:#550000;"></div>
+            </div>
+            <div class="color-row" id="color-row2">
+                <div class="color-box" id="color-box-FFAAAA" style="background:#FFAAAA;"></div>
+                <div class="color-box" id="color-box-FF5555" style="background:#FF5555;"></div>
+                <div class="color-box" id="color-box-FF0000" style="background:#FF0000;"></div>
+                <div class="color-box" id="color-box-AA5555" style="background:#AA5555;"></div>
+                <div class="color-box" id="color-box-AA0000" style="background:#AA0000;"></div>
+            </div>
+            <div class="color-row" id="color-row3">
+                <div class="color-box" id="color-box-FF55AA" style="background:#FF55AA;"></div>
+                <div class="color-box" id="color-box-FF00AA" style="background:#FF00AA;"></div>
+                <div class="color-box" id="color-box-FF0055" style="background:#FF0055;"></div>
+                <div class="color-box" id="color-box-AA0055" style="background:#AA0055;"></div>
+                <div class="color-box" id="color-box-550055" style="background:#550055;"></div>
+            </div>
+            <div class="color-row" id="color-row4">
+                <div class="color-box" id="color-box-FFAAFF" style="background:#FFAAFF;"></div>
+                <div class="color-box" id="color-box-FF55FF" style="background:#FF55FF;"></div>
+                <div class="color-box" id="color-box-FF00FF" style="background:#FF00FF;"></div>
+                <div class="color-box" id="color-box-AA00AA" style="background:#AA00AA;"></div>
+                <div class="color-box" id="color-box-AA55AA" style="background:#AA55AA;"></div>
+            </div>
+            <div class="color-row" id="color-row5">
+                <div class="color-box" id="color-box-AAAAFF" style="background:#AAAAFF;"></div>
+                <div class="color-box" id="color-box-AA55FF" style="background:#AA55FF;"></div>
+                <div class="color-box" id="color-box-AA00FF" style="background:#AA00FF;"></div>
+                <div class="color-box" id="color-box-5555AA" style="background:#5555AA;"></div>
+                <div class="color-box" id="color-box-5500AA" style="background:#5500AA;"></div>
+            </div>
+            <div class="color-row" id="color-row6">
+                <div class="color-box" id="color-box-0000FF" style="background:#0000FF;"></div>
+                <div class="color-box" id="color-box-0000AA" style="background:#0000AA;"></div>
+                <div class="color-box" id="color-box-000055" style="background:#000055;"></div>
+                <div class="color-box" id="color-box-5555FF" style="background:#5555FF;"></div>
+                <div class="color-box" id="color-box-5500FF" style="background:#5500FF;"></div>
+            </div>
+            <div class="color-row" id="color-row7">
+                <div class="color-box" id="color-box-0055FF" style="background:#0055FF;"></div>
+                <div class="color-box" id="color-box-0055AA" style="background:#0055AA;"></div>
+                <div class="color-box" id="color-box-00AAFF" style="background:#00AAFF;"></div>
+                <div class="color-box" id="color-box-55AAFF" style="background:#55AAFF;"></div>
+                <div class="color-box" id="color-box-00AAAA" style="background:#00AAAA;"></div>
+            </div>
+            <div class="color-row" id="color-row8">
+                <div class="color-box" id="color-box-AAFFAA" style="background:#AAFFAA;"></div>
+                <div class="color-box" id="color-box-AAFFFF" style="background:#AAFFFF;"></div>
+                <div class="color-box" id="color-box-55FFFF" style="background:#55FFFF;"></div>
+                <div class="color-box" id="color-box-00FFFF" style="background:#00FFFF;"></div>
+                <div class="color-box" id="color-box-55AAAA" style="background:#55AAAA;"></div>
+            </div>
+            <div class="color-row" id="color-row9">
+                <div class="color-box" id="color-box-00FFAA" style="background:#00FFAA;"></div>
+                <div class="color-box" id="color-box-55FFAA" style="background:#55FFAA;"></div>
+                <div class="color-box" id="color-box-00FF55" style="background:#00FF55;"></div>
+                <div class="color-box" id="color-box-005555" style="background:#005555;"></div>
+                <div class="color-box" id="color-box-005500" style="background:#005500;"></div>
+            </div>
+            <div class="color-row" id="color-row10">
+                <div class="color-box" id="color-box-55FF00" style="background:#55FF00;"></div>
+                <div class="color-box" id="color-box-55FF55" style="background:#55FF55;"></div>
+                <div class="color-box" id="color-box-AAFF55" style="background:#AAFF55;"></div>
+                <div class="color-box" id="color-box-AAFF00" style="background:#AAFF00;"></div>
+                <div class="color-box" id="color-box-555500" style="background:#555500;"></div>
+            </div>
+            <div class="color-row" id="color-row11">
+                <div class="color-box" id="color-box-00FF00" style="background:#00FF00;"></div>
+                <div class="color-box" id="color-box-55AA55" style="background:#55AA55;"></div>
+                <div class="color-box" id="color-box-00AA55" style="background:#00AA55;"></div>
+                <div class="color-box" id="color-box-00AA00" style="background:#00AA00;"></div>
+                <div class="color-box" id="color-box-55AA00" style="background:#55AA00;"></div>
+            </div>
+            <div class="color-row" id="color-row12">
+                <div class="color-box" id="color-box-FFFFAA" style="background:#FFFFAA;"></div>
+                <div class="color-box" id="color-box-FFFF55" style="background:#FFFF55;"></div>
+                <div class="color-box" id="color-box-FFFF00" style="background:#FFFF00;"></div>
+                <div class="color-box" id="color-box-AAAA55" style="background:#AAAA55;"></div>
+                <div class="color-box" id="color-box-AAAA00" style="background:#AAAA00;"></div>
+            </div>
+            <div class="color-row" id="color-row13">
+                <div class="color-box" id="color-box-FFAA55" style="background:#FFAA55;"></div>
+                <div class="color-box" id="color-box-FFAA00" style="background:#FFAA00;"></div>
+                <div class="color-box" id="color-box-FF5500" style="background:#FF5500;"></div>
+                <div class="color-box" id="color-box-AA5500" style="background:#AA5500;"></div>
+            </div>
+        </div>
+        <div data-role="footer">
+        </div>
+    </div>
+<!--START SAVE SCRIPT--> 
+ <script>
+ 
+ 
+ 
+  function rgb2hex(rgb) {
+            console.log("RGB");
+            rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+            return ("#" +
+                ("0" + parseInt(rgb[1], 10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
+                ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2)).toUpperCase();
+        }
+
+        function highlightColorBox($colorButton) {
+            selectedColor = rgb2hex($colorButton.css("background-color"));
+
+            var i;
+            for (i = 1; i <= 13; i++) {
+                $('#color-row' + i).children().removeClass("selected-color-box");
+            }
+            $('#color-box-' + selectedColor.substring(1).toUpperCase()).addClass("selected-color-box");
+        }
+
+        $(function() {
+            $('#color-picker .color-box').on('click', function(event) {
+                var selected_color = rgb2hex($(this).css("background-color"));
+                console.log("SELECTED COLOR"+ selected_color+"\nupdateTo"+updateTo); 
+                if(updateTo == "nback")
+                $('#normal-background').css('background-color', selected_color);
+                else if(updateTo == "nfore")
+                $('#normal-foreground').css('background-color', selected_color);
+                else if(updateTo == "hback")
+                $('#highlight-background').css('background-color', selected_color);
+               else if(updateTo == "hfore")
+                $('#highlight-foreground').css('background-color', selected_color);
+               else if(updateTo == "cback")
+                $('#clock-background').css('background-color', selected_color);
+			   else if(updateTo == "cfore")
+                $('#clock-foreground').css('background-color', selected_color);            
+                highlightColorBox($(this));
+                
+                $( "#color-picker" ).popup( "close" );   
+
+            });
+        });
+        
+        
+        
+         $(function() {
+            $('#normal-background').on('click', function(event) {
+                updateTo = "nback";
+                highlightColorBox($(this));
+            });
+        });
+        
+        
+         $(function() {
+            $('#normal-foreground').on('click', function(event) {
+                updateTo = "nfore";
+                highlightColorBox($(this));
+            });
+        });
+        
+        
+    $(function() {
+            $('#highlight-background').on('click', function(event) {
+                updateTo = "hback";
+                highlightColorBox($(this));
+            });
+        });
+        
+    $(function() {
+            $('#highlight-foreground').on('click', function(event) {
+                updateTo = "hfore";
+                highlightColorBox($(this));
+            });
+        });
+        
+		
+		
+    $(function() {
+            $('#clock-foreground').on('click', function(event) {
+                updateTo = "cfore";
+                highlightColorBox($(this));
+            });
+        });
+        
+    $(function() {
+            $('#clock-background').on('click', function(event) {
+                updateTo = "cback";
+                highlightColorBox($(this));
+            });
+        });
+		
+		
+    $(function() {
+            $('#Reset').on('click', function(event) {
+   $('#normal-background').css('background-color', "#FFFFFF");
+   $('#normal-foreground').css('background-color', "#000000");
+   $('#highlight-background').css('background-color', "#000000");
+   $('#highlight-foreground').css('background-color', "#FFFFFF");
+   $('#clock-background').css('background-color', "#FFFFFF");
+   $('#clock-foreground').css('background-color', "#000000");
+
+            });
+        });		
+        		
+ 
+
+      function saveOptions() {
+        var options = {
+          'note': $("#note").val(),      
+          'sub': $("#sub").val(),  
+          'nback': rgb2hex($('#normal-background').css("background-color")).replace("#", ''),
+          'nfore': rgb2hex($('#normal-foreground').css("background-color")).replace("#", ''),
+          'hback': rgb2hex($('#highlight-background').css("background-color")).replace("#", ''),
+          'hfore': rgb2hex($('#highlight-foreground').css("background-color")).replace("#", ''),
+          'cback': rgb2hex($('#clock-background').css("background-color")).replace("#", ''),
+          'cfore': rgb2hex($('#clock-foreground').css("background-color")).replace("#", ''),
+
+        }
+        return options;
+      }
+
+function getQueryParam(variable, default_) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (pair[0] == variable)
+            return decodeURIComponent(pair[1]);
+    }
+    return default_ || false;
+}
+     
+      $(document).ready(function() {
+      console.log("READY");
+        var priorSearch1 = getURLVariable('note');
+        var priorSearch2 = getURLVariable('sub');
+        var priorSearch3 = getURLVariable('nback');
+        var priorSearch4 = getURLVariable('nfore');
+        var priorSearch5 = getURLVariable('hback');
+        var priorSearch6 = getURLVariable('hfore');
+        var priorSearch7 = getURLVariable('cback');
+        var priorSearch8 = getURLVariable('cfore');
+        
+        
+      
+
+
+        priorSearch1 = decodeURI(priorSearch1);
+        priorSearch2 = decodeURI(priorSearch2);
+        priorSearch3 = '#' + decodeURI(priorSearch3);
+        priorSearch4 = '#' + decodeURI(priorSearch4);
+        priorSearch5 = '#' + decodeURI(priorSearch5);
+        priorSearch6 = '#' + decodeURI(priorSearch6);
+        priorSearch7 = '#' + decodeURI(priorSearch7);
+        priorSearch8 = '#' + decodeURI(priorSearch8);
+		
+		
+
+        if (priorSearch1) {
+          $('#note').html(priorSearch1);
+		}
+
+		if (priorSearch2) {
+          $('#sub').html(priorSearch2);
+		}
+		
+	    if (priorSearch3) {
+          $('#normal-background').css('background-color', priorSearch3);//
+        }
+            
+        if (priorSearch4) {
+          $('#normal-foreground').css('background-color', priorSearch4);//
+        }         
+
+        if (priorSearch5) {
+          $('#highlight-background').css('background-color', priorSearch5);//
+        }
+            
+        if (priorSearch6) {
+          $('#highlight-foreground').css('background-color', priorSearch6);//
+        } 
+		
+		
+		  if (priorSearch7) {
+          $('#clock-background').css('background-color', priorSearch7);//
+        } 
+		
+		
+		  if (priorSearch8) {
+          $('#clock-foreground').css('background-color', priorSearch8);//
+        }  
+		$('#nback-background').removeClass("hidden");
+		$('#nfore-background').removeClass("hidden");
+		$('#hback-background').removeClass("hidden");
+		$('#hfore-background').removeClass("hidden");
+		$('#clock-foreground1').removeClass("hidden");
+		$('#clock-background1').removeClass("hidden");
+          
+      
+//OTHER SETTINGS   
+          
+          
+
+        $("#b-cancel").click(function() {
+          document.location = "pebblejs://close";
+
+        });
+        $("#b-submit").click(function() {
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+var location = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
+  
+
+          document.location = location;
+        });
+      });
+
+      function getURLVariable(name) {
+        name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        var regexS = "[\\?&]"+name+"=([^&#]*)",
+            regex = new RegExp(regexS),
+            results = regex.exec(window.location.href);
+        if (results == null) return "";
+        else return results[1];
+      }
+    </script>
+
+<!--END SAVE SCRIPT-->
+</body>
+</html>
+

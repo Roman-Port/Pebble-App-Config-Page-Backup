@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1.0,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="width">
+<title>Configure</title>
+<style>
+ body {
+  font-family: 'Open Sans',Helvetica,Arial,sans-serif;
+  font-size: smaller;
+  margin: 0;
+ }
+ form {
+  margin: 0 auto;
+  max-width: 20em;
+ }
+ header, fieldset {
+  background: linear-gradient(#ADF, #FFF); /* FF 3.6+ */
+  background: -moz-linear-gradient(#ADF, #FFF); /* FF 3.6+ */
+  background: -o-linear-gradient(#ADF, #FFF); /* FF 3.6+ */
+  background: -webkit-linear-gradient(#ADF, #FFF); /* FF 3.6+ */
+  border-radius: 4px;
+  border-width: 0;
+  font-size: larger;
+  margin: 0.5em auto 0 auto;
+  padding: 1em 0 2em 0;
+  width: 100%;
+ }
+ h1 {
+  color: #000;
+  font-size: 1.25em;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  text-shadow: 2px 2px 1px #FFF;
+ }
+ legend {
+  background-color: #F93;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px #999;
+  color: #333;
+  font-weight: bold;
+  margin: 0 0 0 0.5em;
+  padding: 4px 8px;
+ }
+ ol {
+  counter-reset: item;
+  margin: 0;
+  padding: 0;
+ }
+ li {
+  display: block;
+  margin: 0;
+  padding: 0;
+ }
+ label, li:before {
+  content: counter(item) ": ";
+  counter-increment: item;
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0 0.25em 0 0;
+  text-align: right;
+  width: 4em;
+ }
+ li.button:before {
+  content: "+/-: ";
+ }
+ #worktime, #resttime, #repeat {
+  text-align: right;
+ }
+ input[type=number] {
+  max-width: 6em;
+ }
+ input[type=submit] {
+  border-radius: 4px;
+  font-weight: bold;
+  margin: 0 0 0 6.5em;
+  text-align: left;
+  width: auto !important;
+ }
+ p {
+  margin: 0;
+  padding: 0;
+ }
+ p#error {
+  background-color: #FFF;
+  border: 2px solid red;
+  border-radius: 4px;
+  margin: 1em 0;
+  padding: 0 1em;
+ }
+</style>
+</head>
+<body>
+<form method="get" action="pebblejs://close#" onsubmit="sendConfig(); return false;" id="configForm">
+<header>
+<h1>Configure Work Out</h1>
+</header>
+<fieldset>
+<legend>Timing</legend>
+<p><label for="worktime">Work: </label> <input id="worktime" name="worktime" value="90" type="number" step="1" min="1" max="255"> seconds</p>
+<p><label for="resttime">Rest: </label> <input id="resttime" name="resttime" value="30" type="number" step="1" min="1" max="255"> seconds</p>
+<p><label for="repeat">Repeat: </label> <input id="repeat" name="repeat" value="4" type="number" step="1" min="1" max="255"> times</p>
+</fieldset>
+<fieldset>
+<legend>Exercises</legend>
+<ol id="exerciselist">
+<li><input name="exercise" value="Push-ups" size="20" maxlength="20"></li>
+<li><input name="exercise" value="Sit-ups" size="20" maxlength="20"></li>
+<li><input name="exercise" value="Lunges" size="20" maxlength="20"></li>
+<li><input name="exercise" value="Pull-ups" size="20" maxlength="20"></li>
+<li class="button"><button onclick="clone(this); return false;">+</button> <button onclick="destroy(this); return false;">&minus;</button></li>
+</ol>
+</fieldset>
+<fieldset>
+<legend>Confirm</legend>
+<input type="submit" value="Use these settings">
+</fieldset>
+</form>
+<script>
+var MAX_ROUTINES = 50;
+var f = document.getElementById('configForm');
+var inputs = f.getElementsByTagName('input');
+var confString = getQueryParam('conf');
+if (confString && (confString.substr(0, 1) == '{')) {
+ var initConf = JSON.parse(confString);
+ if (initConf) {
+  if (initConf.work) {
+   f.worktime.value = initConf.work;
+  }
+  if (initConf.rest) {
+   f.resttime.value = initConf.rest;
+  }
+  if (initConf.repeat) {
+   f.repeat.value = initConf.repeat;
+  }
+  if (initConf.exercises && initConf.exercises.length) {
+   var ol = document.getElementById('exerciselist');
+   for (var i=ol.children.length-2; i>0; i--) {
+    ol.removeChild(ol.children[i]);
+   }
+   for (var i=0; i<initConf["exercises"].length; i++) {
+    var input = ol.children[ol.children.length-2].getElementsByTagName('input')[0];
+    input.value = initConf["exercises"][i];
+    if (i < initConf["exercises"].length-1) {
+     var cloneB = ol.children[ol.children.length-1].getElementsByTagName('button')[0];
+     cloneB.onclick();
+    }
+   }
+  }
+ }
+}
+for (var i=0; i<inputs.length; i++) {
+ var val = getQueryParam(inputs[i].name);
+ if (val && (val != "undefined")) {
+  inputs[i].value = val;
+ }
+}
+function sendConfig() {
+ var conf = {};
+ conf["exercises"] = [];
+ for (var i=0; i<inputs.length; i++) {
+  if (inputs[i].name == "worktime") {
+    conf['work'] = parseInt(inputs[i].value);
+  }
+  else if (inputs[i].name == 'resttime') {
+    conf['rest'] = parseInt(inputs[i].value);
+  }
+  else if (inputs[i].name == 'repeat') {
+    conf['repeat'] = parseInt(inputs[i].value);
+  }
+  else if (inputs[i].type != "submit") {
+    conf['exercises'].push(inputs[i].value);
+  }
+ }
+ // alert(JSON.stringify(conf));
+ var return_to = (getQueryParam('return_to') || f.action) +
+  encodeURIComponent(JSON.stringify(conf));
+ document.location = return_to;
+ return false;
+}
+function getQueryParam(variable) {
+ var query = location.search.substring(1);
+ var vars = query.split('&');
+ for (var i = 0; i < vars.length; i++) {
+  var pair = vars[i].split('=');
+  if (pair[0] == variable) {
+   return decodeURIComponent(pair[1]);
+  }
+ }
+ return false;
+}
+function clone(button) {
+ removeError();
+ // alert(button);
+ if (!button.parentNode || !button.parentNode.parentNode) {
+  return false;
+ }
+ var li = button.parentNode;
+ var ul = button.parentNode.parentNode;
+ if (ul.children.length > MAX_ROUTINES) {
+  var msg = 'Sorry, you can save at most ' + MAX_ROUTINES + ' exercises.'
+  var p = document.createElement('p');
+  p.id = 'error';
+  p.appendChild(document.createTextNode(msg));
+  ul.parentNode.appendChild(p);
+  return false;
+ }
+ // var obj = li.previousSibling;
+ var obj = ul.children[ul.children.length-2];
+ // alert(obj);
+ var copy = obj.cloneNode(true);
+ ul.insertBefore(copy, li);
+ return false;
+}
+function destroy(button) {
+ removeError();
+ // alert(button);
+ if (!button.parentNode || !button.parentNode.parentNode) {
+  return false;
+ }
+ var li = button.parentNode;
+ var ol = button.parentNode.parentNode;
+ if (ol.children.length > 2) {
+  ol.removeChild(ol.children[ol.children.length-2]);
+ }
+ return false;
+}
+function removeError() {
+ var p = document.getElementById('error');
+ if (p && p.parentNode) {
+  p.parentNode.removeChild(p);
+ }
+}
+</script>
+</body>
+</html>

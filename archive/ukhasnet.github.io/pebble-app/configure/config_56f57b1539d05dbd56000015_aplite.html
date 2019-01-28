@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="/maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<title>UKHASnet Pebble App Configuration</title>
+</head>
+<body onload="initialize()">
+	<select id='selectName'>
+		Node Name
+	</select>
+	<input id='submit_button' type='button' value='Save'>
+</body>
+
+<script>
+function loadNodes(){
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() { 
+		if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+			var nodesList = JSON.parse(xmlHttp.responseText);
+		var select = document.getElementById("selectName");
+        nodesList.sort(function(a, b){return a.name.localeCompare(b.name);});
+		for (i = 0; i < nodesList.length; i++){
+			var opt = document.createElement("option");
+			opt.value = nodesList[i].name;
+			opt.textContent = nodesList[i].name;
+			select.appendChild(opt);
+		}
+	}
+    xmlHttp.open("GET", "https://ukhas.net/api/nodeInfo", true); // true for asynchronous 
+    xmlHttp.send(null);
+}
+</script>
+<script>
+function initialize(){
+	loadNodes();
+  // Get a handle to the button's HTML element
+  var submitButton = document.getElementById('submit_button');
+
+  // Add a 'click' listener
+  submitButton.addEventListener('click', function() {
+    // Get the config data from the UI elements
+    var name = document.getElementById('selectName');
+
+    // Make a data object to be sent, coercing value types to integers
+    var options = {
+    	'name': name.value,
+        'value':name.textContent
+    };
+
+    // Determine the correct return URL (emulator vs real watch)
+    function getQueryParam(variable, defaultValue) {
+    	var query = location.search.substring(1);
+    	var vars = query.split('&');
+    	for (var i = 0; i < vars.length; i++) {
+    		var pair = vars[i].split('=');
+    		if (pair[0] === variable) {
+    			return decodeURIComponent(pair[1]);
+    		}
+    	}
+    	return defaultValue || false;
+    }
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+    // Encode and send the data when the page closes
+    document.location = return_to + encodeURIComponent(JSON.stringify(options));
+});
+}
+</script>
+</html>

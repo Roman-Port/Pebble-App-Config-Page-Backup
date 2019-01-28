@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>RoughClock Einstellungen</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.0/jquery.css">
+        <script src="/code.jquery.com//jquery-1.js"></script>
+        <script src="/code.jquery.com/mobile/1.4.0/jquery.js"></script>
+    </head>
+    <body>
+        <div data-role="page" id="main">
+            <div data-role="content">
+                <h2>Kopfzeile</h2>
+                <table border="0" width="100%">
+                    <tr>
+                        <td align="left">Uhrzeit anzeigen:</td>
+                        <td align="right">
+                            <select name="switch_clock" id="switch_clock" data-role="slider" data-mini="true">
+                                <option value="0" selected="selected">O</option>
+                                <option value="1">I</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">Bluetooth-Status anzeigen:</td>
+                        <td align="right">
+                            <select name="switch_bt" id="switch_bt" data-role="slider" data-mini="true">
+                                <option value="0" selected="selected">O</option>
+                                <option value="1">I</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">Batteriestatus anzeigen:</td>
+                        <td align="right">
+                            <select name="switch_bat" id="switch_bat" data-role="slider" data-mini="true">
+                                <option value="0" selected="selected">O</option>
+                                <option value="1">I</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">Trennlinie anzeigen:</td>
+                        <td align="right">
+                            <select name="switch_topline" id="switch_topline" data-role="slider" data-mini="true">
+                                <option value="0" selected="selected">O</option>
+                                <option value="1">I</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+
+                <h2>Fu&szlig;zeile</h2>
+                <table border="0" width="100%">
+                    <tr>
+                        <td align="left">Datum anzeigen:</td>
+                        <td align="right">
+                            <select name="switch_date" id="switch_date" data-role="slider" data-mini="true">
+                                <option value="0" selected="selected">O</option>
+                                <option value="1">I</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">Kalenderwoche anzeigen:</td>
+                        <td align="right">
+                            <select name="switch_cw" id="switch_cw" data-role="slider" data-mini="true">
+                                <option value="0" selected="selected">O</option>
+                                <option value="1">I</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left">Trennlinie anzeigen:</td>
+                        <td align="right">
+                            <select name="switch_bottomline" id="switch_bottomline" data-role="slider" data-mini="true">
+                                <option value="0" selected="selected">O</option>
+                                <option value="1">I</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+
+                <h2>Aussehen</h2>
+                <table border="0" width="100%">
+                    <tr>
+                        <td align="left">Inverses Farbschema:</td>
+                        <td align="right">
+                            <select name="switch_color" id="switch_color" data-role="slider" data-mini="true">
+                                <option value="1" selected="selected">O</option>
+                                <option value="0">I</option>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="ui-body ui-body-b">
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a"><button type="submit" data-theme="d" id="b_cancel">Abbrechen</button></div>
+                        <div class="ui-block-b"><button type="submit" data-theme="b" id="b_submit">Speichern</button></div>
+                    </fieldset>
+                </div>
+                <br>
+                <img src="/stats.hussong.biz//piwik_959210310.gif" style="border:0" alt="">
+                <p><strong>Hinweis:</strong></p>
+                <p>Es kann eine Minute dauern, bis die Anzeige auf der Uhr aktualisiert wurde. Um die Einstellungen umgehend sichtbar zu machen ist es notwendig, das Watchface zu wechseln oder das Menü aufzurufen.</p>
+
+            </div>
+        </div>
+        <script>
+            var prefix = "cc.hussong.pebble.roughclock.";
+
+            function saveOptions() {
+                var options = {
+                    '1': parseInt(window.localStorage.getItem(prefix+"switch_clock")),
+                    '2': parseInt(window.localStorage.getItem(prefix+"switch_bt")),
+                    '3': parseInt(window.localStorage.getItem(prefix+"switch_bat")),
+                    '4': parseInt(window.localStorage.getItem(prefix+"switch_date")),
+                    '5': parseInt(window.localStorage.getItem(prefix+"switch_cw")),
+                    '6': parseInt(window.localStorage.getItem(prefix+"switch_color")),
+                    '7': parseInt(window.localStorage.getItem(prefix+"switch_bat")),
+                    '8': parseInt(window.localStorage.getItem(prefix+"switch_topline")),
+                    '9': parseInt(window.localStorage.getItem(prefix+"switch_bottomline"))
+                };
+                return options;
+            }
+
+            for (var i = 0; i < window.localStorage.length; i++) {
+                var key = window.localStorage.key(i);
+                if (key.substring(0,prefix.length) == prefix) {
+                    var element = key.substring(29);
+                    var value = window.localStorage.getItem(key);
+                    $("#"+element).val(value);
+                }
+            }
+
+            $().ready(function() {
+
+
+                      $("#b_cancel").click(function() {
+                                           //console.log("Cancel");
+                                           document.location = "pebblejs://close";
+                                           });
+
+                      $("#b_submit").click(function() {
+                                           //console.log("Submit");
+                                           var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+                                           document.location = location;
+                                           });
+
+                      $("select").change(function() {
+                                         window.localStorage.setItem(prefix+$(this).attr('id'), $(this).val());
+                                         });
+
+                      });
+        </script>
+    </body>
+</html>
+

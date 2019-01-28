@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+  <title>Final Fantasy GT</title>
+  	
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/winterwinter.github.com/finalfantasypebble/css/Pebble.css">
+  <link rel="stylesheet" href="/winterwinter.github.com/finalfantasypebble/css/jquery.css">
+  <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css"> 
+  <script src="/code.jquery.com//jquery-1.js"></script> 
+  <script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script> 
+
+  </head>
+  <body>
+
+<div data-role="page">
+  <div data-role="header" data-theme="a">
+  <h1>Settings</h1>
+  </div>
+
+<style>
+p.options {
+    border-radius: 0px 0px 10px 10px;
+    background-color: rgb(50,50,50);
+    padding-left:10px;
+    padding-right:10px;
+    padding-bottom:10px;
+} 
+
+h1.head {
+    border-radius: 10px 10px 0px 0px;
+    font-size:200%;
+    background-color: rgb(30,30,30);
+    padding:10px;
+}
+
+div.sections {
+    background-color: rgb(50,50,50);
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 0 0 5px #000000;
+}
+
+footer.foot {
+    padding-bottom:10px;
+    padding-left:10px;
+    font-size:80%;
+}
+
+</style>
+<div data-role="main" class="ui-content">
+  <form method="post" action="demoform.asp">
+    <fieldset class="ui-field-contain">
+
+      <div class="sections">
+        <h1 class="head">Heroes</h1>
+        <p class="options">Hero 1
+          <select id="hero_select_1">
+            <option value="0">Bard</option>
+            <option value="1">Black Mage</option>
+            <option value="2">Conjurer</option>
+            <option value="3">Dragoon</option>
+            <option value="4">Fighter</option>
+            <option value="5">Geomancer</option>
+            <option value="6">Hunter</option>
+            <option value="7">Karateka</option>
+            <option value="8">Knight</option>
+            <option value="9">Monk</option>
+            <option value="10">Mystic Knight</option>
+            <option value="11">Ninja</option>
+            <option value="12">Onion Knight</option>
+            <option value="13">Red Mage</option>
+            <option value="14">Sage</option>
+            <option value="15">Scholar</option>
+            <option value="16">Shaman</option>
+            <option value="17">Summoner</option>
+            <option value="18">Thief</option>
+            <option value="19">Viking</option>
+            <option value="20">Warlock</option>
+            <option value="21">White Mage</option>
+          </select>
+        </p>
+        <hr width="95%">
+        <p class="options">Hero 2
+          <select id="hero_select_2">
+            <option value="0">Bard</option>
+            <option value="1">Black Mage</option>
+            <option value="2">Conjurer</option>
+            <option value="3">Dragoon</option>
+            <option value="4">Fighter</option>
+            <option value="5">Geomancer</option>
+            <option value="6">Hunter</option>
+            <option value="7">Karateka</option>
+            <option value="8">Knight</option>
+            <option value="9">Monk</option>
+            <option value="10">Mystic Knight</option>
+            <option value="11">Ninja</option>
+            <option value="12">Onion Knight</option>
+            <option value="13">Red Mage</option>
+            <option value="14">Sage</option>
+            <option value="15">Scholar</option>
+            <option value="16">Shaman</option>
+            <option value="17">Summoner</option>
+            <option value="18">Thief</option>
+            <option value="19">Viking</option>
+            <option value="20">Warlock</option>
+            <option value="21">White Mage</option>
+          </select>
+        </p>
+        <hr width="95%">
+        <p class="options">Hero 3
+          <select id="hero_select_3">
+            <option value="0">Bard</option>
+            <option value="1">Black Mage</option>
+            <option value="2">Conjurer</option>
+            <option value="3">Dragoon</option>
+            <option value="4">Fighter</option>
+            <option value="5">Geomancer</option>
+            <option value="6">Hunter</option>
+            <option value="7">Karateka</option>
+            <option value="8">Knight</option>
+            <option value="9">Monk</option>
+            <option value="10">Mystic Knight</option>
+            <option value="11">Ninja</option>
+            <option value="12">Onion Knight</option>
+            <option value="13">Red Mage</option>
+            <option value="14">Sage</option>
+            <option value="15">Scholar</option>
+            <option value="16">Shaman</option>
+            <option value="17">Summoner</option>
+            <option value="18">Thief</option>
+            <option value="19">Viking</option>
+            <option value="20">Warlock</option>
+            <option value="21">White Mage</option>
+          </select>
+        </p>
+        <hr width="95%">
+        <p class="options">Hero 4
+          <select id="hero_select_4">
+            <option value="0">Bard</option>
+            <option value="1">Black Mage</option>
+            <option value="2">Conjurer</option>
+            <option value="3">Dragoon</option>
+            <option value="4">Fighter</option>
+            <option value="5">Geomancer</option>
+            <option value="6">Hunter</option>
+            <option value="7">Karateka</option>
+            <option value="8">Knight</option>
+            <option value="9">Monk</option>
+            <option value="10">Mystic Knight</option>
+            <option value="11">Ninja</option>
+            <option value="12">Onion Knight</option>
+            <option value="13">Red Mage</option>
+            <option value="14">Sage</option>
+            <option value="15">Scholar</option>
+            <option value="16">Shaman</option>
+            <option value="17">Summoner</option>
+            <option value="18">Thief</option>
+            <option value="19">Viking</option>
+            <option value="20">Warlock</option>
+            <option value="21">White Mage</option>
+          </select>
+        </p>
+      </div>
+
+      <div class="sections">
+        <h1 class="head">Bluetooth</h1>
+        <p class="options">Companion
+          <select id="bluetooth">
+            <option value="chocobo">Chocobo</option>
+            <option value="moogle">Moogle</option>
+          </select>
+        </p>
+      </div>
+
+
+      <div class="sections">
+        <h1 class="head">Health</h1>
+        <p class="options">Sensitivity
+          <select id="sensitivity">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </p>
+        <hr width="95%">
+        <p class="options">Difficulty Mode
+          <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="normal">Normal</option>
+            <option value="hard">Hard</option>
+            <option value="insane">Insane</option>
+          </select>
+        </p>
+        <hr width="95%">
+        <p class="options"> Auto Reset
+          <select id="challenge">
+            <option value="off">Off</option>
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+        </p>
+        <hr width="95%">
+        <p class="options">Reset Level and Experience
+          <select id="reset">
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </p>
+      </div>
+
+      <p>
+        <fieldset class="ui-grid-a">
+          <div class="ui-block-a">
+            <button type="submit" data-theme="d" id="b-cancel">Cancel</button>
+          </div>
+          <div class="ui-block-b">
+            <button type="submit" data-theme="e" id="save_button">Save</button>
+          </div>
+        </fieldset>
+      </p>
+
+   <script> 
+   function getConfigData() {
+   var Hero_1 = document.getElementById("hero_select_1");
+   var Hero_2 = document.getElementById("hero_select_2");
+   var Hero_3 = document.getElementById("hero_select_3");
+   var Hero_4 = document.getElementById("hero_select_4");
+   var Bluetooth = document.getElementById("bluetooth");
+   var Sensitivity = document.getElementById("sensitivity");
+   var Difficulty = document.getElementById("difficulty");
+   var Challenge = document.getElementById("challenge");
+   var Reset = document.getElementById("reset");
+
+   var options = {
+     "hero1": Hero_1.options[Hero_1.selectedIndex].value,
+     "hero2": Hero_2.options[Hero_2.selectedIndex].value,
+     "hero3": Hero_3.options[Hero_3.selectedIndex].value,
+     "hero4": Hero_4.options[Hero_4.selectedIndex].value,
+     "bluetooth": Bluetooth.options[Bluetooth.selectedIndex].value,
+     "sensitivity": Sensitivity.options[Sensitivity.selectedIndex].value,
+     "difficulty": Difficulty.options[Difficulty.selectedIndex].value,
+     "reset": Reset.options[Reset.selectedIndex].value,
+     "challenge": Challenge.options[Challenge.selectedIndex].value
+   };
+   // Save for next launch
+   localStorage["hero1"] = options["hero1"];
+   localStorage["hero2"] = options["hero2"];
+   localStorage["hero3"] = options["hero3"];
+   localStorage["hero4"] = options["hero4"];
+   localStorage["bluetooth"] = options["bluetooth"];
+   localStorage["sensitivity"] = options["sensitivity"];
+   localStorage["difficulty"] = options["difficulty"];
+   localStorage["reset"] = options["reset"];
+   localStorage["challenge"] = options["challenge"];
+   console.log('Got options: ' + JSON.stringify(options));
+   return options;
+ }
+
+ function getQueryParam(variable, default_) {
+   var query = location.search.substring(1);
+   var vars = query.split('&');
+   for (var i = 0; i < vars.length; i++) {
+     var pair = vars[i].split('=');
+     if (pair[0] == variable) {
+       return decodeURIComponent(pair[1]);
+     }
+   }
+   return default_ || false;
+ }
+
+
+ //Cancel Button function
+ $("#b-cancel").click(function() {
+   console.log("Cancel");
+   document.location = 'pebblejs://close#';
+ });
+
+ var submitButton = document.getElementById("save_button");
+ submitButton.addEventListener("click", function() {
+   var return_to = getQueryParam('return_to', 'pebblejs://close#');
+   document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+ });
+
+ (function() {
+   var hero1 = document.getElementById("hero_select_1");
+   var hero2 = document.getElementById("hero_select_2");
+   var hero3 = document.getElementById("hero_select_3");
+   var hero4 = document.getElementById("hero_select_4");
+   var bluetooth = document.getElementById("bluetooth");
+   var sensitivity = document.getElementById("sensitivity");
+   var difficulty = document.getElementById("difficulty");
+   var reset = document.getElementById("reset");
+   var challenge = document.getElementById("challenge");
+
+   // Load any previously saved configuration, if available
+   if (localStorage["hero1"]) {
+     hero1.value = localStorage["hero1"];
+     hero2.value = localStorage["hero2"];
+     hero3.value = localStorage["hero3"];
+     hero4.value = localStorage["hero4"];
+     bluetooth.value = localStorage["bluetooth"];
+     sensitivity.value = localStorage["sensitivity"];
+     difficulty.value = localStorage["difficulty"];
+     reset.value = localStorage["reset"];
+     challenge.value = localStorage["challenge"];
+   }
+ })();
+    </script>
+  </fieldset></form></div></div></body>
+</html>

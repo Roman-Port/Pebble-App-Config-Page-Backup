@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Slate Example Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/cdn.rawgit.com/KiwiLab/LichKingSword/master/css/slate.css'>
+  <script src='/cdn.rawgit.com/KiwiLab/LichKingSword/master/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Lich King Sword</h1>
+    
+    <div class='item-container'>
+      <div class='item-container-header'>Date</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Enable date
+          <input id='date_id' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+         
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='item-container-header'>Vibration</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Bluetooth disconnect
+          <input id='vibro_id' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+         
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='item-container-header'>Weather</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Enable
+          <input id='weather_id' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Update in minutes
+         	<select id='weather_update_id' name="select-1" dir='rtl' class="item-select">
+        	<option class="item-select-option">5</option>
+        	<option class="item-select-option">10</option>
+        	<option class="item-select-option" selected="">15</option>
+        	<option class="item-select-option">30</option>
+        	<option class="item-select-option">60</option>
+      </select>
+        </label>
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Units
+         	<select id='celsion_id' name="select-1" dir='rtl' class="item-select">
+         	<option class="item-select-option" selected=""> Fahrenheit</option>
+        	<option class="item-select-option">Celsius</option>
+      </select>
+        </label>
+      </div>
+      
+      </div>
+    
+      
+      
+      <div class='item-container-footer'>
+         
+      </div>
+    
+    
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE'>
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='button-container'>
+        <label class='item'>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+	<input type="hidden" name="cmd" value="_donations">
+	<input type="hidden" name="business" value="spoonman@list.ru">
+	<input type="hidden" name="lc" value="US">
+	<input type="hidden" name="no_note" value="0">
+	<input type="hidden" name="currency_code" value="USD">
+	<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+	<input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+	<img alt="" border="0" src="/www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+	</form>
+        </label>
+      </div>
+    </div>
+    
+
+    
+  </body>
+  <script>
+  function getConfigData() {
+    var date = document.getElementById('date_id');
+    var vibro = document.getElementById('vibro_id');
+    var weather = document.getElementById('weather_id');
+    var weather_update = document.getElementById('weather_update_id');
+    var celsion = document.getElementById('celsion_id');
+ 
+    var options = {
+      'date_set': date.checked,
+      'vibro_set': vibro.checked,
+      'weather_set': weather.checked,
+      'weather_update_set': weather_update.value,
+      'celsion_set': celsion.value
+    };
+
+    // Save for next launch
+    localStorage['date_save'] = options['date_set'];
+    localStorage['vibro_save'] = options['vibro_set'];
+    localStorage['weather_save'] = options['weather_set'];
+    localStorage['weather_update_save'] = options['weather_update_set'];
+    localStorage['celsion_save'] = options['celsion_set'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var date = document.getElementById('date_id');
+    var vibro = document.getElementById('vibro_id');
+    var weather = document.getElementById('weather_id');
+    var weather_update = document.getElementById('weather_update_id');
+    var celsion = document.getElementById('celsion_id');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['date_save']) {
+      date.checked = JSON.parse(localStorage['date_save']);
+      vibro.checked = JSON.parse(localStorage['vibro_save']);
+      weather.checked = JSON.parse(localStorage['weather_save']);
+      weather_update.value  = localStorage['weather_update_save'];
+      celsion.value  = localStorage['celsion_save'];
+    }else{
+    	date.checked = true;
+    	vibro.checked = true;
+    	weather.checked = true;
+    }
+  })();
+  </script>
+</html>

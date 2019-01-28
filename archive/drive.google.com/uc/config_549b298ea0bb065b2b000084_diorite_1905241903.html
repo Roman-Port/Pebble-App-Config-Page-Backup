@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Starfield Classic</title>
+  </head>
+  <body>
+    <h3>Starfield Classic Config</h3>
+    <p>Choose watchface settings:</p>
+ 
+    <p>Invert Colors:
+    <select id="invert_select">
+      <option value="off">Off</option>
+      <option value="on">On</option>
+    </select>
+    </p>
+
+    <p>Star Speed:
+    <select id="star_speed_select">
+      <option value="slow">Slow</option>
+      <option value="medium">Medium</option>
+      <option value="fast">Fast</option>
+    </select>
+    </p>
+
+    <p>Framerate:
+    <select id="framerate_select">
+      <option value="power">Power-saving</option>
+      <option value="smooth">Smooth</option>
+    </select>
+    </p>
+ 
+    <p>
+    <button id="save_button">Save</button>
+    </p>
+  </body>
+</html>
+
+<script>
+  function saveOptions() {
+    var invertSelect = document.getElementById("invert_select");
+    var starSpeedSelect = document.getElementById("star_speed_select");
+    var framerateSelect = document.getElementById("framerate_select");
+
+    var options = {
+      "invert": invertSelect.options[invertSelect.selectedIndex].value,
+      "speed": starSpeedSelect.options[starSpeedSelect.selectedIndex].value,
+      "rate": framerateSelect.options[framerateSelect.selectedIndex].value
+    }
+     
+    return options;
+  };
+ 
+  var submitButton = document.getElementById("save_button");
+  submitButton.addEventListener("click", 
+    function() {
+      console.log("Submit");
+ 
+      var options = saveOptions();
+      var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+       
+      document.location = location;
+    }, 
+  false);
+</script>

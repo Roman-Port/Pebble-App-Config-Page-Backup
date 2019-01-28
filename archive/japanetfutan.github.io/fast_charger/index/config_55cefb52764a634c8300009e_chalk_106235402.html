@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="/ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.css">
+	<link rel="stylesheet" href="/japanetfutan.github.io/fast_charger/css/css.css">
+	<script src="/ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.js"></script>
+	<script src="/ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.js"></script>
+	<title>Fast charger setting</title>
+</head>
+
+<body>
+<form>
+<h2>Setting IFTTT(IF) MAKER URL</h2>
+<p>When URL set at the time of full charge of Pebble Time Notify your smartphone.</p>
+<p>* The setting must have an account and the app of IFTTT(IF).</p>
+
+<a href="#" id="h" class="ui-btn ui-btn-icon-left ui-icon-carat-r">How to notify your smartphone.</a>
+
+<div id="t" style="display: none">
+<br>
+<a href="/ifttt.com//maker.html">https://ifttt.com/maker</a>
+<br>
+<img src="/japanetfutan.github.io/fast_charger/images/001.png"><br>
+1. Receive a web request<br><br>
+<hr>
+<img src="/japanetfutan.github.io/fast_charger/images/002.png"><br>
+2. Crate a new Recipe<br><br>
+<hr>
+<img src="/japanetfutan.github.io/fast_charger/images/003.png"><br>
+3. [this] -> maker -> Receive a web request<br><br>
+<hr>
+<img src="/japanetfutan.github.io/fast_charger/images/004.png"><br>
+4. Event Name -> Input Optional Event Name<br><br>
+<hr>
+<img src="/japanetfutan.github.io/fast_charger/images/005.png"><br>
+5. [that] -> iOS Notifications OR Android Notification -> Send a notification<br><br>
+<hr>
+<img src="/japanetfutan.github.io/fast_charger/images/006.png"><br>
+6. Notification : "{{EventName}}" -> Create<br><br>
+<hr>
+<br>
+https://ifttt.com/maker<br>
+<br>
+<img src="/japanetfutan.github.io/fast_charger/images/007.png"><br>
+7. Your secret key is:XXXXXXXXXXXXXXXXXXXX<br><br>
+<hr>
+<img src="/japanetfutan.github.io/fast_charger/images/008.png"><br>
+8. URL Copy and paste, {event} name edit.<br><br>
+<hr>
+<p class="small">
+Setting URL :<br>
+https://maker.ifttt.com/trigger/<b>EVENT_NAME</b>/with/key/<b>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</b><br>
+</p>
+</div>
+
+<h3>IFTTT(IF) MAKER URL</h3>
+<p><input type="text" id="ifttt_url" class="small" placeholder="https://maker.ifttt.com/trigger/EVENT_NAME/with/key/XXXXXXXXXXXXXXXXXXXXXXX" style="width: 550px"></p>
+<p><input type="submit" id="b-save" value="save"></p>
+<p><input type="submit" id="b-cancel" value="cancel"></p>
+</form>
+<script>
+function saveOptions() {
+	//var colorValue = parseInt($('#color').val());
+	//var sendValue =[colorValue];
+	var sendValue = [$('#ifttt_url').val()];
+	return sendValue;
+}
+
+$().ready(function(){
+	var query = window.location.search;
+	query = query.substr(1);
+	if(!query){
+		$('#ifttt_url').val('');
+	}else{
+		$('#ifttt_url').val(query);
+	}
+	var w = $(window).width()-50;
+	$('img').width(w);
+
+	$('#h').click(function(){
+		$('#t').toggle("fast");
+		$('#h').toggleClass("ui-icon-carat-r");
+		$('#h').toggleClass("ui-icon-carat-d");
+	});
+	$("#b-cancel").click(function(){
+		//console.log("Canceling");
+		document.location = "pebblejs://close";
+	});
+	$("#b-save").click(function() {
+		//console.log("Save");
+		var location_uri = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+		document.location = location_uri;
+	});
+});
+</script>
+</body>
+</html>

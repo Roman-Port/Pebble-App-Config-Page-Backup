@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title>Pebblewalker</title>
+  <link rel="stylesheet" href="/mrdrake.github.io/pebblewalker/slate.css">
+</head>
+<body>
+  <form id="main-form">
+    <div class="item-container">
+      <div class="item-container-header">Choose your Pok&eacute;mon</div>
+      <div class="item-container-content">
+        <label class="item">
+          Pok&eacute;mon
+          <select id="pokemon" dir='rtl' class="item-select">
+            <option value="1" class="item-select-option">Bulbasaur</option>
+            <option value="4" class="item-select-option">Charmander</option>
+            <option value="7" class="item-select-option">Squirtle</option>
+            <option value="25" class="item-select-option" selected="">Pikachu</option>
+            <option value="137" class="item-select-option">Porygon</option>
+            <option value="251" class="item-select-option">Mew</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="item-container">
+      <div class="item-container-header">Choose your Route</div>
+      <div class="item-container-content">
+        <label class="item">
+          Route
+          <select id="route" dir='rtl' class="item-select">
+            <option value="0" class="item-select-option" selected="">Plains</option>
+            <option value="1" class="item-select-option">Forests</option>
+            <option value="2" class="item-select-option">Paths</option>
+            <option value="3" class="item-select-option">Sea</option>
+            <option value="4" class="item-select-option">Towns</option>
+            <option value="5" class="item-select-option">Caves</option>
+            <option value="6" class="item-select-option">Lakes</option>
+            <option value="7" class="item-select-option">City</option>
+          </select>
+        </label>
+      </div>
+    </div>    <div class="item-container">
+      <div class="button-container">
+        <input type="button" class="item-button" id="submit_button" value="SAVE">
+      </div>
+    </div>
+  </form>
+  <script type="text/javascript" src="/mrdrake.github.io/pebblewalker/slate.js"></script>
+  <script>
+  // Get query variables
+  function getQueryParam(variable, defaultValue) {
+  // Find all URL parameters
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+
+      // If the query variable parameter is found, decode it to use and return it for use
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    // Some example configuration values
+    var e = document.getElementById("pokemon");
+    var f = document.getElementById("route");
+    var config = {
+      'pokemon': parseInt(e.options[e.selectedIndex].value),
+      'route': parseInt(f.options[f.selectedIndex].value)
+    };
+
+    // Return data to watchapp
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(config));
+    console.log('FOO: ', config);
+  });
+  </script>
+</body>
+</html>

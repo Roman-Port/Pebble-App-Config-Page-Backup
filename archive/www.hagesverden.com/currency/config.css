@@ -1,0 +1,138 @@
+body {
+	font-family: "Segoe UI", sans-serif;
+	padding: 0px;
+	margin: 0px;
+}
+
+#header {
+	width: 100%;
+	margin: 0px;
+
+	text-align: left;
+	padding-top: 6px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+
+	background-color: #36589d;
+	color: #fff;
+}
+
+#content {
+	margin: 10px;
+}
+
+h1 {
+	margin: 0px;
+	padding: 0px;
+
+	font-size: 1.5em;
+}
+
+h2 {
+	margin: 0px;
+	padding: 0px;
+
+	font-size: 1em;
+}
+
+h3 {
+	margin: 0px;
+	margin-top: 10px;
+	padding: 0px;
+
+	font-size: 1em;
+}
+
+#searchResult {
+	position: absolute;
+	visibility: hidden;
+
+	background-color: #fff;
+	border: 1px solid #bbb;
+	border-radius: 0px;
+}
+
+#searchResult table {
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+
+#searchResult td {
+	padding: 3px;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	font-size: 1.5em;
+	font-weight: bold;
+
+	width: 25%;
+}
+
+#searchResult td + td {
+	font-size: 1.2em;
+	font-weight: normal;
+	white-space: nowrap;
+	overflow: hidden;
+
+	width: 75%;
+}
+
+input {
+	width: 100%;
+	font-size: 1.4em;
+
+	border: none; /*1px solid #bbb;*/
+	padding: 5px;
+	background-color: #36589d;
+	color: white;
+/*	border-radius: 10px;*/
+}
+
+#from {
+	position: relative;
+}
+
+#to {
+	position: relative;
+}
+
+#buttons {
+	text-align: center;
+	margin-top: 5px;
+}
+
+button {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #26700b;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+
+	width: 40%;
+	margin: 7px;
+}
+
+button#cancel {
+	background-color: #545454;
+}
+
+#instructions {
+	margin-top: 10px;
+}
+
+#instructions h3 {
+	margin-right: -10px;
+	margin-left: -10px;
+	padding-left: 10px;
+	background-color: #36589d;
+	color: white;
+
+}
+
+.btn {
+	font-weight: bold;
+}

@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>Clipped</title>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel='stylesheet' href='/code.jquery.com/mobile/1.3.2/jquery.css'>
+<script src='/code.jquery.com//jquery-1.js'></script>
+<script src='/code.jquery.com/mobile/1.3.2/jquery.js'></script>
+<style>
+.ui-header .ui-title { margin-left: 1em; margin-right: 1em; text-overflow: clip; }
+</style>
+</head>
+<body>
+<div data-role="page" id="page1">
+<div data-theme="a" data-role="header" data-position="fixed">
+<h3>
+Minimalist Configuration
+</h3>
+<div class="ui-grid-a">
+<div class="ui-block-a">
+<input id="cancel" type="submit" data-theme="c" data-icon="delete" data-iconpos="left" value="Cancel" data-mini="true">
+</div>
+<div class="ui-block-b">
+<input id="save" type="submit" data-theme="b" data-icon="check" data-iconpos="right" value="Save" data-mini="true">
+</div>
+</div>
+</div>
+<div data-role="content">
+
+<div id="displaymode" data-role="fieldcontain">
+<fieldset data-role="controlgroup" data-type="vertical" data-mini="true">
+<legend>Display Mode</legend>
+
+<input id="format1" name="displaymode" value="0" data-theme="" type="radio" checked=""><label for="format1">Hours & Minutes<br><img src="/www.famillemattern.com/jnm/pebble/Minimalist/Minimalist-HourAndMinutes.png" width="72" height="84"></label><input id="format2" name="displaymode" value="1" data-theme="" type="radio"><label for="format2">Hours at minute hand<br><img src="/www.famillemattern.com/jnm/pebble/Minimalist/Minimalist-HourAtMinuteHand.png" width="72" height="84"></label><input id="format3" name="displaymode" value="2" data-theme="" type="radio"><label for="format3">Minutes at hour hand<br><img src="/www.famillemattern.com/jnm/pebble/Minimalist/Minimalist-MinutesAtHourHand.png" width="72" height="84"></label></fieldset>
+</div>
+
+<fieldset class="ui-grid-a">
+<div class="ui-block-a">
+	<div data-role="fieldcontain">
+	<label for="seconds">
+	Show seconds
+	</label>
+	<select name="seconds" id="seconds" data-theme="" data-role="slider" data-mini="true">
+	<option value="0" selected="">Off</option><option value="1">On</option>	</select>
+	</div>
+</div>
+<div class="ui-block-b">
+	<div id="dateorder" data-role="fieldcontain">
+	<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+	<legend>Date format</legend>
+
+	<input id="format10" name="dateorder" value="0" data-theme="" type="radio"><label for="format10">dd.mm</label><input id="format20" name="dateorder" value="1" data-theme="" type="radio" checked=""><label for="format20">mm.dd</label>	</fieldset>
+	</div>
+</div>
+</fieldset>
+
+</div>
+
+<script>
+function saveOptions() {
+	var options = {
+		'displaymode': parseInt($("input[name=displaymode]:checked").val(), 10),
+		'seconds': parseInt($("#seconds").val(), 10),
+		'dateorder': parseInt($("input[name=dateorder]:checked").val(), 10)
+	}
+	return options;
+}
+
+$().ready(function() {
+		  $("#cancel").click(function() {
+							 console.log("Cancel");
+							 document.location = "pebblejs://close#";
+							 });
+		  
+		  $("#save").click(function() {
+						   console.log("Submit");
+						   
+						   var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+						   console.log("Close: " + location);
+						   console.log(location);
+						   document.location = location;
+						   });
+		  
+		  });
+</script>
+</div></body>
+</html>

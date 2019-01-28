@@ -1,0 +1,152 @@
+﻿
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Settings</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+   <link rel="stylesheet" href="/www.themapman.com/pebblewatch/marks-slate.css">
+<link rel="stylesheet" href="/www.themapman.com/pebblewatch/jquery.css">
+<link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+<script src="/code.jquery.com//jquery-1.js"></script>
+<script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+    <style>
+      .ui-header .ui-title { margin-left: 1em; margin-right: 1em; text-overflow: clip; }
+      /*.ui-radio { width: 50%; }*/
+    </style>
+  </head>
+  <body>
+   <div data-role='page' id='main'>
+     <div data-role='header' class='jqm-header' data-theme='a'>
+        <h1>Settings</h1>
+      </div>
+<p>
+
+      <div data-role='content'>      
+        
+       
+
+<label for="location"><small><strong>You must</strong> enter a location if "Use GPS" is NO <br>ie. city name or postal/zip code  <br> If you wan't to conserve some battery, have GPS=NO  AND enter your location eg. London</small></label>
+          
+          
+      <input type="text" name="location" id="location" value=" ">
+      
+        <label for="gps_switch"><small>Use GPS</small></label>
+        <select name="gps_switch" id="gps_switch" data-theme="a" data-role="slider" data-track-theme="d">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+          
+          <fieldset data-role="controlgroup" data-type="horizontal">
+            <legend>Units:</legend>
+
+            <label for="celsius">Celsius</label>
+            <input type="radio" id="celsius" name="units" value="celsius" data-theme="a">
+
+            <label for="fahrenheit">Fahrenheit</label>
+            <input type="radio" id="fahrenheit" name="units" value="fahrenheit" data-theme="a">
+          </fieldset>
+        </div>
+
+
+        <div data-role="fieldcontain"><strong>Vibration</strong><p>
+          <label for="bluetoothvibe">Bluetooth</label>
+          <select name="bluetoothvibe" id="bluetoothvibe" data-theme="a" data-role="slider" data-track-theme="d">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+       </p>
+          <label for="hourlyvibe">Hourly</label><br><br>
+          <select name="hourlyvibe" id="hourlyvibe" data-theme="a" data-role="slider" data-track-theme="d">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
+
+ <br>
+ 
+        <div data-role="fieldcontain"><strong>Display</strong><p>
+          <label for="textsize">Time Text Size</label>
+          <select name="textsize" id="textsize" data-theme="a" data-role="slider" data-track-theme="d">
+            <option value="false">Large</option>
+            <option value="true">Small</option>
+          </select>
+       
+        </div>  
+             
+        <div class='ui-body ui-body-b'>
+          <fieldset class='ui-grid-a'>
+            <div class='ui-block-a'><button type='submit' data-theme='a' id='b-cancel'>Cancel</button></div>
+            <div class='ui-block-b'><button type='submit' data-theme='a' id='b-submit'>Submit</button></div>
+          </fieldset>
+        </div>
+ 
+
+    <br><br>
+     
+<p align="center">
+  <a href="/www.paypal.me//markchopsreed.html" title="Support"><img src="/www.themapman.com/pebblewatch/paypalwider.png" width="200" height="35"></a>
+    <br>
+<em>This watchface will continue to be free.  If you find it useful, please consider making a small donation via the link above. Thankyou.</em>
+</p>
+    </div>
+    
+   <script>
+      function getQueryVariable(variable) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (pair[0] == variable)
+            return decodeURIComponent(pair[1]);
+        }
+        return false;
+      }
+
+      function saveOptions() {
+        var options = {
+          'use_gps': $('#gps_switch').val(),
+          'location': $('#location').val(),
+          'units': $('input:radio[name=units]:checked').val(),
+		  'bluetoothvibe': $('#bluetoothvibe').val(),
+          'hourlyvibe': $('#hourlyvibe').val(),
+          'hidesec': $('#hidesec').val(),
+		  'hideleft': $('#hideleft').val(),
+          'hideright': $('#hideright').val(),
+          'textsize': $('#textsize').val()
+		          }
+        return options;
+      }
+
+      $().ready(function() {
+        $('#b-cancel').click(function() {
+          document.location = 'pebblejs://close#';
+        });
+        $('#b-submit').click(function() {
+          document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(saveOptions()));
+        });
+
+        $('#gps_switch').val(getQueryVariable('use_gps')).change();
+        $('#location').val(getQueryVariable('location'));
+        if (getQueryVariable('units') == "celsius") {
+          $('input:radio[name=units][value=celsius]').prop('checked', true).trigger("click");
+        } else {
+          $('input:radio[name=units][value=fahrenheit]').prop('checked', true).trigger("click");
+       }
+        $('#bluetoothvibe').val(getQueryVariable('bluetoothvibe')).change();
+        $('#hidesec').val(getQueryVariable('hidesec')).change();
+        $('#hourlyvibe').val(getQueryVariable('hourlyvibe')).change();
+		$('#hideleft').val(getQueryVariable('hideleft')).change();
+        $('#hideright').val(getQueryVariable('hideright')).change();
+        $('#textsize').val(getQueryVariable('textsize')).change();
+
+
+        // Disable location field based on GPS toggle
+        $('#location').prop('disabled', $('#gps_switch').val() == "true");
+        $('#gps_switch').change(function() {
+          $('#location').prop('disabled', $('#gps_switch').val() == "true");
+        });
+      });
+    </script>
+  </body>
+</html>

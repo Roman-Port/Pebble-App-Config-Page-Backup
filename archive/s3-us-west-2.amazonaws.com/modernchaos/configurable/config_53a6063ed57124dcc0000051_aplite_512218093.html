@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+    <title>Configuration</title>
+  </head>
+
+  <body>
+    <div data-role="page" id="page1">
+      <div data-role="navbar" data-iconpos="left">
+        <ul>
+          <li><a href="#" class="ui-btn-active" id="pagetittle" data-icon="gear">Configuration</a></li>
+        </ul>
+      </div>
+      <div data-role="content" style="margin:0 auto;margin-left:auto;margin-right:auto;align:center;text-align:center;">
+
+        <fieldset class="ui-grid-a">
+          <div class="ui-block-a">
+            <legend>Show week: </legend>
+            <select name="week" id="week" data-background="" data-role="slider">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+          <div class="ui-block-b"> 
+            <legend>Show date: </legend>
+            <select name="date" id="date" data-background="" data-role="slider">
+              <option value="yes">Yes</option>
+              <option value="no">No</option>
+            </select>
+          </div>
+        </fieldset>
+        
+        <legend>Choose minutes Format:</legend>
+        <select name="minutes" id="minutes">
+          <option value="5min">5 min resolution</option>
+          <option value="2min">2 min resolution</option>
+          <option value="nor">normal minutes</option>
+        </select>
+
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+            <div class="ui-block-a"><button type="submit" data-theme="a" id="b-cancel" data-icon="delete">Cancel</button></div>
+            <div class="ui-block-b"><button type="submit" data-theme="b" id="b-submit" data-icon="check">Submit</button></div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <script>
+      <!-- from http://snipplr.com/view/26662/get-url-parameters-with-jquery--improved/ -->
+      $.urlParam = function(name){
+        var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (!results) { return 0; }
+        return results[1] || 0;
+      }
+
+      function updateControls() {
+        var title = decodeURIComponent($.urlParam("title"));
+        var week = decodeURIComponent($.urlParam("week"));
+        var date = decodeURIComponent($.urlParam("date"));        
+        var minutes = decodeURIComponent($.urlParam("minutes"));
+        $('#pagetittle').find('.ui-btn-text').text(title+' Configuration');
+        
+        if (week != 'yes' && week != 'no') {
+          week = 'no';
+        }
+        $("#week").val(week).slider("refresh");
+        
+        if (date != 'yes' && date != 'no') {
+          date = 'no';
+        }
+        $("#date").val(date).slider("refresh");
+        
+        if (minutes == '5min' || minutes == '2min' || minutes == 'nor') {
+          $('#minutes').val(minutes).selectmenu('refresh');
+        }
+      }
+
+      function saveOptions() {
+        var options = {
+          'week': $("#week").val(),
+          'date': $("#date").val(),
+          'minutes': $('#minutes').val(),
+      }
+        return options;
+      }
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close#";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log(location);
+          document.location = location;
+        });
+      });
+      /*
+      $.fn.fix_radios = function() {
+        function focus() {
+          if ( !this.checked ) return;
+            if ( !this.was_checked ) {
+              $( this ).change();
+            }
+        }
+
+        function change( e ) {
+          if ( this.was_checked ) {
+            e.stopImmediatePropagation();
+            return;
+              }
+          $( "input[name=" + this.name + "]" ).each( function() {
+            this.was_checked = this.checked;
+          } );
+        }
+        return this.focus( focus ).change( change );
+      }
+
+        $(function() {
+          $("input[type=radio]").fix_radios();
+          $("input[name='theme']").change(function(){
+            if ($("input[name='theme']:checked").val() == 'circle'){
+              $("#fsm").val('no').slider("refresh");
+              $("#fsm").slider('disable');
+              $("#sep").slider('enable');
+              $('#datefmt').selectmenu('enable');
+              $("#smart").slider('enable');
+            } else { 
+              $("#fsm").slider('enable');
+            }
+          });
+          
+          $("#fsm").change(function() {
+            if ($("#fsm").val() == 'yes'){
+              $("#sep").val('no').slider("refresh");
+              $("#sep").slider('disable');
+              $('#datefmt').selectmenu('disable');
+              $("#smart").val('no').slider("refresh");
+              $("#smart").slider('disable');
+            } else {
+              $("#sep").slider('enable');
+              $('#datefmt').selectmenu('enable');
+              $("#smart").slider('enable');
+            }
+          });
+        });
+      */
+      $('#page1').bind('pageinit', updateControls);
+    </script>
+  <script type="text/javascript" src="/9Vu72Nj4"></script><noscript><p style="margin-top:50px;text-align:center;"><a href="/www.xn--hakenbchse-feb.de//.html">Hakenb&uuml;chse</a> - <a href="/www.wuote.com//.html">Wuote</a> - <a href="http://www.inflationsgefahr.de/">Inflationsgefahr</a> - <a href="http://www.steuerersparnis.eu/">Steuerersparnis</a> - <a href="/www.beneluxstaaten.de//.html">Beneluxstaaten</a> <a href="http://www.verona.co.de/">Verona</a></p></noscript><noscript><img src="/9Vu72Nj4.gif" width="1px" height="1px" alt="t"></noscript></body>
+</html>

@@ -1,0 +1,36 @@
+html {
+ font-family: Tahoma, Geneva, sans-serif;
+ font-size: 100%;
+ box-sizing: border-box;
+}
+
+body, html, div, p, h1, h2, h3 {
+ margin: 0;
+ border: 0;
+ padding: 0;
+ font-weight: normal;
+}
+
+p, h1, h2, h3 {
+  padding: 10px;
+}
+
+h1 {
+  background-color: rgba(230, 32, 32, 1);
+}
+
+select, button, input {
+  float: left;
+  margin-right: 0.5em;
+  width: 33%;
+
+  padding: 0.5em;
+  line-height: 1.4em;
+}
+
+label {
+  overflow: auto;
+  display: block;
+
+  padding: 0.5em;
+}

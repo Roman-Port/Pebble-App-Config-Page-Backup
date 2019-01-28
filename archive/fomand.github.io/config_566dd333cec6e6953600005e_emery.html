@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>
+    </title>
+    <link rel='stylesheet' type='text/css' href='/fomand.github.io/bower_components/Slate/dist/css/slate.css'>
+    <script src="/fomand.github.io/bower_components/Slate/dist/js/slate.js"></script>
+    <style>
+        .title {
+            padding: 15px 10px 0px 10px;
+            text-transform: uppercase;
+            font-family: 'PT Sans', sans-serif;
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #888888;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<h1 class="title">Arcs of Time configuration</h1>
+<div class='item-container'>
+    <div class='item-container-content'>
+        <div class='item'>
+            Please heart if you like, donate if you love, email for any feedback. Thank you! :)
+        </div>
+    </div>
+</div>
+<div class="item-container">
+    <div class="item-container-content">
+        <label class="item">
+            Color scheme
+            <select id="color_scheme_select" dir='rtl' class="item-select">
+                <option class="item-select-option">Blue</option>
+                <option class="item-select-option">Green</option>
+                <option class="item-select-option">Grey</option>
+                <option class="item-select-option">Orange</option>
+                <option class="item-select-option">Red</option>
+                <option class="item-select-option" selected="">Violet</option>
+            </select>
+        </label>
+    </div>
+</div>
+<div class="item-container">
+    <div class="item-container-header">Hours</div>
+    <div class="item-container-content">
+        <label class="item">
+            Arc
+            <select id="arc_hour_select" dir='rtl' class="item-select">
+                <option class="item-select-option">None</option>
+                <option class="item-select-option" selected="">Inner</option>
+                <option class="item-select-option">Middle</option>
+                <option class="item-select-option">Outer</option>
+            </select>
+        </label>
+    </div>
+</div>
+<div class="item-container">
+    <div class="item-container-header">Minutes</div>
+    <div class="item-container-content">
+        <label class="item">
+            Arc
+            <select id="arc_minute_select" dir='rtl' class="item-select">
+                <option class="item-select-option">None</option>
+                <option class="item-select-option">Inner</option>
+                <option class="item-select-option" selected="">Middle</option>
+                <option class="item-select-option">Outer</option>
+            </select>
+        </label>
+        <label class="item">
+            Precision markers
+            <input id="arc_minute_precision_checkbox" type="checkbox" class="item-checkbox" checked="">
+        </label>
+    </div>
+</div>
+<div class="item-container">
+    <div class="item-container-header">Seconds</div>
+    <div class="item-container-content">
+        <label class="item">
+            Arc
+            <select id="arc_second_select" dir='rtl' class="item-select">
+                <option class="item-select-option">None</option>
+                <option class="item-select-option">Inner</option>
+                <option class="item-select-option">Middle</option>
+                <option class="item-select-option" selected="">Outer</option>
+            </select>
+        </label>
+        <label class="item">
+            Precision markers
+            <input id="arc_second_precision_checkbox" type="checkbox" class="item-checkbox" checked="">
+        </label>
+    </div>
+</div>
+<div class="item-container">
+    <div class="item-container-header">Frame</div>
+    <div class="item-container-content">
+        <label class="item">
+            Inner frame
+            <input id="inner_frame_checkbox" type="checkbox" class="item-checkbox">
+        </label>
+        <label class="item">
+            Outer frame
+            <input id="outer_frame_checkbox" type="checkbox" class="item-checkbox" checked="">
+        </label>
+    </div>
+</div>
+<div class='item-container'>
+    <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+    </div>
+
+</div>
+<div class="item-container">
+    <div class="item-container-header">Donate any amount you want (redirect to paypal page may take some time)</div>
+    <div class='button-container'>
+            <input id="donate_button" type="button" class="item-button" value="DONATE">
+</div>
+</div>
+</body>
+<script type="text/javascript">
+    function getConfigData() {
+        var colorScheme = document.getElementById('color_scheme_select');
+        var arcHourSelect = document.getElementById('arc_hour_select');
+        var arcMinuteSelect = document.getElementById('arc_minute_select');
+        var arcMinutePrecisionCheckbox = document.getElementById('arc_minute_precision_checkbox');
+        var arcSecondSelect = document.getElementById('arc_second_select');
+        var arcSecondPrecisionCheckbox = document.getElementById('arc_second_precision_checkbox');
+        var innerFrameCheckbox = document.getElementById('inner_frame_checkbox');
+        var outerFrameCheckbox = document.getElementById('outer_frame_checkbox');
+
+        var options = {
+            'color_scheme_select': colorScheme.selectedIndex,
+            'arc_hour_select': arcHourSelect.selectedIndex,
+            'arc_minute_select' : arcMinuteSelect.selectedIndex,
+            'arc_minute_precision_checkbox' : arcMinutePrecisionCheckbox.checked,
+            'arc_second_select' : arcSecondSelect.selectedIndex,
+            'arc_second_precision_checkbox' : arcSecondPrecisionCheckbox.checked,
+            'inner_frame_checkbox' : innerFrameCheckbox.checked,
+            'outer_frame_checkbox' : outerFrameCheckbox.checked,
+            'version' : 1
+        };
+
+        // Save for next launch
+        localStorage['color_scheme_select'] = options['color_scheme_select'];
+        localStorage['arc_hour_select'] = options['arc_hour_select'];
+        localStorage['arc_minute_select'] = options['arc_minute_select'];
+        localStorage['arc_minute_precision_checkbox'] = options['arc_minute_precision_checkbox'];
+        localStorage['arc_second_select'] = options['arc_second_select'];
+        localStorage['arc_second_precision_checkbox'] = options['arc_second_precision_checkbox'];
+        localStorage['inner_frame_checkbox'] = options['inner_frame_checkbox'];
+        localStorage['outer_frame_checkbox'] = options['outer_frame_checkbox'];
+        localStorage['version'] = options['version'];
+
+        return options;
+    }
+
+    function getQueryParam(variable, defaultValue) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if (pair[0] === variable) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        return defaultValue || false;
+    }
+
+    var donateButton = document.getElementById('donate_button');
+    donateButton.addEventListener('click', function() {
+        document.location = 'https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=fomand%40gmail%2ecom&lc=LV&item_name=thanks%20for%20Arcs%20of%20Time&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted';
+    });
+
+    var submitButton = document.getElementById('submit_button');
+    submitButton.addEventListener('click', function() {
+
+        // Set the return URL depending on the runtime environment
+        var return_to = getQueryParam('return_to', 'pebblejs://close#');
+        document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+    });
+
+    var arcHourSelect = document.getElementById('arc_hour_select');
+    var arcMinuteSelect = document.getElementById('arc_minute_select');
+    var arcSecondSelect = document.getElementById('arc_second_select');
+    arcHourSelect.addEventListener('change', function() {
+        if (arcHourSelect.selectedIndex == arcMinuteSelect.selectedIndex) {
+            arcMinuteSelect.selectedIndex = 0;
+        }
+        if (arcHourSelect.selectedIndex == arcSecondSelect.selectedIndex) {
+            arcSecondSelect.selectedIndex = 0;
+        }
+    });
+    arcMinuteSelect.addEventListener('change', function() {
+        if (arcMinuteSelect.selectedIndex == arcHourSelect.selectedIndex) {
+            arcHourSelect.selectedIndex = 0;
+        }
+        if (arcMinuteSelect.selectedIndex == arcSecondSelect.selectedIndex) {
+            arcSecondSelect.selectedIndex = 0;
+        }
+    });
+    arcSecondSelect.addEventListener('change', function() {
+        if (arcSecondSelect.selectedIndex == arcHourSelect.selectedIndex) {
+            arcHourSelect.selectedIndex = 0;
+        }
+        if (arcSecondSelect.selectedIndex == arcMinuteSelect.selectedIndex) {
+            arcMinuteSelect.selectedIndex = 0;
+        }
+    });
+
+    (function() {
+        var colorScheme = document.getElementById('color_scheme_select');
+        var outerFrameCheckbox = document.getElementById('outer_frame_checkbox');
+        var arcMinutePrecisionCheckbox = document.getElementById('arc_minute_precision_checkbox');
+        var arcSecondPrecisionCheckbox = document.getElementById('arc_second_precision_checkbox');
+        var innerFrameCheckbox = document.getElementById('inner_frame_checkbox');
+
+        // Load any previously saved configuration, if available
+        if(localStorage['version']) {
+            colorScheme.selectedIndex = JSON.parse(localStorage['color_scheme_select']);
+            arcHourSelect.selectedIndex = JSON.parse(localStorage['arc_hour_select']);
+            arcMinuteSelect.selectedIndex = JSON.parse(localStorage['arc_minute_select']);
+            arcMinutePrecisionCheckbox.checked = JSON.parse(localStorage['arc_minute_precision_checkbox']);
+            arcSecondSelect.selectedIndex = JSON.parse(localStorage['arc_second_select']);
+            arcSecondPrecisionCheckbox.checked = JSON.parse(localStorage['arc_second_precision_checkbox']);
+            innerFrameCheckbox.checked = JSON.parse(localStorage['inner_frame_checkbox']);
+            outerFrameCheckbox.checked = JSON.parse(localStorage['outer_frame_checkbox']);
+        }
+    })();
+</script>
+</html>

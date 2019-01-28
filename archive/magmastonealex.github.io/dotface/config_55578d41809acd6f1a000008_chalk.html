@@ -1,0 +1,114 @@
+﻿<html style="width:100%">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.css" rel="stylesheet">
+<script src="/ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.js"></script>
+<script src="/maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.js"></script>
+</head>
+<body>
+<div class="container" role="main">
+<div class="row">
+<div class="checkbox">
+  <label id="inverted">
+    <input id="invertedB" type="checkbox" value="">
+    Inverted?
+  </label>
+</div>
+</div>
+
+<br>
+<br>
+<div class="row">
+<div class="checkbox">
+  <label id="fCircle">
+    <input id="fCircleB" type="checkbox" value="">
+    Face Circle
+  </label>
+</div>
+</div>
+
+<br>
+<br>
+<div class="row">
+<div class="checkbox">
+  <label id="fDots">
+    <input id="fDotsB" type="checkbox" value="">
+    Face Dots
+  </label>
+</div>
+</div>
+
+<br>
+<br>
+
+<div class="row">
+<div class="btn-group col-sm-12" style="width: 100%;" data-toggle="buttons">
+  <button id="submit" type="button" class="btn btn-default" style="display: block; width: 100%;">Submit</button>
+</div>
+</div>
+
+</div>
+<script>
+$(document).ready(function(){
+	inv=localStorage.getItem("inverted");
+	faceC=localStorage.getItem("faceCircle");
+	faceD=localStorage.getItem("faceDots");
+	if(inv != null){
+		if(inv=="T"){
+			$("#invertedB").addClass('active');
+			$("#invertedB").prop("checked",true);
+		}
+	}else{
+
+		localStorage.setItem("inverted","F");
+	}
+	if(faceC != null){
+		if(faceC=="T"){
+			$("#fCircleB").addClass('active');
+			$("#fCircleB").prop("checked",true);
+		}
+	}else{
+		localStorage.setItem("faceCircle","F");
+	}
+	if(faceD != null){
+		if(faceD=="T"){
+			$("#fDotsB").addClass('active');
+			$("#fDotsB").prop("checked",true);
+		}
+	}else{
+		localStorage.setItem("faceDots","F");
+	}
+	$("#fCircle").click(function(){
+		console.log("here?");
+		if( $("#fCircleB").prop("checked") ){
+			localStorage.setItem("faceCircle","T");
+		}else{
+			localStorage.setItem("faceCircle","F");
+		}
+	});
+	$("#fDots").click(function(){
+		console.log("here?");
+		if( $("#fDotsB").prop("checked") ){
+			localStorage.setItem("faceDots","T");
+		}else{
+			localStorage.setItem("faceDots","F");
+		}
+	});
+	$("#inverted").click(function(){
+		if( $("#invertedB").prop("checked")){
+			localStorage.setItem("inverted","T");
+		}else{
+			localStorage.setItem("inverted","F");
+		}
+	});
+	$("#submit").click(function(){
+		//fixed stuff.
+		str=JSON.stringify({'inverted':localStorage.getItem("faceCircle"),'faceCircle':localStorage.getItem("inverted"),'faceDots':localStorage.getItem("faceDots")})
+		location.href = 'pebblejs://close#' + encodeURIComponent(str);
+	});
+});
+</script>
+</body>
+</html>

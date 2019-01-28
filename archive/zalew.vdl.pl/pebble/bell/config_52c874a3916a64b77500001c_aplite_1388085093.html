@@ -1,0 +1,193 @@
+<html>
+ <head>
+  <title>Bell Config</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.0/jquery.css">
+  <script src="/code.jquery.com//jquery-1.js"></script>
+  <script src="/code.jquery.com/mobile/1.4.0/jquery.js"></script>
+  <style type="text/css">
+        #Banner {
+          display: block;
+          margin: 1em auto 0;
+          width: 100%;
+        }
+  </style>
+ </head>
+ <body>
+ <br><br>
+ <center>Loading...</center>
+ <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Bell Configuration</h1>
+      <center>
+<script src="/coinwidget.com/widget/coin.bin"></script>
+<script>
+CoinWidgetCom.go({
+	wallet_address: "1DAvDGQCXJtL2SHPz47QUjaSXBXLSXwThJ"
+	, currency: "bitcoin"
+	, counter: "count"
+	, alignment: "bc"
+	, qrcode: true
+	, auto_show: false
+	, lbl_button: "Donate BTC"
+	, lbl_address: "My Bitcoin Address:"
+	, lbl_count: "donations"
+	, lbl_amount: "BTC"
+});
+</script>
+      </center>
+      </div>
+      <div data-role="content">
+
+        <a class="ui-link" href="/zalew.vdl.pl/pebble/bell_1388085093.html"><img id="Banner" src="/zalew.vdl.pl/pebble/images/3.bin"> </a> 
+
+        <div data-role="fieldcontain">
+          <label for="invert">Invert colors:</label>
+          <select name="invert" id="invert" data-role="slider">
+            <option value="0">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="seconds">Seconds hand:</label>
+          <select name="seconds" id="seconds" data-role="slider">
+            <option value="0">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="vibe">Hourly vibration:</label>
+          <select name="vibe" id="vibe" data-role="slider">
+            <option value="0">Off</option>
+            <option value="1">On</option>
+          </select>
+        </div>
+ 
+        <div data-role="fieldcontain">
+          <label for="vibestart" class="select">Hourly vibration start:</label>
+          <select name="vibestart" id="vibestart">
+            <option value="00">00:00</option>
+            <option value="01">01:00</option>
+            <option value="02">02:00</option>
+            <option value="03">03:00</option>
+            <option value="04">04:00</option>
+            <option value="05">05:00</option>
+            <option value="06">06:00</option>
+            <option value="07">07:00</option>
+            <option value="08">08:00</option>
+            <option value="09">09:00</option>
+            <option value="10">10:00</option>
+            <option value="11">11:00</option>
+            <option value="12">12:00</option>
+            <option value="13">13:00</option>
+            <option value="14">14:00</option>
+            <option value="15">15:00</option>
+            <option value="16">16:00</option>
+            <option value="17">17:00</option>
+            <option value="18">18:00</option>
+            <option value="19">19:00</option>
+            <option value="20">20:00</option>
+            <option value="21">21:00</option>
+            <option value="22">22:00</option>
+            <option value="23">23:00</option>
+          </select>
+        </div>
+ 
+        <div data-role="fieldcontain">
+          <label for="vibeend" class="select">Hourly vibration end:</label>
+          <select name="vibeend" id="vibeend">
+            <option value="00">00:00</option>
+            <option value="01">01:00</option>
+            <option value="02">02:00</option>
+            <option value="03">03:00</option>
+            <option value="04">04:00</option>
+            <option value="05">05:00</option>
+            <option value="06">06:00</option>
+            <option value="07">07:00</option>
+            <option value="08">08:00</option>
+            <option value="09">09:00</option>
+            <option value="10">10:00</option>
+            <option value="11">11:00</option>
+            <option value="12">12:00</option>
+            <option value="13">13:00</option>
+            <option value="14">14:00</option>
+            <option value="15">15:00</option>
+            <option value="16">16:00</option>
+            <option value="17">17:00</option>
+            <option value="18">18:00</option>
+            <option value="19">19:00</option>
+            <option value="20">20:00</option>
+            <option value="21">21:00</option>
+            <option value="22">22:00</option>
+            <option value="23">23:00</option>
+          </select>
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+          <div data-role="navbar">
+            <ul>
+              <div class="ui-block-a"><button type="submit" id="b-cancel" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-delete">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" id="b-submit" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-check ui-btn-active ui-state-persist">Submit</button></div>
+            </ul>
+          </div>
+          <h4 style="display:none;">Footer</h4>
+        </div>
+
+        </div>
+        </div>
+      
+    
+    <script>
+        var settings = "0100822";
+
+        if(settings=="")settings='0100822';
+
+        if(settings.substring(0,1)=='1'){
+          var selectinvert = $("select#invert");
+          selectinvert[0].selectedIndex = 1;
+        }
+
+        if(settings.substring(1,2)=='1'){
+          var selectseconds = $("select#seconds");
+          selectseconds[0].selectedIndex = 1;
+        }
+
+        if(settings.substring(2,3)=='1'){
+          var selectvibe = $("select#vibe");
+          selectvibe[0].selectedIndex = 1;
+        }
+
+        var selectvibestart = $("select#vibestart");
+        selectvibestart[0].selectedIndex = parseInt(settings.substring(3,5), 10);
+
+        var selectvibeend = $("select#vibeend");
+        selectvibeend[0].selectedIndex = parseInt(settings.substring(5,7), 10);
+
+      function saveOptions() {
+        var settings = "" + $("#invert").val() + $("#seconds").val();
+        settings += $("#vibe").val() + $("#vibestart").val() + $("#vibeend").val();
+        var options = {
+          'settings': settings
+        }
+        return options;
+      }
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location.href = "pebblejs://close#";
+        });
+
+        $("#b-submit").click(function() {
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Submit: " + location);
+          document.location = location;
+        });
+
+      });
+   </script>
+  <br><br><br>
+ </body>
+</html>

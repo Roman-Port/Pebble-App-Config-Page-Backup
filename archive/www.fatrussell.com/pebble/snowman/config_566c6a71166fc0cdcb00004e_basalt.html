@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Snowman Watch Face by Fat Russell LLC</title>
+  <link rel='stylesheet' type='text/css' href='/www.fatrussell.com/pebble/css/slate.css'>
+  <script src='/www.fatrussell.com/pebble/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Snowman Watch Face by Fat Russell LLC</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Thank you for adding the Snowman Watch Face by Fat Russell LLC.  Whether you're geting in the Holiday spirit,
+          you're hoping for some cold weather and snow or you're just a fan Pebble artwork, we hope you like this 
+          watch face as much as we do! Enjoy!
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      
+      <div class='button-container'>
+        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+          <input type="hidden" name="cmd" value="_s-xclick">
+          <input type="hidden" name="hosted_button_id" value="Q4EQ4DYF9B856">
+          <input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+          <img alt="" border="0" src="/www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+        </form>
+
+      </div>
+      <div class='item-container-footer'>
+        If you like our watch faces and are interested in more features, more faces and more art, consider helping
+        us move along.  We are working on wearable tech in our spare time and love that you take the time to find 
+        and download our stuff.  So, if you have the means and want to contribute, click the Paypal donate link above.  
+        Donations are appreciated and will help us focus on our Pebble content, but are optional. Thanks!
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='CLOSE'>
+      </div>
+    </div>
+
+  </body>
+  <script>
+  function getConfigData() {
+    //var backgroundColorPicker = document.getElementById('background_color_picker');
+    //var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+ 
+    var options = {
+      'viewed': true
+    };
+
+    // Save for next launch
+    localStorage['viewed'] = options['viewed'];
+    
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    //var backgroundColorPicker = document.getElementById('background_color_picker');
+    //var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+    //console.log("ran init function");
+    // Load any previously saved configuration, if available
+    //if(localStorage['viewed']) {
+    //  highContrastCheckbox.checked = JSON.parse(localStorage['high_contrast']);
+    //  backgroundColorPicker.value = localStorage['background_color'];
+   // }
+  })();
+  </script>
+</html>

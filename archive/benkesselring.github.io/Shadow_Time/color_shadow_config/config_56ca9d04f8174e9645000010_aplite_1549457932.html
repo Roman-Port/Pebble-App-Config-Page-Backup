@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Shadow Time Config</title>
+    <link type="text/css" rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+    <link type="text/css" rel="stylesheet" href="/benkesselring.github.io/Shadow_Time/color_shadow_config.css">
+    <link type="text/css" rel="stylesheet" href="/benkesselring.github.io/Shadow_Time/spectrum.css">
+
+    <script type="text/javascript" src="/code.jquery.com//jquery-1.js"></script>
+    <script type="text/javascript" src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+    <script type="text/javascript" src="/benkesselring.github.io/Shadow_Time/spectrum.js"></script>
+    <script type="text/javascript" src="/benkesselring.github.io/Shadow_Time/gcolor.js"></script>
+    <script type="text/javascript" src="/benkesselring.github.io/Shadow_Time/color_shadow_config.js"></script>
+</head>
+<body style="position:relative; left:5px;">
+
+    <p id="ptblColorSelection" style="display:none">
+        <span class="label">Select Colors</span>
+    </p>
+    <table id="tblColorSelection" style="display:none">
+        <tr>
+            <td><label><input name="bgcolor" id="bgcolor" class="picker">&nbsp;Background</label></td>
+            <td><label><input name="timecolor" id="timecolor" class="picker">&nbsp;Time</label></td>
+        </tr>
+        <tr>
+            <td><label><input name="datecolor" id="datecolor" class="picker">&nbsp;Date</label></td>
+            <td><label><input name="barcolor" id="barcolor" class="picker">&nbsp;Bar</label></td>
+        </tr>
+        <tr>
+            <td><label><input name="h1shadowcolor" id="h1shadowcolor" class="picker">&nbsp;1st hr shadow</label></td>
+            <td><label><input name="h2shadowcolor" id="h2shadowcolor" class="picker">&nbsp;2nd hr shadow</label></td>
+        </tr>
+        <tr>
+            <td><label><input name="m1shadowcolor" id="m1shadowcolor" class="picker">&nbsp;1st min shadow</label></td>
+            <td><label><input name="m2shadowcolor" id="m2shadowcolor" class="picker">&nbsp;2nd min shadow</label></td>
+        </tr>
+
+    </table>
+
+    <div id="main" style="display:none">
+        <p>
+            <span class="label">Select shadow direction</span>
+        </p>
+        <table id="tblDir">
+            <tr>
+                <td title="To top left">
+                    <div style="width: 0; height: 0;border-top: 50px solid transparent; border-right: 50px solid transparent;"></div>
+                    <input type="radio" name="rdDir" value="3" style="top:-45px; left: -7px" onclick="changeShadowDirection(SHADOW.DIRECTON.TO_TOP_LEFT);">
+                </td>
+                <td td="" title="To top right">
+
+                    <div style="width: 0; height: 0; border-top: 50px solid transparent; border-left: 50px solid transparent;"></div>
+                    <input type="radio" name="rdDir" value="4" style="top:-45px; left: 7px" onclick="changeShadowDirection(SHADOW.DIRECTON.TO_TOP_RIGHT);">
+                </td>
+            </tr>
+
+            <tr></tr>
+
+
+            <tr>
+                <td title="To bottom left">
+                    <div style="width: 0; height: 0;border-bottom: 50px solid transparent;border-right: 50px solid transparent;"></div>
+                    <input type="radio" name="rdDir" value="2" style="top:-25px; left: -7px" onclick="changeShadowDirection(SHADOW.DIRECTON.TO_BOTTOM_LEFT);">
+                </td>
+
+                <td title="To bottom right">
+
+                    <div style="width: 0; height: 0; border-bottom: 50px solid transparent;border-left: 50px solid transparent;"></div>
+                    <input type="radio" name="rdDir" value="1" style="top:-25px; left: 7px" checked="checked" onclick="changeShadowDirection(SHADOW.DIRECTON.TO_BOTTOM_RIGHT);">
+                </td>
+            </tr>
+        </table>
+
+        <div class="screen number">
+            <span id="h1">2</span>
+            <span id="h2">0</span>
+            <span id="m1">0</span>
+            <span id="m2">3</span>
+        </div>
+
+        <img id="imgpebble" style="position:relative;top:-506px;left:23px;z-index:10">
+
+        <div style="position:relative;top:-500px" id="xForm">
+          
+            <br>
+
+            <input id="xbtnSave" type="button" value="Save" style="margin-right:30px">
+            <input id="xbtnCancel" type="button" value="Cancel" style="margin-right:30px">
+            
+        </div>
+
+    </div>
+
+</body>
+</html>

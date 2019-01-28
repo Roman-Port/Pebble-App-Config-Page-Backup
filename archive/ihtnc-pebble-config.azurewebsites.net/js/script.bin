@@ -1,0 +1,22 @@
+var enable_logging = true;
+var jsn = '';
+
+function parseSelections() {
+    jsn = '{';
+	
+	//get all textbox values
+    $("input[id^='id_'][type='text']").each(function(index) {
+		if ($(this).val().length != 0)
+		jsn = jsn + '"' + $(this).attr("name") + '":"' + $(this).val() + '",';
+	});
+     
+    //get all other values
+    $("input[id^='id_'][type!='text']:checked").each(function (index) {
+        jsn = jsn + '"' + $(this).attr("name") + '":"' + $(this).attr("value") + '",';
+    });
+
+	jsn = jsn + '"action":"save"';
+    jsn = jsn + '}';
+
+    return jsn;
+}

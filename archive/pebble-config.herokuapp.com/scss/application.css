@@ -1,0 +1,23 @@
+.dbg1 {
+  background-color: yellow; }
+
+.dbg2 {
+  background-color: #cccc00; }
+
+.block {
+  padding: 40px; }
+
+body {
+  background-color: #e6e6e6; }
+
+.list-shb-features li {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+#logo {
+  margin-top: 20px;
+  margin-bottom: 40px; }
+
+footer {
+  margin-top: 40px;
+  color: #999999; }

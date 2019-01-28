@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel='stylesheet' type='text/css' href='/pebble.imhotek.com/bower_components/pebble-slate/dist/css/slate.css'>
+  <link rel='stylesheet' type='text/css' href='./css/style.css'>
+</head>
+<body>
+  <div class='item-container'>
+    <h1 class='title'>Minimal</h1>
+    <br\><h1 class='title'> by Imhotek</h1>
+  </br\></div>
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <div class='item'>
+        Settings for the Minimal watchface.
+      </div>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Reset</div>
+    <div class='item-container-content'>
+      <label class='item'>
+        Clear all settings and set to defaults
+        <div class='button-container'>
+          <input id='defaultButton' type='button' class='item-button' value='Reset'>
+        </div>
+      </label>
+    </div>
+  </div>
+  <div class='item-container'>
+    <div class='item-container-header'>Options</div>
+    <div class='item-container-content'>
+      <label class='item'>
+        24-Hour Format
+        <input id='timeFormat' type='checkbox' class='item-checkbox' checked="">
+      </label>
+      <label class='item'>
+        Larger hour text
+        <input id='largerText' type='checkbox' class='item-checkbox'>
+      </label>
+      <label class='item'>
+        Larger arcs
+        <input id='arcWidth' type='checkbox' class='item-checkbox'>
+      </label>
+      <label class='item'>
+        Monitor battery
+        <input id='monitorBattery' type='checkbox' class='item-checkbox' checked="">
+      </label>
+      <label class='item'>
+        Monitor health
+        <input id='monitorHealth' type='checkbox' class='item-checkbox' checked="">
+      </label>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Health</div>
+    <div class='item-container-content'>
+     <label class="item health">
+       Health text
+       <select id="showHealth" dir='rtl' class="item-select">
+         <option class="item-select-option" value="0">None</option>
+         <option class="item-select-option" value="1">Steps</option>
+         <option class="item-select-option" value="2">Distance</option>
+         <option class="item-select-option" value="3" selected="">Steps and distance</option>
+       </select>
+      </label>
+     <label class="item health">
+       Health arc
+       <select id="showArc" dir='rtl' class="item-select">
+         <option class="item-select-option" value="0">None</option>
+         <option class="item-select-option" value="1" selected="">Daily average %</option>
+         <option class="item-select-option" value="2">Step target %</option>
+       </select>
+      </label>
+     <label class="item health">
+       Distance
+       <select id="distanceUnit" dir='rtl' class="item-select">
+         <option class="item-select-option" value="0" selected="">Miles</option>
+         <option class="item-select-option" value="1">Kilometres</option>
+       </select>
+      </label>
+      <label class="item health">
+        Step target
+        <div class="item-input-wrapper">
+          <input type="text" class="item-input" id="stepTarget" placeholder="Step target">
+        </div>
+      </label>
+      <label class="item health">
+        Health text update frequency
+        <div class="item-input-wrapper">
+          <input type="text" class="item-input" id="healthFreq" placeholder="Update (seconds)">
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Colours</div>
+    <div class='item-container-content'>
+      <label class='item'>
+        Background Colour
+        <input id='backgroundColorPicker' type='text' class='item-color item-color-sunny' value='0xffffff'>
+      </label>
+      <label class='item'>
+        Text Colour
+        <input id='textColorPicker' type='text' class='item-color item-color-sunny' value='0x000000'>
+      </label>
+      <label class='item'>
+        Minute Colour
+        <input id='minuteColorPicker' type='text' class='item-color item-color-sunny' value='#aa0000'>
+      </label>
+      <label class='item'>
+        Battery Colour
+        <input id='batteryColorPicker' type='text' class='item-color item-color-sunny' value='#ffaa00'>
+      </label>
+      <label class='item'>
+        Steps Colour
+        <input id='stepsColorPicker' type='text' class='item-color item-color-sunny' value='#005555'>
+      </label>
+      <label class='item'>
+        Over steps Colour
+        <input id='overstepsColorPicker' type='text' class='item-color item-color-sunny' value='#55aa55'>
+      </label>
+    </div>
+    <div class='item-container-footer'>
+      These settings only change on the watch after you click submit.  Some settings will update on the next minute cycle.
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='button-container'>
+      <input id='submitButton' type='button' class='item-button' value='SUBMIT'>
+    </div>
+  </div>
+
+  <script src='/pebble.imhotek.com/bower_components/pebble-slate/dist/js/slate.js'></script>
+  <script src='./js/main.js'></script>
+</body>
+</html>

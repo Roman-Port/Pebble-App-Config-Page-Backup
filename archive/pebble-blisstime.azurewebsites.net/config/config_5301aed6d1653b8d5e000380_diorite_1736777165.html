@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Bliss Time Config</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='/code.jquery.com/mobile/1.3.2/jquery.css'>
+    <script src='/code.jquery.com//jquery-1.js'></script>
+    <script src='/code.jquery.com/mobile/1.3.2/jquery.js'></script>
+    <style>
+        .ui-header .ui-title { margin-left: 1em; margin-right: 1em; text-overflow: clip; }
+    </style>
+</head>
+<body>
+
+<div data-role="page" id="page1">
+    <div data-theme="a" data-role="header" data-position="fixed">
+        <div class="ui-grid-a">
+            <div class="ui-block-a">
+                <input id="cancel" type="submit" data-theme="c" data-icon="delete" data-iconpos="left" value="Cancel" data-mini="true">
+            </div>
+            <div class="ui-block-b">
+                <input id="save" type="submit" data-theme="b" data-icon="check" data-iconpos="right" value="Save" data-mini="true">
+            </div>
+        </div>
+    </div>
+    <div data-role="content">
+		<div data-role="fieldcontain">
+			<label for="temperature">
+				Temperature
+			</label>
+			<select id="temperature" name="temperature" data-native-menu="true" data-mini="true">
+				<option value="0">Farenheit</option>
+				<option value="1">Celcius</option>
+			</select>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="timeformat">
+				Time Format
+			</label>
+			<select id="timeformat" name="timeformat" data-native-menu="true" data-mini="true">
+				<option value="0">Non-Digital</option>
+				<option value="1">Digital</option>
+				<option value="2">Digital (24 hour)</option>
+			</select>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="timeformat">
+				Buzz
+			</label>
+			<select id="buzzfreq" name="buzzfreq" data-native-menu="true" data-mini="true">
+				<option value="0">Never</option>
+				<option value="1">Every half hour</option>
+				<option value="2">Every hour</option>
+			</select>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="timeformat">
+				Lead Time (minutes)
+			</label>
+
+     		<input type="number" data-clear-btn="false" name="leadtime" id="leadtime" value="2" min="0" max="59">
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="timeformat">
+				From
+			</label>
+			<select id="from" name="from" data-native-menu="true" data-mini="true">
+				<option value="0">Midnight</option>
+				<option value="1">1 am</option>
+				<option value="2">2 am</option>
+				<option value="3">3 am</option>
+				<option value="4">4 am</option>
+				<option value="5">5 am</option>
+				<option value="6">6 am</option>
+				<option value="7">7 am</option>
+				<option value="8">8 am</option>
+				<option value="9">9 am</option>
+				<option value="10">10 am</option>
+				<option value="11">11 am</option>
+				<option value="12">Noon</option>
+				<option value="13">1 pm</option>
+				<option value="14">2 pm</option>
+				<option value="15">3 pm</option>
+				<option value="16">4 pm</option>
+				<option value="17">5 pm</option>
+				<option value="18">6 pm</option>
+				<option value="19">7 pm</option>
+				<option value="20">8 pm</option>
+				<option value="21">9 pm</option>
+				<option value="22">10 pm</option>
+				<option value="23">11 pm</option>
+			</select>
+		</div>
+
+		<div data-role="fieldcontain">
+			<label for="timeformat">
+				To
+			</label>
+			<select id="to" name="to" data-native-menu="true" data-mini="true">
+				<option value="0">Midnight</option>
+				<option value="1">1 am</option>
+				<option value="2">2 am</option>
+				<option value="3">3 am</option>
+				<option value="4">4 am</option>
+				<option value="5">5 am</option>
+				<option value="6">6 am</option>
+				<option value="7">7 am</option>
+				<option value="8">8 am</option>
+				<option value="9">9 am</option>
+				<option value="10">10 am</option>
+				<option value="11">11 am</option>
+				<option value="12">Noon</option>
+				<option value="13">1 pm</option>
+				<option value="14">2 pm</option>
+				<option value="15">3 pm</option>
+				<option value="16">4 pm</option>
+				<option value="17">5 pm</option>
+				<option value="18">6 pm</option>
+				<option value="19">7 pm</option>
+				<option value="20">8 pm</option>
+				<option value="21">9 pm</option>
+				<option value="22">10 pm</option>
+				<option value="23">11 pm</option>
+			</select>
+		</div>
+
+		<div data-role="fieldcontain">
+		 	<fieldset data-role="controlgroup">
+				<legend>On Days</legend>
+				<input type="checkbox" name="sunday" id="sunday" class="custom">
+				<label for="sunday">Sunday</label>
+				<input type="checkbox" name="monday" id="monday" class="custom">
+				<label for="monday">Monday</label>
+				<input type="checkbox" name="tuesday" id="tuesday" class="custom">
+				<label for="tuesday">Tuesday</label>
+				<input type="checkbox" name="wednesday" id="wednesday" class="custom">
+				<label for="wednesday">Wednesday</label>
+				<input type="checkbox" name="thursday" id="thursday" class="custom">
+				<label for="thursday">Thursday</label>
+				<input type="checkbox" name="friday" id="friday" class="custom">
+				<label for="friday">Friday</label>
+				<input type="checkbox" name="saturday" id="saturday" class="custom">
+				<label for="saturday">Saturday</label>
+		    </fieldset>
+		</div>
+	</div>
+</div>
+
+<script>
+function getOptions() {
+	var options = {
+		'temperature': parseInt($("#temperature").val(), 10),
+		'timeformat': parseInt($("#timeformat").val(), 10),
+		'buzzfreq': parseInt($("#buzzfreq").val(), 10),
+		'leadtime': parseInt($("#leadtime").val(), 10),
+		'from': parseInt($("#from").val(), 10),
+		'to': parseInt($("#to").val(), 10),
+		'sunday': $("#sunday").is(':checked') ? 1 : 0,
+		'monday': $("#monday").is(':checked') ? 1 : 0,
+		'tuesday': $("#tuesday").is(':checked') ? 1 : 0,
+		'wednesday': $("#wednesday").is(':checked') ? 1 : 0,
+		'thursday': $("#thursday").is(':checked') ? 1 : 0,
+		'friday': $("#friday").is(':checked') ? 1 : 0,
+		'saturday': $("#saturday").is(':checked') ? 1 : 0
+	}
+	return options;
+}
+
+function onCancelClick() {
+	console.log("Cancel");
+	document.location = "pebblejs://close#";
+}
+
+function onSaveClick() {
+	var json = JSON.stringify(getOptions()),
+		loc = "pebblejs://close#" + encodeURIComponent(json);
+	console.log(json);
+	console.log("Close: " + loc);
+	document.location = loc;
+}
+
+function loadOptions(ops) {
+	opts = JSON.parse(ops);
+	if (!opts) return;
+	$("#temperature").val(opts.temperature).selectmenu("refresh");
+	$("#timeformat").val(opts.timeformat).selectmenu("refresh");
+	$("#buzzfreq").val(opts.buzzfreq).selectmenu("refresh");
+	$("#leadtime").val(opts.leadtime);
+	$("#from").val(opts.from).selectmenu("refresh");
+	$("#to").val(opts.to).selectmenu("refresh");
+	if (opts.sunday) $("#sunday").attr("checked",true).checkboxradio("refresh");
+	if (opts.monday) $("#monday").attr("checked",true).checkboxradio("refresh");
+	if (opts.tuesday) $("#tuesday").attr("checked",true).checkboxradio("refresh");
+	if (opts.wednesday) $("#wednesday").attr("checked",true).checkboxradio("refresh");
+	if (opts.thursday) $("#thursday").attr("checked",true).checkboxradio("refresh");
+	if (opts.friday) $("#friday").attr("checked",true).checkboxradio("refresh");
+	if (opts.saturday) $("#saturday").attr("checked",true).checkboxradio("refresh");
+}
+
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+
+$(document).ready(function() {
+	loadOptions(getParameterByName("options"));
+	$("#cancel").click(onCancelClick);
+	$("#save").click(onSaveClick);
+});
+/*
+{"temperature":"C","timeformat":"D","buzzfreq":1,"leadtime":3,"from":9,"to":17,"sunday":false,"monday":true,"tuesday":true,"wednesday":true,"thursday":true,"friday":true,"saturday":false}
+%7B%22temperature%22%3A%22F%22%2C%22timeformat%22%3A%22L%2…%2C%22thursday%22%3Atrue%2C%22friday%22%3Atrue%2C%22saturday%22%3Afalse%7D
+*/
+</script>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HannaClock Configuration</title>
+    <link rel='stylesheet' type='text/css' href='/rawgit.com/soomtong/HannaClock/master/config/css/slate.css'>
+    <script src='/rawgit.com/soomtong/HannaClock/master/config/js/slate.js'></script>
+    <style>
+        .title {
+            padding: 15px 10px;
+            text-transform: uppercase;
+            font-family: 'PT Sans', sans-serif;
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #888888;
+            text-align: center;
+        }
+        .button-container {
+            margin: 10px auto;
+        }
+    </style>
+</head>
+
+<body>
+<h1 class='title'>Configuration</h1>
+
+<div class='item-container'>
+    <div class='item-container-header'>Feedback</div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Pomodoro Mode
+            <input id='feedback_pomodoro' type='checkbox' class='item-toggle' name="pomodoro">
+        </label>
+    </div>
+    <div class='item-container-footer'>
+        This switch set HannaClock runs to feedback like Pomodoro mode (25 to 5 minute vibration) on next refresh time
+    </div>
+    <div class="item-container-content">
+        <label class="item">
+            <input id="feedback_pomodoro_cycle" type="range" class="item-slider" name="pomodoro-cycle" value="8" min="1" max="16">
+            <div class="item-input-wrapper item-slider-text">
+                <input id="feedback_pomodoro_cycle_value" type="text" class="item-input" name="pomodoro-cycle" value="8">
+            </div>
+        </label>
+    </div>
+    <div class='item-container-footer'>
+        Number of Pomodoro Cycle
+    </div>
+</div>
+
+<div class='item-container'>
+    <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+    </div>
+    <div class="button-container">
+        <a href="/www.paypal.com/cgi-bin/webscr_2025757114.html" target="_blank">
+            <button type='button' class='item-button'>DONATE</button>
+        </a>
+    </div>
+</div>
+</body>
+<script>
+    function getConfigData() {
+        var feedbackPomodoro = document.getElementById('feedback_pomodoro');
+        var feedbackPomodoroCycle = document.getElementById('feedback_pomodoro_cycle');
+
+        var options = {
+            'feedback_pomodoro': feedbackPomodoro.checked,
+            'feedback_pomodoro_cycle': feedbackPomodoroCycle.value
+        };
+
+        // Save for next launch
+        localStorage['feedback_pomodoro'] = options['feedback_pomodoro'];
+        localStorage['feedback_pomodoro_cycle'] = options['feedback_pomodoro_cycle'];
+
+        //console.log('Got options: ' + JSON.stringify(options));
+        return options;
+    }
+
+    function getQueryParam(variable, defaultValue) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if (pair[0] === variable) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        return defaultValue || false;
+    }
+
+    var submitButton = document.getElementById('submit_button');
+
+    submitButton.addEventListener('click', function () {
+        //console.log('Submit');
+
+        // Set the return URL depending on the runtime environment
+        var return_to = getQueryParam('return_to', 'pebblejs://close#');
+        document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+    });
+
+    (function () {
+        var feedbackPomodoro = document.getElementById('feedback_pomodoro');
+        var feedbackPomodoroCycle = document.getElementById('feedback_pomodoro_cycle');
+        var feedbackPomodoroCycleValue = document.getElementById('feedback_pomodoro_cycle_value');
+
+        // Load any previously saved configuration, if available
+        if (localStorage['feedback_pomodoro']) {
+            feedbackPomodoro.checked = JSON.parse(localStorage['feedback_pomodoro']);
+            feedbackPomodoroCycle.value = localStorage['feedback_pomodoro_cycle'];
+            feedbackPomodoroCycleValue.value = localStorage['feedback_pomodoro_cycle'];
+        }
+    })();
+</script>
+</html>

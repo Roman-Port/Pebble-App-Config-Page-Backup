@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>CircaText Einstellungen</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <h1>CircaText Einstellungen</h1>
+    <h2>Text Varianten</h2>
+    Folgende Varianten stehen zur Verfügung:
+    <dl>
+      <dt>Normal</dt><dd>"fünf vor viertel drei"</dd>
+      <dt>Kurz</dt><dd>"zehn nach zwei"</dd>
+    </dl>
+
+    <!-- selectedVersion dropdown -->
+    <select disabled="" name="selectedVersion" id="selectedVersion" style="color: #000; width: 100%;">
+      <option value="Regular">Normal</option>
+      <option value="Short">Kurz</option>
+    </select>
+      
+    <button disabled="" type="submit" id="b-submit" style="width: 100%;">Submit</button>
+
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script>
+      // Used to generate a tuple of the values and returns it.
+      function saveOptions() {
+        var options = {
+          'selectedVersion': $("#selectedVersion").val()
+        }
+        return options;
+      }
+ 
+      $(document).ready(function() {
+        // Read the selectedVersion value from the URL.
+        var priorSearch = getURLVariable('selectedVersion');
+        priorSearch = decodeURI(priorSearch);
+
+        // If priorSearch was set make sure that the selectedVersion dropdown is properly
+        // populated and set.
+        if (priorSearch) {
+          $('#selectedVersion option').removeAttr('selected');
+          $('#selectedVersion').val(priorSearch).change();
+        }
+
+        // Install handler for submit button. 
+        $("#b-submit").click(function() {
+          // When the submit button is pressed, call the pebblejs URL scheme with the
+          // JSON returned by saveOptions().
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          document.location = location;
+        });
+        $("#b-submit").prop('disabled', false);
+        $('#selectedVersion').prop('disabled', false);
+      });
+
+      // This fetches a value from and URL.
+      function getURLVariable(name) {
+        // First escape some stuff in the name.
+        name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+        // Use regex to fetch key,value pair from URL.
+        var regexS = "[\\?&]"+name+"=([^&#]*)",
+            regex = new RegExp(regexS),
+            results = regex.exec(window.location.href);
+        // Return value (from results[1]) or empty string.
+        if (results == null) return "";
+        else return results[1];
+      }
+    </script>
+  </body>
+</html>

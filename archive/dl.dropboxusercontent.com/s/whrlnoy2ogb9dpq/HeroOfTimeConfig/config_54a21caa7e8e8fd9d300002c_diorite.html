@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Hero of Time Config</title>
+	</head>
+	<body>
+		<div align="center">
+		<font face="arial">
+			<h1>Hero of Time<br>Settings</h1>
+			
+			<p>Invert colors:
+			<select id="invert_colors" style="height:30px; width:75px">
+				<option value="off">Off</option>
+				<option value="on">On</option>
+			</select>
+			</p>
+			
+			<p>
+			<button id="save_button" style="height:50px; width:150px">Save</button>
+			</p>
+			
+			<script>
+				function saveOptions() {
+					var invertSelect = document.getElementById("invert_colors");
+					
+					var options = {
+						"invert": invertSelect.options[invertSelect.selectedIndex].value
+					}
+					
+					return options;
+				}
+				
+				var submitButton = document.getElementById("save_button");
+				submitButton.addEventListener("click",
+					function() {
+						console.log("Submit");
+						
+						var options = saveOptions();
+						var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+						
+						document.location = location;
+					},
+					false);
+			</script>
+		</font>
+		</div>
+	</body>
+</html>

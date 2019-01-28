@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Stymple Configuration</title>
+		<link rel='stylesheet' type='text/css' href='/cdn.rawgit.com/Obsouleet/PWatch/master/config/css/slate.css'>
+  
+		<script src='/cdn.rawgit.com/Obsouleet/PWatch/master/config/js/slate.js'></script>
+
+		<style>
+		  .title {
+			padding: 15px 10px 0px 10px;
+			text-transform: uppercase;
+			font-family: 'PT Sans', sans-serif;
+			font-size: 1.2em;
+			font-weight: 500;
+			color: #888888;
+			text-align: center;
+		  }
+		</style>
+	</head>
+	<body>
+		<div class='item-container'>
+			<div class='item-container-content'>
+				<label class='item'>
+					White Background
+					<input id='inverted' type='checkbox' class='item-checkbox'>
+				</label>
+				<label class='item'>
+					12 Hour Format
+					<input id='twelvehr' type='checkbox' class='item-checkbox'>
+				</label>  
+				<label class='item'>
+					Show Date
+					<input id='showdate' type='checkbox' class='item-checkbox'>
+				</label>
+				<label class='item'>
+					Vibrate on BT changes
+					<input id='BTvibe' type='checkbox' class='item-checkbox'>
+				</label>
+        <label class='item'>
+					Show steps (only Pebble2)
+					<input id='stepz' type='checkbox' class='item-checkbox'>
+				</label>
+			</div>
+		</div>  
+			
+<!--		<div class='item-container-footer'>
+			<br>
+		</div>
+-->
+		<div class='item-container'>
+			<div class='button-container'>
+				<input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+			</div>
+		</div>
+		
+	<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+	var sc_project=10640939; 
+	var sc_invisible=1; 
+	var sc_security="a79e6e0e"; 
+	var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+	document.write("<sc"+"ript type='text/javascript' src='" + scJsHost+ "statcounter.com/counter/counter.js'></"+"script>");
+</script>
+<noscript>
+<div class="statcounter">
+	<a title="hits counter" href="/statcounter.com//.html" target="_blank">
+	<img class="statcounter" src="/c.statcounter.com/10640939/0/a79e6e0e/1/.gif" alt="hits counter">
+	</a></div>
+</noscript>
+<!-- End of StatCounter Code for Default Guide -->
+		<script>
+
+			
+			function getConfigData() {
+				//    var backgroundColorPicker = document.getElementById('background_color_picker');
+				var inverted = document.getElementById('inverted');
+				if(inverted.checked){one=1;} else {one=0;}
+				if(twelvehr.checked){two=1;} else {two=0;}
+				if(showdate.checked){three=1;} else {three=0;}
+				if(BTvibe.checked){four=1;} else {four=0;}
+   			if(stepz.checked){five=1;} else {five=0;}
+				
+				var options = {
+
+				  'inverted': one,
+				  'twelvehr': two,
+				  'showdate': three,
+				  'BTvibe': four,
+          'stepz': five
+				  };
+			 
+				// Save for next launch
+				localStorage['inverted'] = options['inverted'];
+				localStorage['twelvehr'] = options['twelvehr'];
+				localStorage['showdate'] = options['showdate'];
+				localStorage['BTvibe'] = options['BTvibe'];
+        localStorage['stepz'] = options['stepz'];
+
+				console.log('Got options: ' + JSON.stringify(options));
+				return options;
+			}
+			  
+			function getQueryParam(variable, defaultValue) {
+				var query = location.search.substring(1);
+				var vars = query.split('&');
+				for (var i = 0; i < vars.length; i++) {
+					var pair = vars[i].split('=');
+					if (pair[0] === variable) {
+						return decodeURIComponent(pair[1]);
+					}
+				}
+				return defaultValue || false;
+			}
+			 
+			var submitButton = document.getElementById('submit_button');
+			submitButton.addEventListener('click', function() {
+				console.log('Submit');
+				// Set the return URL depending on the runtime environment
+				var return_to = getQueryParam('return_to', 'pebblejs://close#');
+				document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+			});
+			
+			(function() {
+				// var backgroundColorPicker = document.getElementById('background_color_picker');
+				var inverted = document.getElementById('inverted');
+				// Load any previously saved configuration, if available
+				if(localStorage['inverted']) {
+					inverted.checked = JSON.parse(localStorage['inverted']);
+					twelvehr.checked = JSON.parse(localStorage['twelvehr']);
+					showdate.checked = JSON.parse(localStorage['showdate']);
+					BTvibe.checked = JSON.parse(localStorage['BTvibe']);
+          stepz.checked = JSON.parse(localStorage['stepz']);          
+				}
+			})();
+		</script>
+	</body>
+</html>
+
+

@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.vhn.vn/blog/xmlrpc.php">
+
+<title>0CTF 2016 &#8211; VHNVN&#039;s blog</title>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//ajax.googleapis.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; Feed" href="https://www.vhn.vn/blog/index.php/feed/" />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; Comments Feed" href="https://www.vhn.vn/blog/index.php/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; 0CTF 2016 Comments Feed" href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.vhn.vn\/blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.9"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='jquery-ui-css'  href='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css?ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-bootstrap-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/css/bootstrap/bootstrap.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-style-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/style.css?ver=4.9.9' type='text/css' media='all' />
+<style id='oria-style-inline-css' type='text/css'>
+body, .widget a { color:#717376}
+.site-title a, .site-title a:hover { color:#fff}
+.site-description { color:#bbb}
+.site-logo { max-width:200px; }
+.site-branding { padding-top:80px;padding-bottom:80px; }
+.site-title { font-size:62px; }
+.site-description { font-size:18px; }
+
+</style>
+<link rel='stylesheet' id='oria-body-fonts-css'  href='//fonts.googleapis.com/css?family=Lato%3A400%2C700%2C400italic%2C700italic&#038;ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-headings-fonts-css'  href='//fonts.googleapis.com/css?family=Oswald%3A300%2C700&#038;ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-fontawesome-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/fonts/font-awesome.min.css?ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack-widget-social-icons-styles-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/modules/widgets/social-icons/social-icons.css?ver=20170506' type='text/css' media='all' />
+<link rel='stylesheet' id='enlighter-local-css'  href='https://www.vhn.vn/blog/wp-content/plugins/enlighter/resources/EnlighterJS.min.css?ver=3.6' type='text/css' media='all' />
+<link rel='stylesheet' id='enlighter-webfonts-css'  href='//fonts.googleapis.com/css?family=Source+Code+Pro%3Aregular%2C700&#038;ver=3.6' type='text/css' media='all' />
+<link rel='stylesheet' id='social-logos-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/css/jetpack.css?ver=6.1.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/related-posts/related-posts.min.js?ver=20150408'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/jquery.fitvids.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/jquery.slicknav.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/parallax.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/scripts.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/imagesloaded.min.js?ver=3.2.0'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/masonry.min.js?ver=3.3.2'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/imagesloaded.pkgd.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/masonry-init.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/owl.carousel.min.js?ver=1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sliderOptions = {"slideshowspeed":"4000"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/slider-init.js?ver=1'></script>
+<link rel='https://api.w.org/' href='https://www.vhn.vn/blog/index.php/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.vhn.vn/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.vhn.vn/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='BKPCTF 2016' href='https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/' />
+<link rel='next' title='Vue single file component and typescript' href='https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/' />
+<link rel="canonical" href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/" />
+<link rel='shortlink' href='https://wp.me/s6MMNs-0ctf' />
+<link rel="alternate" type="application/json+oembed" href="https://www.vhn.vn/blog/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vhn.vn%2Fblog%2Findex.php%2F2016%2F03%2F17%2F0ctf%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.vhn.vn/blog/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vhn.vn%2Fblog%2Findex.php%2F2016%2F03%2F17%2F0ctf%2F&#038;format=xml" />
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'/>
+<link rel='dns-prefetch' href='//i0.wp.com'/>
+<link rel='dns-prefetch' href='//i1.wp.com'/>
+<link rel='dns-prefetch' href='//i2.wp.com'/>
+<style type='text/css'>img#wpstats{display:none}</style><!--[if lt IE 9]>
+<script src="https://www.vhn.vn/blog/wp-content/themes/oria/js/html5shiv.js"></script>
+<![endif]-->
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<style type="text/css">
+/* <![CDATA[ */
+img.latex { vertical-align: middle; border: none; }
+/* ]]> */
+</style>
+		<style type="text/css">
+			.site-header {
+				background-image: url(https://www.vhn.vn/blog/wp-content/themes/oria/images/header.jpg);
+			}
+		</style>
+		
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="0CTF 2016" />
+<meta property="og:url" content="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/" />
+<meta property="og:description" content="&nbsp;" />
+<meta property="article:published_time" content="2016-03-16T17:41:00+00:00" />
+<meta property="article:modified_time" content="2016-03-17T17:35:47+00:00" />
+<meta property="og:site_name" content="VHNVN&#039;s blog" />
+<meta property="og:image" content="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-18-at-12.39.36-AM.png?fit=586%2C444&amp;ssl=1" />
+<meta property="og:image:width" content="586" />
+<meta property="og:image:height" content="444" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:text:title" content="0CTF 2016" />
+<meta name="twitter:image" content="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-18-at-12.39.36-AM.png?fit=586%2C444&#038;ssl=1&#038;w=640" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- End Jetpack Open Graph Tags -->
+</head>
+
+<body class="post-template-default single single-post postid-87 single-format-standard">
+
+<div class="preloader"><div id="preloader-inner"><div class="preload">&nbsp;</div></div></div>
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<div class="top-bar clearfix no-toggle">
+					
+					</div>
+
+		<div class="container">
+			<div class="site-branding">
+				<h1 class="site-title"><a href="https://www.vhn.vn/blog/" rel="home">VHNVN&#039;s blog</a></h1><h2 class="site-description">Smile with the life, it will smile with you!</h2>			</div><!-- .site-branding -->
+		</div>
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<div id="primary-menu" class="menu clearfix"></div>
+		</nav><!-- #site-navigation -->
+		<nav class="mobile-nav"></nav>
+
+	</header><!-- #masthead -->
+	
+	
+	<div id="content" class="site-content clearfix">
+				<div class="container content-wrapper">
+		
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-87" class="post-87 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized">
+
+			<div class="single-thumb">
+			<img width="586" height="444" src="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-18-at-12.39.36-AM.png?fit=586%2C444&amp;ssl=1" class="attachment-oria-large-thumb size-oria-large-thumb wp-post-image" alt="" srcset="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-18-at-12.39.36-AM.png?w=586&amp;ssl=1 586w, https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-18-at-12.39.36-AM.png?resize=300%2C227&amp;ssl=1 300w, https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-18-at-12.39.36-AM.png?resize=520%2C394&amp;ssl=1 520w" sizes="(max-width: 586px) 100vw, 586px" data-attachment-id="112" data-permalink="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/screen-shot-2016-03-18-at-12-39-36-am/" data-orig-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-18-at-12.39.36-AM.png?fit=586%2C444&amp;ssl=1" data-orig-size="586,444" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="Screen Shot 2016-03-18 at 12.39.36 AM" data-image-description="" data-medium-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-18-at-12.39.36-AM.png?fit=300%2C227&amp;ssl=1" data-large-file="https://i0.wp.com/www.vhn.vn/blog/wp-content/uploads/2016/03/Screen-Shot-2016-03-18-at-12.39.36-AM.png?fit=586%2C444&amp;ssl=1" />		</div>
+		
+	<header class="entry-header">
+		<h1 class="entry-title">0CTF 2016</h1>
+				<div class="entry-meta">
+			<span class="posted-on"><a href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/" rel="bookmark"><time class="entry-date published" datetime="2016-03-17T00:41:00+00:00">March 17, 2016</time><time class="updated" datetime="2016-03-18T00:35:47+00:00">March 18, 2016</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="https://www.vhn.vn/blog/index.php/author/vanhoavn/">vanhoavn</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>rand_2 - 2 pts</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<div class="su-quote su-quote-style-default"><div class="su-quote-inner su-clearfix">Do you believe it, can you recieve it?</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="php" data-enlighter-theme="godzilla">&lt;?php
+include('config.php');
+session_start();
+if($_SESSION['time'] &amp;&amp; time() - $_SESSION['time'] &gt; 60) {
+  session_destroy();
+  die('timeout');
+} else {
+  $_SESSION['time'] = time();
+}
+
+echo rand();
+
+if (isset($_GET['go'])) {
+  $_SESSION['rand'] = array();
+  $i = 5;
+  $d = '';
+  while($i--){
+    $r = (string)rand();
+                $_SESSION['rand'][] = $r;
+                $d .= $r;
+  }
+  echo md5($d);
+} else if (isset($_GET['check'])) {
+  if ($_GET['check'] === $_SESSION['rand']) {
+    echo $flag;
+  } else {
+    echo 'die';
+    session_destroy();
+  }
+} else {
+  show_source(__FILE__);
+}
+?&gt;</pre>
+<div class="su-divider su-divider-style-default" style="margin:15px 0;border-width:3px;border-color:#999999"></div></div></div>
+<p>One more PRNG problem. PHP normally use glibc&#8217;s random function as its underlying implementation, which is <code class="EnlighterJSRAW" data-enlighter-language="null">x[n]=(x[n-3]+x[n-31])&gt;&gt;1</code>. My solution was generating all 2^32 possible cases and confirm with the md5 value. First part of the solution was the cache generator:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;set&gt;
+#include &lt;queue&gt;
+#include &lt;algorithm&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdio.h&gt;
+using namespace std;
+
+namespace vhrand {
+  static long randtbl[DEG_3 + 1] = {
+    TYPE_3,
+    0x991539b1, 0x16a5bce3, 0x6774a4cd, 0x3e01511e, 0x4e508aaa, 0x61048c05,
+    0xf5500617, 0x846b7115, 0x6a19892c, 0x896a97af, 0xdb48f936, 0x14898454,
+    0x37ffd106, 0xb58bff9c, 0x59e17104, 0xcf918a49, 0x09378c83, 0x52c7a471,
+    0x8d293ea9, 0x1f4fc301, 0xc3db71be, 0x39b44e1c, 0xf8a44ef9, 0x4c8b80b1,
+    0x19edc328, 0x87bf4bdd, 0xc9b240e5, 0xe9ee4b1b, 0x4382aee7, 0x535b6b41,
+    0xf3bec5da
+  };
+
+  static long *fptr = &amp;randtbl[SEP_3 + 1];
+  static long *rptr = &amp;randtbl[1];
+
+  static long *state = &amp;randtbl[1];
+  static long rand_type = TYPE_3;
+  static long rand_deg = DEG_3;
+  static long rand_sep = SEP_3;
+  static long *end_ptr = &amp;randtbl[DEG_3 + 1];
+
+  long random();
+
+  //
+  // Compute x = (7^5 * x) mod (2^31 - 1)
+  // wihout overflowing 31 bits:
+  //      (2^31 - 1) = 127773 * (7^5) + 2836
+  // From "Random number generators: good ones are hard to find",
+  // Park and Miller, Communications of the ACM, vol. 31, no. 10,
+  // October 1988, p. 1195.
+  //
+
+  __inline long good_rand(long x) {
+    long hi, lo;
+
+    // Can't be initialized with 0, so use another value.
+    if (x == 0) x = 123459876;
+    hi = x / 127773;
+    lo = x % 127773;
+    x = 16807 * lo - 2836 * hi;
+    if (x &lt; 0) x += 0x7fffffff;
+    return x;
+  }
+  void srandom(unsigned long x) {
+    long i, lim;
+
+    state[0] = x;
+    if (rand_type == TYPE_0) {
+      lim = NSHUFF;
+    } else {
+      for (i = 1; i &lt; rand_deg; i++) state[i] = good_rand(state[i - 1]);
+      fptr = &amp;state[rand_sep];
+      rptr = &amp;state[0];
+      lim = 10 * rand_deg;
+    }
+    
+    for (i = 0; i &lt; lim; i++) random();
+  }
+
+  long random() {
+    long i;
+    long *f, *r;
+
+    if (rand_type == TYPE_0) {
+      i = state[0];
+      state[0] = i = (good_rand(i)) &amp; 0x7fffffff;
+    } else {
+      f = fptr; r = rptr;
+      *f += *r;
+      i = (*f &gt;&gt; 1) &amp; 0x7fffffff; // Chucking least random bit
+      if (++f &gt;= end_ptr) {
+        f = state;
+        ++r;
+      } else if (++r &gt;= end_ptr) {
+        r = state;
+      }
+
+      fptr = f; rptr = r;
+    }
+
+    return i;
+  }
+};
+
+int ctop[2148];
+int cnext[10000000];
+long pendingValues[10000000][2];
+long pendingCount = 0;
+
+void processPending(){
+  printf("Flushing %ld\n",pendingCount);
+  char filename[100];
+  for(int i=0;i&lt;=2147;i++){
+    FILE* h = NULL;
+    for(int j=ctop[i];j&gt;=0;j=cnext[j]){
+      if(pendingValues[j][1]/1000000==i){
+        sprintf(filename, "caches/%d.txt", i);
+        if(h==NULL){
+          h = fopen(filename, "a");
+        }
+        fprintf(h, "%ld %ld\n", pendingValues[j][1], pendingValues[j][0]);
+      }else{
+        printf("ERRROR!!!!!");
+        exit(-1);
+      }
+    }
+    if(h!=NULL) fclose(h);
+  }
+  memset(ctop, -1, sizeof(ctop));
+  pendingCount = 0;
+}
+
+int main(int argc, char *argv[]) {
+  //max=2147483647
+  pendingCount = 0;
+  memset(ctop, -1, sizeof(ctop));
+  for(long i=0;i&lt;2147483647l;i++){
+    if(i%1000000==0)
+      fprintf(stderr,"Generated up to %ld\n",i);
+    vhrand::srandom(i);
+    long val = vhrand::random();
+    long bucket = val/1000000;
+    pendingValues[pendingCount][0]=i;
+    pendingValues[pendingCount][1]=val;
+    cnext[pendingCount]=ctop[bucket];
+    ctop[bucket]=pendingCount;
+    pendingCount++;
+    if(pendingCount==10000000) processPending();
+  }
+  processPending();
+  return 0;
+}</pre>
+<p>While the cache was generating, i ran a script to solve the problem and just left it running tothether with above C++ script:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="php">&lt;?php
+for(;;){
+  $s=N("http://202.120.7.202:8888/?go=1");
+  preg_match('@Set-Cookie: (.*?); path=\/@', $s, $m);
+  $cookie = $m[1];
+  $param = end((explode("\n", $s)));
+  $md5 = substr($param, -32);
+  $param = intval(substr($param, 0, -32));
+  $bucket = floor($param/1000000);
+  echo "Param: $param ($bucket) | MD5 : $md5\n";
+  if(file_exists($fn = "caches/$bucket.txt")){
+    $h = fopen($fn, "r");
+    while(!feof($h)){
+      fscanf($h, "%d%d", $n, $seed);
+      if($n==$param){
+        srand($seed);
+        $rr = rand();
+        echo "Trying seed=$seed : $rr\n";
+        $url = "http://202.120.7.202:8888/?_=1";
+        $d = "";
+        $i=5;
+        while($i--){
+          $r = (string)rand();
+          $url.="&amp;check[]=$r";
+          $d.=$r;
+        }
+        if($md5 == md5($d)){
+          echo "Finally... ".$url."\n";
+          echo N($url,$cookie);
+          exit;
+        } else {
+          echo "MD5 must be $md5  --  ".md5($d)."\n";
+        }
+      }
+    }
+  }
+  N("http://202.120.7.202:8888/?check=1");
+}
+
+function N($url,$cookie=""){
+  $ch = curl_init();
+  curl_setopt_array($ch, [
+    CURLOPT_URL =&gt; $url,
+    CURLOPT_SSL_VERIFYPEER =&gt; 0,
+    CURLOPT_SSL_VERIFYHOST =&gt; 0,
+    CURLOPT_RETURNTRANSFER =&gt; 1,
+    CURLOPT_POST =&gt; 0,
+    CURLOPT_HEADER =&gt; 1,
+    CURLOPT_COOKIE =&gt; $cookie,
+  ]);
+  $s = curl_exec($ch);
+  curl_close($ch);
+  return $s;
+}
+
+?&gt;</pre>
+<p>The flag printed out after the cache had generated about 500mils items. After sometime i noticed how stupid i was when forgot the Keep-Alive header, yes it has been a long time&#8230;</p>
+<hr />
+<p>&nbsp;</p>
+</div></div>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>rsa - 2 pts</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<div class="su-quote su-quote-style-default"><div class="su-quote-inner su-clearfix">It seems <a href="http://dl.0ops.net/rsa.zip">easy</a>, right?<br />
+Tip: <code>openssl rsautl -encrypt -in FLAG -inkey public.pem -pubin -out flag.enc</code></p>
+</div></div>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight" data-enlighter-highlight="1,6" data-enlighter-linenumbers="false">$ cat public.pem
+-----BEGIN PUBLIC KEY-----
+MEEwDQYJKoZIhvcNAQEBBQADMAAwLQIoAsqpwJ3BBh5Qflt/Od3jRV/P4Seixpti
+HIP9nT0+qjqsQhR81xiMUwIBAw==
+-----END PUBLIC KEY-----
+$ hexdump -C flag.enc
+00000000  00 4c 41 62 a0 7a 01 11  b8 34 4c 68 b1 18 bd 05  |.LAb.z...4Lh....|
+00000010  4a cb c3 8c 31 31 b6 a8  99 9c 91 d1 b3 e2 d8 2d  |J...11.........-|
+00000020  c7 c3 a1 e1 03 4f d6 04                           |.....O..|
+00000028</pre>
+<p>The pem file give us n=23292710978670380403641273270002884747060006568046290011918413375473934024039715180540887338067, e=3. Msieve reported 3 factors of n after about 2 hours:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">a = 26440615366395242196516853423447
+b = 27038194053540661979045656526063
+c = 32581479300404876772405716877547
+</pre>
+<p>It was not that easy, (a-1)*(b-1)*(c-1) is divisible by e, so d does not exists in this system. In this problem we can calculate d&#8217; which&#8217;s</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="no-highlight">cipher^d' = (plain^e)^d' = plain^27 (mod n)</pre>
+<p>Then find all 27th-root of n and check one by one. Final solution&#8217;s below:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">from sage.all import *
+
+n = 23292710978670380403641273270002884747060006568046290011918413375473934024039715180540887338067
+
+a = 26440615366395242196516853423447
+b = 27038194053540661979045656526063
+c = 32581479300404876772405716877547
+
+e = 3
+
+phi = (a-1)*(b-1)*(c-1)
+
+ne = 0
+while phi % (e**(ne+1)) == 0:
+  ne += 1
+print "ne = ", ne
+d = long(1/Mod(e,phi/e**ne))
+print "d = ", d
+
+with open("flag.enc","rb") as f:
+  cipher = f.read(100)
+  
+cipher = int(cipher.encode("hex"),16)
+
+plain_pow_ene = pow(cipher,d*e**ne,n)
+
+print plain_pow_ene
+
+cases = []
+for p in [a,b,c]:
+  cases.append(Mod(plain_pow_ene%p,p).nth_root(e**ne,all=True))
+
+print "Start solving"
+for ar in map(long,Mod(plain_pow_ene%a,a).nth_root(e**ne,all=True)):
+  for br in map(long,Mod(plain_pow_ene%b,b).nth_root(e**ne,all=True)):
+    for cr in map(long,Mod(plain_pow_ene%c,c).nth_root(e**ne,all=True)):
+      x = crt([ar,br,cr],[a,b,c])
+      print hex(x)
+      s = hex(x)
+      if len(s)%2==1:
+        s = "0" + s
+      print s.decode("hex")</pre>
+<p>The flag is:</p>
+<pre class="EnlighterJSRAW" data-enlighter-theme="twilight" data-enlighter-linenumbers="false">0ctf{HahA!Thi5_1s_n0T_rSa~}</pre>
+<p>Yes yes, i know, it was not RSA, of cause&#8230;</p>
+<hr />
+<p>&nbsp;</p>
+</div></div>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>people_square - 6 pts</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<div class="su-quote su-quote-style-default"><div class="su-quote-inner su-clearfix">
+<p>People&#8217;s Square (A.K.A. shenmhin guangshan in Shanghai Dialect) is a large public square in the Huangpu District of Shanghai, China.<br />
+We know <code>Talent Yang is the king of People's Square</code>. Now he provides you a strange guessing game, and he also demonstrates his talent by giving you the result of how he tackles this task. Can you show your talent to decrypt the secret?</p>
+</div></div>
+<p>After a while reading the binaries with IDA, it&#8217;s confirmed that this&#8217;s a problem about recovering a cipher text with known plain-cipher pairs on reduced version of AES (4 rounds). The given binary&#8217;s decompiled code looks like below:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp" data-enlighter-theme="git" data-enlighter-highlight="1,10,19,38">int __fastcall load_flag(void *a1)
+{
+ FILE *v1; // ST10_8@1
+
+ v1 = fopen("flag.txt", "r");
+ fread(a1, 1uLL, 0x20uLL, v1);
+ return fclose(v1);
+}
+
+int __fastcall load_key(void *a1)
+{
+ FILE *v1; // ST10_8@1
+
+ v1 = fopen("key.txt", "rb");
+ fread(a1, 1uLL, 0x10uLL, v1);
+ return fclose(v1);
+}
+
+__m128i *__fastcall GenerateSamples(__int64 a1, __int64 a2, __int64 a3, int a4, int a5)
+{
+ __int64 v5; // ST28_8@1
+ int v6; // ST20_4@1
+ int v7; // ST18_4@1
+
+ v5 = a3;
+ v6 = a4;
+ v7 = a5;
+ memset((void *)a2, 0, 0x10uLL);
+ memset((void *)v5, 1, 0x10uLL);
+ *(_DWORD *)(a2 + 8) = v6;
+ *(_DWORD *)(v5 + 8) = v6;
+ *(_DWORD *)(a2 + 12) = v7;
+ *(_DWORD *)(v5 + 12) = v7;
+ AESEncrypt(a2, a1);
+ return AESEncrypt(v5, a1);
+}
+
+__int64 main()
+{
+  unsigned __int8 v0; // ST3B_1@6
+  __int64 result; // rax@12
+  int v2; // [sp+3Ch] [bp-174h]@3
+  unsigned __int64 i; // [sp+40h] [bp-170h]@1
+  int v4; // [sp+48h] [bp-168h]@1
+  __int64 v5; // [sp+50h] [bp-160h]@1
+  char sample_1; // [sp+60h] [bp-150h]@3
+  char sample_0; // [sp+70h] [bp-140h]@3
+  char aes_key; // [sp+80h] [bp-130h]@1
+  char key_str; // [sp+170h] [bp-40h]@1
+  char v10; // [sp+180h] [bp-30h]@1
+  __int64 v11; // [sp+190h] [bp-20h]@11
+  __int64 v12; // [sp+1A8h] [bp-8h]@1
+
+  v12 = *__stack_chk_guard_ptr;
+  memset(&amp;v10, 0, 0x20uLL);
+  load_flag(&amp;v10);
+  memset(&amp;key_str, 0, 0x10uLL);
+  load_key(&amp;key_str);
+  AESKeyExpand((__int64)&amp;key_str, (__int64)&amp;aes_key);
+  v5 = 0LL;
+  v4 = time(0LL);
+  for ( i = 0LL; i &lt; 0x400; ++i )
+  {
+    GenerateSamples((__int64)&amp;aes_key, (__int64)&amp;sample_0, (__int64)&amp;sample_1, i, v4);
+    v2 = rand() % 2;
+    if ( v2 )
+      print_hex(&amp;sample_1, 16LL);
+    else
+      print_hex(&amp;sample_0, 16LL);
+    puts("0 or 1?");
+    v0 = getchar() - 48;
+    puts("ciphertext for 0 is: ");
+    print_hex(&amp;sample_0, 16LL);
+    puts("ciphertext for 1 is: ");
+    print_hex(&amp;sample_1, 16LL);
+    if ( v0 == v2 )
+    {
+      ++v5;
+      puts("Correct!");
+    }
+    else
+    {
+      puts("Incorrect!");
+    }
+  }
+  if ( 1024 == v5 )
+  {
+    puts("Now I will give you the flag:");
+    AESEncrypt((__int64)&amp;v10, (__int64)&amp;aes_key);
+    AESEncrypt((__int64)&amp;v11, (__int64)&amp;aes_key);
+    print_hex(&amp;v10, 32LL);
+  }
+  result = *__stack_chk_guard_ptr;
+  if ( *__stack_chk_guard_ptr == v12 )
+    result = 0LL;
+  return result;
+}
+</pre>
+<p>output.txt from problem statement also gave a session that we need to decrypt to obtain flag:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="diff" data-enlighter-theme="git">4d 7c 5d b0 80 45 a2 13 f6 61 0d ca e2 c1 75 9f 
+0 or 1?
+ciphertext for 0 is: 
+d2 e2 57 9e ee 1f e0 dd 39 45 8d 5a 3f 4e 97 65 
+ciphertext for 1 is: 
+4d 7c 5d b0 80 45 a2 13 f6 61 0d ca e2 c1 75 9f 
+Correct!
+1d dc d4 fb e0 4a 33 c2 a8 3f 24 a6 d2 6d 86 39 
+0 or 1?
+ciphertext for 0 is: 
+bb a3 80 8c 66 94 c5 b9 c7 2b 18 ad 8d 9a 1f 78 
+ciphertext for 1 is: 
+1d dc d4 fb e0 4a 33 c2 a8 3f 24 a6 d2 6d 86 39 
+Correct!
+....
+Now I will give you the flag:
+af 93 ce ae 1f 1e 7a 13 26 d6 05 51 97 3c 46 1b c9 b1 56 9c 2c df d5 5a c6 ca 33 46 31 fb 19 73 
+</pre>
+<p>So we have 1024 known cipher texts, in which there is 512 plain text in the format of <code class="EnlighterJSRAW" data-enlighter-language="null">00 00 00 00 00 00 00 00 xx xx xx xx yy yy yy yy</code> where <strong>xxxxxxxx</strong> is an integer from with values in range [0, 1024) and <strong>yyyyyyyy</strong> is a unix timestamp, and the rest is in the format of <code class="EnlighterJSRAW" data-enlighter-language="null">01 01 01 01 01 01 01 01 xx xx xx xx yy yy yy yy</code>.</p>
+<p>After some time spending for research on AES, i found an interesting slide here: <a href="http://www.di.ens.fr/~fouque/pub/fse13b.pdf">http://www.di.ens.fr/~fouque/pub/fse13b.pdf</a>.</p>
+<p>So the final solution is solving the 4-th subkey of given AES session byte by byte, trying all 256 values for each byte of the subkey, perform a single aes decryption step each and xor all the values, the corresponding bytes in the received values will have xor-sum of zero with wrong probality of 2<sup>-8</sup>. The implementation for subkey recovery looks like below:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">def recover_subkey():
+  messages = open("output.txt").read(10*1024*1024).split("\r\n")[:-2]
+  key0 = messages[3::7]
+  key1 = messages[5::7]
+  print len(messages), len(key0), len(key1)
+  key0 = map(parse_hex, key0)
+  key1 = map(parse_hex, key1)
+  
+  sol = [0]*16
+  for ci in range(16):
+    found = False
+    for c in range(256):
+      sol[ci]=c
+      valid = True
+      for i in range(4):
+        sxor3 = "\x00"*16
+        for j in range(256):
+          sxor3 = str_xor(sxor3, decryptOneRound(key0[256*i+j], "".join(map(chr,sol))))
+        if sxor3[ci]!="\x00":
+          valid = False
+          break
+      if valid:
+        print "Found byte ", c
+        found = True
+        break
+    assert found
+  
+  print "Subkey = ", "".join(map(chr,sol)).encode("hex")
+  for i in range(4):
+    sxor3 = "\x00"*16
+    for j in range(256):
+      sxor3 = str_xor(sxor3, backround(key0[256*i+j], "".join(map(chr,sol))))
+    print "Test = ", sxor3.encode("hex")
+</pre>
+<pre class="EnlighterJSRAW" data-enlighter-theme="twilight">f6f601bb7b6adf60d366c0a78724a66b</pre>
+<p>Now we can recover the original key:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="python">def unexpandKey(self, size, expandedKeySize, finalBlock):
+  expandedKey = [0] * expandedKeySize
+  for j in range(1,1+size):
+    expandedKey[-j] = finalBlock[-j]
+  currentSize = expandedKeySize - 4
+  rconIteration = expandedKeySize/size
+  rdi = 0
+  while currentSize &gt;= size:
+    t = expandedKey[currentSize-4:currentSize]
+    special = False
+    if (currentSize-rdi) % size == 0:
+      rconIteration -= 1
+      t = self.core(t, rconIteration)
+    for m in range(4):
+      expandedKey[currentSize-size+m] = expandedKey[currentSize+m] ^ t[m]
+    currentSize -= 4
+  return expandedKey[:size]
+</pre>
+<pre class="EnlighterJSRAW" data-enlighter-theme="twilight">174a221440356475dce3a037a317ed4b</pre>
+<p>Finally it&#8217;s so easily to decrypt the flag:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="no-highlight" data-enlighter-theme="twilight" data-enlighter-linenumbers="false">0CTF{~R0MAN_l0VES_B10CK_C1PHER~}</pre>
+<hr />
+<p>&nbsp;</p>
+</div></div>
+<div class="su-spoiler su-spoiler-style-default su-spoiler-icon-arrow"><div class="su-spoiler-title"><span class="su-spoiler-icon"></span>Arsenal - 8 pts</div><div class="su-spoiler-content su-clearfix" style="display:none">
+<div class="su-quote su-quote-style-default"><div class="su-quote-inner su-clearfix">
+<p>There is a rumor that Arsenal F.C., Talent Yang&#8217;s favourite team, always likes to set some &#8220;mission impossible&#8221; tasks for themselves.<br />
+For instance, with a 0-2 home defeat against FC Barcelona they must play a great game in Camp Nou to get to the next round of UEFA Champions League. Can they fulfil this task? Decrypt the provided ciphertext to help them!</p>
+<p>(The executable of this challenge is similar to that of <code>People's Square</code> , check the slight difference and enjoy solving it)</p>
+<p><code>Hint: You should perform 2^32 single round decryption first</code></p>
+</div></div>
+<p>This&#8217;s the same as people_square, but with only 126 known plain texts, with 63 in each group. The zero sumed xor trick cannot be used anymore&#8230;</p>
+<p>I did not have enough time to solve this problem within the context, i was only 2 hours left and i was so tired due to almost 40 hours playing on both 0ctf and codegate.</p>
+<p>The idea is that the internal state of aes before MixColumn step of 3rd round will have unique values when plain text has exactly 1 active byte. We can find out the final subkey by groups of 4 bytes each, confirm the validity of that group with that statement with wrong probability of 256!/[(256-63)! * 256^63] which is almost zero &#8211; more than good enough for us to confirm the validity of specified group.</p>
+<p>Problem is that pure-python implement cant work anymore 😀 The implement i made for people_square require about 5 mins to check 10000 cases of a group, that will result in about 1491.30808889 days running (lol), so i decided to try out the <a href="https://en.wikipedia.org/wiki/AES_instruction_set">AES Instruction Set</a> (which&#8217;s used in the problem statement too), and surprisingly, the problem is solved after 20 mins running time!!!</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="cpp">int ntest=0;
+  __m128i test[2][100];
+  union{
+    __m128i i128;
+    uint8_t i8[16];
+  } key, state;
+  void solveRound(int a0, int a1, int a2, int a3, int b0, int b1, int b2, int b3){
+    int check[4][256], checkid[4]={7,7,7,7};
+    #define INC(a,b,c,d) ++key.i8[a]==0x00 &amp;&amp; ++key.i8[b]==0x00 &amp;&amp; ++key.i8[c]==0x00 &amp;&amp; ++key.i8[d]==0x00
+    #define TES(a,b) if(check[a][state.i8[b]]!=checkid[a]) check[a][state.i8[b]]=checkid[a]; else {valid=false;break;}
+    memset(check, 0, sizeof(check));
+    for(int i=0;i&lt;4;i++) checkid[i]=1;
+    for(long long i=0;;i++){
+      if(i%100000000==0){
+        printf("%lld / %lld\n",i,(1ll&lt;&lt;32));
+      }
+      bool valid = true;
+      for(int j=0;j&lt;4;j++) checkid[j]++;
+      for(int j=0;j&lt;ntest;j++){
+        state.i128 = _mm_aesdec_si128(_mm_xor_si128(test[0][j],key.i128), _mm_setzero_si128());
+        TES(0,a0);TES(1,a1);TES(2,a2);TES(3,a3);
+      }
+      if(valid){
+        printf("Found!\n");
+        print128_num(key.i128);
+        break;
+      }
+      if(INC(b0, b1, b2, b3)) break;
+    }
+  }
+
+  void solve(){
+    FILE* h = fopen("output.txt", "r");
+    char s[1000];
+    while(!feof(h)){
+      fgets(s, 1000, h); // guess line
+      fgets(s, 1000, h); // 0 or 1?
+      fgets(s, 1000, h); // ciphertext for 0 is: 
+      if(feof_unlocked(h)) break;
+      fgets(s, 1000, h);
+      fromHex((uint8_t*)&amp;test[0][ntest],s);
+      fgets(s, 1000, h); // ciphertext for 1 is:
+      fgets(s, 1000, h);
+      fromHex((uint8_t*)&amp;test[1][ntest],s);
+      fgets(s, 1000, h); //Correct!
+      
+      ntest++;
+    }
+    fclose(h);
+    printf("Total samples = %d\n",ntest);
+    key.i128 =    _mm_setzero_si128();
+    solveRound(0,1,2,3,  0,7,10,13);
+    solveRound(4,5,6,7,  1,4,11,14);
+    solveRound(8,9,10,11,  2,5,8,15);
+    solveRound(12,13,14,15,  3,6,9,12);
+  }</pre>
+<p>The final flag is:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="no-highlight" data-enlighter-theme="twilight" data-enlighter-linenumbers="false">0CTF{~~1MP0SS1BLE_1S_N0TH1NG!~~}</pre>
+</div></div>
+<p>&nbsp;</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-87" class="share-twitter sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-87" class="share-facebook sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-87" class="share-google-plus-1 sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/?share=google-plus-1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-87" class="share-linkedin sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/?share=linkedin" target="_blank" title="Click to share on LinkedIn"><span>LinkedIn</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/?share=reddit" target="_blank" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-pinterest"><a rel="nofollow" data-shared="sharing-pinterest-87" class="share-pinterest sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/?share=pinterest" target="_blank" title="Click to share on Pinterest"><span>Pinterest</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/#print" target="_blank" title="Click to print"><span>Print</span></a></li><li class="share-end"></li></ul></div></div></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div>			</div><!-- .entry-content -->
+
+		<footer class="entry-footer">
+		<span class="cat-links">Posted in <a href="https://www.vhn.vn/blog/index.php/category/uncategorized/" rel="category tag">Uncategorized</a></span>	</footer><!-- .entry-footer -->
+	</article><!-- #post-## -->
+
+			
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/" rel="prev">BKPCTF 2016</a></div><div class="nav-next"><a href="https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/" rel="next">Vue single file component and typescript</a></div></div>
+	</nav>
+			
+<div id="disqus_thread"></div>
+
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	
+<div id="secondary" class="widget-area no-toggle" role="complementary">
+	<span class="sidebar-close"><i class="fa fa-times"></i></span>
+	<aside id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://www.vhn.vn/blog/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h4 class="widget-title">Recent Posts</h4>		<ul>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/">HITCON CTF 2017 Quals</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/10/19/hack-lu-2017/">hack.lu 2017</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/">Vue single file component and typescript</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/">0CTF 2016</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/">BKPCTF 2016</a>
+									</li>
+					</ul>
+		</aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h4 class="widget-title">Recent Comments</h4><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Tung Thanh</span> on <a href="https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/#comment-3">Một bài toán tính tổng</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h4 class="widget-title">Archives</h4>		<ul>
+			<li><a href='https://www.vhn.vn/blog/index.php/2017/11/'>November 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2017/10/'>October 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2017/07/'>July 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2016/03/'>March 2016</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/11/'>November 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/09/'>September 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/04/'>April 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/03/'>March 2015</a></li>
+		</ul>
+		</aside><aside id="categories-2" class="widget widget_categories"><h4 class="widget-title">Categories</h4>		<ul>
+	<li class="cat-item cat-item-2"><a href="https://www.vhn.vn/blog/index.php/category/ctf/" >CTF</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://www.vhn.vn/blog/index.php/category/trick/" >Trick</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://www.vhn.vn/blog/index.php/category/uncategorized/" >Uncategorized</a>
+</li>
+		</ul>
+</aside><aside id="meta-2" class="widget widget_meta"><h4 class="widget-title">Meta</h4>			<ul>
+			<li><a href="https://www.vhn.vn/blog/wp-login.php?action=register">Register</a></li>			<li><a href="https://www.vhn.vn/blog/wp-login.php">Log in</a></li>
+			<li><a href="https://www.vhn.vn/blog/index.php/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://www.vhn.vn/blog/index.php/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+			</aside></div><!-- #secondary -->
+
+		</div>
+	</div><!-- #content -->
+
+	
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="site-info container">
+			<a href="http://wordpress.org/" rel="nofollow">Proudly powered by WordPress</a><span class="sep"> | </span>Theme: <a href="http://justfreethemes.com/oria" rel="nofollow">Oria</a> by JustFreeThemes.		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+	<div style="display:none">
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/www.vhn.vn\/blog\/index.php\/2016\/03\/17\/0ctf\/":87};
+	</script>
+		<link rel='stylesheet' id='font-awesome-css'  href='//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css?ver=4.7.0' type='text/css' media='all' />
+<link rel='stylesheet' id='su-box-shortcodes-css'  href='https://www.vhn.vn/blog/wp-content/plugins/shortcodes-ultimate/assets/css/box-shortcodes.css?ver=5.0.3' type='text/css' media='all' />
+<link rel='stylesheet' id='su-content-shortcodes-css'  href='https://www.vhn.vn/blog/wp-content/plugins/shortcodes-ultimate/assets/css/content-shortcodes.css?ver=5.0.3' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/widget.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/tabs.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/photon/photon.min.js?ver=20130122'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"vhnvn"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/disqus-comment-system/public/js/comment_count.js?ver=3.0.16'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.16"},"disqusIdentifier":"87 https:\/\/www.vhn.vn\/blog\/?p=87","disqusShortname":"vhnvn","disqusTitle":"0CTF 2016","disqusUrl":"https:\/\/www.vhn.vn\/blog\/index.php\/2016\/03\/17\/0ctf\/","postId":"87"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/disqus-comment-system/public/js/comment_embed.js?ver=3.0.16'></script>
+<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201905'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/skip-link-focus-fix.js?ver=20130115'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/comment-reply.min.js?ver=4.9.9'></script>
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/enlighter/resources/EnlighterJS.min.js?ver=3.6'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/wp-embed.min.js?ver=4.9.9'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var su_other_shortcodes = {"no_preview":"This shortcode doesn't work in live preview. Please insert it into editor and preview on the site."};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/shortcodes-ultimate/assets/js/other-shortcodes.js?ver=5.0.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=6.1.1'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-google-plus-1', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-linkedin', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+</script>
+<script type="text/javascript">/* <![CDATA[ */EnlighterJS_Config = {"selector":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"language":"generic","theme":"enlighter","indent":2,"hover":"hoverEnabled","showLinenumbers":true,"rawButton":true,"infoButton":true,"windowButton":true,"rawcodeDoubleclick":false,"grouping":true,"cryptex":{"enabled":false,"email":"mail@example.tld"}};!function(){var a=function(a){var b="Enlighter Error: ";console.error?console.error(b+a):console.log&&console.log(b+a)};return window.addEvent?"undefined"==typeof EnlighterJS?void a("Javascript Resources not loaded yet!"):"undefined"==typeof EnlighterJS_Config?void a("Configuration not loaded yet!"):void window.addEvent("domready",function(){EnlighterJS.Util.Init(EnlighterJS_Config.selector.block,EnlighterJS_Config.selector.inline,EnlighterJS_Config)}):void a("MooTools Framework not loaded yet!")}();;/* ]]> */</script>
+<!-- Shortcodes Ultimate custom CSS - start -->
+<style type="text/css">
+.su-spoiler-content {
+	border-left: 1px dashed #999;
+}
+</style>
+<!-- Shortcodes Ultimate custom CSS - end -->
+<script type='text/javascript' src='https://stats.wp.com/e-201905.js' async='async' defer='defer'></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:6.1.1',blog:'100285338',post:'87',tz:'7',srv:'www.vhn.vn'} ]);
+	_stq.push([ 'clickTrackerInit', '100285338', '87' ]);
+</script>
+
+</body>
+</html>

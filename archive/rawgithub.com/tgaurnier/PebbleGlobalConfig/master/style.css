@@ -1,0 +1,135 @@
+html, body {
+	height: 100%;
+}
+
+body {
+	font-size: 1em;
+	font-family: sans-serif;
+	text-align: center;
+	color: #5C5B57;
+	background-color: #1C1B17;
+	margin: 0px;
+	padding: 0px;
+}
+
+
+#container {
+	min-height: 100%;
+}
+
+
+/**
+ * Style header
+ */
+header {
+	padding: 1em;
+	color: #DCDBD7;
+	background-color: #0C0B07;
+}
+h1 {
+	display: inline;
+	font-size: 1.3em;
+}
+
+
+#inputArea {
+	padding-top: 1em;
+	padding-bottom: 2.5em;
+	overflow: auto;
+}
+
+
+/**
+ * Style fieldset
+ */
+fieldset {
+	margin-bottom: 1em;
+	margin-left: 0;
+	margin-right: 0;
+	padding-left: 2em;
+	text-align: left;
+	border: none;
+	border-top: 1px solid black;
+}
+legend {
+	margin-left: -1em;
+	font-size: 1.1em;
+	font-weight: bold;
+	color: #8C8B87;
+}
+
+
+/**
+ * Style text input
+ */
+.textInput {
+	width: 100%;
+	border: 2px solid #171613;
+	border-radius: 0.3em;
+}
+.textInput:enabled {
+	color: #0C0B07;
+	background-color: #3C3B37;
+	border: 2px solid #171613;
+	border-radius: 0.3em;
+}
+
+
+/**
+ * Style radio groups
+ */
+.radioGroup {
+}
+.radioContainer {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+
+/**
+ * Style select
+ */
+select {
+	color: #0C0B07;
+	background-color: #3C3B37;
+}
+option {
+}
+
+
+/**
+ * Style input toggle
+ */
+.inputToggle {
+	margin-left: 1em;
+}
+.toggledFieldset {
+	margin-left: 0;
+	margin-bottom: 0;
+	padding-left: 1em;
+	border: 0;
+}
+.toggledFieldset legend {
+	font-size: 0.9em;
+}
+
+
+/**
+ * Style action area
+ */
+#actionArea {
+	position: relative;
+	margin-left: 0;
+	margin-right: 0;
+	margin-top: -4.55em;
+	margin-bottom: 0;
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: 1em;
+	text-align: center;
+	background: #0C0B07;
+}
+button {
+	width: 44%;
+	height: 3em;
+}

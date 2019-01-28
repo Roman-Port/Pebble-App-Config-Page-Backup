@@ -1,0 +1,136 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/www.maxiw.com/pebble/13/jquery.css">
+    <script src="/www.maxiw.com/pebble/13/jquery-1.js"></script>
+    <script src="/www.maxiw.com/pebble/13/jquery.js"></script>
+    <title>Watchface Configuration</title>
+<style type="text/css">
+<!--
+body:not(.en) :lang(en), 
+body:not(.ch) :lang(ch), 
+body:not(.jp) :lang(jp) 
+{ display: none; }
+-->
+</style>
+
+  </head>
+
+  <body>
+    <div data-role="page" id="page1">
+      <div data-theme="" data-role="header">
+	<h3 align="center">Star Wars Classic Lines</h3>
+      </div>
+      <div data-role="content">
+   <table width="75%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#333333">
+    <tr>
+    <td width="33%" align="center" bgcolor="#666666"><span onclick="saveOptions;document.body.className='en';$('#page1').bind('pageinit', updateControls)"><font size="2" color="#ffffff">ENGLISH</font></span></td>
+    <td width="33%" align="center" bgcolor="#666666"><span onclick="saveOptions;document.body.className='ch';$('#page1').bind('pageinit', updateControls)"><font size="2" color="#ffffff">中文</font></span></td>
+    <td width="33%" align="center" bgcolor="#666666"><span onclick="saveOptions;document.body.className='jp';$('#page1').bind('pageinit', updateControls)"><font size="2" color="#ffffff">日本語</font></span></td>
+    </tr>
+   </table>
+
+	<h2 align="center" lang="en">Configurations</h2>
+    <h2 align="center" lang="ch">功能設定</h2>
+    <h2 align="center" lang="jp">コンフィグレーション</h2>
+	<hr>
+    <table width="100%" border="0">
+      <tr>
+        <td>
+           <h3 lang="en">Shake to Change</h3>
+           <h3 lang="ch">搖晃換圖</h3>
+           <h3 lang="jp">揺れによる変更</h3>
+        </td>
+
+        <td align="right"><select name="shake_change" id="shake_change" data-theme="" data-role="slider">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+        </select></td>
+     
+      </tr>
+      <tr>
+        <td colspan="2" lang="en"><font color="#999999" size="2">Shake your pebble to change the character.</font></td>
+        <td colspan="2" lang="ch"><font color="#999999" size="2">搖晃你的手錶就可以更換不同台詞。</font></td>
+        <td colspan="2" lang="jp"><font color="#999999" size="2">画像を変更するには、あなたの時計を振ります。</font></td>
+      </tr>
+    </table>
+	<div data-role="fieldcontain">
+	  <hr>
+	  <table width="100%" border="0">
+      <tr>
+        <td>
+        <h3 lang="en">Disconnect Vibration</h3>
+        <h3 lang="ch">斷線提醒</h3>
+        <h3 lang="jp">切断警告</h3>
+        </td>
+
+        <td align="right"><select name="disc_vibrate" id="disc_vibrate" data-theme="" data-role="slider">
+        <option value="no">No</option>
+        <option value="yes">Yes</option>
+        </select></td>
+
+      </tr>
+      <tr>
+        <td colspan="2" lang="en"><font color="#999999" size="2">Vibrate pebble if it gets disconnected with your phone.</font></td>
+        <td colspan="2" lang="ch"><font color="#999999" size="2">當與手機失去連線時，手錶會震動提醒。</font></td>
+        <td colspan="2" lang="jp"><font color="#999999" size="2">それはあなたの携帯電話で切断された場合は、時計を振動させます。</font></td>
+      </tr>
+    </table>
+</div>
+	<div class="ui-body ui-body-b">
+	  <fieldset class="ui-grid-a">
+	    <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+	    <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+	  </fieldset>
+	</div>    
+    </div>
+    </div>
+	
+ <script>
+    document.body.className='en';
+      $.urlParam = function(name){
+	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	if (!results) { return 0; }
+	return results[1] || 0;
+      }
+
+      function updateControls() { /* 載入現存資料, 更新設定畫面 */
+        var shake_change = decodeURIComponent($.urlParam("shake_change"));
+        if (shake_change != '') {
+          $("#shake_change").val(shake_change).slider("refresh");
+        }
+		var disc_vibrate = decodeURIComponent($.urlParam("disc_vibrate"));
+        if (disc_vibrate != '') {
+          $("#disc_vibrate").val(disc_vibrate).slider("refresh");
+        }
+	  }
+
+      function saveOptions() { /* 保存資料 */
+        var options = {
+          'shake_change': $("#shake_change").val(),
+		  'disc_vibrate': $("#disc_vibrate").val(),
+        }
+        return options;
+      }
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close#";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log(location);
+          document.location = location;
+        });
+      });
+
+      $('#page1').bind('pageinit', updateControls);
+    </script>
+  </body>
+</html>

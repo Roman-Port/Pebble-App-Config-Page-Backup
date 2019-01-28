@@ -1,0 +1,222 @@
+var doUpdate = false;
+function selectabat(n){
+//	$("#numOp6").val(n).slider("refresh");
+	$("#numOp6").val(n).slider("refresh");
+
+}
+function setControls() {
+	updateControls(0);
+}
+function updateControls(bat) {
+doUpdate = false;
+//alert(bat);
+
+
+
+bats = ["A","B","C","D","E","F"];
+
+//bat = 0;
+var batP = bats[bat];
+	//batP = typeof bat !== '[object Object]' ? bat : "";
+//alert(">"+batP+"<");
+//	var jason = JSON.parse(decodeURIComponent($.urlParam("JD")));
+	var jason = JSON.parse(decodeURIComponent($.urlParam("J"+batP)));
+
+	for(i=0;i<5;i++){
+		document.getElementById('bat'+i).className = "unselectedBat";
+
+		if(i == jason[7]) document.getElementById('bat'+i).className = "selectedBat";
+	}
+
+
+//alert(JSON.stringify(jason));
+	var opEls = $('*[id^="togOp"]');
+	var colorEls = $('*[id^="colorOp"]');
+	var numEls = $('*[id^="numOp"]');
+//alert(colorEls.length);
+
+	for(n=1;n<numEls.length;n++){
+		if(jason[n+1]){
+			if(document.getElementById("numOp"+n).value){
+				//document.getElementById("numOp"+n).value = jason[n+1];
+				$("#numOp"+n).val(jason[n+1]).slider("refresh");
+			} else {
+				document.getElementById("numOp"+n).innerHTML = jason[n+1]+"%";
+			}
+		}				
+	}
+	
+	for(n=0;n<opEls.length;n++){
+		if(jason[0] & Math.pow(2,n)){
+			$("#togOp"+n).val("on").slider("refresh");
+		}else{
+			$("#togOp"+n).val("off").slider("refresh");
+
+		}
+
+	}
+	for(n=0;n<colorEls.length;n++){
+		if(jason[n+10]) $("#colorOp"+n).css('backgroundColor',intToHex(jason[n+10]));
+
+	}
+doUpdate = true;
+}
+
+function saveOptions() {
+
+	var op = 0;
+	var opEls = $('*[id^="togOp"]');
+	var colorEls = $('*[id^="colorOp"]');
+	var numEls = $('*[id^="numOp"]');
+
+	for(n=0;n<opEls.length;n++){
+		if ($("#togOp"+n).val() == "on") op = op | Math.pow(2,n);
+
+	}
+        var options = {
+	  0: op,
+          1: parseInt($("#numOp0").val()),
+	}
+	for(n=1;n<numEls.length;n++){
+		if(document.getElementById("numOp"+n).value){
+			options[1+n] = parseInt(document.getElementById("numOp"+n).value);
+		}else{
+			options[1+n] = parseInt(document.getElementById("numOp"+n).innerHTML);
+		}
+	}
+	for(n=0;n<colorEls.length;n++){
+		options[10+n] = chexToInt(rgb2hex($("#colorOp"+n).css('backgroundColor')));
+	}
+
+        return options;
+}
+
+
+$(function () {
+  $('#foreground-color').on('click', function (event) {
+	changeForeground = this.id;
+	highlightColorBox($(this));
+  });
+});
+
+function getNewColor(t){
+	changeForeground = t.id;
+	highlightColorBox($(t));
+
+}
+function getNewNumber(t,mi,ma){
+	changeNumber = t.id;
+	$("#numPick").attr("min", mi);
+	$("#numPick").attr("max", ma);
+	$("#numPick").val(parseInt(t.innerHTML)).slider("refresh");
+}
+
+$(function () {
+  $('#color-picker .color-box').on('click', function (event) {
+	var selected_color = rgb2hex($(this).css("background-color"));
+
+	$('#'+changeForeground).css('background-color', selected_color);
+
+	$( "#color-picker" ).popup( "close" );
+
+  });
+});
+
+
+
+
+function highlightColorBox($colorButton) {
+	selectedColor = rgb2hex($colorButton.css("background-color"));
+	
+	var i;
+	for (i = 1; i <= 16; i++)
+	{
+		$('#color-row'+i).children().removeClass("selected-color-box");
+	}
+	$('#color-box-'+selectedColor.substring(1).toUpperCase()).addClass("selected-color-box");
+}
+function intToHex(i){
+	var h = ["00","55","AA","FF"];
+
+	b = i & 3;
+	g = (i & 12) >> 2;
+	r = (i & 48) >> 4;
+	a = (i & 192) >> 6;
+
+	s = "#"+h[r]+h[g]+h[b];
+	
+	return s;
+}
+function chexToInt(h){
+
+	var c = {"00":0,"55":1,"AA":2,"FF":3};
+
+	b = c[h.substring(5, 7)];
+	g = c[h.substring(3, 5)] << 2;
+	r = c[h.substring(1, 3)] << 4;
+	a = 192;
+
+	i = a+r+g+b;
+
+	return i;
+}
+
+function rgb2hex(rgb){
+ rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+ return ("#" +
+  ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2)).toUpperCase();
+}
+
+
+
+
+$().ready(function() {
+	$("#b-cancel").click(function() {
+	  console.log("Cancel");
+	  document.location = "pebblejs://close#";
+	});
+	$("#b-cancel2").click(function() {
+		$("#b-cancel").click();
+	});
+
+	$("#b-OK").click(function() {
+		var selected_num = document.getElementById("numPick").value;
+		document.getElementById(changeNumber).innerHTML=selected_num+'%';
+
+		$( "#number-picker" ).popup( "close" );
+	
+	});
+
+	$("#b-submit2").click(function() {
+		$("#b-submit").click();
+	});
+	$("#b-submit").click(function() {
+	  console.log("Submit");
+
+		var returnTo = decodeURIComponent($.urlParam("return_to"));
+		
+	  //var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+	if(returnTo == 0){
+	  var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+	}else{
+	  var location = returnTo + encodeURIComponent(JSON.stringify(saveOptions()));
+	}
+	  console.log(location);
+	  document.location = location;
+	});
+});
+
+
+// <!-- from http://snipplr.com/view/26662/get-url-parameters-with-jquery--improved/ -->
+$.urlParam = function(name){
+//alert(window.location.href);
+	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	if (!results) { return 0; }
+	return results[1] || 0;
+}
+
+
+
+

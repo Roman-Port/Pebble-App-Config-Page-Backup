@@ -1,0 +1,184 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel='stylesheet' type='text/css' href='/singleserveapps.github.io/sliding-time-wd-config/bower_components/pebble-slate/dist/css/slate.css'>
+	<link rel='stylesheet' type='text/css' href='/singleserveapps.github.io/sliding-time-wd-config/css/style.css'>
+</head>
+<body>
+	<div class="item-container">
+  		<div class="item-container-header">Alignment options</div>
+		<div class="item-container-content">
+		<label class="item">
+      			Weather / Date Lines
+      			<select id="weatherDateAlignment" dir='rtl' class="item-select">
+        		<option class="item-select-option" value="0">Left</option>
+        		<option class="item-select-option" selected="" value="1">Center</option>
+        		<option class="item-select-option" value="2">Right</option>
+      			</select>
+      		</label>
+      		<label class="item">
+            		Hour/Minutes Lines
+      			<select id="hourMinutesAlignment" dir='rtl' class="item-select">
+        		<option class="item-select-option" selected="" value="0">Left</option>
+        		<option class="item-select-option" value="1">Center</option>
+        		<option class="item-select-option" value="2">Right</option>
+      			</select>
+    		</label>
+  		</div>
+		</div>
+		<div class='item-container-footer'>
+		        Select alignment for weather/date & time display lines.
+		</div>
+			
+	
+	<div class='item-container'>
+		<div class='item-container-header'>Color options</div>
+		<div class='item-container-content'>
+			<label class='item'>
+				Background Color
+				<input id='backgroundColorPicker' type='text' class='item-color item-color-normal' value='#000000'>
+			</label>
+			
+            <label class='item'>
+                Hour Color
+                <input id='hrColorPicker' type='text' class='item-color item-color-normal' value='#ffffff'>
+            </label>
+
+            <label class='item'>
+                Minutes Color
+                <input id='minColorPicker' type='text' class='item-color item-color-normal' value='#ffffff'>
+            </label>
+			
+			<label class='item'>
+				Weather/Date Color
+				<input id='wdColorPicker' type='text' class='item-color item-color-normal' value='0xffffff'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+		        Choose the background, time, and weather/date colors for the watchface. 
+		        (For Pebble and Pebble Steel, select from black & white colors only. Black is default for background color and white is default for text color.)
+		</div>
+	</div>	
+	
+	<div class='item-container'>
+		<div class='item-container-header'>Weather options</div>
+		<div class='item-container-content'>
+			<label class='item'>
+				Use GPS for weather
+				<input id='useGPS' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+        <div class='item-container-footer'>
+	        Check to use current GPS location for weather conditions or manually enter weather location information below.
+		 </div>
+        <div class="item-container-content">
+            <label class="item">
+				Weather location
+			</label>
+            <div class="item-input-wrapper">
+                <input type="text" class="item-input" id="weatherLocation" placeholder="e.g. 'San Diego CA US', or '92103 US'">
+            </div>
+        </div>
+        <div class='item-container-footer'>
+	        Enter location for non-GPS weather condition retrieval, e.g. 'San Diego CA US', or '92103 US'
+		 </div>
+		<div class='item-container-content'>
+			<label class='item'>
+				Shake for Lo/Hi Temperature
+				<input id='shakeforLoHi' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+	        	Check to enable shake option to show today's lo and hi temperatures. Also displays last weather update time on date line.
+		 </div>
+		<div class='item-container-content'>
+			<label class='item'>
+				Use Celsius
+				<input id='useCelsius' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+	        	Check to display temperature in degrees Celsius. Uncheck to display in degrees Fahrenheit.
+		 </div>
+		 <div class='item-container-content'>
+    			<label class='item'>
+    				Weather update frequency
+      				<input type='range' class='item-slider' id='weatherFrequencySlider' name='weatherFrequencySlider' min='15' max='120' step='15' value='30'>
+      			<div class='item-input-wrapper item-slider-text'>
+        			<input type='text' class='item-input' name='weatherFrequencySlider' readonly="">
+      			</div>
+    			</label>
+  		</div>
+  		<div class='item-container-footer'>
+	        	Select how often weather information is updated (minutes).
+		 </div>	
+	</div>
+	
+	    <div class='item-container'>
+		<div class='item-container-header'>Display options</div>	
+		
+		<div class='item-container-content'>
+			<label class='item'>
+				Display date
+				<input id='displayDate' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+	        	Check to display current date information.
+		 </div>		
+			
+		<div class='item-container-content'>
+			<label class='item'>
+				Display "o" for 1-9
+				<input id='displayPrefix' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+	        	Check to display "o" for single-digit minutes. For example, two o two or three o seven. Relaunch watchface to apply display option.
+		 </div>
+
+        <div class='item-container-content'>
+            <label class='item'>
+                Use <strong>bold</strong> font for minute lines
+                <input id='hourMinutesReadability' type='checkbox' class='item-checkbox'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Check to display minute lines using a bold font. Relaunch watchface to apply display option.
+        </div>
+
+        <div class='item-container-content'>
+             <label class='item'>
+                Use larger font for weather & date lines
+                <input id='weatherDateReadability' type='checkbox' class='item-checkbox'>
+             </label>
+          </div>
+          <div class='item-container-footer'>
+              Check to display weather & date lines using a larger font size. Relaunch watchface to apply display option.
+         </div>
+	</div>
+    <div class='item-container'>
+		<div class='item-container-header'>Additional options</div>		
+		<div class='item-container-content'>
+			<label class='item'>
+				Vibrate on Bluetooth disconnect
+				<input id='vibrateBT' type='checkbox' class='item-checkbox'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+	        	Check to vibrate on Bluetooth disconnect. Hour hand will also turn <font color="blue">blue</font> when disconnected.
+		 </div>
+	</div>
+	
+	<div class='item-container'>
+		<div class='button-container'>
+			<input id='submitButton' type='button' class='item-button' value='Save'>
+		</div>
+	</div>
+
+	<script src='/singleserveapps.github.io/sliding-time-wd-config/bower_components/pebble-slate/dist/js/slate.js'></script>
+	<script src='/singleserveapps.github.io/sliding-time-wd-config/js/main.js'></script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Old Fogies Configuration</title>
+    
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no">
+    
+	<style>
+		.c_button {
+			width: 40px;
+			height: 40px;
+			border: 1px solid #000;
+			margin: 2px;
+		}
+		
+		#cancel {
+			background: #800;
+			color: #fff;
+			margin-right: 20px;
+		}
+		
+		#reset {
+			margin-right: 20px;
+		}
+		
+		#savetheme {
+			margin-right: 20px;
+		}
+		
+		#colours {
+			position: absolute;
+			margin: 50px 10px;
+			width: 320px;
+			height: 320px;
+			border: 1px solid #000;
+			display: none;
+			padding: 3px;
+			background: #ccc;
+			box-shadow: 5px 5px 5px rgba(0,0,0,0.5);
+		}
+		
+		#colours button {
+			float: left;
+			width: 40px;
+			height: 40px;
+			border: 1px solid #000;
+		}
+	</style>
+	
+    <script>
+        var colour_names = [
+                {"color": "GColorArmyGreenARGB8", "name": "Army Green", "hex": "#555500"},
+                {"color": "GColorBabyBlueEyesARGB8", "name": "Baby Blue Eyes", "hex": "#AAAAFF"},
+                {"color": "GColorBlackARGB8", "name": "Black", "hex": "#000000"},
+                {"color": "GColorBlueARGB8", "name": "Blue", "hex": "#0000FF"},
+                {"color": "GColorBlueMoonARGB8", "name": "Blue Moon", "hex": "#0055FF"},
+                {"color": "GColorBrassARGB8", "name": "Brass", "hex": "#AAAA55"},
+                {"color": "GColorBrightGreenARGB8", "name": "Bright Green", "hex": "#55FF00"},
+                {"color": "GColorBrilliantRoseARGB8", "name": "Brilliant Rose", "hex": "#FF55AA"},
+                {"color": "GColorBulgarianRoseARGB8", "name": "Bulgarian Rose", "hex": "#550000"},
+                {"color": "GColorCadetBlueARGB8", "name": "Cadet Blue", "hex": "#55AAAA"},
+                {"color": "GColorCelesteARGB8", "name": "Celeste", "hex": "#AAFFFF"},
+                {"color": "GColorChromeYellowARGB8", "name": "Chrome Yellow", "hex": "#FFAA00"},
+                {"color": "GColorCobaltBlueARGB8", "name": "Cobalt Blue", "hex": "#0055AA"},
+                {"color": "GColorCyanARGB8", "name": "Cyan", "hex": "#00FFFF"},
+                {"color": "GColorDarkCandyAppleRedARGB8", "name": "Dark Candy Apple Red", "hex": "#AA0000"},
+                {"color": "GColorDarkGrayARGB8", "name": "Dark Gray", "hex": "#555555"},
+                {"color": "GColorDarkGreenARGB8", "name": "Dark Green", "hex": "#005500"},
+                {"color": "GColorDukeBlueARGB8", "name": "Duke Blue", "hex": "#0000AA"},
+                {"color": "GColorElectricBlueARGB8", "name": "Electric Blue", "hex": "#55FFFF"},
+                {"color": "GColorElectricUltramarineARGB8", "name": "Electric Ultramarine", "hex": "#5500FF"},
+                {"color": "GColorFashionMagentaARGB8", "name": "Fashion Magenta", "hex": "#FF00AA"},
+                {"color": "GColorFollyARGB8", "name": "Folly", "hex": "#FF0055"},
+                {"color": "GColorGreenARGB8", "name": "Green", "hex": "#00FF00"},
+                {"color": "GColorIcterineARGB8", "name": "Icterine", "hex": "#FFFF55"},
+                {"color": "GColorImperialPurpleARGB8", "name": "Imperial Purple", "hex": "#550055"},
+                {"color": "GColorInchwormARGB8", "name": "Inchworm", "hex": "#AAFF55"},
+                {"color": "GColorIndigoARGB8", "name": "Indigo", "hex": "#5500AA"},
+                {"color": "GColorIslamicGreenARGB8", "name": "Islamic Green", "hex": "#00AA00"},
+                {"color": "GColorJaegerGreenARGB8", "name": "Jaeger Green", "hex": "#00AA55"},
+                {"color": "GColorJazzberryJamARGB8", "name": "Jazzberry Jam", "hex": "#AA0055"},
+                {"color": "GColorKellyGreenARGB8", "name": "Kelly Green", "hex": "#55AA00"},
+                {"color": "GColorLavenderIndigoARGB8", "name": "Lavender Indigo", "hex": "#AA55FF"},
+                {"color": "GColorLibertyARGB8", "name": "Liberty", "hex": "#5555AA"},
+                {"color": "GColorLightGrayARGB8", "name": "Light Gray", "hex": "#AAAAAA"},
+                {"color": "GColorLimerickARGB8", "name": "Limerick", "hex": "#AAAA00"},
+                {"color": "GColorMagentaARGB8", "name": "Magenta", "hex": "#FF00FF"},
+                {"color": "GColorMalachiteARGB8", "name": "Malachite", "hex": "#00FF55"},
+                {"color": "GColorMayGreenARGB8", "name": "May Green", "hex": "#55AA55"},
+                {"color": "GColorMediumAquamarineARGB8", "name": "Medium Aquamarine", "hex": "#55FFAA"},
+                {"color": "GColorMediumSpringGreenARGB8", "name": "Medium Spring Green", "hex": "#00FFAA"},
+                {"color": "GColorMelonARGB8", "name": "Melon", "hex": "#FFAAAA"},
+                {"color": "GColorMidnightGreenARGB8", "name": "Midnight Green", "hex": "#005555"},
+                {"color": "GColorMintGreenARGB8", "name": "Mint Green", "hex": "#AAFFAA"},
+                {"color": "GColorOrangeARGB8", "name": "Orange", "hex": "#FF5500"},
+                {"color": "GColorOxfordBlueARGB8", "name": "Oxford Blue", "hex": "#000055"},
+                {"color": "GColorPastelYellowARGB8", "name": "Pastel Yellow", "hex": "#FFFFAA"},
+                {"color": "GColorPictonBlueARGB8", "name": "Picton Blue", "hex": "#55AAFF"},
+                {"color": "GColorPurpleARGB8", "name": "Purple", "hex": "#AA00AA"},
+                {"color": "GColorPurpureusARGB8", "name": "Purpureus", "hex": "#AA55AA"},
+                {"color": "GColorRajahARGB8", "name": "Rajah", "hex": "#FFAA55"},
+                {"color": "GColorRedARGB8", "name": "Red", "hex": "#FF0000"},
+                {"color": "GColorRichBrilliantLavenderARGB8", "name": "Rich Brilliant Lavender", "hex": "#FFAAFF"},
+                {"color": "GColorRoseValeARGB8", "name": "Rose Vale", "hex": "#AA5555"},
+                {"color": "GColorScreaminGreenARGB8", "name": "Screamin Green", "hex": "#55FF55"},
+                {"color": "GColorShockingPinkARGB8", "name": "Shocking Pink", "hex": "#FF55FF"},
+                {"color": "GColorSpringBudARGB8", "name": "Spring Bud", "hex": "#AAFF00"},
+                {"color": "GColorSunsetOrangeARGB8", "name": "Sunset Orange", "hex": "#FF5555"},
+                {"color": "GColorTiffanyBlueARGB8", "name": "Tiffany Blue", "hex": "#00AAAA"},
+                {"color": "GColorVeryLightBlueARGB8", "name": "Very Light Blue", "hex": "#5555FF"},
+                {"color": "GColorVividCeruleanARGB8", "name": "Vivid Cerulean", "hex": "#00AAFF"},
+                {"color": "GColorVividVioletARGB8", "name": "Vivid Violet", "hex": "#AA00FF"},
+                {"color": "GColorWhiteARGB8", "name": "White", "hex": "#FFFFFF"},
+                {"color": "GColorWindsorTanARGB8", "name": "Windsor Tan", "hex": "#AA5500"},
+                {"color": "GColorYellowARGB8", "name": "Yellow", "hex": "#FFFF00"}
+            ],
+			defaults = {
+				KEY_OUTLINE_COLOUR: 61,
+				KEY_BATTERY_COLOUR: 50,
+				KEY_BATTERY_SHOW: '1',
+				KEY_TIME_COLOUR: [44,59,24,35,15,33,43,63,16,6,3,13,0,34,19,1,62,11,50,40,14,54,17,9],
+				KEY_LANG: 1,
+				KEY_DATE_SHOW: '1',
+				KEY_MINUTE_SHOW: '1',
+				KEY_MINUTE_STROKE_COLOUR: 2,
+				KEY_HOUR_STROKE_COLOUR: 2,
+				KEY_HOUR_FILL_COLOUR: 61,
+				KEY_HOUR_TEXT_COLOUR: 2,
+				KEY_DATE_TEXT_COLOUR: 2,
+				KEY_DATE_FILL_COLOUR: 61,				
+				KEY_DATE_STROKE_COLOUR: 2,
+				KEY_USE_HIGH_CONTRAST: '0'
+			},
+			themes = localStorage.themes ? JSON.parse(localStorage.themes) : {};
+		
+		
+		
+		function getQueryParam(variable, defaultValue) {
+			// Find all URL parameters
+			var query = location.search.substring(1);
+			var vars = query.split('&');
+			for (var i = 0; i < vars.length; i++) {
+				var pair = vars[i].split('=');
+				
+				// If the query variable parameter is found, decode it to use and return it for use
+				if (pair[0] === variable) {
+					return decodeURIComponent(pair[1]);
+				}
+			}
+			return defaultValue || false;
+		} // end getQueryParam
+		
+		
+		
+		function $(_id) {
+			return document.getElementById(_id);
+		}
+		
+		
+		
+		function $$(_tag) {
+			return document.getElementsByTagName(_tag);
+		}
+		
+		
+		
+		var curr_button;
+		function showColours(e) {
+			$('colours').style.top = e.clientY - 80 + 'px';
+			$('colours').style.display = 'block';
+			curr_button = this;
+			e.stopPropagation();
+		}
+		
+		
+		
+		function colourClick(e) {
+			var colour = this.getAttribute('data-index') * 1;
+			console.log(colour);
+			
+			curr_button.style.backgroundColor = colour_names[colour].hex;
+			if (curr_button.id.indexOf('KEY_TIME') == -1) {
+				config[curr_button.id] = colour;
+			}
+			else {
+				var i = curr_button.getAttribute('data-index') * 1;
+				config.KEY_TIME_COLOUR[i] = colour;
+			}
+			
+			$('colours').style.display = 'none';
+			curr_button = null;
+			
+			e.stopPropagation();
+		}
+		
+		
+		function loadTheme(e) {
+			if (!confirm('Load Theme "' + this.value + '"???\n\np.s. click Submit after loading to send to watch.')) return;
+			
+			config = themes[this.value];
+			
+			self.location = 'http://pointlineplane.ca/fogies/config.html?config=' + encodeURIComponent(JSON.stringify(config));
+			e.stopPropagation();
+		}
+		
+		
+		function submitToWatch(e) {
+			//**** set the checks...
+			config.KEY_BATTERY_SHOW = $('KEY_BATTERY_SHOW').checked ? '1' : '0';
+			config.KEY_DATE_SHOW = $('KEY_DATE_SHOW').checked ? '1' : '0';
+			config.KEY_MINUTE_SHOW = $('KEY_MINUTE_SHOW').checked ? '1' : '0';
+			config.KEY_USE_HIGH_CONTRAST = $('KEY_USE_HIGH_CONTRAST').checked ? '1' : '0';
+			config.KEY_TIME_COLOUR = config.KEY_TIME_COLOUR.join(',');
+			
+			// Return data to watchapp
+			document.location = return_to + encodeURIComponent(JSON.stringify(config));
+			
+			// specifically save "themes" here...
+			localStorage.themes = JSON.stringify(themes);
+			
+			
+			e.stopPropagation();
+		}
+    </script>
+</head>
+
+<body id="body">
+<h1>Old Fogies Like Fun!</h1>
+
+<div id="colours">
+	
+</div>
+
+<dl id="settings">
+	<dt><h3>Battery</h3></dt>
+		<dd><label for="KEY_BATTERY_SHOW"><input type="checkbox" id="KEY_BATTERY_SHOW"> Show</label></dd>
+		<dd><button id="KEY_BATTERY_COLOUR" class="c_button"></button> Colour</dd>
+	
+	<dt><h3>Date</h3></dt>
+		<dd><label for="KEY_DATE_SHOW"><input type="checkbox" id="KEY_DATE_SHOW"> Show</label></dd>
+		<dd><button id="KEY_DATE_FILL_COLOUR" class="c_button"></button> BG Colour</dd>
+		<dd><button id="KEY_DATE_STROKE_COLOUR" class="c_button"></button> Stroke Colour</dd>
+		<dd><button id="KEY_DATE_TEXT_COLOUR" class="c_button"></button> Text Colour</dd>
+	
+	<dt><h3>Hour</h3></dt>
+		<dd><button id="KEY_HOUR_FILL_COLOUR" class="c_button"></button> BG Colour</dd>
+		<dd><button id="KEY_HOUR_STROKE_COLOUR" class="c_button"></button> Stroke Colour</dd>
+		<dd><button id="KEY_HOUR_TEXT_COLOUR" class="c_button"></button> Text Colour</dd>
+	
+	<dt><h3>Minute</h3></dt>
+		<dd><label for="KEY_MINUTE_SHOW"><input type="checkbox" id="KEY_MINUTE_SHOW"> Show</label></dd>
+		<dd><button id="KEY_MINUTE_STROKE_COLOUR" class="c_button"></button> Stroke Colour</dd>
+	
+	<dt><h3>Outline</h3></dt>
+		<dd><button id="KEY_OUTLINE_COLOUR" class="c_button"></button> Colour</dd>
+	
+	<dt><h3>Peter's 2-Colour Mode</h3></dt>
+		<dd><label for="KEY_USE_HIGH_CONTRAST"><input type="checkbox" id="KEY_USE_HIGH_CONTRAST"> Uses first 2 colours, only <br>(1st is background, 2nd for minute)</label></dd>
+	
+	<dt><h3>Hours</h3></dt>
+		
+</dl>
+
+<input type="button" id="cancel" value="Cancel">
+
+<input type="button" id="reset" value="Reset">
+
+<input type="button" id="savetheme" value="Save as Theme">
+
+<input type="submit" id="submit" value="Save">
+
+
+<script>
+	var return_to = getQueryParam('return_to', 'pebblejs://close#');
+	
+	$('submit').addEventListener('click', submitToWatch);
+	
+	
+	$('savetheme').addEventListener('click', function(e){
+		var name = prompt('Enter Name for Theme:');
+		
+		if (name) {
+			config.KEY_BATTERY_SHOW = $('KEY_BATTERY_SHOW').checked ? '1' : '0';
+			config.KEY_DATE_SHOW = $('KEY_DATE_SHOW').checked ? '1' : '0';
+			config.KEY_MINUTE_SHOW = $('KEY_MINUTE_SHOW').checked ? '1' : '0';
+			config.KEY_USE_HIGH_CONTRAST = $('KEY_USE_HIGH_CONTRAST').checked ? '1' : '0';
+			
+			themes[name] = config;
+			
+			localStorage.themes = JSON.stringify(themes);
+		}
+		e.stopPropagation();
+	});
+	
+	
+	$('reset').addEventListener('click', function(e) {
+		//**** reset to defaults?
+		if (!confirm('Reset to default colours???')) return;
+		
+		defaults.KEY_TIME_COLOUR = defaults.KEY_TIME_COLOUR.join(',');
+		
+		document.location = return_to + encodeURIComponent(JSON.stringify(defaults));
+		e.stopPropagation();
+	});
+	
+	
+	$('cancel').addEventListener('click', function(e) {
+		var return_to = getQueryParam('return_to', 'pebblejs://close#');
+		
+		document.location = return_to;
+		e.stopPropagation();
+	});
+	
+	
+	//**** read data from watch
+	var config = JSON.parse(decodeURIComponent(getQueryParam('config'))) || {};
+	for(key in defaults) {
+		config[key] = config[key] ? config[key] : defaults[key];
+	}
+	
+	
+	//**** fix time_colour to array
+	if (typeof config.KEY_TIME_COLOUR == 'string') config.KEY_TIME_COLOUR = config.KEY_TIME_COLOUR.split(',');
+	
+	$('KEY_BATTERY_SHOW').checked = config.KEY_BATTERY_SHOW == 1 ? true : false;
+	$('KEY_BATTERY_COLOUR').style.backgroundColor = colour_names[config.KEY_BATTERY_COLOUR].hex;
+	
+	$('KEY_DATE_SHOW').checked = config.KEY_DATE_SHOW == 1 ? true : false;
+	$('KEY_DATE_TEXT_COLOUR').style.backgroundColor = colour_names[config.KEY_DATE_TEXT_COLOUR].hex;
+	$('KEY_DATE_FILL_COLOUR').style.backgroundColor = colour_names[config.KEY_DATE_FILL_COLOUR].hex;
+	$('KEY_DATE_STROKE_COLOUR').style.backgroundColor = colour_names[config.KEY_DATE_STROKE_COLOUR].hex;
+	
+	$('KEY_HOUR_TEXT_COLOUR').style.backgroundColor = colour_names[config.KEY_HOUR_TEXT_COLOUR].hex;
+	$('KEY_HOUR_FILL_COLOUR').style.backgroundColor = colour_names[config.KEY_HOUR_FILL_COLOUR].hex;
+	$('KEY_HOUR_STROKE_COLOUR').style.backgroundColor = colour_names[config.KEY_HOUR_STROKE_COLOUR].hex;
+	
+	$('KEY_MINUTE_SHOW').checked = config.KEY_MINUTE_SHOW == 1 ? true : false;
+	$('KEY_MINUTE_STROKE_COLOUR').style.backgroundColor = colour_names[config.KEY_MINUTE_STROKE_COLOUR].hex;
+	
+	$('KEY_OUTLINE_COLOUR').style.backgroundColor = colour_names[config.KEY_OUTLINE_COLOUR].hex;
+	
+	$('KEY_USE_HIGH_CONTRAST').checked = config.KEY_USE_HIGH_CONTRAST == 1 ? true : false;
+	
+	//**** let's be lazy and make the 24 hour colours in code...added to end of <DL #settings>
+	for (i = 0; i < 24; i++) {
+		button = document.createElement('button');
+		button.id = 'KEY_TIME_COLOUR_' + i;
+		button.setAttribute('data-index', i);
+		button.style.backgroundColor = colour_names[config.KEY_TIME_COLOUR[i]].hex;
+		button.className = 'c_button';
+		
+		dd = document.createElement('dd');
+		dd.appendChild(button);
+		
+		label = document.createTextNode('Hour ' + (i < 10 ? '0' : '') + i + (i < 2 ? ' (Peter\'s Mode: ' + (!i ? 'background' : 'minute') + ')' : ''));
+		
+		dd.appendChild(label);
+		
+		$('settings').appendChild(dd);
+	}
+	
+	
+	//**** if any themes, add those to top of <DL>
+	var theme_exists = false;
+	for (i in themes) {
+		if (!theme_exists) {
+			theme_exists = true;
+		}
+		
+		button = document.createElement('button');
+		button.id = 'THEME_' + i;
+		button.value = i;
+		button.innerHTML = i;
+		button.addEventListener('click', loadTheme);
+		//button.setAttribute('data-name', i);
+		//button.style.backgroundColor = colour_names[config.KEY_TIME_COLOUR[i]].hex;
+		//button.className = 'c_button';
+		
+		dd = document.createElement('dd');
+		dd.appendChild(button);
+		
+		$('settings').insertBefore(dd, $('settings').firstChild);
+	}
+	
+	if (theme_exists) {
+		dt = document.createElement('dt');
+		dt.innerHTML = '<h3>Load a Theme</h3>';
+		$('settings').insertBefore(dt, $('settings').firstChild);
+	}
+	
+	//**** create colour buttons
+	for (i in colour_names) {
+		button = document.createElement('button');
+		button.id = colour_names[i].color;
+		button.setAttribute('data-index', i);
+		button.style.backgroundColor = colour_names[i].hex;
+		button.addEventListener('click', colourClick);
+		
+		$('colours').appendChild(button);
+	}
+	
+	var myHeight = document.body.clientHeight;
+	
+	//**** close if click outside
+	$('body').addEventListener('click', function(e){
+		if (e.srcElement.tagName == 'LABEL' || e.srcElement.tagName == 'INPUT') {
+			return;
+		}
+		else if ($('colours').style.display != 'block') {
+			//**** config colour button clicked, get it and show colours
+			var y = window.pageYOffset + e.clientY - 80,
+				currHeight = window.pageYOffset + window.innerHeight;
+			//console.log(y, y+380, currHeight)
+			y = y + 380 > currHeight ? y - (y + 380 - currHeight) : y;
+			//y = y + 320 > myHeight ? y - (y + 320 - myHeight + 40) : y;
+			
+			$('colours').style.top = y + 'px';
+			$('colours').style.display = 'block';
+			curr_button = e.srcElement;
+		}
+		else {
+			//**** colours open, so close
+			$('colours').style.display = 'none';
+			curr_button = null;
+		}
+	});
+	
+</script>
+</body>
+</html>

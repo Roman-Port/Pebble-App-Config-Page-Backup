@@ -1,0 +1,142 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>Video Geek</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+	<script src="/code.jquery.com//jquery-1.js"></script>
+	<script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+	<script>
+	
+	// Get query variables
+	function getQueryParam(variable, defaultValue) {
+	  // Find all URL parameters
+	  var query = location.search.substring(1);
+	  var vars = query.split('&');
+	  for (var i = 0; i < vars.length; i++) {
+	    var pair = vars[i].split('=');
+
+	    // If the query variable parameter is found, decode it to use and return it for use
+	    if (pair[0] === variable) {
+	      return decodeURIComponent(pair[1]);
+	    }
+	  }
+	  return defaultValue || false;
+	}
+	
+	$(document).ready(function(){
+		//update button labels with current date after document is loaded
+		var today = new Date();
+		var mm = ("0" + (today.getMonth()+1).toString()).slice(-2);
+		var dd = ("0" + today.getDate().toString()).slice(-2);
+		var yy = today.getFullYear().toString().slice(-2);
+		var weekday = new Array(7);
+		weekday[0]="MON";
+		weekday[1]="TUE";
+		weekday[2]="WED";
+		weekday[3]="THU";
+		weekday[4]="FRI";
+		weekday[5]="SAT";
+		weekday[6]="SUN";
+		var monthname = new Array(12);
+		monthname[0] = "JAN";
+		monthname[1] = "FEB";
+		monthname[2] = "MAR";
+		monthname[3] = "APR";
+		monthname[4] = "MAY";
+		monthname[5] = "JUN";
+		monthname[6] = "JUL";
+		monthname[7] = "AUG";
+		monthname[8] = "SEP";
+		monthname[9] = "OCT";
+		monthname[10] = "NOV";
+		monthname[11] = "DEC";
+		var mName = monthname[today.getMonth()];
+		var day = weekday[today.getDay()];
+		$('label[for="radio-choice-1"]').text('MM-DD-YY'+'  ('+mm+'-'+dd+'-'+yy+')');
+		$('label[for="radio-choice-2"]').text('DD-MM-YY'+'  ('+dd+'-'+mm+'-'+yy+')');
+		$('label[for="radio-choice-3"]').text('YY-MM-DD'+'  ('+yy+'-'+mm+'-'+dd+')');
+		$('label[for="radio-choice-4"]').text('DAY-DD'+'  ('+day+'-'+dd+')');
+		$('label[for="radio-choice-5"]').text('MONTH-DD'+'  ('+mName+'-'+dd+')');
+		//set vaules passed from URI
+		var isTrueSet = getQueryParam('useSeconds','1');
+			if (isTrueSet ==='1' ){
+				$('#useSecondsSelector').prop('checked',true).flipswitch('refresh');
+			} else {
+				$('#useSecondsSelector').prop('checked',false).flipswitch('refresh');
+			}
+		var showBluetooth = getQueryParam('showBluetooth','1');
+			if (showBluetooth ==='1'){
+				$('#showBluetoothSelector').prop('checked',true).flipswitch('refresh');
+			} else {
+				$('#showBluetoothSelector').prop('checked',false).flipswitch('refresh');
+			}
+			
+		var dtFormatValue = '[value='+ getQueryParam('dateFormat','1')+']';
+		$('#radio-choice-'+getQueryParam('dateFormat','1')).prop('checked',true).checkboxradio('refresh');
+		//add event handlers
+		$( "#submit" ).click(function() {
+			  //push to Pebble
+			  //create key value pair of settings
+			  var retObject = {};
+			  if ($("#useSecondsSelector").is(':checked')){
+				  retObject.useSeconds = 1;
+			  } else {
+				  retObject.useSeconds = 0;
+			  }
+			  if ($("#showBluetoothSelector").is(':checked')){
+				  retObject.showBluetooth = 1;
+			  } else {
+				  retObject.showBluetooth = 0;
+			  }
+			  retObject.dateFormat = parseInt($("#dateSelect :radio:checked").val());
+			// Set the return URL depending on the runtime environment
+			var return_to = getQueryParam('return_to', 'pebblejs://close#');
+			console.log(JSON.stringify(retObject));
+			document.location = return_to + encodeURIComponent(JSON.stringify(retObject));
+			});
+	});
+	
+	</script>
+	</head>
+	<body>
+		<div data-role="page">
+			<div data-role="header">
+				<h1>Video Geek</h1>
+			</div><!-- /header -->
+			<div data-role="content" id="page">
+				<fieldset>
+				  <div data-role="fieldcontain">
+				    <label for="useSecondsSelector">Show Seconds:</label>
+				    <input type="checkbox" id="useSecondsSelector" checked="" data-role="flipswitch">
+				  </div>
+				</fieldset>
+				<fieldset>
+				  <div data-role="fieldcontain">
+				    <label for="showBluetoothSelector">Show Bluetooth Status:</label>
+				    <input type="checkbox" id="showBluetoothSelector" checked="" data-role="flipswitch">
+				  </div>
+				</fieldset>
+				<fieldset data-role="controlgroup" id="dateSelect">
+				    <legend>Date Format:</legend>
+				    <input type="radio" name="date-format-choice" id="radio-choice-1" value="1">
+				    <label for="radio-choice-1">MM-DD-YY</label>
+				 
+				    <input type="radio" name="date-format-choice" id="radio-choice-2" value="2">
+				    <label for="radio-choice-2">DD-MM-YY</label>
+				    
+				    <input type="radio" name="date-format-choice" id="radio-choice-3" value="3">
+				    <label for="radio-choice-3">YY-MM-DD</label>
+				    
+				    <input type="radio" name="date-format-choice" id="radio-choice-4" value="4">
+				    <label for="radio-choice-4">DAY-DD</label>
+				    
+				    <input type="radio" name="date-format-choice" id="radio-choice-5" value="5">
+				    <label for="radio-choice-5">MONTH-DD</label>				    
+				 </fieldset>
+				 
+				 <input id="submit" type="submit" value="Save Settings">
+			</div>
+		</div>
+	</body>
+</html>

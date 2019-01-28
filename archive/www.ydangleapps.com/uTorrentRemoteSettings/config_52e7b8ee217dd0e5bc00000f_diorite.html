@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>uTorrent Remote</title>
+	<style>
+		
+		body {
+			margin: 10px;
+			background-color: #EEE;
+		}
+		
+		body, div, td, a, p, input {
+			font-family: Helvetica, Arial;
+			font-size: 13px; 
+		}
+		
+		div.header {
+			text-align: center;
+			font-weight: bold;
+			font-size: 17px;
+			margin-top: 20px;
+			margin-bottom: 10px;
+		}
+		
+		div.content {
+			font-size: 11px;
+			color: #555;
+		}
+		
+	</style>
+	<script>
+	
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
+	
+function onLoad() {
+	
+	// Show values from app
+	var data = JSON.parse(decodeURIComponent(window.location.hash.substr(1)));
+	document.getElementById('host').value = data.host ? data.host : "";
+	document.getElementById('user').value = data.user ? data.user : "";
+	document.getElementById('pass').value = data.pass ? data.pass : "";
+	
+}
+
+function onSave() {
+	
+	// Create configuration
+	var config = {
+		host: document.getElementById('host').value,
+		user: document.getElementById('user').value,
+		pass: document.getElementById('pass').value
+	};
+	
+	// Get return URL
+	var returnTo = getParameterByName("return_to");
+	if (!returnTo)
+		returnTo = "pebblejs://close#";
+		
+	// Close and pass data to app
+	window.location.href = returnTo + encodeURIComponent(JSON.stringify(config));
+	
+}
+	
+	</script>
+</head>
+<body onload='onLoad()'>
+
+	<!-- Hostname -->
+	<div style='display: block; text-align: center; font-family: Helvetica, Arial; font-size: 13px; color: #999; padding-top: 20px; '>Host</div>
+	<div style='display: block; text-align: center; '><input id='host' style='width: 75%; ' placeholder='eg. 10.0.0.1:8080'></div>
+
+	<!-- Username -->
+	<div style='display: block; text-align: center; font-family: Helvetica, Arial; font-size: 13px; color: #999; padding-top: 20px; '>Username</div>
+	<div style='display: block; text-align: center; '><input id='user' style='width: 75%; '></div>
+
+	<!-- Password -->
+	<div style='display: block; text-align: center; font-family: Helvetica, Arial; font-size: 13px; color: #999; padding-top: 20px; '>Password</div>
+	<div style='display: block; text-align: center; '><input id='pass' type='password' style='width: 75%; '></div>
+
+	<!-- Done -->
+	<div style='display: block; text-align: center; font-family: Helvetica, Arial; font-size: 13px; color: #999; padding-top: 20px; '></div>
+	<div style='display: block; text-align: center; '><input type='button' value='Save' onclick='onSave()'></div>
+	
+	<!-- Setup info -->
+	<div class='header'>Setting up uTorrent</div>
+	<div class='content'>
+	
+		1) Open uTorrent<br>
+		2) Go to Preferences -> Advanced -> WebUI<br>
+		3) Enable WebUI<br>
+		4) Enable alternative port, and choose a port (eg. 8080)<br>
+		5) Choose a username and password<br>
+		6) Enter your computer's IP and port in the host field above<br>
+		7) Enter your username and password in the fields above<br>
+		8) Press Save
+	
+	</div>
+
+</body>
+</html>

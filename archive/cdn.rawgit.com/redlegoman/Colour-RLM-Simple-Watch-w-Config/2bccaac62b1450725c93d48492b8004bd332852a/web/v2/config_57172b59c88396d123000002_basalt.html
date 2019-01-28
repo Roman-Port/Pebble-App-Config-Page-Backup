@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<meta http-equiv="refresh" content="300">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="Mon, 01 Jan 1990 00:00:00 GMT">
+<meta http-equiv="Cache-Control" content="no-store, must-revalidate, no-cache, max-age=0">
+
+  <title>RLM Simple Colour Watch</title>
+  <link rel='stylesheet' type='text/css' href='/cdn.rawgit.com/redlegoman/Colour-RLM-Simple-Watch-w-Config/2bccaac62b1450725c93d48492b8004bd332852a/web/css/slate.css'>
+  <script src='/cdn.rawgit.com/redlegoman/Colour-RLM-Simple-Watch-w-Config/2bccaac62b1450725c93d48492b8004bd332852a/web/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>v2 : RLM Simple Colour Watch</h1>
+<!--
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied to this app.
+        </div>
+      </div>
+    </div>
+-->
+
+    <div class='item-container'>
+      <div class='item-container-header'></div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Colour
+          <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's background colour. . Note: Only available on Basalt watches that support many colors.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'></div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Time Colour
+          <input id='time_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's time colour. . Note: Only available on Basalt watches that support many colors.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'></div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Date Colour
+          <input id='date_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's date colour. . Note: Only available on Basalt watches that support many colors.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'></div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Seconds Colour
+          <input id='secs_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's seconds colour. . Note: Only available on Basalt watches that support many colors.
+      </div>
+    </div>
+<!--
+    <div class='item-container'>
+      <div class='item-container-header'>Accessibility</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          High Contrast Mode
+-->
+          <!--<input id='high_contrast_checkbox' type='checkbox' class='item-toggle'>-->
+          <input id='high_contrast_checkbox' type='hidden' xclass='item-toggle'>
+          <input id='config_set' type='text' value='1'>
+<!--
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        This switches the app colors to a higher contrast set that promotes readability in low light.
+      </div>
+    </div>
+-->
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var timeColorPicker = document.getElementById('time_color_picker');
+    var dateColorPicker = document.getElementById('date_color_picker');
+    var secsColorPicker = document.getElementById('secs_color_picker');
+    var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+    var config_set = document.getElementById('config_set');
+ 
+    var options = {
+      'secs_color': secsColorPicker.value,
+      'date_color': dateColorPicker.value,
+      'time_color': timeColorPicker.value,
+      'background_color': backgroundColorPicker.value,
+      'high_contrast': highContrastCheckbox.checked,
+      'config_set': config_set.value
+    };
+
+    // Save for next launch
+    localStorage['secs_color'] = options['secs_color'];
+    localStorage['date_color'] = options['date_color'];
+    localStorage['time_color'] = options['time_color'];
+    localStorage['background_color'] = options['background_color'];
+    localStorage['high_contrast'] = options['high_contrast'];
+    localStorage['config_set'] = options['config_set'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var secsColorPicker = document.getElementById('secs_color_picker');
+    var dateColorPicker = document.getElementById('date_color_picker');
+    var timeColorPicker = document.getElementById('time_color_picker');
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+    var config_set = document.getElementById('config_set');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['high_contrast']) {
+      highContrastCheckbox.checked = JSON.parse(localStorage['high_contrast']);
+		}	
+    if(localStorage['config_set']) {
+      config_set.value = localStorage['config_set'];
+      backgroundColorPicker.value = localStorage['background_color'];
+      timeColorPicker.value = localStorage['time_color'];
+      dateColorPicker.value = localStorage['date_color'];
+      secsColorPicker.value = localStorage['secs_color'];
+    }
+  })();
+  </script>
+</html>

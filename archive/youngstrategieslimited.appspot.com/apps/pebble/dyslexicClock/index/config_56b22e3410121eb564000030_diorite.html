@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dyslexic Clock Configuration</title>
+<link rel='stylesheet' type='text/css' href='/youngstrategieslimited.appspot.com/apps/pebble/dyslexicClock/css/slate.css'>
+<script src='/youngstrategieslimited.appspot.com/apps/pebble/dyslexicClock/js/slate.bin'></script>
+<style>
+@font-face {
+	font-family: 'OpenDyslexic';
+	src: url('fonts/OpenDyslexic-Regular.woff') format('woff');
+}
+
+body,select,input[type=text],input[type=time],input[type=date],input[type=button],.item-container-header
+	{
+	font-family: 'OpenDyslexic', sans-serif !important;
+}
+
+.title {
+	padding: 15px 10px;
+	text-transform: uppercase;
+	font-family: 'OpenDyslexic', sans-serif;
+	font-size: 1.2em;
+	font-weight: 500;
+	color: #888888;
+	text-align: center;
+}
+
+.watchFace{
+	width:144px;
+	height:168px;
+	margin: auto;
+	 border-radius: 25px;
+	 background-color: black;
+    color: yellow;
+    text-align: center;
+    vertical-align: middle;
+	border:10px solid darkgray; 
+	font-size:45px;
+	line-height:168px;
+}
+
+</style>
+</head>
+
+<body>
+	<h1 class='title'>Dyslexic Clock Configuration</h1>
+
+	<div class='item-container'>
+		<div class='item-container-content'>
+			<div class='item'>Use this configuration page to choose the
+				settings you would like applied to this app.</div>
+		</div>
+	</div>
+
+	<div class='item-container'>
+		<div class='item-container-header'>Clock colours when connected
+			to bluetooth.
+			<div class="watchFace" id="bluetooth_on_watchface">
+				12:43
+			</div>
+		</div>
+		<div class='item-container-content'>
+			<label class='item'> Background Colour <input id='background_connected_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+			</label>
+		</div>
+		<div class='item-container-content'>
+			<label class='item'> Text Colour <input id='text_connected_color_picker' type='text' class='item-color item-color-sunny' value='#FFFF00'>
+			</label>
+		</div>
+		<div class='item-container-footer'>Choose the app's background
+			and text colours.</div>
+	</div>
+
+	<div class='item-container'>
+		<div class='item-container-header'>Clock colours when NOT
+			connected to bluetooth.</div>
+			<div class="watchFace" id="bluetooth_off_watchface">
+				12:43
+			</div>
+		<div class='item-container-content'>
+			<label class='item'> Background Colour <input id='background_not_connected_color_picker' type='text' class='item-color item-color-sunny' value='#FFFF00'>
+			</label>
+		</div>
+		<div class='item-container-content'>
+			<label class='item'> Text Colour <input id='text_not_connected_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+			</label>
+		</div>
+		<div class='item-container-footer'>Choose the app's background
+			and text colour for when the watch is not connected to your phone.</div>
+	</div>
+
+	<div class='item-container'>
+		<div class='button-container'>
+			<input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+		</div>
+	</div>
+</body>
+<script>
+
+	function colourFireEvent(){
+		applyWatchFaceColours('background_connected_color_picker', 'text_connected_color_picker',
+				'bluetooth_on_watchface');
+		
+		applyWatchFaceColours('background_not_connected_color_picker', 'text_not_connected_color_picker',
+				'bluetooth_off_watchface');
+	}
+	
+	function applyWatchFaceColours(backgroundId, colorId, watchId){
+		var background_connected_color_picker = document
+		.getElementById(backgroundId).value;
+
+		var text_connected_color_picker = document
+			.getElementById(colorId).value;
+		
+		var watchface = document.getElementById(watchId);
+		watchface.style.backgroundColor = background_connected_color_picker.replace("0x","#");
+		watchface.style.color = ""+text_connected_color_picker.replace("0x","#");
+	}
+
+	function getConfigData() {
+		
+		var background_connected_color_picker = document
+				.getElementById('background_connected_color_picker');
+		
+		var text_connected_color_picker = document
+				.getElementById('text_connected_color_picker');
+		
+		var background_not_connected_color_picker = document
+				.getElementById('background_not_connected_color_picker');
+
+		var text_not_connected_color_picker = document
+				.getElementById('text_not_connected_color_picker');
+		
+		var options = {
+			'background_connected_color_picker' : background_connected_color_picker.value,
+			'text_connected_color_picker' : text_connected_color_picker.value,
+			'background_not_connected_color_picker' : background_not_connected_color_picker.value,
+			'text_not_connected_color_picker' : text_not_connected_color_picker.value
+		};
+
+		// Save for next launch
+		localStorage['background_connected_color_picker'] = options['background_connected_color_picker'];
+		localStorage['text_connected_color_picker'] = options['text_connected_color_picker'];
+		localStorage['background_not_connected_color_picker'] = options['background_not_connected_color_picker'];
+		localStorage['text_not_connected_color_picker'] = options['text_not_connected_color_picker'];
+		
+		console.log('Got options: ' + JSON.stringify(options));
+		return options;
+	}
+
+	function getQueryParam(variable, defaultValue) {
+		var query = location.search.substring(1);
+		var vars = query.split('&');
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split('=');
+			if (pair[0] === variable) {
+				return decodeURIComponent(pair[1]);
+			}
+		}
+		return defaultValue || false;
+	}
+
+	var submitButton = document.getElementById('submit_button');
+	submitButton.addEventListener('click', function() {
+		console.log('Submit');
+
+		// Set the return URL depending on the runtime environment
+		var return_to = getQueryParam('return_to', 'pebblejs://close#');
+		document.location = return_to
+				+ encodeURIComponent(JSON.stringify(getConfigData()));
+	});
+
+	(function() {	
+		
+		if (localStorage['background_connected_color_picker']) {
+			document.getElementById('background_connected_color_picker').value = localStorage['background_connected_color_picker'];
+		}
+		if (localStorage['text_connected_color_picker']) {
+			document.getElementById('text_connected_color_picker').value = localStorage['text_connected_color_picker'];
+		}
+		if (localStorage['background_not_connected_color_picker']) {
+			document.getElementById('background_not_connected_color_picker').value = localStorage['background_not_connected_color_picker'];
+		}
+		if (localStorage['text_not_connected_color_picker']) {
+			document.getElementById('text_not_connected_color_picker').value = localStorage['text_not_connected_color_picker'];
+		}
+		colourFireEvent();
+	})();
+</script>
+</html>

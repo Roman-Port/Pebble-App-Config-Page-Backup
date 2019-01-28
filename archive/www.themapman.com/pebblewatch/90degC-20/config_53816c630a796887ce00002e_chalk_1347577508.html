@@ -1,0 +1,164 @@
+﻿
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>90 Degrees C Settings</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' href='/code.jquery.com/mobile/1.3.2/jquery.css'>
+    <script src='/code.jquery.com//jquery-1.js'></script>
+    <script src='/code.jquery.com/mobile/1.3.2/jquery.js'></script>
+    <style>
+      .ui-header .ui-title { margin-left: 1em; margin-right: 1em; text-overflow: clip; }
+      /*.ui-radio { width: 50%; }*/
+    </style>
+  </head>
+  <body>
+    <div data-role='page' id='main'>
+      <div data-role='header' class='jqm-header' data-theme='b'>
+        <h1>90 degrees C Settings</h1>
+      </div>
+
+      <div data-role='content'>
+
+        <div data-role="fieldcontain">
+          <label for="gps_switch">Use GPS <strong>OR</strong> enter your LOCATION if use gps=NO</label>
+          <select name="gps_switch" id="gps_switch" data-theme="c" data-role="slider" data-track-theme="d">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+            <label for="location"></label>
+          <input type="text" name="location" id="location" value="">
+<p>
+
+          <fieldset data-role="controlgroup" data-type="horizontal">
+            <legend>Units:</legend>
+
+            <label for="celsius">Celsius</label>
+            <input type="radio" id="celsius" name="units" value="celsius" data-theme="c">
+
+            <label for="fahrenheit">Fahrenheit</label>
+            <input type="radio" id="fahrenheit" name="units" value="fahrenheit" data-theme="c">
+          </fieldset>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="invert_color">Invert the TIME area</label>
+          <select name="invert_color" id="invert_color" data-theme="c" data-role="slider" data-track-theme="d">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
+        
+              <div data-role="fieldcontain">
+          <label for="blink">Blink</label>
+          <select name="blink" id="blink" data-theme="c" data-role="slider" data-track-theme="d">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
+        
+        <div data-role="fieldcontain">
+          <label for="bluetoothvibe">Bluetooth vibration</label>
+          <select name="bluetoothvibe" id="bluetoothvibe" data-theme="c" data-role="slider" data-track-theme="d">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+       <p>
+          <label for="hourlyvibe">Hourly vibration</label>
+          <select name="hourlyvibe" id="hourlyvibe" data-theme="c" data-role="slider" data-track-theme="d">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
+
+
+           <div data-role="fieldcontain">
+          <label for="hidebatt">Show Battery or Seconds </label>
+          <select name="hidebatt" id="hidebatt" data-theme="c" data-role="slider" data-track-theme="d">
+            <option value="false">Batt</option>
+            <option value="true">Sec</option>
+          </select>
+        <p>
+          <label for="hidedate">Hide month/day/date</label>
+          <select name="hidedate" id="hidedate" data-theme="c" data-role="slider" data-track-theme="d">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        <p>
+          <label for="hideweather">Hide weather</label>
+          <select name="hideweather" id="hideweather" data-theme="c" data-role="slider" data-track-theme="d">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
+        
+        
+        <div class='ui-body ui-body-b'>
+          <fieldset class='ui-grid-a'>
+            <div class='ui-block-a'><button type='submit' data-theme='d' id='b-cancel'>Cancel</button></div>
+            <div class='ui-block-b'><button type='submit' data-theme='b' id='b-submit'>Submit</button></div>
+          </fieldset>
+        </div>
+
+      </div>
+    </div>
+    <script>
+      function getQueryVariable(variable) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (pair[0] == variable)
+            return decodeURIComponent(pair[1]);
+        }
+        return false;
+      }
+
+      function saveOptions() {
+        var options = {
+          'use_gps': $('#gps_switch').val(),
+          'location': $('#location').val(),
+          'units': $('input:radio[name=units]:checked').val(),
+		  'invert_color': $('#invert_color').val(),
+          'bluetoothvibe': $('#bluetoothvibe').val(),
+          'hourlyvibe': $('#hourlyvibe').val(),
+		  'hidebatt': $('#hidebatt').val(),
+          'hidedate': $('#hidedate').val(),
+          'hideweather': $('#hideweather').val(),
+          'blink': $('#blink').val()
+        }
+        return options;
+      }
+
+      $().ready(function() {
+        $('#b-cancel').click(function() {
+          document.location = 'pebblejs://close#';
+        });
+        $('#b-submit').click(function() {
+          document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(saveOptions()));
+        });
+
+        $('#gps_switch').val(getQueryVariable('use_gps')).change();
+        $('#location').val(getQueryVariable('location'));
+        if (getQueryVariable('units') == "celsius") {
+          $('input:radio[name=units][value=celsius]').prop('checked', true).trigger("click");
+        } else {
+         $('input:radio[name=units][value=fahrenheit]').prop('checked', true).trigger("click");
+        }
+        $('#invert_color').val(getQueryVariable('invert_color')).change();
+        $('#bluetoothvibe').val(getQueryVariable('bluetoothvibe')).change();
+        $('#hourlyvibe').val(getQueryVariable('hourlyvibe')).change();
+		$('#hidebatt').val(getQueryVariable('hidebatt')).change();
+        $('#hidedate').val(getQueryVariable('hidedate')).change();
+        $('#hideweather').val(getQueryVariable('hideweather')).change();
+		$('#blink').val(getQueryVariable('blink')).change();
+        // Disable location field based on GPS toggle
+        $('#location').prop('disabled', $('#gps_switch').val() == "true");
+        $('#gps_switch').change(function() {
+          $('#location').prop('disabled', $('#gps_switch').val() == "true");
+        });
+      });
+    </script>
+  </body>
+</html>

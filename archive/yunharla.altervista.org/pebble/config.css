@@ -1,0 +1,294 @@
+/* On/Off flipswitch (checkbox) */
+.onoffswitch {
+	position: relative; width: 90px;
+	-webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+	float: left;
+}
+.onoffswitch-checkbox {
+	display: none;
+}
+.onoffswitch-label {
+	display: block; overflow: hidden; cursor: pointer;
+	border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+	display: block; width: 200%; margin-left: -100%;
+	transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+	display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+	font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+	box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+	content: "ON";
+	padding-left: 10px;
+	background-color: #00FF00; color: #000000;
+}
+.onoffswitch-inner:after {
+	content: "OFF";
+	padding-right: 10px;
+	background-color: #EEEEEE; color: #FF0000;
+	text-align: right;
+}
+.onoffswitch-switch {
+	display: block; width: 18px; margin: 6px;
+	background: #FFFFFF;
+	position: absolute; top: 0; bottom: 0;
+	right: 56px;
+	border: 2px solid #999999; border-radius: 20px;
+	transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+	margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+	right: 0px;
+}
+.onoffswitch-description {
+	vertical-align: middle;
+	height: 30px;
+	display: table-cell;
+	padding-top: 5px; padding-left: 5px;
+}
+/* GPS/Location switch*/
+.onoffswitch-gps {
+	width: 145px;
+}
+.onoffswitch-gps-inner:before {
+	content: "Use GPS" !important;
+}
+.onoffswitch-gps-inner:after {
+	content: "Use Location:" !important;
+	color: white;
+	background-color: #2673ec;
+}
+.onoffswitch-gps-switch {
+	right: 110px;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-gps-switch {
+	right: 0px;
+}
+/* Date format switch*/
+.onoffswitch-date {
+}
+.onoffswitch-date-inner:before {
+	content: "MMDD" !important;
+}
+.onoffswitch-date-inner:after {
+	content: "DDMM" !important;
+	color: white;
+	background-color: #ff2e12;
+}
+/* 4th row switch*/
+.onoffswitch-row4 {
+	width: 150px;
+}
+.onoffswitch-row4-inner:before {
+	content: "Show Dual Time" !important;
+}
+.onoffswitch-row4-inner:after {
+	content: "Show Year" !important;
+	color: white;
+	background-color: #2673ec;
+}
+.onoffswitch-row4-switch {
+	right: 110px;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-row4-switch {
+	right: 0px;
+}
+
+/*
+ * @CSS3 Metro Dropdown
+ * @author Martin Ivanov
+ * @website http://wemakesitesnet
+ * @blog http://acidmartin.wordpress.com
+ * @twitter https://twitter.com/#!/wemakesitesnet
+ **/
+
+:root .css3-metro-dropdown option,
+:root .css3-metro-dropdown:after,
+:root .css3-metro-dropdown::after,
+:root .css3-metro-dropdown select
+{
+    color: #fff;
+}
+
+:root .css3-metro-dropdown select,
+:root .css3-metro-dropdown:after,
+:root .css3-metro-dropdown::after
+{
+    display: block;
+    background: #78ba00;
+}
+
+:root .css3-metro-dropdown select,
+:root .css3-metro-dropdown option
+{
+    padding: 8px;
+}
+
+:root .css3-metro-dropdown
+{
+    position: relative;
+    display: inline-block;
+    border: 0;
+}
+
+:root .css3-metro-dropdown::after
+{
+    content: "\25bc";
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 32px;
+    font-size: 14px;
+    line-height: 34px;
+    text-align: center;
+
+    -webkit-pointer-events: none;
+    -moz-pointer-events: none;
+    pointer-events: none;
+}
+
+:root .css3-metro-dropdown select
+{
+   height: 34px;
+   border: 0;
+   vertical-align: middle;
+   font: normal 14px/16px "Segoe UI", Arial, Helvetica, Sans-serif;
+   outline: 0 none;
+}
+
+:root .css3-metro-dropdown option
+{
+    background: #fff;
+    color: #333;
+}
+
+/* more colors */
+:root .css3-metro-dropdown-color-ff1d77 select,
+:root .css3-metro-dropdown-color-ff1d77:after,
+:root .css3-metro-dropdown-color-ff1d77::after
+{
+    background: #ff1d77;
+}
+
+:root .css3-metro-dropdown-color-2673ec select,
+:root .css3-metro-dropdown-color-2673ec:after,
+:root .css3-metro-dropdown-color-2673ec::after
+{
+	background: #2673ec;
+}
+
+:root .css3-metro-dropdown-color-ff2e12 select,
+:root .css3-metro-dropdown-color-ff2e12:after,
+:root .css3-metro-dropdown-color-ff2e12::after
+{
+    background: #ff2e12;
+}
+
+.css3-metro-dropdown-description {
+	vertical-align: middle;
+	height: 34px;
+	display: table-cell;
+	padding-top: 5px; padding-left: 5px;
+}
+
+/* green save button */
+.saveButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #a4e271;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #a4e271;
+	box-shadow:inset 0px 1px 0px 0px #a4e271;
+	background-color:#b3ff00;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #74b807;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	/*text-shadow:0px 1px 0px #528009;*/
+}
+.saveButton:hover {
+	background-color:#77a809;
+}
+.saveButton:active {
+	position:relative;
+	top:1px;
+}
+.saveButton:disabled {
+	background-color:#EEEEEE;
+	color: #333333;
+	border:1px solid #CCCCCC;
+}
+
+/* orange radio button */
+input[type=radio].css-checkbox {
+	position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+}
+
+input[type=radio].css-checkbox + label.css-label {
+	padding-left:26px;
+	height:21px;
+	display:inline-block;
+	line-height:21px;
+	background-repeat:no-repeat;
+	background-position: 0 0;
+	font-size:21px;
+	vertical-align:middle;
+	cursor:pointer;
+}
+
+input[type=radio].css-checkbox:checked + label.css-label {
+	background-position: 0 -21px;
+}
+label.css-label {
+	background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAqCAYAAABcOxDuAAAEoklEQVRIia2VXUxbZRjHfz2lLQRGx8JHnbhIYjGyEjaXaLbALlw03miiZl7sjpvJOTPOMM2MXs/FTZeYubeTxOAuOhJn4leXLJtxI1lGskA6NEAoTggQsMPRA2PQ0x77etGW9ZSWj+E/ORfned7nl/Oc933/j02SX34htgFtwFvA81mpv4GfgW9UTbudr9aWD+oX4oTT6fy4sbGRuro6qqqqlnOLi4uMjY0xNDTEvXv3fgTOqZr2a0GoX4ingeNer7etpaUFl8tVoI+URkdHuX79OoZhHFM17cxyQmY9Qgh/KBSSG5Gu6/LChQtSCHE4w8kGftnd3b0hYEYzMzOyo6NDCiE8ElDSbfvKy8vfa25uXrXdQqqsrGT37t0Ax8hAgSO7du1CUZSChWupqakJl8v1gV+IbfYaIRSbzfbLgQMHKCoqemyo3W7n/v37zM7O/q4AO7Zs2bLmTq9H1dXVAC8qQG1paemmgQBpznYFcG7mX2bLbrcDOBXgrwcPHvwv0IWFBYBxRdW0sfn5+fF0YFOamJgAuJbp+/u7d+9uCmgYBpOTkwBXM1B/X18fiUTisaGhUAjTND9VNS2mAKia9qdhGJ93d3c/FnB6epr+/n6Az4CVhnLr1q0N3ftIJCI7OzulEOJQhpN7hT68c+cOuq63tbS0UFZWVvDrpJQMDAzQ09ODaZqtqqZdzOQKmfRHiqKcrK+vp66ujoqKCtxuN4lEgmg0yvj4OCMjI+i6/hXgVzVtMLs+LzQNdgKHgDeABuAZYAEYBK4AAVXTwvlqC0I3ozVtyS9EA/AC4ATiwO3cdnNV6J8WA+3AkYqKiu01NTUoikIymSQSiRCNRqeAc8AZVdNia0L9QrQXFRV9sXPnTpqamsjnYA8fPqS/v5+BgQFM07QOPVhxTk8EAgGp6/q6zqiu6zIQCEghxMlsTjawvaurS8ZisQ0dfsMwZFdXlxRCtGdYNplqudzhcMwdPHgQt9tt7TWxBBN9EBmEmgZ4ag84SixL5ubmuHTpEolEwq1q2nxm94/7fL6VwNvfwg/vQ2zuUazYDa+fgr2Hl0Nutxufz0coFDoOfGITqcH3b2trq3VO9XTAd++s2KRlvf21BWwYBp2dnUgp7Qqwz+PxWIGxOfjpWGEgpPKLs8uvLpcLj8cDsE8B6rdu3WotGLoCxhqTwFiA4WuWUJpTrwDVxcXF1oLZ0dWBBdalOdUKEE8mk9bFpVWsSznr0py4AgxGo1Hr4udeBcW+OlCxw7MvW0JpzqAC3JiamsI0zUdZ95Ow/+jq0P1HoWLH8qtpmkxNTQHcUFRNi5mmeX54eNha9NopaHk3P3Dv4VQ+S8PDw5imeV7VtFjm8J/r7e1t83q9OJ3OR+29eRb2qTDyG0z/AU80gvcl8DRYgPF4nN7eXkg5l+XunwwGgzKZTG7o7ieTSRkMBi2mkutSZ4PBoIzH4+sCxuNxefnyZSmEOJvXpbLApwOBgAyHw6sCw+FwxvZO5zIKOX8zoJaUlByqra2lqqoKh8NBIpFgZmaGyclJlpaWLpKapDdz61cdfH4hKoFXgD1AGalp2gdcVTXtn0J1/wH2xGisrr1O2QAAAABJRU5ErkJggg==);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+label.css-label-disabled {
+	background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAqCAQAAAD2MthlAAAAB3RJTUUH3wcZEBIVuYL3FwAAAAlwSFlzAAAewQAAHsEBw2lUUwAAAARnQU1BAACxjwv8YQUAAAJUSURBVHjajZWxS1tRFMYfDiVDcRCHjh1Kh+DcKVPp4NQ/wEkc/AMySbcWQoaQQYTv2VgbFV8ztBACqUugqUgUqeIr6qAtLQVtse2QEkujtvl6XvLey831vZecw+Ny7/3lcs6557sxnhhdxwgeYRds+zc8xT11VwVTz7jN7+zYbx7yFVHEAw3FbZgVNqnbJy4SyV7U3GOw1blMTPsoZtcZbj+YI261UYyt8h+j7B2R6aDmAaPt0ol4xMCQGZCObhViQnJf7QuS74lZA4niAOhH4qWB+6UB0M9EacAA9ok5pwJfGn3RNeKhg2btPmDTuYSYg95ZlMpF2RaR8i42U4kAv3KeGFbaZTMEPGNeyq921k2Ya9TTa0nmEuXk9daemecbqWCdzq2fSZO8kBIhHqACgW9gEiV8ELk0sI3HuBsimH5+bQFxOXlavngEipjo9bQg8b6Vr0CcyjwWgCKZY43nSv7nMs/5IuwWK2W1M9etTotIKyiShVAlXDihJF0UwwvKiX95IoU/kbF78oJ3sUht+cuHXOHztq/ID7R2UWW472Kee3CTJjGkaOtC3pFedJl/3L0ikTAwVXWnRxro+JG7VyWmpEm8SHcC0J1utDNSqFpIpGq0NSmYgfGyO21IE/eCef5y98rEuNx8jlfuwoaGbrjrV74M/eetxXUFrMq8YweE6T6aS1Ioz37SFsiWsXu1S8SY1wPpsn+Cbi0nzrTaWXPlwLfgkq9FX3q/Ziwea+Cx04KZIBUkYOXl0bWlaWwZRf8WEqHawigmkJU/t6yMo717/wFyaxZHCBSs3QAAAABJRU5ErkJggg==) !important;
+}
+
+/* blue textbox */
+.textbox-blue {
+	padding:3px;
+	background-color:#2672ec;
+	color:#ffffff;
+	font-size:16px;
+	border-width:2px; border-style:solid; border-color:#999999;
+}
+.textbox-blue-description {
+	vertical-align: middle;
+	height: 30px;
+	display: table-cell;
+	padding-top: 2px; padding-left: 5px;
+}
+
+.textbox-green {
+	background-color:#00FF00;
+	color: black;
+}
+
+.textbox-red {
+	background-color:#FF0000;
+	color: white;
+}
+
+.location-status-fail {
+	background-color:#ff0000;
+	color:#ffffff;
+}

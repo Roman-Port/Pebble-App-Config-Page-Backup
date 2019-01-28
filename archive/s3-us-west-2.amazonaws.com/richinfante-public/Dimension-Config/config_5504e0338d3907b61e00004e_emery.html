@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dimension Configuration</title>
+    <style>
+	    body{
+		    background: 000;
+		    color:fff;
+		    font-family: 'Roboto';
+		    text-align: center;
+	    }
+	    
+	    button{
+		    background:#198be8;
+		    border-radius: 8px;
+		    border-style:solid;
+		    border:none;
+		    padding:.5em;
+		    color:white;
+		    min-width: 100px;
+	    }
+	    
+	    .target:not(:target){
+		    display: none;
+	    }
+	    
+	    .target:target{
+		    display: block;
+	    }
+	</style>
+  </head>
+  <body>
+    <h1>Dimension Configuration</h1>
+	
+		<p>
+			Line thickness
+			<input id="thickness" type="text" pattern="[0-9]*" value="2" placeholder="1-15">
+		</p>
+	
+	<div class="target" id="time">
+		<a href="http://developer.getpebble.com/tools/color-picker">For ideas on what to enter here, look at Pebble's colorpicker</a>
+	    <p>
+			Clock Color
+			#<input id="foreground" type="“text”" placeholder="CCCCFF" value="CCCCFF">
+			(HEX COLOR)
+	    </p>
+	    
+	    <p>
+			Background Color
+			#<input id="background" type="“text”" placeholder="000000" value="000000">
+			(HEX COLOR)
+	    </p>
+	    <a href="#classic">Using classic pebble?</a>
+	</div>
+	<div class="target" id="classic">
+		<p>
+			Invert Display (to black on white)
+			<input type="checkbox" id="invert">
+		</p>
+	    
+	    <a href="#time">Using pebble time?</a>
+	</div>
+		<p>
+	    	<button id="save_button">Save</button>
+	    </p>
+    <script>
+      //Setup to allow easy adding more options later
+      function saveOptions() {
+	      
+        var foreground = document.getElementById("foreground").value;
+        var background = document.getElementById("background").value;
+        var thickness = document.getElementById("thickness").value;
+		
+        if(window.location.hash == "#classic"){
+	        if(document.getElementById("invert").checked){
+		        localStorage.setItem("invert", 1);
+		        foreground = "000000";
+		        background = "FFFFFF";
+	        }else{
+		       	localStorage.setItem("invert", 0);
+				background = "000000";
+		        foreground = "FFFFFF";
+	        }
+	        localStorage.setItem("useClassic", 1);
+        }else{
+	      	localStorage.setItem("useClassic", 0);
+        }
+        
+
+		localStorage.setItem("foreground", foreground);
+		localStorage.setItem("background" , background);
+		localStorage.setItem("thickness", thickness);
+		
+        var options = {
+		  "KEY_FOREGROUND" : parseInt("0x" + foreground),
+		  "KEY_BACKGROUND" : parseInt("0x" + background),
+		  "KEY_THICKNESS" : parseInt(thickness)
+        }
+        
+        return options;
+      };
+      
+      var submitButton = document.getElementById("save_button");
+      submitButton.addEventListener("click", 
+        function() {
+          console.log("Submit");
+          var options = saveOptions();
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+          
+          document.location = location;
+        }, 
+      false);
+      
+      window.addEventListener("DOMContentLoaded", function(){
+	      //Load previous values
+	      
+	      if(localStorage.getItem("useClassic") == 0){
+		      window.location.hash = "time";		      
+	      }else{
+		      window.location.hash = "classic";
+	      }
+
+		   document.getElementById("invert").checked = localStorage.getItem("invert") == 1;
+	      document.getElementById("foreground").value = localStorage.getItem("foreground");
+	      document.getElementById("background").value = localStorage.getItem("background");
+	      document.getElementById("thickness").value = localStorage.getItem("thickness");
+      });
+    </script>
+  </body>
+</html>

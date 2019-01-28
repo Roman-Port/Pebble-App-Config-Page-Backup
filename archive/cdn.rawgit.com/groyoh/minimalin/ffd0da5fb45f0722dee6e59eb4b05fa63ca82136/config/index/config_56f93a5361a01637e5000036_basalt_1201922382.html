@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Minimalin Configuration</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <script type='text/javascript' src='/cdn.rawgit.com/groyoh/minimalin/ffd0da5fb45f0722dee6e59eb4b05fa63ca82136/config/js/ractive.js'></script>
+    <script type='text/javascript' src='/cdn.rawgit.com/groyoh/minimalin/ffd0da5fb45f0722dee6e59eb4b05fa63ca82136/config/js/ractive-transitions-slide.js'></script>
+    <script type='text/javascript' src='/cdn.jsdelivr.net/ractive.load/latest/ractive-load.js'></script>
+    <link rel='stylesheet' type='text/css' href='/cdn.rawgit.com/groyoh/minimalin/ffd0da5fb45f0722dee6e59eb4b05fa63ca82136/config/css/slate.css'>
+    <link rel="prefetch" href="/cdn.rawgit.com/groyoh/minimalin/ffd0da5fb45f0722dee6e59eb4b05fa63ca82136/config/fonts/Nupe.bin">
+    <link rel="prefetch" href="/cdn.rawgit.com/groyoh/minimalin/ffd0da5fb45f0722dee6e59eb4b05fa63ca82136/config/template/ItemColor.html">
+    <link rel="prefetch" href="/cdn.rawgit.com/groyoh/minimalin/ffd0da5fb45f0722dee6e59eb4b05fa63ca82136/config/template/ToggleWithItemColor.html">
+    <link rel="prefetch" href="/cdn.rawgit.com/groyoh/minimalin/ffd0da5fb45f0722dee6e59eb4b05fa63ca82136/config/template/Tabs.html">
+    <link rel="prefetch" href="/cdn.rawgit.com/groyoh/minimalin/ffd0da5fb45f0722dee6e59eb4b05fa63ca82136/config/template/Input.html">
+    <link rel="prefetch" href="/cdn.rawgit.com/groyoh/minimalin/ffd0da5fb45f0722dee6e59eb4b05fa63ca82136/config/template/Toggle.html">
+  </head>
+  <body id="body">
+    <script type='text/javascript'>
+     Ractive.DEBUG = false;
+     var query = function(variable, defaultVariable) {
+       var query = location.search.substring(1);
+       var vars = query.split('&');
+       for (var i = 0; i < vars.length; i++) {
+         var pair = vars[i].split('=');
+         if (pair[0] === variable) {
+           return decodeURIComponent(pair[1]);
+         }
+       }
+       return defaultVariable || null;
+     };
+
+     var queryJSON = function(variable, defaultVariable) {
+       var value = query(variable, defaultVariable);
+       try{
+         return JSON.parse(value);
+       }catch(e){
+         return defaultVariable;
+       }
+     }
+     var config = queryJSON('config', {});
+     var bw = config.platform == 'aplite' || config.platform == 'diorite';
+     var defaultsThemes;
+     if(bw){
+       defaultsThemes = [
+         {
+           name: 'Dark',
+           minute_hand_color: 0xFFFFFF,
+           hour_hand_color:  0xFFFFFF,
+           background_color: 0x000000,
+           time_color: 0xFFFFFF,
+           info_color: 0xFFFFFF
+         },
+         {
+           name: 'Light',
+           minute_hand_color: 0x000000,
+           hour_hand_color:  0x000000,
+           background_color: 0xFFFFFF,
+           time_color: 0x000000,
+           info_color: 0x00000
+         }
+       ];
+     }else{
+       defaultsThemes = [
+         {
+           name: 'Default',
+           rainbow_mode: false,
+           minute_hand_color: 0xFFFFFF,
+           hour_hand_color:  0xFF0000,
+           background_color: 0x000000,
+           time_color: 0xAAAAAA,
+           info_color: 0x555555
+         },
+         {
+           name: 'Rainbow',
+           rainbow_mode: true,
+           minute_hand_color: 0xFF0000,
+           hour_hand_color:  0xFFFFFF,
+           background_color: 0x000000,
+           time_color: 0xAAAAAA,
+           info_color: 0x555555
+         },
+         {
+           name: 'Night',
+           rainbow_mode: false,
+           minute_hand_color: 0xFFFFFF,
+           hour_hand_color: 0x55AAAA,
+           background_color: 0x000055,
+           time_color: 0xFFFF00,
+           info_color: 0x5555AA
+         },
+         {
+           name: 'Lobster',
+           rainbow_mode: false,
+           background_color: 0xaaaaaa,
+           hour_hand_color: 0xf56c38,
+           minute_hand_color: 0xffffff,
+           time_color: 0xaa5500,
+           info_color: 0x555555
+         }
+       ];
+     }
+     var defaults = {
+       platform: 'basalt',
+       date_displayed:  true,
+       health_enabled: false,
+       bluetooth_icon: 1,
+       battery_displayed_at: -1,
+       temperature_unit: 0,
+       refresh_rate: 20,
+       weather_enabled: true,
+       location: '',
+       vibrate_on_the_hour: false,
+       military_time: false,
+       selected_theme: 0,
+       themes: defaultsThemes
+     }
+     var data = JSON.parse(JSON.stringify(defaults));
+     for(var key in config){
+       if(config.hasOwnProperty(key)){
+         data[key] = config[key];
+       }
+     }
+     var currentTheme = data.themes[data.selected_theme];
+     if(data.selected_theme !== false){
+       for(var key in currentTheme){
+         if(currentTheme.hasOwnProperty(key)){
+           data[key] = currentTheme[key];
+         }
+       }
+     }
+     data.defaults = defaults;
+     Ractive.load('template/ConfigView.html').then(function(ConfigView) {
+       new ConfigView({
+         el: 'body',
+         data: data
+       });
+     });
+    </script>
+  </body>
+</html>

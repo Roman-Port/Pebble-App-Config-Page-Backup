@@ -1,0 +1,77 @@
+  // Get a handle to the button's HTML element
+  var submitButton = document.getElementById('submitButton');
+
+  // Add a 'click' listener
+  submitButton.addEventListener('click', function() {
+    // Get the config data from the UI elements
+    var secondsCheckbox = document.getElementById('secondsCheckbox');
+    var dateCheckbox = document.getElementById('dateCheckbox');
+    var dateTextDisplay = document.getElementById('dateTextDisplay');
+    var whiteBackgroundCheckbox = document.getElementById('whiteBackgroundCheckbox');
+    var boldHourCheckbox = document.getElementById('boldHourCheckbox');
+    var boldDateCheckbox = document.getElementById('boldDateCheckbox');
+    var healthCheckbox = document.getElementById('healthCheckbox');
+    var healthTextDisplay = document.getElementById('healthTextDisplay');
+    
+
+
+
+    // Make a data object to be sent, coercing value types to integers
+    var options = {
+      'secondsCheckbox': secondsCheckbox.checked == true ? 1 : 0,
+      'dateCheckbox': dateCheckbox.checked == true ? 1 : 0,
+      'dateTextDisplay': dateTextDisplay.value,
+      'whiteBackgroundCheckbox': whiteBackgroundCheckbox.checked == true ? 1 : 0,
+      'boldHourCheckbox': boldHourCheckbox.checked == true ? 1 : 0,
+      'boldDateCheckbox': boldDateCheckbox.checked == true ? 1 : 0,
+      'healthCheckbox': healthCheckbox.checked == true ? 1 : 0,
+      'healthTextDisplay': healthTextDisplay.value
+    };
+    
+    
+    // Save for next launch
+      //localStorage.setItem('secondsCheckbox',1);
+    localStorage.setItem('secondsCheckbox', options['secondsCheckbox']);
+    localStorage.setItem('dateCheckbox', options['dateCheckbox']);
+    localStorage.setItem('dateTextDisplay', options['dateTextDisplay']);
+    localStorage.setItem('whiteBackgroundCheckbox', options['whiteBackgroundCheckbox']);
+    localStorage.setItem('boldHourCheckbox', options['boldHourCheckbox']);
+    localStorage.setItem('boldDateCheckbox', options['boldDateCheckbox']);
+    localStorage.setItem('healthCheckbox', options['healthCheckbox']);
+    localStorage.setItem('healthTextDisplay', options['healthTextDisplay']);
+ 
+    // Determine the correct return URL (emulator vs real watch)
+    function getQueryParam(variable, defaultValue) {
+      var query = location.search.substring(1);
+      var vars = query.split('&');
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (pair[0] === variable) {
+          return decodeURIComponent(pair[1]);
+        }
+      }
+      return defaultValue || false;
+    }
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+    // Encode and send the data when the page closes
+    document.location = return_to + encodeURIComponent(JSON.stringify(options));
+  });
+  
+  (function() {
+  //localStorage.setItem('secondsCheckbox',1);
+  console.log(localStorage.getItem('whiteBackgroundCheckbox'));
+
+    // Load any previously saved configuration, if available
+    if (localStorage.getItem('secondsCheckbox')==0) {secondsCheckbox.checked=0};
+    if (localStorage.getItem('dateCheckbox')==0) {dateCheckbox.checked=0};
+    dateTextDisplay.value = localStorage.getItem('dateTextDisplay');
+    if (localStorage.getItem('whiteBackgroundCheckbox')==1) {whiteBackgroundCheckbox.checked=1};
+    if (localStorage.getItem('boldHourCheckbox')==0) {boldHourCheckbox.checked=0};
+    if (localStorage.getItem('boldDateCheckbox')==1) {boldDateCheckbox.checked=1};
+    if (localStorage.getItem('healthCheckbox')==1) {healthCheckbox.checked=1};
+    healthTextDisplay.value = localStorage.getItem('healthTextDisplay');
+    
+     // console.log(localStorage.getItem('secondsCheckbox'));
+
+  })();

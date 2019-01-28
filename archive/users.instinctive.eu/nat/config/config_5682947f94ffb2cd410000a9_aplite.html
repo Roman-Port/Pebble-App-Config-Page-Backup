@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" type="text/css" href="/cdn.rawgit.com/pebble/slate/v0.0.3/dist/css/slate.css">
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: "PT Sans", sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: 0x888888;
+    text-align: center;
+  }
+  </style>
+  <script>
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split("=");
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+
+  function onSubmit() {
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam("return_to", "pebblejs://close#");
+    var selectedFormat = document.getElementById("textFormat").value;
+    var options = {
+      "backgroundColor": document.getElementById("backgroundColorPicker").value,
+      "hourHandColor": document.getElementById("hourHandColorPicker").value,
+      "minuteHandColor": document.getElementById("minuteHandColorPicker").value,
+      "pinColor": document.getElementById("pinColorPicker").value,
+      "hourColor": document.getElementById("hourColorPicker").value,
+      "innerColor": document.getElementById("innerColorPicker").value,
+      "minuteColor": document.getElementById("minuteColorPicker").value,
+      "textColor": document.getElementById("textColorPicker").value,
+      "batteryColor": document.getElementById("batteryColorPicker").value,
+      "batteryColor2": document.getElementById("batteryColorPicker2").value,
+      "lowBatteryLevel": document.getElementById("lowBatteryLevel").value,
+      "bluetoothColor": document.getElementById("bluetoothColorPicker").value,
+      "bluetoothVibration": document.getElementById("bluetoothVibration").checked ? "1" : "0",
+      "textFormat": encodeURIComponent(selectedFormat === "%" ? document.getElementById("customFormat").value : selectedFormat),
+      "textFont": document.getElementById("textFont").value,
+    }
+    document.location = return_to + encodeURIComponent(JSON.stringify(options));
+  }
+
+  function setCustomFormatVisibility() {
+    document.getElementById("customFormatElement").style.display
+     = (document.getElementById("textFormat").value === "%")
+     ? "block" : "none";
+  }
+  </script>
+</head>
+<body onload="setCustomFormatVisibility()">
+  <div class="item-container">
+    <h1 class="title">Classic Lite</h1>
+  </div>
+
+ <div class="item-container">
+    <div class="item-container-header">Color Scheme</div>
+    <div class="item-container-content">
+      <label class="item">
+        Background Color
+        <input id="backgroundColorPicker" type="text" class="item-color item-color-normal" value="0xFFFFFF">
+      </label>
+      <label class="item">
+        Hour Hand Color
+        <input id="hourHandColorPicker" type="text" class="item-color item-color-normal" value="0x000000">
+      </label>
+      <label class="item">
+        Minute Hand Color
+        <input id="minuteHandColorPicker" type="text" class="item-color item-color-normal" value="0x000000">
+      </label>
+      <label class="item">
+        Central Pin Color
+        <input id="pinColorPicker" type="text" class="item-color item-color-normal" value="0x000000">
+      </label>
+      <label class="item">
+        Hour Mark Color
+        <input id="hourColorPicker" type="text" class="item-color item-color-normal" value="0x000000">
+      </label>
+      <label class="item">
+        Inner Rectangle Color
+        <input id="innerColorPicker" type="text" class="item-color item-color-normal" value="0xAAAAAA">
+      </label>
+      <label class="item">
+        Minute Mark Color
+        <input id="minuteColorPicker" type="text" class="item-color item-color-normal" value="0x000000">
+      </label>
+    </div>
+  </div>
+
+ <div class="item-container">
+    <div class="item-container-header">Low Battery Warning</div>
+    <div class="item-container-content">
+      <label class="item">
+        <input type="range" id="lowBatteryLevelSlider" class="item-slider" name="lowBatteryLevel" value="50">
+        <div class="item-input-wrapper item-slider-text">
+          <input type="text" id="lowBatteryLevel" class="item-input" name="lowBatteryLevel" value="50">
+        </div>
+      </label>
+      <label class="item">
+        Icon Color
+        <input id="batteryColorPicker" type="text" class="item-color item-color-normal" value="0x555555">
+      </label>
+      <label class="item">
+        Secondary Icon Color
+        <input id="batteryColorPicker2" type="text" class="item-color item-color-normal" value="0x555555">
+      </label>
+    </div>
+  </div>
+
+ <div class="item-container">
+    <div class="item-container-header">Bluetooth Warning</div>
+    <div class="item-container-content">
+      <label class="item">
+        Icon Color
+        <input id="bluetoothColorPicker" type="text" class="item-color item-color-normal" value="0x000000">
+      </label>
+      <label class="item">
+        Vibration
+        <input id="bluetoothVibration" type="checkbox" class="item-toggle" checked="">
+      </label>
+    </div>
+  </div>
+
+ <div class="item-container">
+    <div class="item-container-header">Info Text</div>
+    <div class="item-container-content">
+      <label class="item">
+        Color
+        <input id="textColorPicker" type="text" class="item-color item-color-normal" value="0x000000">
+      </label>
+      <label class="item">
+        Format
+        <select id="textFormat" class="item-select" onchange="setCustomFormatVisibility()">
+          <option class="item-select-option" value="">(disabled)</option>
+          <option class="item-select-option" value="Pebble">Pebble</option>
+          <option class="item-select-option" value="%a %d" selected="">Sun 31</option>
+          <option class="item-select-option" value="%d %b">31 Jan</option>
+          <option class="item-select-option" value="%b %d">Jan 31</option>
+          <option class="item-select-option" value="%d %m">31 01</option>
+          <option class="item-select-option" value="%m %d">01 31</option>
+          <option class="item-select-option" value="%a %d %m">Sun 31 01</option>
+          <option class="item-select-option" value="%a %m %d">Sun 01 31</option>
+          <option class="item-select-option" value="%">(Custom)</option>
+        </select>
+      </label>
+      <label class="item" id="customFormatElement">
+        <div class="item-input-wrapper">
+           <input type="text" class="item-input" name="customFormat" id="customFormat" placeholder="Custom Format">
+        </div>
+      </label>
+      <label class="item">
+        Font Size
+        <select id="textFont" class="item-select">
+          <option class="item-select-option" value="1" selected="">14</option>
+          <option class="item-select-option" value="2">18</option>
+          <option class="item-select-option" value="3">24</option>
+          <option class="item-select-option" value="4">28</option>
+        </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="button-container">
+      <input id="submitButton" type="button" class="item-button" value="SUBMIT" onclick="onSubmit()">
+    </div>
+  </div>
+
+  <script src="/cdn.rawgit.com/pebble/slate/v0.0.3/dist/js/slate.js"></script>
+  <script>
+    var handColor = getQueryParam("hands", "0x000000");
+    document.getElementById("backgroundColorPicker").value = getQueryParam("background", "0xFFFFFF");
+    document.getElementById("hourHandColorPicker").value = getQueryParam("hhand", handColor);
+    document.getElementById("minuteHandColorPicker").value = getQueryParam("mhand", handColor);
+    document.getElementById("pinColorPicker").value = getQueryParam("pin", handColor);
+    document.getElementById("hourColorPicker").value = getQueryParam("hours", "0x000000");
+    document.getElementById("innerColorPicker").value = getQueryParam("inner", "0xAAAAAA");
+    document.getElementById("minuteColorPicker").value = getQueryParam("minutes", "0x000000");
+    document.getElementById("lowBatteryLevelSlider").value =
+    document.getElementById("lowBatteryLevel").value = getQueryParam("battlvl", "50");
+    document.getElementById("batteryColorPicker").value = getQueryParam("battcol", "0x555555");
+    document.getElementById("batteryColorPicker2").value = getQueryParam("battcol2", "0x555555");
+    document.getElementById("bluetoothColorPicker").value = getQueryParam("bluetooth", "0x000000");
+    document.getElementById("bluetoothVibration").checked = (parseInt(getQueryParam("vibrate", "1")) > 0);
+    document.getElementById("textColorPicker").value = getQueryParam("textcol", "0x000000");
+    document.getElementById("textFont").value = getQueryParam("font", "1");
+
+    const textFmt = getQueryParam("textfmt", "Pebble");
+    var selectElement =  document.getElementById("textFormat");
+    selectElement.value = textFmt;
+    if (selectElement.value !== textFmt) {
+      selectElement.value = "%";
+      document.getElementById("customFormat").value = textFmt;
+    }
+
+    const versionTag = getQueryParam("v");
+    if (versionTag) {
+      document.getElementsByTagName("h1")[0].childNodes[0].nodeValue = "Classic Lite " + versionTag;
+    }
+  </script>
+</body>
+</html>

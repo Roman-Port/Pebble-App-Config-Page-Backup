@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+		<link rel="stylesheet" href="/robinhuett.github.io/SoliTime/css/slate.css">
+		
+		<title>SoliTime</title>
+	</head>
+	<body>
+		<form id="main-form">
+			<div class="item-container">
+				<div class="item-container-header">Visuals</div>
+				<div class="item-container-content">
+					<label class="item">
+						Bold hour
+						<input type="checkbox" class="item-toggle" name="toggle-1" id="boldhour_select">
+					</label>
+				</div>
+			</div>
+			
+			<div class="item-container">
+				<div class="item-container-header">Colors</div>
+				<div class="item-container-content">
+					<label class="item">
+						Primary
+						<input type="text" class="item-color item-color-normal" name="color-1" id="primarycolor_select">
+					</label>
+					<label class="item">
+						Secondary
+						<input type="text" class="item-color item-color-normal" name="color-2" id="secondarycolor_select">
+					</label>
+					<label class="item">
+						Background
+						<input type="text" class="item-color item-color-normal" name="color-3" id="backgroundcolor_select">
+					</label>
+				</div>
+				<div class="item-container-footer">
+					This only affects the Pebble Time.
+				</div>
+			</div>
+			
+			<div class="item-container">
+				<div class="item-container-header">Functionality</div>
+				<div class="item-container-content">
+					<label class="item">
+						Vibrate on BT connection loss
+						<input type="checkbox" class="item-toggle" name="toggle-2" id="vibrateonbt_select">
+					</label>
+					<label class="item item-hidden">
+						Show the current date
+						<input type="checkbox" class="item-toggle" name="toggle-3" id="showdate_select">
+					</label>
+				</div>
+			</div>
+			
+			<div class="item-container">
+				<div class="button-container">
+					<input type="button" class="item-button" id="save_button" value="SEND">
+				</div>
+			</div>
+		</form>
+
+	
+		<script type="text/javascript" src="/robinhuett.github.io/SoliTime/js/slate.js"></script>
+		<script>
+			function getQueryVariable(variable) 
+			{
+				var query = window.location.search.substring(1);
+				var vars = query.split("&");
+				for (var i=0;i<vars.length;i++) {
+					var pair = vars[i].split("=");
+					if(pair[0] == variable){return pair[1];}
+				}
+				
+				return(false);
+			}
+	
+			function fillOptions() {
+				var vibrateOnBtSelect = document.getElementById("vibrateonbt_select");
+				var showDateSelect = document.getElementById("showdate_select");
+				var boldHourSelect = document.getElementById("boldhour_select");
+				var primaryColorSelect = document.getElementById("primarycolor_select");
+				var secondaryColorSelect = document.getElementById("secondarycolor_select");
+				var backgroundgColorSelect = document.getElementById("backgroundcolor_select");
+				
+				vibrateOnBtSelect.checked = (getQueryVariable("vibrateonbt_select") === 'true');
+				showDateSelect.checked = (getQueryVariable("showdate_select") === 'true');
+				boldHourSelect.checked = (getQueryVariable("boldhour_select") === 'true');
+				primaryColorSelect.value = getQueryVariable("primarycolor_select");
+				secondaryColorSelect.value = getQueryVariable("secondarycolor_select");
+				backgroundgColorSelect.value = getQueryVariable("backgroundcolor_select");
+			}
+	
+			function saveOptions() {
+				var vibrateOnBtSelect = document.getElementById("vibrateonbt_select");
+				var showDateSelect = document.getElementById("showdate_select");
+				var boldHourSelect = document.getElementById("boldhour_select");
+				var primaryColorSelect = document.getElementById("primarycolor_select");
+				var secondaryColorSelect = document.getElementById("secondarycolor_select");
+				var backgroundgColorSelect = document.getElementById("backgroundcolor_select");
+		
+				var options = {
+					"KEY_VIBRATEONBT": vibrateOnBtSelect.checked,
+					"KEY_SHOWDATE": showDateSelect.checked,
+					"KEY_BOLDHOUR": boldHourSelect.checked,
+					"KEY_PRIMARYCOLOR": primaryColorSelect.value,
+					"KEY_SECONDARYCOLOR": secondaryColorSelect.value,
+					"KEY_BACKGROUNDCOLOR": backgroundgColorSelect.value
+				}
+	
+				return options;
+			}
+	
+			var submitButton = document.getElementById("save_button");
+			submitButton.addEventListener("click",
+				function() {
+					console.log("Submit");
+	
+					var options = saveOptions();					
+					var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+			  
+					document.location = location;
+				},
+				false
+			);
+		  
+			fillOptions();
+		</script>
+	</body>
+</html>

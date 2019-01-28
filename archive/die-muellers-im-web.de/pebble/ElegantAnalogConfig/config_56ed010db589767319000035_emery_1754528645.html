@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ElegantAnalog Watchface Configuration</title>
+	<script src="/die-muellers-im-web.de/pebble/ElegantAnalogConfig.bin"></script>
+	<link rel="stylesheet" href="/die-muellers-im-web.de/pebble/ElegantAnalogConfig.css">
+  </head>
+  <body onload="showPresets()">
+    <p class="header">You can adjust various aspects of the ElegantAnalog watchface for Pebble&trade;:</p>
+	<hr>
+	<p>Switch to ambient mode after <input id="activeDuration" type="number" size="4" value="10" min="5" max="360" required="" autofocus/=""> seconds</p>
+	<p>Always show minute ticks<input id="minutesAlwaysCheck" type="checkbox"></p>
+	<p>Always show battery charge<input id="showBatteryCheck" type="checkbox"></p>
+	<p>Always show Bluetooth status<input id="showBTCheck" type="checkbox"></p>
+	<p>Vibrate every 15 minutes<input id="vibrateCheck" type="checkbox"></p>
+	<p>between <input id="vibrateMin" type="number" size="2" value="7" min="0" max="23" required="">:00 and
+	<input id="vibrateMax" type="number" size="2" value="22" min="0" max="23" required="">:59</p>
+	<hr>
+	<p><input id="submitButton" type="button" value="Save" class="button" onclick="saveSettings()"></p>
+	</body>
+</html>

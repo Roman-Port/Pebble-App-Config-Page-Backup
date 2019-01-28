@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Albert Armea</title>
+
+        <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+        <meta property="og:title" content="Albert Armea" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:url" content="https://albertarmea.com/" />
+    
+
+    <link href="https://albertarmea.com/index.xml" rel="alternate" type="application/rss+xml" title="Albert Armea" />
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <link href="https://albertarmea.com/webfonts/ptserif/main.css" rel='stylesheet' type='text/css'>
+    <link href="https://albertarmea.com/webfonts/source-code-pro/main.css" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://albertarmea.com/css/style.css">
+
+    <link href="http://gmpg.org/xfn/11" rel="profile">
+
+    <meta name="generator" content="Hugo 0.38" />
+</head>
+
+<body>
+<div id="container">
+    <header id="header">
+    <div id="header-outer" class="outer">
+        <div id="header-inner" class="inner">
+            <a id="main-nav-toggle" class="nav-icon" href="javascript:;"></a>
+            <a id="logo" class="logo-text" href="https://albertarmea.com/">Albert Armea</a>
+            <nav id="main-nav">
+                
+                <a class="main-nav-link" href="/page/about">About</a>
+                
+                <a class="main-nav-link" href="https://github.com/aarmea">GitHub</a>
+                
+            </nav>
+            <nav id="sub-nav">
+                <div id="search-form-wrap">
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+    <section id="main" class="outer">
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="/post/bt-auto-connect/">Creating Bluetooth sockets on Android without pairing</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="/post/bt-auto-connect/" class="article-date">
+                        <time datetime='2018-03-26T02:41:36.000-07:00' itemprop="datePublished">2018-03-26</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    <video autoplay loop muted class="playpause-with-visibility">
+  <!--
+    `ffmpeg -t 0:00:12 -i noise-demo-2018-03-24_15.55.55.mkv -r 10 noise-demo_%05d.png`
+    Manually remove bad frames
+    `ffmpeg -framerate 10 -pattern_type glob -i "noise-demo_*.png" -pix_fmt yuv420p -c:v libx264 -crf 32 -b:v 0 -an noise-demo-web.mp4`
+  -->
+  <source src="/post/bt-auto-connect/noise-demo-web.mp4">
+  <!--No webm because it's always noticeably worse at this filesize?-->
+</video>
+
+<p>I implemented a way to automatically create Bluetooth Classic sockets between two nearby Android devices running the same app. This method works continuously in the background without wakelocks, and it does not require pairing, root, or any user interaction.</p>
+
+<p></p>
+                    </p>
+                    <p class="article-more-link">
+                        <a href="/post/bt-auto-connect/">Read More</a>
+                    </p>
+                </div>
+
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="/post/alexa-tree/">Making animatronics useful with Alexa</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="/post/alexa-tree/" class="article-date">
+                        <time datetime='2018-01-17T00:02:13.000&#43;00:00' itemprop="datePublished">2018-01-17</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    <div class="video-container">
+  <iframe src="https://www.youtube.com/embed/Yi8ShLDlquk?showinfo=0" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<p>I was looking for a white elephant gift, and the silliness of this animatronic
+Christmas tree was too hard to pass up. The humor wore off after the third time
+I heard it sing, so I decided to make it useful by adding Alexa.</p>
+
+<p></p>
+                    </p>
+                    <p class="article-more-link">
+                        <a href="/post/alexa-tree/">Read More</a>
+                    </p>
+                </div>
+
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="/post/opencv-stereo-camera/">Calculating a depth map from a stereo camera with OpenCV</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="/post/opencv-stereo-camera/" class="article-date">
+                        <time datetime='2017-10-01T20:49:33.000-07:00' itemprop="datePublished">2017-10-01</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    <p><img src="/post/opencv-stereo-camera/depth-final.jpg" alt="Potted plants and the corresponding depth map" /></p>
+
+<p>I found and ordered <a href="https://www.amazon.com/ELP-Megapixel-Camera-Module-Biometric/dp/B00VG32EC2//ref=as_li_ss_tl?ie=UTF8&amp;linkCode=ll1&amp;tag=albertarmeabl-20&amp;linkId=bc5b4947de2850d5a0cec76d2c6a9760">ELP&rsquo;s stereo camera</a> to calculate depth
+maps with OpenCV and see what I could do with them. It turns out that just
+getting a decent depth map was much more involved than I expected. Read and
+download my code <a href="https://gist.github.com/aarmea/629e59ac7b640a60340145809b1c9013">here</a>.</p>
+
+<p></p>
+                    </p>
+                    <p class="article-more-link">
+                        <a href="/post/opencv-stereo-camera/">Read More</a>
+                    </p>
+                </div>
+
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="/post/async-load-hugo/">Asynchronously loading pages in a Hugo site</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="/post/async-load-hugo/" class="article-date">
+                        <time datetime='2017-08-30T23:39:16.000-07:00' itemprop="datePublished">2017-08-30</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    <p>I wrote a Hugo &ldquo;theme&rdquo; that loads its pages asynchronously. Play with it
+<a href="https://aarmea.github.io/mfw-singlepage/">here</a> or read the code
+<a href="https://github.com/aarmea/mfw-singlepage/tree/e17c04d/">here</a>.</p>
+
+<video autoplay loop muted class="playpause-with-visibility">
+  <source src="/post/async-load-hugo/main.webm" type="video/webm">
+  <source src="/post/async-load-hugo/main.mp4" type="video/mp4">
+</video>
+
+<p></p>
+                    </p>
+                    <p class="article-more-link">
+                        <a href="/post/async-load-hugo/">Read More</a>
+                    </p>
+                </div>
+
+                
+            </div>
+        </article>
+        
+        <article class="article article-type-post" itemscope itemprop="blogPost">
+            <div class="article-inner">
+                
+                
+                <header class="article-header">
+                    <h1 itemprop="name"><a class="article-title" href="/post/older-posts/">Older posts</a></h1>
+                </header>
+                
+                <div class="article-meta">
+                    <a href="/post/older-posts/" class="article-date">
+                        <time datetime='2017-08-01T21:25:28.000-07:00' itemprop="datePublished">2017-08-01</time>
+                    </a>
+                    
+                    
+                    
+                </div>
+                <div class="article-entry" itemprop="articleBody">
+                    <p>
+                        
+                    <p>My older posts are still available at <a href="http://blog.albertarmea.com/">http://blog.albertarmea.com/</a>.</p>
+
+<p></p>
+                    </p>
+                    <p class="article-more-link">
+                        <a href="/post/older-posts/">Read More</a>
+                    </p>
+                </div>
+
+                
+            </div>
+        </article>
+        
+
+        
+
+    </section>
+    <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2018 Albert Armea&nbsp;
+            Powered by <a href="https://gohugo.io" target="_blank">Hugo</a> with theme <a href="https://github.com/carsonip/hugo-theme-minos">Minos</a>
+        </div>
+    </div>
+    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/tomorrow-night.min.css" integrity="sha256-2wL88NKUqvJi/ExflDzkzUumjUM73mcK2gBvBBeLvTk=" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js" integrity="sha256-KbfTjB0WZ8vvXngdpJGY3Yp3xKk+tttbqClO11anCIU=" crossorigin="anonymous"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    
+    <script>
+        document.getElementById('main-nav-toggle').addEventListener('click', function () {
+            var header = document.getElementById('header');
+            if (header.classList.contains('mobile-on')) {
+                header.classList.remove('mobile-on');
+            } else {
+                header.classList.add('mobile-on');
+            }
+        });
+
+        
+        
+        (function() {
+            var tolerance = 40; 
+
+            function playPauseVideos() {
+                var elementsToAutoplay = document.getElementsByClassName('playpause-with-visibility');
+                var scrollTop = window.pageYOffset + tolerance;
+                var scrollBottom = window.pageYOffset + window.innerHeight - tolerance;
+
+                for (var i = 0; i < elementsToAutoplay.length; ++i) {
+                    if (elementsToAutoplay[i].tagName !== 'VIDEO')
+                        continue;
+
+                    var video = elementsToAutoplay[i];
+
+                    
+                    if (video.loop) {
+                        video.controls = false;
+                        video.muted = true;
+                    }
+
+                    video.autoplay = false;
+
+                    var videoTop = video.offsetTop;
+                    var videoBottom = video.offsetTop + video.offsetHeight;
+                    if (scrollTop < videoBottom && scrollBottom > videoTop) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                }
+            }
+
+            window.addEventListener('load', playPauseVideos);
+            window.addEventListener('scroll', playPauseVideos);
+            window.addEventListener('resize', playPauseVideos);
+        })();
+    </script>
+</footer>
+
+</div>
+</body>
+</html>

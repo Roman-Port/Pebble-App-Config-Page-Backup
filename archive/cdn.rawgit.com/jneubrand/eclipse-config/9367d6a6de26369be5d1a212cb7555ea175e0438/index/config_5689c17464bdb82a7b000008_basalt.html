@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Eclipse Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/cdn.rawgit.com/jneubrand/eclipse-config/9367d6a6de26369be5d1a212cb7555ea175e0438/css/slate.css'>
+  <script src='/cdn.rawgit.com/jneubrand/eclipse-config/9367d6a6de26369be5d1a212cb7555ea175e0438/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Eclipse Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Fonts</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Smaller Hours
+          <input id='hours_smaller_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+        <label class='item'>
+          Bold Minutes
+          <input id='minutes_bold_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+        <label class='item'>
+          European Date
+          <input id='euro_date_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's font weights.
+      </div>
+    </div>
+    <div class='item-container'>
+      <div class='item-container-header'>Text Colors</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Hour Color
+          <input id='hour_color_picker' type='text' class='item-color item-color-sunny' value='#BBBBBB'>
+        </label>
+        <label class='item'>
+          Minute Color
+          <input id='minute_color_picker' type='text' class='item-color item-color-sunny' value='#BBBBBB'>
+        </label>
+        <label class='item'>
+          Date Color
+          <input id='date_color_picker' type='text' class='item-color item-color-sunny' value='#BBBBBB'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's font colors. On black-and-white Pebbles, choosing any colors other than black or white defaults to white.
+      </div>
+    </div>
+    <div class='item-container'>
+      <div class='item-container-header'>Other Colors</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Color
+          <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+        <label class='item'>
+          Puck Color
+          <input id='puck_color_picker' type='text' class='item-color item-color-sunny' value='#FFFFFF'>
+        </label>
+        <label class='item'>
+          Moon Color
+          <input id='moon_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+        <label class='item'>
+          Flare Color
+          <input id='flare_color_picker' type='text' class='item-color item-color-sunny' value='#FFFFFF'>
+        </label>
+        <label class='item'>
+          Eclipse Color
+          <input id='eclipse_color_picker' type='text' class='item-color item-color-sunny' value='#FFFFFF'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's color scheme. On black-and-white Pebbles, choosing any colors other than black or white defaults to gray.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var hourColorPicker       = document.getElementById('hour_color_picker');
+    var minuteColorPicker     = document.getElementById('minute_color_picker');
+    var puckColorPicker       = document.getElementById('puck_color_picker');
+    var moonColorPicker       = document.getElementById('moon_color_picker');
+    var flareColorPicker      = document.getElementById('flare_color_picker');
+    var dateColorPicker       = document.getElementById('date_color_picker');
+    var eclipseColorPicker    = document.getElementById('eclipse_color_picker');
+
+    var hoursSmallerCheckbox  = document.getElementById('hours_smaller_checkbox');
+    var minutesBoldCheckbox   = document.getElementById('minutes_bold_checkbox');
+    var euroDateCheckbox      = document.getElementById('euro_date_checkbox');
+
+    var options = {
+      'background_color': backgroundColorPicker.value,
+      'hour_color': hourColorPicker.value,
+      'minute_color': minuteColorPicker.value,
+      'puck_color': puckColorPicker.value,
+      'moon_color': moonColorPicker.value,
+      'flare_color': flareColorPicker.value,
+      'date_color': dateColorPicker.value,
+      'eclipse_color': eclipseColorPicker.value,
+
+      'hours_smaller': hoursSmallerCheckbox.checked,
+      'minutes_bold': minutesBoldCheckbox.checked,
+      'euro_date': euroDateCheckbox.checked
+    };
+
+    // Save for next launch
+    localStorage['background_color'] = options['background_color'];
+    localStorage['hour_color']       = options['hour_color'];
+    localStorage['minute_color']     = options['minute_color'];
+    localStorage['puck_color']       = options['puck_color'];
+    localStorage['moon_color']       = options['moon_color'];
+    localStorage['flare_color']      = options['flare_color'];
+    localStorage['date_color']       = options['date_color'];
+    localStorage['eclipse_color']    = options['eclipse_color'];
+
+    localStorage['hours_smaller']    = options['hours_smaller'];
+    localStorage['minutes_bold']     = options['minutes_bold'];
+    localStorage['euro_date']     = options['euro_date'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var hourColorPicker       = document.getElementById('hour_color_picker');
+    var minuteColorPicker     = document.getElementById('minute_color_picker');
+    var puckColorPicker       = document.getElementById('puck_color_picker');
+    var moonColorPicker       = document.getElementById('moon_color_picker');
+    var flareColorPicker      = document.getElementById('flare_color_picker');
+    var dateColorPicker       = document.getElementById('date_color_picker');
+    var eclipseColorPicker    = document.getElementById('eclipse_color_picker');
+
+    var hoursSmallerCheckbox  = document.getElementById('hours_smaller_checkbox');
+    var minutesBoldCheckbox   = document.getElementById('minutes_bold_checkbox');
+    var euroDateCheckbox      = document.getElementById('euro_date_checkbox');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['background_color']) {
+      backgroundColorPicker.value = localStorage['background_color'];
+      hourColorPicker.value       = localStorage['hour_color'];
+      minuteColorPicker.value     = localStorage['minute_color'];
+      puckColorPicker.value       = localStorage['puck_color'];
+      moonColorPicker.value       = localStorage['moon_color'];
+      flareColorPicker.value      = localStorage['flare_color'];
+      dateColorPicker.value       = localStorage['date_color'];
+      eclipseColorPicker.value    = localStorage['eclipse_color'];
+
+      hoursSmallerCheckbox.checked = JSON.parse(localStorage['hours_smaller']);
+      minutesBoldCheckbox.checked  = JSON.parse(localStorage['minutes_bold']);
+      euroDateCheckbox.checked     = JSON.parse(localStorage['euro_date']);
+    }
+  })();
+  </script>
+</html>

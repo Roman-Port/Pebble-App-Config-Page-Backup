@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title></title>
+  <link rel="stylesheet" href="/sfwsoft.net/pebble/dist/css/slate.css">
+</head>
+<body>
+  <form id="main-form">
+    <div class="item-container">
+      <div class="item-container-content">
+        <div class="item">
+          YAWN - Settings
+        </div>
+      </div>
+    </div>
+
+    <div id="general_div" class="item-container">
+      <div class="item-container-header">General</div>
+      <div class="item-container-content">
+        <label class="item">
+          Background Theme
+          <select id="theme" name="theme" class="item-select">
+            <option class="item-select-option" selected="">Mellow Dots</option>
+            <option class="item-select-option">Linear Laser</option>
+            <option class="item-select-option">Calligraphy</option>
+            <option class="item-select-option">Nothing</option>
+          </select>
+        </label>
+        <label id="theme_color_label" class="item">
+          Theme Color
+          <input id="theme_color" type="text" class="item-color item-color-normal" name="color-1" value="0xFFAA55">
+        </label>
+        <label id="background_color_label" class="item">
+          Background Color
+          <input id="background_color" type="text" class="item-color item-color-normal" name="color-1" value="0x000000">
+        </label>
+      </div>
+    </div>
+
+    <div id="clock_div" class="item-container">
+      <div class="item-container-header">Clock & Date</div>
+      <div class="item-container-content">
+        <label id="date_color_label" class="item">
+          Date Color
+          <input id="date_color" type="text" class="item-color item-color-normal" name="color-1" value="0xFFFFFF">
+        </label>
+        <label id="clock_color_label" class="item">
+          Clock Color
+          <input id="clock_color" type="text" class="item-color item-color-normal" name="color-1" value="0xFFFFFF">
+        </label>
+
+      </div>
+    </div>
+	
+    <div class="item-container">
+      <div class="item-container-header">Battery</div>
+      <div class="item-container-content">
+        <label class="item">
+          Show Battery Status
+          <input id="battery_show" type="checkbox" class="item-toggle" name="battery" checked="">
+        </label>
+        <label id="battery_mode_label" class="item">
+          Battery Mode
+          <select id="battery_mode" name="battery_mode" class="item-select">
+            <option class="item-select-option">Both</option>
+            <option class="item-select-option" selected="">Icon</option>
+            <option class="item-select-option">Percentage</option>
+          </select>
+        </label>
+        <label id="battery_color_label" class="item">
+          Color
+          <input id="battery_color" type="text" class="item-color item-color-normal" name="color-1" value="0xFFFFFF">
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Connectivity</div>
+      <div class="item-container-content">
+        <label class="item">
+          Show Bluetooth Status
+          <input id="bluetooth_show" type="checkbox" class="item-toggle" name="bluetooth" checked="">
+        </label>
+        <label id="bluetooth_color_label" class="item">
+          Icon Color
+          <input id="bluetooth_color" type="text" class="item-color item-color-normal" name="color-1" value="0xFFFFFF">
+        </label>
+        <label class="item">
+          Vibe
+          <select id="vibe_mode" name="vibe_mode" class="item-select">
+            <option class="item-select-option">None</option>
+            <option class="item-select-option" selected="">On Disconnect</option>
+            <option class="item-select-option">On Connect</option>
+            <option class="item-select-option">On Both</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Weather</div>
+      <div class="item-container-content">
+        <label id="temp_mode" class="item tab-buttons">
+          <a id="tab-1-c" name="tab-1" class="tab-button active">Celcius</a>
+          <a id="tab-1-f" name="tab-1" class="tab-button">Fahrenheit</a>
+        </label>
+        <label class="item">
+          Update Frequency (min)
+          <select id="update_freq" name="update_freq" class="item-select">
+            <option class="item-select-option">15</option>
+            <option class="item-select-option selected">30</option>
+            <option class="item-select-option">45</option>
+            <option class="item-select-option">60</option>
+          </select>
+        </label>
+        <label id="manual_city_label" class="item">
+		  <div id="manual_city_text">City Override</div>
+          <div class="item-input-wrapper">
+            <input id="manual_city" type="text" class="item-input" name="input-1" placeholder="Override GPS. eg. (London,UK)">
+          </div>
+        </label>
+        <label id="temp_color_label" class="item">
+          Temp. Color
+          <input id="temp_color" type="text" class="item-color item-color-normal" name="color-1" value="0xFFFFFF">
+        </label>
+        <label id="weather_color_label" class="item">
+          Icon Color
+          <input id="weather_color" type="text" class="item-color item-color-normal" name="color-1" value="0xFFFFFF">
+        </label>
+        <label id="city_color_label" class="item">
+          City Color
+          <input id="city_color" type="text" class="item-color item-color-normal" name="color-1" value="0xFFFFFF">
+        </label>
+		
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Health</div>
+      <div class="item-container-content">
+        <label class="item">
+          Enable Health
+          <div class="item-subtitle">Switch this off if you have health app disabled</div>
+          <input id="health_enabled" type="checkbox" class="item-toggle" name="health_enabled" checked="">
+        </label>
+        <label id="steps_show_label" class="item">
+          Always Show Steps
+          <div class="item-subtitle">Will update with weather if enabled</div>
+          <input id="steps_show" type="checkbox" class="item-toggle" name="bluetooth">
+        </label>
+        <label id="steps_color_label" class="item">
+          Steps Color
+          <input id="steps_color" type="text" class="item-color item-color-normal" name="color-1" value="0xFFFFFF">
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Advanced</div>
+      <div class="item-container-content">
+        <label class="item">
+          Bottom Bar Mode
+          <select id="home_auto_icons_show" name="update_freq" class="item-select"> 
+            <option class="item-select-option selected">YAWN</option>
+            <option class="item-select-option">HA ICONS</option>
+            <option class="item-select-option">CUSTOM TEXT</option>
+            <option class="item-select-option">2ND TIMEZONE</option>
+            <option class="item-select-option">SUN RISE/SET</option>
+            <option class="item-select-option">3 DAY FORECAST</option>
+            <option class="item-select-option">BLANK</option>
+          </select>
+        </label>
+        <label id="set_one_label" class="item">
+		  <div id="set_one_text">Setting 1</div>
+          <div class="item-input-wrapper">
+            <input id="set_one" type="text" class="item-input" name="input-1" placeholder="">
+          </div>
+        </label>
+        <label id="set_two_label" class="item">
+		  <div id="set_two_text">Setting 2</div>
+          <div class="item-input-wrapper">
+            <input id="set_two" type="text" class="item-input" name="input-2" placeholder="">
+          </div>
+        </label>
+        <label id="bar_major_color_label" class="item">
+          Major Color
+          <input id="bar_major_color" type="text" class="item-color item-color-normal" name="color-1" value="0xFFFFFF">
+        </label>		
+        <label id="bar_minor_color_label" class="item">
+          Minor Color
+          <input id="bar_minor_color" type="text" class="item-color item-color-normal" name="color-1" value="0xFFFFFF">
+        </label>		
+		
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Registration</div>
+      <div class="item-container-content">
+        <label class="item">
+		  Email
+          <div class="item-input-wrapper">
+            <input id="email" type="text" class="item-input" name="input-1" placeholder="">
+          </div>
+        </label>
+        <label class="item">
+		  Key
+          <div class="item-input-wrapper">
+            <input id="password" type="text" class="item-input" name="input-2" placeholder="Enter 'trial' to start a 7 day trial">
+          </div>
+        </label>
+		  <div class="button-container">
+			<input id="validate_button" type="button" class="item-button" value="Validate">
+		  </div>
+      </div>
+      <div id="registration_subtext" class="item-container-footer">
+        For more information and Registration, please visit our website:
+        <a href="/sfwsoft.net//yawn.html">SFWsoft.net</a>
+      </div>
+	  
+    </div>
+
+    <div class="item-container">
+      <div class="button-container">
+        <input id="submit_button" type="button" class="item-button" value="Save">
+      </div>
+    </div>
+  </form>
+  <script type="text/javascript" src="/sfwsoft.net/pebble/dist/js/slate.js"></script>
+  <script type="text/javascript" src="/sfwsoft.net/pebble/config.js"></script>
+</body>
+</html>

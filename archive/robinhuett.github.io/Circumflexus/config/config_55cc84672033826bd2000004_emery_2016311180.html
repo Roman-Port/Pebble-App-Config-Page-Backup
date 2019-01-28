@@ -1,0 +1,221 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+		<link rel="stylesheet" href="/robinhuett.github.io/Circumflexus/css/slate.css">
+		<style>
+			.title {
+				padding: 15px 10px;
+				text-transform: uppercase;
+				font-family: 'PT Sans', sans-serif;
+				font-size: 1.2em;
+				font-weight: 500;
+				color: #888888;
+				text-align: center;
+			}
+		</style>
+		
+		<title>Circumflexus</title>
+	</head>
+	<body>
+		<h1 class='title'>Circumflexus</h1>
+		<form id="main-form">
+			<div class="item-container">
+				<div class="item-container-header">Visuals</div>
+				<div class="item-container-content">
+					<label class="item">
+						Show Day
+						<input type="checkbox" class="item-toggle" name="toggle-1" id="show_day_select">
+					</label>
+					<label class="item">
+						Show Date
+						<input type="checkbox" class="item-toggle" name="toggle-2" id="show_date_select">
+					</label>
+				</div>
+			</div>
+			
+			<div class="item-container">
+				<div class="item-container-header">Colors</div>
+				<div class="item-container-content">
+					<label class="item">
+						Text
+						<input type="text" class="item-color item-color-sunny" name="color-1" id="color_text_select">
+					</label>
+					<label class="item">
+						Indicators
+						<input type="text" class="item-color item-color-sunny" name="color-2" id="color_indicator_select">
+					</label>
+					<label class="item">
+						Ring 1
+						<input type="text" class="item-color item-color-sunny" name="color-3" id="color_ring_1_select">
+					</label>
+					<label class="item">
+						Ring 2
+						<input type="text" class="item-color item-color-sunny" name="color-4" id="color_ring_2_select">
+					</label>
+					<label class="item">
+						Inner Background
+						<input type="text" class="item-color item-color-sunny" name="color-5" id="color_bg_in_select">
+					</label>
+					<label class="item">
+						Outer Background
+						<input type="text" class="item-color item-color-sunny" name="color-6" id="color_bg_out_select">
+					</label>
+				</div>
+				<div class="item-container-footer">
+					Colors can be reset at the very bottom of this page.
+				</div>
+			</div>
+			
+			<div class="item-container">
+				<div class="item-container-header">Functionality</div>
+				<div class="item-container-content">
+					<label class="item">
+						Vibrate on BT connection loss
+						<input type="checkbox" class="item-toggle" name="toggle-2" id="vibe_bt_select">
+					</label>
+				</div>
+			</div>
+			
+			<div class="item-container">
+				<div class="button-container">
+					<input type="button" class="item-button" id="save_button" value="SEND">
+				</div>
+			</div>
+			
+			<div class="item-container">
+				<div class="item-container-header">Reset settings</div>
+				<div class="button-container">
+					<input type="button" class="item-button" id="reset-colors_button" value="RESET COLORS">
+				</div>
+			</div>
+		</form>
+
+	
+		<script type="text/javascript" src="/robinhuett.github.io/Circumflexus/js/slate.js"></script>
+		<script>
+			function getQueryVariable(variable) 
+			{
+				var query = window.location.search.substring(1);
+				var vars = query.split("&");
+				for (var i=0;i<vars.length;i++) {
+					var pair = vars[i].split("=");
+					if(pair[0] == variable){return pair[1];}
+				}
+				
+				return(false);
+			}
+	
+			function fillOptions() {
+				if (getQueryVariable("first_start") === "jup") {
+					var colorTextSelect = document.getElementById("color_text_select");
+					var colorIndicatorSelect = document.getElementById("color_indicator_select");
+					var colorRing1Select = document.getElementById("color_ring_1_select");
+					var colorRing2Select = document.getElementById("color_ring_2_select");
+					var colorBgInSelect = document.getElementById("color_bg_in_select");
+					var colorBgOutSelect = document.getElementById("color_bg_out_select");
+					var showDaySelect = document.getElementById("show_day_select");
+					var showDateSelect = document.getElementById("show_date_select");
+					var vibeBtSelect = document.getElementById("vibe_bt_select");
+					
+					colorTextSelect.value = "0xFFFFFF";
+					colorIndicatorSelect.value = "0xFFFFFF";
+					colorRing1Select.value = "0xFFFFFF";
+					colorRing2Select.value = "0x00AAFF";
+					colorBgInSelect.value = "0x000055";
+					colorBgOutSelect.value = "0x0055AA";
+					showDaySelect.checked = "true";
+					showDateSelect.checked = "true";
+					vibeBtSelect.checked = "true";
+				}
+				else {
+					var colorTextSelect = document.getElementById("color_text_select");
+					var colorIndicatorSelect = document.getElementById("color_indicator_select");
+					var colorRing1Select = document.getElementById("color_ring_1_select");
+					var colorRing2Select = document.getElementById("color_ring_2_select");
+					var colorBgInSelect = document.getElementById("color_bg_in_select");
+					var colorBgOutSelect = document.getElementById("color_bg_out_select");
+					var showDaySelect = document.getElementById("show_day_select");
+					var showDateSelect = document.getElementById("show_date_select");
+					var vibeBtSelect = document.getElementById("vibe_bt_select");
+					
+					colorTextSelect.value = getQueryVariable("color_text_select");
+					colorIndicatorSelect.value = getQueryVariable("color_indicator_select");
+					colorRing1Select.value = getQueryVariable("color_ring_1_select");
+					colorRing2Select.value = getQueryVariable("color_ring_2_select");
+					colorBgInSelect.value = getQueryVariable("color_bg_in_select");
+					colorBgOutSelect.value = getQueryVariable("color_bg_out_select");
+					showDaySelect.checked = (getQueryVariable("show_day_select") === 'true');
+					showDateSelect.checked = (getQueryVariable("show_date_select") === 'true');
+					vibeBtSelect.checked = (getQueryVariable("vibe_bt_select") === 'true');
+				}				
+			}
+	
+			function saveOptions() {
+				var colorTextSelect = document.getElementById("color_text_select");
+				var colorIndicatorSelect = document.getElementById("color_indicator_select");
+				var colorRing1Select = document.getElementById("color_ring_1_select");
+				var colorRing2Select = document.getElementById("color_ring_2_select");
+				var colorBgInSelect = document.getElementById("color_bg_in_select");
+				var colorBgOutSelect = document.getElementById("color_bg_out_select");
+				var showDaySelect = document.getElementById("show_day_select");
+				var showDateSelect = document.getElementById("show_date_select");
+				var vibeBtSelect = document.getElementById("vibe_bt_select");
+		
+				var options = {
+					"KEY_COLOR_TEXT": colorTextSelect.value,
+					"KEY_COLOR_INDICATOR": colorIndicatorSelect.value,
+					"KEY_COLOR_RING_1": colorRing1Select.value,
+					"KEY_COLOR_RING_2": colorRing2Select.value,
+					"KEY_COLOR_BG_IN": colorBgInSelect.value,
+					"KEY_COLOR_BG_OUT": colorBgOutSelect.value,
+					"KEY_SHOW_DAY": showDaySelect.checked,
+					"KEY_SHOW_DATE": showDateSelect.checked,
+					"KEY_VIBE_BT": vibeBtSelect.checked,
+				}
+	
+				return options;
+			}
+	
+			var submitButton = document.getElementById("save_button");
+			submitButton.addEventListener("click",
+				function() {
+					console.log("Submit");
+	
+					var options = saveOptions();					
+					var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+			  
+					document.location = location;
+				},
+				false
+			);
+			
+			var resetColorsButton = document.getElementById("reset-colors_button");
+			resetColorsButton.addEventListener("click",
+				function() {
+					console.log("Reset Colors");
+	
+					var colorTextSelect = document.getElementById("color_text_select");
+					var colorIndicatorSelect = document.getElementById("color_indicator_select");
+					var colorRing1Select = document.getElementById("color_ring_1_select");
+					var colorRing2Select = document.getElementById("color_ring_2_select");
+					var colorBgInSelect = document.getElementById("color_bg_in_select");
+					var colorBgOutSelect = document.getElementById("color_bg_out_select");
+					
+					colorTextSelect.value = "0xFFFFFF";
+					colorIndicatorSelect.value = "0xFFFFFF";
+					colorRing1Select.value = "0xFFFFFF";
+					colorRing2Select.value = "0x00AAFF";
+					colorBgInSelect.value = "0x000055";
+					colorBgOutSelect.value = "0x0055AA";
+					
+					submitButton.click();
+				},
+				false
+			);
+		  
+			fillOptions();
+		</script>
+	</body>
+</html>

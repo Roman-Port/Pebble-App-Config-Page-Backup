@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Weather Settings</title>
+		<meta charset='utf-8'>
+		<meta name='viewport' content='width=device-width,initial-scale=1'>
+		<link rel='stylesheet' href='/weatherforpebble.com/resources/css/themes/WeatherPebble.css'>
+		<link rel='stylesheet' href='/weatherforpebble.com/resources/css/themes/jquery.css'>
+		<link rel='stylesheet' href='/code.jquery.com/mobile/1.4.5/jquery.css'>
+		<script src='/code.jquery.com//jquery-1.js'></script>
+		<script src='/code.jquery.com/mobile/1.4.5/jquery.js'></script>
+		<style>
+			.ui-title {
+    			margin: 0.6em 10% 0.8em !important;
+			}
+			.temp-settings { width:100%;text-align:center; }
+		</style>
+	</head>
+
+	<body>
+		<div data-role="page" id="home" data-theme="b">
+			<div data-role="content">
+				<div style="width:100%;text-align:center;font-size:23px;">Weather Configuration</div>
+				<div class="ui-field-contain">
+					<fieldset data-role="controlgroup" data-type="horizontal" class="temp-settings" data-theme="b">
+						<legend>Temperature Setting:</legend>
+						<input type="radio" name="temp_setting" id="temp-c" value="0">
+						<label for="temp-c">Celsius</label>
+						<input type="radio" name="temp_setting" id="temp-f" value="1">
+						<label for="temp-f">Fahrenheit</label>
+					</fieldset>
+				</div>
+
+				<div class="ui-field-contain">
+					<label for="gps-settings">Use GPS:</label>
+					<select name="gps-settings" id="gps-settings" data-role="slider" style="text-align:center;">
+						<option value="0">Off</option>
+						<option value="1">On</option>
+					</select>
+				</div>
+
+				<div class="ui-field-contain" id="div-home-city" style="display:none;">
+					<label for="home-woeid-search">Home City:</label>
+					<input type="text" name="home-city-search" id="home-city-search" value="">
+					<br>
+					<div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+						<input type="button" data-icon="search" data-theme="b" value="Find City" onclick="searchCityGoogle('home-city-search', 'home-coords-results', 'home-coords');">
+						<input type="button" data-icon="delete" data-iconpos="right" value="Remove City" onclick="removeCity('home-coords-results','home-city-search','home-coords');">
+					</div>
+					<br>
+					<div id="home-coords-results"></div>
+					<input id="home-coords" type="hidden">
+				</div>
+
+				<div class="ui-field-contain">
+					<label for="additional-city">Additional City:</label>
+					<input type="text" name="additional-city-search" id="additional-city-search" value="">
+					<br>
+					<div data-role="controlgroup" data-type="horizontal" style="text-align:center;">
+						<input type="button" data-icon="search" data-theme="b" value="Find City" onclick="searchCityGoogle('additional-city-search', 'additional-coords-results','additional-coords');">
+						<input type="button" data-icon="delete" data-iconpos="right" value="Remove City" onclick="removeCity('additional-coords-results','additional-city-search','additional-coords');">
+					</div>
+					<br>
+					<div id="additional-coords-results"></div>
+					<input id="additional-coords" type="hidden">
+				</div>
+
+				<div id="donate" style="text-align:center;">
+                                        <br>
+                                        <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					<input type="hidden" name="cmd" value="_donations">
+					<input type="hidden" name="business" value="B53RE9Z25JYQC">
+					<input type="hidden" name="lc" value="US">
+					<input type="hidden" name="item_name" value="Weather for Pebble">
+					<input type="hidden" name="currency_code" value="USD">
+					<input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_LG.gif:NonHosted">
+					<input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="/www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+					If you like this app, feel free to donate a little something. Thanks!
+                                        <br><br>
+                                </div>
+			</div>
+
+			<div data-role="footer" data-position="fixed">
+				<div data-role="navbar">
+					<ul>
+						<li><a id="cancel" href="#" data-icon="delete">Cancel</a></li>
+						<li><a id="save" href="#" data-icon="check">Save</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+
+	<script>
+		var c_or_f = 1;
+	var use_gps = 1;
+	var home_coords = '';
+	var home_content = '';
+	var add_coords = '';
+	var add_content = '';
+
+	$().ready(function(){
+
+		$("input[name='temp_setting']:eq(" + c_or_f + ")").prop("checked",true);
+		$("input[name='temp_setting']").checkboxradio("refresh");
+		$('#gps-settings').val(use_gps).slider('refresh');
+
+		if (use_gps == 0){
+			$('#home-city-search').val(home_content);
+			$('#home-coords').val(home_coords);
+			$('#div-home-city').show();
+		}
+
+		$('#additional-city-search').val(add_content);
+		$('#additional-coords').val(add_coords);
+
+		$('select#gps-settings').change(function(){
+			if ($(this).val() === '1'){
+				$('#div-home-city').slideUp();
+			}else{
+				$('#home-city-search').val('');
+				$('#div-home-city').slideDown();
+			}
+		});
+
+		$('#cancel').click(function(){
+			console.log("Cancel");
+			//document.location="pebblejs://close#";
+			location.href="pebblejs://close#";
+		});
+
+		$('#save').click(function(){
+			console.log("Save");
+			var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveSettings()));
+			document.location = location;
+		});
+	});
+
+	function searchCityGoogle(city_search, results_div, city_coords){
+		$.mobile.loading('show');
+		var city_name = $('#' + city_search).val();
+		var query=encodeURI(city_name);
+
+		$.ajax({
+			url:'https://maps.googleapis.com/maps/api/geocode/json?address=' + query + '&key=AIzaSyBRiNn1hPe-yg5fc6h51feDdcUPBkgE5S0',
+			type:'GET',
+			dataType:'json',
+			success:function(data){
+				if (data.results != null){
+					var resultsHTML;
+					var a=0;
+					$('#' + results_div).html('');
+					if (data.results instanceof Array){
+						$.each(data.results, function(){
+							var cityLongLat = this.geometry.location.lat + ',' + this.geometry.location.lng;
+							resultsHTML='<input type="radio" name="' + results_div + '-city-coords" id="city-coords-' + a + '" value="' + cityLongLat + '" onclick="removeUnselected(\'' + results_div + '\',\'' + city_coords + '\',\'' + city_search + '\')">';
+							resultsHTML+='<label for="city-coords-' + a + '" id="city-coords-' + a + '-label">' + this.formatted_address + '</label>';
+							a++;
+							$('#' + results_div).append(resultsHTML);
+							console.log(this.formatted_address + "|" + cityLongLat);
+						});
+					}
+				}
+				$('#home').trigger('create');
+				$.mobile.loading('hide');
+			}
+		})
+	}
+
+	function removeUnselected(div_id, div_coords, div_search_box){
+		$('#' + div_id + ' input[name=' + div_id + '-city-coords]').not(':checked').each(function(){
+			var idname = $(this).prop("id");
+			$(this).parent().remove();
+		});
+		$('#' + div_coords).val($('#' + div_id + ' input[name=' + div_id + '-city-coords]').val());
+		$('#' + div_search_box).val($('#' + div_id + ' input[name=' + div_id + '-city-coords]').parent().find('label.ui-btn').text());
+	}
+
+	function removeCity(div_id, search_id, city_coords){
+		$('#' + div_id).html('');
+		$('#' + search_id).val('');
+		$('#' + city_coords).val('');
+	}
+
+	function saveSettings(){
+		var gps_settings = parseInt($('#gps-settings').val(), 10);
+		var home_coords = '';
+		if (gps_settings == 0){
+			home_coords = $('#home-coords').val();
+		}
+		var home_name = $('#home-city-search').val();
+		var additional_coords = $('#additional-coords').val();
+		var additional_name = $('#additional-city-search').val();
+
+		var settings = {
+			'temp' : parseInt($('input[name=temp_setting]:checked').val(), 10),
+			'gps' : gps_settings,
+			'home_coords':home_coords,
+			'home_content': home_name,
+			'add_coords':additional_coords,
+			'add_content': additional_name
+		}
+		return settings;
+	}
+
+	function getParameterByName(name) {
+ 		name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+			results = regex.exec(location.search);
+		return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
+	</script>
+
+	<script>
+
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  var watchPlatform = getParameterByName('watch');
+	  var watchInfo = watchPlatform.split('-');
+          ga('create', 'UA-61321718-1', 'auto');
+          ga('send', 'pageview', {
+	  	'dimension1': watchInfo[0]
+	  });
+        </script>
+</html>

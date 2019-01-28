@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>7 segment</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+    <link rel="stylesheet" href="/criogenic.github.io/7segment/css/spectrum.css">
+    <link rel="stylesheet" href="/criogenic.github.io/7segment/css/custom.css">
+    <style type="text/css">
+      #spacer { min-height: 8px; }
+    </style>
+  </head>
+  <body>
+    <div data-role="page" id="main" visibility:="" hidden="">
+      
+      <div data-role="header" data-position="fixed" class="jqm-header">
+        <h1>7 segment</h1>
+      </div>
+      <div data-role="content">
+        <!-- Bluetooth status information -->
+        <div>
+        <label for="display-status"><strong>Bluetooth Alert:</strong></label>
+            <select name="display-status" id="display-status">
+              <option value="0">Off</option>
+              <option value="1" selected="">On</option>
+              <option value="2">On &amp; Invert Color</option>
+            </select>
+          <div style="font-size: 70%; margin-left: 10px;">When this option is turned on your Pebble will vibrate shortly when the Bluetooth connection is lost between your pebble and phone.</div>
+        </div>
+        <div id="spacer"></div>
+
+        <!-- Language selection -->
+        <div>
+          <label for="language"><strong>Language:</strong></label>
+          <select name="language" id="language">
+            <option value="4">Croation</option>
+            <option value="12">Czech</option>
+            <option value="1">Dutch</option>
+            <option value="0">English</option>
+            <option value="8">Finnish</option>
+            <option value="3">French</option>
+            <option value="2">German</option>
+            <option value="10">Greek</option>
+            <option value="6">Italian</option>
+            <option value="7">Norwegian</option>
+            <option value="11">Russian</option>
+            <option value="5">Spanish</option>
+            <option value="9">Turkish</option>
+          </select>
+        </div>
+        <div id="spacer"></div>
+
+        <!-- Date format -->
+        <div>
+          <label for="format"><strong>Display Format:</strong></label>
+          <select name="format" id="format">
+            <option value="0" selected="">DD-MM</option>
+            <option value="1">MM-DD</option>
+          </select>
+        </div>
+        <div id="spacer"></div>
+        <!-- Background Color -->
+        <div>
+          <label for="display-bg"><strong>Watchface Colors:</strong></label>
+          <select name="display-bg" id="display-bg" data-role="slider">
+            <option value="0" selected="">Normal</option>
+            <option value="1">Inverse</option>
+          </select>
+        </div>
+        <div id="spacer"></div>
+        <!-- Weather -->
+        <div class="ui-grid-a">
+         <div class="ui-block-a" style="width:70%">
+           <label for="weastatus"><strong>Weather:</strong><img src="/poweredby.yahoo.com//purple_retina.png" width="120" height="17"></label>
+           <select name="weastatus" id="weastatus">
+            <option value="0">OFF</option>
+            <option value="10">ON every 10 min</option>
+            <option value="30" selected="">ON every 30 min</option>
+            <option value="60">ON every 1 hour</option>
+            <option value="120">ON every 2 hours</option>
+            <option value="240">ON every 4 hours</option>
+            <option value="360">ON every 6 hours</option>
+          </select>
+         </div>
+         <div class="ui-block-b" style="width:30%">
+           <label for="weaunit"><strong>Unit:</strong></label>
+           <select name="weaunit" id="weaunit" data-role="slider">
+            <option value="0" selected="">°C</option>
+            <option value="1">°F</option>
+           </select>
+         </div>
+        </div><!-- /grid-a -->
+        <div id="spacer"></div>
+        <!-- Colorpicker-->
+        <div name="color_section">
+          <label><strong>Time Colors:</strong></label>
+          <div class="ui-grid-a">
+            <div class="ui-block-a"><label>Background</label><input name="bkg-color" id="bkg-color" class="colorpicker"></div>
+            <div class="ui-block-b"><label>Text</label><input name="text-color" id="text-color" class="colorpicker"></div>
+          </div>
+        </div>
+        <br>
+        <div class='ui-body ui-body-b' style="text-align:center;">
+          <p>Enjoying my watchfaces? Wanna feel great? Help me make your Pebble even prettier!</p>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+            <input type="hidden" name="cmd" value="_donations">
+            <input type="hidden" name="business" value="criogenic@gmail.com">
+            <input type="hidden" name="lc" value="US">
+            <input type="hidden" name="item_name" value="Crios Lab">
+            <input type="hidden" name="item_number" value="7 segment">
+            <input type="hidden" name="no_note" value="0">
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+            <select name="amount" id="amount">
+              <option value="1">($1) -  Kind supporter</option>
+              <option value="2">($2) - Good egg</option>
+              <option value="5">($5) - Cream of the crop</option>
+              <option value="10">($10) -  Diamond in the rough</option>
+              <option value="20">($20) - Absolute champion</option>
+              <option value="50">($50) - Undisputedly radtastic</option>
+              <option value="100">($100) - Legendary</option>
+            </select>
+            <input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+            <img alt="" border="0" src="/www.paypalobjects.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+            <p style="font-size:10px;">Might take a sec to load!</p>
+          </form>
+        </div>
+      <!-- Cancel and Submit buttons -->
+        <label> </label>
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+            <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+            <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+          </fieldset>
+        </div>
+        <div id="footertxt" style="font-size: 60%;"></div>
+      </div>
+  </div>
+  <script src="/code.jquery.com//jquery-2.js"></script>
+  <script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+  <script src="/criogenic.github.io/7segment/js/spectrum.js"></script>
+  <script src="/criogenic.github.io/7segment/js/custom.js"></script>
+  <script>
+  
+  $().ready(function() {
+    var appstatus = getQueryParam( "appstatus" , 0 );
+    if (appstatus < 3){
+      $("[name=color_section]").hide();
+    } 
+  
+    $(".colorpicker").spectrum({
+      allowEmpty: true,
+      showPaletteOnly: true,
+      preferredFormat: "hex",
+      hideAfterPaletteSelect: true,
+      palette: [
+        ["#000000", "#000055", "#0000AA", "#0000FF", "#005500", "#005555", "#0055AA", "#0055FF",
+        "#550000", "#550055", "#5500AA", "#5500FF", "#555500", "#555555", "#5555AA", "#5555FF",
+        "#AA0000", "#AA0055", "#AA00AA", "#AA00FF", "#AA5500", "#AA5555", "#AA55AA", "#AA55FF",
+        "#FF0000", "#FF0055", "#FF00AA", "#FF00FF", "#FF5500", "#FF5555", "#FF55AA", "#FF55FF",
+        "#00AA00", "#00AA55", "#00AAAA", "#00AAFF", "#00FF00", "#00FF55", "#00FFAA", "#00FFFF",
+        "#55AA00", "#55AA55", "#55AAAA", "#55AAFF", "#55FF00", "#55FF55", "#55FFAA", "#55FFFF",
+        "#AAAA00", "#AAAA55", "#AAAAAA", "#AAAAFF", "#AAFF00", "#AAFF55", "#AAFFAA", "#AAFFFF",
+        "#FFAA00", "#FFAA55", "#FFAAAA", "#FFAAFF", "#FFFF00", "#FFFF55", "#FFFFAA", "#FFFFFF"
+        ]
+     ]
+    });
+  
+    // Handle cancel button
+    $("#b-cancel").click(function() {
+      console.log( "Cancel" );
+    document.location = "pebblejs://close#";
+    });
+  
+    // Handle submit button
+    $("#b-submit").click(function() {
+      console.log( "Submit" );
+      // Set the return URL depending on the runtime environment
+      var return_to = getQueryParam('return_to', 'pebblejs://close#');
+      document.location.href = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
+    });
+    
+    $("#bkg-color").spectrum("set",GColor.toStrHex( getQueryParam( "backgroundcolor" , 192 ) ));
+    $("#text-color").spectrum("set",GColor.toStrHex( getQueryParam( "textcolor" , 255 ) ));
+    $("#footertxt").html( "7 Segment by Crios Lab on: " + getQueryParam( "watchdesc" , "unknow" ));
+    $("#main").show();
+  });
+  
+  // And finally, the actual pebble configuration stuff
+  function getQueryParam(variable, defaultValue) {
+    // Find all URL parameters
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      // If the query variable parameter is found, decode it to use and return it for use
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+  
+  function saveOptions() {
+    var options = {
+      'status': parseInt( $("#display-status").val() ),
+      'background': parseInt( $("#display-bg").val() ),
+      'language': parseInt( $("#language :selected").val() ),
+      'format': parseInt( $("#format :selected").val() ),
+      'weastatus': parseInt( $("#weastatus :selected").val() ),
+      'weaunit': parseInt( $("#weaunit").val() ),
+      'backgroundcolor': parseInt( GColor.fromStrHex($("#bkg-color").spectrum("get").toHexString()) ),
+      'textcolor': parseInt( GColor.fromStrHex($("#text-color").spectrum("get").toHexString()) )
+    }
+    return options;
+  }
+  
+  // Set initial values
+  $("[name=display-status]").val( getQueryParam("status" , 1) );
+  console.log( "Get status " + getQueryParam("status" , 1));
+  
+  $("[name=display-bg]").val( getQueryParam("background" , "0" ) );
+  console.log( "Get background " + getQueryParam("background" , "0"));
+  
+  $("[name=language]").val( getQueryParam( "language" , "0") );
+  console.log( "Get language " + getQueryParam("language" , "0"));
+  
+  $("[name=format]").val( getQueryParam( "format" , "0" ) );
+  console.log( "Get format " + getQueryParam("format" , "0"));
+  
+  $("[name=weastatus]").val( getQueryParam( "weastatus" , 30 ) );
+  console.log( "Get weastatus " + getQueryParam("weastatus" , 30));
+  
+    $("[name=weaunit]").val( getQueryParam( "weaunit" , 0 ) );
+  console.log( "Get weaunit " + getQueryParam("weaunit" , 0));
+  
+  </script>
+  </body>
+</html>

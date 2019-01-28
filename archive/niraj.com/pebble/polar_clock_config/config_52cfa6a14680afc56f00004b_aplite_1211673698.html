@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Polar Clock Configuration</title>
+    <script src="/code.jquery.com//jquery-1.js" type="text/javascript"></script>
+    <style>
+        .disabled {
+            color: #CCC;
+        }
+
+        fieldset {
+            padding: 10px;
+        }
+
+        legend {
+            padding: 0px 10px;
+        }
+            legend img {
+                margin-right: 5px;
+            }
+            legend h3 {
+                display: inline;
+                position: relative;
+                top: -7px;
+            }
+        .footer {
+            color: #666;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+        <fieldset>
+            <legend>
+                <img src="/niraj.com/pebble/menu_icon_polar_clock.png">
+                <h3>Polar Clock Configuration</h3>
+            </legend>
+            <p>
+                <input type="checkbox" id="showTime" checked="checked">
+                <label id="timeLabel" for="showTime">Show Time</label>
+            </p>
+            <p>
+                <input type="checkbox" id="showDate" checked="checked">
+                <label id="dateLabel" for="showDate">Show Date</label>
+                <p style="margin-left: 40px;">
+                    <input type="checkbox" id="ROWDate">
+                    <label id="ROWLabel" for="ROWDate">Use ROW Date ("15 Jun" instead of "Jun 15")</label>
+                </p>
+            <p>
+                <input type="checkbox" id="invertColor">
+                <label id="invertLabel" for="invertColor">Invert Color (White background if checked)</label>
+            </p>
+            <p>
+                <input type="button" id="submitBtn" value="Submit">
+                <input type="button" id="cancelBtn" value="Cancel">
+            </p>
+        </fieldset>
+        <div class="footer">Polar Clock watchface developed by Niraj Sanghvi</div>
+    <script type="text/javascript">
+        function saveOptions() {
+            var options = {
+                "0": $("#showTime").is(':checked')?1:0,
+                "1": $("#showDate").is(':checked')?1:0,
+                "2": $("#ROWDate").is(':checked')?1:0,
+                "3": $("#invertColor").is(':checked')?1:0,
+                "4": 0
+            }
+            return options;
+        }
+
+        $().ready(function () {
+            if (!($("#showDate").is(':checked'))) {
+                $("#ROWDate").attr("disabled", "disabled");
+                $("#ROWLabel").addClass("disabled");
+            }
+
+            $("#showDate").click(function () {
+                if ($("#showDate").is(':checked')) {
+                    $("#ROWDate").removeAttr("disabled");
+                    $("#ROWLabel").removeClass("disabled");
+                }
+                else {
+                    $("#ROWDate").attr("disabled", "disabled");
+                    $("#ROWLabel").addClass("disabled");
+                }
+            });
+
+            $("#cancelBtn").click(function () {
+                console.log("Cancel");
+                window.location.href = "pebblejs://close";
+            });
+
+            $("#submitBtn").click(function () {
+                console.log("Submit");
+
+                var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+                console.log("Warping to: " + location);
+                console.log(location);
+                window.location.href = location;
+            });
+        });
+    </script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-313572-21', 'niraj.com');
+  ga('require', 'linkid', 'linkid.js');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

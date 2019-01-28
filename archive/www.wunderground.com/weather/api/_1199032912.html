@@ -1,0 +1,1886 @@
+
+<!DOCTYPE HTML>
+<html class="" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+	<meta name="fb-app-id" content="325331260891611" />
+	<meta name="fb-channel-url" content="//www.wunderground.com/php/lib/fb_sdk/channel.php" />
+	<meta name="wui-member-logged-in" content="false" />
+		<meta name="description" content="Weather Underground provides local & long range Weather Forecast, weather reports, maps & tropical weather conditions for locations worldwide." />
+		<meta name="keywords" content="Weather, Weather Underground, API, forecasts, current conditions, rain, snow, hurricane, tornado, storm, thunderstorm, tropical storm, wundermap, ski conditions, ski report, surfing, marine, aviation, photographs, photos, severe weather" />
+	<meta name="msapplication-task" content="name=Local Weather;action-uri=http://www.wunderground.com/;icon-uri=" />
+	<meta name="msapplication-task" content="name=Maps and Radar;action-uri=http://www.wunderground.com/maps/;icon-uri=" />
+	<meta name="msapplication-task" content="name=Severe;action-uri=http://www.wunderground.com/severe.asp;icon-uri=" />
+	<meta name="msapplication-task" content="name=Tropical;action-uri=http://www.wunderground.com/tropical/;icon-uri=" />
+	<meta name="msapplication-task" content="name=WunderPhotos;action-uri=http://www.wunderground.com/wximage/;icon-uri=" />
+	<meta name="application-name" content="Weather Underground"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta http-equiv="pics-label" content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline v2.0" l gen true for "http://www.wunderground.com" r (nz 0 vz 0 lz 0 oz 0 cz 0) "http://www.rsac.org/ratingsv01.html" l gen true for "http://www.wunderground.com"  r (n 0 s 0 v 0 l 0))' />
+		<title>API | Weather Underground</title>
+		<link rel="canonical" href="https://www.wunderground.com/weather/api/" />
+		<link rel="stylesheet" type="text/css" href="//icons.wxug.com/css/wu3_base.css?v=2014042801" />
+		<link rel="stylesheet" type="text/css" href="//icons.wxug.com/css/wu3_print.css?v=2012111501" media="print" />
+		<link rel="stylesheet" href="//icons.wxug.com/css/wu3r_header_wide.css?v=2015100601" />
+		<link rel="stylesheet" href="//icons.wxug.com/css/wu3r_header.css?v=2013090501" />
+		<link rel="stylesheet" type="text/css" href="//icons.wxug.com/css/wu3r_api.css?v=2017051501" />
+		<!-- fancybox -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.css" media="screen" />
+		<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+		<meta name="google-site-verification" content="WtdZAWi0xf79pVdUxgRETUaDlWOxCclM3Os5ob4Jny0" />
+	<link rel="stylesheet" type="text/css" href="//icons.wxug.com/css/slimbox2.css" media="screen" />
+	 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.19/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.3.0/respond.min.js"></script>
+		<link href="//icons.wxug.com/scripts/respond-proxy.html" id="respond-proxy" rel="respond-proxy" />
+		<link href="/scripts/respond.proxy.gif" id="respond-redirect" rel="respond-redirect" />
+		<script src="/scripts/respond.proxy.js"></script>
+	<script type="text/javascript">
+		$.noConflict();
+	</script>
+		<script type="text/javascript" src="/scripts/swfobject.js?v=2.2"></script>
+		<script type="text/javascript" src="//icons.wxug.com/scripts/wui.global.min.js?v=1.3.18"></script>
+		<script type="text/javascript" src="//icons.wxug.com/scripts/wui.date.min.js?v=1.3.18"></script>
+		<script type="text/javascript" src="//icons.wxug.com/scripts/wui.api.min.js?v=1.3.18"></script>
+		<script type="text/javascript" src="//icons.wxug.com/scripts/jquery.flot.min.js"></script>
+		<script type="text/javascript" src="//icons.wxug.com/scripts/jquery.flot.fillbetween.min.js"></script>
+		<script type="text/javascript" src="//icons.wxug.com/scripts/jquery.flot.crosshair.min.js"></script>
+		<script type="text/javascript" src="//icons.wxug.com/scripts/jquery.flot.selection.min.js"></script>
+		<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.0/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="//icons.wxug.com/scripts/slimbox2.js"></script>
+	<script type="text/javascript">
+		<!--
+			function bodyOnLoad()
+			{
+			
+			}
+		//-->
+	</script>
+</head>
+	<body onload="bodyOnLoad()" class="off-canvas hide-extras">
+  <!--[if lte IE 8]>
+  <div style="background-color:pink; text-align: center; font-size: 200%; padding:20px;"> We are no longer supporting Internet Explorer 8 or earlier. Please <a href="http://windows.microsoft.com/en-us/internet-explorer/which-version-am-i-using#ie=other">update your browser</a> for the best experience.</div>
+	<![endif]-->
+	<section role="main">
+<!--[if lt IE 7]> <div id="header" class="ie ie6 lte9 lte8 lte7"> <![endif]-->
+<!--[if IE 7]> <div id="header" class="ie ie7 lte9 lte8 lte7"> <![endif]-->
+<!--[if IE 8]> <div id="header" class="ie ie8 lte9 lte8"> <![endif]-->
+<!--[if IE 9]> <div id="header" class="ie ie9 lte9"> <![endif]-->
+<!--[if gt IE 9]> <div id="header" class="ie"> <![endif]-->
+<!--[if !IE]><!--> <div id="header"> <!--<![endif]-->
+	<nav id="menu">
+		<ul id="menu-list">
+		<li id="menu-primary-weather" class="menu-primary">
+		<h2 class="menu-primary-title" href="#" title="Weather">Weather</h2>
+		<ul class="menu-primary-list">
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">PWS</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/weatherstation/about.asp" title="">About Weather Stations</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/wundermap/?zoom=8&type=&rad=0&sat=0&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=1&wxsn.mode=temp&wxsn.opa=50&wxsn.bcdgtemp=0&wxsn.rf=1&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" title="">Map of Weather Stations</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/personal-weather-station/signup" title="">Sign Up Your Station</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/personal-weather-station/mypws" title="">My PWS</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">History Data</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/airports" title="">Airport History Data</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/hurricane/at2012.asp" title="">Hurricane Archive</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/climate/extremes.asp" title="">Record Extremes</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/travel-planner" title="">Travel Planner</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Travel</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/roadtrip/" title="">Road Trip Planner</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/travelplanner/index.asp" title="">Travel Planner</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/beach-weather/" title="">Beach Weather</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/travel/index.asp#parks" title="The travel planner">US National Parks</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/flights/" title="">Flight Tracking</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Activities</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/ski/" title="">Ski and Snow</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/sports/" title="">Sports</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/Aviation/" title="">General Aviation</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/sailing-weather/" title="">Sailing and Boating</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/garden-weather/" title="">Agriculture</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/sky/index.asp" title="">Astronomy</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Health</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/maps/us/2xAirQuality.html" title="">Air Quality</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/DisplayPollen.asp" title="">Pollen & Alergies</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/maps/us/2xUVForecast.html" title="">UV Index</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/maps/health/" title="">Flu Tracker</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Downloads</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/download/index.asp" title="">Wunderground Apps</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/weather/api/" title="">Weather&trade; API for Developers</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/stickers/" title="">Weather Stickers®</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/printer/cityforecast.asp" title="">Daily Forecast Flyer</a>
+		</li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li id="menu-primary-maps-radar" class="menu-primary">
+		<h2 class="menu-primary-title" href="#" title="Maps &amp; Radar">Maps &amp; Radar</h2>
+		<ul class="menu-primary-list">
+		<li class="menu-secondary col1 compressed">
+		<h3 class="menu-secondary-title">All Maps</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item compressed">
+		<a href="/maps/" title="">All Maps</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">WunderMap</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/wundermap/" title="">WunderMap</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="http://www.fullscreenweather.com/" title="">Full Screen Weather</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wundermap/?lat=37.769699&lon=-122.393303&zoom=10&type=terrain&tl.play=0&tl.spd=2&extremes=0&fault=0&femaflood=0&fire=0&firewfas=0&fissures=0&fronts=0&hurrevac=0&hur=0&lightning=0&livesurge=0&mm=0&ndfd=0&rad=1&rad.num=1&rad.spd=25&rad.opa=81&rad.type=00Q&rad.type2=&rad.smo=1&rad.stm=0&dir=1&dir.mode=driving&sst=0&sat=0&seismicrisk=0&svr=0&ski=0&snowfall=0&stormreports=0&tor=0&tfk=0&tsunami=0&riv=0&wxsn=1&wxsn.mode=temp&wxsn.opa=50&wxsn.bcdgtemp=0&wxsn.rf=1&cams=0&pix=0" title="">Local Weather</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wundermap?lat=39.74503&lon=-97.89816&zoom=5&type=lightmap&units=english&tl.play=0&tl.spd=2&extremes=0&fault=0&femaflood=0&fire=0&firewfas=0&fissures=0&fronts=0&hurrevac=0&hur=0&lightning=1&livesurge=0&mm=0&ndfd=0&rad=1&rad.num=1&rad.spd=25&rad.opa=81&rad.type=00Q&rad.type2=&rad.smo=1&rad.stm=0&dir=1&dir.mode=driving&sst=0&sat=0&seismicrisk=0&svr=1&svr.opa=70&ski=0&snowfall=0&stormreports=0&tor=0&tfk=0&tsunami=0&riv=0&wxsn=0&cams=0&pix=0" title="">Severe Storms</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wundermap?lat=29.99756&lon=-72.45383&zoom=5&type=lightmap&units=english&tl.play=0&tl.spd=2&extremes=0&fault=0&femaflood=0&fire=0&firewfas=0&fissures=0&fronts=0&hurrevac=0&hur=1&hur.wr=0&hur.cod=1&hur.fx=1&hur.obs=0&hur.hd=0&hur.mdl=0&hur.gpce=0&hur.img=0&hur.opa=70&hur.opa2=40&lightning=0&livesurge=0&mm=0&ndfd=0&rad=1&rad.num=1&rad.spd=25&rad.opa=81&rad.type=00Q&rad.type2=&rad.smo=1&rad.stm=0&dir=1&dir.mode=driving&sst=0&sat=0&seismicrisk=0&svr=0&ski=0&snowfall=0&stormreports=0&tor=0&tfk=0&tsunami=0&riv=0&wxsn=1&wxsn.mode=tw&wxsn.opa=50&wxsn.bcdgtemp=0&wxsn.rf=1&cams=0&pix=0" title="">Hurricanes</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Radar</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/radar/map.asp" title="">United States</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/radar/mosaic.asp" title="">U.S. Regional Radar</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/radar/map.asp?region=ca" title="">Canada</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/radar/map.asp?region=au" title="">Australia</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wundermap/?lat=51.70306&lon=10.69070&zoom=4&units=english&rad=1&rad.num=1&rad.spd=25&rad.opa=81&rad.type=00Q&rad.type2=&rad.smo=1&rad.stm=0&sat=0&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" title="">Europe</a>
+		</li>
+		<li class="menu-secondary-item compressed">
+		<a href="/radar/map.asp" title="">Radar</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Satellite</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/wundermap/?lat=39.20228&lon=-97.06320&zoom=5&type=hybrid&units=english&rad=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" title="">United States</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wundermap/?lat=55.35712&lon=-102.95187&zoom=4&type=hybrid&units=english&rad=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" title="">Canada</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wundermap/?lat=-25.00121&lon=-225.91086&zoom=5&type=hybrid&units=english&rad=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" title="">Australia</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wundermap/?lat=50.06756&lon=-349.04562&zoom=4&type=hybrid&units=english&rad=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" title="">Europe</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wundermap/?lat=1.58707&lon=17.28250&zoom=4&type=hybrid&units=english&rad=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" title="">Africa</a>
+		</li>
+		<li class="menu-secondary-item compressed">
+		<a href="/wundermap/?lat=39.20228&lon=-97.06320&zoom=5&type=hybrid&units=english&rad=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" title="">Satellite</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Maps</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/ndfdimage/viewimage" title="">Forecast Maps</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/maps/" title="">Current Conditions</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/severe.asp" title="">U.S. Severe Weather</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/severe/europe.asp" title="">Europe Severe Weather</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/hurricane/" title="">Hurricanes &amp; Tropical Cyclones</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/tornado/" title="">Tornadoes</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/MAR/" title="">Marine and Boating</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/Aviation/" title="">Aviation</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/wundermap/?lat=42.32995&lon=-96.18430&zoom=3&type=hybrid&units=english&rad=0&sat=0&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=1&mm.mdl=GFS&mm.type=SURPRE&mm.hour=0&mm.opa=100&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" title="">Weather Models</a>
+		</li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li id="menu-primary-severe-weather" class="menu-primary">
+		<h2 class="menu-primary-title" href="#" title="Severe Weather">Severe Weather</h2>
+		<ul class="menu-primary-list">
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Severe</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/severe.asp" title="">U.S. Severe Weather</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/severe/europe.asp" title="">Europe Severe Weather</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wundermap/?lat=40.28354&lon=-97.85422&zoom=4&rad=0&sat=0&stormreports=1&stormreports.type.tor=1&stormreports.type.hail=1&stormreports.type.wind=1&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" title="">U.S. Storm Reports</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/climate/extremes.asp" title="">Record Extremes</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Hurricanes &amp; Tropical Cyclones</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/hurricane/" title="">Active Storms</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/hurricane/accumulated_cyclone_energy.asp" title="">Accumulated Cyclone Energy</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/hurricane/at2013.asp" title="">Hurricane Archive</a>
+		</li>
+		<li class="menu-secondary-item compressed">
+		<a href="/hurricane/" title="">Hurricanes &amp; Tropical Cyclones</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Fire &amp; Ice</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/fire/" title="">Wildfires</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/winter-storms" title="">Winter Storms</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Preparedness</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/prepare/" title="">Be Prepared</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/education/winterdriving.asp" title="">Winter Driving Tips</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wxradio/index.html" title="">Weather Radio Online</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/email/emailsettings.asp" title="">Get Severe Weather Alerts</a>
+		</li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li id="menu-primary-photos-video" class="menu-primary">
+		<h2 class="menu-primary-title" href="#" title="Photos &amp; Video">Photos &amp; Video</h2>
+		<ul class="menu-primary-list">
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Photos</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/wximage/" title="">All Galleries</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wximage/viewimages.html?gallery=EDITORSPICK" title="">Approvers' Choice</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wximage/viewimages.html?gallery=VIPPICT" title="">VIP Photos</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/worldview/" title="">World View</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wximage/favorites.html" title="">My Favorite Photos</a>
+		</li>
+		<li class="menu-secondary-item compressed">
+		<a href="/wximage/" title="">Photos</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Video</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/video/" title="">All Videos</a>
+		</li>
+		<li class="menu-secondary-item compressed">
+		<a href="/video/" title="">Videos</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Webcams</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/webcams/" title="">All Webcams</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/webcams/index.html?qlat=39.26628426150451&qlon=-96.94335937&qzoom=4" title="">U.S. Webcams</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/webcams/index.html?qlat=48.60385747104044&qlon=11.601562505&qzoom=4" title="">Europe Webcams</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/webcams/index.html?qlat=-25.12539279935161&qlon=-224.73632812000008&qzoom=4" title="">Australia Webcams</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/webcams/index.html?qlat=32.87958699883&qlon=96.50390625499996&qzoom=3" title="">Asia Webcams</a>
+		</li>
+		<li class="menu-secondary-item compressed">
+		<a href="/webcams/" title="">Webcams</a>
+		</li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li id="menu-primary-community" class="menu-primary">
+		<h2 class="menu-primary-title" href="#" title="Community">Community</h2>
+		<ul class="menu-primary-list">
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Photos</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/wximage/" title="">All Galleries</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wximage/viewimages.html?gallery=EDITORSPICK" title="">Approvers' Choice</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wximage/viewimages.html?gallery=VIPPICT" title="">VIP Photos</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/worldview/" title="">World View</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/wximage/favorites.html" title="">My Favorite Photos</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Blogs</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/blog/" title="">All Blogs</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/blog/JeffMasters/show.html" title="">Dr. Jeff Masters</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/shauntanner/show.html" title="">Shaun Tanner</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/24hourprof/show.html" title="">Lee Grenci</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/weatherhistorian/show.html" title="">Christopher C. Burt</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/RickyRood/show.html" title="">Dr. Ricky Rood</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/angelafritz/show.html" title="">Angela Fritz</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Social</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded compressed">
+		<a href="http://www.twitter.com/wunderground" title="">Twitter</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="http://www.facebook.com/wunderground" title="">Facebook</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="http://plus.google.com/u/0/+weatherunderground/posts" title="">Google+</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="http://pinterest.com/wunderground/" title="">Pinterest</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/community/chat.asp" title="">Visitor Chat</a>
+		</li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li id="menu-primary-news" class="menu-primary">
+		<h2 class="menu-primary-title" href="#" title="News">News</h2>
+		<ul class="menu-primary-list">
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Blogs</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/JeffMasters/show.html" title="">Dr. Jeff Masters</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/shauntanner/show.html" title="">Shaun Tanner</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/24hourprof/show.html" title="">Lee Grenci</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/weatherhistorian/show.html" title="">Christopher C. Burt</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/RickyRood/show.html" title="">Dr. Ricky Rood</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/angelafritz/show.html" title="">Angela Fritz</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/" title=""><strong>All Blogs</strong></a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Popular Stories</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/news/winter-storm-juno-blizzard-live-updates" title="">Winter Storm Juno Live Updates as it Hammered the Northeast</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/news/7f3b3ace-e7fe-4651-ae8a-1fc62644e468" title="">'Abominable Snowman' Brings Cheer to Wisconsin Town</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/news/47aa38b4-59a5-49a3-a8eb-9ffe6122b9d3" title="">BOOM: North America's Explosive Oil-by-Rail Problem</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/news/8ff06165-1f46-46e2-9d5f-cdd07a6c1cd7" title="">United Kingdom Slammed By Wind, Rain From Large Storm</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/news/1a5c652d-0193-4e61-85fb-cae4990be241" title="">Baby Delivered on Southwest Flight; Plane Diverted to LAX</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/news/" title=""><strong>All News</strong></a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Recent Stories</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/news/winter-storm-remus-south-snow" title="">Winter Storm Remus: Wintry Mess Across South, Snow for Midwest (FORECAST)</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/news/winter-storm-quantum-ice-and-snow-reports" title="">Winter Storm Quantum Ice and Snow Reports</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/news/new-england-boston-record-snow-tracker" title="">How New England and Boston's Snow Measures Up In The Record Books</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/news/winter-storm-remus-impacts-news" title="">Winter Storm Remus in the South: Minibus Crashes on Icy Texas Roads, States of Emergency Declared</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/news/winter-storm-quantum-impacts-news" title="">Maine Pileup on I-95 During Winter Storm Quantum Causes Serious Injuries, Officials Say</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/news/" title=""><strong>All News</strong></a>
+		</li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li id="menu-primary-climate" class="menu-primary">
+		<h2 class="menu-primary-title" href="#" title="Climate">Climate</h2>
+		<ul class="menu-primary-list">
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Blogs</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/JeffMasters/comment.html?entrynum=2923" title="Climate blog entry from JeffMasters">Are We Entering a New Period of Rapid Global Warming?</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/JeffMasters/comment.html?entrynum=2918" title="Climate blog entry from JeffMasters">New England Intense Hurricanes Much More Numerous 340 to 1800 Years Ago</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/RickyRood/comment.html?entrynum=328" title="Climate blog entry from RickyRood">Nell, Dudley and Snidely: Uncertainty</a>
+		</li>
+		<li class="menu-secondary-item expanded">
+		<a href="/blog/RickyRood/comment.html?entrynum=327" title="Climate blog entry from RickyRood">Headlining Again: Flirting with Insufferable</a>
+		</li>
+		</ul>
+		</li>
+		<li class="menu-secondary col1 ">
+		<h3 class="menu-secondary-title">Climate Change</h3>
+		<ul class="menu-secondary-list">
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/climate/" title="">Climate Change</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/climate/local.asp" title="">Local Climate Change</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/climate/evidence.asp" title="">Evidence</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/climate/extremes.asp" title="">Record Extremes</a>
+		</li>
+		<li class="menu-secondary-item expanded compressed">
+		<a href="/climate/facts.asp" title="">Feeling Skeptical?</a>
+		</li>
+		</ul>
+		</li>
+		</ul>
+		</li>
+		<li id="menu-more" class="menu-primary is-overflow">
+		<h2 class="menu-primary-title" title="More Menus">More</h2>
+		</li>
+		</ul>
+	</nav>
+	<div id="featureMenu">
+	<div id="featuregroup" class="featureGroup">
+		<a href="/" id="grouptitle" class="groupTitle brTop5" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Weather [Tab]']);"><span>Weather</span></a>
+		<div id="fulllist" class="fullList g1 menuHide brBot5 uberMenu">
+		<div class="u1">
+		<div class="uTitle"><a href="/weatherstation/about.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'PWS Subhead [Weather]']);">PWS</a></div>
+		<ul class="uLinks">
+		<li><a href="/weatherstation/about.asp">About Weather Stations</a></li>
+		<li><a href="/wundermap/?lat=45.167500&lon=-93.247597&zoom=8&type=&rad=0&sat=0&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=1&wxsn.mode=temp&wxsn.opa=50&wxsn.bcdgtemp=0&wxsn.rf=1&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Weather Stations [Weather]']);">Map of Weather Stations</a></li>
+		<li><a href="/personal-weather-station/signup" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Sign Up Your Station [Weather]']);">Sign Up Your Station</a></li>
+		<li><a href="/personal-weather-station/mypws" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'My PWS [Weather]']);">My PWS</a></li>
+		</ul>
+		</div>
+		<div class="u1">
+		<div class="uTitle"><a href="/history/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'History Data Subhead [Weather]']);">Weather History</a></div>
+		<ul class="uLinks">
+		<li><a href="/history/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Airport History Data [Weather]']);">Airport Weather History</a></li>
+		<li><a href="/hurricane/at2018.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Hurricane Archive [Weather]']);">Hurricane Archive</a></li>
+		<li><a href="/climate/extremes.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Record Extremes [Weather]']);">Record Extremes</a></li>
+		<li><a href="/travelplanner/index.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Travel Planner (History) [Weather]']);">Travel Planner</a></li>
+		</ul>
+		</div>
+		<div class="u1">
+		<div class="uTitle"><a href="/travel/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Travel Subhead [Weather]']);">Travel</a></div>
+		<ul class="uLinks">
+		<li><a href="/roadtrip/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Road Trip Planner [Weather]']);">Road Trip Planner</a></li>
+		<li><a href="/travelplanner/index.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Travel Planner [Weather]']);">Travel Planner</a></li>
+		<li><a href="/beach-weather/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Beach Weather [Weather]']);">Beach Weather</a></li>
+		<li><a href="/travel/index.asp#parks" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'US National Parks [Weather]']);">U.S. National Parks</a></li>
+		<li><a href="/flights/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Flight Tracking [Weather]']);">Flight Tracking</a></li>
+		</ul>
+		</div>
+		<div class="u1">
+		<div class="uTitle"><a href="/ski/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Activities Subhead [Weather]']);">Activities</a></div>
+		<ul class="uLinks">
+		<li><a href="/ski/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Ski and Snow [Weather]']);">Ski &amp; Snow</a></li>
+		<li><a href="/sports/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Sports [Weather]']);">Sports</a></li>
+		<li><a href="/Aviation/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'General Aviation [Weather]']);">General Aviation</a></li>
+		<li><a href="/sailing-weather/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Sailing and Boating [Weather]']);">Sailing & Boating</a></li>
+		<li><a href="/sky/index.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Astronomy [Weather]']);">Astronomy</a></li>
+		</ul>
+		</div>
+		<div class="u1">
+		<div class="uTitle"><a href="/maps/health/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Health [Weather]']);">Health</a></div>
+		<ul class="uLinks">
+		<li><a href="/maps/us/2xAirQuality.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Air Quality [Weather]']);">Air Quality</a></li>
+		<li><a href="/DisplayPollen.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Pollen and Allergies [Weather]']);">Pollen &amp; Allergies</a></li>
+		<li><a href="/maps/us/2xUVForecast.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'UV Index [Weather]']);">UV Index</a></li>
+		<li><a href="/maps/health/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Flu Tracker [Weather]']);">Flu Tracker</a></li>
+		</ul>
+		</div>
+		<div class="u1e">
+		<div class="uTitle"><a href="/download/index.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Downloads Subhead [Weather]']);">Downloads</a></div>
+		<ul class="uLinks">
+		<li><a href="/download/index.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Wunderground Apps [Weather]']);">Wunderground Apps</a></li>
+		<li><a href="/weather/api/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Weather API for Devs [Weather]']);">Weather&trade; API for Developers</a></li>
+		<li><a href="/stickers/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Weather Stickers [Weather]']);">Weather Stickers&reg;</a></li>
+		<li><a href="/printer/cityforecast.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Forecast Flyer [Weather]']);">Daily Forecast Flyer</a></li>
+		</ul>
+		</div>
+		<div class="clear"></div>
+		</div>
+	</div>
+	<div id="featuregroup" class="featureGroup">
+		<a href="/wundermap/" id="grouptitle" class="groupTitle brTop5" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Maps & Radar [Tab]']);"><span>Maps & Radar</span></a>
+		<div id="fulllist" class="fullList g2 menuHide brBot5 uberMenu">
+		<div class="u2">
+		<div class="uTitle"><a href="/wundermap/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Wundermap Subhead [Maps & Radar]']);">WunderMap</a></div>
+		<div class="iLeft"><a href="/wundermap/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Wundermap Image [Maps & Radar]']);"><img src="//icons.wxug.com/i/wm/misc/fmStatic.jpg" /></a></div>
+		<ul class="uLinks uSplit">
+		<li><a href="/wundermap/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Wundermap [Maps & Radar]']);">WunderMap</a></li>
+		<li><a href="//www.fullscreenweather.com/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Fullscreen Weather [Maps & Radar]']);">Full Screen Weather</a></li>
+		<li><a href="/wundermap/?lat=45.167500&lon=-93.247597&zoom=10&type=&tl.play=0&tl.spd=2&extremes=0&fault=0&femaflood=0&fire=0&firewfas=0&fissures=0&fronts=0&hurrevac=0&hur=0&lightning=0&livesurge=0&mm=0&ndfd=0&rad=1&rad.num=1&rad.spd=25&rad.opa=81&rad.type=00Q&rad.type2=&rad.smo=1&rad.stm=0&dir=1&dir.mode=driving&sst=0&sat=0&seismicrisk=0&svr=0&ski=0&snowfall=0&stormreports=0&tor=0&tfk=0&tsunami=0&riv=0&wxsn=1&wxsn.mode=temp&wxsn.opa=50&wxsn.bcdgtemp=0&wxsn.rf=1&cams=0&pix=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Local Weather Wundermap [Maps & Radar]']);">Local Weather</a></li>
+		<li><a href="/wundermap?lat=39.74503&lon=-97.89816&zoom=5&type=lightmap&units=english&tl.play=0&tl.spd=2&extremes=0&fault=0&femaflood=0&fire=0&firewfas=0&fissures=0&fronts=0&hurrevac=0&hur=0&lightning=1&livesurge=0&mm=0&ndfd=0&rad=1&rad.num=1&rad.spd=25&rad.opa=81&rad.type=00Q&rad.type2=&rad.smo=1&rad.stm=0&dir=1&dir.mode=driving&sst=0&sat=0&seismicrisk=0&svr=1&svr.opa=70&ski=0&snowfall=0&stormreports=0&tor=0&tfk=0&tsunami=0&riv=0&wxsn=0&cams=0&pix=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Severe Storms Wundermap [Maps & Radar]']);">Severe Storms</a></li>
+		<li><a href="/wundermap?lat=29.99756&lon=-72.45383&zoom=5&type=lightmap&units=english&tl.play=0&tl.spd=2&extremes=0&fault=0&femaflood=0&fire=0&firewfas=0&fissures=0&fronts=0&hurrevac=0&hur=1&hur.wr=0&hur.cod=1&hur.fx=1&hur.obs=0&hur.hd=0&hur.mdl=0&hur.gpce=0&hur.img=0&hur.opa=70&hur.opa2=40&lightning=0&livesurge=0&mm=0&ndfd=0&rad=1&rad.num=1&rad.spd=25&rad.opa=81&rad.type=00Q&rad.type2=&rad.smo=1&rad.stm=0&dir=1&dir.mode=driving&sst=0&sat=0&seismicrisk=0&svr=0&ski=0&snowfall=0&stormreports=0&tor=0&tfk=0&tsunami=0&riv=0&wxsn=1&wxsn.mode=tw&wxsn.opa=50&wxsn.bcdgtemp=0&wxsn.rf=1&cams=0&pix=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Hurricanes Wundermap [Maps & Radar]']);">Hurricanes</a></li>
+		</ul>
+		</div>
+		<div class="u1">
+		<div class="uTitle"><a href="/radar/map.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Radar Subhead [Maps & Radar]']);">Radar</a></div>
+		<ul class="uLinks">
+		<li><a href="/radar/map.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'US Radar [Maps & Radar]']);">United States</a></li>
+		<li><a href="/radar/mosaic.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'US Regional Radar [Maps & Radar]']);">U.S. Regional Radar</a></li>
+		<li><a href="/radar/map.asp?region=ca" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Canada Radar [Maps & Radar]']);">Canada</a></li>
+		<li><a href="/radar/map.asp?region=au" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Australia Radar [Maps & Radar]']);">Australia</a></li>
+		<li><a href="/wundermap/?lat=51.70306&lon=10.69070&zoom=4&units=english&rad=1&rad.num=1&rad.spd=25&rad.opa=81&rad.type=00Q&rad.type2=&rad.smo=1&rad.stm=0&sat=0&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Europe Radar [Maps & Radar]']);">Europe</a></li>
+		</ul>
+		</div>
+		<div class="u1">
+		<div class="uTitle"><a href="/wundermap/?lat=45.167500&lon=-93.247597&zoom=5&type=&tl.play=0&tl.spd=2&extremes=0&fault=0&femaflood=0&fire=0&firewfas=0&fissures=0&fronts=0&hurrevac=0&hur=0&lightning=0&livesurge=0&mm=0&ndfd=0&rad=0&dir=1&dir.mode=driving&sst=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&seismicrisk=0&svr=0&ski=0&snowfall=0&stormreports=0&tor=0&tfk=0&tsunami=0&riv=0&wxsn=0&cams=0&pix=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Satellite Subhead [Maps & Radar]']);">Satellite</a></div>
+		<ul class="uLinks">
+		<li><a href="/wundermap/?lat=39.20228&lon=-97.06320&zoom=5&type=hybrid&units=english&rad=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'United States [Maps & Radar]']);">United States</a></li>
+		<li><a href="/wundermap/?lat=55.35712&lon=-102.95187&zoom=4&type=hybrid&units=english&rad=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Canada [Maps & Radar]']);">Canada</a></li>
+		<li><a href="/wundermap/?lat=-25.00121&lon=-225.91086&zoom=5&type=hybrid&units=english&rad=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Australia [Maps & Radar]']);">Australia</a></li>
+		<li><a href="/wundermap/?lat=50.06756&lon=-349.04562&zoom=4&type=hybrid&units=english&rad=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Europe [Maps & Radar]']);">Europe</a></li>
+		<li><a href="/wundermap/?lat=37.65319&lon=92.25320&zoom=3&type=hybrid&units=english&rad=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Asia [Maps & Radar]']);">Asia</a></li>
+		<li><a href="/wundermap/?lat=1.58707&lon=17.28250&zoom=4&type=hybrid&units=english&rad=0&sat=1&sat.num=1&sat.spd=25&sat.opa=87&sat.gtt1=108&sat.gtt2=108&sat.type=IR4&stormreports=0&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Africa [Maps & Radar]']);">Africa</a></li>
+		</ul>
+		</div>
+		<div class="u2e">
+		<div class="uTitle"><a href="/maps/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Maps Subhead [Maps & Radar]']);">Maps</a></div>
+		<ul class="uLinks uSplit">
+		<li><a href="/ndfdimage/viewimage" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Forecast Maps [Maps & Radar]']);">Forecast Maps</a></li>
+		<li><a href="/maps/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Current Conditions [Maps & Radar]']);">Current Conditions</a></li>
+		<li><a href="/severe.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'U.S. Severe Weather [Maps & Radar]']);">U.S. Severe Weather</a></li>
+		<li><a href="/severe/europe.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Europe Severe Weather [Maps & Radar]']);">Europe Severe Weather</a></li>
+		<li><a href="/hurricane/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Tropical & Hurricane [Maps & Radar]']);">Tropical &amp; Hurricane</a></li>
+		<li><a href="/tornado/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Tornadoes [Maps & Radar]']);">Tornadoes</a></li>
+		</ul>
+		<ul class="uLinks uSplit fRight">
+		<li><a href="/MAR/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Marine & Boating [Maps & Radar]']);">Marine &amp; Boating</a></li>
+		<li><a href="/Aviation/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Aviation [Maps & Radar]']);">Aviation</a></li>
+		<li><a href="/wundermap/?zoom=4&rad=0&wxsn=0&svr=0&cams=0&sat=0&riv=0&mm=1&mm.mdl=GFS&mm.type=SURPRE&mm.hour=0&mm.opa=100&mm.clk=0&hur=0&fire=0&tor=0&ndfd=0&pix=0&dir=0&ads=0&tfk=0&fodors=0&ski=0&ls=0&rad2=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Weather Models [Maps & Radar]']);">Weather Models</a></li>
+		<li><a href="/resources/about/maps.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Map Help [Maps & Radar]']);">Map Help</a></li>
+		<li><a href="/resources/about/radar.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Radar Help [Maps & Radar]']);">Radar Help</a></li>
+		<li><a href="/resources/about/satellite.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Satellite Help [Maps & Radar]']);">Satellite Help</a></li>
+		</ul>
+		</div>
+		</div>
+	</div>
+	<div id="featuregroup" class="featureGroup">
+		<a href="/severe.asp" id="grouptitle" class="groupTitle brTop5" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Severe Weather [Tab]']);"><span>Severe Weather</span></a>
+		<div id="fulllist" class="fullList g3 menuHide brBot5 uberMenu">
+		<div class="u1">
+		<div class="uTitle"><a href="/fire/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Fire Subhead [Severe]']);">Fire</a> &amp; <a href="/winter-storm/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Ice Subhead [Severe]']);">Ice</a></div>
+		<ul class="uLinks">
+		<li><a href="/fire/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Wildfires [Severe]']);">Wildfires</a></li>
+		<li><a href="/winter-storm/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Current Winter Storms & Archive [Severe]']);">Winter Storms</a></li>
+		</ul>
+		</div>
+		<div class="u2">
+		<div class="uTitle"><a href="/severe.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Severe Subhead [Severe]']);">Severe</a></div>
+		<div class="iLeft"><a href="/severe.asp" id="fmSevere" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Severe Image [Severe]']);"><img src="//icons.wxug.com/data/640x480/us_severe_thumb.gif" /></a></div>
+		<ul class="uLinks uSplit">
+		<li><a href="/severe.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'U.S. Severe Weather [Severe]']);">U.S. Severe Weather</a></li>
+		<li><a href="/severe/europe.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Europe Severe Weather [Severe]']);">Europe Severe Weather</a></li>
+		<li><a href="/wundermap/?lat=40.28354&lon=-97.85422&zoom=4&rad=0&sat=0&stormreports=1&stormreports.type.tor=1&stormreports.type.hail=1&stormreports.type.wind=1&svr=0&pix=0&cams=0&tor=0&riv=0&wxsn=0&ski=0&tfk=0&mm=0&ndfd=0&fire=0&firewfas=0&extremes=0&hurrevac=0&sst=0&livesurge=0&femaflood=0&tsunami=0&seismicrisk=0&fault=0&fissures=0&fronts=0&dir=1&dir.mode=driving&hur=0" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'U.S. Storm Reports [Severe]']);">U.S. Storm Reports</a></li>
+		<li><a href="/severeconvective.asp">Convective Outlook</a></li>
+		<li><a href="/tornado/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Tornado [Severe]']);">Tornadoes</a></li>
+		<li class="none"><a href="/fire/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Wildfires [Severe]']);">Wildfires</a></li>
+		<li><a href="/climate/extremes.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Record Extremes [Severe]']);">Record Extremes</a></li>
+		</ul>
+		</div>
+		<div class="u2">
+		<div class="uTitle"><a href="/hurricane/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Tropical Subhead [Severe]']);">Hurricanes & Tropical Cyclones</a></div>
+		<div class="iRight"><a href="/hurricane/" id="fmTropical" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Tropical Image [Severe]']);"><img src="//icons.wxug.com/data/images/sst_basin/gl_sst_thumb.gif" /></a></div>
+		<ul class="uLinks uSplit">
+		<li><a href="/hurricane/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Active Storms [Severe]']);">Active Storms</a></li>
+		<li><a href="/hurricane/southern-indian/2015/Tropical-Cyclone-Glenda" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Dynamic Storm Name [Severe]']);">Tropical Cyclone Glenda</a></li>
+		<li><a href="/hurricane/accumulated_cyclone_energy.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Cyclone Energy [Severe]']);">Cyclone Energy</a></li>
+		<li><a href="/hurricane/at2019.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Hurricane Archive [Severe]']);">Hurricane Archive</a></li>
+		</ul>
+		</div>
+		<div class="u1e">
+		<div class="uTitle"><a href="/prepare/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Preparedness Subhead [Severe]']);">Preparedness</a></div>
+		<ul class="uLinks">
+		<li><a href="/prepare/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Be Prepared [Severe]']);">Be Prepared</a></li>
+		<li><a href="/education/winterdriving.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Winter Driving Tips [Severe]']);">Winter Driving Tips</a></li>
+		<li><a href="/wxradio/index.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Weather Radio Online [Severe]']);">Weather Radio Online</a></li>
+		<!--<li><a href="">[ Preparedness Mobile App ]</a></li>-->
+		<li><a href="/email/emailsettings.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Get Severe Weather Alerts [Severe]']);">Get Severe Weather Alerts</a></li>
+		</ul>
+		</div>
+		</div>
+	</div>
+	<div id="featuregroup" class="featureGroup">
+		<a href="/photos/" id="grouptitle" class="groupTitle brTop5" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Photos & Video [Tab]']);"><span>WunderPhotos</span></a>
+		<div id="fulllist" class="fullList g5 menuHide brBot5 uberMenu">
+		<div class="u2">
+		<div class="uTitle"><a href="/video/">Videos</a></div>
+		<div class="iLeft"><a href='/video/?video=' onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Video Image [Photos & Video]']);"><img src="" /></a></div>
+		<ul class="uLinks uSplit">
+		<li><a href="/video/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'All Videos [Photos & Video]']);"><span class="b">All Videos</span></a></li>
+		</ul>
+		</div>
+		<div class="u2">
+		<div class="uTitle"><a href="/wximage/">Photos</a></div>
+		<ul class="uLinks uSplit">
+		<li><a href="/wximage/viewimages.html?gallery=EDITORSPICK" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Approvers Choice [Photos & Video]']);">Approvers' Choice</a></li>
+		<li><a href="/wximage/viewimages.html?gallery=VIPPICT" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'VIP Photos [Photos & Video]']);">VIP Photos</a></li>
+		<li><a href="/worldview/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'World View [Photos & Video]']);">World View</a></li>
+		</ul>
+		<ul class="uLinks uSplit">
+		<li><a href="/wximage/favorites.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'My Favorite Photos [Photos & Video]']);">My Favorite Photos</a></li>
+		<li><a href="/wximage/multiupload.html" onclick="_gaq.push(['_trackEvent', 'Upload Photos', 'Click', 'Feature Menu PhotoVideo']);">Upload a Photo</a></li>
+		<li><a href="/wximage/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'All Galleries [Photos & Video]']);"><span class="b">All Galleries</span></a></li>
+		</ul>
+		</div>
+		<div class="u2e">
+		<div class="uTitle"><a href="/webcams/">Webcams</a></div>
+		<ul class="uLinks uSplit">
+		<li><a href="/webcams/index.html?qlat=39.26628426150451&qlon=-96.94335937&qzoom=4" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'U.S. Webcams [Photos & Video]']);">U.S. Webcams</a></li>
+		<li class="none"><a href="/webcams/index.html?qlat=56.43820357888461&qlon=-98.26171874500004&qzoom=4" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Canada Webcams [Photos & Video]']);">Canada Webcams</a></li>
+		<li><a href="/webcams/index.html?qlat=48.60385747104044&qlon=11.601562505&qzoom=4" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Europe Webcams [Photos & Video]']);">Europe Webcams</a></li>
+		</ul>
+		<ul class="uLinks uSplit">
+		<li><a href="/webcams/index.html?qlat=-25.12539279935161&qlon=-224.73632812000008&qzoom=4" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Australia Webcams [Photos & Video]']);">Australia Webcams</a></li>
+		<li><a href="/webcams/index.html?qlat=32.87958699883&qlon=96.50390625499996&qzoom=3" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Asia Webcams [Photos & Video]']);">Asia Webcams</a></li>
+		<li><a href="/webcams/signup.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'My Webcams [Photos & Video]']);">My Webcams</a></li>
+		<li><a href="/webcams/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'All Webcams [Photos & Video]']);"><span class="b">All Webcams</span></a></li>
+		</ul>
+		</div>
+		</div>
+	</div>
+	<div id="featuregroup" class="featureGroup">
+		<a href="/blog/" id="grouptitle" class="groupTitle brTop5" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Community [Tab]']);"><span>Community</span></a>
+		<div id="fulllist" class="fullList g4 menuHide brBot5 uberMenu">
+		<div class="u2">
+		<div class="uTitle"><a href="/wximage/">Photos</a></div>
+		<ul class="uLinks uSplit">
+		<li><a href="/wximage/viewimages.html?gallery=EDITORSPICK" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Approvers Choice [Community]']);">Approvers' Choice</a></li>
+		<li><a href="/wximage/viewimages.html?gallery=VIPPICT" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'VIP Photos [Community]']);">VIP Photos</a></li>
+		<li><a href="/worldview/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'World View [Community]']);">World View</a></li>
+		</ul>
+		<ul class="uLinks uSplit">
+		<li><a href="/wximage/favorites.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Favorite Photos [Community]']);">Favorite Photos</a></li>
+		<li><a href="/wximage/multiupload.html" onclick="_gaq.push(['_trackEvent', 'Upload Photos', 'Click', 'Feature Menu Community']);">Upload a Photo</a></li>
+		<li><a href="/wximage/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'All Galleries [Community]']);"><span class="b">All Galleries</span></a></li>
+		</ul>
+		</div>
+		<div class="u1">
+		<div class="uTitle"><a href="/social/">Social</a></div>
+		<ul class="uLinks">
+		<li><a href="//www.twitter.com/wunderground" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Twitter [Community]']);">Twitter</a></li>
+		<li><a href="//www.facebook.com/wunderground" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Facebook [Community]']);">Facebook</a></li>
+		<li><a href="//plus.google.com/u/0/+weatherunderground/posts" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Google+ [Community]']);">Google+</a></li>
+		<li><a href="//pinterest.com/wunderground/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Pinterest [Community]']);">Pinterest</a></li>
+		<li><a href="/community/chat.asp">Visitor Chat</a></li>
+		</ul>
+		</div>
+		<div class="u1">
+		<div class="uTitle"><a href="/community/">My Community</a></div>
+		<ul class="uLinks">
+		<li><a href="/members/signup.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'My Blog/Start a Blog [Community]']);">Start a Blog</a></li>
+		<li><a href="/community/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Community Activity [Community]']);">Community Activity</a></li>
+		<li><a href="/blog/index.html?range=favs#mem" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Favorite Blogs [Community]']);">Favorite Blogs</a></li>
+		<li><a href="/wximage/favorites.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Favorite Photos [Community]']);">Favorite Photos</a></li>
+		<li><a href="/wximage/myphotos.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'My Photos/Upload a Photo [Community]']);">Upload a Photo</a></li>
+		<li><a href="/webcams/signup.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'My Webcams [Community]']);">My Webcams</a></li>
+		</ul>
+		</div>
+		<div class="u2e">
+		<div class="uTitle"><a href="/blog/">Blogs</a></div>
+		<ul class="uLinks uSplit">
+		<li><a href="/blog/JeffMasters/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Dr. Jeff Masters [Community]']);">Dr. Jeff Masters</a></li>
+		<li><a href="/blog/shauntanner/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Shaun Tanner [Community]']);">Shaun Tanner</a></li>
+		<li><a href="/blog/24hourprof/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Lee Grenci [Community]']);">Lee Grenci</a></li>
+		<li><a href="/blog/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Meteorologists [Community]']);">Meteorologists</a></li>
+		<li><a href="/blog/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'All Blogs [Community]']);"><span class="b">All Blogs</span></a></li>
+		</ul>
+		<ul class="uLinks uSplit fRight">
+		<li><a href="/blog/weatherhistorian/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Chris Burt [Community]']);">Christopher C. Burt</a></li>
+		<li><a href="/blog/RickyRood/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Ricky Rood [Community]']);">Dr. Ricky Rood</a></li>
+		<li><a href="/blog/angelafritz/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Angela Fritz [Community]']);">Angela Fritz</a></li>
+		</ul>
+		</div>
+		</div>
+	</div>
+	<div id="featuregroup" class="featureGroup">
+		<a href="/news/" id="grouptitle" class="groupTitle brTop5" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'News [Tab]']);"><span>News</span></a>
+		<div id="fulllist" class="fullList g6 menuHide brBot5 uberMenu">
+		<div class="u2">
+		<div class="uTitle"><a href="/blog/">Blogs</a></div>
+		<ul class="uLinks uSplit">
+		<li><a href="/blog/JeffMasters/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Dr. Jeff Masters [News]']);">Dr. Jeff Masters</a></li>
+		<li><a href="/blog/shauntanner/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Shaun Tanner [News]']);">Shaun Tanner</a></li>
+		<li><a href="/blog/24hourprof/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Lee Grenci [News]']);">Lee Grenci</a></li>
+		<li><a href="/blog/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Meteorologists [News]']);">Meteorologists</a></li>
+		</ul>
+		<ul class="uLinks uSplit fRight">
+		<li><a href="/blog/weatherhistorian/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Chris Burt [News]']);">Christopher C. Burt</a></li>
+		<li><a href="/blog/RickyRood/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Ricky Rood [News]']);">Dr. Ricky Rood</a></li>
+		<li><a href="/blog/angelafritz/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Angela Fritz [News]']);">Angela Fritz</a></li>
+		<li><a href="/blog/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'All Blogs [News]']);"><span class="b">All Blogs</span></a></li>
+		</ul>
+		</div>
+		<div class="u2">
+		<div class="uTitle"><a href="/news/">Popular Stories</a></div>
+		<ul class="uLinks">
+		<li><a href="/news/winter-storm-juno-blizzard-live-updates" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Popular Stories [News]']);" >Winter Storm Juno Live Updates as it Hammered the Northeast</a></li>
+		<li><a href="/news/7f3b3ace-e7fe-4651-ae8a-1fc62644e468" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Popular Stories [News]']);" >'Abominable Snowman' Brings Cheer to Wisconsin Town</a></li>
+		<li><a href="/news/47aa38b4-59a5-49a3-a8eb-9ffe6122b9d3" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Popular Stories [News]']);" >BOOM: North America's Explosive Oil-by-Rail Problem</a></li>
+		<li><a href="/news/8ff06165-1f46-46e2-9d5f-cdd07a6c1cd7" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Popular Stories [News]']);" >United Kingdom Slammed By Wind, Rain From Large Storm</a></li>
+		<li><a href="/news/1a5c652d-0193-4e61-85fb-cae4990be241" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Popular Stories [News]']);" >Baby Delivered on Southwest Flight; Plane Diverted to LAX</a></li>
+		<li><a href="/news/" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'All News [News]']);"><span class="b">All News</span></a></li>
+		</ul>
+		</div>
+		<div class="u2e">
+		<div class="uTitle"><a href="/news/">Recent Stories</a></div>
+		<ul class="uLinks">
+		<li><a href="/news/winter-storm-remus-south-snow" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Recent [News]']);" >Winter Storm Remus: Wintry Mess Across South, Snow for Midwest (FORECAST)</a></li>
+		<li><a href="/news/winter-storm-quantum-ice-and-snow-reports" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Recent [News]']);" >Winter Storm Quantum Ice and Snow Reports</a></li>
+		<li><a href="/news/new-england-boston-record-snow-tracker" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Recent [News]']);" >How New England and Boston's Snow Measures Up In The Record Books</a></li>
+		<li><a href="/news/winter-storm-remus-impacts-news" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Recent [News]']);" >Winter Storm Remus in the South: Minibus Crashes on Icy Texas Roads, States of Emergency Declared</a></li>
+		<li><a href="/news/winter-storm-quantum-impacts-news" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Recent [News]']);" >Maine Pileup on I-95 During Winter Storm Quantum Causes Serious Injuries, Officials Say</a></li>
+		<li><a href="/news/" onclick="_gaq.push(['_trackEvent', 'News', 'Click', 'Feature Menu News']); _gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'All News [News]']);"><span class="b">All News</span></a></li>
+		</ul>
+		</div>
+		</div>
+	</div>
+	<div id="featuregroup" class="featureGroup">
+		<a href="/climate/" id="grouptitle" class="groupTitle brTop5" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Climate [Tab]']);"><span>Climate Change</span></a>
+		<div id="fulllist" class="fullList g7 menuHide brBot5 uberMenu">
+		<div class="u1">
+		<div class="uTitle"><a href="/video/climate-and-going-green/">Videos</a></div>
+		<ul class="uLinks">
+		<li><a href="/video/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'All Videos [Climate]']);"><span class="b">All Videos</span></a></li>
+		</ul>
+		</div>
+		<div class="u2">
+		<div class="uTitle"><a href="/climate/climateblogs.asp">Blogs</a></div>
+		<ul class="uLinks">
+		<li><a href="/blog/JeffMasters/comment.html?entrynum=2923" title="Are We Entering a New Period of Rapid Global Warming?" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Climate Blogs [Climate]']);">Are We Entering a New Period of Rapid Global Warming?</a></li>
+		<li><a href="/blog/JeffMasters/comment.html?entrynum=2918" title="New England Intense Hurricanes Much More Numerous 340 to 1800 Years Ago" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Climate Blogs [Climate]']);">New England Intense Hurricanes Much More Numerous 340 to 1800 Years Ago</a></li>
+		<li><a href="/blog/RickyRood/comment.html?entrynum=328" title="Nell, Dudley and Snidely: Uncertainty" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Climate Blogs [Climate]']);">Nell, Dudley and Snidely: Uncertainty</a></li>
+		<li><a href="/blog/RickyRood/comment.html?entrynum=327" title="Headlining Again: Flirting with Insufferable" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Climate Blogs [Climate]']);">Headlining Again: Flirting with Insufferable</a></li>
+		<li><a href="/blog/RickyRood/show.html" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Ricky Rood [Climate]']);">Dr. Ricky Rood</a></li>
+		<li><a href="/climate/climateblogs.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'All Climate Change Blogs [Climate]']);" class="b">All Climate Change Blogs</a></li>
+		</ul>
+		</div>
+		<div class="u2">
+		<div class="uTitle"><a href="/news/">News</a></div>
+		<ul class="uLinks">
+		<li><a href="/news/polar-vortex-role-of-warming-cold-air-invasion" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Climate News [Climate]']);" >Cold Air Invasion Coming: What's the Role of Warming?</a></li>
+		<li><a href="/news/doomsday-clock-climate-change" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Climate News [Climate]']);" >Doomsday Clock Moves Due to Climate Change, Signaling Mankind is Closer to a Global Catastrophe</a></li>
+		<li><a href="/news/record-warm-year-2014-earth" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Climate News [Climate]']);" >2014 Was Earth's Warmest Year on Record</a></li>
+		<li><a href="/news/california-climate-change-response-20141114" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Climate News [Climate]']);" >California Offers a Comprehensive Response to Climate Change, State Government Says</a></li>
+		<li><a href="/news/us-china-climate-deal-20141112" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Climate News [Climate]']);" >U.S., China Reach Landmark Climate Deal</a></li>
+		<li><a href="/news/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'All News [Climate]']);"><span class="b">All News</span></a></li>
+		</ul>
+		</div>
+		<div class="u1e">
+		<div class="uTitle"><a href="/climate/">Climate Change</a></div>
+		<ul class="uLinks">
+		<li><a href="/climate/" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Climate Change [Climate]']);">Climate Change</a></li>
+		<li><a href="/climate/local.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Local Climate Change [Climate]']);">Local Climate Change</a></li>
+		<li><a href="/climate/evidence.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Evidence [Climate]']);">Evidence</a></li>
+		<li><a href="/climate/extremes.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Record Extremes [Climate]']);">Record Extremes</a></li>
+		<li><a href="/climate/facts.asp" onclick="_gaq.push(['_trackEvent', 'Feature Menu', 'Click', 'Feeling Skeptical? [Climate]']);">Feeling Skeptical?</a></li>
+		</ul>
+		</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+  wui.featuremenu();
+</script>
+	<div id="header-background-container">
+	 <div id="header-search-form" class="default-visible">
+		<form action="/cgi-bin/findweather/getForecast" name="wxsearch">
+		<div id="wuSearchWrapper">
+		<input type="search" name="query" value="" id="wuSearch" x-webkit-speech />
+		</div>
+		<a href="" id="searchSubmit" class="brRight5" onclick="SubmitFastForecastSearch();return false;">Search</a>
+		</form>
+		<!-- TODO: verify that this is necessary -->
+		<script type="text/javascript">
+		function SubmitFastForecastSearch(){
+		var url=new String();
+		var search = document.getElementById('wuSearch').value;
+		url='/cgi-bin/findweather/getForecast?query='+search;
+		window.location = url;
+		return true;
+		}
+		</script>
+		</div>
+		<!-- TODO: make sure this is right... -->
+		<div id="header-recent-cities">
+		</div>
+<!-- AMW 20130808 Removed option bar  -->
+		<div id="header-option-bar">
+		<ul id="header-option-wu-sites">
+		<li><span class="b">Main Site</span></li>
+		<li><a href="http://m.wund.com/">Mobile</a></li>
+		<li><a href="http://i.wund.com/">iPhone</a></li>
+		<li><a href="http://www.wund.com/">Lite</a></li>
+		<li><a href="http://www.fullscreenweather.com/">Full Screen</a></li>
+		<li><a href="/download/index.asp">Downloads</a></li>
+		</ul>
+		<div id="header-option-units">
+		<a id="cfToggle" class="cfToggleF" href="/cgi-bin/findweather/getForecast?setunits=metric" title="Switch to Metric"></a>
+		</div>
+		<ul id="header-option-wu-links">
+		<li><a href="/member/membersettings.html?page=prefs">Settings</a></li>
+		<li><a href="https://www.wunderground.com/members/signup.asp" title="Join the Weather Underground community">Join</a></li>
+		<li><a href="https://www.wunderground.com/login.asp">Sign In</a></li>
+		</ul> <!-- #header-option-wu-links -->
+		</div> <!-- #header-option-bar -->
+		<div id="header-elements">
+		<div id="wunder-button"><a href="#">Menu</a></div>
+		<a id="logo" href="/" title="Weather Underground">wunderground.com</a>
+		<div id="header-buttons">
+		<div id="header-favorites-button"></div>
+		<div id="header-search-button"></div>
+		<div id="header-member-button">
+		<a href="/member/registration?mode=api_signup">Sign In</a>
+		</div>
+		</div>
+		</div>
+	</div> <!-- #header-background-container -->
+	<div id="menu-favorites"><div id="favoritesBar">
+	<a class="favoritesTitle" href="/favorites/edit.html">Favorites</a>
+	<div class="favoritesScrollContainer">
+  <div class="loadFavs noFavs">Loading favorites...</div>
+  <ul id="favoritesRow" class="favoritesScroll ">
+  </ul> <!-- .favoritesScroll -->
+	</div>
+	<div class="favoritesScrollButtons">
+		<a href="javascript:void(0);" class="favoritesScrollRight disabled" onclick="wui.favorites.scroll.right();">&#x25BA;</a>
+		<a href="javascript:void(0);" class="favoritesScrollLeft disabled" onclick="wui.favorites.scroll.left();">&#x25C4;</a>
+	</div>
+<!-- Underscore partial for favorites table columns -->
+<script type="text/template" id="cellTemplate">
+  <li style="display: none;" id="<%= cityFavNum %>" class="favorite nobr">
+  <a href="/cgi-bin/findweather/getForecast?query=<%= zmw %>" class="favoritesItem">
+  <img style="display: none;" alt="Unknown" title="Unknown" class="condIcon" />
+  <span class="favCity"></span>
+  <span class="favTemp">&nbsp;<span class="nobr"><span class="b"></span>&nbsp;</span></span>
+  <img style="display: none;" src="//icons.wxug.com/i/wu/alertTriOrange.png" width="18" height="16" class="warnIcon" />
+  </a>
+  </li>
+</script>
+<!-- Script to load favorites asynchronously -->
+<script type="text/javascript">
+	//Load favorites based on ZMW, preloaded into table cells by
+	//the server
+	jQuery(document).ready(function($) {
+  var cityString = "";
+  var iconPref = "/k/";
+  wui.favorites.scroll.load(cityString, iconPref);
+	});
+</script>
+</div>
+</div>
+</div> <!-- #header -->
+		<center id="WX_Skin">
+		<div id="wuPage">
+		<div id="innerContent" class="tm20">
+		<style>
+	h1 {
+		font-size: 20px !important;
+	}
+	a.button {
+		line-height: 34px;
+		border-radius: 5px;
+	}
+	p {
+		font-size: 16px;
+	}
+</style>
+<style>
+	#api-promo {
+		display: block;
+		padding: 10px;
+		margin: 0 20px 20px 20px;
+		border: 1px solid #ff8833;
+		background: #ffdd99;
+		color: #0053ae;
+		font-size: 18px;
+		text-align: center;
+		border-radius: 5px;
+	}
+</style>
+<div class="row">
+  <div class="small-12 columns">
+		<a href="https://apicommunity.wunderground.com/weatherapi/topics/end-of-service-for-the-weather-underground-api" id="api-promo" target="_blank">
+		<strong>Please read an important notice to our customers:</strong>
+		<div>End of Service for the Weather Underground API</div>
+		</a>
+  </div>
+</div>
+<div class="row">
+  <div id="banner" class="small-12 large-8 columns">
+  <h1>Weather Data Packages</h1>
+  </div>
+</div>
+<span class="show-for-small">
+</span>
+<div class="hide-for-small">
+</div>
+<div class="row">
+	<div class="small-11 small-offset-1 large-9 large-offset-1 columns">
+  <h2>Get access to the world's most accurate, precise and trusted weather data</h2>
+		<p>Weather Underground as part of The Weather Company, an IBM business, now offers a series of Data Packages that tap into the breadth and depth of weather data to provide current and forecast conditions, seasonal and sub-seasonal forecasts, lifestyle indices, severe weather and historical weather data.</p>
+		<p>With The Weather Company, you can take advantage of these packages quickly and easily, accessing weather data APIs via the Cloud. The packages are curated to give you only what you need in the format you need it. You can Incorporate weather data into your applications or combine business data with weather data such as alerts and notifications, forecast data, and weather imagery, then apply advanced analytics to build the foundation for informed enterprise decision-making.</p>
+		<p>To improve our services and enhance our relationship with our users, <strong>we will no longer provide free weather API keys</strong> as part of our program. If you have been directed to download our Weather Underground free API key by a third party provider, please contact your vendor for resolution.</p>
+		<a href="http://biz.weather.com/WU-Data-API_Data-Package-Demo-Request.html?utm_source=Weather%20Underground&utm_medium=webpage&utm_campaign=WREF_Q2_201804_CROSS_WW_%5BWU%20Data%20API%5D" class="button medium radius submit-button" target="_blank">Learn More</a>
+  </div>
+</div>
+<script>
+  jQuery(document).ready(function($) {
+  $('.small-nav-title').click(function (evt) {
+  if($(window).width() < 768) {
+        $('.navigation').removeClass('special');
+        $('.navigation:first').addClass('brTop5');
+        $('.navigation:nth-of-type(5)').addClass('brBot5');
+      }
+      evt.stopPropagation();
+      $('.secondary-nav').toggleClass('active');
+    });
+  });
+</script>
+<!-- script for accordion opening and closing -->
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".fancybox").fancybox();
+  });
+/*
+	$("#contact").submit(function() {
+		return false;
+	});
+*/
+  /* pmims: this allows the text-field to show and hide a message with mouse focus.
+  window.addEventListener (
+  'load',
+  function() {
+  document.getElementById('contact_name').addEventListener ('focus',
+  function() {
+  if(this.value == 'contact name') {
+  this.value = '';
+  }
+  },false);
+  document.getElementById('contact_name').addEventListener ('blur',
+  function() {
+  if(!this.value) {
+  this.value = 'contact name';
+  }
+  }, false
+  );
+  }, false
+  );
+  */
+  /* pmims: textfield counter, used on the questionaire page */
+  function textCounter(char) {
+  var len = char.length;
+  var elem = document.getElementById("charNum");
+  var chars = 0;
+  if (len >= 255) {
+  alert("255 Character Limit Reached!");
+  return false;
+  } else {
+  chars = 255 - len;
+  elem.innerHTML = "(" + chars + " remaining characters...)";
+  }
+  }
+  jQuery(document).ready(function($) {
+  $("#accordion").accordion({
+  active:false,
+  /*autoHeight:false,*/
+  clearStyle:true,
+  animate:"bounceslide",
+  collapsible:true,
+  heightStyle:"fill",
+  fillspace:true
+  });
+  if($(window).width() < 700) {
+    var b1 = "#button1", b2 = "#button2", b3 = "#button3", b4 = "#button4";
+  }
+
+  //do some slight style changes
+  $('#innerContent').removeClass('tm20');
+
+  /* b: pmims:041013 */
+
+  var su = "#signup"; 
+  var log = "#login";
+  var ex = "#explore"; 
+  var fgot = "#forgot";
+  var login = "#loginV2";
+  var signup = "#signupV2";
+
+  $(login).css('cursor','pointer');
+  $(signup).css('cursor','pointer');
+
+  $("#forgot").bind('mouseenter', function() {
+    $(this).css('text-decoration','underline');
+    }).mouseleave(function() {
+    $(this).css('text-decoration','none');
+  });
+
+  $("#purchaseKey").bind('click',function() {
+    $("#questionform").submit();
+  });
+
+  $(login).bind('click',function() {
+    document.location.href = "/member/registration?mode=api_signup";
+  });
+
+  $(signup).bind('click',function() {
+    $("#enroll").submit();
+  });
+
+  $(ex).bind('mouseenter',function() {
+    $(this).css('cursor','pointer');
+    $(this).bind('click',function() {
+      document.location.href = "/weather/api/d/pricing.html";
+    });
+  });
+
+  $(su).bind('mouseenter',function() {
+    $(this).css('cursor','pointer');
+    $(this).bind('click',function() {
+      document.location.href = "/member/registration?mode=api_signup";
+    });
+  });
+
+  $("#signup-pricing").bind('mouseenter',function() {
+    $(this).css('cursor','pointer');
+    $(this).bind('click',function() {
+      document.location.href = "/member/registration?mode=api_signup";
+    });
+  });
+
+  $(".key").bind('mouseenter', function() {
+    $(this).css({'text-decoration':'underline','cursor':'pointer'});
+    }).mouseout(function() {
+    $(this).css('text-decoration','none');
+  });
+
+  $(".key").bind('click',function() {
+    
+            $(this).bind('click',function() {
+      document.location.href = "/member/registration?mode=api_signup";
+    });
+    
+    
+  });
+
+  $(".mobile_key").bind('click',function() {
+    
+    $("#planConfig_r").submit();
+  });
+
+  /* regenerate key page - default button grey and orange */
+  $("#api_regenerate_checkbox").change(function() {
+    if($(this).is(':checked')) {
+      $("#regenerate_key_button_grey").hide();
+      $("#regenerate_key_button").show();
+    } else {
+      $("#regenerate_key_button_grey").show();
+      $("#regenerate_key_button").hide();
+    }
+  });
+
+  $("#regenerate_key_button").bind('click', function() {
+    $("#regenerate_the_key").submit();
+  });
+
+  $("#resetpword").bind('click', function() {
+    $("#reset").submit();
+  });
+
+  $("#view_billing_button").bind('click', function() {
+    window.location = "/weather/api/d//edit.html?api_action=viewbilling";
+  });
+
+  $("#update_button").bind('click', function() {
+    $("#update_key").submit(); 
+  });
+
+  /* e: pmims */
+
+  var elt_form = $("#planConfig_r"),
+      elt_price = $(".api_price"),
+      elt_mon_price_0 = $(".dynamic_price_0"),
+      elt_mon_price_1 = $(".dynamic_price_1"),
+      elt_mon_price_2 = $(".dynamic_price_2"),
+      elt_mon_price_3 = $(".dynamic_price_3"),
+      elt_mon_price_4 = $(".dynamic_price_4"),
+      elt_mon_price_5 = $(".dynamic_price_5"),
+      elt_mon_price_6 = $(".dynamic_price_6"),
+      elt_mon_price_7 = $(".dynamic_price_7"),
+      elt_mon_price_8 = $(".dynamic_price_8"),
+      elt_mon_price_9 = $(".dynamic_price_9"),
+      elt_final_mon_price = $(".monthly_price"),
+      elt_final_calls_per_day = $(".calls_per_day"),
+      elt_final_calls_per_min = $(".calls_per_minute"),
+      elt_final_history = $(".history_cost"),
+      elt_final_history_dollar_sign = $(".history_dollar"),
+      elt_package = elt_form.find("input[name=api_package]"),
+      elt_usage = elt_form.find("input[name=api_usage]"),
+      elt_usage_2 = elt_form.find("input[name=api_usage_2]"),
+      elt_history = elt_form.find("input[name=api_history]"),
+      elt_action = elt_form.find("input[name=api_action]");
+
+  //var elt_checkout = $("#checkout, #changesubscription");
+  //var elt_checkout = elt_form.find("input[type=submit]");
+  var elt_checkout = elt_form.find(".buyButton");
+  var elt_plan_name = elt_form.find(".api_plan_name");
+  var elt_clouds = $("#cloud_bg");
+  var elt_history_icon = $("#historyIcon");
+  var selectedClass = "selected";
+  var disabledClass = "disabled";
+  var includedClass = "included";
+  var cloudsClass = ""; // gets changed by update_clouds_images()
+  var elt_top_price = $(".top-dollar-value");
+
+  // starting state
+  var start_package = "";
+  var start_usage = "";
+  var start_addon_history = false;
+  var has_recurly = false;
+	
+  elt_usage.filter("[value="+start_usage+"]").attr("checked", "checked");
+  elt_usage_2.filter("[value="+start_usage+"]").attr("checked", "checked");
+
+  wui.api.pricing = {};
+
+  wui.api.pricing.adjustments = {
+    
+    
+    "a": {
+      
+      "0": ""
+      
+      ,"1": ""
+      
+      ,"2": ""
+      
+      ,"3": ""
+      
+      ,"4": ""
+      
+      ,"5": ""
+      
+      ,"6": ""
+      
+      ,"7": "($300 if existing key)"
+      
+      ,"8": "($450 if existing key)"
+      
+      ,"9": ""
+      
+    }
+    
+    ,
+    "b": {
+      
+      "0": ""
+      
+      ,"1": ""
+      
+      ,"2": ""
+      
+      ,"3": ""
+      
+      ,"4": ""
+      
+      ,"5": ""
+      
+      ,"6": ""
+      
+      ,"7": "($500 if existing key)"
+      
+      ,"8": "($750 if existing key)"
+      
+      ,"9": "($300 if existing key)"
+      
+    }
+    
+    ,
+    "c": {
+      
+      "0": ""
+      
+      ,"1": ""
+      
+      ,"2": ""
+      
+      ,"3": ""
+      
+      ,"4": ""
+      
+      ,"5": ""
+      
+      ,"6": ""
+      
+      ,"7": "($750 if existing key)"
+      
+      ,"8": "($1,000 if existing key)"
+      
+      ,"9": "($500 if existing key)"
+      
+    }
+    
+  };
+
+  wui.api.pricing.plans = {
+    
+    
+    "a": {
+      
+      "0": 0
+      
+      ,"1": 20
+      
+      ,"2": 200
+      
+      ,"3": 300
+      
+      ,"4": 600
+      
+      ,"5": 1500
+      
+      ,"6": 450
+      
+      ,"7": 600
+      
+      ,"8": 900
+      
+      ,"9": 200
+      
+    }
+    
+    ,
+    "b": {
+      
+      "0": 0
+      
+      ,"1": 150
+      
+      ,"2": 300
+      
+      ,"3": 500
+      
+      ,"4": 1000
+      
+      ,"5": 2500
+      
+      ,"6": 750
+      
+      ,"7": 1000
+      
+      ,"8": 1500
+      
+      ,"9": 400
+      
+    }
+    
+    ,
+    "c": {
+      
+      "0": 0
+      
+      ,"1": 300
+      
+      ,"2": 500
+      
+      ,"3": 750
+      
+      ,"4": 1500
+      
+      ,"5": 4000
+      
+      ,"6": 1000
+      
+      ,"7": 1500
+      
+      ,"8": 2000
+      
+      ,"9": 600
+      
+    }
+    
+  };
+
+  wui.api.pricing.history = {
+    
+    "0": 0
+    
+    ,"1": 500
+    
+    ,"2": 2500
+    
+    ,"3": 5000
+    
+    ,"4": 10000
+    
+    ,"5": 15000
+    
+    ,"6": 30000
+    
+    ,"7": 5000
+    
+    ,"9": 2500
+    
+  };
+
+  // first-time sign-up: show stratus developer
+  if ((!start_package || start_package=='0') && (!start_usage || start_usage=='0')) {
+    start_package = 'a';
+    start_usage = '0';
+    elt_package.filter("[value=a]").attr("checked", "checked");
+    //elt_usage.filter("[value=0]").attr("checked", "checked");
+  }
+
+  // starting price
+  var price = 0;
+  var start_price = wui.api.pricing.plans[start_package][start_usage];
+  if (start_addon_history) {
+    start_price += wui.api.pricing.history[start_usage];
+  }
+  wui.api.checkout = function() {
+    var package = elt_package.filter(":checked").val();
+    var usage = elt_usage.filter(":checked").val();
+    if(usage == start_usage){
+      usage = elt_usage_2.filter(":checked").val();
+    }
+    var addon_history = (elt_history.filter(":checked").val() == "1") ? true : false;
+    var history = (addon_history == true) ? 1 : 0;
+    var disabled = elt_checkout.hasClass(disabledClass);
+    if (disabled || !package || !usage) {
+      return false;
+    }
+    if (!has_recurly && price > 0) {
+  var plan_code = "" + package + usage;
+  if (addon_history) {
+  plan_code += "h";
+  }
+  var url = "https://.recurly.com/subscribe/"+plan_code+"//?email=";
+  window.location = url;
+  return false; // don't submit the form
+  }
+  $('#planConfig_r').submit();
+  var url = "/weather/api/d//edit.html?api_action=changesubscription&api_history="+history+"&api_usage="+usage+"&api_package="+package;
+  window.location = url;
+  return true; // submit the form to changesubscription
+  };
+  wui.api.getPlan = function() {
+  var package_name = elt_package.filter(":checked").attr("data-name");
+  var usage_name = elt_usage.filter(":checked").attr("data-name");
+  var addon_history = (elt_history.filter(":checked").val() == "1") ? true : false;
+  var plan_name = package_name + " " + usage_name;
+  if (addon_history) {
+  plan_name += " + History";
+  }
+  return plan_name;
+  }
+  wui.api.update_price = function() {
+  var package = elt_package.filter(":checked").val();
+  var usage = elt_usage.filter(":checked").val();
+  if(usage == start_usage){
+  usage = elt_usage_2.filter(":checked").val();
+  }
+  var addon_history = (elt_history.filter(":checked").val() == "1") ? true : false;
+  price = 0;
+  if (package && usage) {
+  if(((usage == 7) && ("" == "3")) || (usage == 3)){
+  price += wui.api.pricing.plans[package][3];
+  }else{
+  price += wui.api.pricing.plans[package][usage];
+  }
+  }
+  if (addon_history && usage) {
+  price += wui.api.pricing.history[usage];
+  }
+  elt_price.text(price);
+  elt_top_price.text("$"+price);
+  //update monthly prices in table in step 2
+  elt_mon_price_0.html("$" + wui.api.pricing.plans[package][0]);
+  elt_mon_price_1.html("$" + wui.api.pricing.plans[package][1]);
+  elt_mon_price_2.html("$" + wui.api.pricing.plans[package][2]);
+  elt_mon_price_3.html("$" + wui.api.pricing.plans[package][3]);
+  elt_mon_price_4.html("$" + wui.api.pricing.plans[package][4]);
+  elt_mon_price_5.html("$" + wui.api.pricing.plans[package][5]);
+  elt_mon_price_6.html("$" + wui.api.pricing.plans[package][6]);
+  elt_mon_price_7.html("$" + wui.api.pricing.plans[package][7]);
+  elt_mon_price_8.html("$" + wui.api.pricing.plans[package][8]);
+  elt_mon_price_9.html("$" + wui.api.pricing.plans[package][9]);
+  //update infor in table at bottom of pricing page
+  if(((usage == 7) && ("" == "3")) || (usage == 3)){
+  elt_final_mon_price.text(wui.api.pricing.plans[package][3]);
+  }
+		else if (((usage == 9) && ("" == "2")) || (usage == 2)){
+  elt_final_mon_price.text(wui.api.pricing.plans[package][2]);
+  }
+		else{
+  elt_final_mon_price.text(wui.api.pricing.plans[package][usage]);
+  }
+  if(usage == 0) {
+  elt_final_calls_per_day.text("500");
+  elt_final_calls_per_min.text("10");
+  }
+  else if(usage == 1) {
+  elt_final_calls_per_day.text("5,000");
+  elt_final_calls_per_min.text("100");
+  }
+  else if(usage == 2) {
+  elt_final_calls_per_day.text("100,000");
+  elt_final_calls_per_min.text("1,000");
+  }
+  else if(usage == 3) {
+  elt_final_calls_per_day.text("1,000,000");
+  elt_final_calls_per_min.text("10,000");
+  }
+  else if(usage == 4) {
+  elt_final_calls_per_day.text("10,000,000");
+  elt_final_calls_per_min.text("25,000");
+  }
+  else if(usage == 5) {
+  elt_final_calls_per_day.text("40,000,000");
+  elt_final_calls_per_min.text("50,000");
+  }
+  else if(usage == 6) {
+  //based on features.hdf, why is "tropical storm" id 6?
+  elt_final_calls_per_day.text("5,000,000");
+  elt_final_calls_per_min.text("20,000");
+  }
+  else if(usage == 7) {
+  elt_final_calls_per_day.text("1,000,000");
+  elt_final_calls_per_min.text("10,000");
+  }
+  else if(usage == 8) {
+  elt_final_calls_per_day.text("1,000,000");
+  elt_final_calls_per_min.text("10,000");
+  }
+  else if(usage == 9) {
+  elt_final_calls_per_day.text("100,000");
+  elt_final_calls_per_min.text("1,000");
+  }
+  else {
+  //default to developer status
+  elt_final_calls_per_day.text("500");
+  elt_final_calls_per_min.text("10");
+  }
+  if (addon_history && usage) {
+  elt_final_history.text(wui.api.pricing.history[usage]);
+  } else {
+  elt_final_history_dollar_sign.text("");
+  elt_final_history.text("Not Included");
+  }
+  // disabled state of checkout button
+  if (package==start_package && usage==start_usage && addon_history==start_addon_history) {
+  elt_checkout.addClass(disabledClass).attr("disabled", true);
+  } else {
+  elt_checkout.removeClass(disabledClass).attr("disabled", false);
+  }
+  // image state of checkout button: changesubscription vs. checkout
+  if (!has_recurly && price > 0) {
+  //elt_checkout.addClass("checkout").removeClass("changesubscription");
+  elt_checkout.html("Check out");
+  } else {
+  elt_checkout.html("Update plan");
+  }
+  // text of plan name
+  var plan_name = wui.api.getPlan();
+  elt_plan_name.text(plan_name);
+  };
+  wui.api.update_price();
+  elt_package.click(wui.api.update_price);
+  elt_usage.click(wui.api.update_price);
+  elt_usage_2.click(wui.api.update_price);
+  elt_history.click(wui.api.update_price);
+  // pretty graphics
+  wui.api.update_clouds_images = function() {
+  var package = elt_package.filter(":checked").val();
+  // each of the packages
+  $.each(['a', 'b', 'c'], function(index, value) {
+  if (package == value) {
+  $("#api_package_row_" + value).addClass(selectedClass);
+  } else {
+  $("#api_package_row_" + value).removeClass(selectedClass);
+  }
+  });
+  // each of the packages that are included
+  // stratus
+  if ($.inArray(package, ['a', 'b', 'c']) > -1) {
+  $("#api_package_row_a").addClass(includedClass);
+  } else {
+  $("#api_package_row_a").removeClass(includedClass);
+  }
+  // cumulus
+  if ($.inArray(package, ['b', 'c']) > -1) {
+  $("#api_package_row_b").addClass(includedClass);
+  } else {
+  $("#api_package_row_b").removeClass(includedClass);
+  }
+  // anvil
+  if ($.inArray(package, ['c']) > -1) {
+  $("#api_package_row_c").addClass(includedClass);
+  } else {
+  $("#api_package_row_c").removeClass(includedClass);
+  }
+  var usage = elt_usage.filter(":checked").val();
+  // each of the usage plans
+  /*pmims: increased the array to 7 from 3 */
+  /*bhayes: increased the array to 9 from 7 */
+  $.each(['0','1','2','3','4','5','6','7','8','9'], function(index, value) {
+  if (usage == value) {
+  $("#api_usage_row_" + value).addClass(selectedClass);
+  $("#api_usage_row_" + value).css("background-color","#d2ecf9");
+  } else {
+  $("#api_usage_row_" + value).removeClass(selectedClass);
+  $("#api_usage_row_" + value).css("background-color","#ffffff");
+  }
+  });
+  // which cloud image
+  if (cloudsClass) elt_clouds.removeClass(cloudsClass);
+  cloudsClass = "cloud_" + package + usage;
+  elt_clouds.addClass(cloudsClass);
+  // toggle history image and hilight row
+  var addon_history = (elt_history.filter(":checked").val() == "1") ? true : false;
+  if (addon_history) {
+  elt_history_icon.removeClass("none");
+  $("#api_history_row_0").removeClass(selectedClass);
+  $("#api_history_row_1").addClass(selectedClass);
+  } else {
+  elt_history_icon.addClass("none");
+  $("#api_history_row_0").addClass(selectedClass);
+  $("#api_history_row_1").removeClass(selectedClass);
+  }
+  }
+  wui.api.update_clouds_images();
+  elt_package.click(wui.api.update_clouds_images);
+  elt_usage.click(wui.api.update_clouds_images);
+  elt_usage_2.click(wui.api.update_clouds_images);
+  elt_history.click(wui.api.update_clouds_images);
+		/* Customer Service Form on the Pricing Page */
+		function validateEmail(email) {
+		var reg = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		return reg.test(email);
+		}
+		$("#send").on('click', function(e) {
+		e.preventDefault();
+		var fullname = $("#fullname").val();
+		var email = $("#email").val();
+		var company = $("#company").val();
+		var phone = $("#phone").val();
+		var volume = $("#volume").val();
+		var message = $("#message").val();
+		var messageLength = message.length;
+		var validEmail = validateEmail(email);
+		if(email == false) {
+		$("#email").addClass("error");
+		} else if(email == true){
+		$("#email").removeClass("error");
+		}
+		if(fullname == false) {
+		$("#fullname").addClass("error");
+		} else {
+		$("#fullname").removeClass("error");
+		}
+		if(company == false) {
+		$("#company").addClass("error");
+		} else {
+		$("#company").removeClass("error");
+		}
+		if(phone == false) {
+		$("#phone").addClass("error");
+		} else {
+		$("#phone").removeClass("error");
+		}
+		if(volume == false) {
+		$("#volume").addClass("error");
+		} else {
+		$("#volum").removeClass("error");
+		}
+		if(messageLength < 4) {
+					$("#message").addClass("error");
+				} else if(messageLength >= 4){
+		$("#message").removeClass("error");
+		}
+		if(validEmail == true && messageLength > 1) {
+		$(this).replaceWith("<em>Sending...</em>");
+		$.ajax({
+		//url: "http://www.wunderground.com/pricing_api/sendMessage.php",
+		url: "/pricing_api/sendMessage.php",
+		//url: "http://tim.preview.wunderground.com/cgi-bin/sendMessage",
+		data: $("#contact").serialize(),
+		type: "POST"
+		}).success(function(response) {
+		$("#contact").fadeOut(50, function() {
+		$("#contactus").html("Success! Your feedback has been sent, Thank You!");
+		setTimeout("$.fancybox.close()", 2000);
+		});
+		$("#contact").trigger("reset");
+		console.log("success!!");
+		}).error(function() {
+		console.log("error!!!");
+		});
+		}
+		});
+		});
+</script>
+		</div>
+		<div id="preFooter">
+		&nbsp;
+		</div>
+		</div>
+		</center>
+		<div id="footer">
+	<div id="footerContents">
+		<div id="signoff">
+		<div id="moFoot" class="none">
+		<div class="taC tm5">&copy; Copyright 2019 The Weather Company, LLC</div>
+		<div class="taC p10">
+		<span id="moAPI" class="none nobr"><a href="/weather/api/">Weather API</a> -</span>
+		<span class="nobr"><a href="/about/background.asp">About Us</a> -</span>
+		<span class="nobr"><a href="/about/contact.asp">Contact</a> -</span>
+		<span class="nobr"><a href="/members/tos.asp">TOS</a> -</span>
+		<span class="nobr"><a href="/members/tos.asp#privacy">Privacy</a></span>
+		</div>
+		</div>
+		<table cellspacing="0" cellpadding="0" class="full nomo">
+		<tr>
+		<td id="copyright" class="nobr vaT">&copy; Copyright TWC Product and Technology LLC 2014, 2019</td>
+		<td id="moreInfo">
+		<span class="nobr"><a href="/company/legal" target="_blank">Terms of Use</a> -</span>
+		<span class="nobr"><a href="/company/privacy-policy" target="_blank">Privacy Policy</a></span>
+		</td>
+		</tr>
+		</table>
+		</div>
+		<img src="//icons.wxug.com/i/misc/logo-ibm-twc-wu-color.svg" alt="An IBM Company" height="100" />
+	</div>
+</div>
+	</section>
+		<div id="side-tab">
+	<div id="side-wrapper">
+		<a href="#" id="side-teaser">Try Our BETA</a>
+		<a href="//preview.wunderground.com/weather/api/" id="side-message">
+		<div>We're updating<br />the WU experience.</div>
+		<div></br>Try it!</div>
+		</a>
+	</div>
+</div>
+<script>
+	(function(wui,$){
+	 $(function() {
+	 $( "#side-teaser" ).click(function() {
+	 $( "#side-tab" ).toggleClass( "openTab", 100 );
+	 return false;
+	 });
+	 });
+	})(wui,jQuery);
+</script>
+  <script src="//icons.wxug.com/scripts/wui.header.min.js?v=1.3.18"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/swipe/2.0/swipe.min.js"></script>
+	<div id="iconspopcontainer"></div>
+	<script type="text/javascript">
+		(function($) {
+		jQuery("a[class^='iconSwitch']").click(function() {
+		icon = jQuery(this);
+		popcontain = jQuery('<div class="iconSwitchPop none"></div>').insertAfter('#iconspopcontainer');
+		jQuery(popcontain).load('/member/membersettings.html?responder=1&request=iconspopbox', function() {
+		jQuery(popcontain).removeClass("none");
+		jQuery(popcontain).position({ of: icon, my: "left top", at: "left top", offset: "0", collision: 'fit fit' });
+		});
+		return false;
+		});
+		$(".scrollAnchor").click(function(event){
+		event.preventDefault();
+		$('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+		});
+		})(jQuery);
+	</script>
+</body>
+</html>
+<!-- WUICATEGORY | API_r | APIIndex -->
+<!-- SERVERHOSTNAME | ip-10-226-235-63 | Sep 26 2018 21:34:59 -->

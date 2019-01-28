@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title></title>
+  <link rel="stylesheet" href="/chandlerreynolds.github.io/health-step-config/css/slate.css">
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+
+  <script src="/code.jquery.com//jquery-1.js"></script>
+</head>
+<body>
+  <form id="main-form">
+    <div class='item-container'>
+      <h1 class='title'>HealthStep Config</h1>
+    </div>
+    <div class="item-container">
+      <div class="item-container-content">
+        <div class="item">
+          <p>Use this page to choose a few options about HealthStep.</p>
+          <br>
+          <p>An API key is <b>required</b> for weather to function properly.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">OpenWeatherMap API Key</div>
+      <div class="item-container-content">
+        <label class="item item-subtitle-wrapper">
+          <div class="item-subtitle">Create a FREE account at OpenWeatherMap.org. Obtain an API key and provide it here.</div>
+          <div class="item-input-wrapper">
+            <input id="apiKey" type="text" class="item-input" name="input-1" placeholder="API Key">
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Temperature Format</div>
+      <div class="item-container-content">
+        <label class="item tab-buttons">
+          <a id="tempToggle" name="tab-1" class="tab-button active">Fahrenheit</a>
+          <a id="celToggle" name="tab-1" class="tab-button">Celsius</a>
+        </label>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="button-container">
+        <input id="submit_button" type="button" class="item-button" value="SAVE">
+      </div>
+    </div>
+  </form>
+  <script type="text/javascript" src="/chandlerreynolds.github.io/health-step-config/js/slate.js"></script>
+  <script>
+  function getConfigData() {
+    var backgroundColorPicker = $('#tempToggle');
+    var apiKeyInput = $('#apiKey');
+
+    var options = {
+      'celsius': !backgroundColorPicker.hasClass('active') ? 1 : 0,
+      'api_key': apiKeyInput.val()
+    };
+
+    // Save for next launch
+    localStorage['celsius'] = options['celsius'];
+    localStorage['api_key'] = options['api_key'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var backgroundColorPicker = $('#tempToggle');
+    var apiKeyInput = $('#apiKey');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['celsius']) {
+      var isCelsius = JSON.parse(localStorage['celsius']) === 1 ? true : false;
+      if (!isCelsius) {
+        $('#tempToggle').addClass('active');
+      } else {
+        $('#tempToggle').removeClass('active');
+        $('#celToggle').addClass('active');
+      }
+    }
+    if(localStorage['api_key']) {
+      apiKeyInput.val(localStorage['api_key']);
+    }
+  })();
+  </script>
+</body>
+</html>

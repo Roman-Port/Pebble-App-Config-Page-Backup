@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!-- @@@:TODO Hand create the Object to JSONify before sending to ensure booleans are sent as booleans -->
+<!--          Alternatively try only sending the changed fields -->
+<html lang="en-US">
+  <head>
+    <title>CST Big Time Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.css">
+  </head>
+  <body>
+      <!-- Header -->
+    <h1>CST Big Time Settings</h1>
+      <!-- Settings Table -->
+    <table>
+      <tr>
+        <th colspan="2">Option Toggles:</th>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="checkbox" id="zero_prefix" style="width:100px; margin-left:20px;"> <label for="zero_prefix">Zero Prefix Hour Value?</label></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="checkbox" id="vibe_hour" style="width:100px; margin-left:20px;"> <label for="vibe_hour">Vibrate on the Hour?</label></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="checkbox" id="show_power" style="width:100px; margin-left:20px;"> <label for="show_power">Show Power Level Indicator?</label></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="checkbox" id="show_btooth" style="width:100px; margin-left:20px;"> <label for="show_btooth">Show Bluetooth Indicator?</label></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="checkbox" id="vibe_btooth" style="width:100px; margin-left:20px;"> <label for="vibe_btooth">Vibrate on Bluetooth Connect/Disconnect?</label></td>
+      </tr>
+      <tr>
+        <td><label for="month_first">Date Format</label></td>
+        <td>
+          <select id="month_first">
+            <option value="true">MM/DD</option>
+            <option value="false">DD/MM</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="2">Weekday Abbreviations:</th>
+      </tr>
+      <tr>
+        <td><label for="sun_text">Sunday</label></td>
+        <td><input type="text" id="sun_text" maxlength="3"></td>
+      </tr>
+      <tr>
+        <td><label for="mon_text">Monday</label>
+        </td><td><input type="text" id="mon_text" maxlength="3"></td>
+      </tr>
+      <tr>
+        <td><label for="tue_text">Tuesday</label></td>
+        <td><input type="text" id="tue_text" maxlength="3"></td>
+      </tr>
+      <tr>
+        <td><label for="wed_text">Wednesday</label></td>
+        <td><input type="text" id="wed_text" maxlength="3"></td>
+      </tr>
+      <tr>
+        <td><label for="thu_text">Thursday</label></td>
+        <td><input type="text" id="thu_text" maxlength="3"></td>
+      </tr>
+      <tr>
+        <td><label for="fri_text">Friday</label></td>
+        <td><input type="text" id="fri_text" maxlength="3"></td>
+      </tr>
+      <tr>
+        <td><label for="sat_text">Saturday</label></td>
+        <td><input type="text" id="sat_text" maxlength="3"></td>
+      </tr>
+    </table>
+    <p style="text-align:center;"><button type="button" class="submit btn btn-success" style="width:100px;margin-top:20px;">Submit</button>
+      <!-- Footer -->
+    <br>
+    <script src="/ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.js"></script>
+    <script>
+      $(function() {
+        window.applicationCache.addEventListener("updateready",onUpdateReady);
+
+        function onUpdateReady () {
+          if(window.applicationCache.status === window.applicationCache.UPDATEREADY) {
+            window.location.reload();
+          }
+        } //onUpdateReady
+
+        var dictionary;
+        try {
+          dictionary = JSON.parse(localStorage["dictionary"]);
+          if(!dictionary.hasOwnProperty("month_first")) {
+            dictionary["month_first"] = true;
+            dictionary["sun_text"] = "Su";
+            dictionary["mon_text"] = "Mo";
+            dictionary["tue_text"] = "Tu";
+            dictionary["wed_text"] = "We";
+            dictionary["thu_text"] = "Th";
+            dictionary["fri_text"] = "Fr";
+            dictionary["sat_text"] = "Sa";
+          }
+          if(!dictionary.hasOwnProperty("vibe_hour")) {
+            dictionary["vibe_hour"] = true;
+            dictionary["vibe_btooth"] = false;
+          }
+        } catch(x) {
+          dictionary = { 
+            zero_prefix: false,
+            show_power: true,
+            show_btooth: true,
+            month_first: true,
+            sun_text: "Su",
+            mon_text: "Mo",
+            tue_text: "Tu",
+            wed_text: "We",
+            thu_text: "Th",
+            fri_text: "Fr",
+            sat_text: "Sa",
+            vibe_hour: true,
+            vibe_btooth: false
+          };
+        }
+        for(option in dictionary) {
+          if(dictionary[option]) {
+              /* Option */
+            switch(option) {
+              case "zero_prefix":
+              case "show_power":
+              case "show_btooth":
+              case "vibe_hour":
+              case "vibe_btooth":
+                $('#' + option).prop("checked",dictionary[option]);
+                break;
+              default:
+                $('#' + option).val(dictionary[option]);
+                break;
+            }
+          }
+        }
+
+        $(":checkbox").on("change",function() {
+          dictionary[$(this).attr("id")] = this.checked;
+          localStorage["dictionary"] = JSON.stringify(dictionary);
+        });
+
+        $(":text,select").on("change",function() {
+          dictionary[$(this).attr("id")] = $(this).val();
+          localStorage["dictionary"] = JSON.stringify(dictionary);
+        });
+
+        $(".submit").click(function() {
+          console.log(JSON.stringify(dictionary));
+          window.location.href = "pebblejs://close#" + encodeURIComponent(JSON.stringify(dictionary));
+        });
+      });
+    </script>
+  </body>
+</html>

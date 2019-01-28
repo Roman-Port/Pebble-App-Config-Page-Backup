@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Ingress Community Watchface Configuration</title>
+    <!--script type="text/javascript" src="config.js"></script-->
+    <link rel="stylesheet" type="text/css" href="/www.mikethetech.com/enlightenedqld/config.css">
+  </head>
+  <body>
+  <div id="container">
+    <div id="banner"></div>
+    <div id="content">
+        <h1>Ingress Community Watchface Configuration</h1>
+	    <p>Customise the Ingress Community Pebble watchface to display your own community's name and motto.</p>
+	    <p class="note"><b>Note</b>: Messages will be truncated after the maximum length shown below.</p>
+	    <form name="config">
+          <div>
+	        <label for="community">Community Name (16):</label>
+	        <input type="text" name="community" value="Enlightened QLD" size="15">
+	      </div>
+	      <div>
+	        <label for="motto">Team motto (17):</label>
+	        <input type="text" name="motto" value="For the Shiggles!" size="15">
+	      </div>
+	      <div>
+	        <label for="faction">Faction:</label>
+	        <ul>
+	          <li><input type="radio" id="faction_enl" name="faction" value="0" checked/="">Enlightened</li>
+	          <li><input type="radio" id="faction_res" name="faction" value="1">Resistance</li>
+	        </ul>
+	      </div>
+	    </form>
+	    <div>
+	      <button id="save_button">Save</button>
+	    </div>
+	    <h2>Resources</h2>
+	    <div class="resource">
+	      <p>Github: <a href="/github.com/LachyTech/pebble-ingresscommunity.html">pebble-ingresscommunity</a></p>
+          <p>Contact: <a href="mailto:him357@enlightenedqld.org">him357@enlightenedqld.org</a></p>
+        </div>
+    </div>
+    </div>
+  </body>
+  <footer>
+    <p>LachyTech - 2015</p>
+  </footer>
+  <script>
+	  function saveConfig() {
+		    var community = document.config.community;
+		    var motto = document.config.motto;
+		    var faction;
+		    if (document.getElementById("faction_enl").checked) {
+		        console.log("Enlightened Selected");
+		        faction = "0";
+		    } else if (document.getElementById("faction_res").checked) {
+		        console.log("Resistance Selected");
+		        faction = "1";
+		    }
+	
+		    var configuration = {
+		        "community": community.value,
+		        "motto" : motto.value,
+		        "faction" : faction
+		    }
+		    return configuration;
+		 };
+	
+		var submitButton = document.getElementById("save_button");
+	
+		submitButton.addEventListener("click", 
+		    function() {
+		        console.log("Submit");
+	
+		        var configuration = saveConfig();
+		        console.log("Configuration: " + JSON.stringify(configuration));
+		        var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(configuration));
+	
+		        document.location = location;
+		    },
+		false);
+  </script>
+</html>

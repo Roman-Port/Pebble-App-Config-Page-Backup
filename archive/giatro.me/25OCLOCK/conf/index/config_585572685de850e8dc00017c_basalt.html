@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>25 o'clock Configuration</title>
+    <link rel='stylesheet' type='text/css' href='/giatro.me/25OCLOCK/conf/css/slate.css'>
+    <script src='/giatro.me/25OCLOCK/conf/js/slate.js'></script>
+</head>
+
+<body>
+    <div class='item-container'>
+        <div class='item-container-header'>Layout</div>
+        <div class='item-container-content'>
+            <label class="item">
+                Font
+                <select id="font_index" class="item-select">
+                    <option class="item-select-option" value="0" selected="">Render</option>
+                    <option class="item-select-option" value="1">Raw</option>
+                </select>
+            </label>
+        </div>
+    </div>
+    <div class='item-container'>
+        <div class='item-container-header'>Style</div>
+        <div class='item-container-content'>
+            <label class="item">
+                1st row
+                <select id="layout_row_0" class="item-select">
+                    <option class="item-select-option" value="1000">Time (12:34)</option>
+                    <option class="item-select-option" value="1001">Day date (SUN01)</option>
+                    <option class="item-select-option" value="1002">Month date (DEC01)</option>
+                    <option class="item-select-option" value="1003">Month (DECEM)</option>
+                    <option class="item-select-option" value="1006">Year (Y2016)</option>
+                    <option class="item-select-option" value="1004" selected="">Battery</option>
+                    <option class="item-select-option" value="1005">Steps</option>
+                </select>
+            </label>
+        </div>
+        <div class='item-container-content'>
+            <label class="item">
+                2nd row
+                <select id="layout_row_1" class="item-select">
+                    <option class="item-select-option" value="1000" selected="">Time (12:34)</option>
+                    <option class="item-select-option" value="1001">Day date (SUN01)</option>
+                    <option class="item-select-option" value="1002">Month date (DEC01)</option>
+                    <option class="item-select-option" value="1003">Month (DECEM)</option>
+                    <option class="item-select-option" value="1006">Year (Y2016)</option>
+                    <option class="item-select-option" value="1004">Battery</option>
+                    <option class="item-select-option" value="1005">Steps</option>
+                </select>
+            </label>
+        </div>
+        <div class='item-container-content'>
+            <label class="item">
+                3rd row
+                <select id="layout_row_2" class="item-select">
+                    <option class="item-select-option" value="1000">Time (12:34)</option>
+                    <option class="item-select-option" value="1001" selected="">Day date (SUN01)</option>
+                    <option class="item-select-option" value="1002">Month date (DEC01)</option>
+                    <option class="item-select-option" value="1003">Month (DECEM)</option>
+                    <option class="item-select-option" value="1006">Year (Y2016)</option>
+                    <option class="item-select-option" value="1004">Battery</option>
+                    <option class="item-select-option" value="1005">Steps</option>
+                </select>
+            </label>
+        </div>
+        <div class='item-container-content'>
+            <label class="item">
+                4th row
+                <select id="layout_row_3" class="item-select">
+                    <option class="item-select-option" value="1000">Time (12:34)</option>
+                    <option class="item-select-option" value="1001">Day date (SUN01)</option>
+                    <option class="item-select-option" value="1002">Month date (DEC01)</option>
+                    <option class="item-select-option" value="1003" selected="">Month (DECEM)</option>
+                    <option class="item-select-option" value="1006">Year (Y2016)</option>
+                    <option class="item-select-option" value="1004">Battery</option>
+                    <option class="item-select-option" value="1005">Steps</option>
+                </select>
+            </label>
+        </div>
+        <div class='item-container-content'>
+            <label class="item">
+                5th row
+                <select id="layout_row_4" class="item-select">
+                    <option class="item-select-option" value="1000">Time (12:34)</option>
+                    <option class="item-select-option" value="1001">Day date (SUN01)</option>
+                    <option class="item-select-option" value="1002">Month date (DEC01)</option>
+                    <option class="item-select-option" value="1003">Month (DECEM)</option>
+                    <option class="item-select-option" value="1006">Year (Y2016)</option>
+                    <option class="item-select-option" value="1004">Battery</option>
+                    <option class="item-select-option" value="1005" selected="">Steps</option>
+                </select>
+            </label>
+        </div>
+    </div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Background color
+            <input id='background_color_picker' type='text' class='item-color item-color-normal' value='0x000000'>
+        </label>
+        <label class='item'>
+            Text color
+            <input id='first_foreground_color_picker' type='text' class='item-color item-color-normal' value='0xFFFFFF'>
+        </label>
+        <label class='item'>
+            Accent color
+            <input id='second_foreground_color_picker' type='text' class='item-color item-color-normal' value='0xFFFFFF'>
+        </label>
+        <div class='item-container-content'>
+            <label class='item'>
+                Randomize accent color
+                <input id='random_checkbox' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+        <div class='item-container-content'>
+            <label class='item'>
+                Notify no BT connection (on 5th row)
+                <input id='bt_checkbox' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+    </div>
+    <div class='item-container'>
+        <div class='button-container'>
+            <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+        </div>
+    </div>
+</body>
+<script>
+function getConfigData() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var firstForegroundColorPicker = document.getElementById('first_foreground_color_picker');
+    var secondForegroundColorPicker = document.getElementById('second_foreground_color_picker');
+    var randomCheckbox = document.getElementById('random_checkbox');
+    var btCheckbox = document.getElementById('bt_checkbox');
+    var fontIndex = document.getElementById('font_index');
+    var layoutRow0 = document.getElementById('layout_row_0');
+    var layoutRow1 = document.getElementById('layout_row_1');
+    var layoutRow2 = document.getElementById('layout_row_2');
+    var layoutRow3 = document.getElementById('layout_row_3');
+    var layoutRow4 = document.getElementById('layout_row_4');
+
+    var options = {
+        'background_color': backgroundColorPicker.value,
+        'first_foreground_color': firstForegroundColorPicker.value,
+        'second_foreground_color': secondForegroundColorPicker.value,
+        'font_index': fontIndex.value,
+        'layout_row_0': layoutRow0.value,
+        'layout_row_1': layoutRow1.value,
+        'layout_row_2': layoutRow2.value,
+        'layout_row_3': layoutRow3.value,
+        'layout_row_4': layoutRow4.value,
+        'random_checkbox': randomCheckbox.checked,
+        'bt_checkbox': btCheckbox.checked
+    };
+
+    // Save for next launch
+    localStorage['background_color'] = options['background_color'];
+    localStorage['first_foreground_color'] = options['first_foreground_color'];
+    localStorage['second_foreground_color'] = options['second_foreground_color'];
+    localStorage['font_index'] = options['font_index'];
+    localStorage['layout_row_0'] = options['layout_row_0'];
+    localStorage['layout_row_1'] = options['layout_row_1'];
+    localStorage['layout_row_2'] = options['layout_row_2'];
+    localStorage['layout_row_3'] = options['layout_row_3'];
+    localStorage['layout_row_4'] = options['layout_row_4'];
+    localStorage['random'] = options['random_checkbox'];
+    localStorage['bt'] = options['bt_checkbox'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+}
+
+function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (pair[0] === variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    return defaultValue || false;
+}
+
+var submitButton = document.getElementById('submit_button');
+submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+});
+
+(function() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var firstForegroundColorPicker = document.getElementById('first_foreground_color_picker');
+    var secondForegroundColorPicker = document.getElementById('second_foreground_color_picker');
+    var randomCheckbox = document.getElementById('random_checkbox');
+    var btCheckbox = document.getElementById('bt_checkbox');
+    var fontIndex = document.getElementById('font_index');
+    var layoutRow0 = document.getElementById('layout_row_0');
+    var layoutRow1 = document.getElementById('layout_row_1');
+    var layoutRow2 = document.getElementById('layout_row_2');
+    var layoutRow3 = document.getElementById('layout_row_3');
+    var layoutRow4 = document.getElementById('layout_row_4');
+
+    // Load any previously saved configuration, if available
+    if (localStorage['background_color']) {
+        backgroundColorPicker.value = localStorage['background_color'];
+        firstForegroundColorPicker.value = localStorage['first_foreground_color'];
+        secondForegroundColorPicker.value = localStorage['second_foreground_color'];
+        if (localStorage['font_index'] && localStorage['font_index'] < 4) {
+            fontIndex.value = localStorage['font_index'];
+        }
+        if (localStorage['layout_row_0'] !== undefined) {
+            layoutRow0.value = localStorage['layout_row_0'];
+        }
+        if (localStorage['layout_row_1'] !== undefined) {
+            layoutRow1.value = localStorage['layout_row_1'];
+        }
+        if (localStorage['layout_row_2'] !== undefined) {
+            layoutRow2.value = localStorage['layout_row_2'];
+        }
+        if (localStorage['layout_row_3'] !== undefined) {
+            layoutRow3.value = localStorage['layout_row_3'];
+        }
+        if (localStorage['layout_row_4'] !== undefined) {
+            layoutRow4.value = localStorage['layout_row_4'];
+        }
+        randomCheckbox.checked = JSON.parse(localStorage['random']);
+        btCheckbox.checked = JSON.parse(localStorage['bt']);
+    }
+})();
+</script>
+
+</html>

@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Arrowhead Configuration Page</title>
+		<link rel="stylesheet" type="text/css" href="/jvarness.github.io/arrowhead/bower_components/Slate/dist/css/slate.css">
+		<link rel="stylesheet" type="text/css" href="/jvarness.github.io/arrowhead/css/styles.css">
+	</head>
+	<body>
+		<div class="item-container">
+			<h1 class="title">Arrowhead Watchface</h1>
+		</div>
+		<div class="item-container">
+			<div class="item-container-header">
+				Customize the colors of the watchface below.
+			</div>
+			<div class="item-container-content">
+				<label class="item">
+					Background Color
+					<input id="backgroundColor" class="item-color item-color-sunny" type="text" value="#000000">
+				</label>
+				<label class="item">
+					Hour Hand/Dial Color
+					<input id="hourHandColor" class="item-color item-color-normal" type="text" value="#000000">
+				</label>
+				<label class="item">
+					Minute Hand Color
+					<input id="minuteHandColor" class="item-color item-color-normal" type="text" value="#000000">
+				</label>
+			</div>
+			<div class="item-container-footer">
+				Click below to submit your changes.
+			</div>
+		</div>
+		
+		<div class="item-container">
+			<div class="button-container">
+				<input id="submit" type="button" class="item-button" value="SUBMIT">
+			</div>
+		</div>
+		<script src="/jvarness.github.io/arrowhead/bower_components/Slate/dist/js/slate.js"></script>
+		<script src="/jvarness.github.io/arrowhead/js/prefs.js"></script>
+	</body>
+</html>

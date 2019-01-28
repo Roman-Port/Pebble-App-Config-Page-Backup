@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title id="page-title" class="translate">Kane watchface settings page</title>
+  <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
+  <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.css">
+</head>
+
+<body class="container" style="position:relative;">
+  <h1 id="page-heading" class="translate">Kane <small>watchface</small></h1>
+  <select style="position:absolute;right:2em;top:2em;" id="language" name="language">
+    <option value="en">English</option>
+    <option value="fr">Français</option>
+    <option value="es">Español</option>
+  </select>
+  <form>
+    <fieldset>
+      <legend id="dial-shape" class="translate">Dial shape</legend>
+      <div class="form-group">
+        <div class="radio">
+          <label>
+            <input type="radio" name="dial-shape" value="0" checked="">
+            <span id="dial-shape-rectangular" class="translate">Rectangular markings</span>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="dial-shape" value="1">
+            <span id="dial-shape-elliptical" class="translate">Elliptical markings</span>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="dial-shape" value="2">
+            <span id="dial-shape-blank" class="translate">No markings</span>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend id="dial-colour" class="translate">Dial colour</legend>
+      <div class="form-group">
+        <div class="radio">
+          <label>
+            <input type="radio" name="dial-colour" value="0" checked="">
+            <span id="dial-colour-black" class="translate">Black dial</span>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="dial-colour" value="1">
+            <span id="dial-colour-white" class="translate">White dial</span>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend id="branding" class="translate">Branding</legend>
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="show-logo" id="show-logo">
+            <span id="branding-show" class="translate">Show Pebble branding on dial</span>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend id="second-hand" class="translate">Second hand</legend>
+      <div class="form-group">
+        <div class="radio">
+          <label>
+            <input type="radio" name="second-hand" value="0" checked="">
+            <span id="second-hand-smart" class="translate">Smart second hand</span>
+          </label>
+          <p id="second-hand-smart-help" class="help-block translate">Show second hand for 10 seconds on tap / shake; always hide when battery is at 20% or less</p>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="second-hand" value="1">
+            <span id="second-hand-always" class="translate">Always show second hand</span>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="second-hand" value="2">
+            <span id="second-hand-never" class="translate">Always hide second hand</span>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend id="calendar" class="translate">Calendar</legend>
+      <div class="form-group">
+        <div class="radio">
+          <label>
+            <input type="radio" name="start-on-monday" value="0" checked="">
+            <span id="week-starts-sunday" class="translate">Week starts on Sunday</span>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="start-on-monday" value="1">
+            <span id="week-starts-monday" class="translate">Week starts on Monday</span>
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Bluetooth</legend>
+      <div class="form-group">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="bluetooth-vibrate" id="bluetooth-vibrate">
+            <span id="bluetooth-vibrate" class="translate">Vibrate on disconnect / reconnect</span>
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <button id="save-settings" type="submit" class="btn btn-primary btn-lg translate" style="width:100%;">Save settings</button>
+      </div>
+      <div class="form-group">
+        <button id="cancel-changes" class="btn btn-default btn-lg translate" style="width:100%;">Cancel changes</button>
+      </div>
+    </fieldset>
+  </form>
+  <script type="text/javascript" src="/settings.kane-face.com.s3-website-us-east-1.amazonaws.com/js/main.bin"></script>
+</body>
+</html>

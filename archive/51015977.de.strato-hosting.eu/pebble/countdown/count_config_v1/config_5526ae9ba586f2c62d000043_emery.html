@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Countdown Configuration</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link href="/51015977.de.strato-hosting.eu/pebble/countdown/css/bootstrap.css" rel="stylesheet">
+	<link href="/51015977.de.strato-hosting.eu/pebble/countdown/css/bootstrap-theme.css" rel="stylesheet">
+	
+	<script type="text/javascript" src="/51015977.de.strato-hosting.eu/pebble/countdown/js/jquery.js"></script>
+	<script type="text/javascript" src="/51015977.de.strato-hosting.eu/pebble/countdown/js/bootstrap.js"></script>
+  </head>
+  <body>
+  <center>
+  <div class="container">
+    <h2>Countdown Config</h2>
+	<div class="form-configure well">
+    <h3>Set your Event</h3>
+
+	<p>
+	<input type="text" size="20" maxlength="20" id="text1" value="next christmas"><br>
+	<input type="text" size="20" maxlength="20" id="text2" value="is in"><br>
+	<b>Text: </b> (20 Char per line)
+	</p>
+	
+	<h3>Set Date and Time</h3>
+	
+	<p>
+	<select id="year" size="1"> 
+
+	</select> 
+	/
+	<select id="mon" size="1"> 
+		<option>1</option> 
+		<option>2</option> 
+		<option>3</option> 
+		<option>4</option> 
+		<option>5</option> 
+		<option>6</option>
+		<option>7</option>
+		<option>8</option>
+		<option>9</option>
+		<option>10</option>
+		<option>11</option>
+		<option>12</option>
+	</select> 
+	/
+	<select id="day" size="1"> 
+		<option>1</option> 
+		<option>2</option> 
+		<option>3</option> 
+		<option>4</option> 
+		<option>5</option> 
+		<option>6</option>
+		<option>7</option>
+		<option>8</option>
+		<option>9</option>
+		<option>10</option>
+		<option>11</option>
+		<option>12</option>
+		<option>13</option> 
+		<option>14</option> 
+		<option>15</option> 
+		<option>16</option> 
+		<option>17</option> 
+		<option>18</option>
+		<option>19</option>
+		<option>20</option>
+		<option>21</option>
+		<option>22</option>
+		<option>23</option>
+		<option>24</option>
+		<option>25</option> 
+		<option>26</option> 
+		<option>27</option> 
+		<option>28</option> 
+		<option>29</option> 
+		<option>30</option>
+		<option>31</option>
+	</select> 
+	<br><b>Date:</b> (Year/Mon/Day)
+	</p>
+	
+	<p>
+	<select id="hour" size="1"> 
+		<option>0</option>
+		<option>1</option> 
+		<option>2</option> 
+		<option>3</option> 
+		<option>4</option> 
+		<option>5</option> 
+		<option>6</option>
+		<option>7</option>
+		<option>8</option>
+		<option>9</option>
+		<option>10</option>
+		<option>11</option>
+		<option>12</option>
+		<option>13</option> 
+		<option>14</option> 
+		<option>15</option> 
+		<option>16</option> 
+		<option>17</option> 
+		<option>18</option>
+		<option>19</option>
+		<option>20</option>
+		<option>21</option>
+		<option>22</option>
+		<option>23</option>
+	</select> 
+	:
+	<select id="min" size="1"> 
+		<option>0</option> 
+		<option>1</option> 
+		<option>2</option> 
+		<option>3</option> 
+		<option>4</option> 
+		<option>5</option> 
+		<option>6</option>
+		<option>7</option>
+		<option>8</option>
+		<option>9</option>
+		<option>10</option>
+		<option>11</option>
+		<option>12</option>
+		<option>13</option> 
+		<option>14</option> 
+		<option>15</option> 
+		<option>16</option> 
+		<option>17</option> 
+		<option>18</option>
+		<option>19</option>
+		<option>20</option>
+		<option>21</option>
+		<option>22</option>
+		<option>23</option>
+		<option>24</option> 
+		<option>25</option> 
+		<option>26</option> 
+		<option>27</option> 
+		<option>28</option> 
+		<option>29</option>
+		<option>30</option>
+		<option>31</option>
+		<option>32</option>
+		<option>33</option>
+		<option>34</option>
+		<option>35</option>
+		<option>36</option> 
+		<option>37</option> 
+		<option>38</option> 
+		<option>39</option> 
+		<option>40</option> 
+		<option>41</option>
+		<option>42</option>
+		<option>43</option>
+		<option>44</option>
+		<option>45</option>
+		<option>46</option>
+		<option>47</option> 
+		<option>48</option> 
+		<option>49</option> 
+		<option>50</option> 
+		<option>51</option> 
+		<option>52</option>
+		<option>53</option>
+		<option>54</option>
+		<option>55</option>
+		<option>56</option>
+		<option>57</option>
+		<option>58</option>
+		<option>59</option>
+	</select> 
+	:
+	<select id="sec" size="1"> 
+		<option>0</option> 
+		<option>1</option> 
+		<option>2</option> 
+		<option>3</option> 
+		<option>4</option> 
+		<option>5</option> 
+		<option>6</option>
+		<option>7</option>
+		<option>8</option>
+		<option>9</option>
+		<option>10</option>
+		<option>11</option>
+		<option>12</option>
+		<option>13</option> 
+		<option>14</option> 
+		<option>15</option> 
+		<option>16</option> 
+		<option>17</option> 
+		<option>18</option>
+		<option>19</option>
+		<option>20</option>
+		<option>21</option>
+		<option>22</option>
+		<option>23</option>
+		<option>24</option> 
+		<option>25</option> 
+		<option>26</option> 
+		<option>27</option> 
+		<option>28</option> 
+		<option>29</option>
+		<option>30</option>
+		<option>31</option>
+		<option>32</option>
+		<option>33</option>
+		<option>34</option>
+		<option>35</option>
+		<option>36</option> 
+		<option>37</option> 
+		<option>38</option> 
+		<option>39</option> 
+		<option>40</option> 
+		<option>41</option>
+		<option>42</option>
+		<option>43</option>
+		<option>44</option>
+		<option>45</option>
+		<option>46</option>
+		<option>47</option> 
+		<option>48</option> 
+		<option>49</option> 
+		<option>50</option> 
+		<option>51</option> 
+		<option>52</option>
+		<option>53</option>
+		<option>54</option>
+		<option>55</option>
+		<option>56</option>
+		<option>57</option>
+		<option>58</option>
+		<option>59</option>
+	</select>
+	<br><b>Time:</b> (hh:mm:ss)
+	</p>
+	
+	<h3>Watchface settings</h3>
+	<!--
+    <p><b>Mode:</b> (Day/Night/Auto)<br>
+    <select id="mode_select">
+      <option value="day">Day</option>
+      <option value="night">Night</option>
+	  <option value="auto" selected>Auto</option>
+    </select>
+    </p>
+	
+	<p><b>Day starts at:</b> (Auto Mode)<br>
+    <select id="day_start">
+      <option value="1">1</option>
+      <option value="2">2</option>
+	  <option value="3">3</option>
+	  <option value="4">4</option>
+	  <option value="5">5</option>
+	  <option value="6">6</option>
+	  <option value="7">7</option>
+	  <option value="8" selected>8</option>
+	  <option value="9">9</option>
+	  <option value="10">10</option>
+	  <option value="11">11</option>
+	  <option value="12">12</option>
+    </select> 
+	o'clock 
+    </p>
+	
+	<p><b>Night starts at:</b> (Auto Mode)<br>
+    <select id="day_end">
+      <option value="13">13</option>
+      <option value="14">14</option>
+	  <option value="15">15</option>
+	  <option value="16">16</option>
+	  <option value="17">17</option>
+	  <option value="18">18</option>
+	  <option value="19">19</option>
+	  <option value="20">20</option>
+	  <option value="21" selected>21</option>
+	  <option value="22">22</option>
+	  <option value="23">23</option>
+	  <option value="0">24</option>
+    </select> 
+	o'clock
+    </p>-->
+	
+	<p><b>Vibrate:</b><br>
+    <select id="vibe">
+      <option>Vibrate</option>
+      <option>dont Vibrate</option>
+    </select>
+    </p>
+	
+    <p>
+    <button class="btn btn-lg btn-primary btn-block" id="save_button">Save</button>
+    </p>
+	</div>
+	</div></center>
+	
+	<div class="footer container">
+
+	<!--
+	<p>
+	<b>Mode Day:</b> The background is black. <br><br>
+	<b>Mode Night:</b> The background is white. <br><br>
+	<b>Mode Auto:</b> The background turns at 8 clock in the morning in the day mode. From 20 clock in the evening, he switches to night mode for better readability in the dark.<br><br>
+	</p>
+	-->
+	
+	<p>
+	<b>Vibrate: </b>The Watchface vibrate shortly at<br>
+	10 Days, 1 Day, 12 Hours, 6 Hours, 1 Hour,<br>
+	30 Min, 10 Min, 1 Min, 30 Sec, 10 Seconds and <br>
+	at 5,4,3,2,1 Second remaining time. 
+	</p>
+	
+	<p>
+	<b>Feedback:</b><br>
+	If you like the watch face or do you have any ideas: Feel free and send me a message.<br> It's a good feeling if you know somebody likes your work.
+	</p>
+	
+	<p>
+	<b>Faeture:</b><br>
+	You can add the current time or date to the textlines. Just use the C string time format (strftime). <br>
+	%H for hour in 24h format (00-23)<br>
+	%I = hour in 12h format (01-12)<br>
+	%M = minutes (00-59)<br>
+	%S = secounds (00-59)<br>
+	<br>
+	%d = day of the month<br>
+	%m = month <br>
+	%g = year (16)<br>
+	%G = year (2016)<br>
+	<br>
+	Combine text and time like: %H:%M:%S  = 12:23:56
+	
+	</p>
+	
+	</div>
+    <script>
+		var year	= document.getElementById("year");
+		var mon		= document.getElementById("mon");
+		var day		= document.getElementById("day");
+		var hour	= document.getElementById("hour");
+		var min		= document.getElementById("min");
+		var sec		= document.getElementById("sec");
+		var text1	= document.getElementById("text1");
+		var text1	= document.getElementById("text1");
+		
+		//var current_year = new Date().getFullYear();
+		for(var i = 1980; i <= 2040; i++) {
+			var opt = document.createElement('option');
+			opt.innerHTML = i;
+			opt.value = i;
+			year.appendChild(opt);
+		}
+		
+        //var modeSelect 	= document.getElementById("mode_select");
+		//var startSelect = document.getElementById("day_start");
+		//var endSelect 	= document.getElementById("day_end");
+		var vibe 		= document.getElementById("vibe");
+		
+		var mText1;
+		var mText2;
+		var mYear;
+		var mMon;
+		var mDay;
+		var mHour;
+		var mMin;
+		var mSec;
+		
+		$().ready(function () {
+
+		//read data from storage
+        mText1 		= localStorage.getItem("text1");
+		mText2 		= localStorage.getItem("text2");
+		mYear 		= localStorage.getItem("year");
+		mMon 		= localStorage.getItem("mon");
+		mDay 		= localStorage.getItem("day");
+		mHour 		= localStorage.getItem("hour");
+		mMin 		= localStorage.getItem("min");
+		mSec 		= localStorage.getItem("sec");
+		mVibe 		= localStorage.getItem("vibe");
+		
+		//mBlink = parseInt(localStorage.getItem("blink"));      
+        
+		//set default
+		if(isNaN(mYear)){mYear = new Date().getFullYear()-1980;}
+		if(isNaN(mMon)){mMon = 11;}
+		if(isNaN(mDay)){mDay = 23;}		
+		
+        //set value     
+        $('#text1').prop('value', mText1); 
+		$('#text2').prop('value', mText2);
+		year.options[mYear].selected 	= true;
+		mon.options[mMon].selected 		= true;
+		day.options[mDay].selected 		= true;
+		hour.options[mHour].selected	= true;
+		min.options[mMin].selected 		= true;
+		sec.options[mSec].selected 		= true;
+		vibe.options[mVibe].selected	= true;
+
+		});
+	
+      //Setup to allow easy adding more options later
+      function saveOptions() {
+
+		//save data
+		localStorage.setItem ('text1', text1.value);
+		localStorage.setItem ('text2', text2.value);
+		localStorage.setItem ('year', year.selectedIndex);
+		localStorage.setItem ('mon',  mon.selectedIndex);
+		localStorage.setItem ('day',  day.selectedIndex);
+		localStorage.setItem ('hour', hour.selectedIndex);
+		localStorage.setItem ('min',  min.selectedIndex);
+		localStorage.setItem ('sec',  sec.selectedIndex);
+		localStorage.setItem ('vibe', vibe.selectedIndex);
+		
+        var options = {
+		  "text1"	: text1.value.replace(/\%/g,"$"),
+		  "text2"	: text2.value.replace(/\%/g,"$"),
+		  "year"	: parseInt(year.options[year.selectedIndex].value),
+		  "mon"		: parseInt(mon.selectedIndex +1),
+		  "day"		: parseInt(day.selectedIndex +1),
+		  "hour"	: parseInt(hour.selectedIndex),
+		  "min"		: parseInt(min.selectedIndex),
+		  "sec"		: parseInt(sec.selectedIndex),
+		  
+          //"mode"	: modeSelect.options[modeSelect.selectedIndex].value,
+		  //"start"	: parseInt(startSelect.options[startSelect.selectedIndex].value),
+		  //"end"		: parseInt(endSelect.options[endSelect.selectedIndex].value),
+		  "vibe"	: parseInt(vibe.selectedIndex)
+        }
+        
+        return options;
+      };
+
+      var submitButton = document.getElementById("save_button");
+      submitButton.addEventListener("click", 
+        function() {
+          console.log("Submit");
+
+          var options = saveOptions();
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+          
+          document.location = location;
+        }, 
+      false);
+    </script>
+  </body>
+</html>

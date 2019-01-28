@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Remote Worker Configuration</title>
+  <link rel="stylesheet" type="text/css" href="/www.mirz.com/RemoteWorker/css/slate.css">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <script src="/www.mirz.com/RemoteWorker/js/slate.js"></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: "PT Sans", sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class="title">Remote Worker</h1>
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied to this app.
+        </div>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Data Row</div>
+      <div class="item-container-content">
+        <div class='item'>
+          <small>Health data (if available) and battery level. Flick your wrist to cycle values.</small>
+        </div>
+        <label class="item" style="min-height:26px;">
+          <select id="DisplayMode" dir="rtl" class="item-select">
+            <option value="0">None</option>
+            <option value="1">Enabled</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    <div class="item-container">
+      <div class="item-container-header">Remote Timezone</div>
+      <div class="item-container-content">
+        <label class="item" style="min-height:26px;">
+          <select id="Timezone" dir="rtl" class="item-select"></select>
+        </label>
+      </div>
+    </div>
+    <div class="item-container">
+      <div class="item-container-header">Customize Colors</div>
+      <div class="item-container-content">
+        <div class='item'>
+          <small>Top tip: if you want to hide one of the items, choose the same color as the background :)</small>
+        </div>
+        <label class="item">
+          Background Color
+          <input id="Background" type="text" class="item-color item-color-sunny" value="#000000">
+        </label>
+      </div>
+      <div class="item-container-content">
+        <label class="item">
+          LocalTime Color
+          <input id="LocalTime" type="text" class="item-color item-color-sunny" value="#FFFFFF">
+        </label>
+      </div>
+      <div class="item-container-content">
+        <label class="item">
+          RemoteTime Color
+          <input id="RemoteTime" type="text" class="item-color item-color-sunny" value="#FFFFFF">
+        </label>
+      </div>
+      <div class="item-container-content">
+        <label class="item">
+          Day Color
+          <input id="Day" type="text" class="item-color item-color-sunny" value="#FFFFFF">
+        </label>
+      </div>
+      <div class="item-container-content">
+        <label class="item">
+          Date Color
+          <input id="Date" type="text" class="item-color item-color-sunny" value="#FFFFFF">
+        </label>
+      </div>
+      <div class="item-container-content">
+        <label class="item">
+          Data Color
+          <input id="Data" type="text" class="item-color item-color-sunny" value="#FFFFFF">
+        </label>
+      </div>
+    </div>
+    <div class="item-container">
+      <div class="button-container">
+        <input id="submit_button" type="button" class="item-button" value="Save">
+      </div>
+    </div>
+  </body>
+  <script>
+  var options = null;
+
+  (function() {
+    loadOptions();
+    initTimezones();
+    submitHandler();
+  })();
+
+  function submitHandler() {
+    $('#submit_button').on('click', function() {
+      // Set the return URL depending on the runtime environment
+      var return_to = getQueryParam("return_to", "pebblejs://close#");
+      document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+    });
+  }
+
+  function initTimezones() {
+    $('#Timezone').append('<option class="item-select-option" value="0|">Select a Timezone</option>');
+    $.getJSON('/RemoteWorker/timezones.json', function(data) {
+      $(data).each(function(index, item) {
+        try {
+          var TimezoneName = options.TimezoneName;
+        }
+        catch(ex) {
+          var TimezoneName = null;
+        }
+        var sel = item.text == TimezoneName ? 'selected' : '';
+        $('#Timezone').append('<option class="item-select-option" value="' + item.offset + '|' + item.abbr + '" ' + sel + '>' + item.text + '</option>');
+      });
+    });
+  }
+
+  function loadOptions() {
+    try {
+      options = JSON.parse(localStorage['options']);
+    }
+    catch(ex) {}
+
+    if(options) {
+      console.log("loaded options: " + JSON.stringify(options));
+      $('#Background')[0].value = options.Background.replace(/^0x/, '#');
+      $('#LocalTime')[0].value = options.LocalTime.replace(/^0x/, '#');
+      $('#RemoteTime')[0].value = options.RemoteTime.replace(/^0x/, '#');
+      $('#Day')[0].value = options.Day.replace(/^0x/, '#');
+      $('#Date')[0].value = options.Date.replace(/^0x/, '#');
+      $('#Data')[0].value = options.Date.replace(/^0x/, '#');
+      if(options.DisplayMode) {
+        $('#DisplayMode').val(options.DisplayMode);
+      }
+    }
+  }
+
+//// $('#Timezone option[value="'+$('#Timezone').val()+'"]').html(),
+
+  function getConfigData() {
+    var aTimezone = $('#Timezone').val().split('|');
+    var TimezoneOpts = $('#Timezone')[0].options;
+    options = {
+      "Background": $('#Background').val().replace(/^#/, '0x'),
+      "LocalTime": $('#LocalTime').val().replace(/^#/, '0x'),
+      "RemoteTime": $('#RemoteTime').val().replace(/^#/, '0x'),
+      "Day": $('#Day').val().replace(/^#/, '0x'),
+      "Date": $('#Date').val().replace(/^#/, '0x'),
+      "Data": $('#Data').val().replace(/^#/, '0x'),
+      "Offset": aTimezone[0],
+      "Label": aTimezone[1],
+      "TimezoneName": $('#Timezone option').not(function(){ return !this.selected }).text(),
+      "DisplayMode": $('#DisplayMode').val()
+    };
+    console.log("saving options: " + JSON.stringify(options));
+    localStorage['options'] = JSON.stringify(options);
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split("=");
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+
+
+
+  </script>
+</html>

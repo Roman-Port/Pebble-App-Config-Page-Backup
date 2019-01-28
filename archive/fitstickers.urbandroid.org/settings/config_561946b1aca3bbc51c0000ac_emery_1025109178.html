@@ -1,0 +1,415 @@
+<html>
+<head>
+    <link rel="stylesheet" href="/fitstickers.urbandroid.org//main.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+          padding: 2em;
+        }
+        #active form {
+          padding: 2em;
+        }
+        .add-button {
+          display: block;
+          margin: 0.5em;
+        }
+        .button {
+          margin: 0.5em;
+        }
+        .sticker {
+          padding: 0.5em;
+          text-align: center;
+        }
+    </style>
+
+    <script language="javascript">
+
+      function saveOptions() {
+        var events = document.getElementById("events");
+
+        var options = {
+          "events": events.value
+        }
+
+        return options;
+      };
+
+
+      function init() {
+          var events_string = getURLVariable('events');
+
+          console.log("events " + events_string);
+
+          if (events_string) {
+            var events = document.getElementById("events");
+            events.value = events_string;
+          }
+
+          var submitButton = document.getElementById("submit_button");
+          submitButton.addEventListener("click",
+            function() {
+              console.log("Submit");
+
+              var options = saveOptions();
+              var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+
+              document.location = location;
+            },
+          false);
+
+          var submitButton = document.getElementById("cancel_button");
+          submitButton.addEventListener("click",
+            function() {
+              console.log("Cancel");
+              document.location = 'pebblejs://close';
+            },
+          false);
+
+          var addButton = document.getElementById("add_button");
+          addButton.addEventListener("click",
+            function() {
+
+              var selectSticker = document.getElementById("select_sticker");
+              var selectDay = document.getElementById("select_day");
+              var selectHourFrom = document.getElementById("select_hour_from");
+              var selectMinuteFrom = document.getElementById("select_min_from");
+              var selectHourTo = document.getElementById("select_hour_to");
+              var selectMinuteTo = document.getElementById("select_min_to");
+
+
+              var events = document.getElementById("events");
+              events.value = events.value + selectSticker.value + selectDay.value + selectHourFrom.value + selectMinuteFrom.value + selectHourTo.value + selectMinuteTo.value;
+
+              console.log("Add " + selectSticker.value + " " + events.value);
+
+
+              refresh();
+            },
+          false);
+
+          refresh();
+
+      }
+
+        function getURLVariable(name)  {
+          name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+          var regexS = "[\\?&]"+name+"=([^&#]*)",
+              regex = new RegExp(regexS),
+              results = regex.exec(window.location.href);
+          if (results == null) return "";
+          else return results[1];
+        }
+
+        function refresh() {
+          var active = document.getElementById("active");
+
+          active.innerHTML = '';
+
+          var selectSticker = document.getElementById("select_sticker");
+          var selectDay = document.getElementById("select_day");
+          var selectHour = document.getElementById("select_hour_from");
+          var selectMinute = document.getElementById("select_min_from");
+          var events = document.getElementById("events");
+          var events_string = events.value;
+
+          for (i = 0; i < events_string.length; i = i + 6) {
+            sticker = b(events_string.charCodeAt(i));
+            d = b(events_string.charCodeAt(i + 1));
+            h1 = b(events_string.charCodeAt(i + 2));
+            m1 = b(events_string.charCodeAt(i + 3));
+            h2 = b(events_string.charCodeAt(i + 4));
+            m2 = b(events_string.charCodeAt(i + 5));
+
+            var p1 = document.createElement("p");
+            var p2 = document.createElement("p");
+            var p3 = document.createElement("p");
+            var div = document.createElement("div");
+            var img = document.createElement("img");
+            img.src = selectSticker.options[sticker].text.toLowerCase()+".png";
+            div.className = "sticker";
+
+            var deleteButton = document.createElement("button");
+            deleteButton.id = "d" + i;
+            deleteButton.className = "pure-button button"
+            var deleteText = document.createTextNode("Delete");
+            deleteButton.appendChild(deleteText);
+
+            var upButton = document.createElement("button");
+            upButton.id = "u" + i;
+            upButton.className = "pure-button button"
+            var upText = document.createTextNode("Up");
+            upButton.appendChild(upText);
+
+            var downButton = document.createElement("button");
+            downButton.id = "o" + i;
+            downButton.className = "pure-button button"
+            var downText = document.createTextNode("Down");
+            downButton.appendChild(downText);
+
+            deleteButton.type = "button";
+              deleteButton.addEventListener("click",
+                function() {
+                  var event_index = parseInt(this.id.substring(1));
+
+                  var events = document.getElementById("events");
+                  var event_string = events.value;
+
+                  event_string = deleteAt(event_string, event_index, event_index + 5);
+                  events.value = event_string;
+
+                  console.log("Delete index " + event_index + " in " + event_string);
+
+                  refresh();
+
+                },
+              false);
+
+            upButton.type = "button";
+              upButton.addEventListener("click",
+                function() {
+                  var event_index = parseInt(this.id.substring(1));
+                  var events = document.getElementById("events");
+                  var event_string = events.value;
+                  events.value = up(event_string, event_index);
+
+                  refresh();
+
+                },
+              false);
+
+            downButton.type = "button";
+              downButton.addEventListener("click",
+                function() {
+                  var event_index = parseInt(this.id.substring(1));
+                  var events = document.getElementById("events");
+                  var event_string = events.value;
+                  events.value = down(event_string, event_index);
+
+                  refresh();
+
+                },
+              false);
+
+            var node2 = document.createTextNode(selectSticker.options[sticker].text);
+            var node = document.createTextNode(selectDay.options[d].text + " " + selectHour.options[h1].text + ":" + selectMinute.options[m1].text + " - " + selectHour.options[h2].text  + ":" + selectMinute.options[m2].text);
+            div.appendChild(img);
+            p1.appendChild(node2);
+            p2.appendChild(node);
+            p3.appendChild(deleteButton);
+            if (i > 0) {
+              p3.appendChild(upButton);
+            }
+            if (i < events_string.length - 6) {
+              p3.appendChild(downButton);
+            }
+            div.appendChild(p1);
+            div.appendChild(p2);
+            div.appendChild(p3);
+
+            active.appendChild(div);
+
+          }
+        }
+
+        function b(c) {
+            return c - 65;
+        }
+
+        function deleteAt(str, m, n) {
+          var result = str.slice(0, m) + str.slice(n + 1);
+          console.log("Slice " + m + " " + n + " " + result);
+          return result;
+        }
+
+        function up(str, m) {
+          if (m > 5) {
+            var j = 0
+          console.log("Up before " + str);
+            for (;j < 6; j++) {
+                var a = str.charAt(m + j);
+                var b = str.charAt(m + j - 6);
+
+                str = replaceAt(str, m + j, b);
+                str = replaceAt(str, m + j - 6, a);
+            }
+          }
+          console.log("Up after " + str);
+          return str;
+        }
+
+        function down(str, m) {
+          if (m < str.length - 6) {
+            var j = 0
+          console.log("Down before " + str);
+            for (;j < 6; j++) {
+                var a = str.charAt(m + j);
+                var b = str.charAt(m + j + 6);
+
+                str = replaceAt(str, m + j, b);
+                str = replaceAt(str, m + j + 6, a);
+            }
+          }
+          console.log("Down after " + str);
+          return str;
+        }
+
+        function replaceAt(str, index, character) {
+            return str.substr(0, index) + character + str.substr(index + character.length);
+        }
+    </script>
+</head>
+
+<body onload="init()">
+
+<div id="select">
+
+    <form class="pure-form pure-form-stacked">
+        <fieldset>
+            <legend>Add a sticker</legend>
+
+            <label for="select_sticker">Sticker</label>
+            <select id="select_sticker" style="display:inline" name="select_sticker">
+                <option value="A">None</option>
+                <option value="B">Food</option>
+                <option value="C">Sport</option>
+                <option value="D">Drink</option>
+                <option value="E">Learn</option>
+                <option value="F">Work</option>
+                <option value="G">Rest</option>
+                <option value="H">Beer</option>
+                <option value="I">Friends</option>
+                <option value="J">Bedtime</option>
+                <option value="K">Sex</option>
+                <option value="L">Reminder</option>
+            </select>
+            <button type="button" style="display:inline" id="add_button" class="pure-button">Add</button>
+            <label for="select_day">Days</label>
+            <select id="select_day" name="select_day">
+                <option value="A">Every day</option>
+                <option value="B">Sundays</option>
+                <option value="C">Mondays</option>
+                <option value="D">Thuesdays</option>
+                <option value="E">Wednesdays</option>
+                <option value="F">Thursdays</option>
+                <option value="G">Fridays</option>
+                <option value="H">Saturdays</option>
+                <option value="I">Weekdays</option>
+                <option value="J">Weekends</option>
+            </select>
+
+            <label for="select_hour_from">From</label>
+            <select style="display:inline" id="select_hour_from" name="select_hour_from">
+                <option value="A">00</option>
+                <option value="B">01</option>
+                <option value="C">02</option>
+                <option value="D">03</option>
+                <option value="E">04</option>
+                <option value="F">05</option>
+                <option value="G">06</option>
+                <option value="H">07</option>
+                <option value="I">08</option>
+                <option value="J">09</option>
+                <option value="K">10</option>
+                <option value="L">11</option>
+                <option value="M">12</option>
+                <option value="N">13</option>
+                <option value="O">14</option>
+                <option value="P">15</option>
+                <option value="Q">16</option>
+                <option value="R">17</option>
+                <option value="S">18</option>
+                <option value="T">19</option>
+                <option value="U">20</option>
+                <option value="V">21</option>
+                <option value="W">22</option>
+                <option value="X">23</option>
+            </select>
+            <div style="display:inline">:</div>
+            <select id="select_min_from" name="select_min_from" style="display:inline">
+                <option value="A">00</option>
+                <option value="B">05</option>
+                <option value="C">10</option>
+                <option value="D">15</option>
+                <option value="E">20</option>
+                <option value="F">25</option>
+                <option value="G">30</option>
+                <option value="H">35</option>
+                <option value="I">40</option>
+                <option value="J">45</option>
+                <option value="K">50</option>
+                <option value="L">55</option>
+            </select>
+
+            <label for="select_hour_from">To</label>
+            <select id="select_hour_to" name="select_hour_to" style="display:inline">
+                <option value="A">00</option>
+                <option value="B">01</option>
+                <option value="C">02</option>
+                <option value="D">03</option>
+                <option value="E">04</option>
+                <option value="F">05</option>
+                <option value="G">06</option>
+                <option value="H">07</option>
+                <option value="I">08</option>
+                <option value="J">09</option>
+                <option value="K">10</option>
+                <option value="L">11</option>
+                <option value="M">12</option>
+                <option value="N">13</option>
+                <option value="O">14</option>
+                <option value="P">15</option>
+                <option value="Q">16</option>
+                <option value="R">17</option>
+                <option value="S">18</option>
+                <option value="T">19</option>
+                <option value="U">20</option>
+                <option value="V">21</option>
+                <option value="W">22</option>
+                <option value="X">23</option>
+            </select>
+            <div style="display:inline">:</div>
+            <select id="select_min_to" name="select_min_to" style="display:inline">
+                <option value="A">00</option>
+                <option value="B">05</option>
+                <option value="C">10</option>
+                <option value="D">15</option>
+                <option value="E">20</option>
+                <option value="F">25</option>
+                <option value="G">30</option>
+                <option value="H">35</option>
+                <option value="I">40</option>
+                <option value="J">45</option>
+                <option value="K">50</option>
+                <option value="L">55</option>
+            </select>
+
+
+
+        </fieldset>
+    </form>
+</div>
+
+<form class="pure-form pure-form-stacked">
+    <fieldset>
+        <legend>Stickers</legend>
+        <div id="active">
+
+        </div>
+    </fieldset>
+</form>
+
+
+<div>
+    <button type="submit" id="cancel_button" class="pure-button">Cancel</button>
+    <button type="submit" id="submit_button" class="pure-button pure-button-primary">Submit</button>
+</div>
+
+
+<textarea name="events" id="events" style="visibility:hidden"></textarea>
+
+
+</body>
+
+
+</html>

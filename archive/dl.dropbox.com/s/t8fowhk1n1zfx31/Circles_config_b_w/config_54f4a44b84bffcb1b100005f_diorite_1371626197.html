@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<!-- COLOR VERSION -->
+
+<!--TODO : Black & White Version-->
+<html>
+	<meta name="viewport" content="width=device-width">
+	<style>
+		body {
+			background: #444;
+			color: #FFF;
+			font-family: sans-serif, HelveticaNeue-Light, sans-serif;
+		}
+	p,a {
+			color: #FFF;
+			text-align: center;
+		}
+	hr {clear: both; margin: 10px 0}
+	h1 {
+			text-align: center;
+		}
+		
+	select {
+			display: inline-block;
+			padding: 4px 3px 5px 5px;
+			width: 150px;
+			outline: none;
+			color: black;
+			border: 1px solid #C8BFC4;
+			border-radius: 4px;
+			box-shadow: inset 1px 1px 2px #ddd8dc;
+			background-color: lightgrey;
+	}
+
+	</style>
+	
+	<head>
+		<title>CIRCLES CONFIGURATION</title>
+	</head>
+	
+	<body>
+		<h1>CIRCLES CONFIGURATION</h1>
+		<p> Only Works on pebble Time</p>
+		<p>Choose Your Watchface Settings</p>
+		<p><span style="font-size: 15px;">(Choose different colors)</span></p>
+		<hr>
+		<p>
+		<select id="background_color_select">
+			<option selected="" disabled="">Background Color</option>
+			<option value="black">Black</option>
+			<option value="white">White</option>
+		</select>
+		</p>
+		<hr>
+		<p>
+		<select id="circle_color_select">
+			<option selected="" disabled="">Circles Color</option>
+			<option value="black">Black</option>
+			<option value="white">White</option>
+		</select>
+		</p>
+
+		<p>
+		<button id="save_button">Save</button>
+		</p>
+	</body>
+</html>
+
+
+
+<script>
+	
+	function getQueryParam(variable, default_) {
+		var query = location.search.substring(1);
+		var vars = query.split('&');
+			for (var i = 0; i < vars.length; i++) {
+				var pair = vars[i].split('=');
+				if (pair[0] == variable)
+						return decodeURIComponent(pair[1]);
+			}
+		return default_ || false;
+	}
+
+	//Setup to allow easy adding more options later
+	function saveOptions() {
+		var backgroundColorSelect = document.getElementById("background_color_select");
+		var circleColorSelect = document.getElementById("circle_color_select");
+		
+		var options = {
+			"background_color": backgroundColorSelect.options[backgroundColorSelect.selectedIndex].value ,
+			"circle_color": circleColorSelect.options[circleColorSelect.selectedIndex].value
+		}
+		return options;
+	};
+
+
+var submitButton = document.getElementById("save_button");
+submitButton.addEventListener("click",
+							  function() {
+							  console.log("Submit");
+							  
+							  var options = saveOptions();
+							  
+							  var return_to = getQueryParam('return_to', 'pebblejs://close#');
+							  document.location = return_to + encodeURIComponent(JSON.stringify(options));
+							  
+							  },
+							  false);
+	</script>

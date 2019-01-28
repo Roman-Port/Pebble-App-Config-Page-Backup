@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link href="/watchface.tmnhy.su/css/metro-bootstrap.css" rel="stylesheet">
+        <link href="/watchface.tmnhy.su/css/metro-bootstrap-responsive.css" rel="stylesheet">
+        <link href="/watchface.tmnhy.su/css/iconFont.css" rel="stylesheet">
+        <link href="/watchface.tmnhy.su/css/docs.css" rel="stylesheet">
+        <link href="/watchface.tmnhy.su/js/prettify/prettify.css" rel="stylesheet">
+
+        <!-- Load JavaScript Libraries -->
+        <script src="/watchface.tmnhy.su/js/jquery/jquery.js"></script>
+        <script src="/watchface.tmnhy.su/js/jquery/jquery.js"></script>
+        <script src="/watchface.tmnhy.su/js/jquery/jquery.js"></script>
+        <script src="/watchface.tmnhy.su/js/prettify/prettify.js"></script>
+
+        <!-- Metro UI CSS JavaScript plugins -->
+        <script src="/watchface.tmnhy.su/js/load-metro.js"></script>
+
+        <!-- Local JavaScript -->
+        <script src="/watchface.tmnhy.su/js/docs.js"></script>
+        <script src="/watchface.tmnhy.su/js/github.js"></script>
+
+        <title>Pebble: 7-segment watchface</title>
+
+        <style>
+        </style>
+
+    <body class="metro" style="background-color: dark">
+        <header class="bg-dark" data-load="header_light.html"></header>
+        <div class="container">
+            <h2>Setup your 7-segment watchface</h2>
+
+            <div class="panel margin10">
+                <div class="panel-header">
+                    Screen settings
+                </div>
+                <div class="panel-content">
+
+                    <div class="input-control switch ">
+                        <label>
+                            <input id="screen_standby_invert" type="checkbox" checked="">
+                            <span class="check"></span>
+                            <span class="margin10">standby-screen invert</span>
+                        </label>
+                    </div> <!-- input-control -->
+
+                    <div class="input-control switch ">
+                        <label>
+                            <input id="screen_info_invert" type="checkbox" checked="">
+                            <span class="check"></span>
+                            <span class="margin10">info-screen invert</span>
+                        </label>
+                    </div> <!-- input-control -->
+
+                    <div class="input-control switch ">
+                        <label>
+                            <input id="screen_ru_days" type="checkbox" checked="">
+                            <span class="check"></span>
+                            <span class="margin10">RU days of week</span>
+                        </label>
+                    </div> <!-- input-control -->
+
+                    <div class="input-control switch ">
+                        <label>
+                            <input id="screen_autostandby" type="checkbox" checked="">
+                            <span class="check"></span>
+                            <span class="margin10">auto standby</span>
+                        </label>
+                    </div> <!-- input-control -->
+                </div> <!-- panel-content -->
+            </div> <!-- panel -->
+
+            <div class="panel margin10">
+                <div class="panel-header">
+                    Vibe settings
+                </div>
+                <div class="panel-content">
+
+                    <div class="input-control switch ">
+                        <label>
+                            <input id="vibe_bt" type="checkbox" checked="">
+                            <span class="check"></span>
+                            <span class="margin10">bluetooth on/off</span>
+                        </label>
+                    </div> <!-- input-control -->
+
+                    <div class="input-control switch ">
+                        <label>
+                            <input id="vibe_hourly" type="checkbox" checked="">
+                            <span class="check"></span>
+                            <span class="margin10">hourly</span>
+                        </label>
+                    </div> <!-- input-control -->
+                </div> <!-- panel-content -->
+            </div> <!-- panel -->
+
+            <div class="panel margin10">
+                <div class="panel-header">
+                    Weather settings
+                </div>
+                <div class="panel-content">
+                    <label>openweathermap.org city ID</label>
+                    <div class="input-control text" data-role="input-control">
+                        <input type="text" placeholder="type city ID" id="w_key">
+                        <button class="btn-clear" tabindex="-1"></button>
+                    </div>
+                </div> <!-- panel-content -->
+            </div> <!-- panel -->
+
+            <input id="b_submit" type="submit" value="Save" class="margin10">
+            <input id="b_reset" type="submit" value="Reset" class="margin10">
+            <input id="b_cancel" type="submit" value="Cancel" class="margin10">
+        </div> <!-- container -->
+
+        <script>
+            $().ready(function() {
+                var w_key = localStorage.getItem("w_key");
+                var vibe_bt = parseInt(localStorage.getItem("vibe_bt"));
+                var vibe_hourly = parseInt(localStorage.getItem("vibe_hourly"));
+                var screen_standby_invert = parseInt(localStorage.getItem("screen_standby_invert"));
+                var screen_info_invert = parseInt(localStorage.getItem("screen_info_invert"));
+                var screen_ru_days = parseInt(localStorage.getItem("screen_ru_days"));
+                var screen_autostandby = parseInt(localStorage.getItem("screen_autostandby"));
+
+                if (!(w_key)) {
+                    $('#w_key').prop('value', "601339")
+                } else {
+                    $('#w_key').prop('value', w_key)
+                };
+
+                if (isNaN(vibe_bt)) {
+                    vibe_bt = 1;
+                };
+
+                if (vibe_bt) {
+                    $('#vibe_bt').prop('checked', true);
+                } else {
+                    $('#vibe_bt').prop('checked', false);
+                };
+
+                if (isNaN(vibe_hourly)) {
+                    vibe_hourly = 0;
+                };
+                if (vibe_hourly) {
+                    $('#vibe_hourly').prop('checked', true);
+                } else {
+                    $('#vibe_hourly').prop('checked', false);
+                };
+
+                if (isNaN(screen_standby_invert)) {
+                    screen_standby_invert = 1;
+                };
+                if (screen_standby_invert) {
+                    $('#screen_standby_invert').prop('checked', true);
+                } else {
+                    $('#screen_standby_invert').prop('checked', false);
+                };
+
+                if (isNaN(screen_info_invert)) {
+                    screen_info_invert = 0;
+                };
+                if (screen_info_invert) {
+                    $('#screen_info_invert').prop('checked', true);
+                } else {
+                    $('#screen_info_invert').prop('checked', false);
+                };
+
+                if (isNaN(screen_ru_days)) {
+                    screen_ru_days = 0;
+                };
+                if (screen_ru_days) {
+                    $('#screen_ru_days').prop('checked', true);
+                } else {
+                    $('#screen_ru_days').prop('checked', false);
+                };
+
+                if (isNaN(screen_autostandby)) {
+                    screen_autostandby = 1;
+                };
+                if (screen_autostandby) {
+                    $('#screen_autostandby').prop('checked', true);
+                } else {
+                    $('#screen_autostandby').prop('checked', false);
+                };
+            });
+
+            var submitButton = document.getElementById("b_submit");
+            submitButton.addEventListener("click",
+                function() {
+                    localStorage.setItem("w_key", $('#w_key').prop('value'));
+                    localStorage.setItem("vibe_bt",
+                                         $('#vibe_bt').prop('checked') ? 1 : 0);
+                    localStorage.setItem("vibe_hourly",
+                                         $('#vibe_hourly').prop('checked') ? 1 : 0);
+                    localStorage.setItem("screen_standby_invert",
+                                $('#screen_standby_invert').prop('checked') ? 1 : 0);
+                    localStorage.setItem("screen_info_invert",
+                                $('#screen_info_invert').prop('checked') ? 1 : 0);
+                    localStorage.setItem("screen_ru_days",
+                                $('#screen_ru_days').prop('checked') ? 1 : 0);
+                    localStorage.setItem("screen_autostandby",
+                                $('#screen_autostandby').prop('checked') ? 1 : 0);
+                    var result = {
+                        W_KEY: parseInt($('#w_key').prop('value')),
+                        VIBE_BT: $('#vibe_bt').prop('checked') ? 1 : 0,
+                        VIBE_HOURLY: $('#vibe_hourly').prop('checked') ? 1 : 0,
+                        S_STANDBY_I: $('#screen_standby_invert').prop('checked') ? 1 : 0,
+                        S_INFO_I: $('#screen_info_invert').prop('checked') ? 1 : 0,
+                        S_RU_D: $('#screen_ru_days').prop('checked') ? 1 : 0,
+                        S_AUTO: $('#screen_autostandby').prop('checked') ? 1 : 0
+                    };
+                    var location = "pebblejs://close#"+JSON.stringify(result);
+                    document.location = location;
+                },
+                false);
+            var resetButton = document.getElementById("b_reset");
+            resetButton.addEventListener("click",
+                function() {
+                    localStorage.clear();
+                    location.reload();
+                },
+                false);
+            var cancelButton = document.getElementById("b_cancel");
+            cancelButton.addEventListener("click",
+                function() {
+                    var location = "pebblejs://close#cancel";
+                    document.location = location;
+                },
+                false);
+        </script>
+    </body>
+</head></html>

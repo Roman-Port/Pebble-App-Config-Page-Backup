@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Settings</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Settings</h1>
+      </div>
+
+	
+      <div data-role="content">
+		
+		<div data-role="fieldcontain">
+          <label for="special-feature">Units of temperature:</label>
+          <select name="temperature" id="temperature" data-role="slider">
+		  <option value="0" selected="selected">°C</option><option value="1">°F</option>            
+          </select>
+        </div>
+		
+		<div data-role="fieldcontain">
+			<label for="special-feature">Enable personal location :</label>
+			<select name="utiliser_ville" id="utiliser_ville" data-role="slider">
+				<option value="0" selected="selected">No</option><option value="1">Yes</option>			</select>
+			
+		</div>
+		
+		
+		<div data-role="fieldcontain">
+			<label for="ville">City :</label>
+			<span style="font-style:italic;">Example : Saint-Etienne, France</span>
+			<textarea cols="1" rows="1" name="ville" id="ville">undefined</textarea>
+        </div>
+		
+		<div data-role="fieldcontain">
+			<label for="select-choice-1" class="select">Weather refresh time:</label>
+			<select name="rafraichissement" id="rafraichissement">
+			<option value="10">10 minutes</option><option value="20">20 minutes</option><option value="30">30 minutes</option><option value="40">40 minutes</option><option value="50">50 minutes</option><option value="60">60 minutes</option>			</select>
+		</div>
+		
+		<div>Made by Aurélien Lacroix</div>
+
+
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    
+    <script>
+      function saveOptions() {
+        var options = {
+		  'utiliser_ville': $("#utiliser_ville").val(),
+		  'temperature': $("#temperature").val(),
+		  'rafraichissement': $("#rafraichissement").val(),
+		  'ville': escape($("#ville").val())
+        }
+        return options;
+      }
+
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+
+
+      });
+    </script>
+  </body>
+</html>

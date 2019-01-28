@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title></title>
+  <link rel="stylesheet" href="/freakified.github.io/PebbleChecklist/css/slate.css">
+  <link rel="stylesheet" href="/freakified.github.io/PebbleChecklist/css/custom.css">
+</head>
+<body>
+  <div class="main-toolbar">
+    <h1 id="title">Checklist</h1>
+  </div>
+
+  <form id="main-form" style="padding-top: 40px;">
+    <div class="item-container">
+      <div class="item-container-footer">
+        Items can be added to the list directly from your watch via voice! You can also
+        use this page to manually add items to the list.
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Items to add</div>
+      <div class="item-container-content">
+        <div class="item-dynamic-list" id="items_to_add">
+        </div>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="button-container">
+        <input id="submit_button" type="button" class="item-button hidden" value="SEND TO WATCH">
+      </div>
+    </div>
+  </form>
+  <script type="text/javascript" src="/freakified.github.io/PebbleChecklist/js/slate.js"></script>
+  <script type="text/javascript" src="/freakified.github.io/PebbleChecklist/js/config.js"></script>
+</body>
+</html>

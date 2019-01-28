@@ -1,0 +1,1975 @@
+﻿<html class="ui-mobile">
+	<head>
+		<meta http-equiv="EXPIRES" content="0">
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+		<title>BCD minimalist configuration</title>
+		<link href="/www.pebble.timm.tc/css/slate.css" type="text/css" rel="stylesheet">
+		<link href="/www.pebble.timm.tc/css/pebble_config_design.css" type="text/css" rel="stylesheet">
+		<link href="/www.pebble.timm.tc/css/minimal_color_picker.css" type="text/css" rel="stylesheet">
+		<script type="text/javascript" src="/www.pebble.timm.tc/js/pebble_config_scripts.js"></script>
+		<script type="text/javascript" src="/www.pebble.timm.tc/js/minimal_color_picker.js"></script>
+		<script type="text/javascript" src="/www.pebble.timm.tc/js/slate.js"></script>
+		<script>
+			var default_config = {
+				truebinary: 0,
+				//bitshape: 0,
+				displayfalse: 1,
+				showimpossible: 0,
+				backgroundcolor: "000000",
+				bitcolor: "00aaff",
+				offcolor: "555555",
+				hintcolor: "00aaff",
+				displayseconds: 1,
+				timealignment: 0,
+				timeformat: 0,
+				showhint: 0,
+				datebitcolor: "00ff55",
+				dateoffcolor: "555555",
+				datehintcolor: "00ff55",
+				showdate: 0,
+				dateposition: 0,
+				datealignment: 0,
+				dateformat: 0,
+				dateshowhint: 0,
+				btloss: 1,
+				btlossvibration: 3,
+				btreconnectvibration: 3,
+				btlevel: 1,
+				btlevelvibration: 0,
+				vibratehourly: 0,
+				dndwhilecharging: 0,
+				tappingtimeout: 5000,
+				watchtimeformat: 1,
+				timedeco: 0,
+				datedeco: 0,
+				trueborder: 0,
+				falseborder: 0,
+				secint: 1,
+				quickview: 0,
+			};
+			var latest_version = "2.2";
+			var current_config;
+			var current_version;
+			var current_watch;
+
+			var screen = { round: 0, large: 0, color: 0, edges: 0 };
+
+			function onLoad() {
+				currentSettings();
+				versionCheck();
+				platformCheck();
+				formatChanged(true);
+				displayfalseChanged(true);
+				showhintChanged(true);
+				displaysecondsChanged(true);
+				showDateChanged(true);
+				datehintChanged(true);
+				dateformatChanged(true);
+				batteryLevelChanged(true);
+				datepositionChanged(true);
+				setInterval(tickPreview, 1000);
+			}
+
+			function currentSettings() {
+				current_version = getQueryParam('current_version', latest_version);
+				current_watch = JSON.parse(getQueryParam('current_watch', JSON.stringify(basalt_watch)));
+				if("aplite" === current_watch.platform) {
+					// check for old version 2 firmware
+					if(undefined === current_watch.firmware
+						|| undefined === current_watch.firmware.major
+						|| 3 > current_watch.firmware.major) {
+						latest_version = "2.1";
+					}
+					screen.round = false;
+					screen.large = false;
+					screen.color = false;
+					screen.edges = false;
+				} else
+				if("basalt" === current_watch.platform) {
+					screen.round = false;
+					screen.large = false;
+					screen.color = true;
+					screen.edges = true;
+				} else
+				if("chalk" === current_watch.platform) {
+					screen.round = true;
+					screen.large = false;
+					screen.color = true;
+					screen.edges = false;
+				} else
+				if("diorite" === current_watch.platform) {
+					screen.round = false;
+					screen.large = false;
+					screen.color = false;
+					screen.edges = true;
+				} else
+				if("emery" === current_watch.platform) {
+					screen.round = false;
+					screen.large = true;
+					screen.color = true;
+					screen.edges = true;
+				}
+				if(!screen.color) {
+					default_config.displayfalse = 2;
+					default_config.bitcolor = "ffffff";
+					default_config.offcolor = "ffffff";
+					default_config.hintcolor = "ffffff";
+					default_config.datebitcolor = "ffffff";
+					default_config.dateoffcolor = "ffffff";
+					default_config.datehintcolor = "ffffff";
+				}
+				current_config = JSON.parse(getQueryParam('current_config', JSON.stringify(default_config)));
+
+				document.getElementById("version").innerHTML = "V"+current_version;
+
+				if(getValue(current_config.truebinary, default_config.truebinary)) {
+					document.getElementById("tb-tab").className += " active";
+				} else {
+					document.getElementById("bcd-tab").className += " active";
+				}
+				//document.getElementById("bitshape").selectedIndex = getValue(current_config.bitshape, default_config.bitshape);
+				document.getElementById("displayfalse").selectedIndex = getValue(current_config.displayfalse, default_config.displayfalse);
+				document.getElementById("displayimpossible").checked = getValue(current_config.showimpossible, default_config.showimpossible);
+				document.getElementById("trueborder").checked = getValue(current_config.trueborder, default_config.trueborder);
+				document.getElementById("falseborder").checked = getValue(current_config.falseborder, default_config.falseborder);
+
+				var canvas = document.getElementsByClassName("watchpreview");
+				for(var c = 0; c < canvas.length; c++) {
+					if(screen.round) {
+						canvas[c].width = "180";
+						canvas[c].height = "180";
+					} else if(screen.large) {
+						canvas[c].width = "200";
+						canvas[c].height = "228";
+					} else {
+						canvas[c].width = "144";
+						canvas[c].height = "168";
+					}
+				}
+
+				if(screen.color) {
+					var colorpickers = document.getElementsByClassName("colorpicker-wrapper");
+					for(var i = 0; i < colorpickers.length; i++) {
+						colorpickers[i].removeAttribute("hidden");
+					}
+				}
+
+				minimalcolorpicker_setupColorPicker(document.getElementById("backgroundcolorpicker"), updatePreview, getValue(current_config.backgroundcolor, default_config.backgroundcolor), "#F7F7F7", "#FF4700", screen.color ? 64 : 2);
+				minimalcolorpicker_setupColorPicker(document.getElementById("onbitscolorpicker"), updatePreview, getValue(current_config.bitcolor, default_config.bitcolor), "#F7F7F7", "#FF4700", screen.color ? 64 : 2);
+				minimalcolorpicker_setupColorPicker(document.getElementById("offbitscolorpicker"), updatePreview, getValue(current_config.offcolor, default_config.offcolor), "#F7F7F7", "#FF4700", screen.color ? 64 : 2);
+				minimalcolorpicker_setupColorPicker(document.getElementById("hintcolorpicker"), updatePreview, getValue(current_config.hintcolor, default_config.hintcolor), "#F7F7F7", "#FF4700", screen.color ? 64 : 2);
+
+				document.getElementById("showhint").selectedIndex = getValue(current_config.showhint, default_config.showhint);
+				document.getElementById("timedeco").checked = getValue(current_config.timedeco, default_config.timedeco);
+				document.getElementById("displayseconds").checked = getValue(current_config.displayseconds, default_config.displayseconds);
+				document.getElementById("showsecondsinterval").value = getValue(current_config.secint, default_config.secint);
+				document.getElementById("timealignment").selectedIndex = getValue(current_config.timealignment, default_config.timealignment);
+				document.getElementById("timeformat").selectedIndex = getValue(current_config.timeformat, default_config.timeformat);
+
+				document.getElementById("showdate").checked = getValue(current_config.showdate, default_config.showdate);
+
+				minimalcolorpicker_setupColorPicker(document.getElementById("datebitcolorpicker"), updatePreview, getValue(current_config.datebitcolor, default_config.datebitcolor), "#F7F7F7", "#FF4700", screen.color ? 64 : 2);
+				minimalcolorpicker_setupColorPicker(document.getElementById("dateoffcolorpicker"), updatePreview, getValue(current_config.dateoffcolor, default_config.dateoffcolor), "#F7F7F7", "#FF4700", screen.color ? 64 : 2);
+				minimalcolorpicker_setupColorPicker(document.getElementById("datehintcolorpicker"), updatePreview, getValue(current_config.datehintcolor, default_config.datehintcolor), "#F7F7F7", "#FF4700", screen.color ? 64 : 2);
+
+				document.getElementById("dateposition").selectedIndex = getValue(current_config.dateposition, default_config.dateposition);
+				document.getElementById("datealignment").selectedIndex = getValue(current_config.datealignment, default_config.datealignment);
+				document.getElementById("dateformat").selectedIndex = getValue(current_config.dateformat, default_config.dateformat);
+				document.getElementById("showhintdate").selectedIndex = getValue(current_config.dateshowhint, default_config.dateshowhint);
+				document.getElementById("datedeco").checked = getValue(current_config.datedeco, default_config.datedeco);
+
+				document.getElementById("timelinequickviewreaction").selectedIndex = getValue(current_config.quickview, default_config.quickview);
+				document.getElementById("btloss").selectedIndex = getValue(current_config.btloss, default_config.btloss);
+				document.getElementById("btlossvibe").selectedIndex = getValue(current_config.btlossvibration, default_config.btlossvibration);
+				document.getElementById("btreconnectvibe").selectedIndex = getValue(current_config.btreconnectvibration, default_config.btreconnectvibration);
+				document.getElementById("batteryalert").selectedIndex = getValue(current_config.btlevel, default_config.btlevel);
+				document.getElementById("batteryvibe").selectedIndex = getValue(current_config.btlevelvibration, default_config.btlevelvibration);
+				document.getElementById("hourlyvibe").selectedIndex = getValue(current_config.vibratehourly, default_config.vibratehourly);
+				document.getElementById("dndwhilecharging").checked = getValue(current_config.dndwhilecharging, default_config.dndwhilecharging);
+
+				document.getElementById("tappingtimeout").value = getValue(current_config.tappingtimeout, default_config.tappingtimeout) / 1000;
+				document.getElementById("tappingtimeoutslider").value = document.getElementById("tappingtimeout").value;
+			}
+
+			function trueBinaryFormat() {
+				var tbclasses = document.getElementById("tb-tab").className.split(" ");
+				for(var i = 0; i < tbclasses.length; i++) {
+					if(tbclasses[i] === "active") {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			function checkDisplayImpossible() {
+				if(document.getElementById("displayfalse").selectedIndex) {
+					document.getElementById("displayimpossibleitem").removeAttribute("hidden");
+				} else {
+					document.getElementById("displayimpossibleitem").setAttribute("hidden", true);
+				}
+			}
+
+			function checkTimeOffColorPicker() {
+				if(document.getElementById("displayfalse").selectedIndex) {
+					document.getElementById("timeoffcolorpicker").removeAttribute("hidden");
+				} else {
+					document.getElementById("timeoffcolorpicker").setAttribute("hidden", true);
+				}
+			}
+
+			function checkTimeHintColorPicker() {
+				if(document.getElementById("showhint").selectedIndex) {
+					document.getElementById("timehintcolorpicker").removeAttribute("hidden");
+				} else {
+					document.getElementById("timehintcolorpicker").setAttribute("hidden", true);
+				}
+			}
+
+			function checkTimeAlignment() {
+				if(!document.getElementById("displayseconds").checked
+					&& ((document.getElementById("showdate").checked && !trueBinaryFormat())
+						|| (trueBinaryFormat() && document.getElementById("showhint").selectedIndex))) {
+					document.getElementById("timealignmentitem").removeAttribute("hidden");
+				} else {
+					document.getElementById("timealignmentitem").setAttribute("hidden", true);
+				}
+			}
+
+			function checkDateOnColorPicker() {
+				if(document.getElementById("showdate").checked) {
+					document.getElementById("doncolorpicker").removeAttribute("hidden");
+				} else {
+					document.getElementById("doncolorpicker").setAttribute("hidden", true);
+				}
+			}
+
+			function checkDateOffColorPicker() {
+				if(document.getElementById("showdate").checked
+					&& document.getElementById("displayfalse").selectedIndex) {
+					document.getElementById("doffcolorpicker").removeAttribute("hidden");
+				} else {
+					document.getElementById("doffcolorpicker").setAttribute("hidden", true);
+				}
+			}
+
+			function checkDateHintColorPicker() {
+				if(document.getElementById("showhintdate").selectedIndex) {
+					document.getElementById("dhintcolorpicker").removeAttribute("hidden");
+				} else {
+					document.getElementById("dhintcolorpicker").setAttribute("hidden", true);
+				}
+			}
+
+			function checkDateAlignment() {
+				if(document.getElementById("dateformat").selectedIndex < 2
+					&& ((document.getElementById("showhintdate").selectedIndex
+						&& (document.getElementById("displayseconds").checked || trueBinaryFormat()))
+						|| (!trueBinaryFormat() && document.getElementById("showdate").checked))) {
+					document.getElementById("datealignmentitem").removeAttribute("hidden");
+				} else {
+					document.getElementById("datealignmentitem").setAttribute("hidden", true);
+				}
+			}
+
+			function checkDateFormat() {
+				if(    document.getElementById("showdate").checked
+					|| document.getElementById("showhintdate").selectedIndex) {
+					document.getElementById("dateformatitem").removeAttribute("hidden");
+				} else {
+					document.getElementById("dateformatitem").setAttribute("hidden", true);
+				}
+			}
+
+			function checkDatePosition() {
+				if(    document.getElementById("showdate").checked
+					|| document.getElementById("showhintdate").selectedIndex) {
+					document.getElementById("datepositionitem").removeAttribute("hidden");
+					document.getElementById("timehintpositionitem").setAttribute("hidden", true);
+				} else {
+					document.getElementById("datepositionitem").setAttribute("hidden", true);
+					if(document.getElementById("showhint").selectedIndex) {
+						document.getElementById("timehintpositionitem").removeAttribute("hidden");
+					} else {
+						document.getElementById("timehintpositionitem").setAttribute("hidden", true);
+					}
+				}
+			}
+
+			function checkTapping() {
+				if(    1 === document.getElementById("showhint").selectedIndex
+					|| 1 === document.getElementById("showhintdate").selectedIndex
+					|| 2 === document.getElementById("batteryalert").selectedIndex
+					|| 3 === document.getElementById("batteryalert").selectedIndex) {
+					document.getElementById("tapping").removeAttribute("hidden");
+				} else {
+					document.getElementById("tapping").setAttribute("hidden", true);
+				}
+			}
+
+			function checkTimeDeco() {
+				if((versionCompare(current_version, "2.1") >= 0) && document.getElementById("showhint").selectedIndex) {
+					document.getElementById("timedecoitem").removeAttribute("hidden");
+				} else {
+					document.getElementById("timedecoitem").setAttribute("hidden", true);
+				}
+			}
+
+			function checkDateDeco() {
+				if((versionCompare(current_version, "2.1") >= 0) && document.getElementById("showhintdate").selectedIndex) {
+					document.getElementById("datedecoitem").removeAttribute("hidden");
+				} else {
+					document.getElementById("datedecoitem").setAttribute("hidden", true);
+				}
+			}
+
+			function checkTrueBorder() {
+				if((versionCompare(current_version, "2.1") >= 0) && (screen.color)) {
+					document.getElementById("trueborderitem").removeAttribute("hidden");
+				} else {
+					document.getElementById("trueborderitem").setAttribute("hidden", true);
+				}
+			}
+
+			function checkFalseBorder() {
+				if((versionCompare(current_version, "2.1") >= 0) && document.getElementById("displayfalse").selectedIndex
+					&& !((!screen.color) && (4 === document.getElementById("displayfalse").selectedIndex))) {
+					document.getElementById("falseborderitem").removeAttribute("hidden");
+				} else {
+					document.getElementById("falseborderitem").setAttribute("hidden", true);
+				}
+			}
+
+			function checkShowSecondsInterval() {
+				if((versionCompare(current_version, "2.1") >= 0) && document.getElementById("displayseconds").checked) {
+					document.getElementById("showsecondsintervalitem").removeAttribute("hidden");
+				} else {
+					document.getElementById("showsecondsintervalitem").setAttribute("hidden", true);
+				}
+			}
+
+			function timehintpositionChanged() {
+				document.getElementById("dateposition").selectedIndex = document.getElementById("timehintposition").selectedIndex;
+				updatePreview();
+			}
+
+			function versionCheck() {
+				if(versionCompare(current_version, latest_version) < 0) {
+					document.getElementById("latest_version").innerHTML = latest_version;
+					document.getElementById("not_latest_version").removeAttribute("hidden");
+				}
+				checkTrueBorder();
+			}
+
+			function platformCheck() {
+				if(!screen.color) {
+					document.getElementById("displayfalse_solid").setAttribute("hidden", true);
+					document.getElementById("displayfalse_solid").style.display = "none";
+					document.getElementById("displayfalse_solid").disabled = true;
+				}
+				if(versionCompare(current_version, "2.3") < 0
+					|| "aplite" === current_watch.platform
+					|| "chalk" === current_watch.platform) {
+					document.getElementById("timelinequickviewreactionitem").setAttribute("hidden", true);
+				} else {
+					document.getElementById("timelinequickviewreactionitem").removeAttribute("hidden");
+				}
+				checkTrueBorder();
+			}
+
+			function formatChanged(init) {
+				if(trueBinaryFormat()) {
+					document.getElementById("tb-sub").removeAttribute("hidden");
+					document.getElementById("bcd-sub").setAttribute("hidden", true);
+				} else {
+					document.getElementById("bcd-sub").removeAttribute("hidden");
+					document.getElementById("tb-sub").setAttribute("hidden", true);
+				}
+				checkTimeAlignment();
+				checkDateAlignment();
+				if(!init) {
+					updatePreview();
+				}
+			}
+
+			function displayfalseChanged(init) {
+				checkDisplayImpossible();
+				checkTimeOffColorPicker();
+				checkDateOffColorPicker();
+				checkFalseBorder();
+				if(!init) {
+					updatePreview();
+				}
+			}
+
+			function showhintChanged(init) {
+				checkTimeHintColorPicker();
+				checkTimeAlignment();
+				checkDatePosition();
+				checkTapping();
+				checkTimeDeco();
+				if(!init) {
+					updatePreview();
+				}
+			}
+
+			function displaysecondsChanged(init) {
+				checkTimeAlignment();
+				checkDateAlignment();
+				checkShowSecondsInterval();
+				if(!init) {
+					updatePreview();
+				}
+			}
+
+			function showDateChanged(init) {
+				checkTimeAlignment();
+				checkDateAlignment();
+				checkDateOnColorPicker();
+				checkDateOffColorPicker();
+				checkDateFormat();
+				checkDatePosition();
+				if(!init) {
+					updatePreview();
+				}
+			}
+
+			function datehintChanged(init) {
+				checkDateHintColorPicker();
+				checkDateAlignment();
+				checkDateFormat();
+				checkDatePosition();
+				checkTapping();
+				checkDateDeco();
+				if(!init) {
+					updatePreview();
+				}
+			}
+
+			function dateformatChanged(init) {
+				checkDateAlignment();
+				if(!init) {
+					updatePreview();
+				}
+			}
+
+			function batteryLevelChanged(init) {
+				checkTapping();
+				if(!init) {
+					updatePreview();
+				}
+			}
+
+			function datepositionChanged(init) {
+				document.getElementById("timehintposition").selectedIndex = document.getElementById("dateposition").selectedIndex;
+				if(!init) {
+					updatePreview();
+				}
+			}
+
+			function scrollDown() {
+				var pos = getAbsPosition(document.getElementById("bottom"));
+				window.scrollTo(0, pos[0]);
+			}
+
+			function save() {
+				// only save configuration if the page was opened by the Pebble App (containing a valid config)
+				if(JSON.parse(getQueryParam('current_config', false))) {
+					var configuration = {
+						truebinary: trueBinaryFormat() ? 1 : 0,
+						displayfalse: document.getElementById("displayfalse").selectedIndex,
+						showimpossible: document.getElementById("displayimpossible").checked ? 1 : 0,
+						backgroundcolor: minimalcolorpicker_getColorValue(document.getElementById("backgroundcolorpicker_preview").style.backgroundColor),
+						bitcolor: minimalcolorpicker_getColorValue(document.getElementById("onbitscolorpicker_preview").style.backgroundColor),
+						offcolor: minimalcolorpicker_getColorValue(document.getElementById("offbitscolorpicker_preview").style.backgroundColor),
+						hintcolor: minimalcolorpicker_getColorValue(document.getElementById("hintcolorpicker_preview").style.backgroundColor),
+						displayseconds: document.getElementById("displayseconds").checked ? 1 : 0,
+						timealignment: document.getElementById("timealignment").selectedIndex,
+						timeformat: document.getElementById("timeformat").selectedIndex,
+						showhint: document.getElementById("showhint").selectedIndex,
+						datebitcolor: minimalcolorpicker_getColorValue(document.getElementById("datebitcolorpicker_preview").style.backgroundColor),
+						dateoffcolor: minimalcolorpicker_getColorValue(document.getElementById("dateoffcolorpicker_preview").style.backgroundColor),
+						datehintcolor: minimalcolorpicker_getColorValue(document.getElementById("datehintcolorpicker_preview").style.backgroundColor),
+						showdate: document.getElementById("showdate").checked ? 1 : 0,
+						dateposition: document.getElementById("dateposition").selectedIndex,
+						datealignment: document.getElementById("datealignment").selectedIndex,
+						dateformat: document.getElementById("dateformat").selectedIndex,
+						dateshowhint: document.getElementById("showhintdate").selectedIndex,
+						btloss: document.getElementById("btloss").selectedIndex,
+						btlossvibration: document.getElementById("btlossvibe").selectedIndex,
+						btreconnectvibration: document.getElementById("btreconnectvibe").selectedIndex,
+						btlevel: document.getElementById("batteryalert").selectedIndex,
+						btlevelvibration: document.getElementById("batteryvibe").selectedIndex,
+						vibratehourly: document.getElementById("hourlyvibe").selectedIndex,
+						dndwhilecharging: document.getElementById("dndwhilecharging").checked ? 1 : 0,
+						tappingtimeout: document.getElementById("tappingtimeout").value * 1000,
+						watchtimeformat: current_config.watchtimeformat, // just mirror it back to the watch
+						timedeco: document.getElementById("timedeco").checked ? 1 : 0,
+						datedeco: document.getElementById("datedeco").checked ? 1 : 0,
+						trueborder: document.getElementById("trueborder").checked ? 1 : 0,
+						falseborder: document.getElementById("falseborder").checked ? 1 : 0,
+						secint: parseInt(document.getElementById("showsecondsinterval").options[document.getElementById("showsecondsinterval").selectedIndex].value),
+						quickview: document.getElementById("timelinequickviewreaction").selectedIndex,
+					};
+					// if "return_to" is used, the config is returned to CloudPebble without triggering analytics
+					document.location.href=getQueryParam('return_to', 'bcd_minimalist_slate_save.html?') + encodeURIComponent(JSON.stringify(configuration));
+				} else {
+					// no config means the page is opened by a web browser -> show the Pebble App store
+					document.location.href="https://apps.getpebble.com/en_US/application/5546abfc47bb344acb0000d2?hardware="+current_watch.platform;
+				}
+			}
+		</script>
+		<script>
+			var preview_image_count = 14;
+			var preview_image_on_small;
+			var preview_image_on_large;
+			var preview_image_off_small = [];
+			var preview_image_off_large = [];
+			var preview_image_on_border_small;
+			var preview_image_on_border_large;
+			var preview_image_off_border_small;
+			var preview_image_off_border_large;
+			var preview_tapping_active = false;
+			var preview_tapping_timeout;
+
+			var bcdTime = [];
+			var bcdTimeCols = 6;
+			var bcdDate = [];
+			var bcdDateCols = 4;
+			var hour24 = true;
+			var timeDeco;
+			var dateDeco;
+			var timeDecoCols;
+			var dateDecoCols;
+
+			function updateBCDTime(now) {
+				var hours = now.getHours();
+				hour24 = (1 === current_config.watchtimeformat);
+				switch(document.getElementById("timeformat").selectedIndex) {
+					case 1: hour24 = true; break;
+					case 2: hour24 = false; break;
+				}
+				if(!hour24) {
+					if(hours === 0) { // Midnight to 1am
+						hours = 12;
+					} else if(hours > 12) { // 1pm to 11:59pm
+						hours -= 12;
+					}
+				}
+				bcdTime[0] = Math.floor(hours / 10);
+				bcdTime[1] = hours % 10;
+				bcdTime[2] = Math.floor(now.getMinutes() / 10);
+				bcdTime[3] = now.getMinutes() % 10;
+				if(document.getElementById("displayseconds").checked) {
+					var nowSeconds = now.getSeconds();
+					var showSeconds = nowSeconds - (nowSeconds % document.getElementById("showsecondsinterval").options[document.getElementById("showsecondsinterval").selectedIndex].value);
+					bcdTime[4] = Math.floor(showSeconds / 10);
+					bcdTime[5] = showSeconds % 10;
+					bcdTimeCols = 6;
+					timeDecoCols = 2;
+				} else {
+					bcdTimeCols = 4;
+					timeDecoCols = 1;
+				}
+				timeDeco = ":";
+			}
+
+			function updateBCDDate(now) {
+				bcdDateCols = 4;
+				dateDecoCols = 1;
+				dateDeco = "/";
+				switch(document.getElementById("dateformat").selectedIndex) {
+					case 2: { // DDMMYY
+						bcdDate[4] = Math.floor((now.getFullYear()%100) / 10);
+						bcdDate[5] = (now.getFullYear()%100) % 10;
+						bcdDateCols = 6;
+					} // fallthrough
+					case 0: { // DDMM
+						bcdDate[0] = Math.floor(now.getDate() / 10);
+						bcdDate[1] = now.getDate() % 10;
+						bcdDate[2] = Math.floor((now.getMonth()+1) / 10);
+						bcdDate[3] = (now.getMonth()+1) % 10;
+						dateDecoCols = 2;
+						dateDeco = ".";
+						break;
+					}
+					case 3: { // MMDDYY
+						bcdDate[4] = Math.floor((now.getFullYear()%100) / 10);
+						bcdDate[5] = (now.getFullYear()%100) % 10;
+						bcdDateCols = 6;
+						dateDecoCols = 2;
+					} // fallthrough
+					case 1: { // MMDD
+						bcdDate[0] = Math.floor((now.getMonth()+1) / 10);
+						bcdDate[1] = (now.getMonth()+1) % 10;
+						bcdDate[2] = Math.floor(now.getDate() / 10);
+						bcdDate[3] = now.getDate() % 10;
+						break;
+					}
+					case 4: { // YYMMDD
+						bcdDate[0] = Math.floor((now.getFullYear()%100) / 10);
+						bcdDate[1] = (now.getFullYear()%100) % 10;
+						bcdDate[2] = Math.floor((now.getMonth()+1) / 10);
+						bcdDate[3] = (now.getMonth()+1) % 10;
+						bcdDate[4] = Math.floor(now.getDate() / 10);
+						bcdDate[5] = now.getDate() % 10;
+						bcdDateCols = 6;
+						dateDecoCols = 2;
+						break;
+					}
+				}
+			}
+
+			function brighterColor(color) {
+				if(!screen.color) {
+					return color;
+				}
+				var rgbSplit = color.toString().split(',');
+				var rgb = {"r": parseInt(rgbSplit[0].substring(4)), "g": parseInt(rgbSplit[1]), "b": parseInt(rgbSplit[2])};
+				var brighter = "rgb(" + ((rgb.r < 255) ? rgb.r+0x55 : rgb.r) + ", " + ((rgb.g < 255) ? rgb.g+0x55 : rgb.g) + ", " + ((rgb.b < 255) ? rgb.b+0x55 : rgb.b) + ")";
+				return brighter;
+			}
+
+			function shadeColor(color) {
+				if(!screen.color) {
+					return color;
+				}
+				var rgbSplit = color.toString().split(',');
+				var rgb = {"r": parseInt(rgbSplit[0].substring(4)), "g": parseInt(rgbSplit[1]), "b": parseInt(rgbSplit[2])};
+				var shade = "rgb(" + (rgb.r ? rgb.r-0x55 : rgb.r) + ", " + (rgb.g ? rgb.g-0x55 : rgb.g) + ", " + (rgb.b ? rgb.b-0x55 : rgb.b) + ")";
+				return shade;
+			}
+
+			function drawPreview() {
+				var now = new Date();
+				updateBCDTime(now);
+				updateBCDDate(now);
+
+				var background = minimalcolorpicker_getSunlightColor(document.getElementById("backgroundcolorpicker_preview").style.backgroundColor);
+				var onbit = minimalcolorpicker_getSunlightColor(document.getElementById("onbitscolorpicker_preview").style.backgroundColor);
+				var donbit = minimalcolorpicker_getSunlightColor(document.getElementById("datebitcolorpicker_preview").style.backgroundColor);
+				var offbitindex = document.getElementById("displayfalse").selectedIndex;
+				var offbit = offbitindex ? minimalcolorpicker_getSunlightColor(document.getElementById("offbitscolorpicker_preview").style.backgroundColor) : background;
+				var doffbit = offbitindex ? minimalcolorpicker_getSunlightColor(document.getElementById("dateoffcolorpicker_preview").style.backgroundColor) : background;
+
+				var onbitborderbright = minimalcolorpicker_getSunlightColor(brighterColor(document.getElementById("onbitscolorpicker_preview").style.backgroundColor));
+				var onbitbordershade = minimalcolorpicker_getSunlightColor(shadeColor(document.getElementById("onbitscolorpicker_preview").style.backgroundColor));
+				var offbitborderbright = offbitindex ? ((1 === offbitindex) ? minimalcolorpicker_getSunlightColor(brighterColor(document.getElementById("offbitscolorpicker_preview").style.backgroundColor)) : offbit) : background;
+				var offbitbordershade = offbitindex ? minimalcolorpicker_getSunlightColor(shadeColor(document.getElementById("offbitscolorpicker_preview").style.backgroundColor)) : background;
+
+				var donbitborderbright = minimalcolorpicker_getSunlightColor(brighterColor(document.getElementById("datebitcolorpicker_preview").style.backgroundColor));
+				var donbitbordershade = minimalcolorpicker_getSunlightColor(shadeColor(document.getElementById("datebitcolorpicker_preview").style.backgroundColor));
+				var doffbitborderbright = offbitindex ? ((1 === offbitindex) ? minimalcolorpicker_getSunlightColor(brighterColor(document.getElementById("dateoffcolorpicker_preview").style.backgroundColor)) : doffbit) : background;
+				var doffbitbordershade = offbitindex ? minimalcolorpicker_getSunlightColor(shadeColor(document.getElementById("dateoffcolorpicker_preview").style.backgroundColor)) : background;
+
+				offbitindex = offbitindex ? offbitindex-1 : offbitindex;
+
+				var timehint = minimalcolorpicker_getSunlightColor(document.getElementById("hintcolorpicker_preview").style.backgroundColor);
+				var datehint = minimalcolorpicker_getSunlightColor(document.getElementById("datehintcolorpicker_preview").style.backgroundColor);
+				var trueBinary = trueBinaryFormat();
+				var displaySeconds = document.getElementById("displayseconds").checked;
+				var showDate = document.getElementById("showdate").checked;
+				var timeAlignment = document.getElementById("timealignment").selectedIndex;
+				var dateAlignment = document.getElementById("datealignment").selectedIndex;
+				var hintFontSize = screen.large ? { w: 11, h: 13 } : { w: 9, h: 10 };
+				var hintFontOffset = screen.large ? -13 : -10;
+
+				var canvas = document.getElementsByClassName("watchpreview");
+				var img;
+
+				var side = canvas[0].width > canvas[0].height ? canvas[0].height : canvas[0].width;
+				var smallBits = Math.floor(side/(screen.round ? 15 : 13));
+				while(!(smallBits%2)) --smallBits;
+				var largeBits = Math.floor(side/(screen.round ? 11 : 9));
+				while(!(largeBits%2)) --largeBits;
+				var narrowBitGap = Math.floor((2*smallBits)/1.25);
+				while(!(narrowBitGap%2)) --narrowBitGap;
+
+				var temp;
+				var timeRows = 4;
+				var timeCols = bcdTimeCols;
+				var dateRows = 4;
+				var dateCols = bcdDateCols;
+
+				// init variables to big bits for time without seconds in BCD format
+				var bitSize = largeBits;
+				var preview_image_off = preview_image_off_large[offbitindex];
+				var preview_image_on = preview_image_on_large;
+				var preview_image_on_border = preview_image_on_border_large;
+				var preview_image_off_border = preview_image_off_border_large;
+				var timeDeltaX = 2*largeBits;
+				var dateDeltaX = (6 === dateCols) ? 2*smallBits : 2*largeBits;
+				var deltaY = 2*largeBits;
+
+				temp = canvas[0].width-(3*timeDeltaX+largeBits);
+				var timeX = Math.floor(temp/2)+temp%2;
+				temp = canvas[0].height-(3*deltaY+largeBits);
+				var timeY = Math.floor(temp/2)+temp%2;
+				temp = canvas[0].width-11*smallBits;
+				var dateX = Math.floor(temp/2)+temp%2;
+				var dateY = 0;
+
+				// time hint is the same as time
+				var timeHintX = timeX;
+
+				var dateHintBitSize = (6 == dateCols) ? smallBits : bitSize;
+				temp = canvas[0].width-11*dateHintBitSize;
+				var dateHintX = (6 == dateCols) ? Math.floor(temp/2)+temp%2 : timeHintX;
+
+				var topHintY = Math.floor(timeY-hintFontSize.h)/2-hintFontOffset;
+				temp = (canvas[0].height-timeY-(3*deltaY+largeBits))-hintFontSize.h;
+				var botHintY = Math.floor(temp/2)+temp%2-hintFontOffset+timeY+(3*deltaY+largeBits);
+
+				// these are for adjusting the gap between the hint digits on round displays
+				var timeHintAdjust = 0;
+				var dateHintAdjust = 0;
+
+				if(screen.round) {
+					dateHintAdjust = (6 == dateCols && !displaySeconds && !trueBinary) ? Math.floor(canvas[0].width/45) : 0;
+					if(dateHintAdjust) {
+						temp = canvas[0].width-(5*(dateDeltaX-dateHintAdjust)+dateHintBitSize);
+						dateHintX = Math.floor(temp/2)+temp%2;
+					}
+					topHintY += Math.floor(canvas[0].height/20);
+					botHintY -= Math.floor(canvas[0].height/20);
+				}
+
+				if(trueBinary) {
+					// true binary is displayed right-left instead of bottom-up
+					timeRows = bcdTimeCols / 2;
+					timeCols = 6;
+					dateRows = bcdDateCols / 2;
+					dateCols = 6;
+
+					bitSize = smallBits;
+					dateHintBitSize = bitSize;
+					preview_image_off = preview_image_off_small[offbitindex];
+					preview_image_on = preview_image_on_small;
+					preview_image_on_border = preview_image_on_border_small;
+					preview_image_off_border = preview_image_off_border_small;
+					timeDeltaX = 2*smallBits;
+					dateDeltaX = 2*smallBits;
+					// make line gap smaller on the round if needed
+					deltaY = screen.round ? ((showDate && (3 === dateRows || 3 === timeRows)) ? narrowBitGap : 2*smallBits) : 2*smallBits;
+
+					// timeX is fixed for true binary
+					temp = canvas[0].width-(11*smallBits);
+					timeX = Math.floor(temp/2)+temp%2;
+
+					// init hintX to x
+					timeHintX = timeX;
+					dateHintX = dateX;
+
+					// timeY and dateY and topHintY and botHintY
+					var topRows = document.getElementById("dateposition").selectedIndex ? timeRows : dateRows;
+					var botRows = document.getElementById("dateposition").selectedIndex ? dateRows : timeRows;
+					if(showDate) {
+						var gap = screen.round ? Math.floor(canvas[0].height/10) : 2*smallBits;
+						var rows = (topRows+botRows-2)*deltaY+2*smallBits+gap;
+						var topY = Math.floor((canvas[0].height-rows)/2)+(canvas[0].height-rows)%2;
+						var botY = topY+(topRows-1)*deltaY+smallBits+gap;
+						topHintY = Math.floor((topY-hintFontSize.h)/2)-hintFontOffset;
+						temp = (canvas[0].height-topY-rows)-hintFontSize.h;
+						botHintY = Math.floor(temp/2)+temp%2-hintFontOffset+topY+rows;
+						if(screen.round) {
+							topHintY += canvas[0].height/(100-(topRows+botRows)*10);
+							botHintY -= canvas[0].height/(100-(topRows+botRows)*10);
+						}
+						timeY = document.getElementById("dateposition").selectedIndex ? topY : botY;
+						dateY = document.getElementById("dateposition").selectedIndex ? botY : topY;
+					} else {
+						temp = canvas[0].height-((timeRows-1)*deltaY+smallBits);
+						timeY = Math.floor(temp/2)+temp%2;
+						topHintY = Math.floor((timeY-hintFontSize.h)/2)-hintFontOffset;
+						temp = (canvas[0].height-timeY-((timeRows-1)*deltaY+smallBits))-hintFontSize.h;
+						botHintY = Math.floor(temp/2)+temp%2-hintFontOffset+timeY+((timeRows-1)*deltaY+smallBits);
+						if(screen.round) {
+							topHintY += Math.floor(canvas[0].height/25);
+							botHintY -= Math.floor(canvas[0].height/25);
+						}
+					}
+
+					// timeHintX
+					if(2 === timeRows) {
+						if(0 === timeAlignment) {
+							timeHintX = timeX + timeDeltaX;
+						} else if(1 === timeAlignment) {
+							timeHintX = timeX + 2*timeDeltaX;
+						} else {
+							timeHintX = timeX;
+						}
+					} else if(screen.round && showDate) {
+						// force narrow centered hint on round displays (if 6 columns)
+						timeHintAdjust = Math.floor(canvas[0].width/25);
+						temp = canvas[0].width-(5*(timeDeltaX-timeHintAdjust)+bitSize);
+						timeHintX = Math.floor(temp/2)+temp%2;
+					}
+
+					// dateHintX
+					if(2 === dateRows) {
+						if(0 === dateAlignment) {
+							dateHintX = dateX + dateDeltaX;
+						} else if(1 === dateAlignment) {
+							dateHintX = dateX + 2*dateDeltaX;
+						} else {
+							dateHintX = dateX;
+						}
+					} else if(screen.round && showDate) {
+						// force narrow centered hint on round displays (if 6 columns)
+						dateHintAdjust = Math.floor(canvas[0].width/25);
+						temp = canvas[0].width-(5*(dateDeltaX-dateHintAdjust)+dateHintBitSize);
+						dateHintX = Math.floor(temp/2)+temp%2;
+					}
+				} else if(showDate || 6 === timeCols) {
+					bitSize = smallBits;
+					preview_image_off = preview_image_off_small[offbitindex];
+					preview_image_on = preview_image_on_small;
+					preview_image_on_border = preview_image_on_border_small;
+					preview_image_off_border = preview_image_off_border_small;
+					timeDeltaX = 2*smallBits;
+					dateDeltaX = 2*smallBits;
+					temp = canvas[0].width-(5*timeDeltaX+smallBits);
+					timeX = Math.floor(temp/2)+temp%2;
+
+					if(showDate) {
+						deltaY = narrowBitGap; // make line gap smaller if needed
+						if(screen.round) {
+							// make column gap smaller on the round if needed
+							timeDeltaX = narrowBitGap;
+							dateDeltaX = narrowBitGap;
+							temp = canvas[0].width-(5*timeDeltaX+smallBits);
+							timeX = Math.floor(temp/2)+temp%2;
+							temp = canvas[0].width-(5*dateDeltaX+smallBits);
+							dateX = Math.floor(temp/2)+temp%2;
+						}
+					}
+					else {
+						deltaY = 2*smallBits;
+					}
+
+					if(6 === timeCols) {
+						temp = canvas[0].height-(3*deltaY+smallBits);
+						timeY = Math.floor(temp/2)+temp%2;
+						topHintY = Math.floor((timeY-hintFontSize.h)/2)-hintFontOffset;
+						temp = (canvas[0].height-timeY-(3*deltaY+smallBits))-hintFontSize.h;
+						botHintY = Math.floor(temp/2)+temp%2-hintFontOffset+timeY+(3*deltaY+smallBits);
+						if(screen.round) {
+							topHintY += Math.floor(canvas[0].height/18);
+							botHintY -= Math.floor(canvas[0].height/18);
+						}
+					}
+
+					// timeX
+					if(4 === timeCols) {
+						if(screen.round) {
+							timeHintX = timeX + timeDeltaX; // force centered hint on round displays (if 4 columns)
+						}
+						if(0 === timeAlignment) {
+							timeX += timeDeltaX;
+						} else if(1 === timeAlignment) {
+							timeX += 2*timeDeltaX;
+						}
+						if(!screen.round) {
+							timeHintX = timeX; // force centered hint only on round displays (if 4 columns)
+						}
+					} else {
+						if(screen.round) {
+							if(showDate) {
+								// force narrow centered hint on round displays (if 6 columns)
+								timeHintAdjust = Math.floor(canvas[0].width/25);
+								temp = canvas[0].width-(5*(timeDeltaX-timeHintAdjust)+bitSize);
+								timeHintX = Math.floor(temp/2)+temp%2;
+							} else {
+								timeHintX = timeX;
+							}
+						} else {
+							timeHintX = timeX;
+						}
+					}
+
+					// dateX
+					if(4 === dateCols) {
+						if(screen.round) {
+							// force centered hint on round displays (if 4 columns and no binary date)
+							if(showDate) {
+								dateHintX = dateX + dateDeltaX;
+							}
+							dateHintAdjust = 0;
+						}
+						if(0 === dateAlignment) {
+							dateX += dateDeltaX;
+						} else if(1 === dateAlignment) {
+							dateX += 2*dateDeltaX;
+						}
+						if(!screen.round) {
+							dateHintX = dateX; // force centered hint only on round displays (if 4 columns)
+						}
+					} else {
+						if(screen.round) {
+							// force narrow centered hint on round displays (if 6 columns)
+							if(showDate) {
+								dateHintAdjust = Math.floor(canvas[0].width/25);
+							}
+							temp = canvas[0].width-(5*(dateDeltaX-dateHintAdjust)+dateHintBitSize);
+							dateHintX = Math.floor(temp/2)+temp%2;
+						} else {
+							dateHintX = dateX;
+						}
+					}
+					if(screen.round && !showDate) {
+						dateHintX = dateX; // force centered hint on round displays (if 4 columns)
+					}
+
+					// time_y and date_y and top_hint_y and bot_hint_y
+					if(showDate) {
+						var rows = 3*deltaY+smallBits;
+						var gap = Math.floor((canvas[0].height-2*rows)/3);
+						var topY = gap;
+						if(2 == (canvas[0].height-2*rows)%3) {
+							++topY;
+						} else {
+							++gap;
+						}
+						var botY = topY+rows+gap;
+						topHintY = Math.floor((topY-hintFontSize.h)/2)-hintFontOffset;
+						temp = canvas[0].height-botY-rows-hintFontSize.h;
+						botHintY = Math.floor(temp/2)+temp%2-hintFontOffset+botY+rows;
+						if(screen.round) {
+							topHintY += Math.floor(canvas[0].height/90);
+							botHintY -= Math.floor(canvas[0].height/90);
+						}
+						timeY = document.getElementById("dateposition").selectedIndex ? topY : botY;
+						dateY = document.getElementById("dateposition").selectedIndex ? botY : topY;
+					}
+				}
+
+				if(canvas.length) {
+					timeHintY = (document.getElementById("dateposition").selectedIndex ? topHintY : botHintY);
+					dateHintY = (document.getElementById("dateposition").selectedIndex ? botHintY : topHintY);
+
+					var batteryX;
+					var batteryY;
+					if(screen.round) {
+						batteryX = 158;
+						batteryY = 86;
+					} else {
+						if(screen.large) {
+							batteryX = 180;
+							batteryY = 6;
+						} else {
+							batteryX = 126;
+							batteryY = 4;
+						}
+					}
+
+					var ctx = canvas[0].getContext("2d");
+					ctx.fillStyle = background;
+					ctx.fillRect(0, 0, canvas[0].width, canvas[0].height);
+
+					if(trueBinary)
+					{
+						var binaryBitmask = [
+							[0,1,1,1,1,1],
+							[1,1,1,1,1,1],
+							[1,1,1,1,1,1]
+						];
+						if(!hour24) {
+							binaryBitmask[0][1] = 0;
+						}
+						var binaryTime = [bcdTime[0]*10+bcdTime[1], bcdTime[2]*10+bcdTime[3], bcdTime[4]*10+bcdTime[5]];
+						var rows = bcdTimeCols / 2;
+						for(var i = 0; i < rows; i++) {
+							for(var j = 0; j < 6; j++) { // true binary always has 6 columns
+								if(binaryBitmask[i][j]) {
+									var bit = (binaryTime[i] >> (5-j)) & 0x1 ;
+									if(bit) {
+										ctx.drawImage(preview_image_on, timeX+j*timeDeltaX, timeY+i*deltaY);
+										if(document.getElementById("trueborder").checked) {
+											ctx.drawImage(preview_image_on_border, timeX+j*timeDeltaX, timeY+i*deltaY);
+										}
+									} else {
+										ctx.drawImage(preview_image_off, timeX+j*timeDeltaX, timeY+i*deltaY);
+										if(document.getElementById("falseborder").checked) {
+											ctx.drawImage(preview_image_off_border, timeX+j*timeDeltaX, timeY+i*deltaY);
+										}
+									}
+								} else if(document.getElementById("displayimpossible").checked) {
+									ctx.drawImage(preview_image_off, timeX+j*timeDeltaX, timeY+i*deltaY);
+									if(document.getElementById("falseborder").checked) {
+										ctx.drawImage(preview_image_off_border, timeX+j*timeDeltaX, timeY+i*deltaY);
+									}
+								}
+							}
+						}
+						if(showDate) {
+							var binaryBitmask = [];
+							switch(document.getElementById("dateformat").selectedIndex) {
+								case 0: // DDMM
+									binaryBitmask = [
+										[0,1,1,1,1,1],
+										[0,0,1,1,1,1],
+										[0,0,0,0,0,0]
+									];
+									break;
+								case 1: // MMDD
+									binaryBitmask = [
+										[0,0,1,1,1,1],
+										[0,1,1,1,1,1],
+										[0,0,0,0,0,0]
+									];
+									break;
+								case 2: // DDMMYY
+									binaryBitmask = [
+										[0,1,1,1,1,1],
+										[0,0,1,1,1,1],
+										[1,1,1,1,1,1]
+									];
+									break;
+								case 3: // MMDDYY
+									binaryBitmask = [
+										[0,0,1,1,1,1],
+										[0,1,1,1,1,1],
+										[1,1,1,1,1,1]
+									];
+									break;
+								case 4: // YYMMDD
+									binaryBitmask = [
+										[1,1,1,1,1,1],
+										[0,0,1,1,1,1],
+										[0,1,1,1,1,1]
+									];
+									break;
+							}
+							var binaryDate = [bcdDate[0]*10+bcdDate[1], bcdDate[2]*10+bcdDate[3], bcdDate[4]*10+bcdDate[5]];
+							var rows = bcdDateCols / 2;
+							for(var i = 0; i < rows; i++) {
+								for(var j = 0; j < 6; j++) { // true binary always has 6 columns
+									if(binaryBitmask[i][j]) {
+										var bit = (binaryDate[i] >> (5-j)) & 0x1 ;
+										if(bit) {
+											ctx.drawImage(preview_image_on, dateX+j*dateDeltaX, dateY+i*deltaY);
+											if(document.getElementById("trueborder").checked) {
+												ctx.drawImage(preview_image_on_border, dateX+j*dateDeltaX, dateY+i*deltaY);
+											}
+										} else {
+											ctx.drawImage(preview_image_off, dateX+j*dateDeltaX, dateY+i*deltaY);
+											if(document.getElementById("falseborder").checked) {
+												ctx.drawImage(preview_image_off_border, dateX+j*dateDeltaX, dateY+i*deltaY);
+											}
+										}
+									} else if(document.getElementById("displayimpossible").checked) {
+										ctx.drawImage(preview_image_off, dateX+j*dateDeltaX, dateY+i*deltaY);
+										if(document.getElementById("falseborder").checked) {
+											ctx.drawImage(preview_image_off_border, dateX+j*dateDeltaX, dateY+i*deltaY);
+										}
+									}
+								}
+							}
+						}
+					} else {
+						var bcdBitmask = [
+							[0,1,0,1,0,1],
+							[0,1,1,1,1,1],
+							[1,1,1,1,1,1],
+							[1,1,1,1,1,1]
+						];
+						if(!hour24) {
+							bcdBitmask[2][0] = 0;
+						}
+						for(var i = 0; i < 4; i++) { // BCD always has 4 rows
+							for(var j = 0; j < bcdTimeCols; j++) {
+								if(bcdBitmask[i][j]) {
+									var bit = (bcdTime[j] >> (3-i)) & 0x1 ;
+									if(bit) {
+										ctx.drawImage(preview_image_on, timeX+j*timeDeltaX, timeY+i*deltaY);
+										if(document.getElementById("trueborder").checked) {
+											ctx.drawImage(preview_image_on_border, timeX+j*timeDeltaX, timeY+i*deltaY);
+										}
+									} else {
+										ctx.drawImage(preview_image_off, timeX+j*timeDeltaX, timeY+i*deltaY);
+										if(document.getElementById("falseborder").checked) {
+											ctx.drawImage(preview_image_off_border, timeX+j*timeDeltaX, timeY+i*deltaY);
+										}
+									}
+								} else if(document.getElementById("displayimpossible").checked) {
+									ctx.drawImage(preview_image_off, timeX+j*timeDeltaX, timeY+i*deltaY);
+									if(document.getElementById("falseborder").checked) {
+										ctx.drawImage(preview_image_off_border, timeX+j*timeDeltaX, timeY+i*deltaY);
+									}
+								}
+							}
+						}
+						if(showDate) {
+							var bcdBitmask = [];
+							switch(document.getElementById("dateformat").selectedIndex) {
+								case 0: // DDMM
+									bcdBitmask = [
+										[0,1,0,1,0,0],
+										[0,1,0,1,0,0],
+										[1,1,0,1,0,0],
+										[1,1,1,1,0,0]
+									];
+									break;
+								case 1: // MMDD
+									bcdBitmask = [
+										[0,1,0,1,0,0],
+										[0,1,0,1,0,0],
+										[0,1,1,1,0,0],
+										[1,1,1,1,0,0]
+									];
+									break;
+								case 2: // DDMMYY
+									bcdBitmask = [
+										[0,1,0,1,0,1],
+										[0,1,0,1,1,1],
+										[1,1,0,1,1,1],
+										[1,1,1,1,1,1]
+									];
+									break;
+								case 3: // MMDDYY
+									bcdBitmask = [
+										[0,1,0,1,0,1],
+										[0,1,0,1,1,1],
+										[0,1,1,1,1,1],
+										[1,1,1,1,1,1]
+									];
+									break;
+								case 4: // YYMMDD
+									bcdBitmask = [
+										[0,1,0,1,0,1],
+										[1,1,0,1,0,1],
+										[1,1,0,1,1,1],
+										[1,1,1,1,1,1]
+									];
+									break;
+							}
+							for(var i = 0; i < 4; i++) { // BCD always has 4 rows
+								for(var j = 0; j < bcdDateCols; j++) {
+									if(bcdBitmask[i][j]) {
+										var bit = (bcdDate[j] >> (3-i)) & 0x1 ;
+										if(bit) {
+											ctx.drawImage(preview_image_on, dateX+j*dateDeltaX, dateY+i*deltaY);
+											if(document.getElementById("trueborder").checked) {
+												ctx.drawImage(preview_image_on_border, dateX+j*dateDeltaX, dateY+i*deltaY);
+											}
+										} else {
+											ctx.drawImage(preview_image_off, dateX+j*dateDeltaX, dateY+i*deltaY);
+											if(document.getElementById("falseborder").checked) {
+												ctx.drawImage(preview_image_off_border, dateX+j*dateDeltaX, dateY+i*deltaY);
+											}
+										}
+									} else if(document.getElementById("displayimpossible").checked) {
+										ctx.drawImage(preview_image_off, dateX+j*dateDeltaX, dateY+i*deltaY);
+										if(document.getElementById("falseborder").checked) {
+											ctx.drawImage(preview_image_off_border, dateX+j*dateDeltaX, dateY+i*deltaY);
+										}
+									}
+								}
+							}
+						}
+					}
+
+					img = ctx.getImageData(0, 0, canvas[0].width, canvas[0].height);
+
+					if(showDate) {
+						var topon = donbit;
+						var topoff = doffbit;
+						var bottomon = onbit;
+						var bottomoff = offbit;
+						var toponbitborderbright = donbitborderbright;
+						var toponbitbordershade = donbitbordershade;
+						var bottomonbitborderbright = onbitborderbright;
+						var bottomonbitbordershade = onbitbordershade;
+						var topoffbitborderbright = doffbitborderbright;
+						var topoffbitbordershade = doffbitbordershade;
+						var bottomoffbitborderbright = offbitborderbright;
+						var bottomoffbitbordershade = offbitbordershade;
+						if(document.getElementById("dateposition").selectedIndex) {
+							topon = onbit;
+							topoff = offbit;
+							bottomon = donbit;
+							bottomoff = doffbit;
+							toponbitborderbright = onbitborderbright;
+							toponbitbordershade = onbitbordershade;
+							bottomonbitborderbright = donbitborderbright;
+							bottomonbitbordershade = donbitbordershade;
+							topoffbitborderbright = offbitborderbright;
+							topoffbitbordershade = offbitbordershade;
+							bottomoffbitborderbright = doffbitborderbright;
+							bottomoffbitbordershade = doffbitbordershade;
+						}
+						for(var i = 0; i < img.data.length/2; i+=4) {
+							var color = background;
+							if(img.data[i] === 0xbb) {
+								color = topon;
+							} else
+							if(img.data[i] === 0x88) {
+								color = topoff;
+							} else
+							if(img.data[i] === 0x77) {
+								color = toponbitbordershade;
+							} else
+							if(img.data[i] === 0x99) {
+								color = toponbitborderbright;
+							} else
+							if(img.data[i] === 0xaa) {
+								color = topoffbitbordershade;
+							} else
+							if(img.data[i] === 0xcc) {
+								color = topoffbitborderbright;
+							}
+							img.data[i]   = getColorRed(color);
+							img.data[i+1] = getColorGreen(color);
+							img.data[i+2] = getColorBlue(color);
+						}
+						for(var i = img.data.length/2; i < img.data.length; i+=4) {
+							var color = background;
+							if(img.data[i] === 0xbb) {
+								color = bottomon;
+							} else
+							if(img.data[i] === 0x88) {
+								color = bottomoff;
+							} else
+							if(img.data[i] === 0x77) {
+								color = bottomonbitbordershade;
+							} else
+							if(img.data[i] === 0x99) {
+								color = bottomonbitborderbright;
+							} else
+							if(img.data[i] === 0xaa) {
+								color = bottomoffbitbordershade;
+							} else
+							if(img.data[i] === 0xcc) {
+								color = bottomoffbitborderbright;
+							}
+							img.data[i]   = getColorRed(color);
+							img.data[i+1] = getColorGreen(color);
+							img.data[i+2] = getColorBlue(color);
+						}
+					} else {
+						for(var i = 0; i < img.data.length; i+=4) {
+							var color = background;
+							if(img.data[i] === 0xbb) {
+								color = onbit;
+							} else
+							if(img.data[i] === 0x88) {
+								color = offbit;
+							} else
+							if(img.data[i] === 0x77) {
+								color = onbitbordershade;
+							} else
+							if(img.data[i] === 0x99) {
+								color = onbitborderbright;
+							} else
+							if(img.data[i] === 0xaa) {
+								color = offbitbordershade;
+							} else
+							if(img.data[i] === 0xcc) {
+								color = offbitborderbright;
+							}
+							img.data[i]   = getColorRed(color);
+							img.data[i+1] = getColorGreen(color);
+							img.data[i+2] = getColorBlue(color);
+						}
+					}
+
+					ctx.putImageData(img, 0, 0);
+
+					if(screen.large) {
+						ctx.font = "18px LECO1976";
+					} else {
+						ctx.font = "14px LECO1976";
+					}
+					var fontAdjust = (smallBits === bitSize ? (screen.large ? 2 : 1) : (screen.large ? 5 : 3));
+					if(document.getElementById("showhint").selectedIndex === 2 ||
+					   (preview_tapping_active && document.getElementById("showhint").selectedIndex === 1)) {
+						ctx.fillStyle = timehint;
+						for(var i = 0; i < bcdTimeCols; i++) {
+							ctx.fillText(bcdTime[i], timeHintX+i*(timeDeltaX-timeHintAdjust)+fontAdjust, timeHintY);
+						}
+						if(document.getElementById("timedeco").checked) {
+							for(var j = 0; j < timeDecoCols; j++) {
+								ctx.fillText(timeDeco, 3+((timeDeltaX-timeHintAdjust)+(timeDeltaX-timeHintAdjust)/2)+timeHintX+j*(timeDeltaX-timeHintAdjust)*2+fontAdjust, timeHintY);
+							}
+						}
+					}
+					if(document.getElementById("showhintdate").selectedIndex === 2 ||
+					   (preview_tapping_active && document.getElementById("showhintdate").selectedIndex === 1)) {
+						ctx.fillStyle = datehint;
+						for(var i = 0; i < bcdDateCols; i++) {
+							ctx.fillText(bcdDate[i], dateHintX+i*(dateDeltaX-dateHintAdjust)+fontAdjust, dateHintY);
+						}
+						if(document.getElementById("datedeco").checked) {
+							for(var j = 0; j < dateDecoCols; j++) {
+								ctx.fillText(dateDeco, ((dateDecoCols === (bcdDateCols / 2)) ? -2 : 2)+((dateDeltaX-dateHintAdjust)+(dateDeltaX-dateHintAdjust)/2)+dateHintX+j*(dateDeltaX-dateHintAdjust)*2+fontAdjust, dateHintY);
+							}
+						}
+					}
+
+					if((4 === document.getElementById("batteryalert").selectedIndex)
+						|| (preview_tapping_active && (1 < document.getElementById("batteryalert").selectedIndex))) {
+						ctx.strokeStyle = "rgb(0, 0, 0)" === background ? screen.color ? "#FFEEAB" : "#FFFFFF" : onbit;
+						ctx.fillStyle = "rgb(0, 0, 0)" === background ? screen.color ? "#FFEEAB" : "#FFFFFF" : onbit;
+						ctx.lineWidth = 1;
+						ctx.strokeRect(batteryX+0.5, batteryY+0.5, 13, 7);
+						ctx.beginPath();
+						ctx.moveTo(batteryX+14.5, batteryY+2);
+						ctx.lineTo(batteryX+14.5, batteryY+6);
+						ctx.stroke();
+						ctx.fillRect(batteryX+2, batteryY+2, 7, 4)
+					}
+
+
+					// draw display edges on the canvas
+					if(screen.round) {
+						ctx.strokeStyle = "#F7F7F7";
+						//ctx.strokeStyle = "#333333";
+						ctx.lineWidth = 40;
+						ctx.beginPath();
+						ctx.arc(90, 90, 110, 0, 2*Math.PI);
+						ctx.stroke();
+					} else if(screen.edges) {
+						if(screen.large) {
+							ctx.strokeStyle = "#F7F7F7";
+							//ctx.strokeStyle = "#333333";
+							ctx.lineWidth = 6;
+							ctx.beginPath();
+							ctx.arc(12, 12, 15, Math.PI, 3/2*Math.PI); // top left
+							ctx.stroke();
+							ctx.beginPath();
+							ctx.arc(188, 12, 15, 3/2*Math.PI, 2*Math.PI); // top right
+							ctx.stroke();
+							ctx.beginPath();
+							ctx.arc(188, 216, 15, 0, 1/2*Math.PI); // bottom right
+							ctx.stroke();
+							ctx.beginPath();
+							ctx.arc(12, 216, 15, 1/2*Math.PI, Math.PI); // bottom left
+							ctx.stroke();
+						} else {
+							ctx.strokeStyle = "#F7F7F7";
+							//ctx.strokeStyle = "#333333";
+							ctx.lineWidth = 6;
+							ctx.beginPath();
+							ctx.arc(8, 8, 11, Math.PI, 3/2*Math.PI); // top left
+							ctx.stroke();
+							ctx.beginPath();
+							ctx.arc(136, 8, 11, 3/2*Math.PI, 2*Math.PI); // top right
+							ctx.stroke();
+							ctx.beginPath();
+							ctx.arc(136, 160, 11, 0, 1/2*Math.PI); // bottom right
+							ctx.stroke();
+							ctx.beginPath();
+							ctx.arc(8, 160, 11, 1/2*Math.PI, Math.PI); // bottom left
+							ctx.stroke();
+						}
+					}
+					img = ctx.getImageData(0, 0, canvas[0].width, canvas[0].height);
+				}
+				for(var c = 0; img && c < canvas.length; c++) {
+					var ctx = canvas[c].getContext("2d");
+					ctx.putImageData(img, 0, 0);
+				}
+			}
+
+			function previewImageLoaded() {
+				preview_image_count--;
+				if(0 === preview_image_count) {
+					drawPreview();
+				}
+			}
+
+			function loadPreviewImages() {
+				preview_image_on_small = new Image();
+				preview_image_on_small.onload = function() {
+					previewImageLoaded();
+				}
+				if(screen.large) {
+					preview_image_on_small.src = 'img/bcd_mini_on_square_solid_large.png';
+				} else {
+					preview_image_on_small.src = 'img/bcd_mini_on_square_solid_small.png';
+				}
+
+				preview_image_on_large = new Image();
+				preview_image_on_large.onload = function() {
+					previewImageLoaded();
+				}
+				if(screen.large) {
+					preview_image_on_large.src = 'img/bcd_mini_on_square_solid_very_large.png';
+				} else {
+					preview_image_on_large.src = 'img/bcd_mini_on_square_solid_large.png';
+				}
+
+				var files = [];
+
+				if(screen.large) {
+					files = [
+						'img/bcd_mini_off_square_solid_large.png',
+						'img/bcd_mini_off_square_dotted_large.png',
+						'img/bcd_mini_off_square_shaded_large.png',
+						'img/bcd_mini_off_square_outline_large.png',
+						'img/bcd_mini_off_square_solid_very_large.png',
+						'img/bcd_mini_off_square_dotted_very_large.png',
+						'img/bcd_mini_off_square_shaded_very_large.png',
+						'img/bcd_mini_off_square_outline_very_large.png',
+					];
+				} else {
+					files = [
+						'img/bcd_mini_off_square_solid_small.png',
+						'img/bcd_mini_off_square_dotted_small.png',
+						'img/bcd_mini_off_square_shaded_small.png',
+						'img/bcd_mini_off_square_outline_small.png',
+						'img/bcd_mini_off_square_solid_large.png',
+						'img/bcd_mini_off_square_dotted_large.png',
+						'img/bcd_mini_off_square_shaded_large.png',
+						'img/bcd_mini_off_square_outline_large.png',
+					];
+				}
+				for(var i = 0; i < 4; i++) {
+					preview_image_off_small.push(new Image());
+					preview_image_off_small[i].onload = function() {
+						previewImageLoaded();
+					}
+					preview_image_off_small[i].src = files[i];
+					preview_image_off_large.push(new Image());
+					preview_image_off_large[i].onload = function() {
+						previewImageLoaded();
+					}
+					preview_image_off_large[i].src = files[i+(files.length/2)];
+				}
+
+				preview_image_on_border_small = new Image();
+				preview_image_on_border_small.onload = function() {
+					previewImageLoaded();
+				}
+				if(screen.large) {
+					preview_image_on_border_small.src = 'img/bcd_mini_on_border_large.png';
+				} else {
+					preview_image_on_border_small.src = 'img/bcd_mini_on_border_small.png';
+				}
+
+				preview_image_on_border_large = new Image();
+				preview_image_on_border_large.onload = function() {
+					previewImageLoaded();
+				}
+				if(screen.large) {
+					preview_image_on_border_large.src = 'img/bcd_mini_on_border_very_large.png';
+				} else {
+					preview_image_on_border_large.src = 'img/bcd_mini_on_border_large.png';
+				}
+
+				preview_image_off_border_small = new Image();
+				preview_image_off_border_small.onload = function() {
+					previewImageLoaded();
+				}
+				if(screen.large) {
+					preview_image_off_border_small.src = 'img/bcd_mini_off_border_large.png';
+				} else {
+					preview_image_off_border_small.src = 'img/bcd_mini_off_border_small.png';
+				}
+
+				preview_image_off_border_large = new Image();
+				preview_image_off_border_large.onload = function() {
+					previewImageLoaded();
+				}
+				if(screen.large) {
+					preview_image_off_border_large.src = 'img/bcd_mini_off_border_very_large.png';
+				} else {
+					preview_image_off_border_large.src = 'img/bcd_mini_off_border_large.png';
+				}
+			}
+
+			function tickPreview() {
+				if(0 === preview_image_count) {
+					drawPreview();
+				} else {
+					loadPreviewImages();
+				}
+			}
+
+			function updatePreview(colorPickerID) {
+				if(!screen.color) {
+					var activePicker = document.getElementById(colorPickerID+"_preview");
+					if(activePicker && (activePicker.className == "minimal-color-picker-slate-preview")) {
+						var pickers = ["backgroundcolorpicker", "onbitscolorpicker", "offbitscolorpicker", "hintcolorpicker", "datebitcolorpicker", "dateoffcolorpicker", "datehintcolorpicker"];
+						if(colorPickerID === pickers[0]) {
+								for(var i = 1; i < pickers.length; i++) {
+								var picker = document.getElementById(pickers[i]+"_preview");
+								if(picker) {
+									minimalcolorpicker_colorSelected(
+										activePicker.style.backgroundColor === "rgb(0, 0, 0)" ? "rgb(255, 255, 255)" : "rgb(0, 0, 0)",
+										document.getElementById(pickers[i]+"_name"),
+										document.getElementById(pickers[i]+"_preview")
+									);
+								}
+							}
+						} else {
+							minimalcolorpicker_colorSelected(
+								activePicker.style.backgroundColor === "rgb(0, 0, 0)" ? "rgb(255, 255, 255)" : "rgb(0, 0, 0)",
+								document.getElementById(pickers[0]+"_name"),
+								document.getElementById(pickers[0]+"_preview")
+							);
+								for(var i = 1; i < pickers.length; i++) {
+									if(pickers[i] != colorPickerID) {
+									var picker = document.getElementById(pickers[i]+"_preview");
+									if(picker) {
+										minimalcolorpicker_colorSelected(
+											activePicker.style.backgroundColor === "rgb(0, 0, 0)" ? "rgb(0, 0, 0)" : "rgb(255, 255, 255)",
+											document.getElementById(pickers[i]+"_name"),
+											document.getElementById(pickers[i]+"_preview")
+										);
+									}
+								}
+							}
+						}
+					}
+				}
+				tickPreview();
+			}
+
+			function handleTapping() {
+				if(preview_tapping_active) {
+					clearTimeout(preview_tapping_timeout);
+				}
+				preview_tapping_active = true;
+				preview_tapping_timeout =
+					setTimeout(function() {
+							preview_tapping_active = false;
+							updatePreview(); },
+						document.getElementById("tappingtimeout").value * 1000
+					);
+				updatePreview();
+			}
+		</script>
+	</head>
+	<body onload="onLoad()">
+		<div class="item-container">
+			<h1 style="padding:15px 10px 0px;font-family:'PT Sans',sans-serif;font-size:xx-large;font-weight:500;color:#888888;">BCD minimalist</h1>
+		</div>
+		<div class="item-container">
+			<div class="item-container-footer" style="text-align: right" id="version"></div>
+		</div>
+		<!--
+		<div class="item-container">
+			<div style="padding:15px 10px 0px;font-family:'PT Sans',sans-serif;font-size:xx-large;font-weight:500;color:#888888;white-space:nowrap;text-align:center">BETA BETA BETA</div>
+		</div>
+		-->
+		<div class="item-container" id="not_latest_version" style="margin:0px 10px;background-color:#FF4700;border-radius: 5px;" hidden="">
+			<div class="item-container-footer" style="color:#F7F7F7">A new version (V<span id="latest_version"></span>) is available in the Pebble App Store. Make sure to update to the latest version to get all bugfixes and new features.</div>
+		</div>
+		<div class="item-container">
+			<div class="item-container-content" style="border-bottom-style:none">
+				<label class="item item-subtitle-wrapper">
+					<label class="item tab-buttons" onclick="formatChanged()">
+						<a id="bcd-tab" name="format-tab" class="tab-button">BCD</a>
+						<a id="tb-tab" name="format-tab" class="tab-button">True binary</a>
+					</label>
+					<div class="item-container-footer" id="bcd-sub" hidden=""><dl>
+						<dt>How to read BCD format:</dt>
+						<dd>- Each column represents one digit.</dd>
+						<dd>- Two columns each for hours, minutes and seconds.</dd>
+						<dd>- The rows have the values 1, 2, 4, 8 (bottom to top).</dd>
+						<dd>- Add the values of all "on" bits in a column to get the digit.</dd>
+					</dl></div>
+					<div class="item-container-footer" id="tb-sub" hidden=""><dl>
+						<dt>How to read true binary format:</dt>
+						<dd>- The first rows represent the hours and minutes.</dd>
+						<dd>- The last row shows the seconds.</dd>
+						<dd>- The columns have the values 1, 2, 4, 8, 16, 32 (right to left).</dd>
+						<dd>- Add the values of all "on" bits in a row to get the number.</dd>
+					</dl></div>
+				</label>
+				<!--
+				<label class="item">
+					Bit shape
+					<select id="bitshape" name="bitshape" dir="rtl" class="item-select">
+						<option class="item-select-option">Square</option>
+						<option class="item-select-option">Circle</option>
+						<option class="item-select-option">Heart</option>
+					</select>
+				</label>
+				-->
+				<label class="item">
+					Display off bits
+					<select id="displayfalse" name="displayfalse" dir="rtl" class="item-select dark" onchange="displayfalseChanged()">
+						<option class="item-select-option">Off</option>
+						<option class="item-select-option" id="displayfalse_solid">Solid</option>
+						<option class="item-select-option">Dotted</option>
+						<option class="item-select-option">Shaded</option>
+						<option class="item-select-option">Outline</option>
+					</select>
+				</label>
+			</div>
+			<div class="item-container-content" id="displayimpossibleitem" style="border-bottom-style:none">
+				<label class="item">
+					Show impossible bits
+					<input type="checkbox" class="item-toggle" id="displayimpossible" name="displayimpossible" onchange="updatePreview()">
+				</label>
+			</div>
+			<div class="item-container-content" id="trueborderitem" style="border-bottom-style:none">
+				<label class="item">
+					On bits border
+					<input type="checkbox" class="item-toggle" id="trueborder" name="trueborder" onchange="updatePreview()">
+				</label>
+			</div>
+			<div class="item-container-content" id="falseborderitem" style="border-bottom-style:none">
+				<label class="item">
+					Off bits border
+					<input type="checkbox" class="item-toggle" id="falseborder" name="falseborder" onchange="updatePreview()">
+				</label>
+			</div>
+			<div class="item-container-content">
+				<label class="item">
+					<div onclick="minimalcolorpicker_toggleColorPicker('backgroundcolorpicker', updatePreview)">
+						Background color
+						<span class="minimal-color-picker-slate-preview" id="backgroundcolorpicker_preview"></span>
+						<div id="backgroundcolorpicker_name" class="item-subtitle"></div>
+					</div>
+					<div class="minimal-color-picker" id="backgroundcolorpicker" hidden=""></div>
+				</label>
+			</div>
+		</div>
+		<div class="item-container">
+			<div class="item-container-header" onclick="scrollDown()">Live preview<span style="float:right">&darr;</span></div>
+			<div class="item-container-content">
+				<label class="item" style="text-align: center">
+					<canvas class="watchpreview" onclick="handleTapping()"></canvas>
+				</label>
+			</div>
+		</div>
+		<div class="item-container">
+			<div class="item-container-header" onclick="scrollDown()">Time<span style="float:right">&darr;</span></div>
+			<div class="colorpicker-wrapper" hidden="">
+				<div class="item-container-content" style="border-bottom-style:none">
+					<label class="item">
+						<div onclick="minimalcolorpicker_toggleColorPicker('onbitscolorpicker', updatePreview)">
+							On bits color
+							<span class="minimal-color-picker-slate-preview" id="onbitscolorpicker_preview"></span>
+							<div id="onbitscolorpicker_name" class="item-subtitle"></div>
+						</div>
+						<div class="minimal-color-picker" id="onbitscolorpicker" hidden=""></div>
+					</label>
+				</div>
+				<div class="item-container-content" id="timeoffcolorpicker" style="border-bottom-style:none">
+					<label class="item">
+						<div onclick="minimalcolorpicker_toggleColorPicker('offbitscolorpicker', updatePreview)">
+							Off bits color
+							<span class="minimal-color-picker-slate-preview" id="offbitscolorpicker_preview"></span>
+							<div id="offbitscolorpicker_name" class="item-subtitle"></div>
+						</div>
+						<div class="minimal-color-picker" id="offbitscolorpicker" hidden=""></div>
+					</label>
+				</div>
+			</div>
+			<div class="item-container-content" style="border-bottom-style:none">
+				<label class="item">
+					Show seconds
+					<input type="checkbox" class="item-toggle" id="displayseconds" name="displayseconds" onchange="displaysecondsChanged()">
+				</label>
+			</div>
+			<div class="item-container-content" id="showsecondsintervalitem" style="border-bottom-style:none">
+				<label class="item">
+					Update seconds
+					<select id="showsecondsinterval" name="showsecondsinterval" dir='rtl' class="item-select" onchange="updatePreview()">
+						<option class="item-select-option" value="1">every second</option>
+						<option class="item-select-option" value="5">every 5s</option>
+						<option class="item-select-option" value="10">every 10s</option>
+						<option class="item-select-option" value="15">every 15s</option>
+						<option class="item-select-option" value="20">every 20s</option>
+						<option class="item-select-option" value="30">every 30s</option>
+					</select>
+				</label>
+			</div>
+			<div class="item-container-content" id="timealignmentitem" style="border-bottom-style:none">
+				<label class="item">
+					Alignment
+					<select id="timealignment" name="timealignment" dir='rtl' class="item-select" onchange="updatePreview()">
+						<option class="item-select-option">Center</option>
+						<option class="item-select-option">Right</option>
+						<option class="item-select-option">Left</option>
+					</select>
+				</label>
+			</div>
+			<div class="item-container-content">
+				<label class="item">
+					Format
+					<select id="timeformat" name="timeformat" dir='rtl' class="item-select" onchange="updatePreview()">
+						<option class="item-select-option">Watch settings</option>
+						<option class="item-select-option">24h</option>
+						<option class="item-select-option">12h</option>
+					</select>
+				</label>
+				<label class="item">
+					Show hint
+					<select id="showhint" name="showhint" dir='rtl' class="item-select" onchange="showhintChanged()">
+						<option class="item-select-option">Off</option>
+						<option class="item-select-option">On tapping</option>
+						<option class="item-select-option">Always</option>
+					</select>
+				</label>
+			</div>
+			<div class="colorpicker-wrapper" hidden="">
+				<div class="item-container-content" id="timehintcolorpicker" style="border-top-style:none">
+					<label class="item">
+						<div onclick="minimalcolorpicker_toggleColorPicker('hintcolorpicker', updatePreview)">
+							Hint color
+							<span class="minimal-color-picker-slate-preview" id="hintcolorpicker_preview"></span>
+							<div id="hintcolorpicker_name" class="item-subtitle"></div>
+						</div>
+						<div class="minimal-color-picker" id="hintcolorpicker" hidden=""></div>
+					</label>
+				</div>
+			</div>
+			<div class="item-container-content" id="timedecoitem" style="border-top-style:none">
+				<label class="item">
+					Hint decoration
+					<input type="checkbox" class="item-toggle" id="timedeco" name="timedeco" onchange="updatePreview()">
+				</label>
+			</div>
+			<div class="item-container-content" id="timehintpositionitem" style="border-top-style:none">
+				<label class="item">
+					Hint position
+					<select id="timehintposition" name="timehintposition" dir='rtl' class="item-select" onchange="timehintpositionChanged()">
+						<option class="item-select-option">Bottom</option>
+						<option class="item-select-option">Top</option>
+					</select>
+				</label>
+			</div>
+		</div>
+		<div class="item-container">
+			<div class="item-container-header" onclick="scrollDown()">Live preview<span style="float:right">&darr;</span></div>
+			<div class="item-container-content">
+				<label class="item" style="text-align: center">
+					<canvas class="watchpreview" onclick="handleTapping()"></canvas>
+				</label>
+			</div>
+		</div>
+		<div class="item-container">
+			<div class="item-container-header" onclick="scrollDown()">Date<span style="float:right">&darr;</span></div>
+			<div class="item-container-content" style="border-bottom-style:none">
+				<label class="item">
+					Show binary date
+					<input type="checkbox" class="item-toggle" id="showdate" name="showdate" onchange="showDateChanged()">
+				</label>
+			</div>
+			<div class="colorpicker-wrapper" hidden="">
+				<div class="item-container-content" style="border-top-style:none;border-bottom-style:none">
+					<div class="item-container-content" id="doncolorpicker" style="border-bottom-style:none">
+						<label class="item">
+							<div onclick="minimalcolorpicker_toggleColorPicker('datebitcolorpicker', updatePreview)">
+								On bits color
+								<span class="minimal-color-picker-slate-preview" id="datebitcolorpicker_preview"></span>
+								<div id="datebitcolorpicker_name" class="item-subtitle"></div>
+							</div>
+							<div class="minimal-color-picker" id="datebitcolorpicker" hidden=""></div>
+						</label>
+					</div>
+					<div class="item-container-content" id="doffcolorpicker" style="border-bottom-style:none">
+						<label class="item">
+							<div onclick="minimalcolorpicker_toggleColorPicker('dateoffcolorpicker', updatePreview)">
+								Off bits color
+								<span class="minimal-color-picker-slate-preview" id="dateoffcolorpicker_preview"></span>
+								<div id="dateoffcolorpicker_name" class="item-subtitle"></div>
+							</div>
+							<div class="minimal-color-picker" id="dateoffcolorpicker" hidden=""></div>
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="item-container-content">
+				<label class="item">
+					Show hint
+					<select id="showhintdate" name="showhintdate" dir='rtl' class="item-select" onchange="datehintChanged()">
+						<option class="item-select-option">Off</option>
+						<option class="item-select-option">On tapping</option>
+						<option class="item-select-option">Always</option>
+					</select>
+				</label>
+			</div>
+			<div class="colorpicker-wrapper" hidden="">
+					<div class="item-container-content" id="dhintcolorpicker" style="border-top-style:none">
+						<label class="item">
+							<div onclick="minimalcolorpicker_toggleColorPicker('datehintcolorpicker', updatePreview)">
+								Hint color
+								<span class="minimal-color-picker-slate-preview" id="datehintcolorpicker_preview"></span>
+								<div id="datehintcolorpicker_name" class="item-subtitle"></div>
+							</div>
+							<div class="minimal-color-picker" id="datehintcolorpicker" hidden=""></div>
+						</label>
+					</div>
+				</div>
+			<div class="item-container-content" id="datedecoitem" style="border-top-style:none">
+				<label class="item">
+					Hint decoration
+					<input type="checkbox" class="item-toggle" id="datedeco" name="datedeco" onchange="updatePreview()">
+				</label>
+			</div>
+			<div class="item-container-content" id="datepositionitem" style="border-top-style:none">
+				<label class="item">
+					Position
+					<select id="dateposition" name="dateposition" dir='rtl' class="item-select" onchange="datepositionChanged()">
+						<option class="item-select-option">Top</option>
+						<option class="item-select-option">Bottom</option>
+					</select>
+				</label>
+			</div>
+			<div class="item-container-content" id="dateformatitem" style="border-top-style:none">
+				<label class="item">
+					Format
+					<select id="dateformat" name="dateformat" dir='rtl' class="item-select" onchange="dateformatChanged()">
+						<option class="item-select-option">DDMM</option>
+						<option class="item-select-option">MMDD</option>
+						<option class="item-select-option">DDMMYY</option>
+						<option class="item-select-option">MMDDYY</option>
+						<option class="item-select-option">YYMMDD</option>
+					</select>
+				</label>
+			</div>
+			<div class="item-container-content" id="datealignmentitem" style="border-top-style:none">
+				<label class="item">
+					Alignment
+					<select id="datealignment" name="datealignment" dir='rtl' class="item-select" onchange="updatePreview()">
+						<option class="item-select-option">Center</option>
+						<option class="item-select-option">Right</option>
+						<option class="item-select-option">Left</option>
+					</select>
+				</label>
+			</div>
+		</div>
+		<div class="item-container">
+			<div class="item-container-header" onclick="scrollDown()">Live preview<span style="float:right">&darr;</span></div>
+			<div class="item-container-content">
+				<label class="item" style="text-align: center">
+					<canvas class="watchpreview" onclick="handleTapping()"></canvas>
+				</label>
+			</div>
+		</div>
+		<div class="item-container">
+			<div class="item-container-header" onclick="scrollDown()">Alerts<span style="float:right">&darr;</span></div>
+			<div class="item-container-content" id="timelinequickviewreactionitem" style="border-bottom-style:none">
+				<label class="item">
+					Timeline Quick View
+					<select id="timelinequickviewreaction" name="timelinequickviewreaction" dir='rtl' class="item-select">
+						<option class="item-select-option">Squeeze</option>
+						<option class="item-select-option">Shrink</option>
+						<option class="item-select-option">Center</option>
+						<option class="item-select-option">Displace</option>
+						<option class="item-select-option">Draw over</option>
+					</select>
+				</label>
+			</div>
+			<div class="item-container-content">
+				<label class="item">
+					BT connection loss alert
+					<select id="btloss" name="btloss" dir='rtl' class="item-select">
+						<option class="item-select-option">None</option>
+						<option class="item-select-option">Icon</option>
+						<option class="item-select-option">Switch colors</option>
+					</select>
+				</label>
+				<label class="item">
+					BT connection loss vibration
+					<select id="btlossvibe" name="btlossvibe" dir='rtl' class="item-select">
+						<option class="item-select-option">None</option>
+						<option class="item-select-option">Short</option>
+						<option class="item-select-option">Long</option>
+						<option class="item-select-option">Double</option>
+						<option class="item-select-option">Heartbeat</option>
+						<option class="item-select-option">Halfbeat</option>
+					</select>
+				</label>
+				<label class="item">
+					BT reconnect vibration
+					<select id="btreconnectvibe" name="btreconnectvibe" dir='rtl' class="item-select">
+						<option class="item-select-option">None</option>
+						<option class="item-select-option">Short</option>
+						<option class="item-select-option">Long</option>
+						<option class="item-select-option">Double</option>
+						<option class="item-select-option">Heartbeat</option>
+						<option class="item-select-option">Halfbeat</option>
+					</select>
+				</label>
+				<label class="item">
+					Show battery level
+					<select id="batteryalert" name="batteryalert" dir='rtl' class="item-select" onchange="batteryLevelChanged()">
+						<option class="item-select-option">Off</option>
+						<option class="item-select-option">When low</option>
+						<option class="item-select-option">On tapping</option>
+						<option class="item-select-option">Low & tapping</option>
+						<option class="item-select-option">Always</option>
+					</select>
+				</label>
+				<label class="item">
+					Low battery vibration
+					<select id="batteryvibe" name="batteryvibe" dir='rtl' class="item-select">
+						<option class="item-select-option">None</option>
+						<option class="item-select-option">Short</option>
+						<option class="item-select-option">Long</option>
+						<option class="item-select-option">Double</option>
+						<option class="item-select-option">Heartbeat</option>
+						<option class="item-select-option">Halfbeat</option>
+					</select>
+				</label>
+				<label class="item">
+					Hourly vibration
+					<select id="hourlyvibe" name="hourlyvibe" dir='rtl' class="item-select">
+						<option class="item-select-option">None</option>
+						<option class="item-select-option">Short</option>
+						<option class="item-select-option">Long</option>
+						<option class="item-select-option">Double</option>
+						<option class="item-select-option">Heartbeat</option>
+						<option class="item-select-option">Halfbeat</option>
+					</select>
+				</label>
+				<label class="item">
+					No vibration while charging
+					<input type="checkbox" class="item-toggle" id="dndwhilecharging" name="dndwhilecharging">
+				</label>
+				<!--
+				<label class="item">
+					Quite time begin
+					<input type="time" class="item-time" name="time-1" value="00:00">
+				</label>
+				<label class="item">
+					Quite time end
+					<input type="time" class="item-time" name="time-1" value="00:00">
+				</label>
+				-->
+			</div>
+			<div class="item-container-content" id="tapping" style="border-top-style:none">
+				<label class="item">
+					Tapping timeout seconds
+					<div class="item-input-wrapper item-slider-text">
+						<input type="text" class="item-input" id="tappingtimeoutslider" name="tappingtimeout" value="5" style="padding:10px">
+					</div>
+					<input type="range" class="item-slider" id="tappingtimeout" name="tappingtimeout" value="5" min="1" max="10">
+				</label>
+			</div>
+		</div>
+		<div class="item-container">
+			<label class="item">
+				If you like the Watchface, don't forget to give it a &hearts; in the Pebble App Store. <b>Thanks!</b>
+			</label>
+			<label class="item">
+				And if you <i>really</i> love the Watchface, feel free to donate any amount you like:
+				<br><br>
+				<div class="button-container">
+					<input type="button" class="item-button" value="Donate via PayPal" onclick="document.location.href='https://paypal.me/MorrisTimm'">
+				</div><br>
+				<div style="text-align:center">
+				You can also use this link: <a href="/donate.timm.tc//.html">donate.timm.tc</a>.
+				<br><b>Thanks again!</b></div>
+			</label>
+			<label class="item"></label>
+		</div>
+		<div class="item-container" id="bottom">
+			<div class="button-container">
+				<input type="button" class="item-button" value="SAVE" onclick="save()">
+			</div>
+		</div>
+		<div class="item-container">
+			<label class="item" style="text-align:center">
+				Also check out my other Watchfaces:<br><a href="#" onclick="document.location.href='https://apps.getpebble.com/en_US/application/555283c7efff0cc8e50000b0?hardware='+current_watch.platform">Slides of Time</a><br><a href="#" onclick="document.location.href='https://apps.getpebble.com/en_US/application/58060628c988667eaa00009e?hardware='+current_watch.platform">Cut/up</a>
+			</label>
+		</div>
+	</body>
+</html>

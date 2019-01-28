@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>ErgoBooster Config</title>
+	<link rel="stylesheet" type="text/css" href="/jb.beejects.ch/pebble/ergobooster-lite/jquery.css">
+	<style type="text/css">
+	body{
+		font-family: Helvetica, Arial, sans-serif;
+		font-size: 12pt;
+		padding: 0 15px;
+	}
+	* {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+	}
+	.top{
+		margin: 15px 0;
+	}
+	.setting {
+		margin: 5px 0 25px;
+
+		opacity: 0.4;
+		pointer-events: none;
+	}
+	.title{
+		font-size: 14pt;
+	}
+
+	.noUi-connect {
+		background: #FC481E;
+	}
+
+	.button {
+		background-color: #FC481E;
+		color: white;
+		border: none;
+		border-radius: 30px;
+		padding: 10px 30px;
+		font-size: 14pt;
+		text-transform: uppercase;
+		min-width: 100%;
+		margin-top: 20px;
+
+		opacity: 0.4;
+		pointer-events: none;
+	}
+	.button:active, .button:hover {
+		background-color: #D62900;
+	}
+
+	.copylink {
+		-webkit-touch-callout: all;
+		-webkit-user-select: all;
+	}
+	</style>
+</head>
+<body>
+	<div class="setting">
+		<div class="top">
+			<span class="title">Interval: </span>
+			<span class="desc"></span> min
+		</div>
+		<div class="interval-slider"></div>
+	</div>
+	
+	<button class="button" id="save">save</button>
+
+	<p>This is the <b>lite</b> version of ErgoBooster which is fixed to a <b>15min</b> interval. The full version allows you to configure a random interval with the controlls shown above.</p>
+	<p>Buy the full version via the "Website Link" on the Pebble App Store listing, or copy the following link and open it in your webbrowser:</p>
+	<p class="copylink">https://gum.co/ergobooster</p>
+
+	<script type="text/javascript" src="/jb.beejects.ch/pebble/ergobooster-lite/zepto.js"></script>
+	<script type="text/javascript" src="/jb.beejects.ch/pebble/ergobooster-lite/jquery.js"></script>
+	<script type="text/javascript">
+	document.addEventListener("touchstart", function(){}, true);
+	var config = {
+		interval: [3,45]
+	};
+	$(function() {
+		var d = decodeURIComponent(location.hash);
+		if (d.length > 0 && d[0] == '#') {	
+			var s = d.split('#')[1];
+			$.extend(config, JSON.parse(s));
+			console.log(config);
+			//document.write('test' + s);
+		}
+		$('.interval-slider').noUiSlider({
+			range: [1,60],
+			start: [config.interval[0], config.interval[1]],
+			step: 1,
+			connect: true,
+			serialization: {
+				//to: [$('.desc'), 'html']
+				to: [serialize, serialize]
+			}
+		});
+
+		function serialize (val) {
+			//console.log(arguments, this, $(this).val());
+			var range = $(this).val();
+			if (range && range.length == 2 && range[1] !== undefined) {
+				var lower = parseInt(range[0]);
+				var upper = parseInt(range[1]);
+				config.interval = [lower,upper];
+				if (lower == upper)
+					$('.setting .desc').html("every " + lower);
+				else
+					$('.setting .desc').html("between " + lower + " and " + upper);
+			};
+			
+		}
+
+		$('#save').on('click',function () {
+			window.location.href = "pebblejs://close#" + encodeURIComponent(JSON.stringify(config));
+		});
+	});
+	</script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <title>NaviTime GMT settings</title>
+        <link href="/maranas.github.io/css/bootstrap.css" rel="stylesheet">
+        <link href="/maranas.github.io/css/bootstrap-responsive.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row"">
+                <h3>NaviTime GMT settings</h3>
+            </div>
+            <div class="row">
+                <div class="span4">
+                    <p>Set the timezone offset for the GMT hand (no timezones support on Pebble Time yet):</p>
+                    <p>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                GMT
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="#" onclick="set_timezone(0)">0</a></li>
+                                <li><a href="#" onclick="set_timezone(-1)">-1</a></li>
+                                <li><a href="#" onclick="set_timezone(-2)">-2</a></li>
+                                <li><a href="#" onclick="set_timezone(-3)">-3</a></li>
+                                <li><a href="#" onclick="set_timezone(-4)">-4</a></li>
+                                <li><a href="#" onclick="set_timezone(-5)">-5</a></li>
+                                <li><a href="#" onclick="set_timezone(-6)">-6</a></li>
+                                <li><a href="#" onclick="set_timezone(-7)">-7</a></li>
+                                <li><a href="#" onclick="set_timezone(-8)">-8</a></li>
+                                <li><a href="#" onclick="set_timezone(-9)">-9</a></li>
+                                <li><a href="#" onclick="set_timezone(-10)">-10</a></li>
+                                <li><a href="#" onclick="set_timezone(-11)">-11</a></li>
+                                <li><a href="#" onclick="set_timezone(-12)">-12</a></li>
+                                <li><a href="#" onclick="set_timezone(1)">+1</a></li>
+                                <li><a href="#" onclick="set_timezone(2)">+2</a></li>
+                                <li><a href="#" onclick="set_timezone(3)">+3</a></li>
+                                <li><a href="#" onclick="set_timezone(4)">+4</a></li>
+                                <li><a href="#" onclick="set_timezone(5)">+5</a></li>
+                                <li><a href="#" onclick="set_timezone(6)">+6</a></li>
+                                <li><a href="#" onclick="set_timezone(7)">+7</a></li>
+                                <li><a href="#" onclick="set_timezone(8)">+8</a></li>
+                                <li><a href="#" onclick="set_timezone(9)">+9</a></li>
+                                <li><a href="#" onclick="set_timezone(10)">+10</a></li>
+                                <li><a href="#" onclick="set_timezone(11)">+11</a></li>
+                                <li><a href="#" onclick="set_timezone(12)">+12</a></li>
+                                <li><a href="#" onclick="set_timezone(13)">+13</a></li>
+                                <li><a href="#" onclick="set_timezone(14)">+14</a></li>
+                            </ul>
+                        </div>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span4">
+                    <p>Invert colors</p>
+                    <p>
+                        <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                NO
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <li><a href="#" onclick="set_invert(0)">NO</a></li>
+                                <li><a href="#" onclick="set_invert(1)">YES</a></li>
+                            </ul>
+                        </div>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span4">
+                    <center>
+                        <p><a class="btn" href="#" onclick="save_settings()">Save</a></p>
+                    </center>
+                </div>
+            </div>
+        </div>
+        <!-- scripts -->
+        <script src="/ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+        <script src="/maranas.github.io/js/bootstrap.js"></script>
+        <script type="text/javascript">
+        var timezone = 0;
+        var invert = 0;
+        
+        function set_timezone(x)
+        {
+            var new_text = "0";
+            if (x > 0)
+            {
+                new_text = "+" + x;
+            }
+            else if (x < 0)
+            {
+                new_text = x;
+            }
+            timezone = x;
+            document.getElementById("dropdownMenu1").innerHTML=new_text;
+        };
+
+        function set_invert(x)
+        {
+            if (x > 0)
+            {
+                document.getElementById("dropdownMenu2").innerHTML="YES";
+            }
+            else
+            {
+                document.getElementById("dropdownMenu2").innerHTML="NO";
+            }
+            invert = x;
+        };
+
+        function getQueryParam(variable, defaultValue) {
+            var query = location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (pair[0] === variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return defaultValue || false;
+        }
+
+        function save_settings()
+        {
+            var return_to = getQueryParam('return_to', 'pebblejs://close#');
+            var settings = {'timezone' : timezone, 'invert' : invert};
+            document.location = return_to + encodeURIComponent(JSON.stringify(settings));
+        };
+
+        $().ready(function() {
+            set_timezone(getQueryParam('timezone', 0));
+            set_invert(getQueryParam('invert', 0));
+        });
+        </script>
+    </body>
+</html>

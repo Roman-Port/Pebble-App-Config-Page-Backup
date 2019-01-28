@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html><head>
+  <title>CLASSIQUE</title>
+  <link rel="stylesheet" type="text/css" href="/cdn.rawgit.com/rozza-m/Classique-Config/ca23259b9b47843b0d0315beeac727b95e6e002b/config/css/slate.css">
+  <script src="/cdn.rawgit.com/rozza-m/Classique-Config/ca23259b9b47843b0d0315beeac727b95e6e002b/config/js/slate.js"></script>
+  <style type="text/css"></style></head>
+
+  <body>
+    <h1 class="title">Classique</h1>
+    
+    
+    <div class="item-container">
+      <div class="item-container-header">Lower Display</div>
+      <div class="item-container-content">
+        <label class="item">
+          Steps today (numeric)
+          <p><small>This will only work if you have health set up on your pebble.</small><p>
+          <input type="radio" class="item-radio" id="lower_display_steps_num_checkbox" name="radio-1" value="a" checked="">
+        <div class="item-styled-radio"></div></label>
+        <label class="item">
+          Battery (numeric)
+          <input type="radio" class="item-radio" id="lower_display_batt_num_checkbox" name="radio-1" value="b">
+        <div class="item-styled-radio"></div></label>
+        <label class="item">
+          Battery (bar)
+          <input type="radio" class="item-radio" name="radio-1" id="lower_display_batt_bar_checkbox" value="c">
+        <div class="item-styled-radio"></div></label>
+        <label class="item">
+          Nothing
+          <input type="radio" class="item-radio" name="radio-1" id="lower_display_blank_checkbox" value="d">
+        <div class="item-styled-radio"></div></label>
+      </div>
+    </div>
+    
+    <div class="item-container">
+      <div class="item-container-header">Bluetooth warning</div>
+      <div class="item-container-content">
+        <label class="item">
+          Show icon on phone disconnection
+          <input type="checkbox" class="item-checkbox" id="bt_icon_checkbox" name="checkbox-1">
+        <div class="item-styled-checkbox"></div></label>
+        <label class="item">
+          Vibrate briefly on phone disconnection
+          <input type="checkbox" class="item-checkbox" id="bt_vibrate_checkbox" name="checkbox-2">
+        <div class="item-styled-checkbox"></div></label>
+      </div>
+    </div>
+    
+    <div class="item-container">
+  <div class="item-container-header">Exclusive Edition</div>
+<div class="width-image"><img src="/cdn.rawgit.com/rozza-m/Classique-Config/ca23259b9b47843b0d0315beeac727b95e6e002b/config/config-examples.png" style="
+    width: 100%;
+    max-width: 606px;
+"></div>
+      <div class="item-container-content">
+        <div class="item">
+          Classique will always be free and will never have features taken away. 
+          But if you want to support the developer (me), and in return get loads 
+          of customisation options, search for "<emp style="color:#ff4700">Classique Exclusive Edition</emp>" in
+          the Pebble App Store!
+        </div>
+      </div>
+    </div>
+    
+    <div class="item-container">
+      <div class="button-container">
+        <input id="submit_button" type="button" class="item-button" value="SUBMIT">
+      </div>
+    </div>
+
+    
+  </body>
+  <script>
+  function getConfigData() {
+    var lowerDisplayStepsNumCheckbox = document.getElementById('lower_display_steps_num_checkbox');
+    var lowerDisplayBattNumCheckbox = document.getElementById('lower_display_batt_num_checkbox');
+    var lowerDisplayBattBarCheckbox = document.getElementById('lower_display_batt_bar_checkbox');
+    var lowerDisplayBlankCheckbox = document.getElementById('lower_display_blank_checkbox');
+    var btIconCheckbox = document.getElementById('bt_icon_checkbox');
+    var btVibrateCheckbox = document.getElementById('bt_vibrate_checkbox');
+ 
+    var options = {
+      'lower_display_steps_num': lowerDisplayStepsNumCheckbox.checked,
+      'lower_display_batt_num': lowerDisplayBattNumCheckbox.checked,
+      'lower_display_batt_bar': lowerDisplayBattBarCheckbox.checked,
+      'lower_display_blank': lowerDisplayBlankCheckbox.checked,
+      'bt_icon': btIconCheckbox.checked,
+      'bt_vibrate': btVibrateCheckbox.checked
+    };
+    // Save for next launch
+    localStorage['lower_display_steps_num'] = options['lower_display_steps_num'];
+    localStorage['lower_display_batt_num'] = options['lower_display_batt_num'];
+    localStorage['lower_display_batt_bar'] = options['lower_display_batt_bar'];
+    localStorage['lower_display_blank'] = options['lower_display_blank'];
+    localStorage['bt_icon'] = options['bt_icon'];
+    localStorage['bt_vibrate'] = options['bt_vibrate'];
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+  (function() {
+    var lowerDisplayStepsNumCheckbox = document.getElementById('lower_display_steps_num_checkbox');
+    var lowerDisplayBattNumCheckbox = document.getElementById('lower_display_batt_num_checkbox');
+    var lowerDisplayBattBarCheckbox = document.getElementById('lower_display_batt_bar_checkbox');
+    var lowerDisplayBlankCheckbox = document.getElementById('lower_display_blank_checkbox');
+    var btIconCheckbox = document.getElementById('bt_icon_checkbox');
+    var btVibrateCheckbox = document.getElementById('bt_vibrate_checkbox');
+    // Load any previously saved configuration, if available
+    if(localStorage['lower_display_steps_num']) {  lowerDisplayStepsNumCheckbox.checked = JSON.parse(localStorage['lower_display_steps_num']); }
+    if(localStorage['lower_display_batt_num']) {  lowerDisplayBattNumCheckbox.checked = JSON.parse(localStorage['lower_display_batt_num']); }
+    if(localStorage['lower_display_batt_bar']) {  lowerDisplayBattBarCheckbox.checked = JSON.parse(localStorage['lower_display_batt_bar']); }
+    if(localStorage['lower_display_blank']) {  lowerDisplayBlankCheckbox.checked = JSON.parse(localStorage['lower_display_blank']); }
+    if(localStorage['bt_icon']) {  btIconCheckbox.checked = JSON.parse(localStorage['bt_icon']); }
+    if(localStorage['bt_vibrate']) {  btVibrateCheckbox.checked = JSON.parse(localStorage['bt_vibrate']); }
+  })();
+  </script>
+</html>

@@ -1,0 +1,50 @@
+﻿$(document).ready(function() {
+
+    //Language Dropdown
+	$('.lang').stop().click(function() {
+
+	    $(this).toggleClass('opened');
+		$('.m-languageselect').slideToggle();
+        
+	    //Close Main Menu if open
+		if ($('.menu').hasClass('active')) {
+		    $(".menu").stop().toggleClass('active');
+		    $(".menu").stop().slideToggle(250);
+		    $('.m-menubutton').toggleClass('active')
+		    $("div").remove('.disable');
+		}
+
+	});
+
+    //location dropdown
+	$('.location-toggle').stop().click(function () {
+	    $(this).stop().parent().toggleClass('active');
+	    $(this).parent().children('.more').slideToggle();
+	});
+
+    //boiler form dropdown
+	$('.locations .yes').on('click', function () {
+      $(this).parent().parent().parent().children('.boiler-form').slideDown();
+	});
+
+	$('.locations .no').on('click', function () {
+	    $(this).parent().parent().parent().children('.boiler-form').slideUp();
+	});
+
+    //check locations selected
+	$('.locations .checkbox-left').on('click', function () {
+	    var checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+	    $('.locations-number span').html(checked);
+	});
+
+
+    //hide nav for remote access page
+	if ($('.l-content').hasClass('hidenav')) {
+	    $('.primary').hide();
+	}
+
+	$(document).on('scroll', function() {
+		$('.lang').removeClass('opened');
+		$('.m-languageselect').slideUp();
+	});
+});

@@ -1,0 +1,218 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width">
+
+<style type="text/css">
+/* ------------Check------------- */
+
+body {
+	background: #f3f3f3;
+	font-family: "Lucida Grande", Verdana, Arial, sans-serif, Helvetica;
+}
+
+    
+    
+.button {        
+    display: inline-block;
+    white-space: nowrap;
+    background-color: #ccc;
+    background-image: linear-gradient(top, #eee, #ccc);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#cccccc');
+    border: 1px solid #777;
+    padding: 0 1.5em;
+    margin: 0.5em;
+    font: bold 1em/2em Arial, Helvetica;
+    text-decoration: none;
+    color: #333;
+    text-shadow: 0 1px 0 rgba(255,255,255,.8);
+    border-radius: .2em;
+    box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
+}
+
+.button:hover {
+    background-color: #ddd;        
+    background-image: linear-gradient(top, #fafafa, #ddd);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fafafa', EndColorStr='#dddddd');        
+}
+
+.button:active {
+    box-shadow: 0 0 4px 2px rgba(0,0,0,.3) inset;
+    position: relative;
+    top: 1px;
+}
+
+.button:focus {
+    outline: 0;
+    background: #fafafa;
+}    
+
+.button:before {
+    background: #ccc;
+    background: rgba(0,0,0,.1);
+    float: left;        
+    width: 1em;
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0 1em 0 -1em;
+    padding: 0 .2em;
+    box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5);
+    border-radius: .15em 0 0 .15em;
+    pointer-events: none;        
+}
+
+    
+    
+/* Hexadecimal entities for the icons */
+
+.delete:before {
+    content: "\2718";        
+}
+
+.save:before {
+    content: "\2714";        
+}
+
+.email:before {
+    content: "\2709";        
+}
+
+    
+#hide-show {
+    transition:         height 300ms ease;
+    -moz-transition:    height 300ms ease;
+    -ms-transition:     height 300ms ease;
+    -o-transition:      height 300ms ease;
+    -webkit-transition: height 300ms ease;
+    overflow:hidden;
+    height:0px;
+    padding-left:50px;
+
+}
+input[type=checkbox] {   position: absolute;   top: -9999px;   left: -9999px;}    
+input[type=radio] {   position: absolute;   top: -9999px;   left: -9999px;}    
+.css-label { display: inline-block; white-space: nowrap; background-color: #ccc; background-image: linear-gradient(top, #eee, #ccc);        
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#eeeeee', EndColorStr='#cccccc'); border: 1px solid #777;        
+    padding: 0 1.5em; margin: 0.5em; font: bold 1em/2em Arial, Helvetica; text-decoration: none; color: #333; text-shadow: 0 1px 0 rgba(255,255,255,.8);        
+    border-radius: .2em; box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
+}    
+.css-label::before { background: #ccc; background: rgba(0,0,0,.1); float: left; width: 1em; text-align: center; font-size: 1.5em; margin: 0 1em 0 -1em;        
+ 	padding: 0 .2em; box-shadow: 1px 0 0 rgba(0,0,0,.5), 2px 0 0 rgba(255,255,255,.5); border-radius: .15em 0 0 .15em; pointer-events: none; content: "\2718";
+}    
+/* Toggled State */
+input[type=checkbox]:checked ~ .css-label::before {content: "\2714";}    
+input[type=radio]:checked ~ .css-label::before {content: "\2714";}     
+    
+</style>
+    
+    
+    </head>
+<body>
+    
+    <form id="form" class="center" onsubmit="return onSubmit(this)">
+                <p>
+                    <input type="checkbox" name="background" id="background" class="css-checkbox" value="1">
+                    <label for="background" class="css-label">Display Background</label>
+                </p>
+                <p>
+                    <input type="checkbox" name="animbg" id="animbg" class="css-checkbox" value="2">
+                    <label for="animbg" class="css-label" onclick="toggle_visibility('hide-show');">Animate Background</label>
+                </p>
+                <div id="hide-show">
+                    <p>
+                        <input type="radio" name="animspeed" id="radio1" class="css-checkbox" checked/="">
+                        <label for="radio1" class="css-label">Every Second</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="animspeed" id="radio2" class="css-checkbox">
+                        <label for="radio2" class="css-label">Half Second</label>
+                    </p>
+                    <p>
+                        <input type="radio" name="animspeed" id="radio3" class="css-checkbox">
+                        <label for="radio3" class="css-label">Quarter Second</label>
+                    </p>
+                </div>
+                <p>
+                    <input type="checkbox" name="bluetooth" id="bluetooth" class="css-checkbox" value="1">
+                    <label for="bluetooth" class="css-label">Bluetooth Icon</label>
+                <p>
+                </p>
+                    <input type="checkbox" name="battery" id="battery" class="css-checkbox" value="1">
+                    <label for="battery" class="css-label">Battery Icon</label>
+                </p>
+        <a class="button save" href="javascript:onSubmit(document.form)" id="savebutton">Save</a>
+        <a class="button delete" href="javascript:onCancel()" id="cancelbutton">Cancel</a>
+    </form>
+    
+    <script>
+
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+     e.style.display = 'block';
+
+    ( e.style.height == '0px' || e.style.height == '' )
+        ? e.style.height = '220px' 
+        : e.style.height = '0px';
+    }
+        
+        (function() {        
+            load();
+        })();
+
+        function save(){
+            localStorage.setItem('1', document.getElementById('background').checked);
+            localStorage.setItem('2', document.getElementById('animbg').checked);
+            localStorage.setItem('3', document.getElementById('radio1').checked);
+            localStorage.setItem('4', document.getElementById('radio2').checked);
+            localStorage.setItem('5', document.getElementById('radio3').checked);
+            localStorage.setItem('6', document.getElementById('bluetooth').checked);
+            localStorage.setItem('7', document.getElementById('battery').checked);
+        }
+
+        function load(){    
+            document.getElementById("background").checked = JSON.parse(localStorage.getItem('1'));
+            document.getElementById("animbg").checked = JSON.parse(localStorage.getItem('2'));
+            document.getElementById("radio1").checked = JSON.parse(localStorage.getItem('3'));
+            document.getElementById("radio2").checked = JSON.parse(localStorage.getItem('4'));
+            document.getElementById("radio3").checked = JSON.parse(localStorage.getItem('5'));
+            document.getElementById("bluetooth").checked = JSON.parse(localStorage.getItem('6'));
+            document.getElementById("battery").checked = JSON.parse(localStorage.getItem('7'));
+            if(document.getElementById("animbg").checked)toggle_visibility('hide-show');
+        }
+        
+        // assign function to onclick property of checkbox
+            document.getElementById('savebutton').onclick = function() {
+            save();
+        };        
+        
+        var config = JSON.parse(decodeURIComponent('"REPLACE_ME_AT_RUNTIME"'));
+        for (var which in config) {
+            if (form[which]) for (var i = 0; i < form[which].length; i++) {
+                var radio = form[which][i];
+                radio.checked = radio.value == config[which];
+            }
+        }
+        function onSubmit(e) {
+            var result = {};
+            var inputs = form.getElementsByTagName("input");
+            for (var i = 0; i < inputs.length; i++){
+                if(inputs[i].checked){
+                    result[inputs[i].id] = '1';
+                }else{
+                    result[inputs[i].id] = '0';
+                }
+            }
+            window.location.href = "pebblejs://close#" + encodeURIComponent(JSON.stringify(result));
+            return false;
+        }
+
+            function onCancel() {
+            window.location.href = "pebblejs://close#" ;
+            return false;
+        }
+    
+        
+            </script>
+</body>
+</html>

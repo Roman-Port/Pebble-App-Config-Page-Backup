@@ -1,0 +1,144 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Configurable</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Settings</h1>
+      </div>
+
+
+      <div data-role="content">
+
+        <div data-role="fieldcontain">
+          <label for="rss">RSS:</label>
+          <textarea cols="40" rows="8" name="rss" id="rss"></textarea>
+        </div>
+
+        <fieldset data-role="controlgroup">
+          <legend>Refresh interval:</legend>
+          <input name="refresh-interval-choice" id="refresh-interval-choice-5" value="5" type="radio">
+          <label for="refresh-interval-choice-5">5 min</label>
+          <input name="refresh-interval-choice" id="refresh-interval-choice-15" value="15" type="radio">
+          <label for="refresh-interval-choice-15">15 min</label>
+          <input name="refresh-interval-choice" id="refresh-interval-choice-30" value="30" type="radio">
+          <label for="refresh-interval-choice-30">30 min</label>
+          <input name="refresh-interval-choice" id="refresh-interval-choice-60" value="60" type="radio">
+          <label for="refresh-interval-choice-60">1 hour</label>
+        </fieldset>
+
+        <div data-role="fieldcontain">
+          <input type="checkbox" name="rss-notification-vibrate-checkbox0" id="rss-notification-vibrate-checkbox" class="custom">
+          <label for="rss-notification-vibrate-checkbox">Vibrate when the RSS feed updates</label>
+        </div>
+
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    
+    <script>
+      function saveOptions() {
+        /*
+        var options = {
+          'rss': $("#rss").val(),
+          'special-feature': $("#special-feature").val(),
+          'checkbox-cheetos': $("#checkbox-cheetos").is(':checked'),
+          'checkbox-doritos': $("#checkbox-doritos").is(':checked'),
+          'checkbox-fritos': $("#checkbox-fritos").is(':checked'),
+          'checkbox-sunchips': $("#checkbox-sunchips").is(':checked')
+        }
+        */
+
+        var rssNotificationVibrate = $("#rss-notification-vibrate-checkbox").is(':checked') ? 1 : 0;
+        var options = {
+          'rss': $("#rss").val(),
+          'refreshInterval': $('[name=refresh-interval-choice]:checked').val(),
+          'rssNotificationVibrate':rssNotificationVibrate 
+        }
+        return options;
+      }
+
+      $().ready(function() {
+
+        function get_url_vars()
+        {
+          var vars = new Object, params;
+          var temp_params = window.location.search.substring(1).split('&');
+          for(var i = 0; i <temp_params.length; i++) {
+            params = temp_params[i].split('=');
+            vars[params[0]] = params[1];
+          }
+          return vars;
+        }
+
+        //alert("test");
+
+        var vars = get_url_vars();
+        $("#rss").val(decodeURIComponent(vars["rss"]));
+
+//        alert(vars["rss_notification"]);
+        if(vars["rss_notification"] == 1){
+//          alert("checked!");
+//          $('#rss-notification-vibrate-checkbox').prop({'checked':true});
+          $('#rss-notification-vibrate-checkbox').prop('checked', true).checkboxradio('refresh');
+//          $('#rss-notification-vibrate-checkbox').attr("checked", "checked");
+        }
+
+        var interval = vars["interval"];
+        if(interval == 5){
+//          $('#refresh-interval-choice-5').prop({'checked':true});
+          $('#refresh-interval-choice-5').prop('checked', true).checkboxradio('refresh');
+        }else if(interval == 15){
+//          $('#refresh-interval-choice-15').prop({'checked':true});
+          $('#refresh-interval-choice-15').prop('checked', true).checkboxradio('refresh');
+        }else if(interval == 30){
+//          $('#refresh-interval-choice-30').prop({'checked':true});
+          $('#refresh-interval-choice-30').prop('checked', true).checkboxradio('refresh');
+        }else if(interval == 60){
+//          $('#refresh-interval-choice-60').prop({'checked':true});
+          $('#refresh-interval-choice-60').prop('checked', true).checkboxradio('refresh');
+        }else{
+          $('#refresh-interval-choice-15').prop('checked', true).checkboxradio('refresh');          
+        }
+
+/*
+        var vars = get_url_vars();
+        $("#test").text("---");
+        $("#test").text(vars["id"]);
+*/
+        $("#b-cancel").click(function() {
+
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          if(!$("#rss").val().match(/(http|ftp):\/\/.+/)){
+            alert("Please input correct URL of RSS.");
+            return;
+          }
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+
+      });
+    </script>
+  </body>
+</html>

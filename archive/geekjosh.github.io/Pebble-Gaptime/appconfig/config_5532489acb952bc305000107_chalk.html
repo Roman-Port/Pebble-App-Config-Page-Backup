@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gaptime Settings</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #34495e;
+            color: #ddd;
+        }
+
+        form {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        label {
+            width: 50%;
+            text-align: left;
+        }
+
+        label, input, select {
+            display: inline-block;
+            -webkit-box-sizing: content-box;
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+
+        input, select {
+            border: 0;
+            border-radius: 8px;
+            padding: 5px 5px;
+        }
+
+        div {
+            padding: 5px;
+        }
+
+        #content {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #locationWarning {
+            color: #CC645C;
+        }
+
+        #save_button {
+            float: right;
+            padding: 10px;
+        }
+
+        #paypal {
+            clear: both;
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content">
+        <h3>Gaptime Settings</h3>
+        <form action="#" id="settings_form">
+            <div id="divTextTime"><label for="text_time_checkbox">Show time as text: </label><input type="checkbox" id="text_time_checkbox"></div>
+            <div id="divHandOrder"><label for="hand_order">Hand order [SMH]: </label><input id="hand_order" value="SMH" pattern="[SMHsmh]{3}" size="3" maxlength="3" required=""></div>
+            <div id="divInvertCheckbox"><label for="invert_checkbox">Invert: </label><input type="checkbox" id="invert_checkbox"></div>
+
+            <div id="divInvertOptions">
+                <label for="invert_select">Invert face: </label>
+                <select id="invert_select">
+                    <option value="off">Off</option>
+                    <option value="on">Always</option>
+                    <option value="time">Set Time</option>
+                    <option value="sunrise">Sunrise</option>
+                    <option value="sunset">Sunset</option>
+                </select>
+
+                <div id="locationWarning" style="display: none"><b>Warning:</b> In order to calculate the sunrise and sunset times, the Pebble app equires access to your location. Currently this is a global setting which means that once allowed, <b>all</b> Pebble apps will have access to your location, not just this one</div>
+
+                <div id="invertBetween" style="display: none">
+                    <label for="invert_start">Start: </label><input type="time" id="invert_start" value="06:00">
+                    <label for="invert_end">End: </label><input type="time" id="invert_end" value="19:00">
+                </div>
+            </div>
+
+            <div><input type="submit" value="Save" id="save_button"></div>
+        </form>
+
+        <div id="paypal">
+            Like my watch face? Any contributions are greatly appreciated! <br>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="7PWS7CJFTV7DQ">
+                <input type="image" src="/www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+                <img alt="" border="0" src="/www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+            </form>
+
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="/raw.githubusercontent.com/mourner/suncalc/master/suncalc.bin"></script>
+    <script type="text/javascript">
+        var divInvertCheckbox = document.getElementById("divInvertCheckbox");
+        var divInvertOptions = document.getElementById("divInvertOptions");
+        var invertCheckbox = document.getElementById("invert_checkbox");
+        var textTimeCheckbox = document.getElementById("text_time_checkbox");
+        var handOrderInput = document.getElementById("hand_order");
+        var submitButton = document.getElementById("save_button");
+        var invertSelect = document.getElementById("invert_select");
+        var invertBetween = document.getElementById("invertBetween");
+        var invertStartTime = document.getElementById("invert_start");
+        var invertEndTime = document.getElementById("invert_end");
+        var locationWarning = document.getElementById("locationWarning");
+        var form = document.getElementById("settings_form");
+
+        //load previous settings if possible
+        invertCheckbox.checked = (window.localStorage.getItem("invert") == "on");
+        textTimeCheckbox.checked = (window.localStorage.getItem("textTime") == "on");
+        if (window.localStorage.getItem("handOrder") !== null) {
+            handOrderInput.value = window.localStorage.getItem("handOrder");
+        }
+        if (window.localStorage.getItem("invert") !== null) {
+            invertSelect.value = window.localStorage.getItem("invert");
+        }
+        if (window.localStorage.getItem("invertStart") !== null) {
+            invertStartTime.value = window.localStorage.getItem("invertStart");
+        }
+        if (window.localStorage.getItem("invertEnd") !== null) {
+            invertEndTime.value = window.localStorage.getItem("invertEnd");
+        }
+        
+        var locationOptions = {
+            enableHighAccuracy: false,
+            maximumAge: 10000,
+            timeout: 10000
+        };
+
+        function locationSuccess(pos) {
+            console.log("lat: " + pos.coords.latitude + " lon: " + pos.coords.longitude);
+            var sunTimes = SunCalc.getTimes(new Date(), pos.coords.latitude, pos.coords.longitude);
+            console.log("Sunrise: " + sunTimes.sunrise.getHours() + ":" + sunTimes.sunrise.getMinutes());
+            console.log("Sunset: " + sunTimes.sunset.getHours() + ":" + sunTimes.sunset.getMinutes());
+            
+            invertStartTime.value = invertSelect.value == "sunrise" ? sunTimes.sunrise.getHours() + ":" + sunTimes.sunrise.getMinutes() : sunTimes.sunset.getHours() + ":" + sunTimes.sunset.getMinutes();
+            invertEndTime.value = invertSelect.value == "sunrise" ? sunTimes.sunset.getHours() + ":" + sunTimes.sunset.getMinutes() : sunTimes.sunrise.getHours() + ":" + sunTimes.sunrise.getMinutes();
+        }
+
+        function locationError(err) {
+            console.log("Location error (" + err.code + "): " + err.message);
+        }
+
+        function updateLocation() {
+            navigator.geolocation.getCurrentPosition(locationSuccess, locationError, locationOptions);
+        }
+
+        //fix to return params when called from emulator
+        function getQueryParam(variable, default_) {
+            var query = location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (pair[0] == variable)
+                    return decodeURIComponent(pair[1]);
+            }
+            return default_ || false;
+        }
+
+        //versioning changes
+        var version = getQueryParam("version", false);
+        if (version === false) {     // pre-versioning version
+            divInvertOptions.setAttribute("style", "display: none");
+        } else {
+            // hide/unhide page elements as per version
+            divInvertCheckbox.setAttribute("style", "display: none");
+        }
+
+        //Setup to allow easy adding more options later
+        function saveOptions() {
+            var invert = null;
+
+            if (divInvertCheckbox.offsetParent !== null) {    // old version of settings with checkbox visible
+                invert = (invertCheckbox.checked ? "on" : "off");
+            } else {
+                invert = invertSelect.value;
+            }
+
+            var textTime = (textTimeCheckbox.checked ? "on" : "off");
+            var handOrder = handOrderInput.value.toUpperCase();
+            var invertStart = invertStartTime.value.split(":");
+            var invertEnd = invertEndTime.value.split(":");
+
+            var options = {
+                "textTime": textTime,
+                "handOrder": handOrder,
+                "invert": invert,
+                "invertStartMin": parseInt(invertStart[1]),
+                "invertStartHour": parseInt(invertStart[0]),
+                "invertEndMin": parseInt(invertEnd[1]),
+                "invertEndHour": parseInt(invertEnd[0])
+            }
+
+            //store locally so settings are remembered by config screen too
+            window.localStorage.setItem("textTime", textTime);
+            window.localStorage.setItem("handOrder", handOrder);
+            window.localStorage.setItem("invert", invert);
+            window.localStorage.setItem("invertStart", invertStart);
+            window.localStorage.setItem("invertEnd", invertEnd);
+
+            console.log(options);
+
+            return options;
+        };
+
+        function isValid() {
+            if (handOrderInput.value.length != 3) {
+                window.alert("The hand order string must be 3 characters in length");
+                console.log("handOrder input length != 3");
+                return false;
+            }
+
+            var patt = /[HMS]{3}/i;
+            if (!patt.test(handOrderInput.value)) {
+                window.alert("You must only enter the characters S, M or H in to the hand order text box");
+                console.log("handOrder failed RegExp");
+                return false;
+            }
+
+            console.log("Form is valid");
+            return true;
+        }
+
+        var updateInvertOptions = function () {
+            switch (invertSelect.value) {
+                case "time":
+                    invertBetween.setAttribute("style", "");
+                    invertStartTime.setAttribute("disabled", false);
+                    invertEndTime.setAttribute("disabled", false);
+                    locationWarning.setAttribute("style", "display: none;");
+                    if (window.localStorage.getItem("invertStart") !== null) {
+                        invertStartTime.value = window.localStorage.getItem("invertStart");
+                    } else {
+                        invertStartTime.value = "06:00";
+                    }
+                    if (window.localStorage.getItem("invertEnd") !== null) {
+                        invertEndTime.value = window.localStorage.getItem("invertEnd");
+                    } else {
+                        invertEndTime.value = "20:00";
+                    }
+                    break;
+                case "sunset":
+                case "sunrise":
+                    invertBetween.setAttribute("style", "");
+                    invertStartTime.setAttribute("disabled", true);
+                    invertEndTime.setAttribute("disabled", true);
+                    invertBetween.setAttribute("style", "");
+                    locationWarning.setAttribute("style", "");
+                    updateLocation();
+                    break;
+                default:
+                    invertBetween.setAttribute("style", "display: none");
+                    locationWarning.setAttribute("style", "display: none");
+            }
+        };
+
+        invertSelect.addEventListener("change", function () { updateInvertOptions(); });
+        updateInvertOptions();
+
+        form.addEventListener("submit",
+        function () {
+            console.log("Submit");
+
+            //fix for Cloud Pebble emulator
+            var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+            var options = saveOptions();
+            var location = return_to + encodeURIComponent(JSON.stringify(options));
+
+            form.action = location;
+            return isValid();
+        },
+        false);
+    </script>
+</body>
+</html>

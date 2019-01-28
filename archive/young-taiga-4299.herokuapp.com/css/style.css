@@ -1,0 +1,28 @@
+.title {
+  padding: 0 10px;
+  text-transform: inherit;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #888888;
+  text-align: center;
+}
+
+.title2 {
+  padding: 0 10px;
+  text-transform: inherit;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 1.0em;
+  font-weight: 500;
+  color: #888888;
+  text-align: center;
+}
+
+.item-input {
+    border: 0;
+    background-color: transparent;
+    padding: 0 10px 7px 10px;
+    font-size: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}

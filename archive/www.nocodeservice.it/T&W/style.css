@@ -1,0 +1,59 @@
+body {
+	text-align: center;
+	font-size: 14px;
+	font-family: "Helvetica", Arial, sans-serif;
+	background-color: #fff;
+	margin: 0px;
+	padding: 0px;
+}
+
+header {
+	padding: 1em;
+	background-color: #F0F0F0;
+}
+h1 {
+	display: inline;
+	font-size: 1.3em;
+	height: 10em;
+	color: #222;
+}
+
+form {
+padding-top: 16px;
+}
+div {
+border-bottom: 1px solid #F0F0F0;
+margin: 0 auto;
+width: 80%;
+}
+
+label {
+padding: 8px,8px;
+display: block;
+}
+
+
+.styled-select select {
+    	text-align: center;
+background-color: #F0F0F0;
+   background: transparent;
+   width: 100%;
+   padding: 10px 0;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+  margin-bottom: 5px;
+   }
+   
+   select, option {
+    text-align: center;
+}
+
+input[type="button"] {
+	width: 45%;
+	height: 3em;
+	border-radius: 20px;
+	margin-top: 20px;
+	border: none;
+}

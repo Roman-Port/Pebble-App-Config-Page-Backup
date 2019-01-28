@@ -1,0 +1,34 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<title>Configuration</title>
+		<meta author="Francesco Di Carlo">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="/www.nocodeservice.it/T&W/style.css">
+		<script type="text/javascript" src="/www.nocodeservice.it/T&W/logic.js"></script>
+			</head>
+	<body onload="setValues()">
+		<header><h1>Configuration</h1></header>
+		<form method="get" name="form" action="">
+			<label for="weatherTempFormat">Temperature Unit</label>
+			<div class="styled-select">
+			<select id="weatherTempFormat" name="weatherTempFormat">
+				<option value="1">Celsius</option>
+				<option value="2">Fahrenheit</option>
+			</select>
+			</div>
+			<label for="weatherWindFormat">Wind Speed Unit</label>
+			<div class="styled-select">
+			<select id="weatherWindFormat" name="weatherWindFormat">
+				<option value="1">km/h</option>
+				<option value="2">m/s</option>
+				<option value="3">mi/h</option>
+				<option value="4">kn</option>
+			</select>
+			</div class="bu">
+			
+		</form>
+		<input type="button" value="Save" onclick="submit();">
+	</body>
+</html>

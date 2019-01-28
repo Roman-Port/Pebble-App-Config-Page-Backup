@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Weather My Way Configuration</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.css">
+    <style>
+        #apikey { display: none;}
+    </style>
+    <script src="/ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+    <script src="/ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.js"></script>
+</head>
+<body>
+<div data-role="page" id="main">
+
+    <div data-role="content" class="ui-body ui-body-a">
+
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-mini="true">
+                <legend>Weather Provider:</legend>
+                <input type="radio" name="weather-service" id="radiowunder" value="wunder" class="custom">
+                <label for="radiowunder">Weather Underground</label>
+
+                <input type="radio" name="weather-service" id="radioopen" value="open" class="custom">
+                <label for="radioopen">Open Weather Map</label>
+
+            </fieldset>
+        </div>
+
+        <div data-role="fieldcontain">
+            <label for="fliphourly">Hourly Weather (requires key):</label>
+            <select name="fliphourly" id="fliphourly" data-role="slider" data-mini="true">
+                <option value="off">Off</option>
+                <option value="on">On</option>
+            </select>
+        </div>
+        <div data-role="popup" id="popupCloseRight" class="ui-content">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <p>Hourly weather requires a Weather Underground API key.</p>
+            <p>Weather Underground provides a free Developer API key, but you must first sign up.
+                You can <a href="/www.wunderground.com/weather/api/.html">sign up here.</a></p>
+        </div>
+        <div data-role="fieldcontain" id="apikey" data-mini="true">
+            <div class="ui-field-contain">
+                <label for="text-apikey">Weather Underground API Key:</label>
+                <input type="text" name="text-apikey" id="text-apikey" autocapitalize="off" autocorrect="off" autocomplete="off" value="">
+            </div>
+        </div>
+
+        <div data-role="fieldcontain">
+            <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                <legend>Temperature Scale:</legend>
+                <input type="radio" name="weather-scale" id="radioF" value="F" class="custom">
+                <label for="radioF">°Fahrenheit</label>
+
+                <input type="radio" name="weather-scale" id="radioC" value="C" class="custom">
+                <label for="radioC">°Celsius</label>
+
+            </fieldset>
+        </div>
+
+        <div data-role="fieldcontain">
+            <label for="flipbattery">Display Battery:</label>
+            <select name="flipbattery" id="flipbattery" data-role="slider" data-mini="true">
+                <option value="off">Off</option>
+                <option value="on">On</option>
+            </select>
+        </div>
+
+
+        <div data-role="fieldcontain">
+            <label for="flipdebug">Debug Mode:</label>
+            <select name="flipdebug" id="flipdebug" data-role="slider" data-mini="true">
+                <option value="off">Off</option>
+                <option value="on">On</option>
+            </select>
+        </div>
+
+        <fieldset class="ui-grid-a">
+            <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+            <div class="ui-block-b"><button type="submit" data-theme="b" id="b-submit">Save</button></div>
+        </fieldset>
+
+    </div>
+</div>
+<script>
+    function saveOptions() {
+        return {
+            'service': $("#radiowunder").is(':checked') ? 'wunder' : 'open',
+            'scale':   $("#radioF").is(':checked')     ? 'F' : 'C',
+            'battery': $("select[name=flipbattery]").prop('selectedIndex') ? 'on' : 'off',
+            'debug':   $("select[name=flipdebug]").prop('selectedIndex')   ? 'true' : 'false',
+            'wuApiKey':$("select[name=fliphourly]").prop('selectedIndex')  ? $("#text-apikey").val() : null
+        };
+    }
+
+    function getURLParameter(name) {
+        return decodeURI(
+                (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+        );
+    }
+
+    $().ready(function() {
+
+        var initialLoad = true;
+
+        var flipHourly = $("select[name=fliphourly]");
+        flipHourly.bind( "change", function(event, ui) {
+            var val = $(this).val();
+            if (val === 'on') {
+                $("#apikey").show();
+                if (!initialLoad) {
+                    $("#popupCloseRight").popup("open");
+                }
+            } else {
+                $("#apikey").hide();
+            }
+        });
+
+        var service = getURLParameter('s');
+        if (service === 'open') {
+            $("#radioopen").attr("checked", "checked");
+        } else {
+            $("#radiowunder").attr("checked", "checked");
+        }
+        $("input[name='weather-service']").checkboxradio("refresh");
+
+        var scale = getURLParameter('u');
+        if (scale === 'C') {
+            $("#radioC").attr("checked", "checked");
+        } else {
+            $("#radioF").attr("checked", "checked");
+        }
+        $("input[name='weather-scale']").checkboxradio("refresh");
+
+        var apikey = getURLParameter('a');
+        if (apikey !== 'null') {
+            flipHourly.prop('selectedIndex', 1);
+            $("#text-apikey").val(apikey);
+        } else {
+            flipHourly.prop('selectedIndex', 0);
+        }
+        flipHourly.change();
+
+        var flipBattery = $("select[name=flipbattery]");
+        var battery = getURLParameter('b');
+        if (battery === 'off') {
+            flipBattery.prop('selectedIndex', 0);
+        } else {
+            flipBattery.prop('selectedIndex', 1);
+        }
+
+        var flipDebug = $("select[name=flipdebug]");
+        var debug = getURLParameter('d');
+        if (debug === 'true') {
+            flipDebug.prop('selectedIndex', 1);
+        } else {
+            flipDebug.prop('selectedIndex', 0);
+        }
+
+        $("select").slider("refresh");
+
+        $("#b-cancel").click(function() {
+            console.log("Cancel");
+            document.location = "pebblejs://close";
+        });
+
+        $("#b-submit").click(function() {
+            console.log("Submit");
+
+            var location = "pebblejs://close#" + (JSON.stringify(saveOptions()));
+            console.log("Warping to: " + location);
+            console.log(location);
+            document.location = location;
+        });
+
+        initialLoad = false;
+    });
+</script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-50506231-1', 'jaredbiehler.github.io');
+    ga('send', 'pageview');
+
+</script>
+</body>
+</html>

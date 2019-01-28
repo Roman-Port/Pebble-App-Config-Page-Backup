@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://www.vhn.vn/blog/xmlrpc.php">
+
+<title>[Writeup] CodeGate CTF 2015 &#8211; Quals &#8211; good-crypto &#8211; VHNVN&#039;s blog</title>
+<link rel='dns-prefetch' href='//s0.wp.com' />
+<link rel='dns-prefetch' href='//ajax.googleapis.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; Feed" href="https://www.vhn.vn/blog/index.php/feed/" />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; Comments Feed" href="https://www.vhn.vn/blog/index.php/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="VHNVN&#039;s blog &raquo; [Writeup] CodeGate CTF 2015 &#8211; Quals &#8211; good-crypto Comments Feed" href="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/feed/" />
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/11\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/www.vhn.vn\/blog\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.9.9"}};
+			!function(a,b,c){function d(a,b){var c=String.fromCharCode;l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,a),0,0);var d=k.toDataURL();l.clearRect(0,0,k.width,k.height),l.fillText(c.apply(this,b),0,0);var e=k.toDataURL();return d===e}function e(a){var b;if(!l||!l.fillText)return!1;switch(l.textBaseline="top",l.font="600 32px Arial",a){case"flag":return!(b=d([55356,56826,55356,56819],[55356,56826,8203,55356,56819]))&&(b=d([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]),!b);case"emoji":return b=d([55358,56760,9792,65039],[55358,56760,8203,9792,65039]),!b}return!1}function f(a){var c=b.createElement("script");c.src=a,c.defer=c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var g,h,i,j,k=b.createElement("canvas"),l=k.getContext&&k.getContext("2d");for(j=Array("flag","emoji"),c.supports={everything:!0,everythingExceptFlag:!0},i=0;i<j.length;i++)c.supports[j[i]]=e(j[i]),c.supports.everything=c.supports.everything&&c.supports[j[i]],"flag"!==j[i]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[j[i]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(h=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",h,!1),a.addEventListener("load",h,!1)):(a.attachEvent("onload",h),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),g=c.source||{},g.concatemoji?f(g.concatemoji):g.wpemoji&&g.twemoji&&(f(g.twemoji),f(g.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<link rel='stylesheet' id='jquery-ui-css'  href='//ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css?ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-bootstrap-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/css/bootstrap/bootstrap.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-style-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/style.css?ver=4.9.9' type='text/css' media='all' />
+<style id='oria-style-inline-css' type='text/css'>
+body, .widget a { color:#717376}
+.site-title a, .site-title a:hover { color:#fff}
+.site-description { color:#bbb}
+.site-logo { max-width:200px; }
+.site-branding { padding-top:80px;padding-bottom:80px; }
+.site-title { font-size:62px; }
+.site-description { font-size:18px; }
+
+</style>
+<link rel='stylesheet' id='oria-body-fonts-css'  href='//fonts.googleapis.com/css?family=Lato%3A400%2C700%2C400italic%2C700italic&#038;ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-headings-fonts-css'  href='//fonts.googleapis.com/css?family=Oswald%3A300%2C700&#038;ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='oria-fontawesome-css'  href='https://www.vhn.vn/blog/wp-content/themes/oria/fonts/font-awesome.min.css?ver=4.9.9' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack-widget-social-icons-styles-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/modules/widgets/social-icons/social-icons.css?ver=20170506' type='text/css' media='all' />
+<link rel='stylesheet' id='enlighter-local-css'  href='https://www.vhn.vn/blog/wp-content/plugins/enlighter/resources/EnlighterJS.min.css?ver=3.6' type='text/css' media='all' />
+<link rel='stylesheet' id='enlighter-webfonts-css'  href='//fonts.googleapis.com/css?family=Source+Code+Pro%3Aregular%2C700&#038;ver=3.6' type='text/css' media='all' />
+<link rel='stylesheet' id='social-logos-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/social-logos/social-logos.min.css?ver=1' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/css/jetpack.css?ver=6.1.1' type='text/css' media='all' />
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/jquery.js?ver=1.12.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.4.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var related_posts_js_options = {"post_heading":"h4"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/related-posts/related-posts.min.js?ver=20150408'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/jquery.fitvids.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/jquery.slicknav.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/parallax.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/scripts.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/imagesloaded.min.js?ver=3.2.0'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/masonry.min.js?ver=3.3.2'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/imagesloaded.pkgd.min.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/masonry-init.js?ver=1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/owl.carousel.min.js?ver=1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sliderOptions = {"slideshowspeed":"4000"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/slider-init.js?ver=1'></script>
+<link rel='https://api.w.org/' href='https://www.vhn.vn/blog/index.php/wp-json/' />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.vhn.vn/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.vhn.vn/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='next' title='[Writeup] Plaid CTF 2015 &#8211; radhos' href='https://www.vhn.vn/blog/index.php/2015/04/20/writeup-plaid-ctf-2015-radhos/' />
+<link rel="canonical" href="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/" />
+<link rel='shortlink' href='https://wp.me/p6MMNs-z' />
+<link rel="alternate" type="application/json+oembed" href="https://www.vhn.vn/blog/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vhn.vn%2Fblog%2Findex.php%2F2015%2F03%2F16%2Fwriteup-codegate-ctf-2015-quals-good-crypto%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://www.vhn.vn/blog/index.php/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.vhn.vn%2Fblog%2Findex.php%2F2015%2F03%2F16%2Fwriteup-codegate-ctf-2015-quals-good-crypto%2F&#038;format=xml" />
+
+<link rel='dns-prefetch' href='//v0.wordpress.com'/>
+<link rel='dns-prefetch' href='//i0.wp.com'/>
+<link rel='dns-prefetch' href='//i1.wp.com'/>
+<link rel='dns-prefetch' href='//i2.wp.com'/>
+<style type='text/css'>img#wpstats{display:none}</style><!--[if lt IE 9]>
+<script src="https://www.vhn.vn/blog/wp-content/themes/oria/js/html5shiv.js"></script>
+<![endif]-->
+		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+		<style type="text/css">
+/* <![CDATA[ */
+img.latex { vertical-align: middle; border: none; }
+/* ]]> */
+</style>
+		<style type="text/css">
+			.site-header {
+				background-image: url(https://www.vhn.vn/blog/wp-content/themes/oria/images/header.jpg);
+			}
+		</style>
+		
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="[Writeup] CodeGate CTF 2015 &#8211; Quals &#8211; good-crypto" />
+<meta property="og:url" content="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/" />
+<meta property="og:description" content="Category: Programming Points: 500 Description: Binary : We recently intercepted some kind of encrypted traffic, can you help us recover the password? Update: Due to a crappy javascript programmer t…" />
+<meta property="article:published_time" content="2015-03-15T18:13:07+00:00" />
+<meta property="article:modified_time" content="2015-09-29T18:21:01+00:00" />
+<meta property="og:site_name" content="VHNVN&#039;s blog" />
+<meta property="og:image" content="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?fit=662%2C482&amp;ssl=1" />
+<meta property="og:image:width" content="662" />
+<meta property="og:image:height" content="482" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:text:title" content="[Writeup] CodeGate CTF 2015 &#8211; Quals &#8211; good-crypto" />
+<meta name="twitter:image" content="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?fit=662%2C482&#038;ssl=1&#038;w=640" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<!-- End Jetpack Open Graph Tags -->
+</head>
+
+<body class="post-template-default single single-post postid-35 single-format-standard">
+
+<div class="preloader"><div id="preloader-inner"><div class="preload">&nbsp;</div></div></div>
+<div id="page" class="hfeed site">
+	<a class="skip-link screen-reader-text" href="#content">Skip to content</a>
+
+	<header id="masthead" class="site-header" role="banner">
+
+		<div class="top-bar clearfix no-toggle">
+					
+					</div>
+
+		<div class="container">
+			<div class="site-branding">
+				<h1 class="site-title"><a href="https://www.vhn.vn/blog/" rel="home">VHNVN&#039;s blog</a></h1><h2 class="site-description">Smile with the life, it will smile with you!</h2>			</div><!-- .site-branding -->
+		</div>
+
+		<nav id="site-navigation" class="main-navigation" role="navigation">
+			<div id="primary-menu" class="menu clearfix"></div>
+		</nav><!-- #site-navigation -->
+		<nav class="mobile-nav"></nav>
+
+	</header><!-- #masthead -->
+	
+	
+	<div id="content" class="site-content clearfix">
+				<div class="container content-wrapper">
+		
+	<div id="primary" class="content-area">
+		<main id="main" class="site-main" role="main">
+
+		
+			
+<article id="post-35" class="post-35 post type-post status-publish format-standard has-post-thumbnail hentry category-ctf">
+
+			<div class="single-thumb">
+			<img width="662" height="482" src="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?fit=662%2C482&amp;ssl=1" class="attachment-oria-large-thumb size-oria-large-thumb wp-post-image" alt="" srcset="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?w=662&amp;ssl=1 662w, https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?resize=300%2C218&amp;ssl=1 300w, https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?resize=520%2C379&amp;ssl=1 520w" sizes="(max-width: 662px) 100vw, 662px" data-attachment-id="36" data-permalink="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/wep/" data-orig-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?fit=662%2C482&amp;ssl=1" data-orig-size="662,482" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="wep" data-image-description="" data-medium-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?fit=300%2C218&amp;ssl=1" data-large-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?fit=662%2C482&amp;ssl=1" />		</div>
+		
+	<header class="entry-header">
+		<h1 class="entry-title">[Writeup] CodeGate CTF 2015 &#8211; Quals &#8211; good-crypto</h1>
+				<div class="entry-meta">
+			<span class="posted-on"><a href="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/" rel="bookmark"><time class="entry-date published" datetime="2015-03-16T01:13:07+00:00">March 16, 2015</time><time class="updated" datetime="2015-09-30T01:21:01+00:00">September 30, 2015</time></a></span><span class="byline"> <span class="author vcard"><a class="url fn n" href="https://www.vhn.vn/blog/index.php/author/vanhoavn/">vanhoavn</a></span></span>		</div><!-- .entry-meta -->
+			</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p><strong>Category:</strong> Programming</p>
+<p><strong>Points:</strong> 500</p>
+<p><strong>Description:</strong></p>
+<blockquote><p>Binary : <a href="file.xz">http://binary.grayhash.com/bd24de5d345c0d1da274fcd7d9a2b244/file.xz</a><br />
+We recently intercepted some kind of encrypted traffic, can you help us recover the password?</p>
+<p>Update: Due to a crappy javascript programmer there&#8217;s one line of code missing, but I&#8217;m sure you can figure out which one</p></blockquote>
+<h2>Write-up</h2>
+<p>The provided file is a compressed pcap file on a WEP-encrypted wireless network.</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="null">14:52:22.194582 WEP Encrypted 44us CF +QoS Data IV:ed006c Pad 0 KeyID 0
+</pre>
+<p>Let&#8217;s crack the key using aircrack-ng:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">&gt; aircrack-ng file.pcap
+Opening file.pcap
+Read 45169 packets.
+
+   #  BSSID              ESSID                     Encryption
+
+   1  00:26:66:55:97:D6  cgnetwork                 WEP (15477 IVs)
+
+Choosing first network as target.
+
+Opening file.pcap
+Attack will be restarted every 5000 captured ivs.
+Starting PTW attack with 15477 ivs.
+
+                                                                                Aircrack-ng 1.2 rc1
+
+
+                                                                [00:00:00] Tested 103 keys (got 15477 IVs)
+
+   KB    depth   byte(vote)
+    0    0/  1   A4(22784) 62(20992) A8(19968) B6(19968) 42(19456) 6E(19456) 91(19200) B7(19200) 26(18944) 9E(18944) 68(18944) E4(18688) 0E(18688) 74(18688)
+    1    0/  1   3D(23040) 51(20736) 07(20480) 62(19968) 7B(19968) 1F(19712) B0(19712) BD(19456) 85(19200) 9D(19200) 80(19200) EC(18944) 13(18944) 98(18688)
+    2    0/  1   F6(23808) E4(20992) D0(20736) 68(20224) 95(19712) 38(19456) 0C(19200) F7(18944) 45(18944) A8(18944) 4F(18944) C5(18688) CB(18688) BB(18688)
+    3    1/ 10   F3(20480) D0(19968) C5(19968) 3E(19712) 52(19456) B2(19456) 09(19456) 20(19456) 43(19456) A0(19200) 8F(19200) B0(19200) 04(18944) 8D(18944)
+    4    8/ 11   67(19456) 52(19456) F9(19456) 5C(19456) 20(19456) 45(18944) D3(18944) 95(18944) 85(18944) 9D(18688) 3A(18688) C8(18688) 40(18688) 1E(18432)
+
+                         KEY FOUND! [ A4:3D:F6:F3:74 ]
+    Decrypted correctly: 100%</pre>
+<p>Yes, that was easy, now we can decrypt the traffic:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">&gt; airdecap-ng -w A4:3D:F6:F3:74 file.pcap
+Total number of packets read         45169
+Total number of WEP data packets     15477
+Total number of WPA data packets         0
+Number of plaintext data packets         0
+Number of decrypted WEP  packets     15477
+Number of corrupted WEP  packets         0
+Number of decrypted WPA  packets         0</pre>
+<p>Still don&#8217;t need wireshark, use foremost to extract the files:</p>
+<p>&nbsp;</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">&gt; foremost -v file-dec.pcap
+
+Foremost version 1.5.7 by Jesse Kornblum, Kris Kendall, and Nick Mikus
+Audit File
+
+Foremost started at Mon Mar 16 16:24:49 2015
+Invocation: foremost -v file-dec.pcap
+Output directory: /Users/Shared/dev/ctf/codegat/p500/output
+Configuration file: /usr/local/etc
+Processing: file-dec.pcap
+|------------------------------------------------------------------
+File: file-dec.pcap
+Start: Mon Mar 16 16:24:49 2015
+Length: Unknown
+
+Num  Name (bs=512)         Size  File Offset     Comment
+
+0:  00000104.jpg         258 KB           53549
+1:  00004538.jpg          87 KB         2323670
+2:  00000406.gif           35 B          208185       (1 x 1)
+3:  00001260.gif           35 B          645564       (1 x 1)
+4:  00002450.gif           42 B         1254588       (1 x 1)
+5:  00003653.gif           35 B         1870635       (1 x 1)
+6:  00003719.gif           35 B         1904213       (1 x 1)
+7:  00010456.gif           49 B         5353479       (1 x 1)
+8:  00010876.gif           35 B         5568641       (1 x 1)
+9:  00001639.htm           67 B          839396
+10: 00024427.htm           1 KB        12506741
+11: 00001765.png          283 B          904100       (44 x 44)
+12: 00001831.png          166 B          937711       (12 x 12)
+13: 00010214.png           67 B         5229704       (1 x 1)
+14: 00010671.png          110 B         5464006       (1 x 400)
+15: 00020736.png          425 B        10616910       (19 x 19)
+16: 00024242.png          589 B        12412171       (19 x 19)
+*|
+Finish: Mon Mar 16 16:24:49 2015
+
+17 FILES EXTRACTED
+
+jpg:= 2
+gif:= 7
+htm:= 2
+png:= 6
+------------------------------------------------------------------</pre>
+<p>The secret is in this html:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="html">&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Router - index&lt;/title&gt;
+    &lt;link href="static/css/bootstrap.min.css" rel="stylesheet" media="screen"&gt;
+    &lt;link href="static/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen"&gt;
+    &lt;link href="static/css/blah.css" rel="stylesheet"&gt;
+
+    &lt;script src="static/js/sha1.js"&gt;&lt;/script&gt;
+
+    &lt;script&gt;
+        function validate() {
+            var x = document.forms["formxx"]["pwz"].value;
+            if (x == null || x == "") {
+                alert("Password must be filled out");
+                return false;
+            }
+
+            if (!x.match("/^[A-Za-z]+$/")) {
+                alert("Bad charset");
+                return false;
+            }
+
+            if (!sha1(x).match("^ff7b948953ac"))
+            {
+
+            }
+
+            alert("Flag: " + x);
+            return true;
+        }
+    &lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="box"&gt;
+        &lt;center&gt;
+            &lt;h1&gt;Router - Please log in&lt;/h1&gt;
+        &lt;/center&gt;
+        &lt;br/&gt;
+        &lt;br/&gt;
+
+
+
+
+        &lt;form class="box" method="post" onSubmit="validate()" name="formxx" action="/login"&gt;
+            &lt;h2 class="box-heading"&gt;Login&lt;/h2&gt;
+            &lt;input type="text" class="input-block-level" placeholder="Username" name="user" value="admin"&gt;
+            &lt;input type="password" name="pwz" class="input-block-level" placeholder="WEP passhrase" name="pw"&gt;
+            &lt;input type="submit" name="submit" value="Submit" /&gt;
+        &lt;/form&gt;
+    &lt;/div&gt;
+
+    &lt;script src="static/js/jquery-1.10.2.min.js"&gt;&lt;/script&gt;
+    &lt;script src="static/js/bootstrap.min.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+<p>Well, now let&#8217;s sum up all the information:</p>
+<ul>
+<li>We need to find a password with charset [a-zA-Z]+, having sha1 value starting with &#8220;ff7b948953ac&#8221; (from javascript code).</li>
+<li>The password is WEP&#8217;s Passphrase (indicated in placeholder of the input box).</li>
+<li>WEP&#8217;s key corresponding to the Passphrase is A4:3D:F6:F3:74.</li>
+</ul>
+<p>Using the first hint only, I wrote a brute force script for it and had it run up to 6 characters without success.</p>
+<p>WEP&#8217;s key generator is mostly using simple xor and PRNG:</p>
+<p><a href="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png"><img data-attachment-id="36" data-permalink="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/wep/" data-orig-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?fit=662%2C482&amp;ssl=1" data-orig-size="662,482" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="wep" data-image-description="" data-medium-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?fit=300%2C218&amp;ssl=1" data-large-file="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?fit=662%2C482&amp;ssl=1" class="size-medium wp-image-36 aligncenter" src="https://i1.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep-300x218.png?resize=300%2C218" alt="WEP key generation algorithm" width="300" height="218" srcset="https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?resize=300%2C218&amp;ssl=1 300w, https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?resize=520%2C379&amp;ssl=1 520w, https://i2.wp.com/www.vhn.vn/blog/wp-content/uploads/2015/09/wep.png?w=662&amp;ssl=1 662w" sizes="(max-width: 300px) 100vw, 300px" data-recalc-dims="1" /></a></p>
+<p>The seed&#8217;s efficient value space is only 24 bits, so we can find the original hash easily:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vhqtvn/ed163c30000405149a4e.js"></script><noscript>View the code on <a href="https://gist.github.com/vhqtvn/ed163c30000405149a4e">Gist</a>.</noscript></div>
+<p>Output:</p>
+<pre class="EnlighterJSRAW" data-enlighter-language="shell" data-enlighter-theme="twilight">('Found it: ', '0x12766b')
+Verify:
+('0xa4', '0xa4a782')
+('0x3d', '0x3d303d')
+('0xf6', '0xf6420c')
+('0xf3', '0xf3089f')
+('0x74', '0x74c0e6')</pre>
+<p>So we have the seed value now, and:</p>
+<ul>
+<li>sumxor(p[4k])=0x6b</li>
+<li>sumxor(p[4k+1])=0x76</li>
+<li>sumxor(p[4k+2])=0x12</li>
+</ul>
+<p>The passphrase length is longer than 6, so from this i can guess the passphrase length is 10 (as passhrase is ascii, we just need to look at msb of the result to guess). I was feeling stupid to see how long can my original bruteforce script need to brute these 10 characters.</p>
+<p>Let&#8217;s rewrite the relations in more readable form:</p>
+<ul>
+<li>p[0] xor p[4] xor p[8] = 0x6b</li>
+<li>p[1] xor p[5] xor p[9] = 0x76</li>
+<li>p[2] xor p[6] = 0x12</li>
+</ul>
+<p>Using these relations, the key space is still 7 characters, cracking that for charset of 52 values should take hours, so i tried to install cuda toolkit to use gpu, but my crappy internet dont allow me to do so. From the relation, in both set {p[0], p[4], p[8]}, {p[1], p[5], p[9]}, there must be 2 uppercase letters or no letter at all for each set, so I guessed that all characters are lowercase. Now let&#8217;s run a bruteforce script for lowercase charset:</p>
+<div class="oembed-gist"><script src="https://gist.github.com/vhqtvn/4ff6fe679f313be3a8ea.js"></script><noscript>View the code on <a href="https://gist.github.com/vhqtvn/4ff6fe679f313be3a8ea">Gist</a>.</noscript></div>
+<p>Wait some tens of seconds and we have the key: <strong>cgwepkeyxz</strong>.</p>
+<p>Thanks CodeGate for this interesting &#8220;programming&#8221; problem 🙂</p>
+<div class="sharedaddy sd-sharing-enabled"><div class="robots-nocontent sd-block sd-social sd-social-icon-text sd-sharing"><h3 class="sd-title">Share this:</h3><div class="sd-content"><ul><li class="share-twitter"><a rel="nofollow" data-shared="sharing-twitter-35" class="share-twitter sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/?share=twitter" target="_blank" title="Click to share on Twitter"><span>Twitter</span></a></li><li class="share-facebook"><a rel="nofollow" data-shared="sharing-facebook-35" class="share-facebook sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/?share=facebook" target="_blank" title="Click to share on Facebook"><span>Facebook</span></a></li><li class="share-google-plus-1"><a rel="nofollow" data-shared="sharing-google-35" class="share-google-plus-1 sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/?share=google-plus-1" target="_blank" title="Click to share on Google+"><span>Google</span></a></li><li class="share-linkedin"><a rel="nofollow" data-shared="sharing-linkedin-35" class="share-linkedin sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/?share=linkedin" target="_blank" title="Click to share on LinkedIn"><span>LinkedIn</span></a></li><li class="share-reddit"><a rel="nofollow" data-shared="" class="share-reddit sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/?share=reddit" target="_blank" title="Click to share on Reddit"><span>Reddit</span></a></li><li class="share-pinterest"><a rel="nofollow" data-shared="sharing-pinterest-35" class="share-pinterest sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/?share=pinterest" target="_blank" title="Click to share on Pinterest"><span>Pinterest</span></a></li><li class="share-print"><a rel="nofollow" data-shared="" class="share-print sd-button share-icon" href="https://www.vhn.vn/blog/index.php/2015/03/16/writeup-codegate-ctf-2015-quals-good-crypto/#print" target="_blank" title="Click to print"><span>Print</span></a></li><li class="share-end"></li></ul></div></div></div>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div>			</div><!-- .entry-content -->
+
+		<footer class="entry-footer">
+		<span class="cat-links">Posted in <a href="https://www.vhn.vn/blog/index.php/category/ctf/" rel="category tag">CTF</a></span>	</footer><!-- .entry-footer -->
+	</article><!-- #post-## -->
+
+			
+	<nav class="navigation post-navigation" role="navigation">
+		<h2 class="screen-reader-text">Post navigation</h2>
+		<div class="nav-links"><div class="nav-next"><a href="https://www.vhn.vn/blog/index.php/2015/04/20/writeup-plaid-ctf-2015-radhos/" rel="next">[Writeup] Plaid CTF 2015 &#8211; radhos</a></div></div>
+	</nav>
+			
+<div id="disqus_thread"></div>
+
+		
+		</main><!-- #main -->
+	</div><!-- #primary -->
+
+	
+<div id="secondary" class="widget-area no-toggle" role="complementary">
+	<span class="sidebar-close"><i class="fa fa-times"></i></span>
+	<aside id="search-2" class="widget widget_search"><form role="search" method="get" class="search-form" action="https://www.vhn.vn/blog/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></aside>		<aside id="recent-posts-2" class="widget widget_recent_entries">		<h4 class="widget-title">Recent Posts</h4>		<ul>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/11/06/hitcon-ctf-2017-quals/">HITCON CTF 2017 Quals</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/10/19/hack-lu-2017/">hack.lu 2017</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2017/07/12/vue-single-file-component-and-typescript/">Vue single file component and typescript</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2016/03/17/0ctf/">0CTF 2016</a>
+									</li>
+											<li>
+					<a href="https://www.vhn.vn/blog/index.php/2016/03/07/bkpctf-2016/">BKPCTF 2016</a>
+									</li>
+					</ul>
+		</aside><aside id="recent-comments-2" class="widget widget_recent_comments"><h4 class="widget-title">Recent Comments</h4><ul id="recentcomments"><li class="recentcomments"><span class="comment-author-link">Tung Thanh</span> on <a href="https://www.vhn.vn/blog/index.php/2015/11/07/mot-bai-toan-tinh-tong/#comment-3">Một bài toán tính tổng</a></li></ul></aside><aside id="archives-2" class="widget widget_archive"><h4 class="widget-title">Archives</h4>		<ul>
+			<li><a href='https://www.vhn.vn/blog/index.php/2017/11/'>November 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2017/10/'>October 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2017/07/'>July 2017</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2016/03/'>March 2016</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/11/'>November 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/09/'>September 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/04/'>April 2015</a></li>
+	<li><a href='https://www.vhn.vn/blog/index.php/2015/03/'>March 2015</a></li>
+		</ul>
+		</aside><aside id="categories-2" class="widget widget_categories"><h4 class="widget-title">Categories</h4>		<ul>
+	<li class="cat-item cat-item-2"><a href="https://www.vhn.vn/blog/index.php/category/ctf/" >CTF</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="https://www.vhn.vn/blog/index.php/category/trick/" >Trick</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="https://www.vhn.vn/blog/index.php/category/uncategorized/" >Uncategorized</a>
+</li>
+		</ul>
+</aside><aside id="meta-2" class="widget widget_meta"><h4 class="widget-title">Meta</h4>			<ul>
+			<li><a href="https://www.vhn.vn/blog/wp-login.php?action=register">Register</a></li>			<li><a href="https://www.vhn.vn/blog/wp-login.php">Log in</a></li>
+			<li><a href="https://www.vhn.vn/blog/index.php/feed/">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://www.vhn.vn/blog/index.php/comments/feed/">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="https://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>			</ul>
+			</aside></div><!-- #secondary -->
+
+		</div>
+	</div><!-- #content -->
+
+	
+	<footer id="colophon" class="site-footer" role="contentinfo">
+		<div class="site-info container">
+			<a href="http://wordpress.org/" rel="nofollow">Proudly powered by WordPress</a><span class="sep"> | </span>Theme: <a href="http://justfreethemes.com/oria" rel="nofollow">Oria</a> by JustFreeThemes.		</div><!-- .site-info -->
+	</footer><!-- #colophon -->
+</div><!-- #page -->
+
+	<div style="display:none">
+	</div>
+
+	<script type="text/javascript">
+		window.WPCOM_sharing_counts = {"https:\/\/www.vhn.vn\/blog\/index.php\/2015\/03\/16\/writeup-codegate-ctf-2015-quals-good-crypto\/":35};
+	</script>
+		<!--[if lte IE 8]>
+<link rel='stylesheet' id='jetpack-carousel-ie8fix-css'  href='https://www.vhn.vn/blog/wp-content/plugins/jetpack/modules/carousel/jetpack-carousel-ie8fix.css?ver=20121024' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/core.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/widget.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/jquery/ui/tabs.min.js?ver=1.11.4'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/photon/photon.min.js?ver=20130122'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var countVars = {"disqusShortname":"vhnvn"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/disqus-comment-system/public/js/comment_count.js?ver=3.0.16'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var embedVars = {"disqusConfig":{"integration":"wordpress 3.0.16"},"disqusIdentifier":"35 http:\/\/www.vhn.vn\/blog\/?p=35","disqusShortname":"vhnvn","disqusTitle":"[Writeup] CodeGate CTF 2015 \u2013 Quals \u2013 good-crypto","disqusUrl":"https:\/\/www.vhn.vn\/blog\/index.php\/2015\/03\/16\/writeup-codegate-ctf-2015-quals-good-crypto\/","postId":"35"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/disqus-comment-system/public/js/comment_embed.js?ver=3.0.16'></script>
+<script type='text/javascript' src='https://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201905'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/themes/oria/js/skip-link-focus-fix.js?ver=20130115'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/comment-reply.min.js?ver=4.9.9'></script>
+<script type='text/javascript' src='//ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/enlighter/resources/EnlighterJS.min.js?ver=3.6'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-includes/js/wp-embed.min.js?ver=4.9.9'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/oembed-gist/js/script.min.js?ver=4.9.1'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/spin.min.js?ver=1.3'></script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/jquery.spin.min.js?ver=1.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var jetpackCarouselStrings = {"widths":[370,700,1000,1200,1400,2000],"is_logged_in":"","lang":"en","ajaxurl":"https:\/\/www.vhn.vn\/blog\/wp-admin\/admin-ajax.php","nonce":"83a9538251","display_exif":"1","display_geo":"1","single_image_gallery":"1","single_image_gallery_media_file":"","background_color":"black","comment":"Comment","post_comment":"Post Comment","write_comment":"Write a Comment...","loading_comments":"Loading Comments...","download_original":"View full size <span class=\"photo-size\">{0}<span class=\"photo-size-times\">\u00d7<\/span>{1}<\/span>","no_comment_text":"Please be sure to submit some text with your comment.","no_comment_email":"Please provide an email address to comment.","no_comment_author":"Please provide your name to comment.","comment_post_error":"Sorry, but there was an error posting your comment. Please try again later.","comment_approved":"Your comment was approved.","comment_unapproved":"Your comment is in moderation.","camera":"Camera","aperture":"Aperture","shutter_speed":"Shutter Speed","focal_length":"Focal Length","copyright":"Copyright","comment_registration":"0","require_name_email":"1","login_url":"https:\/\/www.vhn.vn\/blog\/wp-login.php?redirect_to=https%3A%2F%2Fwww.vhn.vn%2Fblog%2Findex.php%2F2015%2F03%2F16%2Fwriteup-codegate-ctf-2015-quals-good-crypto%2F","blog_id":"1","meta_data":["camera","aperture","shutter_speed","focal_length","copyright"],"local_comments_commenting_as":"<fieldset><label for=\"email\">Email (Required)<\/label> <input type=\"text\" name=\"email\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-email-field\" \/><\/fieldset><fieldset><label for=\"author\">Name (Required)<\/label> <input type=\"text\" name=\"author\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-author-field\" \/><\/fieldset><fieldset><label for=\"url\">Website<\/label> <input type=\"text\" name=\"url\" class=\"jp-carousel-comment-form-field jp-carousel-comment-form-text-field\" id=\"jp-carousel-comment-form-url-field\" \/><\/fieldset>"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/carousel/jetpack-carousel.min.js?ver=20170209'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var sharing_js_options = {"lang":"en","counts":"1"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.vhn.vn/blog/wp-content/plugins/jetpack/_inc/build/sharedaddy/sharing.min.js?ver=6.1.1'></script>
+<script type='text/javascript'>
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-twitter', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomtwitter', 'menubar=1,resizable=1,width=600,height=350' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-facebook', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomfacebook', 'menubar=1,resizable=1,width=600,height=400' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-google-plus-1', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomgoogle-plus-1', 'menubar=1,resizable=1,width=480,height=550' );
+				return false;
+			});
+var windowOpen;
+			jQuery( document.body ).on( 'click', 'a.share-linkedin', function() {
+				// If there's another sharing window open, close it.
+				if ( 'undefined' !== typeof windowOpen ) {
+					windowOpen.close();
+				}
+				windowOpen = window.open( jQuery( this ).attr( 'href' ), 'wpcomlinkedin', 'menubar=1,resizable=1,width=580,height=450' );
+				return false;
+			});
+</script>
+<script type="text/javascript">/* <![CDATA[ */EnlighterJS_Config = {"selector":{"block":"pre.EnlighterJSRAW","inline":"code.EnlighterJSRAW"},"language":"generic","theme":"enlighter","indent":2,"hover":"hoverEnabled","showLinenumbers":true,"rawButton":true,"infoButton":true,"windowButton":true,"rawcodeDoubleclick":false,"grouping":true,"cryptex":{"enabled":false,"email":"mail@example.tld"}};!function(){var a=function(a){var b="Enlighter Error: ";console.error?console.error(b+a):console.log&&console.log(b+a)};return window.addEvent?"undefined"==typeof EnlighterJS?void a("Javascript Resources not loaded yet!"):"undefined"==typeof EnlighterJS_Config?void a("Configuration not loaded yet!"):void window.addEvent("domready",function(){EnlighterJS.Util.Init(EnlighterJS_Config.selector.block,EnlighterJS_Config.selector.inline,EnlighterJS_Config)}):void a("MooTools Framework not loaded yet!")}();;/* ]]> */</script>
+<!-- Shortcodes Ultimate custom CSS - start -->
+<style type="text/css">
+.su-spoiler-content {
+	border-left: 1px dashed #999;
+}
+</style>
+<!-- Shortcodes Ultimate custom CSS - end -->
+<script type='text/javascript' src='https://stats.wp.com/e-201905.js' async='async' defer='defer'></script>
+<script type='text/javascript'>
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:6.1.1',blog:'100285338',post:'35',tz:'7',srv:'www.vhn.vn'} ]);
+	_stq.push([ 'clickTrackerInit', '100285338', '35' ]);
+</script>
+
+</body>
+</html>

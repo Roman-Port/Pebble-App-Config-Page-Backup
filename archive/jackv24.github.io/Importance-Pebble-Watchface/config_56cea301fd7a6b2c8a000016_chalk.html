@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Importance Configuration</title>
+		<link rel="stylesheet" type="text/css" href="/jackv24.github.io/Importance-Pebble-Watchface/css/slate.css">		
+	</head>
+	<body>
+    	<div class="item-container">
+        	<h1 style="text-align: center; padding: 10px 0;">Importance Settings</h1>
+        </div>
+		<div class="item-container">
+			<div class="item-container-header">Time</div>
+			<div class="item-container-content">
+				<label class="item">
+					Display Seconds
+					<input type="checkbox" class="item-toggle" id="seconds_toggle">
+				</label>
+                <div class="item-container-footer">
+				Please note that enabling this feature will drastically reduce battery life.
+				</div>
+             </div>
+         </div>
+         <!--<div class="item-container">
+             <div class="item-container-header">Bluetooth Indicator</div>
+             <div class="item-container-content">
+                <div class="item tab-buttons">
+                	<a class="tab-button active">Icon / Vibrate</a>
+                    <a class="tab-button">Icon Only</a>
+                    <a class="tab-button">Disabled</a>
+                </div>
+			</div>
+		</div>-->
+		<div class="item-container">
+			<div class="item-container-header">Colour</div>
+			<div class="item-container-content">
+				<label class="item">
+					Time Colour
+					<input type="text" class="item-color item-color-normal" id="time_color" value="#FFFFFF">
+				</label>
+				<label class="item">
+					Date Colour
+					<input type="text" class="item-color item-color-normal" id="date_color" value="#FFFFFF">
+				</label>
+				<label class="item">
+					Background Colour
+					<input type="text" class="item-color item-color-normal" id="bg_color" value="#000000">
+				</label>
+			</div>
+		</div>
+		
+		<div class="item-container">
+			<div class="item-container-header">Battery Bar</div>
+			<div class="item-container-content">
+				<label class="item">
+					Foreground Colour
+					<input type="text" class="item-color item-color-normal" id="battery_fg_color" value="#00AAFF">
+				</label>
+				<label class="item">
+					Background Colour
+					<input type="text" class="item-color item-color-normal" id="battery_bg_color" value="#0000AA">
+				</label>
+			</div>
+		</div>
+		
+		<div class="item-container">
+			<div class="button-container">
+				<input type="button" class="item-button" value="SUBMIT" id="submit-button">
+			</div>
+		</div>
+		
+		<script src="/jackv24.github.io/Importance-Pebble-Watchface/js/slate.js"></script>
+		<script>
+		(function() {
+			loadOptions();
+			submitHandler();
+		})();
+		
+		function submitHandler() {
+			var $submitButton = $('#submit-button');
+			
+			$submitButton.on('click', function() {
+				console.log('Submit clicked');
+				
+				var return_to = getQueryParam('return_to', 'pebblejs://close#');
+				document.location = return_to + encodeURIComponent(JSON.stringify(getAndStoreConfigData()));
+			});
+		}
+		
+		function loadOptions() {
+			var $secondsToggle = $('#seconds_toggle');
+			
+			var $batteryBackgroundColorPicker = $('#battery_bg_color');
+			var $batteryForegroundColorPicker = $('#battery_fg_color');
+			
+			var $timeColorPicker = $('#time_color');
+			var $dateColorPicker = $('#date_color');
+			var $backgroundColorPicker = $('#bg_color');
+			
+			if(localStorage.batteryBackgroundColor) {
+				$secondsToggle[0].checked = localStorage.secondsToggle === 'true';
+				
+				$batteryBackgroundColorPicker[0].value = localStorage.batteryBackgroundColor;
+				$batteryForegroundColorPicker[0].value = localStorage.batteryForegroundColor;
+				
+				$timeColorPicker[0].value = localStorage.timeColor;
+				$dateColorPicker[0].value = localStorage.dateColor;
+				$backgroundColorPicker[0].value = localStorage.backgroundColor;
+			}
+		}
+		
+		function getAndStoreConfigData() {
+			var $secondsToggleSwitch = $('#seconds_toggle');
+			
+			var $batteryBackgroundColorPicker = $('#battery_bg_color');
+			var $batteryForegroundColorPicker = $('#battery_fg_color');
+			
+			var $timeColorPicker = $('#time_color');
+			var $dateColorPicker = $('#date_color');
+			var $backgroundColorPicker = $('#bg_color');
+			
+			var options = {
+				secondsToggle: $secondsToggleSwitch[0].checked,
+				
+				batteryBackgroundColor: $batteryBackgroundColorPicker.val(),
+				batteryForegroundColor: $batteryForegroundColorPicker.val(),
+				
+				timeColor: $timeColorPicker.val(),
+				dateColor: $dateColorPicker.val(),
+				backgroundColor: $backgroundColorPicker.val()
+			};
+			
+			localStorage.secondsToggle = options.secondsToggle;
+			
+			localStorage.batteryBackgroundColor = options.batteryBackgroundColor;
+			localStorage.batteryForegroundColor = options.batteryForegroundColor;
+			
+			localStorage.timeColor = options.timeColor;
+			localStorage.dateColor = options.dateColor;
+			localStorage.backgroundColor = options.backgroundColor;
+			
+			console.log('Got options: ' + JSON.stringify(options));
+			
+			return options;
+		}
+		
+		function getQueryParam(variable, defaultValue) {
+		  var query = location.search.substring(1);
+		  var vars = query.split('&');
+		  for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split('=');
+			if (pair[0] === variable) {
+			  return decodeURIComponent(pair[1]);
+			}
+		  }
+		  return defaultValue || false;
+		}
+	</script>
+	</body>
+</html>

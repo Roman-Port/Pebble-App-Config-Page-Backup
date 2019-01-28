@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  font-family: 'Karla', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  text-align: center;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 160%;
+}
+
+h2, h3 {
+  font-size: 120%;
+  margin: 10px 0;
+}
+
+.content {
+  width: 100%;
+  background:#fafafa;
+}
+
+.pure-form {
+  margin:0 auto;
+  text-align:center;
+  width: 90%;
+}
+
+.fullscreen-form {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background-color: #fff;
+}
+
+.autocomplete-suggestions {
+  max-height: 80%;
+}
+
+
+.menu-class {
+  width: 100%;
+  height: 100%:
+}
+
+#form-home {
+  border-bottom:1px solid #eee;
+}
+
+p, form input, form label {
+  font-size: 120%;
+}
+
+form label{
+  display:block;
+  font-size: 120%;
+  padding: 20px 0;
+}
+
+.input-text{
+  width:90%;
+  margin: 0 auto;
+  font-family: 'Karla', sans-serif;
+  font-size: 120%;
+  font-weight: 700;
+  padding: 15px;
+  margin-bottom: 20px;
+  outline:0;
+  -webkit-box-shadow: none;
+  border: 0;
+}
+
+.ui-buttons {
+  margin-top: 20px;
+}
+
+.btn {
+  color: white;
+  font-size: 120%;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 13px 32px;
+  border: 0;
+  border-radius: 5px;
+  -webkit-appearance:none;
+  font-color: white;
+  text-decoration: none;
+  display:block;
+  width: 95%;
+  margin: 10px auto;
+}
+
+.btn-cancel {
+font-family: 'Karla', sans-serif;
+  background-color: #FF7654;
+}
+
+.btn-submit {
+font-family: 'Karla', sans-serif;
+  background-color: #3b5998;
+}
+
+.autocomplete-suggestion {  padding: 10px .6em; font-size: 120%; }
+.float-code {float: right;
+  display: inline-block;
+  font-size: 100%;
+  background: #f0f0f0;
+  padding: 5px 10px;
+  margin-top: -5px;
+  font-weight: 700;
+  color: #1f8dd6;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.autocomplete-suggestion.selected { background: #f0f0f0; }

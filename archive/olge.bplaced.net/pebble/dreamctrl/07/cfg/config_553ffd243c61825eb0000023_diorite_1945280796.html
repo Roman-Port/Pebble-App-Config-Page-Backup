@@ -1,0 +1,688 @@
+ 	
+<!DOCTYPE html>
+<html manifest="manifest.appcache">
+<head>
+<title>Dream Ctrl Config</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<xmeta name="viewport" content="user-scalable=0, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0">
+<xmeta name="apple-mobile-web-app-capable" content="yes">
+<xmeta name="apple-mobile-web-app-status-bar-style" content="black-translucent"></xmeta>
+            
+<style>
+
+body {
+	font: 14px Arial;
+  padding: 2px 6px; 
+  background-color:#2a2a2a;
+}
+
+pre {
+  font-size:12px;
+}
+
+.taMain {
+	padding:2px 10px;
+	border:1px solid #777777;
+	background-color:#efefef;
+	background-image: -webkit-gradient(linear, 
+	                   left top, 
+	                   left bottom, 
+	                   color-stop(0%,#ffffff), color-stop(10%,#ffffff), color-stop(70%,#efefef), color-stop(100%,#e0e0e0));
+	-webkit-border-radius: 12px;
+	-moz-border-radius: 12px;
+	border-radius: 12px;
+	padding-bottom:11px;
+	margin-bottom:15px;
+	width:290px;
+}
+
+input, button {
+  font-size: 16px;
+  font-weight:normal;
+}
+
+input {
+	width:230px;
+	background-color:#ffffff;
+}
+
+.inputCheckbox {
+	width:35px;
+	padding: 10px 0px;
+	vertical-align: middle;
+}
+
+.buttonOk {
+	padding:6px 24px;
+	background-color:#008800;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#009900), color-stop(100%,#008800));
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	border-radius: 18px;
+	width: 105px;
+  font-weight:bold;
+	color: white;
+}
+
+.buttonSave {
+	padding:7px 0px 9px 0px;
+	background-color:#007700;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#008800), color-stop(100%,#007700));
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	border-radius: 14px;
+	width: 105px;
+  font-weight:bold;
+	color: white;
+}
+
+
+.buttonCancel {
+	padding:7px 0px 9px 0px;
+	background-color:#aa0000;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bb0000), color-stop(100%,#aa0000));
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	border-radius: 14px;
+	width: 105px;
+  font-weight:bold;
+	color: white;
+}
+
+.buttonHelp {
+	padding:5px 0px 5px 0px;
+	background-color:#5368DC;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#6378EC), color-stop(100%,#5368DC));
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	border-radius: 18px;
+	width: 80px;
+  font-weight:bold;
+	color: white;
+}
+
+.buttonDefaults {
+	padding:6px 20px;
+	background-color:#aaaaaa;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#eeeeee), color-stop(100%,#999999));
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	border-radius: 18px;
+	width: 230px;
+}
+
+.tdTitle {
+	font-family: Helvetica; 
+  font-size: 36px;
+  font-weight:bold;
+  text-align:center;
+  padding-top:8px;
+  padding-bottom:4px;
+  color: #000099;
+}
+
+.tdLabel {
+  font-size: 16px;
+  font-weight:bold;
+  padding-top:15px;
+  color: #000099;
+}
+
+.tdInput {
+  padding:2px 8px;
+}
+
+.tdInputCheckbox {
+  padding:2px 10px;
+  font-weight:bold;
+}
+
+.tdDebug {
+  font-size: 12px;
+  padding:4px 2px;
+}
+
+.tdDescription {
+  font-size: 13px;
+  padding:2px 12px;
+}
+
+.tdDescriptionCenter {
+  font-size: 13px;
+  padding:2px 12px;
+  text-align:center;
+}
+
+.tdAction {
+  text-align:center;
+  padding:28px 0px;
+  padding-top:8px;
+  padding-bottom:1px;
+}
+
+.tdDefaults {
+  text-align:center;
+  padding:0px 0px;
+  padding-top:6px;
+  padding-bottom:2px;
+}
+
+.tdCopyright {
+  font-size: 12px;
+  text-align:center;
+  font-style:italic; 
+  padding-top:0px;
+  padding-bottom:0px;
+}
+
+.tdLanguage {
+	vertical-align:center;
+  font-size: 17px;
+  font-weight:bold;
+  text-align:center;
+  padding-top:8px;
+  padding-bottom:0px;
+}
+
+.tdAppDescription {
+  font-size: 13px;
+  font-weight:normal;
+  font-weight:bold;
+  text-align:center;
+  padding-top:8px;
+  padding-bottom:0px;
+}
+
+.tdSectionTitle {
+	font-family: Helvetica; 
+	color: #C60651;
+  font-weight:bold;
+  font-size: 20px;
+  text-align:center;
+  xxfont-style:italic; 
+  padding-top:4px;
+  padding-bottom:0px;
+}
+
+
+</style>
+
+<script>
+</script>
+
+<script>
+
+//###################################
+//###################################
+
+
+//--------------------------------------
+// wird von cfg.php initialisiert mit
+// den aktuellen cfgdata Werten
+//--------------------------------------
+var cfgdata =
+{
+  
+  cfgversion : "07",
+  
+  cfglanguage : "EN",
+  
+  account_token : "RPWS_APPCONFIGRIPPER_TOKEN_ACCOUNT",
+  
+  watch_token : "RPWS_APPCONFIGRIPPER_TOKEN_WATCH",
+  
+  pebble_platform : "diorite",
+  
+  pebble_model : "RPWS_APPCONFIGRIPPER_GETACTIVEWATCHINFO_MODEL",
+  
+  pebble_language : "RPWS_APPCONFIGRIPPER_GETACTIVEWATCHINFO_LANG",
+  
+  pebble_fw_major : "RPWS_APPCONFIGRIPPER_GETACTIVEWATCHINFO_FW_MAJOR",
+  
+  pebble_fw_minor : "RPWS_APPCONFIGRIPPER_GETACTIVEWATCHINFO_FW_MINOR",
+  
+  pebble_fw_patch : "RPWS_APPCONFIGRIPPER_GETACTIVEWATCHINFO_FW_PATCH",
+  
+  pebble_fw_suffix : "RPWS_APPCONFIGRIPPER_GETACTIVEWATCHINFO_FW_SUFFIX",
+  
+  http_timeout : 3000,
+  
+  dreambox_ip : "",
+  
+  backlight : 0,
+  
+  use_screen_nav : true,
+  
+  use_screen_play : true,
+  
+  use_screen_vol : true,
+  
+  user1_http : "",
+  
+  user1_http_message : true,
+  
+  use_denon : false,
+  
+  denon_ip : "",
+  
+  vibe_screenchg : true,
+  
+  vibe_button : true,
+  
+};
+
+
+//-----------------------------------
+//-----------------------------------
+function set_formdata()
+{
+	cfgform.use_screen_nav.checked     = cfgdata.use_screen_nav;
+	cfgform.use_screen_play.checked    = cfgdata.use_screen_play;
+	cfgform.use_screen_vol.checked     = cfgdata.use_screen_vol;
+	cfgform.vibe_screenchg.checked     = cfgdata.vibe_screenchg;
+	cfgform.vibe_button.checked        = cfgdata.vibe_button;
+	//cfgform.user1_http_message.checked = cfgdata.user1_http_message;
+}
+
+
+//-----------------------------------
+// get_formdata()
+//
+// auslesen der form-werte und 
+// speichern in cfgdata
+//-----------------------------------
+function get_formdata()
+{
+	cfgdata.dreambox_ip  = cfgform.dreambox_ip.value;
+	cfgdata.backlight    = parseInt(cfgform.backlight.value, 10);
+	cfgdata.user1_http   = cfgform.user1_http.value;
+	cfgdata.denon_ip     = cfgform.denon_ip.value;
+	cfgdata.http_timeout = parseInt(cfgform.http_timeout.value, 10);
+
+	if( cfgdata.denon_ip != "" )   cfgdata.use_denon = true;
+
+  // backlight muss 0 >= n <= 30 sein
+	if( cfgdata.backlight > 30 )   cfgdata.backlight = 30;
+	if( cfgdata.backlight < 0 )    cfgdata.backlight = 0;
+
+	cfgdata.use_screen_nav  = cfgform.use_screen_nav.checked;
+	cfgdata.use_screen_play = cfgform.use_screen_play.checked;
+	cfgdata.use_screen_vol  = cfgform.use_screen_vol.checked;
+	cfgdata.vibe_screenchg  = cfgform.vibe_screenchg.checked;
+	cfgdata.vibe_button     = cfgform.vibe_button.checked;
+	
+	// mindestens 1 control screen muss aktiv sein!
+	if( !cfgdata.use_screen_nav && !cfgdata.use_screen_play && !cfgdata.use_screen_vol )
+		cfgdata.use_screen_nav = true;
+
+	//cfgdata.user1_http_message  = cfgform.user1_http_message.checked;
+}
+
+
+//-----------------------------------
+//-----------------------------------
+function doHelp()
+{
+  //alert( "doHelp!" );
+  get_formdata();
+
+	var cData = encodeURIComponent(JSON.stringify(cfgdata));
+
+  window.location.href = "../info/index.php?cfglang=" + cfgdata.cfglanguage + "&cfgdata=" + cData;
+}
+
+
+//-----------------------------------
+//-----------------------------------
+function doLanguage( sLanguage )
+{
+  //alert( "doLanguage!" );
+  get_formdata();
+	cfgdata.cfglanguage = sLanguage;
+
+	//alert( JSON.stringify(cfgdata) );
+  
+	var cData = encodeURIComponent(JSON.stringify(cfgdata));
+	
+  window.location.href = "cfg.php?cfgdata=" + cData;
+}
+
+
+//-----------------------------------
+//-----------------------------------
+function doSave()
+{
+  get_formdata();	
+
+  //alert( "doSave!" );
+	//var cData = (JSON.stringify(cfgdata));
+  //alert( cData );
+    
+  alert("\nsettings saved!");
+
+	var cData = encodeURIComponent(JSON.stringify(cfgdata));
+	//cData = "";
+
+  window.location.href = "pebblejs://close#" + cData;		// send config data back to pebble-js-app.s
+}
+
+
+//-----------------------------------
+//-----------------------------------
+function doCancel()
+{
+  window.location.href = "pebblejs://close#";
+}
+
+
+//-----------------------------------
+//-----------------------------------
+function doDefaults()
+{
+	var lOk;
+	
+  lOk = confirm("\n* WARNING! *\n\nDo you really want to set defaults?\n\nAll of your configuration data will be lost!");
+	
+	if( lOk )
+	{
+		//initData();
+		//setData();
+	}
+}
+
+
+
+</script>
+
+</xmeta></xmeta></head>
+<body>
+
+<center>
+	
+<form name="cfgform" method="POST" action="#"></form>
+
+<!-- ----------- -->
+<!-- TITLE       -->
+<!-- ----------- -->
+<table class='taMain'>
+<tr>
+	<td class='tdTitle'>Dream Ctrl</td>
+</tr>
+<tr>
+  <td class='tdCopyright'>&copy; Oliver Gemesi</td>
+</tr>
+<tr> 
+  <td class='tdLanguage'>
+   <a href='#' onclick="doLanguage('EN');"><img src="/olge.bplaced.net/pebble/dreamctrl/07/gfx/USA_32.png"></a>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <a href='#' onclick="doLanguage('DE');"><img src="/olge.bplaced.net/pebble/dreamctrl/07/gfx/Germany_32.png"></a>
+	</td>
+</tr>
+<tr>
+  <td class='tdAppDescription'>control Dreambox or Enigma2 based <br>sat-receivers with your Pebble!</td>
+</tr>
+
+<tr>
+	<td class='tdAppDescription'>
+	<input class='buttonHelp' id="help" type="button" value="Help" onclick="doHelp();">
+  </td>
+</tr>
+
+</table>
+
+
+<!-- --------------- -->
+<!-- DEBUG -->
+<!-- --------------- -->
+
+
+	
+<!-- ----------- -->
+<!-- MAIN CONFIG -->
+<!-- ----------- -->
+<table class='taMain'>
+
+<tr>
+  <td class='tdSectionTitle'>basic configuration</td>
+</tr>
+
+<!-- ----------------- -->
+
+<tr>
+  <td class='tdLabel'>
+  Dreambox IP:
+	</td>
+</tr>
+
+<tr>
+  <td class='tdInput'>
+  <input type="text" value="" id="dreambox_ip" placeholder="192.168.0.11">
+	</td>
+</tr>
+
+<tr>
+  <td class='tdDescription'>
+  local IP Adress of your Dreambox or any other Enigma2 based Sat-Receiver. The webinterface must be enabled without password
+	</td>
+</tr>
+
+<!-- ----------------- -->
+
+<tr>
+  <td class='tdLabel'>
+  Control Screens:
+	</td>
+</tr>
+
+<tr>
+  <td class='tdInputCheckbox'>
+ 		<label for="use_screen_nav">
+  		<input class="inputCheckbox" type="checkbox" value="" id="use_screen_nav">Screen: Navigation
+    </label>   		
+	</td>
+</tr>
+
+<tr>
+  <td class='tdInputCheckbox'>
+ 		<label for="use_screen_play">
+  		<input class="inputCheckbox" type="checkbox" value="" id="use_screen_play" checked="">Screen: Play
+    </label>   		
+	</td>
+</tr>
+
+<tr>
+  <td class='tdInputCheckbox'>
+ 		<label for="use_screen_vol">
+  		<input class="inputCheckbox" type="checkbox" value="" id="use_screen_vol" checked="">Screen: Volume
+    </label>   		
+	</td>
+</tr>
+
+<tr>
+  <td class='tdDescription'> 
+  you can switch off control screens - e.g. if you don't use the volume controls than uncheck the screen 'Volume'.
+                                                 <br>The diffrent screens can be cycled by a <b>long press</b> on Pebble's <b>SELECT</b> button <a href='#' onclick="doHelp();">Help</a>
+	</td>
+</tr>
+
+<!-- ----------------- -->
+
+<tr>
+  <td class='tdLabel'>
+  Vibrate on screen change:
+	</td>
+</tr>
+
+<tr>
+  <td class='tdInputCheckbox'>
+ 		<label for="vibe_screenchg">
+  		<input class="inputCheckbox" type="checkbox" value="" id="vibe_screenchg" checked="">vibrate screen change
+    </label>   		
+	</td>
+</tr>
+
+<tr>
+  <td class='tdDescription'>
+  vibrates if you change the control screen - helpful on blind operation DreamCtrl.
+                                                    <br>1x Navigation, 2x Play, 3x Volume
+	</td>
+</tr>
+
+<!-- ----------------- -->
+
+<tr>
+  <td class='tdLabel'>
+  Button Feedback:
+	</td>
+</tr>
+
+<tr>
+  <td class='tdInputCheckbox'>
+ 		<label for="vibe_button">
+  		<input class="inputCheckbox" type="checkbox" value="" id="vibe_button" checked="">haptic feedback
+    </label>   		
+	</td>
+</tr>
+
+<tr>
+  <td class='tdDescription'>
+  light vibe on button press
+	</td>
+</tr>
+
+<!-- ----------------- -->
+
+<tr>
+  <td class='tdLabel'>
+  Backlight:
+	</td>
+</tr>
+
+<tr>
+  <td class='tdInput'>
+  <input type="text" value="0" id="backlight" placeholder="12">
+	</td>
+</tr>
+
+<tr>
+  <td class='tdDescription'>
+  seconds to switch on Pebble's backlight when shaking - 0=Pebble default; >0 and <=30 seconds for backlight on
+	</td>
+</tr>
+
+</table>
+
+
+
+<!-- --------------- -->
+<!-- USER CONFIG     -->
+<!-- --------------- -->
+<table class='taMain'>
+<tr>
+  <td class='tdSectionTitle'>enhanced configuration</td>
+</tr>
+
+<tr>
+  <td class='tdLabel'>
+  User HTTP:
+	</td>
+</tr>
+
+<tr>
+  <td class='tdInput'>
+  <input type="text" value="" id="user1_http" placeholder="http://myip?set=1">
+	</td>
+</tr>
+
+<tr>
+  <td class='tdDescription'>
+  this http request is executed by <b>double click</b> Pebble's <b>SELECT</b> button.
+                                                    <br><br>e.g. you can switch power on if you have a smart powerswitch device like <i>NETIO4</i> or a web-enabled home automation system. Refer to the manual of your device for the proper http-call.
+	</td>
+</tr>
+
+<!-- --------------- -->
+
+<tr>
+  <td class='tdLabel'>
+  Denon AVR-3311 IP:
+	</td>
+</tr>
+
+<tr>
+  <td class='tdInput'>
+  <input type="text" value="" id="denon_ip" placeholder="192.168.0.11">
+	</td>
+</tr>
+
+<tr>
+  <td class='tdDescription'>
+  You can control volume with a <b>Denon AVR-3311</b> Receiver!<br>If IP is set, volume up/down is send to Denon AVR instead of Dreambox. 
+	</td>
+</tr>
+
+<!-- --------------- -->
+
+<tr>
+  <td class='tdLabel'>
+  HTTP Timeout:
+	</td>
+</tr>
+
+<tr>
+  <td class='tdInput'>
+  <input type="text" value="3000" id="http_timeout" placeholder="2500">
+	</td>
+</tr>
+
+<tr>
+  <td class='tdDescription'>
+  time in ms (1000 = 1 second; default: 2500).<br>Set this to 0 if you don't want to get timeout error messages in case a device is not accessible.
+	</td>
+</tr>
+
+</table>
+
+
+
+<!-- --------------- -->
+<!-- CANCEL / OK     -->
+<!-- --------------- -->
+<table class='taMain'>	
+
+<!--
+<tr>
+  <td class='tdSectionTitle'>store settings</td>
+</tr>
+-->
+
+<tr>
+  <td class='tdAction'>
+  <input class='buttonCancel' id="cancel" type="button" value="cancel" onclick="doCancel();">
+  &nbsp;&nbsp;
+  <input class='buttonSave' id="save" type="button" value="save" onclick="doSave();">
+	</td>
+</tr>
+
+</table>
+
+
+<!-- ---------------- -->
+<!-- RESTORE DEFAULTS -->
+<!-- ---------------- -->
+
+
+</form>
+
+
+<script>
+//-----------------------------------
+//-----------------------------------
+window.onload = function ()
+{
+	set_formdata();  // setzen von checkboxen und Optionslisten (config.js)
+}
+</script>
+
+</center></body>
+</html>

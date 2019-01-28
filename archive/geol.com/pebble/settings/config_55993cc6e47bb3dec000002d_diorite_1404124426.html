@@ -1,0 +1,314 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+<!--
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+-->
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+    <link href="/geol.com/pebble/colorpicker.css" rel="stylesheet" type="text/css">
+
+<script src='/geol.com/pebble/settings/script.bin'></script>
+    <title>Smiley Face Watch configuration</title>
+
+    <style>
+	span{
+		font-size:x-small;
+	}
+	td{
+		text-align:center;
+	}
+	.noColor{
+		display:block;
+	}
+
+    </style>
+
+  </head>
+
+  <body>
+    <div data-role="page" id="page1">
+<!--
+      <div data-theme="" data-role="header" style="height:50px;">
+	<img src="SmileClearSim.png" style="height:48px;float:left;" />
+	<img src="../OS-Pebble.png" style="height:48px;float:right;" />
+
+	<h3>Smiley Face Watch for Unknown</h3>
+      </div>
+-->
+<div data-theme="" data-role="header" style="height:50px;"><img src="/geol.com/pebble/settings/SmileClearSim.png" style="height:48px;float:left;"><img src="/geol.com/pebble/OS-Pebble.png" style="height:48px;float:right;"><h3>Smiley Watch for Unknown</h3></div><div style="text-align:center;background-color:silver;">Unknown</div>      <div data-role="content">
+	<h2>Options</h2>
+	<div data-role="fieldcontain">
+	  <label for="batBack">Eyes Color<br>
+		<span>Click face to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('bat-color4'));" style="background-color: transparent; height:24px;">
+			<img id="bat-color4" style="background-color:black;height:64px;" src="/geol.com/pebble/settings/SmileWhite.png"></a>
+		<br>
+		<span>Choose the Default eye color. <br>If Battery Level indicator below is enabled, think of this as the eye lid color.</span>
+
+	  </label>
+	</div>
+	<hr>
+
+	<div data-role="fieldcontain">
+	  <label for="btdisco-notif">Bluetooth Indicator<br>
+		<img style="background-color:black;height:64px;" src="/geol.com/pebble/settings/SmileWhite.png">
+		<img style="background-color:black;height:64px;" src="/geol.com/pebble/settings/SadWhite.png">
+		<br>
+		<span>Face will be Happy when Bluetooth is connected and Sad when disconnected</span>
+
+	  </label>
+	  <select name="btdisco-notif" id="btdisco-notif" data-theme="" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+
+	<div class="noColor" data-role="fieldcontain">
+	  <label for="lowbat-notif">Battery Color Indicator<br>
+		<span>Click face to change color</span><br>
+		<table><tr>
+		<td><a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('bat-color0'));" style="background-color: transparent; height:24px;">
+			<img id="bat-color0" style="background-color:#00FF00;height:64px;" src="/geol.com/pebble/settings/SmileWhite.png"></a></td>
+		<td><a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('bat-color1'));" style="background-color: transparent; height:24px;">
+			<img id="bat-color1" style="background-color:#0000FF;height:64px;" src="/geol.com/pebble/settings/SmileWhite.png"></a></td>
+		<td><a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('bat-color2'));" style="background-color: transparent; height:24px;">
+			<img id="bat-color2" style="background-color:orange;height:64px;" src="/geol.com/pebble/settings/SmileWhite.png"></a></td>
+		<td><a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('bat-color3'));" style="background-color: transparent; height:24px;">
+			<img id="bat-color3" style="background-color:red;height:64px;" src="/geol.com/pebble/settings/SmileWhite.png"></a></td>
+		</tr>
+		<tr>
+<td>100%</td><td>70%</td><td>50%</td><td>30%</td>
+
+</tr>
+		</table>
+		<span>Eyes will change color with battery level<br>Note: 100% is only seen when plugged in and fully charged.</span>
+
+	  </label>
+	  <select name="lowbat-notif" id="lowbat-notif" data-theme="" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+
+	<div data-role="fieldcontain">
+	  <label for="levbat-notif">Battery Level Indicator<br>
+		<span>Click face to change color</span><br>
+		<a href="#color-picker" data-rel="popup" data-position-to="origin" onclick="getNewColor(document.getElementById('bat-color5'));" style="background-color: transparent; height:24px;">
+			<img id="bat-color5" style="background-color:blue;height:64px;" src="/geol.com/pebble/settings/SmileWhiteSim.png"></a>
+
+
+
+		<br><span>Eyes will show level of battery<br>
+		Note: Battery level is always on when charging</span>
+	  </label>
+	  <select name="levbat-notif" id="levbat-notif" data-theme="" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+	<div data-role="fieldcontain">
+	  <label for="battext-notif">Show Battery Text %<br>
+		<span>Show the current battery level as a text percent</span>
+
+	  </label>
+	  <select name="battext-notif" id="battext-notif" data-theme="" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+	<div data-role="fieldcontain">
+	  <label for="showTicks-tog">Show Hour Tick Marks<br>
+	  </label>
+	  <select name="showTicks-tog" id="showTicks-tog" data-theme="" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+	<div data-role="fieldcontain">
+	  <label for="showNums-tog">Show Hour Numbers<br>
+	  </label>
+	  <select name="showNums-tog" id="showNums-tog" data-theme="" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+	<div data-role="fieldcontain">
+	  <label for="snapHours-tog">Snap Hour Hand to Current Hour<br>
+		<span>If OFF, hour hand will move slowly between each hour mark<br>If ON, hour hand will point directly to current hour.</span>
+
+	  </label>
+	  <select name="snapHours-tog" id="snapHours-tog" data-theme="" data-role="slider">
+	    <option value="off">Off</option>
+	    <option value="on">On</option>
+	  </select>
+	</div>
+	<hr>
+	<div data-role="fieldcontain">
+		<label for="slider">Battery Level Test</label><br>
+		<span>Used to simulate battery level.<br>Return to settings and submit with a value of zero for true battery level<br>
+		<input name="battestslider" id="battestslider" type="range" min="0" max="100" value="0">
+	</span></div>
+
+
+
+
+
+
+
+
+
+
+
+
+	<div class="ui-body ui-body-b">
+	  <fieldset class="ui-grid-a">
+	    <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+	    <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Save</button></div>
+	  </fieldset>
+	</div>
+    <script>
+      <!-- from http://snipplr.com/view/26662/get-url-parameters-with-jquery--improved/ -->
+      $.urlParam = function(name){
+	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	if (!results) { return 0; }
+	return results[1] || 0;
+      }
+
+	function setControls() {
+		updateControls();
+	}
+      function updateControls() {
+	var jason = JSON.parse(decodeURIComponent($.urlParam("J")));
+
+	if(jason.OP & 1) $("#btdisco-notif").val("on").slider("refresh");
+	if(jason.OP & 2) $("#lowbat-notif").val("on").slider("refresh");
+	if(jason.OP & 4) $("#levbat-notif").val("on").slider("refresh");
+	if(jason.OP & 8) $("#battext-notif").val("on").slider("refresh");
+	if(jason.OP & 16) $("#showTicks-tog").val("on").slider("refresh");
+	if(jason.OP & 32) $("#showNums-tog").val("on").slider("refresh");
+	if(jason.OP & 64) $("#snapHours-tog").val("on").slider("refresh");
+
+
+
+	if(jason.C0) $("#bat-color0").css('backgroundColor',phextojhex(jason.C0));
+	if(jason.C1) $("#bat-color1").css('backgroundColor',phextojhex(jason.C1));
+	if(jason.C2) $("#bat-color2").css('backgroundColor',phextojhex(jason.C2));
+	if(jason.C3) $("#bat-color3").css('backgroundColor',phextojhex(jason.C3));
+	if(jason.C4) $("#bat-color4").css('backgroundColor',phextojhex(jason.C4));
+	if(jason.C5) $("#bat-color5").css('backgroundColor',phextojhex(jason.C5));
+      }
+
+      function saveOptions() {
+	var op = 0;
+	if ($("#btdisco-notif").val() == "on") op = op | 1;
+	if ($("#lowbat-notif").val() == "on") op = op | 2;
+	if ($("#levbat-notif").val() == "on") op = op | 4;
+	if ($("#battext-notif").val() == "on") op = op | 8;
+	if ($("#showTicks-tog").val() == "on") op = op | 16;
+	if ($("#showNums-tog").val() == "on") op = op | 32;
+	if ($("#snapHours-tog").val() == "on") op = op | 64;
+
+
+	//alert(op);
+
+        var options = {
+
+
+          'testbat': parseInt($("#battestslider").val()),
+	  'OP': op,
+          'C0': jhextophex(rgb2hex($("#bat-color0").css('backgroundColor'))),
+          'C1': jhextophex(rgb2hex($("#bat-color1").css('backgroundColor'))),
+          'C2': jhextophex(rgb2hex($("#bat-color2").css('backgroundColor'))),
+          'C3': jhextophex(rgb2hex($("#bat-color3").css('backgroundColor'))),
+          'C4': jhextophex(rgb2hex($("#bat-color4").css('backgroundColor'))),
+          'C5': jhextophex(rgb2hex($("#bat-color5").css('backgroundColor'))),
+	  //'testbat':37,
+        }
+
+	//alert(options['forecolor']);
+        return options;
+      }
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close#";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+	var returnTo = decodeURIComponent($.urlParam("return_to"));
+//          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+	if(returnTo == 0){
+	  var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+	}else{
+	  var location = returnTo + encodeURIComponent(JSON.stringify(saveOptions()));
+	}
+          console.log(location);
+	//alert(location);
+
+          document.location = location;
+        });
+      });
+
+
+    </script>
+
+<div data-role="popup" id="color-picker" data-overlay-theme="b">
+	<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<div data-role="main" id="color-picker" class="ui-content" style="border-style: none; height:90vh; width:5000px; overflow-y:scroll; overflow-x:hidden; ">
+	<div class="color-row" id="color-row1"><div class="color-box selected-color-box" id="color-box-000000" style="background:#000000;">0</div><div class="color-box selected-color-box" id="color-box-000055" style="background:#000055;">1</div><div class="color-box selected-color-box" id="color-box-0000AA" style="background:#0000AA;">2</div><div class="color-box selected-color-box" id="color-box-0000FF" style="background:#0000FF;">3</div></div><div class="color-row" id="color-row2"><div class="color-box selected-color-box" id="color-box-005500" style="background:#005500;">4</div><div class="color-box selected-color-box" id="color-box-005555" style="background:#005555;">5</div><div class="color-box selected-color-box" id="color-box-0055AA" style="background:#0055AA;">6</div><div class="color-box selected-color-box" id="color-box-0055FF" style="background:#0055FF;">7</div></div><div class="color-row" id="color-row3"><div class="color-box selected-color-box" id="color-box-00AA00" style="background:#00AA00;">8</div><div class="color-box selected-color-box" id="color-box-00AA55" style="background:#00AA55;">9</div><div class="color-box selected-color-box" id="color-box-00AAAA" style="background:#00AAAA;">10</div><div class="color-box selected-color-box" id="color-box-00AAFF" style="background:#00AAFF;">11</div></div><div class="color-row" id="color-row4"><div class="color-box selected-color-box" id="color-box-00FF00" style="background:#00FF00;">12</div><div class="color-box selected-color-box" id="color-box-00FF55" style="background:#00FF55;">13</div><div class="color-box selected-color-box" id="color-box-00FFAA" style="background:#00FFAA;">14</div><div class="color-box selected-color-box" id="color-box-00FFFF" style="background:#00FFFF;">15</div></div><div class="color-row" id="color-row5"><div class="color-box selected-color-box" id="color-box-550000" style="background:#550000;">16</div><div class="color-box selected-color-box" id="color-box-550055" style="background:#550055;">17</div><div class="color-box selected-color-box" id="color-box-5500AA" style="background:#5500AA;">18</div><div class="color-box selected-color-box" id="color-box-5500FF" style="background:#5500FF;">19</div></div><div class="color-row" id="color-row6"><div class="color-box selected-color-box" id="color-box-555500" style="background:#555500;">20</div><div class="color-box selected-color-box" id="color-box-555555" style="background:#555555;">21</div><div class="color-box selected-color-box" id="color-box-5555AA" style="background:#5555AA;">22</div><div class="color-box selected-color-box" id="color-box-5555FF" style="background:#5555FF;">23</div></div><div class="color-row" id="color-row7"><div class="color-box selected-color-box" id="color-box-55AA00" style="background:#55AA00;">24</div><div class="color-box selected-color-box" id="color-box-55AA55" style="background:#55AA55;">25</div><div class="color-box selected-color-box" id="color-box-55AAAA" style="background:#55AAAA;">26</div><div class="color-box selected-color-box" id="color-box-55AAFF" style="background:#55AAFF;">27</div></div><div class="color-row" id="color-row8"><div class="color-box selected-color-box" id="color-box-55FF00" style="background:#55FF00;">28</div><div class="color-box selected-color-box" id="color-box-55FF55" style="background:#55FF55;">29</div><div class="color-box selected-color-box" id="color-box-55FFAA" style="background:#55FFAA;">30</div><div class="color-box selected-color-box" id="color-box-55FFFF" style="background:#55FFFF;">31</div></div><div class="color-row" id="color-row9"><div class="color-box selected-color-box" id="color-box-AA0000" style="background:#AA0000;">32</div><div class="color-box selected-color-box" id="color-box-AA0055" style="background:#AA0055;">33</div><div class="color-box selected-color-box" id="color-box-AA00AA" style="background:#AA00AA;">34</div><div class="color-box selected-color-box" id="color-box-AA00FF" style="background:#AA00FF;">35</div></div><div class="color-row" id="color-row10"><div class="color-box selected-color-box" id="color-box-AA5500" style="background:#AA5500;">36</div><div class="color-box selected-color-box" id="color-box-AA5555" style="background:#AA5555;">37</div><div class="color-box selected-color-box" id="color-box-AA55AA" style="background:#AA55AA;">38</div><div class="color-box selected-color-box" id="color-box-AA55FF" style="background:#AA55FF;">39</div></div><div class="color-row" id="color-row11"><div class="color-box selected-color-box" id="color-box-AAAA00" style="background:#AAAA00;">40</div><div class="color-box selected-color-box" id="color-box-AAAA55" style="background:#AAAA55;">41</div><div class="color-box selected-color-box" id="color-box-AAAAAA" style="background:#AAAAAA;">42</div><div class="color-box selected-color-box" id="color-box-AAAAFF" style="background:#AAAAFF;">43</div></div><div class="color-row" id="color-row12"><div class="color-box selected-color-box" id="color-box-AAFF00" style="background:#AAFF00;">44</div><div class="color-box selected-color-box" id="color-box-AAFF55" style="background:#AAFF55;">45</div><div class="color-box selected-color-box" id="color-box-AAFFAA" style="background:#AAFFAA;">46</div><div class="color-box selected-color-box" id="color-box-AAFFFF" style="background:#AAFFFF;">47</div></div><div class="color-row" id="color-row13"><div class="color-box selected-color-box" id="color-box-FF0000" style="background:#FF0000;">48</div><div class="color-box selected-color-box" id="color-box-FF0055" style="background:#FF0055;">49</div><div class="color-box selected-color-box" id="color-box-FF00AA" style="background:#FF00AA;">50</div><div class="color-box selected-color-box" id="color-box-FF00FF" style="background:#FF00FF;">51</div></div><div class="color-row" id="color-row14"><div class="color-box selected-color-box" id="color-box-FF5500" style="background:#FF5500;">52</div><div class="color-box selected-color-box" id="color-box-FF5555" style="background:#FF5555;">53</div><div class="color-box selected-color-box" id="color-box-FF55AA" style="background:#FF55AA;">54</div><div class="color-box selected-color-box" id="color-box-FF55FF" style="background:#FF55FF;">55</div></div><div class="color-row" id="color-row15"><div class="color-box selected-color-box" id="color-box-FFAA00" style="background:#FFAA00;">56</div><div class="color-box selected-color-box" id="color-box-FFAA55" style="background:#FFAA55;">57</div><div class="color-box selected-color-box" id="color-box-FFAAAA" style="background:#FFAAAA;">58</div><div class="color-box selected-color-box" id="color-box-FFAAFF" style="background:#FFAAFF;">59</div></div><div class="color-row" id="color-row16"><div class="color-box selected-color-box" id="color-box-FFFF00" style="background:#FFFF00;">60</div><div class="color-box selected-color-box" id="color-box-FFFF55" style="background:#FFFF55;">61</div><div class="color-box selected-color-box" id="color-box-FFFFAA" style="background:#FFFFAA;">62</div><div class="color-box selected-color-box" id="color-box-FFFFFF" style="background:#FFFFFF;">63</div></div>	</div>
+</div>
+
+<div data-role="popup" id="number-picker" data-overlay-theme="b" style="width:90vw;">
+	<a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+	<div data-role="main" id="num-picker" class="ui-content" style="border-style: none; height:20vh; ">
+		<input class="num-box" id="numPick" type="range" min="0" max="100" value="0" step="10">
+		<div class="ui-block-a"><button data-theme="d" id="b-OK">OK</button></div>
+	</div>
+</div>
+
+<br>
+<div style="text-align:center;">
+For more help with this app<br> or anything else Pebble related,<br> check out the Facebook group Pebble Junkies
+<br>
+<a href="/www.facebook.com/groups/pebble.junkies/.html">https://www.facebook.com/groups/pebble.junkies/</a>
+</div>
+<br>
+<hr><hr>
+<br>
+	<div style="text-align:center;">
+	If you like this application be sure to show some love in the App Store. 
+
+	<br><a href="https://apps.getpebble.com/applications/55993cc6e47bb3dec000002d"><img src="/geol.com/pebble/heart.png"></a>
+	<br>
+	<br>
+
+	</div>
+</div>
+<table style="width:100%;background-color:silver;"><tr><td><img src="/geol.com/pebble/logs/SmileTinyGray.png"></td><td><img src="/geol.com/pebble/logs/FlexTimeTinyGray.png"></td><td><img src="/geol.com/pebble/logs/BatmanTinyGray.png"></td></tr></table>
+      <div data-theme="" data-role="header">
+	<img src="/geol.com/pebble/flags/us.png" style="float:left; margin:10px;" alt="United States" title="United States"> 	<img src="/geol.com//glogonew.gif" style="height:32px;float:right;">
+	<h3>Smiley Watch</h3>
+      </div>
+
+    </div>
+
+
+    <script>
+      $('#page1').bind('pageinit', setControls);
+    </script>
+
+  </body>
+</html>
+

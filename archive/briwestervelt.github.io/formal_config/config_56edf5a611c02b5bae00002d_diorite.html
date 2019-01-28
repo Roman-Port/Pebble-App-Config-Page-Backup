@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Formal Config</title>
+  <link rel="stylesheet" href="config/css/slate.min.css">
+  <link rel="stylesheet" href="config/css/stylesheet.css">
+</head>
+<body>
+  <div class="item-container">
+    <h1 class="title">Formal Configuration</h1>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Color Options</div>
+    <div class="item-container-content">
+      <label class="item">
+          Background Color
+          <input id="backgroundColorPicker" type="text" class="item-color item-color-normal" value="#000000">
+      </label>
+      <label class="item">
+        Tick-mark Color 
+        <input id="tickColorPicker" type="text" class="item-color item-color-normal" value="#AAAAAA">
+      </label>
+      <label class="item">
+        Hour Hand Color 
+        <input id="hourColorPicker" type="text" class="item-color item-color-normal" value="#FFFFFF">
+      </label>
+      <label class="item">
+        Minute Hand Color 
+        <input id="minuteColorPicker" type="text" class="item-color item-color-normal" value="#FFFFFF">
+      </label>
+      <label class="item">
+        Center Dot Color 
+        <input id="dotColorPicker" type="text" class="item-color item-color-normal" value="#FFFFFF">
+      </label>
+      <label class="item">
+        Date Color 
+        <input id="dateColorPicker" type="text" class="item-color item-color-normal" value="#FFFFFF">
+      </label>
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Bluetooth</div>
+    <div class="item-container-content">
+      <label class="item">
+        Vibrate on Bluetooth Disconnect
+        <input id="bluetoothVibesCheckbox" type="checkbox" class="item-toggle" checked="">
+      </label>
+    </div>
+  </div>   
+
+  <div class="item-container">
+    <div class="button-container">
+      <input id="submitButton" type="button" class="item-button" value="SUBMIT">
+    </div>
+  </div>
+
+
+  <script type="text/javascript" src="config/js/slate.min.js"></script>
+  <script type="text/javascript" src="config/js/main.js"></script>
+</body>
+</html>

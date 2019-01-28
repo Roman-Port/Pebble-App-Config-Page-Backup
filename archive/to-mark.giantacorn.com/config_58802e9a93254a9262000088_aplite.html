@@ -1,0 +1,72 @@
+<!doctype html>
+
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="/to-mark.giantacorn.com//app_1876689426.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <p class="intro">Marks are organized into folders. Create and name a folder, and you can begin making marks. Each mark just needs a name, a latitude, and a longitude.</p>
+
+  <div id="main">
+    <div class="groups"></div>
+    <button class="add-group">Add Folder</button>
+  </div>
+
+  <div id="loading">
+    <div id="loading-inner"></div>
+  </div>
+
+  <div id="toolbar">
+    <button id="caltopo-activate">Import from Caltopo</button>
+    <button id="save">Save</button>
+    <div class="subtoolbar" id="caltopo">
+      <h2>Import from Caltopo</h2>
+      <label> <input type="text" id="caltopo-id"> Caltopo ID; for example: https://caltopo.com/m/<strong>AbCd</strong> </label>
+      <button id="caltopo-append">Append</button>
+      <button id="caltopo-replace">Replace All</button>
+    </div>
+  </div>
+
+  <div id="templates">
+    <div class="group">
+      <div class="group-icon"></div>
+      <label> <input type="text" class="group-name"> Name </label>
+
+      <div class="marks"></div>
+      <button class="add-mark">Add Mark</button>
+      <button class="delete-group">Delete Folder</button>
+    </div>
+
+    <div class="mark">
+      <label> <input type="text" class="mark-name"> Name </label>
+      <div class="decimal">
+        <label> <input type="number" class="mark-lat"> Latitude </label>
+        <label> <input type="number" class="mark-lon"> Longitude </label>
+        <button class="delete-mark">Delete Mark</button>
+        <button class="to-dms">DMS</button>
+      </div>
+      <div class="dms hide">
+        <div class="dms-lat line">
+          <label> <input type="number" class="dms-d"> &deg; </label>
+          <label> <input type="number" class="dms-m"> ' </label>
+          <label> <input type="number" class="dms-s"> " </label>
+        </div>
+        <h2>Latitude</h2>
+        <div class="dms-lon line">
+          <label> <input type="number" class="dms-d"> &deg; </label>
+          <label> <input type="number" class="dms-m"> ' </label>
+          <label> <input type="number" class="dms-s"> " </label>
+        </div>
+        <h2>Longitude</h2>
+        <button class="delete-mark">Delete Mark</button>
+        <button class="to-decimal">Decimal</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
+  <script type="text/javascript" src="/to-mark.giantacorn.com//app_1876689426.js"></script>
+</body>
+</html>
+

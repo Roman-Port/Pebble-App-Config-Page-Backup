@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pebble Wave config</title>
+	<link rel="stylesheet" type="text/css" href="/dmitrydodzin.github.io/PebbleWave/config/site.css">
+	<link rel="stylesheet" type="text/css" href="/dmitrydodzin.github.io/PebbleWave/config/lib/Slate/dist/css/slate.css">
+	<script type="text/javascript" src="/code.jquery.com//jquery-2.js"></script>
+	<script type="text/javascript" src="/dmitrydodzin.github.io/PebbleWave/config/lib/Slate/dist/js/slate.js"></script>
+</head>
+<body>
+
+	<div id="main-container" class="item-container">
+		<div class="item-container-header">Connection</div>
+		<div class="item-container-content">
+			<label class="item not-supported" version="Min version: 0.7">
+				Show Bluetooth disconnect
+				<input type="checkbox" id="BACKGROUND_CHANGE_ENABLED" class="item-toggle" disabled="">
+			</label>
+		</div>
+		<div class="item-container-content">
+			<label class="item not-supported" version="Min version: 0.8">
+				Vibrate Bluetooth disconnect
+				<input type="checkbox" id="BT_VIBRATE_ENABLED" class="item-toggle" disabled="">
+			</label>
+		</div>
+		<div class="item-container-header">Display</div>
+		<div class="item-container-content">
+			<label class="item not-supported" version="Min version: 0.8">
+				Show Date
+				<input type="checkbox" id="DATE_ENABLED" class="item-toggle" disabled="">
+			</label>
+		</div>
+		<div class="item-container-content">
+			<label class="item not-supported" version="Min version: 0.9">
+				Show Battery
+				<input type="checkbox" id="BATTERY_INDICATOR_ENABLED" class="item-toggle" disabled="">
+			</label>
+		</div>
+		<div class="item-container">
+			<div class="button-container">
+				<input type="button" id="submit" class="item-button" value="Save">
+			</div>
+		</div>
+		<div class="item-container-footer">
+		</div>
+	</div>
+	<script src="/dmitrydodzin.github.io/PebbleWave/config/config.js"></script>
+</body>
+</html>

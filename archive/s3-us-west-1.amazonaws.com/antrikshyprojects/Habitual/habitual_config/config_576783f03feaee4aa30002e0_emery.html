@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Habitual Configuration</title>
+    <style>
+      body {
+        padding: 20px 0;
+        text-align: center;
+        font-family: "Helvetica Neue", "Arial", sans-serif;
+        background-color: #2A2A2A;
+        color: #FFFFFF;
+      }
+      input {
+        height: 30px;
+        font-size: 20px;
+        margin: 10px;
+        text-align: center;
+        color: #2A2A2A;
+      }
+      button {
+        height: 30px;
+        font-size: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Set your habits</h1>
+    <br>
+    <input id='habit1' type='text' placeholder='Habit 1'>
+    <br>
+    <input id='habit2' type='text' placeholder='Habit 2'>
+    <br>
+    <input id='habit3' type='text' placeholder='Habit 3'>
+    <br>
+    <input id='habit4' type='text' placeholder='Habit 4'>
+    <br>
+    <input id='habit5' type='text' placeholder='Habit 5'>
+    <br>
+    <br>
+    <button id='submit_button' value='Save'>Save</button>
+  </body>
+  <script>
+    var submitButton = document.getElementById('submit_button');
+
+    // Retrieve previous user input to pre-fill form
+    (function() {
+      document.getElementById('habit1').value = localStorage.getItem('Habit1');
+      document.getElementById('habit2').value = localStorage.getItem('Habit2');
+      document.getElementById('habit3').value = localStorage.getItem('Habit3');
+      document.getElementById('habit4').value = localStorage.getItem('Habit4');
+      document.getElementById('habit5').value = localStorage.getItem('Habit5');
+    })();
+
+    submitButton.addEventListener('click', function() {
+      var Habit1 = document.getElementById('habit1').value;
+      var Habit2 = document.getElementById('habit2').value;
+      var Habit3 = document.getElementById('habit3').value;
+      var Habit4 = document.getElementById('habit4').value;
+      var Habit5 = document.getElementById('habit5').value;
+
+      // Save input into HTML5 localStorage to persist 
+      // settings in Pebble app
+      localStorage.setItem('Habit1', Habit1);
+      localStorage.setItem('Habit2', Habit2);
+      localStorage.setItem('Habit3', Habit3);
+      localStorage.setItem('Habit4', Habit4);
+      localStorage.setItem('Habit5', Habit5);
+
+      // Make a data object to be sent
+      var options = {
+        'Habit1': Habit1,
+        'Habit2': Habit2,
+        'Habit3': Habit3,
+        'Habit4': Habit4,
+        'Habit5': Habit5
+      };
+      // Determine the correct return URL (emulator vs real watch)
+      function getQueryParam(variable, defaultValue) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (pair[0] === variable) {
+            return decodeURIComponent(pair[1]);
+          }
+        }
+        return defaultValue || false;
+      }
+      var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+      // Encode and send the data when the page closes
+      document.location = return_to + encodeURIComponent(JSON.stringify(options));
+    });
+  </script>
+</html>

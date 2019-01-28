@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Big Time+Date Colour</title>
+	<link rel='stylesheet' type='text/css' href='/wedwabbit.github.io/pebble-slate/dist/css/slate.css'>
+</head>
+<body>
+
+	<div class='item-container' align="center">
+		<div class='item-container-content'>
+			<div class='item'>
+				Big Time+Date Colour
+			</div>
+		</div>
+	</div>
+	<div class='item-container'>
+		<div class='item-container-header'>Display</div>
+		<div class='item-container-content'>
+   			<label class='item'>
+				Digit Font
+				<select name='fonttype' id='fonttype' dir='rtl' class='item-select'>
+                    <option class='item-select-option' value='0'>Big Time</option>
+                    <option class='item-select-option' value='1'>BIG again</option>
+                    <option class='item-select-option' value='2'>SquareFace</option>
+                    <option class='item-select-option' value='3'>CST</option>
+                    <option class='item-select-option' value='4'>Alpha Slab</option>
+                    <option class='item-select-option' value='5'>Digital Thin</option>
+                    <option class='item-select-option' value='6'>Digital Thick</option>
+                </select>
+			</label>
+		</div>
+		<div class='item-container-footer'></div>
+	</div>
+	<div class='item-container'>
+		<div class='item-container-header'>Time</div>
+		<div class='item-container-content'>
+			<label class='item'>
+				Background Colour
+				<input id='timebackground' type='text' class='item-color item-color-sunny' value='#000000'>
+			</label>
+			<label class='item'>
+				Digit Colour
+				<input id='timeforeground' type='text' class='item-color item-color-sunny' value='#FFFFFF'>
+			</label>
+		</div>
+		<div class='item-container-footer'></div>
+	</div>
+	<div class='item-container'>
+		<div class='item-container-header'>Date</div>
+		<div class='item-container-content'>
+            <label class='item'>
+                Enable Date
+                <input id='dateenabled' type='checkbox' class='item-toggle' checked="">
+            </label>
+			<label class='item'>
+				Date Timeout in Seconds
+				<select name='datetimeout' id='datetimeout' dir='rtl' class='item-select'>
+                    <option class='item-select-option' value='1'>1</option>
+                    <option class='item-select-option' value='2'>2</option>
+                    <option class='item-select-option' value='3'>3</option>
+                    <option class='item-select-option' value='4'>4</option>
+                    <option class='item-select-option' value='5'>5</option>
+                </select>
+			</label>
+			<label class='item'>
+				Background Colour
+				<input id='datebackground' type='text' class='item-color item-color-sunny' value='#000000'>
+			</label>
+			<label class='item'>
+				Digit Colour
+				<input id='dateforeground' type='text' class='item-color item-color-sunny' value='#FFFFFF'>
+			</label>
+		</div>
+		<div class='item-container-footer'></div>
+	</div>
+	<div class='item-container'>
+		<div class='button-container'>
+			<input id='submitButton' type='button' class='item-button' value='SUBMIT'>
+		</div>
+	</div>
+	<script src='/wedwabbit.github.io/pebble-slate/dist/js/slate.js'></script>
+    <script src='/wedwabbit.github.io/js/main.js'></script>
+</body>
+</html>

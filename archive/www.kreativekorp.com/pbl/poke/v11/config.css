@@ -1,0 +1,39 @@
+h1 {
+	margin: 0;
+	padding: 0;
+	font-family: 'PT Sans', sans-serif;
+	font-size: 1.2em;
+	font-weight: 500;
+	text-align: center;
+	text-transform: uppercase;
+	color: #666666;
+}
+.item-styled-color .value {
+	top: 7px;
+	height: 30px;
+}
+.item-input {
+	padding: 5px 10px;
+}
+
+h2 {
+	font-weight: normal;
+	text-align: center;
+}
+
+.mmm .item:first-child {
+	padding-bottom: 0;
+}
+.mmm .item:not(:first-child) {
+	border-top: none;
+	padding-top: 0;
+	text-align: center;
+}
+.mmm label:not(:first-child) .item:first-child {
+	border-top: 1px solid #dedede; /* #dedenne */
+}
+.mmm img {
+	width: 100%;
+	max-width: 432px;
+	height: auto;
+}

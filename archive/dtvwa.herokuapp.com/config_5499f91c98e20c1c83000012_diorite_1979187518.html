@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>DirectTV - Remote - Configure</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <!-- Latest compiled and minified CSS -->
+    <script type="text/javascript" src="/dtvwa.herokuapp.com/lib/rollbar.js"></script>
+    <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="/maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.css">
+    <style>
+        body {
+            padding-bottom: 70px;
+        }
+
+        #content {
+            margin: 0 5px 0 5px;
+        }
+
+        .cmd-remove {
+            color: red;
+        }
+    </style>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="/code.jquery.com//jquery-2.js"></script>
+    <script src="/maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.js"></script>
+    <script src="/cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="/cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+    <script src="/dtvwa.herokuapp.com/lib/dtv-remote.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+        <h4>Configure</h4>
+    </div>
+</nav>
+<div id="content" class="container">
+
+</div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-12">
+            <button type="button" class="btn btn-primary cmd-new" style="margin-bottom: 10px;">Add new device</button>
+            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                <input type="hidden" name="cmd" value="_s-xclick">
+                <input type="hidden" name="hosted_button_id" value="HEZUMAEPUQMGL">
+                <input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                <img alt="" border="0" src="/www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+            </form>
+            <p style="margin-top: 5px;"><a href="/dtvwa.herokuapp.com//help.html">How do I find my DirecTV DVR IP address?</a></p>
+            <p style="margin-top: 5px;"><a id="remoteURL" href="/dtvwa.herokuapp.com//remote.html">Having connection issues?</a></p>
+            <p style="margin-top: 5px;">Make sure all receivers are powered on</p>
+        </div>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <div class="btn-group" role="group" aria-label="" style="margin-top: 10px;">
+                    <button type="button" class="btn btn-default cmd-cancel">Cancel</button>
+                    <button type="button" class="btn btn-primary cmd-save">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<script>
+
+    $().ready(function () {
+        //Helpers
+        var devices = [];
+        var guid = (function () {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                        .toString(16)
+                        .substring(1);
+            }
+
+            return function () {
+                return s4();
+            };
+        })();
+
+        function saveOptions() {
+            var devices = $('.device');
+            var devicesJSON = {};
+            _.each(devices, function (device) {
+                var formArray = $('#' + device.id).find('form').serializeArray()
+                devicesJSON[device.id] = {}
+                _.each(formArray, function (formValue) {
+                    devicesJSON[device.id][formValue.name] = formValue.value;
+                }, this);
+            }, this)
+            return devicesJSON;
+        }
+
+        function checkForGennie(ip) {
+            var remote = new DirecTV.Remote({
+                ipAddress: ip
+            });
+            remote.getLocations({
+                callback: function (err, data) {
+                    if (err) return Rollbar.error(err)
+
+                    if (data.locations) {
+                        var newDevices = [];
+                        _.each(data.locations, function (loc) {
+                            var newDevice = {id: guid(), ipAddress: loc.clientAddr, name: loc.locationName, gIp: ip};
+                            if (!_.findWhere(devices, {ipAddress: newDevice.ipAddress}) && newDevice.ipAddress != "0") {
+                                newDevices.push(newDevice);
+                            }
+                        });
+                        var html = "";
+                        _.each(newDevices, function (value, key) {
+                            if (!$('input[value="' + value.ipAddress + '"]').length > 0) {
+                                html += template(_.extend({id: key}, value));
+                            }
+                        });
+                        if (html) {
+                            $('#content').append(html);
+                        }
+                    }
+                }, type: 1
+            })
+
+        };
+        function getQueryParams(queryString) {
+            var query = (queryString || window.location.search).substring(1); // delete ?
+            if (!query) {
+                return false
+            }
+            return _
+                    .chain(query.split('&'))
+                    .map(function (params) {
+                        var p = params.split('=')
+                        return [p[0], decodeURIComponent(p[1])]
+                    })
+                    .object()
+                    .value()
+        }
+
+        var source = $("#device-template").html();
+        var template = Handlebars.compile(source);
+
+        var params = getQueryParams();
+        if (params["token"]) {
+            var url = $('#remoteURL').prop('href');
+            var newURL = url + "?token=" + params.token;
+            $('#remoteURL').prop('href', newURL);
+            Rollbar.configure({payload: {person: {token: params.token}}});
+        }
+        try {
+            if (params["devices"]) {
+                devices = JSON.parse(decodeURIComponent(params.devices));
+                if (!_.isEmpty(devices)) {
+                    var html = ""
+                    _.each(devices, function (value, key) {
+                        html += template(_.extend({id: key}, value));
+                        checkForGennie(value.ipAddress);
+                    });
+                    $('#content').append(html);
+                }
+            }
+        } catch (ex) {
+            Rollbar.error("Devices data is not a object", ex);
+        }
+
+        $(".cmd-cancel").click(function () {
+            console.log("Cancel");
+            document.location = "pebblejs://close";
+        });
+
+        $(".cmd-save").click(function () {
+            console.log("Submit");
+            var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+            document.location = location;
+        });
+        $("#content").on('click', '.cmd-remove', function (e) {
+            $(e.currentTarget).parent().parent().parent().remove()
+        });
+        $(".cmd-new").click(function (e) {
+            $('#content').append(template({name: 'new device', id: guid()}));
+        });
+
+        $('body').on('keyup', '.ip-address', _.debounce(function (e) {
+//            console.log("match" + e.currentTarget.value.match("^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"))
+            if (e.currentTarget.value.match("^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$")) {
+                checkForGennie(e.currentTarget.value)
+            }
+        }, 300));
+    });
+</script>
+<script id="device-template" type="text/x-handlebars-template">
+    <div id="{{id}}" class="row device" style="margin-bottom:10px;">
+        <form>
+            <div class="form-group">
+                <label for="name-{{id}}">Name</label> <a href="#" class="cmd-remove pull-right"> Remove</a>
+                <input type="text" class="form-control" id="name-{{id}}" name="name" placeholder="" value="{{name}}">
+            </div>
+            <div class="form-group">
+                <label for="ip-{{id}}">IP Address</label>
+                <input type="text" class="form-control ip-address" id="ip-{{id}}" placeholder="" name="ipAddress"
+                       value="{{ipAddress}}">
+                <input type="hidden" class="form-control" placeholder="" name="gIp"
+                       value="{{gIp}}">
+            </div>
+        </form>
+    </div>
+</script>
+</body>
+</html>

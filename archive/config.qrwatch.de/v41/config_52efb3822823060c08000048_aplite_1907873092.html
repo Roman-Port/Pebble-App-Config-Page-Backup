@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title>QRWatch Settings</title>
+  <link rel="stylesheet" href="/config.qrwatch.de/dist/css/slate.css">
+</head>
+
+
+
+<body onload="applyConfig()">
+  <form id="main-form">
+    <div class="item-container">
+      <div class="item-container-header">
+      QRCode Drawing      </div>
+      <div class="item-container-content">
+        <label class="item">
+            Squares          <input type="radio" class="item-radio" name="drawing" id="drawing_s" value="S">
+        </label>
+        <label class="item">
+            Circles          <input type="radio" class="item-radio" name="drawing" id="drawing_c" value="C">
+        </label>
+      </div>
+    </div>
+
+            
+
+
+    <div class="item-container">
+      <div class="item-container-header">
+      Colors (Only applies for color display Pebbles. Will be ignored on black/white Pebbles)          </div>
+      <div class="item-container-content">
+        <label class="item">
+          QR Code, logo and text color          <input type="text" class="item-color item-color-normal" name="qrcodeColor" id="qrcodeColor" value="">
+        </label>
+        <label class="item">
+          Background Color          <input type="text" class="item-color item-color-normal" name="backgroundColor" id="backgroundColor" value="">
+        </label>
+      </div>
+    </div>
+
+
+
+    <div class="item-container">
+      <div class="button-container">
+        <input type="button" class="item-button" value="SEND" id="b-submit">
+      </div>
+    </div>
+  </form>
+
+<script>
+  function saveOptions() {
+    var options = {
+      'drawing': $("input[name='drawing']:checked").val(),
+      'qrcodeColor': $("input[name='qrcodeColor']").val(),
+      'backgroundColor': $("input[name='backgroundColor']").val()
+    }
+    return options;
+  };
+
+  var submitButton = document.getElementById("b-submit");
+  submitButton.addEventListener("click", 
+    function() {
+      console.log("Submit");
+
+      var options = saveOptions();
+      var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+
+      document.location = location;
+    }, 
+  false);
+
+  function applyConfig()
+  {
+    console.log("applyConfig");
+    var obj = JSON.parse(decodeURIComponent(location.search.slice(1)));
+
+    if ("S" === obj.drawing[0]) {
+      document.getElementById("drawing_s").checked = true;
+    }
+    if ("C" === obj.drawing[0]) {
+      document.getElementById("drawing_c").checked = true;
+    }
+  }
+  </script>
+  <script type="text/javascript" src="/config.qrwatch.de/dist/js/slate.js"></script>
+</body>
+</html>

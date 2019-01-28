@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <title>Επιλογές GreekClock</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.4/jquery.css">
+        <script src="/code.jquery.com//jquery-1.js"></script>
+        <script src="/code.jquery.com/mobile/1.4.4/jquery.js"></script>
+    </head>
+    <body>
+        <h1>Επιλογές GreekClock</h1>
+        <form>
+            <fieldset data-role="controlgroup" data-type="horizontal">
+                <legend>Χρώμα φόντου:</legend>
+                <input name="back_choice" id="black_id" value="black" type="radio">
+                <label for="black_id"> Μαύρο </label>
+                <input name="back_choice" id="white_id" value="white" type="radio">
+                <label for="white_id"> Λευκό </label>
+            </fieldset>
+             <fieldset data-role="controlgroup" data-type="horizontal">
+                <legend>Γλώσσα:</legend>
+                <input name="lang_choice" id="casual_id" value="casual" type="radio">
+                <label for="casual_id"> Καθημερινή </label>
+                <input name="lang_choice" id="formal_id" value="formal" type="radio">
+                <label for="formal_id"> Επίσημη </label>
+            </fieldset>
+        </form>
+        <p>Έναρξη δόνησης
+            <select id="from_select">
+                <option value="1">1 π.μ.</option>
+                <option value="2">2 π.μ.</option>
+                <option value="3">3 π.μ.</option>
+                <option value="4">4 π.μ.</option>
+                <option value="5">5 π.μ.</option>
+                <option value="6">6 π.μ.</option>
+                <option value="7">7 π.μ.</option>
+                <option value="8">8 π.μ.</option>
+                <option value="9">9 π.μ.</option>
+                <option value="10">10 π.μ.</option>
+                <option value="11">11 π.μ.</option>
+                <option value="12">12 μ.μ.</option>
+                <option value="13">1 μ.μ.</option>
+                <option value="14">2 μ.μ.</option>
+                <option value="15">3 μ.μ.</option>
+                <option value="16">4 μ.μ.</option>
+                <option value="17">5 μ.μ.</option>
+                <option value="18">6 μ.μ.</option>
+                <option value="19">7 μ.μ.</option>
+                <option value="20">8 μ.μ.</option>
+                <option value="21">9 μ.μ.</option>
+                <option value="22">10 μ.μ.</option>
+                <option value="23">11 μ.μ.</option>
+                <option value="24">12 π.μ.</option>
+            </select>
+        </p>
+        <p>Λήξη δόνησης
+            <select id="to_select">
+                <option value="1">1 π.μ.</option>
+                <option value="2">2 π.μ.</option>
+                <option value="3">3 π.μ.</option>
+                <option value="4">4 π.μ.</option>
+                <option value="5">5 π.μ.</option>
+                <option value="6">6 π.μ.</option>
+                <option value="7">7 π.μ.</option>
+                <option value="8">8 π.μ.</option>
+                <option value="9">9 π.μ.</option>
+                <option value="10">10 π.μ.</option>
+                <option value="11">11 π.μ.</option>
+                <option value="12">12 μ.μ.</option>
+                <option value="13">1 μ.μ.</option>
+                <option value="14">2 μ.μ.</option>
+                <option value="15">3 μ.μ.</option>
+                <option value="16">4 μ.μ.</option>
+                <option value="17">5 μ.μ.</option>
+                <option value="18">6 μ.μ.</option>
+                <option value="19">7 μ.μ.</option>
+                <option value="20">8 μ.μ.</option>
+                <option value="21">9 μ.μ.</option>
+                <option value="22">10 μ.μ.</option>
+                <option value="23">11 μ.μ.</option>
+                <option value="24">12 π.μ.</option>
+            </select>
+        </p>
+    <p>
+        <button id="save_button">Αποθήκευση</button>
+
+<p>Για να λειτουργήσει ο χρονοδιακόπτης της δόνησης και η επιλογή της γλώσσας, πρέπει να έχετε την έκδοση 1.3 του GreekPhone, που μπορείτε να τη βρείτε στο <a href="/www.panayotis.com/pebble/greekclock.html">http://www.panayotis.com/pebble/greekclock.html</a>.</p>
+
+        <script>
+            function saveOptions() {
+                if(document.getElementById("white_id").checked)
+                    backSelect = "white";
+                else
+                    backSelect = "black";
+                if(document.getElementById("casual_id").checked)
+                    langSelect = "casual";
+                else
+                    langSelect = "formal";
+                var fromSelect = document.getElementById("from_select");
+                var toSelect = document.getElementById("to_select");
+                var options = {
+                    "background" : backSelect,
+                    "language" : langSelect,
+                    "from" : fromSelect.options[fromSelect.selectedIndex].value,
+                    "to" : toSelect.options[toSelect.selectedIndex].value
+                }
+                return options;
+            }
+
+            function getURLVariable(name)  {
+                name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+                var regexS = "[\\?&]"+name+"=([^&#]*)",
+                    regex = new RegExp(regexS),
+                    results = regex.exec(window.location.href);
+                if (results == null) return "";
+                else return results[1];
+            }
+
+            // Update default time constraints
+            document.getElementById("from_select").value = decodeURI(getURLVariable('from'));
+            document.getElementById("to_select").value = decodeURI(getURLVariable('to'));
+
+            // Update default background
+            var back_color = decodeURI(getURLVariable('backcolor'));
+            if (back_color=="black")
+                document.getElementById("black_id").checked = true
+            else
+                document.getElementById("white_id").checked = true
+
+            // Update language selection
+            var language = decodeURI(getURLVariable('language'));
+            if (language=="formal")
+                document.getElementById("formal_id").checked = true
+            else
+                document.getElementById("casual_id").checked = true
+
+            var submitButton = document.getElementById("save_button");
+            submitButton.addEventListener("click",
+                    function () {
+                        console.log("Submit");
+                        var options = saveOptions();
+                        var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+                        document.location = location;
+                    },
+                    false);
+        </script>
+    </body>
+</html>
+

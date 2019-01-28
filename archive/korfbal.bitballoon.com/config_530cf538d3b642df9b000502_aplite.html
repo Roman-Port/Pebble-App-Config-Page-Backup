@@ -1,0 +1,173 @@
+﻿<html>
+  <head>
+    <title>Pebble Referee App Configurator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/code.jquery.com/mobile/1.4.2/jquery.css">
+	<script src="/code.jquery.com//jquery-1.js"></script>
+	<script src="/code.jquery.com/mobile/1.4.2/jquery.js"></script>    
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Configure Pebble Referee App</h1>
+      </div>
+      <div data-role="content">
+		<div class="ui-field-contain">
+          <label for="home">Home team:</label>
+          <input cols="15" name="home" id="home" placeholder="Home team" maxlength="15" value="Home">
+        </div>	
+		<div class="ui-field-contain">
+          <label for="away">Away team:</label>
+          <input cols="15" name="away" id="away" placeholder="Home team" maxlength="15" value="Away">
+        </div>
+        <div data-role="fieldcontain">
+         <fieldset data-role="controlgroup">
+            <legend>Select the  different times you need:</legend>
+            <input type="checkbox" name="checkbox-45min" id="checkbox-45min" class="custom">
+            <label for="checkbox-45min">45 Minutes</label>
+
+            <input type="checkbox" name="checkbox-40min" id="checkbox-40min" class="custom">
+            <label for="checkbox-40min">40 Minutes</label>
+
+            <input type="checkbox" name="checkbox-35min" id="checkbox-35min" class="custom">
+            <label for="checkbox-35min">35 Minutes</label>
+
+            <input type="checkbox" name="checkbox-30min" id="checkbox-30min" class="custom">
+            <label for="checkbox-30min">30 Minutes</label>
+			
+            <input type="checkbox" name="checkbox-25min" id="checkbox-25min" class="custom">
+            <label for="checkbox-25min">25 Minutes</label>
+
+            <input type="checkbox" name="checkbox-20min" id="checkbox-20min" class="custom">
+            <label for="checkbox-20min">20 Minutes</label>
+			
+            <input type="checkbox" name="checkbox-125min" id="checkbox-125min" class="custom">
+            <label for="checkbox-125min">12:30 Minutes</label>
+
+            <input type="checkbox" name="checkbox-10min" id="checkbox-10min" class="custom">
+            <label for="checkbox-10min">10 Minutes</label>
+			
+			<input type="checkbox" name="checkbox-5min" id="checkbox-5min" class="custom">
+            <label for="checkbox-5min">5 Minutes</label>
+            </fieldset>
+          </div>
+		  <div class="ui-field-contain">
+          <label for="away">Custom minutes:</label>
+          <input cols="15" name="customtime" id="customtime" placeholder="Minutes" maxlength="2" value="">
+        </div>
+		<div class="ui-field-contain">
+			<label for="select-native-1">Vibrate mode:</label>
+			<select name="vibrate" id="vibrate">
+				<option value="60">Every minute</option>
+				<option value="3">Every 3 seconds</option>				
+			</select>
+		</div>
+        </div>
+		
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+            </fieldset>
+          </div>
+        </div>
+      
+    
+    <script>
+$.urlParam = function (name) {
+  var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+  if (!results) { return 0; }
+  return results[1] || 0;
+}
+function updateControls() {
+	var home = decodeURIComponent($.urlParam("home"));
+	var away = decodeURIComponent($.urlParam("away"));
+	var times = decodeURIComponent($.urlParam("times"));
+	var customtime = decodeURIComponent($.urlParam("customtime"));  
+	var vibrate = decodeURIComponent($.urlParam("vibrate"));
+			
+	if (home != 0) {
+      $("#home").val(home);
+	}
+	if (away != 0) {
+		$("#away").val(away);
+	}
+	if (times & 256) {			
+		$("#checkbox-45min").prop("checked", true);												
+		$("#checkbox-45min").checkboxradio("refresh");
+	}		
+	if (times & 128) {			
+		$("#checkbox-40min").prop("checked", true);				
+		$("#checkbox-40min").checkboxradio("refresh");
+	}
+	if (times & 64) {			
+		$("#checkbox-35min").prop("checked", true);								
+		$("#checkbox-35min").checkboxradio("refresh");
+	}
+	if (times & 32) {			
+		$("#checkbox-30min").prop("checked", true);				
+		$("#checkbox-30min").checkboxradio("refresh");
+	}
+	if (times & 16) {			
+		$("#checkbox-25min").prop("checked", true);				
+		$("#checkbox-25min").checkboxradio("refresh");
+	}
+	if (times & 8) 	{			
+		$("#checkbox-20min").prop("checked", true);				
+		$("#checkbox-20min").checkboxradio("refresh");
+	}
+	if (times & 4) 	{			
+		$("#checkbox-125min").prop("checked", true);				
+		$("#checkbox-125min").checkboxradio("refresh");
+	}
+	if (times & 2) 	{			
+		$("#checkbox-10min").prop("checked", true);				
+		$("#checkbox-10min").checkboxradio("refresh");
+	}
+	if (times & 1) 	{			
+		$("#checkbox-5min").prop("checked", true);				
+		$("#checkbox-5min").checkboxradio("refresh");
+	}
+	if (customtime != 0) 	{			
+		$("#customtime").val(customtime);
+	}
+	if (vibrate != 0) 	{			
+		$("#vibrate").val(vibrate);
+	}
+}
+
+	  function saveOptions() {
+        var options = {
+          'home': $("#home").val(),
+          'away': $("#away").val(),
+          'times':$("#checkbox-45min").is(':checked') + $("#checkbox-40min").is(':checked')*2 + $("#checkbox-35min").is(':checked')*4 + $("#checkbox-30min").is(':checked')*8 + $("#checkbox-25min").is(':checked')*16+ $("#checkbox-20min").is(':checked')*32+$("#checkbox-125min").is(':checked')*64+ $("#checkbox-10min").is(':checked')*128+$("#checkbox-5min").is(':checked')*256,
+		  'customtime': $("#customtime").val(),
+          'vibrate': $("#vibrate").val()          
+        }
+        return options;
+      }
+	  	  
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+
+	  });
+	  
+		$(document).on("pagecreate",function(event){			
+			updateControls();
+		}); 	  
+	</script>
+  </body>
+</html>

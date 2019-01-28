@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html>
+<html>  
+  <head>
+    <title>Configurable</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+    <style>
+      .color-box
+      {
+        width: 30px;
+        height: 20px; 
+        border-style: none;
+        margin: 2px;;
+        display:inline-block;
+      }
+      .selected-color-box
+      {
+        border-width: 2px;
+        border-style: solid;
+        border-color: black;
+        margin: 0px;
+      }
+      .color-row
+      {
+        border-style: none;
+        border-width: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Fractopus Configuration</h1>
+      </div>
+
+      <div data-role="content">
+        
+        <div data-role="popup" id="color-picker" data-overlay-theme="b">
+          <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+          <div data-role="main" id="color-picker" class="ui-content" style="border-style: none; height:90vh; overflow-y:scroll; overflow-x:hidden;">
+            <div class="color-row" id="color-row1">
+              <div class="color-box" id="color-box-000000" style="background:#000000;"></div>
+              <div class="color-box" id="color-box-555555" style="background:#555555;"></div>
+              <div class="color-box" id="color-box-AAAAAA" style="background:#AAAAAA;"></div>
+              <div class="color-box" id="color-box-FFFFFF" style="background:#FFFFFF;"></div>
+              <div class="color-box" id="color-box-550000" style="background:#550000;"></div>
+            </div>
+            <div class="color-row" id="color-row2">
+              <div class="color-box" id="color-box-FFAAAA" style="background:#FFAAAA;"></div>
+              <div class="color-box" id="color-box-FF5555" style="background:#FF5555;"></div>
+              <div class="color-box" id="color-box-FF0000" style="background:#FF0000;"></div>
+              <div class="color-box" id="color-box-AA5555" style="background:#AA5555;"></div>
+              <div class="color-box" id="color-box-AA0000" style="background:#AA0000;"></div>
+            </div>
+            <div class="color-row" id="color-row3">
+              <div class="color-box" id="color-box-FF55AA" style="background:#FF55AA;"></div>
+              <div class="color-box" id="color-box-FF00AA" style="background:#FF00AA;"></div>
+              <div class="color-box" id="color-box-FF0055" style="background:#FF0055;"></div>
+              <div class="color-box" id="color-box-AA0055" style="background:#AA0055;"></div>
+              <div class="color-box" id="color-box-550055" style="background:#550055;"></div>
+            </div>
+            <div class="color-row" id="color-row4">
+              <div class="color-box" id="color-box-FFAAFF" style="background:#FFAAFF;"></div>
+              <div class="color-box" id="color-box-FF55FF" style="background:#FF55FF;"></div>
+              <div class="color-box" id="color-box-FF00FF" style="background:#FF00FF;"></div>
+              <div class="color-box" id="color-box-AA00AA" style="background:#AA00AA;"></div>
+              <div class="color-box" id="color-box-AA55AA" style="background:#AA55AA;"></div>
+            </div>
+            <div class="color-row" id="color-row5">
+              <div class="color-box" id="color-box-AAAAFF" style="background:#AAAAFF;"></div>
+              <div class="color-box" id="color-box-AA55FF" style="background:#AA55FF;"></div>
+              <div class="color-box" id="color-box-AA00FF" style="background:#AA00FF;"></div>
+              <div class="color-box" id="color-box-5555AA" style="background:#5555AA;"></div>
+              <div class="color-box" id="color-box-5500AA" style="background:#5500AA;"></div>
+            </div>
+            <div class="color-row" id="color-row6">
+              <div class="color-box" id="color-box-0000FF" style="background:#0000FF;"></div>
+              <div class="color-box" id="color-box-0000AA" style="background:#0000AA;"></div>
+              <div class="color-box" id="color-box-000055" style="background:#000055;"></div>
+              <div class="color-box" id="color-box-5555FF" style="background:#5555FF;"></div>
+              <div class="color-box" id="color-box-5500FF" style="background:#5500FF;"></div>
+            </div>
+            <div class="color-row" id="color-row7">
+              <div class="color-box" id="color-box-0055FF" style="background:#0055FF;"></div>
+              <div class="color-box" id="color-box-0055AA" style="background:#0055AA;"></div>
+              <div class="color-box" id="color-box-00AAFF" style="background:#00AAFF;"></div>
+              <div class="color-box" id="color-box-55AAFF" style="background:#55AAFF;"></div>
+              <div class="color-box" id="color-box-00AAAA" style="background:#00AAAA;"></div>
+            </div>
+            <div class="color-row" id="color-row8">
+              <div class="color-box" id="color-box-AAFFAA" style="background:#AAFFAA;"></div>
+              <div class="color-box" id="color-box-AAFFFF" style="background:#AAFFFF;"></div>
+              <div class="color-box" id="color-box-55FFFF" style="background:#55FFFF;"></div>
+              <div class="color-box" id="color-box-00FFFF" style="background:#00FFFF;"></div>
+              <div class="color-box" id="color-box-55AAAA" style="background:#55AAAA;"></div>
+            </div>
+            <div class="color-row" id="color-row9">
+              <div class="color-box" id="color-box-00FFAA" style="background:#00FFAA;"></div>
+              <div class="color-box" id="color-box-55FFAA" style="background:#55FFAA;"></div>
+              <div class="color-box" id="color-box-00FF55" style="background:#00FF55;"></div>
+              <div class="color-box" id="color-box-005555" style="background:#005555;"></div>
+              <div class="color-box" id="color-box-005500" style="background:#005500;"></div>
+            </div>
+            <div class="color-row" id="color-row10">
+              <div class="color-box" id="color-box-55FF00" style="background:#55FF00;"></div>
+              <div class="color-box" id="color-box-55FF55" style="background:#55FF55;"></div>
+              <div class="color-box" id="color-box-AAFF55" style="background:#AAFF55;"></div>
+              <div class="color-box" id="color-box-AAFF00" style="background:#AAFF00;"></div>
+              <div class="color-box" id="color-box-555500" style="background:#555500;"></div>
+            </div>
+            <div class="color-row" id="color-row11">
+              <div class="color-box" id="color-box-00FF00" style="background:#00FF00;"></div>
+              <div class="color-box" id="color-box-55AA55" style="background:#55AA55;"></div>
+              <div class="color-box" id="color-box-00AA55" style="background:#00AA55;"></div>
+              <div class="color-box" id="color-box-00AA00" style="background:#00AA00;"></div>
+              <div class="color-box" id="color-box-55AA00" style="background:#55AA00;"></div>
+            </div>
+            <div class="color-row" id="color-row12">
+              <div class="color-box" id="color-box-FFFFAA" style="background:#FFFFAA;"></div>
+              <div class="color-box" id="color-box-FFFF55" style="background:#FFFF55;"></div>
+              <div class="color-box" id="color-box-FFFF00" style="background:#FFFF00;"></div>
+              <div class="color-box" id="color-box-AAAA55" style="background:#AAAA55;"></div>
+              <div class="color-box" id="color-box-AAAA00" style="background:#AAAA00;"></div>
+            </div>
+            <div class="color-row" id="color-row13">
+              <div class="color-box" id="color-box-FFAA55" style="background:#FFAA55;"></div>
+              <div class="color-box" id="color-box-FFAA00" style="background:#FFAA00;"></div>
+              <div class="color-box" id="color-box-FF5500" style="background:#FF5500;"></div>
+              <div class="color-box" id="color-box-AA5500" style="background:#AA5500;"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ui-grid-a">
+          <div class="ui-block-a">Shake to reveal:</div>
+          <div class="ui-block-b">
+            <select name="shake-to-reveal" id="shake-to-reveal" data-role="slider">
+              <option value="off">Off</option>
+              <option value="on" selected="selected">On</option>
+            </select>
+          </div>
+
+          <div class="ui-block-a">Blink fraction bar:</div>
+          <div class="ui-block-b">
+            <select name="blink" id="blink" data-role="slider">
+              <option value="off" selected="selected">Off</option>
+              <option value="on">On</option>
+            </select>
+          </div>
+
+          <div class="ui-block-a">Always show date:</div>
+          <div class="ui-block-b">
+            <select name="always-show-date" id="always-show-date" data-role="slider">
+              <option value="off" selected="selected">Off</option>
+              <option value="on">On</option>
+            </select>
+          </div>
+
+          <div class="ui-block-a aplite">Background color:</div>
+          <div class="ui-block-b aplite">
+            <fieldset data-role="controlgroup" data-type="horizontal">
+              <input type="radio" name="background-color" id="background-color-black" value="black" checked="checked">
+              <label for="background-color-black">Black</label>
+
+              <input type="radio" name="background-color" id="background-color-white" value="white">
+              <label for="background-color-white">White</label>
+            </fieldset>
+          </div>
+
+          <div class="ui-block-a basalt">Number color:</div>
+          <div class="ui-block-b basalt"><a href="#color-picker" data-rel="popup" class="ui-btn ui-corner-all" data-position-to="window" id="text-color" style="background-color: #000000"></a></div>
+
+          <div class="ui-block-a basalt">Hour background color:</div>
+          <div class="ui-block-b basalt"><a href="#color-picker" data-rel="popup" class="ui-btn ui-corner-all" data-position-to="window" id="hour-bg-color" style="background-color: #5500ff"></a></div>
+
+          <div class="ui-block-a basalt">Numerator background color:</div>
+          <div class="ui-block-b basalt"><a href="#color-picker" data-rel="popup" class="ui-btn ui-corner-all" data-position-to="window" id="numerator-bg-color" style="background-color: #ff00aa"></a></div>
+
+          <div class="ui-block-a basalt">Denominator background color:</div>
+          <div class="ui-block-b basalt"><a href="#color-picker" data-rel="popup" class="ui-btn ui-corner-all" data-position-to="window" id="denominator-bg-color" style="background-color: #00ff00"></a></div>
+        </div>
+
+        <p>
+
+        <div data-role="controlgroup" class="basalt">
+          <a href="#" id="theme1" class="ui-btn ui-corner-all">Colorful Theme 1</a>
+          <a href="#" id="theme2" class="ui-btn ui-corner-all">Colorful Theme 2</a>
+          <a href="#" id="theme3" class="ui-btn ui-corner-all">Colorful Theme 3</a>
+          <a href="#" id="theme4" class="ui-btn ui-corner-all">Dual Tone Theme</a>
+          <a href="#" id="theme5" class="ui-btn ui-corner-all">Monochrome Theme</a>
+        </div>
+  
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+            <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+            <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <script>
+      function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) 
+        {
+          var sParameterName = sURLVariables[i].split('=');
+          if (sParameterName[0] == sParam) 
+          {
+            return sParameterName[1];
+          }
+        }
+      }    
+      function saveOptions() {
+        var options = {};
+        options.KEY_SHAKE_TO_REVEAL = $('#shake-to-reveal').val() == 'on' ? 1: 0;
+        options.KEY_BLINK = $('#blink').val() == 'on' ? 1: 0;
+        options.KEY_ALWAYS_SHOW_DATE = $('#always-show-date').val() == 'on' ? 1: 0;
+        options.KEY_BACKGROUND_COLOR_BLACK = $('#background-color-black').is(':checked') ? 1 : 0;
+        options.KEY_TEXT_COLOR = rgb2GColor($('#text-color').css('background-color'))
+        options.KEY_HOUR_BG_COLOR = rgb2GColor($('#hour-bg-color').css('background-color'))
+        options.KEY_NUMERATOR_BG_COLOR = rgb2GColor($('#numerator-bg-color').css('background-color'))
+        options.KEY_DENOMINATOR_BG_COLOR = rgb2GColor($('#denominator-bg-color').css('background-color'))
+        return options;
+      }
+      function getReturnTo() {
+        var returnTo = getUrlParameter('return_to');
+        if (returnTo !== undefined) {
+          return decodeURIComponent(returnTo);
+        }
+        return "pebblejs://close#";
+      }
+      function GColor2hex(color) {
+        return '#' + ("000000" + parseInt(color).toString(16)).substr(-6);
+      }
+      function rgb2hex(rgb) {
+        rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        var hex = ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+                  ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+                  ("0" + parseInt(rgb[3],10).toString(16)).slice(-2);
+        return hex;
+      }
+      function rgb2GColor(rgb) {
+        return parseInt(rgb2hex(rgb), 16);
+      }
+      function highlightColorBox($colorButton) {
+	var selectedColor = rgb2hex($colorButton.css("background-color"));
+	
+	var i;
+	for (i = 1; i <= 13; i++)
+	{
+		$('#color-row'+i).children().removeClass("selected-color-box");
+	}
+	$('#color-box-'+selectedColor.toUpperCase()).addClass("selected-color-box");
+      }
+      function changeColor(color1, color2, color3, color4) {
+          $("#text-color").css("background-color", color1);
+          $("#hour-bg-color").css("background-color", color2);
+          $("#numerator-bg-color").css("background-color", color3);
+          $("#denominator-bg-color").css("background-color", color4);
+      }
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = getReturnTo();
+        });
+        $("#b-submit").click(function() {
+          console.log("Submit");
+          var location = getReturnTo() + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Warping to: " + location);
+          document.location = location;
+        });
+        $("#theme1").click(function() {
+          changeColor("#000000", "#5500ff", "#ff00aa", "#00ff00");
+        });
+        $("#theme2").click(function() {
+          changeColor("#000000", "#ff0000" ,"#00ff00", "#0055ff");
+        });
+        $("#theme3").click(function() {
+          changeColor("#000000", "#55ffaa" ,"#aaff55", "#00aaff");
+        });
+        $("#theme4").click(function() {
+          changeColor("#000000", "#00aaff" ,"#ffffff", "#ffffff");
+        });
+        $("#theme5").click(function() {
+          changeColor("#ffffff", "#000000" ,"#000000", "#000000");
+        });
+        function setupColor(color) {
+          $(color).click(function() {
+            highlightColorBox($(this));
+            $('#color-picker .color-box').off('click').click(function() {
+              $(color).css('background-color', $(this).css('background-color'));
+              $('#color-picker').popup('close');
+            });
+          });
+        }
+        setupColor("#text-color"); 
+        setupColor("#hour-bg-color");
+        setupColor("#numerator-bg-color");
+        setupColor("#denominator-bg-color");
+
+        // Display whatever is passed in 
+        var obj = jQuery.parseJSON(decodeURIComponent(getUrlParameter('config')));
+        if (obj.KEY_SHAKE_TO_REVEAL && obj.KEY_SHAKE_TO_REVEAL !== null) {
+          $('#shake-to-reveal').val(obj.KEY_SHAKE_TO_REVEAL > 0 ? 'on' : 'off');
+          $('#shake-to-reveal').slider('refresh');
+        }
+        if (obj.KEY_BLINK && obj.KEY_BLINK !== null) {
+          $('#blink').val(obj.KEY_BLINK > 0 ? 'on' : 'off');
+          $('#blink').slider('refresh');
+        }
+        if (obj.KEY_ALWAYS_SHOW_DATE && obj.KEY_ALWAYS_SHOW_DATE !== null) {
+          $('#always-show-date').val(obj.KEY_ALWAYS_SHOW_DATE > 0 ? 'on' : 'off');
+          $('#always-show-date').slider('refresh');
+        }
+        if (obj.KEY_BACKGROUND_COLOR_BLACK && obj.KEY_BACKGROUND_COLO_BLACK !== null) {
+          $('#background-color-white').attr('checked', obj.KEY_BACKGROUND_COLOR_BLACK < 1).checkboxradio('refresh');
+          $('#background-color-black').attr('checked', obj.KEY_BACKGROUND_COLOR_BLACK > 0).checkboxradio('refresh');
+        }
+        if (obj.KEY_TEXT_COLOR && obj.KEY_TEXT_COLOR !== null) {
+          $("#text-color").css('background-color', GColor2hex(obj.KEY_TEXT_COLOR));
+        }
+        if (obj.KEY_HOUR_BG_COLOR && obj.KEY_HOUR_BG_COLOR !== null) {
+          $("#hour-bg-color").css('background-color', GColor2hex(obj.KEY_HOUR_BG_COLOR));
+        }
+        if (obj.KEY_NUMERATOR_BG_COLOR && obj.KEY_NUMERATOR_BG_COLOR !== null) {
+          $("#numerator-bg-color").css('background-color', GColor2hex(obj.KEY_NUMERATOR_BG_COLOR));
+        }
+        if (obj.KEY_DENOMINATOR_BG_COLOR && obj.KEY_DENOMINATOR_BG_COLOR !== null) {
+          $("#denominator-bg-color").css('background-color', GColor2hex(obj.KEY_DENOMINATOR_BG_COLOR));
+        }
+        if (obj.KEY_PLATFORM === "aplite" || obj.KEY_PLATFORM === "diorite") {
+          $(".basalt").hide();
+        } else {
+          $(".aplite").hide();
+        }
+      });
+    </script>
+  </body>
+</html>

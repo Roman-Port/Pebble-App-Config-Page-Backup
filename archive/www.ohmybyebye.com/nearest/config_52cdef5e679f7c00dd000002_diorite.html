@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+
+
+<h1 id='title'>AIRPORT DATA</h1>
+<h2 id='date'>loading...</h2>
+<button id='save' type="button" onclick="save_database()" disabled='true'>Save</button>
+
+<script>
+window.onload = function () { 
+	document.getElementById('date').innerHTML = 'information effective date:' + database['config']['till_hr']
+	document.getElementById('save').disabled = false;
+}
+
+function save_database()
+{
+	window.location.href = "pebblejs://close#" + encodeURIComponent(JSON.stringify(database));
+}
+</script>
+
+<script src="/www.ohmybyebye.com//database.js"></script>
+
+</body>
+</html>
+

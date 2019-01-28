@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+    <title>Ghibli Configuration</title>
+	<link rel="stylesheet" href="https://dl.dropboxusercontent.com/u/133899570/Ghibli%20Watchface%20Config/slate.css">
+  </head>
+  <body>
+	<script src="https://dl.dropboxusercontent.com/u/133899570/Ghibli%20Watchface%20Config/slate.min.js"></script>
+	<div class="item-container">
+		<div class="item-container-content">
+			<div class="item">
+				<h1>Ghibli Config:</h1>
+			</div>
+		</div>
+	</div>
+		<div class="item-container-header">
+			<p>Settings</p>
+		</div>
+	<div class="item-container">
+		<div class="item-container-content">
+			<div class="item">
+				<p>Background:
+				<select id="face_select">
+				<option value="totoro">Totoro</option>
+				<option value="noface">No Face</option>
+				<option value="calcifer">Calcifer</option>
+				<option value="catbus">Cat Bus</option>
+				<option value="robot">Laputan Robot</option>
+				</select>
+				</p>
+			</div>
+		</div>
+	</div>
+	
+	<div class="item-container">
+		<div class="item-container-content">
+			<div class="item">
+				<p>Like this watchface? Why not buy me a coffee?</p>
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+">
+<input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="/www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
+
+
+				
+			</div>
+		</div>
+	</div>
+    
+	<div class="item-container">
+		<div class="button-container">
+			<p>
+			<input id="save_button" type="button" class="item-button" value="Save">
+			</p>
+		</div>
+	</div>
+    
+  </body>
+<script>
+  //Setup to allow easy adding more options later
+  function saveOptions() {
+    var faceSelect = document.getElementById("face_select");
+ 
+    var options = {
+      "face": faceSelect.options[faceSelect.selectedIndex].value
+    }
+     
+    return options;
+  };
+ 
+  var submitButton = document.getElementById("save_button");
+  submitButton.addEventListener("click", 
+    function() {
+      console.log("Submit");
+ 
+      var options = saveOptions();
+      var location = ("return_to", "pebblejs://close#");
+       
+      document.location = location + encodeURIComponent(JSON.stringify(options));
+    }, 
+  false);
+</script>
+</html>

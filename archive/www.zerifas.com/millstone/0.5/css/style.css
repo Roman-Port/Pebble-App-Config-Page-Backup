@@ -1,0 +1,51 @@
+html, body {
+    font-family: "Helvetica-Neue", "Helvetica", "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header h1 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin: -1px 5px;
+    padding: 5px 5px 3px 0;
+    border: 1px solid #ddd;
+    text-align: right;
+    font-size: small;
+}
+
+label input {
+    position: relative;
+    top: -1px;
+    width: 200px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    -webkit-appearance: none;
+}
+
+label input#hostname {
+    width: 98px;
+    margin-right: 0;
+}
+
+.hostname-suffix {
+    margin: 0;
+    width: 100px;
+    display: inline-block;
+    text-align: left;
+}
+
+.controls {
+    margin-top: 5px;
+    text-align: center;
+}
+
+.controls button {
+    width: 300px;
+    height: 30px;
+    margin: 0px auto;
+}

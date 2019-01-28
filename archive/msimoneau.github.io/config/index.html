@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+   <title>Paris</title>
+   <meta charset="utf-8">
+   <link rel="stylesheet" href="bower_components/pebble-slate/dist/css/slate.min.css">
+   <link rel="stylesheet" href="css/style.css">
+   
+</head>
+
+<body>
+   
+   <div class="item-container">
+      <h2 class="title">Preferences</h2>
+   </div>
+   
+   <div class="item-container">
+     <div class="item-container-header">Appearance settings</div>
+     
+     <div class="item-container-content">
+        <label class="item">
+          Show Tick Mark
+          <input id="tickMarkId" type="checkbox" class="item-checkbox" checked>
+        </label>
+        
+        <label id="tmId" class="item">
+           Number of Tick Marks
+           <select id="numberMark" class="item-select">
+             <option class="item-select-option" selected>4</option>
+             <option class="item-select-option">12</option>
+           </select>
+        </label>
+        
+     </div>
+     <div class="item-container-content">
+        <label class="item">
+          Show Day
+          <input id="dayFrameId" type="checkbox" class="item-checkbox" checked>
+        </label>
+     </div>
+     
+     <div style="font-size:0.8em" class="item-container-footer">
+       These settings only change on the watch after you click save.
+     </div>
+   </div>
+   
+   <div class="item-container">
+      <div class="button-container">
+         <input id="submitButton" type="button" class="item-button" value="SAVE">
+      </div>
+   </div>
+
+
+   <script src="bower_components/pebble-slate/dist/js/slate.min.js"></script>
+   <script src="js/main.js"></script>
+
+</body>
+
+</html>

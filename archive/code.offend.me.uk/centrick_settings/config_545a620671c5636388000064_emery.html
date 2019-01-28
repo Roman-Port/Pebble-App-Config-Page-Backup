@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Centrick Settings</title>
+
+        <style>
+            body {
+                font-family: sans-serif;
+                font-size: 14pt;
+                text-align: center;
+            }
+
+            h1 {
+            }
+
+            input, select {
+                margin: 0.5em;
+                padding: 0.5em;
+                font-size: 14pt;
+                min-width: 12em;
+                text-align: center;
+            }
+
+            input {
+                background: #bdb;
+                border: 1px solid #999;
+                border-radius: 0.5em;
+            }
+
+            .save {
+                text-align: center;
+            }
+
+            table.settings {
+                border: 0;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Centrick</h1>
+
+        <table class="settings">
+            <tr>
+                <th>Colour scheme</th>
+                <td>
+                    <select id="invert">
+                        <option value="no">Black on white</option>
+                        <option value="yes">White on black</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Ring ordering</th>
+                <td>
+                    <select id="order">
+                        <option value="out">Seconds outside</option>
+                        <option value="in">Hours outside</option>
+                    </select>
+                </td>
+            </tr>
+        </table>
+
+        <p class="save">
+            <input type="button" id="save" value="Save settings">
+        </p>
+    </body>
+
+    <script>
+        document.getElementById("save").onclick = function() {
+            var data = {
+                "invert": document.getElementById("invert").value,
+                "order": document.getElementById("order").value
+            };
+
+            location.href = "pebblejs://close#" + encodeURIComponent(JSON.stringify(data));
+        };
+    </script>
+</html>

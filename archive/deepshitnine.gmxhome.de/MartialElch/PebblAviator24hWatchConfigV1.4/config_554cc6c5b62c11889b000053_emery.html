@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<head>
+  <title>Aviator 24h Config</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  <link rel="stylesheet" href="/deepshitnine.gmxhome.de/MartialElch/css/config.css">
+</head>
+
+<body>
+  <div class="container">
+  <h2>Aviator 24h Config</h2>
+
+  <form onchange="update()">
+  <h4>Seconds Hand</h4>
+  <p>
+    <small>
+      Turn on/off the seconds watch hand. Turning off reduces display updates
+      and improves battery performance
+    </small>
+  </p>
+
+  <div class="btn-group" data-toggle="radio">
+  <label class="btn">
+  <input type="radio" name="seconds" id="secondsYES" value="1"> Yes
+  </label>
+  <label class="btn">
+  <input type="radio" name="seconds" id="secondsNO" value="0"> No
+  </label>
+  </div>
+
+  <h4>Invert Colors</h4>
+  <p>
+    <small>
+      Turning on converts watch dial to white and watch hands black.
+    </small>
+  </p>
+
+  <div class="btn-group" data-toggle="radio">
+  <label class="btn">
+  <input type="radio" name="invert" id="invertYES" value="1"> Yes
+  </label>
+  <label class="btn">
+  <input type="radio" name="invert" id="invertNO" value="0"> No
+  </label>
+  </div>
+
+  </form>
+
+  <p>
+  <input class="btn btn-wide" id="save" type="submit" value="Save">
+  </p>
+
+  </div>
+
+<script>
+  var seconds;
+
+  function init() {
+    // load local storage
+    seconds = localStorage.getItem("seconds");
+    invert  = localStorage.getItem("invert");
+
+    // set seconds default value
+    if (seconds == "off") {
+      document.getElementById("secondsNO").checked = true;
+      document.getElementById("secondsYES").parentNode.setAttribute("class", "btn");
+      document.getElementById("secondsNO").parentNode.setAttribute("class", "btn active");
+    } else {
+      document.getElementById("secondsYES").checked = true;
+      document.getElementById("secondsYES").parentNode.setAttribute("class", "btn active");
+      document.getElementById("secondsNO").parentNode.setAttribute("class", "btn");
+    }
+
+    // set invert default value
+    if (invert == "on") {
+      document.getElementById("invertYES").checked = true;
+      document.getElementById("invertYES").parentNode.setAttribute("class", "btn active");
+      document.getElementById("invertNO").parentNode.setAttribute("class", "btn");
+    } else {
+      document.getElementById("invertNO").checked = true;
+      document.getElementById("invertYES").parentNode.setAttribute("class", "btn");
+      document.getElementById("invertNO").parentNode.setAttribute("class", "btn active");
+    }
+  }
+
+  function update() {
+    // seconds
+    if (document.getElementById("secondsYES").checked) {
+      document.getElementById("secondsYES").parentNode.setAttribute("class", "btn active");
+      document.getElementById("secondsNO").parentNode.setAttribute("class", "btn");
+      seconds = "on";
+    } else if (document.getElementById("secondsNO").checked) {
+      document.getElementById("secondsYES").parentNode.setAttribute("class", "btn");
+      document.getElementById("secondsNO").parentNode.setAttribute("class", "btn active");
+      seconds = "off";
+    } else {
+      console.log("seconds is undefined");
+    }
+
+    // invert
+    if (document.getElementById("invertYES").checked) {
+      document.getElementById("invertYES").parentNode.setAttribute("class", "btn active");
+      document.getElementById("invertNO").parentNode.setAttribute("class", "btn");
+      invert = "on";
+    } else if (document.getElementById("invertNO").checked) {
+      document.getElementById("invertYES").parentNode.setAttribute("class", "btn");
+      document.getElementById("invertNO").parentNode.setAttribute("class", "btn active");
+      invert = "off";
+    } else {
+      console.log("invert is undefined");
+    }
+  }
+
+  // Something like this to get query variables.
+  function getQueryParam(variable, defaultValue) {
+    // Find all URL parameters
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+
+      // If the query variable parameter is found, decode it to use and return it for use
+      if (pair[0] === variable) {
+          return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+
+  //Setup to allow easy adding more options later
+  function getOptions() {
+    var seconds;
+
+    // read options setting from form
+    // seconds
+    if (document.getElementById("secondsYES").checked) {
+      seconds = "on";
+    } else {
+      seconds = "off";
+    }
+    // invert
+    if (document.getElementById("invertYES").checked) {
+      invert = "on";
+    } else {
+      invert = "off";
+    }
+
+    // remember settings in local storage
+    localStorage.setItem("seconds", seconds);
+    localStorage.setItem("invert", invert);
+
+    // prepare data for JSON object
+    var options = {
+      "seconds": seconds,
+      "invert" : invert
+    }
+    return options;
+  };
+
+  init();
+
+  var submitButton = document.getElementById("save");
+  submitButton.addEventListener("click", 
+    function() {
+      var options = getOptions();
+      var return_to = getQueryParam('return_to', 'pebblejs://close#');
+      document.location = return_to + encodeURIComponent(JSON.stringify(options));
+    }, 
+    false
+  );
+
+</script>
+
+</body>
+

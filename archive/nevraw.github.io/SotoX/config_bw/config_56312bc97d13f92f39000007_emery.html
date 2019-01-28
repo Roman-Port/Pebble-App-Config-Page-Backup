@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Duo Settings</title>
+ <link rel='stylesheet' type='text/css' href='/nevraw.github.io/SotoX/slate.css'>
+ <link rel='stylesheet' type='text/css' href='/nevraw.github.io/SotoX/style.css'>
+</head>
+<body>
+ <div class='item-container'>
+  <h1 class='title'>Duo Watchface</h1>
+ </div>
+ 
+ <div class="item-container">
+  <div class="item-container-header">Configurable items</div>
+  <div class="item-container-content">
+    <label class="item">
+     Time display
+     <label class="item">
+      <span style="vertical-align:middle">  Digital</span>
+      <input name="digital" value="1" type="radio" class='item-radio' checked="">
+     </label>
+     <label class="item">
+      <span style="vertical-align:middle">  Analog</span>
+      <input name="digital" value="0" type="radio" class='item-radio'>
+     </label>
+    </label>
+   <label class='item'>
+    Invert colors
+    <input id='invertCheckbox' type='checkbox' class='item-checkbox'>
+   </label>
+    <label class="item">
+     Date display
+     <label class="item">
+      <span style="vertical-align:middle">  MM/DD</span>
+      <input name="datemode" value="0" type="radio" class='item-radio' checked="">
+     </label>
+     <label class="item">
+      <span style="vertical-align:middle">  DD/MM</span>
+      <input name="datemode" value="1" type="radio" class='item-radio'>
+     </label>
+    </label>
+  </div>
+  <div class='item-container-footer'>
+   Settings only change on the watch after you click Submit.
+  </div>
+ </div>
+
+ <div class='item-container'>
+  <div class='button-container'>
+    <input id='submitButton' type='button' class='item-button' value='SUBMIT'>
+  </div>
+ </div>
+
+ <div class="item-container">
+  <div class="button-container">
+    <input id='cancelButton' type='button' class='item-button' value='CANCEL'>
+  </div>
+ </div>
+
+ <script src='/nevraw.github.io/SotoX/slate.js'></script>
+ <script src='/nevraw.github.io/SotoX/main_bw.js'></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<html>
+<head>
+<title>Color Crush Pebble App</title>
+<style>
+p {
+  font-family:Arial;
+	font-size:11pt;
+}
+
+h1 {
+	font-family:Arial;
+	font-size:20pt;
+}
+</style>
+ <script src="/code.jquery.com//jquery.js"></script>
+</head>
+<body>
+<h1>Color Crush Watch Face Config:</h1>
+<br><br>
+<p>Background Color:
+	<select id="background" name="background">
+		<option value="0xAAFF55">Inchworm</option>
+		<option value="0xFFFFAA">Pastel Yellow</option>
+		<option value='0xAAAAAA'>Light Gray</option>
+		<option value='0xFFFFFF'>White</option>
+		<option value="0xAAFFAA">Mint Green</option>
+		<option value="0x55FF00">Bright Green</option>
+		<option value="0xAAFF00">Spring Bud</option>
+		<option value="0xFFFF55">Icterine</option>
+		<option value="0x000000">Black</option>
+		<option value="0x555555">Dark Gray</option>
+		<option value="0x55FF55">Screamin' Green</option>
+		<option value="0x00FF00">Green</option>
+		<option value="0xFFFF00">Yellow</option>
+		<option value="0xFFAA55">Rajah</option>
+		<option value="0x00FF55">Malachite</option>
+		<option value="0x00AA00">Islamic Green</option>
+		<option value="0x55AA00">Kelly Green</option>
+		<option value="0xAAAA55">Brass</option>
+		<option value="0xAAAA00">Limerick</option>
+		<option value="0xFFAA00">Chrome Yellow</option>
+		<option value="0xFF5500">Orange</option>
+		<option value="0xFFAAAA">Melon</option>
+		<option value="0x55FFAA">Medium Aquamarine</option>
+		<option value="0x00AA55">Jaeger Green</option>
+		<option value="0x55AA55">May Green</option>
+		<option value="0x005500">Dark Green</option>
+		<option value="0x555500">Army Green</option>
+		<option value="0xAA5500">Windsor Tan</option>
+		<option value="0xFF0000">Red</option>
+		<option value="0xFF5555">Sunset Orange</option>
+		<option value="0x00FFAA">Medium Spring Green</option>
+		<option value="0x00AAAA">Tiffany Blue</option>
+		<option value="0x55AAAA">Cadet Blue</option>
+		<option value="0x005555">Midnight Green</option>
+		<option value="0xAA5555">Rose Vale</option>
+		<option value="0xFF0055">Folly</option>
+		<option value="0x55FFFF">Electric Blue</option>
+		<option value="0x00FFFF">Cyan</option>
+		<option value="0x0055AA">Cobalt Blue</option>
+		<option value="0x550000">Bulgarian Rose</option>
+		<option value="0xAA0000">Dark Candy Apple Red</option>
+		<option value="0xAAFFFF">Celeste</option>
+		<option value="0x00AAFF">Vivid Cerulean</option>
+		<option value="0x0000AA">Duke Blue</option>
+		<option value="0x000055">Oxford Blue</option>
+		<option value="0x550055">Imperial Purple</option>
+		<option value="0xAA0055">Jazzberry Jam</option>
+		<option value="0xFF00AA">Fashion Magenta</option>
+		<option value="0x55AAFF">Piction blue</option>
+		<option value="0x0000FF">Blue</option>
+		<option value="0x5500FF">Electric Ultramarine</option>
+		<option value="0x5500AA">Indigo</option>
+		<option value="0xAA00AA">Purple</option>
+		<option value="0xFF00FF">Magenta</option>
+		<option value="0xFF55AA">Brillian Rose</option>
+		<option value="0x0055FF">Blue Moon</option>
+		<option value="0x5555FF">Very Light Blue</option>
+		<option value="0x5555AA">Liberty</option>
+		<option value="0xAA00FF">Vivid Violet</option>
+		<option value="0xAA55AA">Purpureus</option>
+		<option value="0xFF55FF">Shocking Pink</option>
+		<option value="0xFFAAFF">Rich Brilliant Lavendar</option>
+		<option value="0xAAAAFF">Baby Blue Eyes</option>
+		<option value="0xAA55FF">Lavendar Indigo</option>
+	</select>
+</p>
+<p>
+	<button id="save_button">Save</button>
+</p>
+
+</body>
+</html>
+
+
+<script>
+
+(function () {
+	loadOptions();
+})();
+
+function loadOptions() {
+	var $background = $('#background');
+
+if (localStorage.background) {
+		$background[0].value = localStorage.background;
+	}
+}
+
+function getAndStoreConfigData() {
+	var $background = $('#background');
+
+	var options = {
+		background: $background.val(),
+	};
+
+	localStorage.background = options.background;
+
+	console.log('Got options: ' + JSON.stringify(options));
+	return options;
+}
+
+// Something like this to get query variables.
+function getQueryParam(variable, defaultValue) {
+// Find all URL parameters
+var query = location.search.substring(1);
+var vars = query.split('&');
+for (var i = 0; i < vars.length; i++) {
+	var pair = vars[i].split('=');
+
+	// If the query variable parameter is found, decode it to use and return it for use
+	if (pair[0] === variable) {
+		return decodeURIComponent(pair[1]);
+	}
+}
+return defaultValue || false;
+}
+
+
+
+
+  //Setup to allow easy adding more options later
+  function saveOptions() {
+
+  var e = document.getElementById("background");
+  
+  var bgColor = e.options[e.selectedIndex].value;
+
+  var options = {
+      'bgcolor': bgColor,
+    }
+    return options;
+  };
+
+ $("#save_button").click(function () {	
+	console.log("Submit");
+	var options = saveOptions();
+    getAndStoreConfigData() 
+  // Set the return URL depending on the runtime environment
+  var return_to = getQueryParam('return_to', 'pebblejs://close#');
+  document.location.href = return_to + encodeURIComponent(JSON.stringify(options));
+ });
+
+</script>

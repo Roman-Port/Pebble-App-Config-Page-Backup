@@ -1,0 +1,128 @@
+<div class="item-container">
+  <div class="item-container-content">
+    <label class="item {{ disabled ? 'disabled' : '' }}">
+      {{ label }}
+      <input type="text" class="item-color item-color-normal" value="{{ color }}" on-click="show"/>
+      <div class="item-styled-color">
+        <span class="value" style="background:{{ css_color }}"></span>
+        <div style="padding-bottom:{{ boxHeight }}%" class="color-box-wrap {{ show ? 'show' : '' }}">
+          <div class="color-box-container">
+            {{#each layout}}
+              {{#each line}}
+                <i class="color-box {{ selectable }} {{ roundedTL }} {{ roundedTR }} {{ roundedBL }} {{ roundedBR }}"
+                   style="width:{{ itemWidth }}%;height:{{ itemHeight }}%;background:{{ css_color }};" on-click="setColor:{{color}}">
+                </i>
+              {{/each}}
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </label>
+  </div>
+</div>
+
+<style>
+ .disabled {
+   color: lightgray;
+ }
+</style>
+
+<script>
+ var ENUMS = {
+   COLOR : {
+     EMPTY: "transparent"
+   }
+ }
+ var LAYOUT = [
+   [false    , false    , 0x55FF00 , 0xAAFF55 , false    , 0xFFFF55 , 0xFFFFAA , false    , false    ],
+   [false    , 0xAAFFAA , 0x55FF55 , 0x00FF00 , 0xAAFF00 , 0xFFFF00 , 0xFFAA55 , 0xFFAAAA , false    ],
+   [0x55FFAA , 0x00FF55 , 0x00AA00 , 0x55AA00 , 0xAAAA55 , 0xAAAA00 , 0xFFAA00 , 0xFF5500 , 0xFF5555 ],
+   [0xAAFFFF , 0x00FFAA , 0x00AA55 , 0x55AA55 , 0x005500 , 0x555500 , 0xAA5500 , 0xFF0000 , 0xFF0055 ],
+   [false    , 0x55AAAA , 0x00AAAA , 0x005555 , 0xFFFFFF , 0x000000 , 0xAA5555 , 0xAA0000 , false    ],
+   [0x55FFFF , 0x00FFFF , 0x00AAFF , 0x0055AA , 0xAAAAAA , 0x555555 , 0x550000 , 0xAA0055 , 0xFF55AA ],
+   [0x55AAFF , 0x0055FF , 0x0000FF , 0x0000AA , 0x000055 , 0x550055 , 0xAA00AA , 0xFF00AA , 0xFFAAFF ],
+   [false    , 0x5555AA , 0x5555FF , 0x5500FF , 0x5500AA , 0xAA00FF , 0xFF00FF , 0xFF55FF , false    ],
+   [false    , false    , false    , 0xAAAAFF , 0xAA55FF , 0xAA55AA , false    , false    , false    ],
+ ];
+ var ITEM_WIDTH = 100 / LAYOUT[0].length;
+ var ITEM_HEIGHT = 100 / LAYOUT.length;
+ var BOX_HEIGHT = ITEM_WIDTH * LAYOUT.length;
+
+ var layout_color = function(i, j){
+   var color = layout[i][j] || ENUMS.COLOR.EMPTY;
+   if(this.get("sunny")){
+     color = "#" + mappingSunny[color.replace("#", "").toLowerCase()];
+   }
+   return color;
+ };
+ var selectable = function(color){
+   return color !== ENUMS.COLOR.EMPTY ? " selectable" : "";
+ };
+ var roundedTL = function(i, j){
+   return ( i === 0 && j === 0) || i === 0 && !LAYOUT[i][j - 1]  || !LAYOUT[i][j - 1] && !LAYOUT[i -1][j] ? "rounded-tl" : "";
+ };
+ var roundedTR = function(i, j){
+   return ( i === 0 && !LAYOUT[i][j + 1] || !LAYOUT[i][j + 1] && !LAYOUT[i -1][j]) ? "rounded-tr " : "";
+ };
+ var roundedBL = function(i, j){
+   return (i === LAYOUT.length - 1 && j === 0) || i === LAYOUT.length - 1 && !LAYOUT[i][j - 1] || !LAYOUT[i][j - 1] && !LAYOUT[i + 1][j] ? " rounded-bl" : "";
+ };
+ var roundedBR = function(i, j){
+   return i === LAYOUT.length - 1 && !LAYOUT[i][j + 1] || !LAYOUT[i][j + 1] && !LAYOUT[i + 1][j] ? " rounded-br" : "";
+ };
+ component.exports = {
+   data: function(){
+     ractive = this;
+     return {
+       sunny: false,
+       show: false,
+       disabled: false,
+       itemWidth: ITEM_WIDTH,
+       itemHeight: ITEM_HEIGHT,
+       boxHeight: BOX_HEIGHT,
+       layout: function(){
+         var layout = [];
+         for(var line = 0; line < LAYOUT.length; line++){
+           layout[line] = { line: [] };
+           for(var col = 0; col < LAYOUT[line].length; col++){
+             var color = LAYOUT[line][col];
+             layout[line].line[col] = {
+               color: color,
+               css_color: ractive.css_color(color),
+               selectable: selectable(color),
+               roundedTL: roundedTL(line, col),
+               roundedTR: roundedTR(line, col),
+               roundedBL: roundedBL(line, col),
+               roundedBR: roundedBR(line, col),
+             };
+           }
+         }
+         return layout;
+       }()
+     };
+   },
+   oninit: function(){
+     this.on("show", function () {
+       if(!this.get("disabled")){
+         this.toggle("show");
+       }
+     });
+     this.on('setColor', function(event, color){
+       if(color !== false){
+         this.set('color', color);
+         return;
+       }
+       return false;
+     });
+   },
+   css_color: function(color){
+     var hex = color.toString(16);
+     return '#' + new Array(6 - hex.length + 1).join('0') + hex;
+   },
+   computed: {
+     css_color: function(){
+       return this.css_color(this.get("color"));
+     }
+   }
+ };
+</script>

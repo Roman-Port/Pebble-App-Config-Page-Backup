@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<style>
+html{margin:0; padding:0}
+body{background:#fff; color:#000; padding:1%}
+.blk{background:#000; color:#fff}
+body,input,select{font:normal 14pt Helvetica}
+input,select{line-height:1.5em}
+form{text-align:center}
+center{margin:1em 0}
+table,tr,td{margin:0; padding:0; text-align:left}
+td{padding:0.5em 2px; vertical-align:top}
+#three,#six,#nine,#twelve{position:absolute; width:196px; left:10px; text-align:center; font-size:1.5em}
+#three,#nine{top:108px; margin-top:-0.5em; text-align:right}
+#nine{text-align:left}#six{bottom:5px}#twelve{top:5px}
+#batt_ring,#date_ring,#week_ring,
+#stime,#batt,#date,#week{position:absolute; width:30px; height:30px; line-height:30px; text-align:center; font-size:0.8em}
+#batt_ring,#date_ring,#week_ring{border:1px dotted; border-radius:15px}
+.cpc{position:absolute; width:30px; height:30px}
+.cpc select{position:absolute; top:0}
+</style>
+<body><!-- APPUID: 28b06d4a-4875-45bb-bde3-fbd0fbbfbf7c -->
+<script>
+function wr(s){
+var hours=[];
+for(var i=0; i<24; i++) hours.push("<option value="+i+">"+i+":00");
+document.write(hours.join(""));
+}
+</script>
+<form name="fm">
+<div style="display:inline-block; position:relative; width:216px; height:252px">
+  <div style="position:absolute; top:18px; border:2px dotted; width:216px; height:216px; border-radius:108px">
+    <div id="three">3</div><div id="six">6</div><div id="nine">9</div><div id="twelve">12</div>
+    <div style="position:absolute; width:100%; left:0; top:108px; margin-top:-2em; text-align:center">
+    <select name="bg" onchange="upd();"><option value="0">Black<option value="1">White</option></select><p>
+    <select name="m" onchange="upd();">
+      <option value="0">No digits
+      <option value="2">12
+      <option value="4">12, 6
+      <option value="6">12, 3, 6, 9
+    </option></select></div>
+  </div>
+  <div class="cpc" style="top:0; left:0">
+    <div id="stime">12:00</div>
+  </div>
+  <div class="cpc" style="top:0; right:0">
+    <div id="batt_ring"></div>
+    <div id="batt">90</div>
+  </div>
+  <div class="cpc" style="bottom:0; right:0">
+    <div id="date_ring"></div>
+    <div id="date">31</div>
+  </div>
+  <div class="cpc" style="bottom:0; left:0">
+    <div id="week_ring"></div>
+    <div id="week">Tu</div>
+  </div>
+</div>
+<center>
+<table>
+<tr><td>Digital</td><td><select name="s" onchange="upd();"><option value="0">Hide Time<option value="1">Show Time</option></select>
+</td></tr><tr><td>Battery</td><td><select name="b" onchange="upd();"><option value="0">Hide<option value="1">Show when 30%<option value="2">Show<option value="3">Show Ring</option></select>
+</td></tr><tr><td>Week</td><td><select name="w" style="right:40px" onchange="upd();"><option value="0">Hide<option value="1">Show<option value="2">Show Ring</option></select>
+</td></tr><tr><td>Date</td><td><select name="d" style="left:40px" onchange="upd();"><option value="0">Hide<option value="1">Show<option value="2">Show Ring</option></select>
+</td></tr><tr><td>Seconds</td><td><select name="c" onchange="upd();"><script>wr();</script></select>
+  to <select name="h" onchange="upd();"><script>wr();</script></select> show the clock's second hand
+</td></tr><tr><td>Conserve</td><td>Hide the second hand when battery is below <select name="p" onchange="upd();">
+<option value="0">0%<option value="10">10%<option value="20">20%<option value="30">30%
+<option value="40">40%<option value="50">50%<option value="60">60%<option value="70">70%
+<option value="80">80%<option value="90">90%<option value="100">100%</option></select> to conserve power
+</td></tr></table>
+</center>
+<p><input type="button" value="OK" onclick="bye();">
+</form>
+
+<script>
+function $(s) {return document.getElementById(s)}
+var obj = {m:0,s:1,b:3,d:2,w:2,p:100,c:7,h:1};
+location.search.replace(/\b(\w)=(\d+)\b/g, function(s,n,v) {if(n in obj)document.fm[n].value=obj[n]=v});
+document.fm.bg.value=obj.m%2;
+document.fm.m.value=obj.m-(obj.m%2);
+upd();
+function show(s, t, v) {
+  s=s.charAt?[s]:s;
+  for(var i=0;i<s.length;i++) $(s[i]).style.opacity=t?"1":"0.15";
+}
+function upd() {
+  var fm=document.fm;
+  document.body.className=(fm.bg.value==0)?"blk":"";
+  var m=fm.m.value;
+  show(["three","nine"],m>=6);
+  show("six",m>=4);
+  show("twelve",m>=2);
+  show("stime",fm.s.value>0);
+  show("batt_ring",fm.b.value==3);
+  show("batt",fm.b.value>=1);
+  show("date_ring",fm.d.value==2);
+  show("date",fm.d.value>=1);
+  show("week_ring",fm.w.value==2);
+  show("week",fm.w.value>=1);
+  for(var i in obj) obj[i]=fm[i].value*1;
+  obj.m=fm.m.value*1+fm.bg.value*1;
+}
+function bye(){
+  location="pebblejs://close#"+encodeURIComponent(JSON.stringify(obj));
+}
+</script>
+</body>
+</html>

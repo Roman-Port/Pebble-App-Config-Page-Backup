@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title>Final Fantasy Series Face # Options</title>
+  <link rel="stylesheet" href="/pebble.internetdesigns.eu/FFSface/css/slate.css">
+</head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-22777856-33', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  <form id="main-form">
+    <div class="item-container">
+    	<div class="item-container-header"><center>Final Fantasy Series Face # Options</center></div>
+      <div class="item-container-content">
+        <div class="item">
+          For true FF games fans!<br> <strong>Like it?</strong> Give it a heart! &hearts;
+        </div>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Visible</div>
+      <div class="item-container-content">
+        <label class="item">
+          Bluetooth Signal
+          <input type="checkbox" class="item-toggle" id="bluetooth_checkbox" checked="">
+        </label>
+        <label class="item">
+          Battery
+          <input type="checkbox" class="item-toggle" id="battery_checkbox" checked="">
+        </label>
+        <!--<label class="item">FF logo
+      	 <select id="ff_logo_select" dir='rtl' class="item-select">
+        	<option class="item-select-option" selected>random</option>
+        	<option class="item-select-option">Final Fantasy I</option>
+        	<option class="item-select-option">Final Fantasy II</option>
+        	<option class="item-select-option">Final Fantasy III</option>
+        	<option class="item-select-option">Final Fantasy IV</option>
+        	<option class="item-select-option">Final Fantasy V</option>
+        	<option class="item-select-option">Final Fantasy VI</option>
+        	<option class="item-select-option">Final Fantasy VII</option>
+        	<option class="item-select-option">Final Fantasy VIII</option>
+        	<option class="item-select-option">Final Fantasy IX</option>
+        	<option class="item-select-option">Final Fantasy X</option>
+        	<option class="item-select-option">Final Fantasy XI</option>
+        	<option class="item-select-option">Final Fantasy XII</option>
+        	<option class="item-select-option">Final Fantasy XIII</option>
+        	<option class="item-select-option">Final Fantasy XIV</option>
+      	 </select>
+        </label>-->
+      </div>
+      <div class='item-container-footer'>
+        Choose if you want to see battery level and bloototh connection icons<!-- and which FF logo to display - <b>random</b> means that every 30 minutes the FF logo will be randomly changed-->.
+      </div>
+    </div>
+
+
+
+    <div class="item-container">
+      <div class="item-container-header">Colors</div>
+      <div class="item-container-content">
+        <label class="item">
+          Time Color Picker
+          <input type="text" class="item-color item-color-normal" id="time_color_picker" value="0x000000">
+        </label>
+        <label class="item">
+          Date Color Picker
+          <input type="text" class="item-color item-color-normal" id="date_color_picker" value="0x000000">
+        </label>
+        
+      </div>
+     <div class='item-container-footer'>
+        Only available on watches that support many colors.
+      </div>
+    </div>
+
+    
+
+    <div class="item-container">
+      <div class="button-container">
+        <input type="button" class="item-button" value="SEND" id='submit_button'>
+      </div>
+    </div>
+  </form>
+  
+  <br>
+
+  <center>
+  <script async="" src="/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- pebble settings -->
+<ins class="adsbygoogle" style="display:inline-block;width:320px;height:100px" data-ad-client="ca-pub-8461823729052049" data-ad-slot="5019211090"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</center>
+
+
+  <script type="text/javascript" src="/pebble.internetdesigns.eu/FFSface/js/slate.bin"></script>
+  <script type="text/javascript">
+  function getConfigData() {
+    var bluetoothCheckbox = document.getElementById('bluetooth_checkbox');
+    var batteryCheckbox = document.getElementById('battery_checkbox');
+    var time_colorPicker = document.getElementById('time_color_picker');
+    var date_colorPicker = document.getElementById('date_color_picker');
+    //var FFlogoSelected = document.getElementById('ff_logo_select');
+
+    var options = {
+      'bluetooth': bluetooth_checkbox.checked,
+      'battery': battery_checkbox.checked,
+      'time_color': time_color_picker.value,
+      'date_color': date_color_picker.value
+      //'ff_logo': FFlogoSelected.value
+    };
+    // Save for next launch
+    localStorage['bluetooth'] = options['bluetooth'];
+    localStorage['battery'] = options['battery'];
+    localStorage['time_color'] = options['time_color'];
+    localStorage['date_color'] = options['date_color'];
+    //localStorage['ff_logo'] = options['ff_logo'];
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+  (function() {
+    var bluetoothCheckbox = document.getElementById('bluetooth_checkbox');
+    var batteryCheckbox = document.getElementById('battery_checkbox');
+    var time_colorPicker = document.getElementById('time_color_picker');
+    var date_colorPicker = document.getElementById('date_color_picker');
+   // var FFlogoSelected = document.getElementById('ff_logo_select');
+    
+    // Load any previously saved configuration, if available
+    if(localStorage['bluetooth']) {
+      bluetoothCheckbox.checked = JSON.parse(localStorage['bluetooth']);
+      batteryCheckbox.checked = JSON.parse(localStorage['battery']);
+      time_colorPicker.value = localStorage['time_color'];
+      date_colorPicker.value = localStorage['date_color'];
+      //FFlogoSelected.value = localStorage['ff_logo'];
+    }
+  })();
+  </script>
+</body>
+</html>

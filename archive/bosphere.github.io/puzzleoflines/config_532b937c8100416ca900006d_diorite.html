@@ -1,0 +1,136 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Puzzle of Lines Configurations</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bosphere.github.io/puzzleoflines/bootstrap.css" rel="stylesheet">
+    <link href="/bosphere.github.io/puzzleoflines/custom.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="header">
+          <br>
+          <img src="/bosphere.github.io/puzzleoflines/title.png" alt="Puzzle of Lines" width="200" height="16">
+          <span class="text-muted" style="font-size:8pt;float:right;padding-top:5px;">settings</span>
+        </div>
+        <hr>
+        <div id="body">
+          <h5 class="text-muted">How to read the time:</h5>
+          <p class="text-muted"><b>hours</b> in the central area - horizontal lines one to six, vertical lines seven to twelve; <b>minutes</b> - the tiny solid rectangule circles around the outer frame and changes position every minute, while each gap corresponds to clock position one to twelve.</p>
+          <ul>
+            <li>
+              <label for='chkbx'>inverse color</label>
+              <div class='togglebox'>
+                <input type='checkbox' id='inv-color'>
+                <label for='inv-color'><b></b></label>
+              </div>
+            </li>
+            <li>
+              <label for='chkbx2'>vibrate on disconnect</label>
+              <div class='togglebox'>
+                <input type='checkbox' id='vib-disconn'>
+                <label for='vib-disconn'><b></b></label>
+              </div>
+            </li>
+            <li>
+              <label for='chkbx3'>battery saving mode<br><small class="text-muted">screen updates every 15 sec</small></label>
+              <div class='togglebox'>
+                <input type='checkbox' id='bat-save'>
+                <label for='bat-save'><b></b></label>
+              </div>
+            </li>
+          </ul>
+          <br><br><br>
+          <div style="text-align:center;">
+            <button id="submit-btn" type="button" class="btn btn-danger btn-lg" style="width:200px;border-radius: 0;border-color:transparent;background:#333333;">Apply</button>
+          </div>
+          <br><br>
+        </div>
+      </div> <!-- /container -->
+      <div class="push"></div>
+    </div> <!-- /wrapper -->
+    <div class="footer">
+      <p class="text-muted pull-right">by yang bo</p>
+    </div>
+  </body>
+  <script src="/bosphere.github.io/puzzleoflines/jquery-1.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      var hash = window.location.hash;
+      var conf_str = decodeURIComponent(hash.substr(1));
+      var conf = {};
+      if(conf_str) {
+        try {
+          conf = JSON.parse(conf_str);
+        } catch(e) {
+          // console.log("failed to read input json: " + e);
+        } finally {
+          if(!conf) conf = {};
+        }
+      }
+      var inv_color = conf['inv-color'] == null? 1 : conf['inv-color'];
+      var vib_disconn = conf['vib-disconn'] == null? 0 : conf['vib-disconn'];
+      var bat_save = conf['bat-save'] == null? 0 : conf['bat-save'];
+      // console.log("input: inv-color="+inv_color+" vib-disconn="+vib_disconn+" bat-save="+bat_save);
+
+      var color_selector = $('input#inv-color');
+      if(inv_color == 1) {
+        color_selector.prop('checked', true);
+      }
+      color_selector.change(function(){
+        if($(this).is(':checked')) {
+          inv_color = 1;
+        } else {
+          inv_color = 0;
+        }
+        // console.log("inv_color change to: "+inv_color);
+      });
+
+      var vib_disconn_selector = $('input#vib-disconn');
+      if(vib_disconn == 1) {
+        vib_disconn_selector.prop('checked', true);
+      }
+      vib_disconn_selector.change(function(){
+        if($(this).is(':checked')) {
+          vib_disconn = 1;
+        } else {
+          vib_disconn = 0;
+        }
+        // console.log("vib_disconn change to: "+vib_disconn);
+      });
+
+      var bat_save_selector = $('input#bat-save');
+      if(bat_save == 1) {
+        bat_save_selector.prop('checked', true);
+      }
+      bat_save_selector.change(function(){
+        if($(this).is(':checked')) {
+          bat_save = 1;
+        } else {
+          bat_save = 0;
+        }
+        // console.log("bat_save change to: "+bat_save);
+      });
+
+      $('#submit-btn').click(function(){
+        var conf = {
+          "inv-color": inv_color,
+          "vib-disconn": vib_disconn,
+          "bat-save": bat_save
+        };
+        var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(conf));
+        document.location = location;
+      });
+    });
+  </script>
+</html>

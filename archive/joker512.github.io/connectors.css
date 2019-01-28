@@ -1,0 +1,78 @@
+body,input,p,select { margin:0; padding:0; }
+
+.chart {
+	height: 547px;
+	width: 364px;
+	margin: 4px auto;
+	border: 3px solid #ddd;
+	border-radius: 6px;
+}
+
+.node.cell {
+	font-size: 11px;
+	padding: 0 2px;
+	min-width: 65px;
+	height: 35px;
+	text-align: center;
+	border: 2px solid #dddddd; 
+	border-radius: 2px;
+}
+
+.node.insert {
+	border: 0;
+	margin-top: 10px;
+	margin-left: -1px;
+}
+
+.node.root {
+	min-width: 40px;
+	height: 65px;
+}
+
+input[type=number] {
+	width: 35px;
+	text-align: center;
+	border-color: #ddd;
+}
+
+input[type=input] {
+	text-align: center;
+	border: 0;
+}
+
+.buttons {
+	border: 3px solid #DDD;
+	border-radius: 6px;
+	width: 174px;
+	height: 25px;
+	margin: 0 auto;
+	padding: 4px 95px;
+}
+
+input[type=submit] {
+	padding-left: 22px;
+	width: 70px;
+	height: 25px;
+}
+
+input#cancel{
+	background: #eee url('exit.png') no-repeat center;
+	background-position: 4px;
+	float: left;
+}
+
+input#submit{
+	background: #eee url('save.png') no-repeat center;
+	background-position: 4px;
+	float: right;
+}
+
+select {
+	-webkit-appearance: none;
+	border: 2px solid #bbb;
+	border-radius: 4px;
+	width: 16px;
+	height: 18px;
+	margin: 0 2px;
+	text-indent: 3px;
+}

@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel='stylesheet' type='text/css' href='/pebble.geraintwhite.co.uk/css/slate.css'>
+  <link rel='stylesheet' type='text/css' href='css/style.css'>
+</head>
+<body>
+  <div class='item-container'>
+    <h1 class='title'>Watchface Configuration Page</h1>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <div class='item'>
+        Use this configuration page to choose the settings you would like applied to this app.
+      </div>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Customisability</div>
+    <div class='item-container-content'>
+      <label class='item app-setting'>
+        Show battery percentage
+        <input id='batteryPercentage' type='checkbox' class='item-toggle' checked="">
+      </label>
+      <label class='item app-setting'>
+        Show current date
+        <input id='showDate' type='checkbox' class='item-toggle' checked="">
+      </label>
+      <label class='item app-setting'>
+        Show weather information
+        <input id='showWeather' type='checkbox' class='item-toggle' checked="">
+      </label>
+      <label class='item app-setting'>
+        Vibrate on the hour
+        <input id='hourlyVibrate' type='checkbox' class='item-toggle'>
+      </label>
+      <label class='item app-setting'>
+        Vibrate twice on Bluetooth disconnect
+        <input id='bluetoothVibrate' type='checkbox' class='item-toggle'>
+      </label>
+      <label class='item app-setting'>
+        Invert colours
+        <input id='invertColours' type='checkbox' class='item-toggle'>
+      </label>
+    </div>
+    <div class='item-container-footer'>
+      These settings only change on the watch after you click save.
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='button-container'>
+      <input id='submitButton' type='button' class='item-button' value='SAVE'>
+    </div>
+  </div>
+
+  <script src='/pebble.geraintwhite.co.uk/js/slate.js'></script>
+  <script src='/pebble.geraintwhite.co.uk/js/main.js'></script>
+</body>
+</html>

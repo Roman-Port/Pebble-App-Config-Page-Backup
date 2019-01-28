@@ -1,0 +1,611 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Impact</title>
+  <link rel='stylesheet' type='text/css' href='/sichroteph.github.io/Impact/css/slate.css'>
+  <script src='/sichroteph.github.io/Impact/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Impact</h1>
+
+
+    <div class='item-container'>
+    
+	  <div class='item-container-content'>
+          <div class='item-container-footer'>
+  
+            </div>
+            </div>
+  <div class='item-container-header'>Position</div>
+  <div class='item-container-content'>
+
+    <label class='item'>
+    GPS
+      <input id='gps' type='checkbox' class='item-toggle'>
+    </label>
+    Your city if no GPS:
+        <label class='item'>
+          <div class='item-input-wrapper'>
+            <input type='text' class='item-input' input="" id='input_city' placeholder='Input field'>
+          </div>
+        </label>
+
+
+            <label class='item'>
+Your weather provider choice:
+      <select input="" id='select_provider' dir='rtl' class='item-select'>
+            <option class='item-select-option'>0</option>
+            <option class='item-select-option'>1</option>
+            <option class='item-select-option' selected="">2</option>
+               </select>
+    </label>
+
+                            <div class='item-container-footer'>
+      Choice 0 : Disabled -- Choice 1 : Open weather map -- Choice 2 : Forecast.Io
+ </div>
+
+              <div style="display:none;">
+        Your weather underground API key :
+        <label class='item'>
+          <div class='item-input-wrapper'>
+            <input type='text' class='item-input' input="" id='input_api' placeholder='Input field'>
+          </div>
+        </label>
+             </div>
+    
+
+        <div style="display:none;">
+     <label class='item'>
+      UTC time offset
+      <select input="" id='select_utc' dir='rtl' class='item-select'>
+            <option class='item-select-option'>-9</option>
+            <option class='item-select-option'>-8</option>
+            <option class='item-select-option'>-7</option>
+            <option class='item-select-option'>-6</option>
+            <option class='item-select-option'>-5</option>
+            <option class='item-select-option'>-4</option>
+            <option class='item-select-option'>-3</option>
+            <option class='item-select-option'>-2</option>
+            <option class='item-select-option'>-1</option>
+            <option class='item-select-option'>-0</option>            
+            <option class='item-select-option' selected="">1</option>
+            <option class='item-select-option'>2</option>         
+            <option class='item-select-option'>3</option>
+            <option class='item-select-option'>4</option>
+            <option class='item-select-option'>5</option>
+            <option class='item-select-option'>6</option>
+            <option class='item-select-option'>7</option>            
+            <option class='item-select-option'>8</option>
+            <option class='item-select-option'>9</option>            
+            <option class='item-select-option'>10</option>            
+            <option class='item-select-option'>11</option>
+            <option class='item-select-option'>12</option>
+      </select>
+    </label>
+
+    <div class='item-container-footer'>
+    You can find this number by visiting <a href='/www.timeanddate.com/time/map/.html'>this site</a>
+  </div>
+   </div>
+
+    </div>
+</div>
+
+
+<div class='item-container'>
+  <div class='item-container-header'>Units</div>
+  <div class='item-container-content'>
+    <label class='item'>
+      Imperial
+      <input type='radio' class='item-radio' name='radio1' input="" id='radio_units' value='a'>
+    </label>
+    <label class='item'>
+      Metric
+      <input type='radio' class='item-radio' name='radio1' input="" id='radio_units' value='b' checked="">
+    </label>
+      
+  </div>
+</div>
+
+ <div style="display:none;">
+<div class='item-container'>
+  <div class='item-container-header'>Health</div>
+  <div class='item-container-content'>
+          <label class='item'>
+       Your daily step goal:
+      <select input="" id='select_goal' dir='rtl' class='item-select'>
+            <option class='item-select-option'>12000</option>
+            <option class='item-select-option'>11000</option>
+            <option class='item-select-option'>10000</option>
+
+            <option class='item-select-option'>9000</option>
+            <option class='item-select-option'>8000</option>
+            <option class='item-select-option'>7000</option>
+            <option class='item-select-option'>6000</option>
+            <option class='item-select-option'>5000</option>
+            <option class='item-select-option'>4000</option>
+            <option class='item-select-option'>3000</option>
+            <option class='item-select-option'>2000</option>
+            <option class='item-select-option'>1000</option>
+            <option class='item-select-option' selected="">0</option>
+
+      </select>
+    </label>
+
+      <div class='item-container-footer'>
+      Enter 0 to deactivate
+    </div>
+           <div class='item-container'>
+  <div class='item-container-header'></div>
+  <div class='item-container-content'>
+         <label class='item'>
+  <img src="/sichroteph.github.io/Impact/Vx6vv7J.png" style="width:300px;height:133px;"></label>
+
+
+        </div>
+</div>
+
+  </div>
+  </div>
+  </div>
+
+<div class='item-container'>
+  <div class='item-container-header'>Others</div>
+  <div class='item-container-content'>
+     <div style="display:none;">
+    <label class='item'>
+      Fonts  
+      <select input="" id='select_fonts' dir='rtl' class='item-select'>
+            <option class='item-select-option' selected="">0</option>
+            <option class='item-select-option'>1</option>
+            <option class='item-select-option'>2</option>
+      </select>
+    </label>
+	 </div>
+     <div style="display:none;">
+    <div class='item-container-footer'>
+      0: Squared fonts - 1: Clearview fonts - 2: Leco fonts 
+    </div>
+    </div>
+      <label class='item'>
+    Bluetooth disconnection vibration 
+      <input type='checkbox' class='item-toggle' input="" id='toggle_bt'>
+    </label>
+   
+    <label class='item'>
+      Hourly vibrations
+      <input type='checkbox' class='item-toggle' input="" id='toggle_vibration'>
+    </label>
+    <div class='item-container-footer'>
+      Starts at 10am - Ends at 10pm
+    </div>
+    <div style="display:none;">
+	<label class='item'>
+      White icons
+      <input type='checkbox' class='item-toggle' input="" id='toggle_bw_icons'>
+    </label></div>
+	
+  <div class='item-container-footer'>
+    Only applies to Pebble Time.
+  </div>
+ <div style="display:none;">   
+   <label class='item'>
+    Gradiant
+      <input type='checkbox' class='item-toggle' input="" id='toggle_gradiant'>
+    </label>
+  <div class='item-container-footer'>
+   Does not apply to Pebble round
+  </div>
+  
+   
+    
+    <label class='item'>
+      Larger ruler
+      <input type='checkbox' class='item-toggle' input="" id='toggle_ruler_large' checked="">
+    </label>
+          <div class='item-container-footer'>
+   The larger ruler is by default
+  </div>
+    
+    <label class='item'>
+      Hours numbers mid-centered
+      <input type='checkbox' class='item-toggle' input="" id='toggle_centered'>
+    </label>
+      <div class='item-container-footer'>
+   	
+By default, the hours are not mid-centered
+  </div>
+
+    <label class='item'>
+      Inverse the ruler movement
+      <input type='checkbox' class='item-toggle' input="" id='toggle_inv'>
+    </label>
+      <div class='item-container-footer'>
+   By default the ruler is not inversed
+  </div>
+  </div>
+
+
+      <label class='item'>
+      Display month before week day
+      <input type='checkbox' class='item-toggle' input="" id='toggle_month'>
+    </label>
+
+      <div class='item-container-footer'>
+   Checked: May 26 Thu -- Unchecked: Thu 26 May (Not for Pebble round)
+  </div>
+
+    
+    <div style="display:none;">
+	<label class='item'>
+     Invert first and second screen
+      <input type='checkbox' class='item-toggle' input="" id='toggle_tg'>
+    </label>
+
+      <div class='item-container-footer'>
+   In order to have a completely different watchface !
+  </div>
+  </div>
+
+  </div>
+  </div>
+
+   
+
+<div class='item-container'>
+  <div class='item-container-header'>Weather update</div>
+  <div class='item-container-content'>
+    <label class='item'>
+      30 mn
+      <input type='radio' class='item-radio' name='radio2' input="" id='radio_refresh' value='a'>
+    </label>
+    <label class='item'>
+      60 mn
+      <input type='radio' class='item-radio' name='radio2' input="" id='radio_refresh' value='b' checked="">
+    </label>
+  </div>
+</div>
+
+
+
+ <div style="display:none;">
+
+ <div class='item-container'>
+  <div class='item-container-header'>Weather 12H forecast graph</div>
+  <div class='item-container-content'>
+     <label class='item'>
+      Second screen mode
+      <select input="" id='select_screen' dir='rtl' class='item-select'>
+            <option class='item-select-option'>1</option>
+            <option class='item-select-option' selected="">2</option>
+            <option class='item-select-option'>3</option>
+      </select>
+    </label>
+    <div class='item-container-footer'>
+   Mode 1: Desactivated  <br>
+   Mode 2: One shake to show<br>
+   Mode 3: Two shakes to show (Doesn't work well on OG pebbles)
+  </div>
+    </div>
+</div>
+</div>
+
+ <div class='item-container'>
+  <div class='item-container-header'>Phone battery management (Android)</div>
+ <div class='item-container-content'>
+
+
+ <label class='item'>
+      Phone battery at 100% vibration
+      <input type='checkbox' class='item-toggle' input="" id='toggle_100'>
+    </label>
+
+ <label class='item'>
+      Phone battery < 20% or > 80% vibration
+      <input type='checkbox' class='item-toggle' input="" id='toggle_80'>
+    </label>
+	
+	 <label class='item'>
+      Vibrate when the phone is charging
+      <input type='checkbox' class='item-toggle' input="" id='toggle_pc'>
+    </label>
+
+
+  <div class='item-container-footer'>
+      More information to make your lithium battery last longer  
+      <a href='/lifehacker.com/5875162/how-often-should-i-charge-my-gadgets-battery-to-prolong-its-lifespan.html'>here</a>
+
+ </div>
+ </div>
+</div>
+
+
+
+<div class='item-container'>
+  <div class='item-container-header'>Background color</div>
+  <div class='item-container-content'>
+     <label class='item'>
+      Temperatures - Background color
+      <input type='text' class='item-color item-color-normal' input="" id='color_left_back' value='0x000000'>
+    </label>
+     <div style="display:none;">
+	<label class='item'>
+      Temperatures color
+      <input type='text' class='item-color item-color-normal' input="" id='color_temperatures' value='0xFFFFFF'>
+    </label>
+	  </div>
+     <label class='item'>
+      Hours - Background color
+      <input type='text' class='item-color item-color-normal' input="" id='color_right_back' value='0x000000'>
+    </label>
+     <div style="display:none;">
+	<label class='item'>
+      Hours color
+      <input type='text' class='item-color item-color-normal' input="" id='color_hours' value='0xFFFFFF'>
+    </label>
+   
+   <label class='item'>
+      Ruler color
+      <input type='text' class='item-color item-color-normal' input="" id='color_ruler' value='0xFFFFFF'>
+    </label>
+
+    <label class='item'>
+      Central line color
+    <input type='text' class='item-color item-color-normal' input="" id='color_line' value='0xFFFFFF'>
+    </label>
+	 </div> 
+  </div>
+</div>
+
+ <div style="display:none;">
+<div class='item-container'>
+  <div class='item-container-header'>Second screen (Does not apply to B&W Pebbles)</div>
+  <div class='item-container-content'>
+    <label class='item'>
+      Background color
+      <input type='text' class='item-color item-color-normal' input="" id='color_2nd_back' value='0x000000'>
+    </label>
+    <label class='item'>
+      Text color
+      <input type='text' class='item-color item-color-normal' input="" id='color_2nd_temp' value='0xFFFFFF'>
+    </label>
+    </div>
+</div>
+</div>
+
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+          
+         <img src="/sichroteph.github.io/Impact/explain2.png" style="width:300px;height:133px;">
+      
+                      
+        
+             
+                       <div class='item-container-footer'>
+        If you REALLY like this app <br>
+        you can give me a little something on Paypal  <a href='/www.paypal.me//ChristopheJEANNETTE.html'>here</a>. <br>
+        - Otherwise just enjoy it, it's free !<br><br><br>  
+  
+    </div>
+    
+    
+  </body>
+
+
+  <script>
+
+  function getConfigData() {
+
+    var gps = document.getElementById('gps');
+    var input_city = document.getElementById('input_city');
+       var input_api = document.getElementById('input_api');
+    var select_utc = document.getElementById('select_utc');
+    var select_goal = document.getElementById('select_goal');
+    var select_provider = document.getElementById('select_provider');
+    var select_screen = document.getElementById('select_screen');
+
+    var radio_units = document.getElementById('radio_units');
+    var radio_refresh = document.getElementById('radio_refresh');
+
+    var toggle_vibration = document.getElementById('toggle_vibration');
+    var select_fonts = document.getElementById('select_fonts');
+    var toggle_bt = document.getElementById('toggle_bt');
+	 var toggle_pc = document.getElementById('toggle_pc');
+var toggle_tg = document.getElementById('toggle_tg');
+ var toggle_inv = document.getElementById('toggle_inv');
+    var toggle_bw_icons = document.getElementById('toggle_bw_icons');
+    var toggle_gradiant = document.getElementById('toggle_gradiant');
+    var color_right_back = document.getElementById('color_right_back');
+    var color_left_back = document.getElementById('color_left_back');
+    var color_hours = document.getElementById('color_hours');
+    var color_ruler = document.getElementById('color_ruler');
+    var color_temperatures = document.getElementById('color_temperatures');
+    var color_line = document.getElementById('color_line');
+    var color_2nd_back = document.getElementById('color_2nd_back');
+    var color_2nd_temp = document.getElementById('color_2nd_temp');
+    var toggle_ruler_large = document.getElementById('toggle_ruler_large');
+    var toggle_centered = document.getElementById('toggle_centered');
+    var toggle_month = document.getElementById('toggle_month');
+    var toggle_100 = document.getElementById('toggle_100');
+    var toggle_80 = document.getElementById('toggle_80');
+
+
+
+    var options = {
+      'gps': gps.checked,
+      'input_city': input_city.value,
+        'input_api': input_api.value,
+      'select_utc': select_utc.value,
+      'select_goal': select_goal.value,
+      'select_provider': select_provider.value,
+      'select_screen': select_screen.value,
+      'radio_units': radio_units.checked,
+      
+      'radio_refresh': radio_refresh.checked,
+      'radio_screen': radio_refresh.checked,
+
+      'toggle_vibration': toggle_vibration.checked,
+      'select_fonts': select_fonts.value,
+      'toggle_bt': toggle_bt.checked,
+	   'toggle_pc': toggle_pc.checked,
+'toggle_tg': toggle_tg.checked,
+ 'toggle_inv': toggle_inv.checked,
+'toggle_100': toggle_100.checked,
+'toggle_80': toggle_80.checked,
+      'toggle_bw_icons': toggle_bw_icons.checked,
+      'toggle_gradiant': toggle_gradiant.checked,
+
+       'color_right_back': color_right_back.value,
+       'color_left_back': color_left_back.value,
+       'color_hours': color_hours.value,
+       'color_ruler': color_ruler.value,
+       'color_temperatures': color_temperatures.value,
+       'color_line': color_line.value,
+       'color_2nd_back': color_2nd_back.value,
+       'color_2nd_temp': color_2nd_temp.value,
+       'toggle_ruler_large': toggle_ruler_large.checked,
+       'toggle_centered': toggle_centered.checked,
+         'toggle_month': toggle_month.checked,
+      
+    };
+
+    // Save for next launch
+    localStorage['gps'] = options['gps'];
+    localStorage['input_city'] = options['input_city'];
+     localStorage['input_api'] = options['input_api'];
+    localStorage['select_utc'] = options['select_utc'];
+    localStorage['select_goal'] = options['select_goal'];
+      localStorage['select_provider'] = options['select_provider'];
+    localStorage['select_screen'] = options['select_screen'];
+    localStorage['radio_units'] = options['radio_units'];
+    localStorage['radio_refresh'] = options['radio_refresh'];
+    localStorage['toggle_vibration'] = options['toggle_vibration'];
+      localStorage['select_fonts'] = options['select_fonts'];
+        localStorage['toggle_bt'] = options['toggle_bt'];
+		localStorage['toggle_pc'] = options['toggle_pc'];
+		 localStorage['toggle_tg'] = options['toggle_tg'];
+ localStorage['toggle_inv'] = options['toggle_inv'];
+ localStorage['toggle_100'] = options['toggle_100'];
+ localStorage['toggle_80'] = options['toggle_80'];
+    localStorage['toggle_bw_icons'] = options['toggle_bw_icons'];
+    localStorage['toggle_gradiant'] = options['toggle_gradiant'];
+    localStorage['toggle_centered'] = options['toggle_centered'];
+    localStorage['toggle_month'] = options['toggle_month'];
+    localStorage['color_right_back'] = options['color_right_back'];
+    localStorage['color_left_back'] = options['color_left_back'];
+    localStorage['color_hours'] = options['color_hours'];
+    localStorage['color_ruler'] = options['color_ruler'];
+    localStorage['color_temperatures'] = options['color_temperatures'];
+    localStorage['color_line'] = options['color_line'];
+    localStorage['color_2nd_back'] = options['color_2nd_back'];
+    localStorage['color_2nd_temp'] = options['color_2nd_temp'];
+    localStorage['toggle_ruler_large'] = options['toggle_ruler_large'];
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var gps = document.getElementById('gps');
+    var input_city = document.getElementById('input_city');
+        var input_api = document.getElementById('input_api');
+    var select_utc = document.getElementById('select_utc');
+    var select_goal = document.getElementById('select_goal');
+    var select_provider = document.getElementById('select_provider');
+    var select_screen = document.getElementById('select_screen');
+    var radio_units = document.getElementById('radio_units');
+    var radio_refresh = document.getElementById('radio_refresh');
+    var toggle_vibration = document.getElementById('toggle_vibration');
+        var select_fonts = document.getElementById('select_fonts');
+        var toggle_bt = document.getElementById('toggle_bt');
+   var toggle_pc = document.getElementById('toggle_pc');
+		var toggle_tg = document.getElementById('toggle_tg');
+ var toggle_inv = document.getElementById('toggle_inv');
+  var toggle_100 = document.getElementById('toggle_100');
+  var toggle_80 = document.getElementById('toggle_80');
+    var toggle_bw_icons = document.getElementById('toggle_bw_icons');
+    var toggle_gradiant = document.getElementById('toggle_gradiant');
+    var color_right_back = document.getElementById('color_right_back');
+    var color_left_back = document.getElementById('color_left_back');
+    var color_hours = document.getElementById('color_hours');
+    var color_ruler = document.getElementById('color_ruler');
+    var color_temperatures = document.getElementById('color_temperatures');
+    var color_line = document.getElementById('color_line');
+    var color_2nd_back = document.getElementById('color_2nd_back');
+    var color_2nd_temp = document.getElementById('color_2nd_temp');
+    var toggle_ruler_large = document.getElementById('toggle_ruler_large');
+    var toggle_centered = document.getElementById('toggle_centered');
+      var toggle_month = document.getElementById('toggle_month');  
+    gps.checked = JSON.parse(localStorage['gps']);
+    input_city.value =  localStorage['input_city'];
+        input_api.value =  localStorage['input_api'];
+    select_utc.value =  JSON.parse(localStorage['select_utc']);
+    select_goal.value =  JSON.parse(localStorage['select_goal']);
+    select_provider.value =  JSON.parse(localStorage['select_provider']);
+    select_screen.value =  JSON.parse(localStorage['select_screen']);
+    radio_units.checked =  JSON.parse(localStorage['radio_units']);
+    toggle_centered.checked =  JSON.parse(localStorage['toggle_centered']);
+        toggle_month.checked =  JSON.parse(localStorage['toggle_month']);
+    radio_refresh.checked =  JSON.parse(localStorage['radio_refresh']);
+    toggle_vibration.checked =  JSON.parse(localStorage['toggle_vibration']);
+    select_fonts.value =  JSON.parse(localStorage['select_fonts']);
+    toggle_bt.checked =  JSON.parse(localStorage['toggle_bt']);
+	toggle_pc.checked =  JSON.parse(localStorage['toggle_pc']);
+	   toggle_tg.checked =  JSON.parse(localStorage['toggle_tg']);
+toggle_inv.checked =  JSON.parse(localStorage['toggle_inv']);
+ toggle_100.checked =  JSON.parse(localStorage['toggle_100']);
+ toggle_80.checked =  JSON.parse(localStorage['toggle_80']);
+    toggle_bw_icons.checked =  JSON.parse(localStorage['toggle_bw_icons']);
+    toggle_gradiant.checked =  JSON.parse(localStorage['toggle_gradiant']);
+    color_right_back.value =  localStorage['color_right_back'];
+    color_left_back.value =  localStorage['color_left_back'];
+    color_hours.value =  localStorage['color_hours'];
+    color_ruler.value =  localStorage['color_ruler'];
+    color_temperatures.value =  localStorage['color_temperatures'];
+    color_line.value =  localStorage['color_line'];
+    color_2nd_back.value =  localStorage['color_2nd_back'];
+    color_2nd_temp.value =  localStorage['color_2nd_temp'];
+    toggle_ruler_large.checked =  JSON.parse(localStorage['toggle_ruler_large']);
+  
+                            
+
+  })();
+  </script>
+</html>

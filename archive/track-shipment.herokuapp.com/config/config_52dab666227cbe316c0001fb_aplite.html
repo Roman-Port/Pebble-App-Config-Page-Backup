@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+	<head>
+		<title>Pebble Form</title>
+		<link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
+		<script type="text/javascript" src="/ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.js"></script>
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link href="/netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+		
+		<style type="text/css">
+
+			/********************
+			 * Colors:          *
+			 *                  *
+			 * Red:    #AF0014  *
+			 * Blue:   #0056B2  *
+			 * Green:  #0B7A00  *
+			 ********************/
+
+			* {
+				font-family: helvetica, 'Roboto', sans-serif;
+				font-size: 1em;
+			}
+
+			h1 {
+				font-weight: bold;
+				font-size: 2.0em;
+			}
+			p {
+				font-size: 1.0em;
+			}
+
+			#content {
+				width: 90%;
+				height: 100%;
+				padding: 5%;
+			}
+
+			.fieldGroup {
+				margin-bottom: 20px;
+				position: relative;
+			}
+
+			.fieldGroup:after {
+				/* clearfix */
+				content: "";
+				display: table;
+				clear: both;
+			}
+			
+			.inputs {
+				width: 80%;
+				height: 106px;
+				float: left;
+			}
+				.inputs.lengthen {
+					width: 100%;
+				}
+
+			.field {
+				width: 92%;
+				height: 40px;
+				font-size: 1.5em;
+				display: block;
+			}
+
+			.removeButton {
+				width: 9%;
+				height: 85px;
+				padding-top: 21px;
+				/* border: 1px solid black; */
+				display: block;
+				float: right;
+				
+				text-align: center;
+				/* background: #AF0014; */
+				color: red;
+
+				display: none;
+				font-size: 0.60em;
+			}
+
+
+			#addButton, #sendButton {
+				width: 100%;
+				border: 1px solid black;
+				color: white;
+				font-size: 0.6em;
+			}
+				#sendButton {
+					height: 52px;
+					-webkit-appearance: none;
+					background: #0056B2;
+					margin-top: 20px;
+				}
+				#addButton {
+					height: 41px;
+					padding-top: 9px;
+					background: #0B7A00;
+					text-decoration: none;
+					display: block;
+					text-align: center;
+				}
+		</style>
+		<script>
+			$(document).ready(function() {
+				var urlParams = getURLParameters(window.location.href);
+				if (urlParams.names && urlParams.numbers) {
+					var names = urlParams.names.split("+");
+					var numbers = urlParams.numbers.split("+");
+					if (names.length > 1)
+					{
+						for (i=0; i<names.length;i++ ) {
+							if (i == 0) {
+								$(".fieldGroup").remove();
+							}
+							addFields(names[i], numbers[i]);
+							$(".removeButton").show();
+						}
+					}
+					else
+					{
+						$(".fieldGroup").remove();
+						addFields(urlParams.names, urlParams.numbers);
+						$(".removeButton").hide();
+						$(".inputs").addClass("lengthen");
+					}
+				}
+
+				$("#addButton").click(function() {
+					addFields("", "");
+					$(".inputs").removeClass("lengthen");
+					$(".removeButton").show();
+					if ($(".fieldGroup").length >= 5) $("#addButton").hide();
+				});
+
+				$(".removeButton").live('click', function() {
+				    $(this).parent().remove();
+				    if($(".fieldGroup").length == 1) {
+				    	$(".removeButton").hide();
+				    	$(".inputs").addClass("lengthen");
+				    }
+				    if ($(".fieldGroup").length < 5) $("#addButton").show();
+				});
+
+				$("#tracking_form").submit(function(event) {
+					var $inputs = $("#tracking_form :input");
+		        	var url = "pebblejs://close#";
+		        	var first = true;
+		        	var doSubmit = true;
+		        	var allBlank = true;
+		        	$inputs.each(function () {
+		        		if ($(this).val()) {
+		        			allBlank = false;
+		        			
+			        		if (!first) {
+			        			url = url + "&" + this.name + "=" + encodeURIComponent($(this).val().replace("+", ""));
+			        		} else {
+			        			url = url + this.name + "=" + encodeURIComponent($(this).val().replace("+", ""));
+			        			first = false;
+			        		}
+		        		} else if (this.name != "sendButton") {
+		        			doSubmit = false;
+		        			$(this).css("border", "2px solid #AF0014");
+		        			console.log("name:", this.name);
+		        		}
+		        	});
+
+		        	if (doSubmit || allBlank) {
+		        		window.location.href = url; // I think this is what you want.
+		        		//alert(url);
+		        	} else {
+		        		alert("Some fields were left blank. Please either complete all fields or remove the empty fields using the red buttons.");
+		        	}
+		        	// window.location.replace(url); // but this one might work better.
+		        	//alert(url);
+		        	event.preventDefault();
+				});
+
+				function addFields(nameVal, numberVal) {
+					$(".packageFields").append(
+						'<div class="fieldGroup">' +
+							'<div class="inputs">' +
+								'<input type="text" name="name" id="name" class="field nameField" ' +
+									'placeholder="Nickname" value="' + nameVal + '" maxlength="16" />' +
+								'<input type="text" name="number" id="number" class="field numberField" ' +
+									'placeholder="Tracking Number" value="' + numberVal + '"" maxlength="32" />' +
+							'</div>' +
+							'<a class="removeButton" href="#">' +
+								'<i class="fa fa-times-circle fa-5x"></i>' +
+							'</a>' +
+						'</div>'
+					);
+				}
+
+				function getURLParameters(url){
+				    var result = {};
+				    var searchIndex = url.indexOf("?");
+				    if (searchIndex == -1 ) return result;
+				    var sPageURL = url.substring(searchIndex +1);
+				    var sURLVariables = sPageURL.split('&');
+				    for (var i = 0; i < sURLVariables.length; i++)
+				    {       
+				        var sParameterName = sURLVariables[i].split('=');      
+				        result[sParameterName[0]] = decodeURIComponent(sParameterName[1]);
+				    }
+				    return result;
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<div id="description">
+				<h1>USPS Shipment Tracker</h1>
+				<p>Track up to five packages shipped through the United States Postal Service</p>
+			</div>
+			<form id="tracking_form" name="tracking_form" method="post">
+				<div class="packageFields">
+					<div class="fieldGroup">
+						<div class="inputs lengthen">
+							<input type="text" name="name" id="name" class="field nameField" placeholder="Nickname" maxlength="16">
+							<input type="text" name="number" id="number" class="field numberField" placeholder="Tracking Number" maxlength="32">
+						</div>
+						<a class="removeButton" href="#">
+							<i class="fa fa-times-circle fa-5x"></i>
+						</a>
+					</div>
+				</div>
+				<a id="addButton" href="#">
+					 <span style="font-size: 2.5em;">Add Another Package&nbsp;</span><i class="fa fa-plus-circle fa-3x"></i>
+				</a>
+				<button type="submit" id="sendButton" name="sendButton">
+					<span style="font-size: 2.5em;">Send To Pebble&nbsp;</span>
+					<i class="fa fa-arrow-circle-right fa-3x"></i>
+				</button>
+			</form></div>
+		
+	</body>

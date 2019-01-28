@@ -1,0 +1,347 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>PebbleColorSimulator</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/shinya-dodo.github.io/pebble/jquery.css">
+    <script src="/shinya-dodo.github.io/pebble/jquery-1.js"></script>
+    <script src="/shinya-dodo.github.io/pebble/jquery.js"></script>
+    <script src="/shinya-dodo.github.io/pebble/spectrum.js"></script>
+    <link rel="stylesheet" href="/shinya-dodo.github.io/pebble/spectrum.css">
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>PebbleColorSimulator</h1>
+      </div>
+      <div data-role="content">
+      
+<!--背景色-->
+
+<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>BackColor1:</legend>
+	<table>
+	<tr>
+	<td>
+		<input type="text" name="nmColor" id="txtBack1">
+	</td>
+	<td>
+		<input type="text" id="lblBack1" readonly="readonly">
+	</td>
+	</tr>
+	</table>
+</fieldset>
+
+<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>ForeColor1:</legend>
+    <table>
+	<tr>
+	<td>
+		<input type="text" name="nmColor" id="txtFore1">
+	</td>
+	<td>
+		<input type="text" id="lblFore1" readonly="readonly">
+	</td>
+	</tr>
+	</table>
+</fieldset>
+
+<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>BackColor2:</legend>
+    <table>
+	<tr>
+	<td>
+		<input type="text" name="nmColor" id="txtBack2">
+	</td>
+	<td>
+		<input type="text" id="lblBack2" readonly="readonly">
+	</td>
+	</tr>
+	</table>
+</fieldset>
+<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>ForeColor2:</legend>
+    <table>
+	<tr>
+	<td>
+		<input type="text" name="nmColor" id="txtFore2">
+	</td>
+	<td>
+		<input type="text" id="lblFore2" readonly="readonly">
+	</td>
+	</tr>
+	</table>
+</fieldset>
+<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+    <legend>BorderColor:</legend>
+    <table>
+	<tr>
+	<td>
+		<input type="text" name="nmColor" id="txtBorder">
+	</td>
+	<td>
+		<input type="text" id="lblBorder" readonly="readonly">
+	</td>
+	</tr>
+	</table>
+</fieldset>
+
+<fieldset data-role="controlgroup" data-type="horizontal">
+	<button type="submit" data-theme="b" id="btnDefault">Load Default</button>
+</fieldset>
+
+    </div>
+
+<br>
+	<div class="ui-body ui-body-c">
+		<fieldset class="ui-grid-a">
+			<div class="ui-block-a">
+				<button type="submit" data-theme="d" id="btnCancel">Cancel</button>
+			</div>
+			<div class="ui-block-b">
+				<button type="submit" data-theme="b" id="btnSubmit">Submit</button>
+			</div>
+		</fieldset>
+	</div>
+</div>
+    <script>
+    		function utf8_to_b64(str) 
+    		{
+    			return window.btoa(unescape(encodeURIComponent(str)));
+      		}
+      		
+		function saveOptions()
+		{
+			var options =
+			{
+				"BackColor1":$("#txtBack1").spectrum("get").toHex(),
+				"ForeColor1":$("#txtFore1").spectrum("get").toHex(),
+				"BackColor2":$("#txtBack2").spectrum("get").toHex(),
+				"ForeColor2":$("#txtFore2").spectrum("get").toHex(),
+				"BorderColor":$("#txtBorder").spectrum("get").toHex()
+			}
+			return options;
+		}
+		
+		var colors;
+		
+		function fncChange (ctrl, color)
+		{
+			var sID = "#" + $(ctrl).attr("id").replace(/txt/g,"lbl");
+		  	//change event execute write
+		  	for(var i in colors)
+		    {
+		    	if(colors[i].value == color)
+		    	{
+		    		$(sID).val(colors[i].name);
+		    		break;
+		    	}
+		    }
+		  	
+		}  
+		
+		$().ready(function()
+		{
+		
+			var vpalette = [];
+  			
+			//色情報読み込み
+            		//$.ajax({
+			//    url: "pebblecolors.json",
+			//    dataType: 'json',
+			//    async: false,
+			//    success: function(json) 
+			//    {
+			//        colors = json;
+			//	for(var i in json)
+			//	{
+			//		vpalette.push(json[i].value);
+			//	}
+			//    }
+			//     ,
+			//    error: function(json) {
+			//       alert(json);
+			//    }
+			//});
+			colors = [
+				{"value": "#000000", "name": "Black", 					"color": "white"}, 
+				{"value": "#000055", "name": "Oxford Blue", 			"color": "white"}, 
+				{"value": "#0000AA", "name": "Duke blue", 				"color": "white"}, 
+				{"value": "#0000FF", "name": "Blue", 					"color": "white"}, 
+				{"value": "#005500", "name": "Dark green", 				"color": "white"}, 
+				{"value": "#005555", "name": "Midnight green", 			"color": "white"}, 
+				{"value": "#0055AA", "name": "Cobalt Blue", 			"color": "white"}, 
+				{"value": "#0055FF", "name": "Blue Moon", 				"color": "white"}, 
+				{"value": "#00AA00", "name": "Islamic green", 			"color": "white"}, 
+				{"value": "#00AA55", "name": "Jaeger Green", 			"color": "white"}, 
+				{"value": "#00AAAA", "name": "Tiffany Blue", 			"color": "white"}, 
+				{"value": "#00AAFF", "name": "Vivid cerulean", 			"color": "white"}, 
+				{"value": "#00FF00", "name": "Green", 					"color": "black"}, 
+				{"value": "#00FF55", "name": "Malachite", 				"color": "black"}, 
+				{"value": "#00FFAA", "name": "Medium spring green", 	"color": "black"}, 
+				{"value": "#00FFFF", "name": "Cyan", 					"color": "black"}, 
+				{"value": "#550000", "name": "Bulgarian ros", 			"color": "white"}, 
+				{"value": "#550055", "name": "Imperial purple", 		"color": "white"}, 
+				{"value": "#5500AA", "name": "Indigo", 					"color": "white"}, 
+				{"value": "#5500FF", "name": "Electric ultramarine", 	"color": "white"}, 
+				{"value": "#555500", "name": "Army green", 				"color": "white"}, 
+				{"value": "#555555", "name": "Dark Gray", 				"color": "white"}, 
+				{"value": "#5555AA", "name": "Liberty", 				"color": "white"}, 
+				{"value": "#5555FF", "name": "Very light blue", 		"color": "white"}, 
+				{"value": "#55AA00", "name": "Kelly green", 			"color": "black"}, 
+				{"value": "#55AA55", "name": "May green", 				"color": "black"}, 
+				{"value": "#55AAAA", "name": "Cadet blue", 				"color": "black"}, 
+				{"value": "#55AAFF", "name": "Picton blue", 			"color": "black"}, 
+				{"value": "#55FF00", "name": "Bright gree", 			"color": "black"}, 
+				{"value": "#55FF55", "name": "Screamin' Green", 		"color": "black"}, 
+				{"value": "#55FFAA", "name": "Medium aquamarine", 		"color": "black"}, 
+				{"value": "#55FFFF", "name": "Electric blue", 			"color": "black"}, 
+				{"value": "#AA0000", "name": "Dark candy apple red", 	"color": "white"}, 
+				{"value": "#AA0055", "name": "Jazzberry jam", 			"color": "white"}, 
+				{"value": "#AA00AA", "name": "Purple", 					"color": "white"}, 
+				{"value": "#AA00FF", "name": "Vivid violet", 			"color": "white"}, 
+				{"value": "#AA5500", "name": "Windsor tan", 			"color": "white"}, 
+				{"value": "#AA5555", "name": "Rose vale", 				"color": "white"}, 
+				{"value": "#AA55AA", "name": "Purpureus", 				"color": "white"}, 
+				{"value": "#AA55FF", "name": "Lavender indigo", 		"color": "white"}, 
+				{"value": "#AAAA00", "name": "Limerick", 				"color": "black"}, 
+				{"value": "#AAAA55", "name": "Brass", 					"color": "black"}, 
+				{"value": "#AAAAAA", "name": "Light Gray", 				"color": "black"}, 
+				{"value": "#FFFFFF", "name": "White", 					"color": "black"}, 
+				{"value": "#AAAAFF", "name": "Baby blue eyes", 			"color": "black"}, 
+				{"value": "#AAFF00", "name": "Spring bud", 				"color": "black"}, 
+				{"value": "#AAFF55", "name": "Inchworm", 				"color": "black"}, 
+				{"value": "#AAFFAA", "name": "Mint green", 				"color": "black"}, 
+				{"value": "#AAFFFF", "name": "Celeste", 				"color": "black"}, 
+				{"value": "#FF0000", "name": "Red", 					"color": "black"}, 
+				{"value": "#FF0055", "name": "Folly", 					"color": "black"}, 
+				{"value": "#FF00AA", "name": "Fashion Magenta", 		"color": "black"}, 
+				{"value": "#FF00FF", "name": "Magenta", 				"color": "black"}, 
+				{"value": "#FF5500", "name": "Orange", 					"color": "black"}, 
+				{"value": "#FF5555", "name": "Sunset orange", 			"color": "black"}, 
+				{"value": "#FF55AA", "name": "Brilliant rose", 			"color": "black"}, 
+				{"value": "#FF55FF", "name": "Shocking pink", 			"color": "black"}, 
+				{"value": "#FFAA00", "name": "Chrome yellow", 			"color": "black"}, 
+				{"value": "#FFAA55", "name": "Rajah", 					"color": "black"}, 
+				{"value": "#FFAAAA", "name": "Melon", 					"color": "black"}, 
+				{"value": "#FFAAFF", "name": "Rich brilliant lavender",	"color": "black"}, 
+				{"value": "#FFFF00", "name": "Yellow", 					"color": "black"}, 
+				{"value": "#FFFF55", "name": "Icterine", 				"color": "black"}, 
+				{"value": "#FFFFAA", "name": "Pastel yellow", 			"color": "black"}
+			];
+			for(var i in colors)
+			{
+				vpalette.push(colors[i].value);
+			}
+			
+			$("input[name=nmColor]").spectrum({
+				showInput: true,
+			    showPaletteOnly: true,
+			    showPalette:true,
+			    hideAfterPaletteSelect:true,
+			    palette: vpalette,
+			    change: function(color)
+			    {
+			    	var sID = "#" + $(this).attr("id").replace(/txt/g,"lbl");
+			      	//change event execute write
+			      	for(var i in colors)
+	                {
+	                	if(colors[i].value == color.toHexString().toUpperCase())
+	                	{
+	                		$(sID).val(colors[i].name);
+	                		break;
+	                	}
+	                }
+			      	
+			    },
+			});
+			
+			//色初期設定
+		    $("#txtBack1").spectrum("set", "#AAFFFF");	//Celeste
+			$("#txtFore1").spectrum("set", "#0055FF");	//Blue Moon
+			$("#txtBack2").spectrum("set", "#AAFFAA");	//Mint Green
+			$("#txtFore2").spectrum("set", "#AA55FF");	//Lavender Indigo
+			$("#txtBorder").spectrum("set", "#AA5500");	//Windsor Tan
+				
+			//localStorageにあれば読み込み
+			if (typeof window.localStorage !== "undefined") {
+				if (window.localStorage.pebble_PebbleColorSimulator_options) 
+				{
+					ls_pto = JSON.parse(window.localStorage.pebble_PebbleColorSimulator_options);
+					
+	  				$("#txtBack1").spectrum("set", "#" + ls_pto["BackColor1"]);
+	  				$("#txtFore1").spectrum("set", "#" + ls_pto["ForeColor1"]);
+	  				$("#txtBack2").spectrum("set", "#" + ls_pto["BackColor2"]);
+	  				$("#txtFore2").spectrum("set", "#" + ls_pto["ForeColor2"]);
+	  				$("#txtBorder").spectrum("set", "#" + ls_pto["BorderColor"]);
+		  		}
+		  	}
+			
+			fncChange ("#txtBack1", $("#txtBack1").spectrum("get").toHexString().toUpperCase());
+			fncChange ("#txtFore1", $("#txtFore1").spectrum("get").toHexString().toUpperCase());
+			fncChange ("#txtBack2", $("#txtBack2").spectrum("get").toHexString().toUpperCase());
+			fncChange ("#txtFore2", $("#txtFore2").spectrum("get").toHexString().toUpperCase());
+			fncChange ("#txtBorder", $("#txtBorder").spectrum("get").toHexString().toUpperCase());
+			
+			$("#btnDefault").click(function()
+			{
+				//色初期設定
+			    $("#txtBack1").spectrum("set", "#AAFFFF");	//Celeste
+				$("#txtFore1").spectrum("set", "#0055FF");	//Blue Moon
+				$("#txtBack2").spectrum("set", "#AAFFAA");	//Mint Green
+				$("#txtFore2").spectrum("set", "#AA55FF");	//Lavender Indigo
+				$("#txtBorder").spectrum("set", "#AA5500");	//Windsor Tan
+				
+				fncChange ("#txtBack1", "#AAFFFF");
+				fncChange ("#txtFore1", "#0055FF");
+				fncChange ("#txtBack2", "#AAFFAA");
+				fncChange ("#txtFore2", "#AA55FF");
+				fncChange ("#txtBorder", "#AA5500");
+			});
+			$("#btnCancel").click(function()
+			{
+				location.href = getQueryParam("return_to", "pebblejs://close#");
+			});
+			$("#btnSubmit").click(function()
+			{
+				ls_pto = JSON.stringify(saveOptions());
+				//localStorageに保存
+          			if (typeof window.localStorage !== "undefined") 
+          			{
+					window.localStorage.pebble_PebbleColorSimulator_options = ls_pto;
+				}
+				
+				var return_to = getQueryParam("return_to", "pebblejs://close#");
+				
+				location.href = return_to + utf8_to_b64(ls_pto);
+			});
+		});
+		function getQueryVariable(variable)
+		{
+			var query = location.search.substring(1);
+			var vars = query.split('&');
+			for(var i = 0; i < vars.length; i++)
+			{
+				var pair = vars[i].split('=');
+				if(pair[0] == variable)
+				{
+					return decodeURIComponent(pair[1]);
+				}
+			}
+			return false;
+		}
+		// Something like this to get query variables.
+		function getQueryParam(variable, default_) {
+		    var query = location.search.substring(1);
+		    var vars = query.split('&');
+		    for (var i = 0; i < vars.length; i++) {
+		        var pair = vars[i].split('=');
+		        if (pair[0] == variable)
+		            return decodeURIComponent(pair[1]);
+		    }
+		    return default_ || false;
+		}
+    </script>
+  </body>
+</html>

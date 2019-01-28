@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>SONifY Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/karpeta.vipserv.org/pebble/SONifY/css/slate.css'>
+  <script src='/karpeta.vipserv.org/pebble/SONifY/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>SONifY Watchface Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied to this app.
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Customizability</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Enable date on shake
+          <input id='shake_enabled' name='shake_enabled' type='checkbox' class='item-toggle' checked="checked">
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Enable BT disconnection notify with vibration
+          <input id='should_vibrate' name='should_vibrate' type='checkbox' class='item-toggle' checked="checked">
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Show battery indication on shake (with date)
+          <input id='battery_indicator' name='battery_indicator' type='checkbox' class='item-toggle' disabled="disabled">
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+    var should_vibrate = document.getElementById('should_vibrate'),
+        shake_enabled = document.getElementById('shake_enabled'),
+        battery_indicator = document.getElementById('battery_indicator');
+ 
+    var options = {
+      'battery_indicator': battery_indicator.checked,
+      'shake_enabled': shake_enabled.checked,
+      'should_vibrate': should_vibrate.checked
+    };
+
+    // Save for next launch
+    localStorage['battery_indicator'] = options['battery_indicator'];
+    localStorage['should_vibrate'] = options['should_vibrate'];
+    localStorage['shake_enabled'] = options['shake_enabled'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1),
+        vars = query.split('&');
+
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var should_vibrate = document.getElementById('should_vibrate'),
+        shake_enabled = document.getElementById('shake_enabled'),
+        battery_indicator = document.getElementById('battery_indicator');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['should_vibrate']) {
+      should_vibrate.checked = JSON.parse(localStorage['should_vibrate']);
+      shake_enabled.checked = JSON.parse(localStorage['shake_enabled']);
+      battery_indicator.checked = JSON.parse(localStorage['battery_indicator']);
+    }
+  })();
+  </script>
+</html>

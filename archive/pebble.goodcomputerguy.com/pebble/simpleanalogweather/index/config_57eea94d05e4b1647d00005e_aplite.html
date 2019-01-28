@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Analog Weather Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/pebble.goodcomputerguy.com/pebble/simpleanalogweather/css/slate.css'>
+  <link rel='stylesheet' type='text/css' href='/pebble.goodcomputerguy.com/pebble/simpleanalogweather/css/style.css'>
+</head>
+<body>
+  <div class='item-container'>
+    <h1 class='title'>Simple Analog<br>Weather Configuration</h1>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Temperature Scale</div>
+		<div class="item-container-content">
+			<label class="item">
+				Fahrenheit
+				<input type='radio' class='item-radio' id='tempScaleF' name='tempScale' value='F' checked="">
+			</label>
+			<label class='item'>
+				Celsius
+				<input type='radio' class='item-radio' id='tempScaleC' name='tempScale' value='C'>
+			</label>    
+		</div>
+  </div>
+
+  <div class="item-container">
+		<div class="item-container-header">Weather Underground API key</div>
+			<div class="item-container-content">
+				<label class="item">
+					<div class="item-input-wrapper">
+						<input type="text" class="item-input" name="WUAPIKey" id="WUAPIKey" placeholder="WU API key">
+					</div>
+					If you want to use Weather Underground, get a free key from <a href="/www.weatherunderground.com/api/d/pricing.html">www.weatherunderground.com/api/d/pricing</a>.<br> If left blank weather data will come from OpenWeather.com.<br>
+					Email me if you have any trouble.
+				</label>
+			</div>
+		</div>
+    
+    <div class='item-container-footer'>
+      These settings will change on the watch after you click Submit.
+    </div>
+  
+  <div class='item-container'>
+    <div class='button-container'>
+      <input id='submitButton' type='button' class='item-button' value='SUBMIT'>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <div class='item'>
+        <center>***More configuration options coming soon!<center>
+      </center></center></div>
+    </div>
+  </div>
+  
+  <script src='/pebble.goodcomputerguy.com/pebble/simpleanalogweather/js/slate.bin'></script>
+  <script src='/pebble.goodcomputerguy.com/pebble/simpleanalogweather/js/main.bin'></script>
+  
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-1895366-15', 'auto');
+  ga('send', 'pageview');
+
+</script>
+  
+</body>
+</html>

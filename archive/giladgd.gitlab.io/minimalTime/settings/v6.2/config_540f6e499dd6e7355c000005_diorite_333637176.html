@@ -1,0 +1,806 @@
+<html>
+<head>
+    <title>Minimal Time settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background-color: #f2f2f2;
+            font-family: sans-serif;
+            margin: 20px;
+            margin-top: 68px;
+            margin-bottom: 80px;
+        }
+
+        #header {
+            height: 48px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #333333;
+            color: #f2f2f2;
+            font-size: 18px;
+            text-align: center;
+            line-height: 48px;
+            box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, .2);
+        }
+
+        .checkbox, .radio {
+            display: inline-block;
+            background-color: #fff;
+            width: 12px;
+            height: 12px;
+            border: solid 1px #fff;
+            margin-right: 12px;
+            margin-top: 3px;
+            flex-shrink: 0;
+            box-shadow: 0 2px 1px 1px #eee;
+            -webkit-box-shadow: 0 2px 1px 1px #eee;
+            -moz-box-shadow: 0 2px 1px 1px #eee;
+            -ms-box-shadow: 0 2px 1px 1px #eee;
+            -o-box-shadow: 0 2px 1px 1px #eee;
+            transition: ease-in-out .15s box-shadow;
+            -webkit-transition: ease-in-out .15s -webkit-box-shadow;
+            -moz-transition: ease-in-out .15s -moz-box-shadow;
+            -ms-transition: ease-in-out .15s -ms-box-shadow;
+            -o-transition: ease-in-out .15s -o-box-shadow
+        }
+
+        .radio {
+            border-radius: 13px
+        }
+
+        .checkbox-parent, .radio-parent {
+            font-size: 18px;
+            color: #6f6f6f;
+            margin-bottom: 6px;
+            display: flex;
+            flex-direction: row;
+            -webkit-user-select: none;
+            cursor: default;
+            -webkit-user-drag: none
+        }
+
+        .checkbox-parent:hover .checkbox, .radio-parent:hover .radio {
+            box-shadow: 0 2px 2px 1px #e8e8e8;
+            -webkit-box-shadow: 0 2px 2px 1px #e8e8e8;
+            -moz-box-shadow: 0 2px 2px 1px #e8e8e8;
+            -ms-box-shadow: 0 2px 2px 1px #e8e8e8;
+            -o-box-shadow: 0 2px 2px 1px #e8e8e8
+        }
+
+        .checkbox-parent:active .checkbox, .radio-parent:active .radio {
+            box-shadow: 0 2px 3px 1px #ddd;
+            -webkit-box-shadow: 0 2px 3px 1px #ddd;
+            -moz-box-shadow: 0 2px 3px 1px #ddd;
+            -ms-box-shadow: 0 2px 3px 1px #ddd;
+            -o-box-shadow: 0 2px 3px 1px #ddd
+        }
+
+        .radio.selected {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAFRJREFUeNpiYBh0gBGZU19fLwCk1gOxA1ToABAHNjY2foCpYUIzAFkxA5S9HlkBugYHLK5wANqsgEsDVgB00gNcGg5gUX8An5MC0RQcgIoNZgAQYAAE2hAMrd3W9gAAAABJRU5ErkJggg==)
+        }
+
+        .checkbox.selected {
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAMCAYAAABWdVznAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAJVJREFUeNpiYBgUoL6+PgHGZiJCcQOQmg+k54P4jAQUBwCp9UhChUy4rAayDUAmI0lfAOIFjEgKQJIgDQtAJgHxfiA2gEp/AGLDxsbGB4xIJiObBlIggMR2BCoG2cDADCIOHjx4wcHBQQHJRA4kzZlAxTtgHGYYA6hpI5omsCeBimcg+5MZmYOmaQFQcSXJEYUOAAIMABp8NAhm8po4AAAAAElFTkSuQmCC);
+            background-position-y: -1px
+        }
+
+        .subtitle {
+            color: #6f6f6f;
+            font-size: 18px;
+            display: inline-block;
+            margin-right: 10px
+        }
+
+        .subtitle-bigger, .subtitle-bigger-tb {
+            color: #6f6f6f;
+            font-size: 20px;
+            display: block;
+            margin-right: 10px
+        }
+
+        .subtitle-bigger-tb {
+            margin-top: 20px
+        }
+
+        .subtitle-bigger-tb + .content {
+            padding-bottom: 0px
+        }
+
+        .title {
+            color: #6f6f6f;
+            font-size: 24px;
+            display: block;
+            margin-right: 10px
+        }
+
+        .input {
+            padding: 5px 7px;
+            font-size: 14.5px;
+            width: 80px;
+            outline: 0;
+            color: #333;
+            border: 1px solid rgba(0, 0, 0, 0);
+            margin-bottom: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 1px 1px #eee;
+            -webkit-box-shadow: 0 2px 1px 1px #eee;
+            -moz-box-shadow: 0 2px 1px 1px #eee;
+            -ms-box-shadow: 0 2px 1px 1px #eee;
+            -o-box-shadow: 0 2px 1px 1px #eee;
+            transition: ease-in-out .15s box-shadow;
+            -webkit-transition: ease-in-out .15s -webkit-box-shadow;
+            -moz-transition: ease-in-out .15s -moz-box-shadow;
+            -ms-transition: ease-in-out .15s -ms-box-shadow;
+            -o-transition: ease-in-out .15s -o-box-shadow
+        }
+
+        .input:focus {
+            border: 1px solid #fff;
+            box-shadow: 0 2px 4px 1px #ddd
+        }
+
+        #vibratehourly {
+            margin-bottom: 10px
+        }
+
+        #save {
+            display: block;
+            width: 100%;
+            height: 40px;
+            background-color: #fff;
+            border-radius: 5px;
+            font-size: 18px;
+            color: #6f6f6f;
+            font-family: sans-serif;
+            outline: 0;
+            box-shadow: 0 2px 5px -2px rgba(0, 0, 0, .2);
+            -webkit-box-shadow: 0 2px 5px -2px rgba(0, 0, 0, .2);
+            -moz-box-shadow: 0 2px 5px -2px rgba(0, 0, 0, .2);
+            -ms-box-shadow: 0 2px 5px -2px rgba(0, 0, 0, .2);
+            -o-box-shadow: 0 2px 5px -2px rgba(0, 0, 0, .2);
+            transition: ease-in-out .15s box-shadow;
+            -webkit-transition: ease-in-out .15s -webkit-box-shadow;
+            -moz-transition: ease-in-out .15s -moz-box-shadow;
+            -ms-transition: ease-in-out .15s -ms-box-shadow;
+            -o-transition: ease-in-out .15s -o-box-shadow;
+            border: solid 1px #fff;
+            width: calc(100% - 20px * 2);
+        }
+
+        #save:hover {
+            box-shadow: 0 4px 10px -2px rgba(0, 0, 0, .2);
+            -webkit-box-shadow: 0 4px 10px -2px rgba(0, 0, 0, .2);
+            -moz-box-shadow: 0 4px 10px -2px rgba(0, 0, 0, .2);
+            -ms-box-shadow: 0 4px 10px -2px rgba(0, 0, 0, .2);
+            -o-box-shadow: 0 4px 10px -2px rgba(0, 0, 0, .2);
+        }
+
+        #save:active {
+            box-shadow: 0 6px 18px -4px rgba(0, 0, 0, .3);
+            -webkit-box-shadow: 0 6px 18px -4px rgba(0, 0, 0, .3);
+            -moz-box-shadow: 0 6px 18px -4px rgba(0, 0, 0, .3);
+            -ms-box-shadow: 0 6px 18px -4px rgba(0, 0, 0, .3);
+            -o-box-shadow: 0 6px 18px -4px rgba(0, 0, 0, .3);
+        }
+
+        #saveContainer {
+            background-color: #eeeeee;
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            padding: 20px 20px 20px 20px;
+            z-index: 10;
+            box-shadow: 0px -2px 6px -2px rgba(0, 0, 0, .2);
+        }
+
+        #general-content, #numbers-content, #vibration-content, .content {
+            padding: 5px 0 20px 15px
+        }
+
+        #vibration-hour {
+            padding-left: 15px;
+            padding-top: 5px
+        }
+
+        #thours, #tdate {
+            padding: 5px 0 20px 15px
+        }
+    </style>
+</head>
+<body>
+<div id="header">Minimal Time Settings</div>
+<div class="title">General</div>
+<div id="general-content">
+    <div class="checkbox-parent" id="white-background">
+        <div class="checkbox"></div>
+        White background
+    </div>
+    <div class="checkbox-parent" id="betterone">
+        <div class="checkbox"></div>
+        Draw 1 digit in square in bottom info
+    </div>
+    <div class="checkbox-parent" id="hideline">
+        <div class="checkbox"></div>
+        Hide full separation line
+    </div>
+    <div class="checkbox-parent" id="hidehollowline">
+        <div class="checkbox"></div>
+        Hide hollow separation line (bluetooth disconnected)
+    </div>
+    <div class="checkbox-parent" id="vibratehourly">
+        <div class="checkbox"></div>
+        Vibrate hourly
+    </div>
+</div>
+<div class="title">Hourly Vibration</div>
+<div id="vibration-content">
+    <div class="subtitle">Start vibrating hourly hour:</div>
+    <input type="number" id="starthour" class="input" value="0">
+    <div></div>
+    <div class="subtitle">Stop vibrating hourly hour:</div>
+    <input type="number" id="stophour" class="input" value="0">
+    <div></div>
+    <div class="subtitle-bigger">Vibration Length</div>
+    <div class="radiogroup" id="vibration-hour">
+        <div class="radio-parent" vib="0">
+            <div class="radio"></div>
+            One vibrate
+        </div>
+        <div class="radio-parent" vib="1">
+            <div class="radio"></div>
+            Double vibrate
+        </div>
+        <div class="radio-parent" vib="2">
+            <div class="radio"></div>
+            Triple vibrate
+        </div>
+        <div class="radio-parent" vib="3">
+            <div class="radio"></div>
+            Four vibrates
+        </div>
+        <div class="radio-parent" vib="4">
+            <div class="radio"></div>
+            One long vibrate
+        </div>
+    </div>
+</div>
+<div class="title">Time Format</div>
+<div class="radiogroup" id="thours">
+    <div class="radio-parent" sett="0">
+        <div class="radio"></div>
+        Automatic (13:00/01:00)
+    </div><!--<div class="radio-parent" sett="1"><div class="radio"></div>12-hour (01:00)</div>-->
+    <div class="radio-parent" sett="2">
+        <div class="radio"></div>
+        <div style="display: inline-block;width: calc(100% - 28px); vertical-align: text-top;">Automatic, day name
+            replaced by AM/PM if the clock is set to 12-hour (13:00/01:00 PM)
+        </div>
+    </div>
+</div>
+<div class="title">Date Format</div>
+<div class="radiogroup" id="tdate">
+    <div class="radio-parent" sett="0">
+        <div class="radio"></div>
+        Day(1-31)/Month(1-12)
+    </div>
+    <div class="radio-parent" sett="1">
+        <div class="radio"></div>
+        Month(1-12)/Day(1-31)
+    </div>
+</div>
+<div class="title">Info To Show</div>
+<div id="numbers-content">
+    <div class="checkbox-parent" id="showday">
+        <div class="checkbox selected"></div>
+        Show day name/AM/PM
+    </div>
+    <div class="checkbox-parent" id="showdaymonth">
+        <div class="checkbox selected"></div>
+        Show day
+    </div>
+    <div class="checkbox-parent" id="showmonth">
+        <div class="checkbox selected"></div>
+        Show month
+    </div>
+    <div class="checkbox-parent" id="showseconds">
+        <div class="checkbox selected"></div>
+        Show seconds
+    </div>
+</div>
+<div class="title">Bluetooth Connectivity</div>
+<div class="content">
+    <div class="checkbox-parent" id="showbluetooth">
+        <div class="checkbox"></div>
+        Show Pebble's Bluetooth connectivity
+    </div>
+    <div class="checkbox-parent" id="showbluetoothinvert">
+        <div class="checkbox"></div>
+        Invert background when connected
+    </div>
+    <div class="checkbox-parent" id="bluetoothhourly">
+        <div class="checkbox selected"></div>
+        Vibrate only in hourly vibration time period
+    </div>
+    <div class="subtitle-bigger-tb">Bluetooth connected vibration</div>
+    <div class="radiogroup content" id="vibration-connect">
+        <div class="radio-parent" vib="0">
+            <div class="radio"></div>
+            Don't vibrate
+        </div>
+        <div class="radio-parent" vib="1">
+            <div class="radio"></div>
+            One vibrate
+        </div>
+        <div class="radio-parent" vib="2">
+            <div class="radio"></div>
+            Double vibrate
+        </div>
+        <div class="radio-parent" vib="3">
+            <div class="radio"></div>
+            Triple vibrate
+        </div>
+        <div class="radio-parent" vib="4">
+            <div class="radio"></div>
+            Four vibrates
+        </div>
+        <div class="radio-parent" vib="5">
+            <div class="radio"></div>
+            One long vibrate
+        </div>
+    </div>
+    <div class="subtitle-bigger-tb">Bluetooth disconnected vibration</div>
+    <div class="radiogroup content" id="vibration-disconnect">
+        <div class="radio-parent" vib="0">
+            <div class="radio"></div>
+            Don't vibrate
+        </div>
+        <div class="radio-parent" vib="1">
+            <div class="radio"></div>
+            One vibrate
+        </div>
+        <div class="radio-parent" vib="2">
+            <div class="radio"></div>
+            Double vibrate
+        </div>
+        <div class="radio-parent" vib="3">
+            <div class="radio"></div>
+            Triple vibrate
+        </div>
+        <div class="radio-parent" vib="4">
+            <div class="radio"></div>
+            Four vibrates
+        </div>
+        <div class="radio-parent" vib="5">
+            <div class="radio"></div>
+            One long vibrate
+        </div>
+    </div>
+</div>
+<div class="title">Shake to Invert</div>
+<div class="content">
+    <div class="checkbox-parent" id="flicke">
+        <div class="checkbox"></div>
+        <div style="display: inline-block;width: calc(100% - 28px); vertical-align: text-top;">Invert background on
+            shake (for 3 seconds)
+        </div>
+    </div>
+    <div class="checkbox-parent" id="flickp">
+        <div class="checkbox"></div>
+        <div style="display: inline-block;width: calc(100% - 28px); vertical-align: text-top;">Invert permanently</div>
+    </div>
+    <div class="checkbox-parent" id="invertinfoten">
+        <div class="checkbox"></div>
+        <div style="display: inline-block;width: calc(100% - 28px); vertical-align: text-top;">Invert bottom info for 10
+            seconds instead of 3 seconds
+        </div>
+    </div>
+    <div class="subtitle-bigger-tb">Day name/AM/PM</div>
+    <div class="content">
+        <div class="checkbox-parent" id="dayninvertv">
+            <div class="checkbox"></div>
+            Invert visibility
+        </div>
+        <div class="checkbox-parent" id="dayninvertp">
+            <div class="checkbox"></div>
+            Invert permanently
+        </div>
+    </div>
+    <div class="subtitle-bigger-tb">Day</div>
+    <div class="content">
+        <div class="checkbox-parent" id="dayinvertv">
+            <div class="checkbox"></div>
+            Invert visibility
+        </div>
+        <div class="checkbox-parent" id="dayinvertp">
+            <div class="checkbox"></div>
+            Invert permanently
+        </div>
+    </div>
+    <div class="subtitle-bigger-tb">Month</div>
+    <div class="content">
+        <div class="checkbox-parent" id="monthinvertv">
+            <div class="checkbox"></div>
+            Invert visibility
+        </div>
+        <div class="checkbox-parent" id="monthinvertp">
+            <div class="checkbox"></div>
+            Invert permanently
+        </div>
+    </div>
+    <div class="subtitle-bigger-tb">Seconds</div>
+    <div class="content">
+        <div class="checkbox-parent" id="secondsinvertv">
+            <div class="checkbox"></div>
+            Invert visibility
+        </div>
+        <div class="checkbox-parent" id="secondsinvertp">
+            <div class="checkbox"></div>
+            Invert permanently
+        </div>
+    </div>
+</div>
+<div id="saveContainer">
+    <button id="save">Save</button>
+</div>
+</body>
+<script>
+    function select(rowTag) {
+        var tag = rowTag.getElementsByClassName("checkbox")[0];
+        if (tag == null)
+            tag = rowTag.getElementsByClassName("radio")[0];
+        tag.classList.add("selected");
+    }
+    function deselect(rowTag) {
+        var tag = rowTag.getElementsByClassName("checkbox")[0];
+        if (tag == null)
+            tag = rowTag.getElementsByClassName("radio")[0];
+        tag.classList.remove("selected");
+    }
+    function isSelected(rowTag) {
+        var tag = rowTag.getElementsByClassName("checkbox")[0];
+        if (tag == null)
+            tag = rowTag.getElementsByClassName("radio")[0];
+        return tag.classList.contains("selected");
+    }
+    function getSelected(radioGroupTag) {
+        var radioTags = radioGroupTag.getElementsByClassName("radio-parent");
+        for (var i = 0; i < radioTags.length; i++) {
+            if (isSelected(radioTags[i]))
+                return radioTags[i];
+        }
+        return null;
+    }
+    function getRadioGroup(tag) {
+        if (tag.classList.contains("radiogroup"))
+            return tag;
+
+        return getRadioGroup(tag.parentElement);
+    }
+    function fixHoursInput(inputTag) {
+        if (parseInt(inputTag.value).toString() == parseInt(inputTag.value)) {
+            if (parseInt(inputTag.value) > 23) {
+                inputTag.value = 0;
+            } else if (parseInt(inputTag.value) < 0) {
+                inputTag.value = 23;
+            }
+
+            if (parseInt(inputTag.value).toString() != inputTag.value) {
+                inputTag.value = parseInt(inputTag.value);
+            }
+        } else
+            inputTag.value = 0;
+    }
+    var conf = decodeURIComponent(window.location.href.split("?confs=")[1].split("&endofconfs=")[0]);
+    conf = JSON.parse(conf);
+    for (var tdateSetted = false, vibetSetted = false, thoursSetted = false, bconnectSetted = false, bdisconnectSetted = false,
+             index = 0; index < conf.length; index++) {
+        var key = conf[index][0];
+        var value = conf[index][1];
+        switch (key) {
+            case "KEY_INVERTED":
+                if ("off" == value) {
+                    select(document.getElementById("white-background"));
+                }
+
+                break;
+
+            case "KEY_BLUETOOTH":
+                if ("on" == value) {
+                    select(document.getElementById("showbluetooth"));
+                }
+
+                break;
+
+            case "KEY_BLUETOOTH_INVERT":
+                if ("on" == value) {
+                    select(document.getElementById("showbluetoothinvert"));
+                }
+
+                break;
+
+            case "KEY_HIDEVLL":
+                if ("on" == value) {
+                    deselect(document.getElementById("showday"));
+                }
+
+                break;
+
+            case "KEY_BHOURLY":
+                if ("off" == value) {
+                    deselect(document.getElementById("bluetoothhourly"));
+                }
+
+                break;
+
+            case "KEY_HIDEVLR":
+                if ("on" == value) {
+                    deselect(document.getElementById("showdaymonth"));
+                }
+
+                break;
+
+            case "KEY_HIDEVRL":
+                if ("on" == value) {
+                    deselect(document.getElementById("showmonth"));
+                }
+
+                break;
+
+            case "KEY_HIDEVRR":
+                if ("on" == value) {
+                    deselect(document.getElementById("showseconds"));
+                }
+
+                break;
+
+            case "KEY_VIBE":
+                if ("on" == value) {
+                    select(document.getElementById("vibratehourly"));
+                }
+
+                break;
+
+            case "KEY_SVIBE":
+                if ("" != value) {
+                    document.getElementById("starthour").value = value;
+                }
+
+                break;
+
+            case "KEY_EVIBE":
+                if ("" != value) {
+                    document.getElementById("stophour").value = value;
+                }
+
+                break;
+
+            case "KEY_FLICKE":
+                if ("on" == value) {
+                    select(document.getElementById("flicke"));
+                }
+
+                break;
+
+            case "KEY_IDAYNV":
+                if ("on" == value) {
+                    select(document.getElementById("dayninvertv"));
+                }
+
+                break;
+
+            case "KEY_IDAYNP":
+                if ("on" == value) {
+                    select(document.getElementById("dayninvertp"));
+                }
+
+                break;
+
+            case "KEY_IDAYV":
+                if ("on" == value) {
+                    select(document.getElementById("dayinvertv"));
+                }
+
+                break;
+
+            case "KEY_IDAYP":
+                if ("on" == value) {
+                    select(document.getElementById("dayinvertp"));
+                }
+
+                break;
+
+            case "KEY_IMONTHV":
+                if ("on" == value) {
+                    select(document.getElementById("monthinvertv"));
+                }
+
+                break;
+
+            case "KEY_IMONTHP":
+                if ("on" == value) {
+                    select(document.getElementById("monthinvertp"));
+                }
+
+                break;
+
+            case "KEY_ISECONDSV":
+                if ("on" == value) {
+                    select(document.getElementById("secondsinvertv"));
+                }
+
+                break;
+
+            case "KEY_ISECONDSP":
+                if ("on" == value) {
+                    select(document.getElementById("secondsinvertp"));
+                }
+
+                break;
+
+            case "KEY_INVERTBTEN":
+                if ("on" == value) {
+                    select(document.getElementById("invertinfoten"));
+                }
+
+                break;
+
+            case "KEY_BETTERONE":
+                if ("off" == value) {
+                    select(document.getElementById("betterone"));
+                }
+
+                break;
+
+            case "KEY_HIDEFULLLINE":
+                if ("on" == value) {
+                    select(document.getElementById("hideline"));
+                }
+
+                break;
+
+            case "KEY_HIDEHOLLOWLINE":
+                if ("on" == value) {
+                    select(document.getElementById("hidehollowline"));
+                }
+
+                break;
+
+            case "KEY_FLICKP":
+                if ("on" == value) {
+                    select(document.getElementById("flickp"));
+                }
+
+                break;
+
+            case "KEY_VIBET":
+                select(document.querySelector('#vibration-hour [vib="' + ("" == value ? 0 : value) + '"]'));
+                vibetSetted = true;
+
+                break;
+
+            case "KEY_BCONNECT":
+                select(document.querySelector('#vibration-connect [vib="' + ("" == value ? 0 : value) + '"]'));
+                bconnectSetted = true;
+
+                break;
+
+            case "KEY_BDISCONNECT":
+                select(document.querySelector('#vibration-disconnect [vib="' + ("" == value ? 0 : value) + '"]'));
+                bdisconnectSetted = true;
+
+                break;
+
+            case "KEY_TDATE":
+                select(document.querySelector('#tdate [sett="' + ("" == value ? 0 : value) + '"]'));
+                tdateSetted = true;
+
+                break;
+
+            case "KEY_THOURS":
+                if ("" == value)
+                    select(document.querySelector('#thours [sett="' + 0 + '"]'));
+                else
+                    select(document.querySelector('#thours [sett="' + ((value == 1) ? 0 : value) + '"]'));
+
+                thoursSetted = true;
+
+                break;
+        }
+    }
+    if (vibetSetted == false)
+        select(document.querySelector('#vibration-hour [vib="0"]'));
+
+    if (bconnectSetted == false)
+        select(document.querySelector('#vibration-connect [vib="0"]'));
+
+    if (bdisconnectSetted == false)
+        select(document.querySelector('#vibration-disconnect [vib="0"]'));
+
+    if (thoursSetted == false)
+        select(document.querySelector('#thours [sett="0"]'));
+
+    if (tdateSetted == false)
+        select(document.querySelector('#tdate [sett="0"]'));
+
+    function initCheckboxes() {
+        var checkboxRows = document.getElementsByClassName("checkbox-parent");
+        for (var i = 0; i < checkboxRows.length; i++) {
+            checkboxRows[i].addEventListener("click", function () {
+                1 == isSelected(this) ? deselect(this) : select(this)
+            });
+        }
+    }
+
+    function initRadioGroups() {
+        var radioGroups = document.getElementsByClassName("radiogroup");
+        for (var i = 0; i < radioGroups.length; i++) {
+            var radioRows = radioGroups[i].getElementsByClassName("radio-parent");
+            for (var j = 0; j < radioRows.length; j++) {
+                radioRows[j].addEventListener("click", function () {
+                    var radioRows = getRadioGroup(this).getElementsByClassName("radio-parent");
+                    for (var i = 0; i < radioRows.length; i++) {
+                        if (radioRows[i] == this)
+                            select(this);
+                        else
+                            deselect(radioRows[i]);
+                    }
+                });
+            }
+        }
+    }
+    initCheckboxes();
+    initRadioGroups();
+
+    document.getElementById("starthour").addEventListener("input", function () {
+        fixHoursInput(document.getElementById("starthour"))
+    });
+    document.getElementById("stophour").addEventListener("input", function () {
+        fixHoursInput(document.getElementById("stophour"))
+    });
+    document.getElementById("save").addEventListener("click", function () {
+        var settings = {
+            KEY_INVERTED: isSelected(document.getElementById("white-background")) ? "off" : "on",
+            KEY_BLUETOOTH: isSelected(document.getElementById("showbluetooth")) ? "on" : "off",
+            KEY_BLUETOOTH_INVERT: isSelected(document.getElementById("showbluetoothinvert")) ? "on" : "off",
+            KEY_VIBE: isSelected(document.getElementById("vibratehourly")) ? "on" : "off",
+            KEY_SVIBE: parseInt(document.getElementById("starthour").value).toString() == parseInt(document.getElementById("starthour").value) ? parseInt(document.getElementById("starthour").value) : 0,
+            KEY_EVIBE: parseInt(document.getElementById("stophour").value).toString() == parseInt(document.getElementById("stophour").value) ? parseInt(document.getElementById("stophour").value) : 0,
+            KEY_VIBET: parseInt(getSelected(document.getElementById("vibration-hour")).getAttribute("vib")),
+            KEY_THOURS: parseInt(getSelected(document.getElementById("thours")).getAttribute("sett")),
+            KEY_HIDEVLL: isSelected(document.getElementById("showday")) ? "off" : "on",
+            KEY_HIDEVLR: isSelected(document.getElementById("showdaymonth")) ? "off" : "on",
+            KEY_HIDEVRL: isSelected(document.getElementById("showmonth")) ? "off" : "on",
+            KEY_HIDEVRR: isSelected(document.getElementById("showseconds")) ? "off" : "on",
+            KEY_FLICKE: isSelected(document.getElementById("flicke")) ? "on" : "off",
+            KEY_FLICKP: isSelected(document.getElementById("flickp")) ? "on" : "off",
+            KEY_IDAYNV: isSelected(document.getElementById("dayninvertv")) ? "on" : "off",
+            KEY_IDAYNP: isSelected(document.getElementById("dayninvertp")) ? "on" : "off",
+            KEY_IDAYV: isSelected(document.getElementById("dayinvertv")) ? "on" : "off",
+            KEY_IDAYP: isSelected(document.getElementById("dayinvertp")) ? "on" : "off",
+            KEY_IMONTHV: isSelected(document.getElementById("monthinvertv")) ? "on" : "off",
+            KEY_IMONTHP: isSelected(document.getElementById("monthinvertp")) ? "on" : "off",
+            KEY_ISECONDSV: isSelected(document.getElementById("secondsinvertv")) ? "on" : "off",
+            KEY_ISECONDSP: isSelected(document.getElementById("secondsinvertp")) ? "on" : "off",
+            KEY_INVERTBTEN: isSelected(document.getElementById("invertinfoten")) ? "on" : "off",
+            KEY_BHOURLY: isSelected(document.getElementById("bluetoothhourly")) ? "on" : "off",
+            KEY_BETTERONE: isSelected(document.getElementById("betterone")) ? "off" : "on",
+            KEY_HIDEFULLLINE: isSelected(document.getElementById("hideline")) ? "on" : "off",
+            KEY_HIDEHOLLOWLINE: isSelected(document.getElementById("hidehollowline")) ? "on" : "off",
+            KEY_BCONNECT: parseInt(getSelected(document.getElementById("vibration-connect")).getAttribute("vib")),
+            KEY_BDISCONNECT: parseInt(getSelected(document.getElementById("vibration-disconnect")).getAttribute("vib")),
+            KEY_TDATE: parseInt(getSelected(document.getElementById("tdate")).getAttribute("sett"))
+        };
+
+        var returnUrl = window.location.href.split("return_to=")[1];
+        if (returnUrl == null)
+            returnUrl = "pebblejs://close#";
+        else
+            returnUrl = decodeURIComponent(returnUrl.split("&")[0]);
+
+        document.location = returnUrl + encodeURIComponent(JSON.stringify(settings));
+    });
+</script>
+</html>

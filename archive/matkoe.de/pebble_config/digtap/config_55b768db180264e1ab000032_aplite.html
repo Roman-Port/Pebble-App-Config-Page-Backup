@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>DigTap Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/matkoe.de/pebble_config/slate.css'>
+  <script src='/matkoe.de/pebble_config/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>DigTap Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied to this app.
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Weeknumber or Timezone</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Show Weeknumber
+          <input id='radio_week' type='radio' class='item-radio' name='radio-1' value='1'>
+        </label>
+        <label class='item'>
+          Show Timezone
+          <input id='radio_zone' type='radio' class='item-radio' name='radio-1' value='2'>
+        </label>
+        <label class='item'>
+          Difference
+          <select id='select_zone' name='select-1' dir='rtl' class='item-select'>
+            <option class='item-select-option'>-23</option>
+            <option class='item-select-option'>-22</option>
+            <option class='item-select-option'>-21</option>
+            <option class='item-select-option'>-20</option>
+            <option class='item-select-option'>-19</option>
+            <option class='item-select-option'>-18</option>
+            <option class='item-select-option'>-17</option>
+            <option class='item-select-option'>-16</option>
+            <option class='item-select-option'>-15</option>
+            <option class='item-select-option'>-14</option>
+            <option class='item-select-option'>-13</option>
+            <option class='item-select-option'>-12</option>
+            <option class='item-select-option'>-11</option>
+            <option class='item-select-option'>-10</option>
+            <option class='item-select-option'>-09</option>
+            <option class='item-select-option'>-08</option>
+            <option class='item-select-option'>-07</option>
+            <option class='item-select-option'>-06</option>
+            <option class='item-select-option'>-05</option>
+            <option class='item-select-option'>-04</option>
+            <option class='item-select-option'>-03</option>
+            <option class='item-select-option'>-02</option>
+            <option class='item-select-option'>-01</option>
+            <option class='item-select-option'>+00</option>
+            <option class='item-select-option'>+01</option>
+            <option class='item-select-option'>+02</option>
+            <option class='item-select-option'>+03</option>
+            <option class='item-select-option'>+04</option>
+            <option class='item-select-option'>+05</option>
+            <option class='item-select-option'>+06</option>
+            <option class='item-select-option'>+07</option>
+            <option class='item-select-option'>+08</option>
+            <option class='item-select-option'>+09</option>
+            <option class='item-select-option'>+10</option>
+            <option class='item-select-option'>+11</option>
+            <option class='item-select-option'>+12</option>
+            <option class='item-select-option'>+13</option>
+            <option class='item-select-option'>+14</option>
+            <option class='item-select-option'>+15</option>
+            <option class='item-select-option'>+16</option>
+            <option class='item-select-option'>+17</option>
+            <option class='item-select-option'>+18</option>
+            <option class='item-select-option'>+19</option>
+            <option class='item-select-option'>+20</option>
+            <option class='item-select-option'>+21</option>
+            <option class='item-select-option'>+22</option>
+            <option class='item-select-option'>+23</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Backlight</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          No Backlight
+          <input id='radio_none' type='radio' class='item-radio' name='radio-2' value='1'>
+        </label>
+        <label class='item'>
+          On Single Tap
+          <input id='radio_tap' type='radio' class='item-radio' name='radio-2' value='2'>
+        </label>
+        <label class='item'>
+          On Double Tap
+          <input id='radio_double' type='radio' class='item-radio' name='radio-2' value='3'>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Colors</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background
+          <input type='text' id='col_background' class='item-color item-color-normal' name='color-1'>
+        </label>
+        <label class='item'>
+          Hour
+          <input type='text' id='col_hour' class='item-color item-color-normal' name='color-2'>
+        </label>
+        <label class='item'>
+          Minute
+          <input type='text' id='col_minute' class='item-color item-color-normal' name='color-3'>
+        </label>
+        <label class='item'>
+          Info
+          <input type='text' id='col_info' class='item-color item-color-normal' name='color-4'>
+        </label>
+        <label class='item'>
+          Default Colors
+          <input id='reset_button' type='button' class='item-button item-input-button' value='Reset'>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <br>
+        <input id='submit_button' type='button' class='item-button' value='Save'>
+      </div>
+    </div>
+  </body>
+
+  <script>
+  function getConfigData() {
+    var radioWeek   = document.getElementById('radio_week');
+    var radioZone   = document.getElementById('radio_zone');
+    var selectZone  = document.getElementById('select_zone');
+    var radioNone   = document.getElementById('radio_none');
+    var radioTap    = document.getElementById('radio_tap');
+    var radioDouble = document.getElementById('radio_double');
+    var colorBack   = document.getElementById('col_background');
+    var colorHour   = document.getElementById('col_hour');
+    var colorMinute = document.getElementById('col_minute');
+    var colorInfo   = document.getElementById('col_info');
+    var options = {
+      'radio_week':   radioWeek.checked,
+      'radio_zone':   radioZone.checked,
+      'select_zone':  selectZone.value,
+      'radio_none':   radioNone.checked,
+      'radio_tap':    radioTap.checked,
+      'radio_double': radioDouble.checked,
+      'col_back':     colorBack.value,
+      'col_hour':     colorHour.value,
+      'col_minute':   colorMinute.value,
+      'col_info':     colorInfo.value
+    };
+    localStorage['radio_week']   = options['radio_week'];
+    localStorage['radio_zone']   = options['radio_zone'];
+    localStorage['select_zone']  = options['select_zone'];
+    localStorage['radio_none']   = options['radio_none'];
+    localStorage['radio_tap']    = options['radio_tap'];
+    localStorage['radio_double'] = options['radio_double'];
+    localStorage['col_back']     = options['col_back'];
+    localStorage['col_hour']     = options['col_hour'];
+    localStorage['col_minute']   = options['col_minute'];
+    localStorage['col_info']     = options['col_info'];
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+
+  var resetButton = document.getElementById('reset_button');
+  resetButton.addEventListener('click', function() {
+    console.log('Reset');
+    localStorage['col_back']   = '0xffffff';
+    localStorage['col_hour']   = '0xaa0000';
+    localStorage['col_minute'] = '0x555555';
+    localStorage['col_info']   = '0x000000';
+    location.reload();
+  });
+
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var radioWeek   = document.getElementById('radio_week');
+    var radioZone   = document.getElementById('radio_zone');
+    var selectZone  = document.getElementById('select_zone');
+    var radioNone   = document.getElementById('radio_none');
+    var radioTap    = document.getElementById('radio_tap');
+    var radioDouble = document.getElementById('radio_double');
+    var colorBack   = document.getElementById('col_background');
+    var colorHour   = document.getElementById('col_hour');
+    var colorMinute = document.getElementById('col_minute');
+    var colorInfo   = document.getElementById('col_info');
+    if (localStorage['radio_week']) {
+      radioWeek.checked = JSON.parse(localStorage['radio_week']);
+    } else {
+      radioWeek.checked = true;
+    }
+    if (localStorage['radio_zone']) {
+      radioZone.checked = JSON.parse(localStorage['radio_zone']);
+    } else {
+      radioZone.checked = false;
+    }
+    if (localStorage['select_zone']) {
+      selectZone.value = localStorage['select_zone'];
+    } else {
+      selectZone.value = '+00';
+    }
+    if (localStorage['radio_none']) {
+      radioNone.checked = JSON.parse(localStorage['radio_none']);
+    } else {
+      radioNone.checked = true;
+    }
+    if (localStorage['radio_tap']) {
+      radioTap.checked = JSON.parse(localStorage['radio_tap']);
+    } else {
+      radioTap.checked = false;
+    }
+    if (localStorage['radio_double']) {
+      radioDouble.checked = JSON.parse(localStorage['radio_double']);
+    } else {
+      radioDouble.checked = false;
+    }
+    if (localStorage['col_back']) {
+      colorBack.value = localStorage['col_back'];
+    } else {
+      colorBack.value = '0xffffff';
+    }
+    if (localStorage['col_hour']) {
+      colorHour.value = localStorage['col_hour'];
+    } else {
+      colorHour.value = '0xaa0000';
+    }
+    if (localStorage['col_minute']) {
+      colorMinute.value = localStorage['col_minute'];
+    } else {
+      colorMinute.value = '0x555555';
+    }
+    if (localStorage['col_info']) {
+      colorInfo.value = localStorage['col_info'];
+    } else {
+      colorInfo.value = '0x000000';
+    }
+  })();
+  </script>
+</html>

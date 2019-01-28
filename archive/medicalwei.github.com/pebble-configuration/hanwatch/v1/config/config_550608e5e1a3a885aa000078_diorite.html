@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Chinese Watch Configuration Page</title>
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="/cdn.jsdelivr.net/primer/2.1.0/primer.css">
+	<style type="text/css" media="screen">
+.container{
+	max-width: 980px;
+	width: 100%;
+	padding: 20px;
+}
+	</style>
+</head>
+<body>
+	<form id="settings" class="container">
+		<h1>中文錶面設定</h1>
+		<div class="form-checkbox">
+			<label>
+				<input id="white_on_black" type="checkbox">
+				黑底白字
+			</label>
+			<p class="note">
+				White on black
+			</p>
+		</div>
+		<div class="form-checkbox">
+			<label>
+				<input id="vibrate_on_disconnect" type="checkbox">
+				與手機斷線時震動
+			</label>
+			<p class="note">
+				Vibrate on disconnect
+			</p>
+		</div>
+
+		<div class="form-actions">
+			<button type="submit" class="btn btn-primary">確定 (OK)</button>
+			<button id="cancelButton" type="button" class="btn">取消 (Cancel)</button>
+		</div>
+	</form>
+	<script src="/cdn.jsdelivr.net/jquery/2.1.3/jquery.js"></script>
+	<script src="/medicalwei.github.com/pebble-configuration/hanwatch/v1/config.js" type="text/javascript" charset="utf-8"></script>
+</body>
+</html>

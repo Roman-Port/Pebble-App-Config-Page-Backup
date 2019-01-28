@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Stand with Orlando</title>
+  </head>
+  <body onload="fillOptions()">
+	<img alt='' src='https://dl.dropboxusercontent.com/u/58117814/Stand_with_Orlando/ribbon.png'>
+	
+	<p>
+    <select id='silent'>
+      <option value='0'>Remind me</option>
+      <option value='1'>No thanks, I'll ignore the problem with America</option>
+    </select>
+    </p>
+	
+	<p>
+	<input id='save_button' type='button' value='Save'>
+	</p>
+	
+	<p>
+	<a href="https://www.gofundme.com/PulseVictimsFund">Donate</a>
+
+    <script>
+	function fillOptions() {
+		var hashParams = window.location.hash.substr(1).split('&'); // substr(1) to remove the `#`		
+		for(var i = 0; i < hashParams.length; i++){
+			var p = hashParams[i].split('=');
+			document.getElementById(p[0]).value = decodeURIComponent(p[1]);
+		}
+	};
+	
+	function saveOptions() {
+		var silentSelect = document.getElementById('silent');
+	
+		var options = {
+			'silent': silentSelect.value,
+		};		
+		return options;    
+	};
+	  
+    var submitButton = document.getElementById('save_button');
+    submitButton.addEventListener('click', 
+        function() {
+
+		var options = saveOptions();
+        var location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(options));
+          
+          document.location = location;
+        }, 
+      false);  
+	  
+	  
+    </script>
+	
+  </body>
+</html>

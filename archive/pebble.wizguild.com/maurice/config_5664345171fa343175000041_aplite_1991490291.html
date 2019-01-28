@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ShoMaurice Settings</title>
+    <link rel="stylesheet" type="text/css" href="/pebble.wizguild.com/maurice/css/slate.css">
+    <style>
+        .title { padding: 15px 10px; text-align: center; }
+        .item-container-content { margin-top: 5px; }
+    </style>
+</head>
+<body>
+        <div class="item-container">
+
+      <div class="item-container">
+        <script async="" src="/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- pebble -->
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-1135036851319784" data-ad-slot="5219779829" data-ad-format="auto"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+      </div>
+
+        <h1 class="title">ShoMaurice</h1>
+
+        <div class="item-container-content">
+            <div class='item-container-footer'>
+              Color settings are only for Time / Time Steel, quite understandably.
+            </div>
+        </div>
+        <div class="item-container-content">
+            <div class="item">
+                Background color
+                <input id='backgroundColorPicker' type='text' class='item-color item-color-normal' value='#191970'>
+             </div>
+        </div>
+        <div class="item-container-content">
+            <div class="item">
+                Hour hand color
+                <input id='hourColorPicker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+            </div>
+            <div class="item">
+                Hour hand inside color
+                <input id='hourinColorPicker' type='text' class='item-color item-color-normal' value='#191970'>
+            </div>
+        </div>
+        <div class="item-container-content">
+            <div class="item">
+                Minute hand color
+                <input id='minuteColorPicker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+            </div>
+        </div>
+        <div class="item-container-content">
+            <label class='item'>
+                Show second hand
+                <input id='showseconds' type='checkbox' class='item-toggle'>
+            </label>
+            <div class="item">
+                Second hand color
+                <input id='secColorPicker' type='text' class='item-color item-color-normal' value='#FFFFFF'>
+            </div>
+        </div>
+        <div class="item-container-content">
+            <div class="item">
+                Text color
+                <input id='textColorPicker' type='text' class='item-color item-color-normal' value='#FFFF00'>
+            </div>
+        </div>
+        <div class="item-container-content">
+            <div class='item-container-footer'>
+              These settings only change on the watch after you click save.
+            </div>
+       </div>
+
+        <div class="item-container-content">
+            <label class='item'>
+                Show digital clock
+                <input id='showDigital' type='checkbox' class='item-toggle'>
+            </label>
+            <label class='item'>
+                24 hour digital clock
+                <input id='digital24' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+        <div class="item-container-content">
+            <label class='item'>
+                Show steps
+                <input id='healthSteps' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+        <div class="item-container-content">
+            <label class='item'>
+                Vibrate on Bluetooth disconnect
+                <input id='btVibe' type='checkbox' class='item-toggle'>
+            </label>
+        </div>
+        <div class="item-container">
+          <div class="item-container-header">Radio Buttons</div>
+          <div class="item-container-content">
+            <label class="item">
+              Classic mode
+              <input type="radio" class="item-radio" name="calMode" value="1" checked="">
+            </label>
+            <label class="item">
+              Month instead of battery
+              <input type="radio" class="item-radio" name="calMode" value="2">
+            </label>
+            <label class="item">
+              "Tue 29 Mar" date style
+              <input type="radio" class="item-radio" name="calMode" value="3">
+            </label>
+            <label class="item">
+              Bottom left calendar
+              <input type="radio" class="item-radio" name="calMode" value="4">
+            </label>
+          </div>
+        </div>
+
+
+      <div class='item-container'>
+        <div class='button-container'>
+          <input id='submitButton' type='button' class='item-button' value='Save Settings'>
+        </div>
+      </div>
+
+
+    </div>
+    <script src="/pebble.wizguild.com/maurice/js/slate.js"></script>
+    <script>
+        (function() {
+          loadOptions();
+          submitHandler();
+        })();
+
+        function submitHandler() {
+          var $submitButton = $('#submitButton');
+
+          $submitButton.on('click', function() {
+            console.log('Submit');
+
+            var return_to = getQueryParam('return_to', 'pebblejs://close#');
+            document.location = return_to + encodeURIComponent(JSON.stringify(getAndStoreConfigData()));
+          });
+        }
+
+        function loadOptions() {
+          var $backgroundColorPicker = $('#backgroundColorPicker');
+          var $hourColorPicker = $('#hourColorPicker');
+          var $hourinColorPicker = $('#hourinColorPicker');
+          var $minuteColorPicker = $('#minuteColorPicker');
+          var $textColorPicker = $('#textColorPicker');
+                    var $showseconds = $('#showseconds')[0];
+          var $secColorPicker = $('#secColorPicker');
+                              var $showDigital = $('#showDigital')[0];
+          var $digital24 = $('#digital24')[0];
+          var $healthSteps = $('#healthSteps')[0];
+          var $btVibe = $('#btVibe')[0];
+          var $calMode = $('input[name=calMode]');
+          
+          if (localStorage.backgroundColor) {
+            $backgroundColorPicker[0].value = localStorage.backgroundColor;
+            $hourColorPicker[0].value = localStorage.hourColor;
+            $hourinColorPicker[0].value = localStorage.hourinColor;
+            $minuteColorPicker[0].value = localStorage.minuteColor;
+            $textColorPicker[0].value = localStorage.textColor;
+                        if (localStorage.secColor) {
+                $secColorPicker[0].value = localStorage.secColor;
+            }
+            if(localStorage.showSeconds) {
+              $showseconds.checked = JSON.parse(localStorage.showSeconds);
+            }
+                                    if(localStorage.showDigital) {
+              $showDigital.checked = JSON.parse(localStorage.showDigital);
+            }
+            if(localStorage.digital24) {
+              $digital24.checked = JSON.parse(localStorage.digital24);
+            }
+            if(localStorage.healthSteps) {
+              $healthSteps.checked = JSON.parse(localStorage.healthSteps);
+            }
+            if(localStorage.btVibe) {
+              $btVibe.checked = JSON.parse(localStorage.btVibe);
+            }
+            if(localStorage.calMode) {
+              value = JSON.parse(localStorage.calMode);
+              if (value !== undefined) {
+                $('input[name=calMode]').each(function () { if(this.value == value) { $(this).prop('checked','checked'); }});
+              } else {
+                console.log("upgrade");
+              }
+            }
+                      }
+        }
+
+        function getAndStoreConfigData() {
+          var $backgroundColorPicker = $('#backgroundColorPicker');
+          var $hourColorPicker = $('#hourColorPicker');
+          var $hourinColorPicker = $('#hourinColorPicker');
+          var $minuteColorPicker = $('#minuteColorPicker');
+          var $textColorPicker = $('#textColorPicker');
+                    var $showseconds = $('#showseconds')[0];
+          var $secColorPicker = $('#secColorPicker');
+                              var $showDigital = $('#showDigital')[0];
+          var $digital24 = $('#digital24')[0];
+          var $healthSteps = $('#healthSteps')[0];
+          var $btVibe = $('#btVibe')[0];
+          var $calMode = $('input[name=calMode]:checked');
+          
+          var options = {
+            backgroundColor: $backgroundColorPicker.val(),
+            hourColor: $hourColorPicker.val(),
+            hourinColor: $hourinColorPicker.val(),
+            minuteColor: $minuteColorPicker.val(),
+                            showSeconds: $showseconds.checked,
+                secColor: $secColorPicker.val(),
+                                        showDigital: $showDigital.checked,
+                digital24: $digital24.checked,
+                healthSteps: $healthSteps.checked,
+                btVibe: $btVibe.checked,
+                calMode: $calMode.val(),
+                        textColor: $textColorPicker.val()
+          };
+
+          localStorage.backgroundColor = options.backgroundColor;
+          localStorage.hourColor = options.hourColor;
+          localStorage.hourinColor = options.hourinColor;
+          localStorage.minuteColor = options.minuteColor;
+          localStorage.textColor = options.textColor;
+                    localStorage.showSeconds = options.showSeconds;
+          localStorage.secColor = options.secColor;
+                              localStorage.showDigital = options.showDigital;
+          localStorage.digital24 = options.digital24;
+          localStorage.healthSteps = options.healthSteps;
+          localStorage.btVibe = options.btVibe;
+          localStorage.calMode = options.calMode;
+          
+          console.log('Got options: ' + JSON.stringify(options));
+          return options;
+        }
+
+        function getQueryParam(variable, defaultValue) {
+          var query = location.search.substring(1);
+          var vars = query.split('&');
+          for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if (pair[0] === variable) {
+              return decodeURIComponent(pair[1]);
+            }
+          }
+          return defaultValue || false;
+        }
+    </script>
+</body>
+</html>

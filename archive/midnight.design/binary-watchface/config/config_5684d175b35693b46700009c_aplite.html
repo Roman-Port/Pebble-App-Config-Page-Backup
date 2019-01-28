@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Binary Watchface Configuration</title>
+	<link rel="stylesheet" type="text/css" href="/midnight.design/binary-watchface/config/css/slate.css">
+	<style>
+		#sendBtn { cursor:pointer; }
+	</style>
+</head>
+<body>
+<div class="item-container">
+  <div class="item-container-content">
+    <label class="item">Show date<input type="checkbox" class="item-toggle" id="showDate" checked=""></label>
+    <label class="item">Show Bluetooth indicator<input type="checkbox" class="item-toggle" id="showBluetooth" checked=""></label>
+    <label class="item">Color Theme<select id="theme" class="item-select">
+        <option class="item-select-option" value="0">Mono Day</option>
+        <option class="item-select-option" value="1">Mono Night</option>
+        <option class="item-select-option" value="2">Brimstone</option>
+        <option class="item-select-option" value="3">Greenboard</option>
+        <option class="item-select-option" value="4">Ice Palace</option>
+        <option class="item-select-option" value="5">Matrix</option>
+        <option class="item-select-option" value="6">Ocean</option>
+        <option class="item-select-option" value="7">Ponies!!</option>
+      </select>
+    </label>
+  </div>
+  <div class="item-container-footer">
+    The date shows as current Month (first letter) and Day as the "serial number" on the chip in the center of the display. Bluetooth indicator shows as a small LED in the top-right of the display.
+  </div>
+</div>
+<div class="item-container">
+  <div class="button-container">
+    <input type="button" id="sendBtn" class="item-button" value="SEND">
+  </div>
+</div>
+<script src="/midnight.design/binary-watchface/config/js/slate.js"></script>
+<script src="/midnight.design/binary-watchface/config/js/main.js"></script>
+</body>
+</html>

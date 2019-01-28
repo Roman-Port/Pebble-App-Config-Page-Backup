@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>NPR Station Finder Pebble App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.css">
+    <style>
+        #zip { display: none;}
+        label.error {
+            color: red;
+            font-size: 16px;
+            font-weight: normal;
+            line-height: 1.4;
+            margin-top: 0.5em;
+            width: 100%;
+            float: none;
+        }
+
+        @media screen and (orientation: portrait){
+            label.error { margin-left: 0; display: block; }
+        }
+
+        @media screen and (orientation: landscape){
+            label.error { display: inline-block; margin-left: 22%; }
+        }
+
+        em { color: red; font-weight: bold; padding-right: .25em; }
+    </style>
+    <script src="/ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.js"></script>
+    <script src="/ajax.googleapis.com/ajax/libs/jquerymobile/1.4.2/jquery.js"></script>
+    <script src="/ajax.aspnetcdn.com/ajax/jquery.validate/1.12.0/jquery.js"></script>
+
+</head>
+<body>
+<div data-role="page" id="main">
+
+    <div data-role="content" class="ui-body ui-body-a">
+
+        <form id="form-config" class="validate">
+
+            <div data-role="fieldcontain">
+                <fieldset data-role="controlgroup" data-type="horizontal">
+                    <legend>Location:</legend>
+                    <input type="radio" name="location" id="radio-gps" value="gps" class="custom">
+                    <label for="radio-gps">Use GPS</label>
+
+                    <input type="radio" name="location" id="radio-zip" value="zip" class="custom">
+                    <label for="radio-zip">Specify ZIP Code</label>
+
+                </fieldset>
+            </div>
+
+            <div data-role="fieldcontain">
+                <div class="ui-field-contain" id="zip">
+                    <label for="text-zip">US ZIP Code:</label>
+                    <input type="text" name="text-zip" id="text-zip" value="" class="zipcodeUS">
+                </div>
+            </div>
+
+            <fieldset class="ui-grid-a">
+                <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+                <div class="ui-block-b"><button type="submit" data-theme="b" id="b-submit">Save</button></div>
+            </fieldset>
+
+        </form>
+    </div>
+</div>
+<script>
+    function saveOptions() {
+
+        var options = {zip: ''};
+        if ($("#radio-zip").is(':checked')) {
+            options.zip = $("#text-zip").val();
+        }
+        return options;
+    }
+
+    function getURLParameter(name) {
+        return decodeURI(
+                (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+        );
+    }
+
+    $.validator.addMethod("zipcodeUS", function(value, element) {
+        return this.optional(element) || /\d{5}-\d{4}$|^\d{5}$/.test(value)
+    }, "The specified US ZIP Code is invalid");
+
+    $().ready(function() {
+
+        $("input[name=location]:radio").bind( "change", function(event, ui) {
+            var val = $(this).val();
+            if (val === 'gps') {
+                $("#zip").hide();
+                $("#text-zip").val('');
+            } else {
+                $("#zip").show();
+            }
+        });
+
+        var zip = getURLParameter('zip');
+
+        if (zip !== "null") {
+            $("#radio-zip").attr("checked", "checked");
+            $("#radio-zip").change();
+            $("#text-zip").val(zip);
+        } else {
+            $("#radio-gps").attr("checked", "checked");
+            $("#radio-gps").change();
+        }
+
+        $("input[name='location']").checkboxradio("refresh");
+
+        $( "#form-config" ).validate({
+            submitHandler: function( form ) {
+                var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+                console.log(location);
+                document.location = location;
+            },
+            errorPlacement: function(error, element) {
+                error.insertAfter($(element).parent());
+            }
+        });
+
+        $("#b-cancel").click(function(e) {
+            e.preventDefault();
+            console.log("Cancel");
+            document.location = "pebblejs://close";
+        });
+    });
+</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-51076229-1', 'jaredbiehler.github.io');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

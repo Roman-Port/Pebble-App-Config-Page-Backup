@@ -1,0 +1,106 @@
+function getQueryVariable(variable) {
+	var query = window.location.search.substring(1);
+	var vars = query.split('&');
+	for (var i = 0; i < vars.length; i++) {
+		var pair = vars[i].split('=');
+		if (decodeURIComponent(pair[0]) == variable) {
+			return decodeURIComponent(pair[1]);
+		}
+	}
+	console.log('Query variable %s not found', variable);
+}
+
+function settingsFromUrl() {
+	var settings = {
+		ambientDelaySec: getQueryVariable("ambientDelaySec"),
+		minuteTicksAlwaysOn: getQueryVariable("minuteTicksAlwaysOn"),
+		showBattery: getQueryVariable("showBattery"),
+		showBT: getQueryVariable("showBT"),
+		vibrate: getQueryVariable("vibrate"),
+		vibrateMin: getQueryVariable("vibrateMin"),
+		vibrateMax: getQueryVariable("vibrateMax"),
+	};
+
+	return settings;
+}
+
+function settingsFromForm() {
+	var activeDurationInput = document.getElementById("activeDuration");
+	var vibrateMinInput = document.getElementById("vibrateMin");
+	var vibrateMaxInput = document.getElementById("vibrateMax");
+	
+	var settings = {
+		ambientDelaySec: parseInt(activeDurationInput.value),
+		minuteTicksAlwaysOn: document.getElementById("minutesAlwaysCheck").checked ? 1 : 0,
+		showBattery: document.getElementById("showBatteryCheck").checked ? 1 : 0,
+		showBT: document.getElementById("showBTCheck").checked ? 1 : 0,
+		vibrate: document.getElementById("vibrateCheck").checked ? 1 : 0,
+		vibrateMin: parseInt(vibrateMinInput.value),
+		vibrateMax: parseInt(vibrateMaxInput.value),
+	};
+
+
+	if (isNaN(settings.ambientDelaySec) || activeDurationInput.checkValidity() == false)
+	{
+		throw "Ambient mode delay must be between "+activeDurationInput.min+" and "+activeDurationInput.max+" seconds!";
+	}
+	
+	if (isNaN(settings.vibrateMin) || isNaN(settings.vibrateMax) ||
+		vibrateMinInput.checkValidity() == false || vibrateMaxInput.checkValidity() == false ||
+		settings.vibrateMax < settings.vibrateMin)
+	{
+		throw "Vibration hours must between "+vibrateMaxInput.min+" and "+vibrateMaxInput.max+" and max must be >= min!";
+	}
+	
+	return settings;
+}
+
+function showPresets() {
+	// set presets
+	var settings = settingsFromUrl();
+	
+	var activeDur = document.getElementById("activeDuration");
+	var showMinTicks = document.getElementById("minutesAlwaysCheck");
+	var showBattery = document.getElementById("showBatteryCheck");
+	var showBT = document.getElementById("showBTCheck");
+	var vibrate = document.getElementById("vibrateCheck");
+	var vibrateMin = document.getElementById("vibrateMin");
+	var vibrateMax = document.getElementById("vibrateMax");
+	
+	activeDur.value = settings.ambientDelaySec;
+	showMinTicks.checked = settings.minuteTicksAlwaysOn == 1;
+	showBattery.checked = settings.showBattery == 1;
+	showBT.checked = settings.showBT == 1;
+	vibrate.checked = settings.vibrate == 1;
+	vibrateMin.value = settings.vibrateMin;
+	vibrateMax.value = settings.vibrateMax;
+}
+
+function saveSettings() {
+	var settings;
+	try {
+		settings = settingsFromForm();
+	}
+	catch (ex)
+	{
+		alert(ex);
+		return;
+	}
+	
+	// Determine the correct return URL (emulator vs real watch)
+	function getQueryParam(variable, defaultValue) {
+	  var query = location.search.substring(1);
+	  var vars = query.split('&');
+	  for (var i = 0; i < vars.length; i++) {
+		var pair = vars[i].split('=');
+		if (pair[0] === variable) {
+		  return decodeURIComponent(pair[1]);
+		}
+	  }
+	  return defaultValue || false;
+	}
+	var return_to = getQueryParam('return_to', 'pebblejs://close#');
+
+	// Encode and send the data when the page closes
+	document.location = return_to + encodeURIComponent(JSON.stringify(settings));
+}

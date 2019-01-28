@@ -1,0 +1,37 @@
+<div class="item-container">
+  <div class="item-container-content">
+    <div class="item-container-header">{{ header }}</div>
+    <div class="item tab-buttons">
+      {{#each source}}
+        <a name="tab-bt" class="tab-button bt-icon {{ value === ~/value ? 'active' : '' }}" on-click="update_current_tab:{{value}}">{{ label }}</a>
+      {{/each}}
+    </div>
+  </div>
+</div>
+
+<style>
+ .item-container {
+   margin: 0;
+   margin-top: 15px;
+ }
+
+ .item:not(:first-child) {
+   border-top: 0px;
+ }
+
+ .item-container-header {
+   padding: 7px 0px 0px 10px;
+   text-transform: none;
+   color: #000000;
+ }
+</style>
+
+<script>
+ component.exports = {
+   oninit: function(){
+     this.on('update_current_tab', function(e, value){
+       this.set('value', value);
+     });
+   }
+ }
+</script>

@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="UTF-8">
+  <title>MazeClock Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/realzogzog.github.io/mazeclock/css/slate.css'>
+  <script src='/realzogzog.github.io/mazeclock/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>MazeClock Configuration</h1>
+    
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Please choose the settings you would like applied to MazeClock watch-face.
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+    
+      <div class='item-container-header'>Colors</div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Background
+          <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Led 1 (biggest)
+          <input id='led1_color_picker' type='text' class='item-color item-color-sunny' value='#FFFF00'>
+        </label>
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Led 2
+          <input id='led2_color_picker' type='text' class='item-color item-color-sunny' value='#0000FF'>
+        </label>
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Led 3
+          <input id='led3_color_picker' type='text' class='item-color item-color-sunny' value='#FF0000'>
+        </label>
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Led 4 (smallest)
+          <input id='led4_color_picker' type='text' class='item-color item-color-sunny' value='#00FF00'>
+        </label>
+      </div>
+
+      <div class='item-container-footer'>
+        Caution: some colors combinations can render the watchface unreadable !
+      </div>
+
+		<div class='item-container-content'>
+		</div>
+
+    </div>
+    
+	<div class='item-container'>
+    
+      <div class='item-container-header'>Layout</div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Invert Time
+          <input id='time_checkbox' type='checkbox' class='item-toggle' name="toggle-2">
+        </label>
+        <div class='item-container-footer'>
+        Inverted time is read from the inside to the outside.
+      </div>
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Invert Stack
+          <input id='stack_checkbox' type='checkbox' class='item-toggle' name="toggle-3">
+        </label>
+        <div class='item-container-footer'>
+        Invert the draw order of the led stack. (Just try)
+      </div>
+      </div>
+      
+		<div class='item-container-content'>
+        <label class='item'>
+          Show Nodes
+          <input id='node_checkbox' type='checkbox' class='item-toggle' name="toggle-3">
+        </label>
+        <div class='item-container-footer'>
+        Show nodes in leds (to get the original feel ;)
+      </div>
+      </div>
+      
+      <div class='item-container-content'>
+		</div>
+      
+    </div>
+
+<div class="item-container">
+  <div class="button-container">
+    <input id='reset_button' type="button" class="item-button" value="Default Settings">
+  </div>
+</div>
+
+<div class='item-container'>
+	<div class='button-container'>
+	  <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+	</div>
+</div>
+
+  </body>
+  <script>
+  function getConfigData() {
+  	var backgroundColorPicker = document.getElementById('background_color_picker');
+  	var led1ColorPicker = document.getElementById('led1_color_picker');
+  	var led2ColorPicker = document.getElementById('led2_color_picker');
+  	var led3ColorPicker = document.getElementById('led3_color_picker');
+  	var led4ColorPicker = document.getElementById('led4_color_picker');
+  	var timeCheckbox = document.getElementById('time_checkbox');
+  	var stackCheckbox = document.getElementById('stack_checkbox');
+  	var nodeCheckbox = document.getElementById('node_checkbox');
+
+  	var options = {
+  		'background_color': backgroundColorPicker.value,
+  		'led1_color': led1ColorPicker.value,
+  		'led2_color': led2ColorPicker.value,
+  		'led3_color': led3ColorPicker.value,
+  		'led4_color': led4ColorPicker.value,
+  		'time':timeCheckbox.checked,
+  		'stack':stackCheckbox.checked,
+  		'node':nodeCheckbox.checked
+  	};
+
+  	// Save for next launch
+  	localStorage['background_color'] = options['background_color'];
+  	localStorage['led1_color'] = options['led1_color'];
+  	localStorage['led2_color'] = options['led2_color'];
+  	localStorage['led3_color'] = options['led3_color'];
+  	localStorage['led4_color'] = options['led4_color'];
+  	localStorage['time'] = options['time'];
+  	localStorage['stack'] = options['stack'];
+  	localStorage['node'] = options['node'];
+
+  	console.log('Got options: ' + JSON.stringify(options));
+  	return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+  	var query = location.search.substring(1);
+  	var vars = query.split('&');
+  	for (var i = 0; i < vars.length; i++) {
+  		var pair = vars[i].split('=');
+  		if (pair[0] === variable) {
+  			return decodeURIComponent(pair[1]);
+  		}
+  	}
+  	return defaultValue || false;
+  }
+
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+  	console.log('Submit');
+
+  	// Set the return URL depending on the runtime environment
+  	var return_to = getQueryParam('return_to', 'pebblejs://close#');
+  	document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  var resetButton = document.getElementById('reset_button');
+  resetButton.addEventListener('click', function() {
+  	console.log('Reset');
+
+  	var backgroundColorPicker = document.getElementById('background_color_picker');
+  	var led1ColorPicker = document.getElementById('led1_color_picker');
+  	var led2ColorPicker = document.getElementById('led2_color_picker');
+  	var led3ColorPicker = document.getElementById('led3_color_picker');
+  	var led4ColorPicker = document.getElementById('led4_color_picker');
+  	var timeCheckbox = document.getElementById('time_checkbox');
+  	var stackCheckbox = document.getElementById('stack_checkbox');
+  	var nodeCheckbox = document.getElementById('node_checkbox');
+
+  	timeCheckbox.checked = false;
+  	stackCheckbox.checked = false;
+  	nodeCheckbox.checked = false;
+  	backgroundColorPicker.value = '0x000000';
+  	led1ColorPicker.value = '0xFFFF00';
+  	led2ColorPicker.value = '0x0000FF';
+  	led3ColorPicker.value = '0xFF0000';
+  	led4ColorPicker.value = '0x00FF00';
+
+  	// Save for next launch
+  	localStorage['background_color'] = '0x000000';
+  	localStorage['led1_color'] = '0xFFFF00';
+  	localStorage['led2_color'] = '0x0000FF';
+  	localStorage['led3_color'] = '0xFF0000';
+  	localStorage['led4_color'] = '0x00FF00';
+	localStorage['time'] = false;
+	localStorage['stack'] = false;
+	localStorage['node'] = false;
+  	window.location.reload();
+
+  });
+
+  (function() {
+  	var backgroundColorPicker = document.getElementById('background_color_picker');
+  	var led1ColorPicker = document.getElementById('led1_color_picker');
+  	var led2ColorPicker = document.getElementById('led2_color_picker');
+  	var led3ColorPicker = document.getElementById('led3_color_picker');
+  	var led4ColorPicker = document.getElementById('led4_color_picker');
+  	var timeCheckbox = document.getElementById('time_checkbox');
+  	var stackCheckbox = document.getElementById('stack_checkbox');
+  	var nodeCheckbox = document.getElementById('node_checkbox');
+
+  	// Load any previously saved configuration, if available
+  	if (localStorage['led1_color']) {
+  		
+  		timeCheckbox.checked = JSON.parse(localStorage['time']);
+  		stackCheckbox.checked = JSON.parse(localStorage['stack']);
+  		nodeCheckbox.checked = JSON.parse(localStorage['node']);
+  		
+  		backgroundColorPicker.value = localStorage['background_color'];
+  		led1ColorPicker.value = localStorage['led1_color'];
+  		led2ColorPicker.value = localStorage['led2_color'];
+  		led3ColorPicker.value = localStorage['led3_color'];
+  		led4ColorPicker.value = localStorage['led4_color'];
+  	}
+  })();
+
+  </script>
+</html>

@@ -1,0 +1,1091 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Teacher's Watch</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+        <script src="/code.jquery.com//jquery-1.js"></script>
+        <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+    </head>
+    <body>
+        <!-- Main -->
+        <div data-role="page" id="main">
+            <div data-theme="a" data-role="header" data-position="fixed">
+                <h4>
+                    Teacher's Watch
+                </h4>
+            </div>
+            <div data-role="content">
+                <div data-role="collapsible-set">
+                    <div id="lessonLengthContent" data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">
+                        <h3>Lesson length</h3>
+                        <p>
+                            Set duration of lessons in minutes. <b>Normal</b> is considered standard.
+                            <b>Long</b> can be also used in day schedule.
+                        </p>
+                        <div data-role="fieldcontain">
+                            <label for="lesson1">
+                                Normal:
+                            </label>
+                            <input type="range" name="lesson1" id="lesson1" value="45" min="15" max="120" step="5" data-highlight="true">
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="lesson2">
+                                Long:
+                            </label>
+                            <input type="range" name="lesson2" id="lesson2" value="90" min="15" max="120" step="5" data-highlight="true">
+                        </div>
+                    </div> 
+                    <div id="dayScheduleContent" data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">
+                        <h3>Day schedule</h3>
+                        <div data-role="fieldcontain">
+                            <label for="b-day-count">
+                                Different days:
+                            </label>
+                            <input type="range" name="b-day-count" id="b-day-count" value="1" min="1" max="5">
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="b-day-select">
+                                Choose day:
+                            </label>
+                            <select name="b-day-select" id="b-day-select" data-inline="false">
+                                <option value="0">Standard day</option>
+                                <option value="1">Day 1</option>
+                                <option value="2">Day 2</option>
+                                <option value="3">Day 3</option>
+                                <option value="4">Day 4</option>
+                            </select>
+                        </div>
+                        <table>
+                            <tr>
+                                <td valign="middle">
+                                    Start of zero (= really 1<sup>st</sup>) lesson:
+                                </td>
+                                <td valign="middle">
+                                    <select name="day-start-h" id="day-start-h" data-inline="true">
+                                        <option value="5">05</option>
+                                        <option value="6">06</option>
+                                        <option value="7">07</option>
+                                        <option value="8">08</option>
+                                        <option value="9">09</option>
+                                        <option>10</option>
+                                        <option>11</option>
+                                        <option>12</option>
+                                    </select>
+                                </td>
+                                <td valign="middle">
+                                    :                                
+                                </td>
+                                <td valign="middle">
+                                    <select name="day-start-m" id="day-start-m" data-inline="true">
+                                        <option value="0">00</option>
+                                        <option value="5">05</option>
+                                        <option>10</option>
+                                        <option>15</option>
+                                        <option>20</option>
+                                        <option>25</option>
+                                        <option>30</option>
+                                        <option>35</option>
+                                        <option>40</option>
+                                        <option>45</option>
+                                        <option>50</option>
+                                        <option>55</option>
+                                    </select>
+                                </td>
+                            </tr>                        
+                        </table>
+
+                        <table data-role="table" id="table-custom-2" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="b" data-mode="columntoggle">
+                            <thead>
+                                <tr class="ui-bar-d">
+                                    <th align="center" data-priority="1"><small>d</small></th> 
+                                    <th align="center"><small>from</small></th> 
+                                    <th align="center"><small>to</small></th> 
+                                    <th align="center"><small>Lesson</small></th> 
+                                    <th align="center"><small>Break</small></th> 
+                                </tr>
+                            </thead>
+                            <tbody id="daySchedule">
+                                <tr id="dayScheduleTemplate">
+                                    <td valign="middle" style="font-size: small; font-weight: bold;">NR.</td>
+                                    <td align="center" valign="middle" id="day-start-lesson-NR" style="font-size: small;">00:00</td>
+                                    <td align="center" valign="middle" id="day-end-lesson-NR" style="font-size: small;">00:00</td>
+                                    <td align="center">
+                                        <select name="day-lesson-NR" id="day-lesson-NR" data-mini="true" data-inline="true" data-role="none">
+                                            <option value="N">Normal</option>
+                                            <option value="L">Long</option>
+                                        </select>
+                                    </td>
+                                    <td align="center">
+                                        <select name="day-break-0" id="day-break-NR" data-mini="true" data-inline="true" data-role="none">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="15">15</option>
+                                            <option value="20">20</option>
+                                            <option value="25">25</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                        <!-- -->
+                        <div data-role="fieldcontain">
+                            <label for="display-day0">
+                                Day 0:
+                            </label>
+                            <input name="display-day0" id="display-day0" placeholder="" type="text">
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="display-day1">
+                                Day 1:
+                            </label>
+                            <input name="display-day1" id="display-day1" placeholder="" type="text">
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="display-day2">
+                                Day 2:
+                            </label>
+                            <input name="display-day2" id="display-day2" placeholder="" type="text">
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="display-day3">
+                                Day 3:
+                            </label>
+                            <input name="display-day3" id="display-day3" placeholder="" type="text">
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="display-day4">
+                                Day 4:
+                            </label>
+                            <input name="display-day4" id="display-day4" placeholder="" type="text">
+                        </div>
+                        <!-- -->
+                    </div>
+                    <div id="vibrationContent" data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">
+                        <h3>Vibration</h3>
+                        <div data-role="fieldcontain">
+                            <label for="vibration">
+                                vibration
+                            </label>
+                            <input name="vibration" id="vibration" placeholder="" type="text">
+                        </div>
+                        <!--
+                        <div data-role="fieldcontain">
+                            <label for="breaks">
+                                breaks
+                            </label>
+                            <input name="breaks" id="breaks" placeholder=""
+                                   type="text">
+                        </div>
+                        -->
+                    </div>
+                    <div id="timeTableContent" data-role="collapsible" data-theme="b" data-content-theme="d" data-inset="false">
+                        <h3>Time Table</h3>
+                        <div data-role="fieldcontain">
+                            <label for="tt-weekday">
+                                Weekday:
+                            </label>
+                            <select name="tt-weekday" id="tt-weekday" data-inline="false">
+                                <option value="MO">Monday</option>
+                                <option value="TU">Tuesday</option>
+                                <option value="WE">Wednesday</option>
+                                <option value="TH">Thursday</option>
+                                <option value="FR">Friday</option>
+                                <option value="SA">Saturday</option>
+                                <option value="SU">Sunday</option>
+                            </select>
+                        </div>
+                        <div data-role="fieldcontain">
+                            <label for="tt-weekday">
+                                Day format:
+                            </label>
+                            <select name="tt-day" id="tt-day" data-inline="false">
+                                <option value="0">Standard day</option>
+                            </select>
+                        </div>
+                        <table data-role="table" id="table-custom-3" class="ui-body-d ui-shadow table-stripe ui-responsive" data-column-btn-theme="b" data-mode="columntoggle">
+                            <thead>
+                                <tr class="ui-bar-d">
+                                    <th align="center" data-priority="1"><small>d</small></th> 
+                                    <th align="center"><small>Time</small></th> 
+                                    <th align="center"><small>Lesson</small></th> 
+                                    <th align="center"><small>Break</small></th> 
+                                </tr>
+                            </thead>
+                            <tbody id="ttSchedule">
+                                <tr id="ttScheduleTemplate">
+                                    <td valign="middle" style="font-size: small; font-weight: bold;">NR.</td>
+                                    <td align="center" valign="middle">
+                                        <span id="tt-start-NR" style="font-size: small;">00:00</span>
+                                        -
+                                        <span id="tt-end-NR" style="font-size: small;">00:00</span>
+                                    </td>
+                                    <td align="center" valign="middle">
+                                        <select name="tt-lesson-NR" id="tt-lesson-NR" data-theme="b" data-role="none" data-mini="true">
+                                            <option value="off">free</option>
+                                            <option value="on">teach</option>
+                                        </select>
+                                    </td>
+                                    <td align="center" valign="middle">
+                                        <select name="tt-break-NR" id="tt-break-NR" data-theme="b" data-role="none" data-mini="true">
+                                            <option value="0">free</option>
+                                            <option value="1">work</option>
+                                        </select>
+                                    </td>
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div data-role="footer">
+                <div class="ui-body ui-body-b">
+                    <fieldset class="ui-grid-b">
+                        <div class="ui-block-a">
+                            <button id="b-builtin" type="submit" data-inline="true" data-theme="c" data-icon="forward" data-iconpos="left" value="Clear"></button>
+                        </div>
+                        <div class="ui-block-b">
+                            <button id="b-cancel" type="submit" data-inline="true" data-theme="c" data-icon="delete" data-iconpos="left" value="Cancel"></button>
+                        </div>
+                        <div class="ui-block-c">
+                            <button id="b-submit" type="submit" data-inline="true" data-theme="b" data-icon="plus" data-iconpos="left" value="Do it"></button>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        <script>
+            // ----------------------------------------
+            // variables and constants
+            var LESSON_COUNT = 10; // number of lessons in templates
+            var DAY_COUNT = 5; // number of days in templates
+            var isReady = false;
+
+            // time tables
+            var weekDays = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
+            var selectedWeekDay = -1;
+            var selectedWeekDayFormat = -1;
+            var weekDayTexts = ["", "", "", "", "", "", ""];
+            var weekDayFormats = [0, 0, 0, 0, 0, 0, 0];
+            var timeTable = "";
+
+            // day
+            var selectedDay = -1;
+            var selectedDayText = "";
+            var dayTexts = ["", "", "", "", ""];
+            var dayCount = 1;
+            var dayStartHour = 0;
+            var dayStartMinute = 0;
+            var defaultBreakLength = 10;
+
+            // lesson length  
+            var lessonNormal = 45;
+            var lessonLong = 90;
+            // ----------------------------------------
+
+            $().ready(function () {
+                console.log("ready: start");
+                isReady = false;
+                useTemplates();
+                // ----------------------------------------
+                // time table
+                console.log("ready: time table");
+                $("#tt-weekday").change(function () {
+                    selectWeekDay($("#tt-weekday").val());
+                });
+                $("#tt-day").change(function () {
+                    selectWeekDayFormat($("#tt-day").val());
+                });
+                // ----------------------------------------
+                // day
+                console.log("ready: day");
+                $("#b-day-select").change(function () {
+                    selectDay($("#b-day-select").val());
+                });
+                $("#b-day-count").change(function () {
+                    setDayCount(Number($("#b-day-count").val()));
+                });
+                $("#day-start-h").change(function () {
+                    fillDay();
+                });
+                $("#day-start-m").change(function () {
+                    fillDay();
+                });
+                console.log("ready: set days");
+                for (var i = 0; i < LESSON_COUNT; i++) {
+                    $("#day-break-" + i).val(defaultBreakLength);
+                    if (isReady)
+                        $("#day-break-" + i).selectmenu("refresh");
+                    $("#day-lesson-" + i).change(function () {
+                        console.log("day-lesson change");
+                        fillDay();
+                        $("#day-lesson-" + i).selectmenu("refresh");
+                    });
+                    $("#day-break-" + i).change(fillDay);
+                    $("#tt-lesson-" + i).change(function () {
+                        console.log("tt-lesson change");
+                    });
+                    $("#tt-break-" + i).change(function () {
+                        console.log("tt-break change");
+                    });
+                }
+
+                $("#lessonLengthContent").bind(
+                        "expand", function (event, ui) {
+//                            console.log("lessonLengthContent expanded");
+                        }
+                );
+                $("#lessonLengthContent").bind(
+                        "collapse", function (event, ui) {
+//                            console.log("lessonLengthContent collapsed");
+                        }
+                );
+                $("#dayScheduleContent").bind(
+                        "expand", function (event, ui) {
+                            console.log("dayScheduleContent expanded");
+                            if (selectedDay < 0)
+                                selectDay(0);
+                            else
+                                fillDay();
+                        }
+                );
+                $("#dayScheduleContent").bind(
+                        "collapse", function (event, ui) {
+                            console.log("dayScheduleContent collapsed");
+                            saveSelectedDay();
+                        }
+                );
+                $("#timeTableContent").bind(
+                        "expand", function (event, ui) {
+                            console.log("timeTableContent expanded");
+                            if (selectedWeekDay < 0)
+                                selectWeekDay("MO");
+                            else
+                                fillWeekDay();
+                        }
+                );
+                $("#timeTableContent").bind(
+                        "collapse", function (event, ui) {
+                            console.log("timeTableContent collapsed");
+                            saveSelectedWeekDay();
+                        }
+                );
+                $(".ui-table-columntoggle-btn").hide();
+                // ----------------------------------------
+                // lessons
+                console.log("ready: lessons");
+                $("#lesson1").change(function () {
+                    readLessons();
+                    if (lessonNormal > lessonLong) {
+                        lessonLong = lessonNormal;
+                        $("#lesson2").val(lessonLong);
+                        if (isReady)
+                            $("#lesson2").slider("refresh");
+                    }
+                    fillDay();
+                });
+                $("#lesson2").change(function () {
+                    readLessons();
+                    if (lessonNormal > lessonLong) {
+                        lessonNormal = lessonLong;
+                        $("#lesson1").val(lessonNormal);
+                        if (isReady)
+                            $("#lesson1").slider("refresh");
+                    }
+                    fillDay();
+                });
+                // ----------------------------------------
+                // footer buttons
+                console.log("ready: footer buttons");
+                $("#b-cancel").click(function () {
+                    console.log("Cancel");
+                    document.location = "pebblejs://close";
+                });
+                $("#b-builtin").click(function () {
+                    console.log("Builtin");
+                    setDefaultValues();
+                    selectWeekDay("MO");
+                    fillWeekDay();
+                });
+                $("#b-submit").click(function () {
+                    console.log("Submit");
+                    //var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+                    var location = "pebblejs://close#" + JSON.stringify(saveOptions());
+                    console.log("Warping to: " + location);
+                    document.location = location;
+                });
+                console.log("ready: initial values");
+                setInitialValues();
+                console.log("ready: end");
+                isReady = true;
+            });
+
+            function useTemplates() {
+                console.log("useTemplates: start");
+                console.log("useTemplates: day");
+                var place = $("#daySchedule");
+                var t = $("#dayScheduleTemplate");
+                var tmpl = t.html();
+                t.detach();
+                t.empty();
+                t.removeAttr("id");
+                for (var i = 0; i < LESSON_COUNT; i++) {
+                    var s = replaceAll(tmpl, "NR", "" + i);
+                    s = replaceAll(s, " data-role=\"none\"", "");
+                    var t1 = t.clone();
+                    t1.html(s);
+                    t1.appendTo(place);
+                }
+                place.trigger("create");
+                console.log("useTemplates: tt");
+                place = $("#ttSchedule");
+                t = $("#ttScheduleTemplate");
+                tmpl = t.html();
+                t.remove();
+                t.remove("*");
+                for (var i = 0; i < LESSON_COUNT; i++) {
+                    var s = replaceAll(tmpl, "NR", "" + i);
+                    s = replaceAll(s, "data-role=\"none\"", "data-role=\"slider\"");
+                    var t1 = t.clone();
+                    t1.html(s);
+                    t1.appendTo(place);
+                }
+                place.trigger("create");
+                console.log("useTemplates: end");
+            }
+
+            function replaceAll(s, src, dst) {
+                //console.log("replace ... "+src+" -> "+dst); 
+                var re = new RegExp(src, "g");
+                var res = s.replace(re, dst);
+                //console.log("= ("+res+")");                    
+                return res;
+            }
+
+            function setValues(day0, day1, day2, day3, day4, lessons, vibration, breaks, table) {
+                console.log("setValues: start");
+                var dc = 1;
+                dayTexts[0] = day0;
+                dayTexts[1] = day1;
+                dayTexts[2] = day2;
+                dayTexts[3] = day3;
+                dayTexts[4] = day4;
+                for (var i = 0; i < DAY_COUNT;
+                        i++
+                        ) {
+                    if (dayTexts[i] === null)
+                        dayTexts[i] = "";
+                    if (dayTexts[i].length > 0)
+                        dc = i + 1;
+                    else
+                        break;
+                }
+                dayCount = 0;
+                setDayCount(dc);
+                setLessons(lessons);
+                $("[name=vibration]").val(vibration);
+                //$("[name=breaks]").val(breaks);
+                setTimeTable(table);
+                console.log("setValues: end");
+            }
+
+            function setDefaultValues() {
+                setValues(//
+                        "0655N15N10N20N10N10N10N10N10N10N10N10N10",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "45",
+                        "L:s0e0;S:s1e-1",
+                        "0b,Bb,Sb",
+                        "MO:0s1f1f1f1f1f1,TU:0f1f1f1s1f1s,WE:0f0f0f1s1f1f1,TH:0f1f1s0s1f1f0f0f1,FR:1f1f1f1f1"
+                        );
+            }
+
+            function setInitialValues() {
+                console.log("setInitialValues: start");
+                // Set initial values
+                setValues(//
+                        decodeString($.params("day0")),
+                        decodeString($.params("day1")),
+                        decodeString($.params("day2")),
+                        decodeString($.params("day3")),
+                        decodeString($.params("day4")),
+                        decodeString($.params("lessons")),
+                        decodeString($.params("vibration")),
+                        decodeString($.params("breaks")),
+                        decodeString($.params("table")));
+                console.log("setInitialValues: end");
+            }
+
+            $.params = function (param_name) {
+                //console.log("param(" + param_name + ")");
+                var value = new RegExp('[\\?&]' + param_name + '=([^&#]*)').exec(window.location.href);
+                if (value === null)
+                    return null;
+                console.log("param(" + param_name + ") = " + value);
+                return value[1];
+            };
+
+            function saveOptions() {
+                console.log("saveOptions");
+                var options = {
+                    'day0': encodeURIComponent(dayTexts[0]),
+                    'day1': encodeURIComponent(dayTexts[1]),
+                    'day2': encodeURIComponent(dayTexts[2]),
+                    'day3': encodeURIComponent(dayTexts[3]),
+                    'day4': encodeURIComponent(dayTexts[4]),
+                    'lessons': encodeURIComponent(readLessons()),
+                    'vibration': encodeURIComponent($("#vibration").val()),
+                    // 'breaks': encodeURIComponent($("#breaks").val()),
+                    'table': encodeURIComponent(readTimeTable())
+                };
+                //console.log("res = "+options);
+                return options;
+            }
+
+            function decodeString(str) {
+                if (str === null) {
+                    str = "";
+                } else {
+                    str = decodeURIComponent(str);
+                    str = str.replace(/\+/g, " ");
+                }
+                return str;
+            }
+
+            // ----------------------------------------------------------------
+            // time table
+
+            function saveSelectedWeekDay() {
+                if (selectedWeekDay < 0)
+                    return;
+                console.log("saveSelectedWeekDay: start");
+                var last = -1;
+                var lessonUsed;
+                var breakUsed;
+                for (var i = 0; i < LESSON_COUNT; i++) {
+                    lessonUsed = $("#tt-lesson-" + i).val() === "on";
+                    breakUsed = $("#tt-break-" + i).val() === "1";
+                    if (lessonUsed || breakUsed)
+                        last = i;
+                }
+                var s = "";
+                for (var i = 0; i < last; i++) {
+                    lessonUsed = $("#tt-lesson-" + i).val() === "on";
+                    breakUsed = $("#tt-break-" + i).val() === "1";
+                    s += lessonUsed ? "1" : "0";
+                    s += breakUsed ? "s" : "f";
+                }
+                weekDayTexts[selectedWeekDay] = s;
+                console.log("saveSelectedWeekDay: end, " + weekDays[selectedWeekDay] + " = " + s);
+            }
+
+            function selectWeekDay(f) {
+                var x = decodeWeekDay(f);
+                if (x === selectedWeekDay)
+                    return;
+                console.log("select week day " + x + " ... " + f);
+                if (selectedWeekDay >= 0) {
+                    saveSelectedWeekDay();
+                }
+                selectedWeekDay = x;
+                selectWeekDayFormat(weekDayFormats[selectedWeekDay]);
+                fillWeekDay();
+            }
+
+            function selectWeekDayFormat(x) {
+                if (x === selectedWeekDayFormat)
+                    return;
+                console.log("select week day format" + x);
+                if (selectedWeekDayFormat >= 0) {
+                    weekDayFormats[selectedWeekDay] = selectedWeekDayFormat;
+                }
+                selectedWeekDayFormat = x;
+                fillWeekDayFormat();
+            }
+
+            function clearTimeTable() {
+                selectedWeekDay = -1;
+                selectedWeekDayFormat = -1;
+                timeTable = "";
+                for (var i = 0; i < 7; i++) {
+                    weekDayTexts[i] = "";
+                    weekDayFormats[i] = 0;
+                }
+            }
+
+            function fillWeekDayFormat() {
+                if (selectedWeekDayFormat < 0)
+                    return;
+                selectDay(selectedWeekDayFormat);
+                fillDay();
+            }
+
+            function fillWeekDay() {
+                console.log("fillWeekDay: start ... " + selectedWeekDay);
+                var s;
+                if (selectedWeekDay < 0) {
+                    s = "";
+                    selectedWeekDayFormat = 0;
+                } else {
+                    s = weekDayTexts[selectedWeekDay];
+                    selectedWeekDayFormat = weekDayFormats[selectedWeekDay];
+                }
+                fillWeekDayFormat();
+                $("#tt-weekday").val(weekDays[selectedWeekDay]).selectmenu("refresh");
+                $("#tt-day").val(selectedWeekDayFormat).selectmenu("refresh");
+                console.log("  s = " + s);
+                var count = 0;
+                var pos = 0;
+                var lessonUsed;
+                var breakUsed;
+                var c;
+                while (pos < s.length) {
+                    console.log("  pos = " + pos);
+                    lessonUsed = false;
+                    c = s.charAt(pos++);
+                    if (c === '0')
+                        lessonUsed = false;
+                    else
+                    if (c === '1')
+                        lessonUsed = true;
+                    breakUsed = false;
+                    c = '0';
+                    if (pos < s.length) {
+                        c = s.charAt(pos++);
+                    }
+                    if (c === 'f')
+                        breakUsed = false;
+                    else
+                    if (c === 's')
+                        breakUsed = true;
+                    console.log("      set " + count + ": " + lessonUsed + ",  " + breakUsed);
+                    setTT(count, lessonUsed, breakUsed);
+                    count++;
+                }
+                for (var i = count; i < LESSON_COUNT; i++) {
+                    setTT(i, false, false);
+                }
+                console.log("fillWeekDay: end, count = " + count);
+            }
+
+            function setTT(pos, lessonUsed, breakUsed) {
+                $("#tt-lesson-" + pos).val(lessonUsed ? "on" : "off").slider('refresh');
+                $("#tt-break-" + pos).val(breakUsed ? "1" : "0").slider('refresh');
+            }
+
+            function readTimeTable() {
+                console.log("readTimeTable: start");
+                saveSelectedWeekDay();
+                var res = "";
+                for (var i = 0; i < 7; i++) {
+                    console.log("    day " + i + ": " + weekDays[i]);
+                    if (weekDayTexts[i].length <= 0) {
+                        console.log("       skip");
+                        continue;
+                    }
+                    if (res.length > 0)
+                        res += ",";
+                    res += weekDays[i];
+                    res += ":";
+                    if (weekDayFormats[i] > 0) {
+                        res += "D";
+                        res += weekDayFormats[i];
+                    }
+                    res += weekDayTexts[i];
+                }
+                console.log("readTimeTable: " + res);
+                return res;
+            }
+
+            function setTimeTable(tt) {
+                clearTimeTable();
+                if (tt === null || tt === undefined || tt.length <= 0)
+                    return;
+                console.log("setTimeTable: start ... " + tt);
+                var s = tt;
+                var wd;
+                var d;
+                var pos = 0;
+                var pos1;
+                while (pos < s.length) {
+                    wd = readWeekday(s, pos);
+                    if (wd < 0)
+                        break;
+                    pos += 3;
+                    if (s.length <= pos)
+                        break;
+                    if (s.charAt(pos) === 'D') {
+                        pos++;
+                        d = readNumber(s, pos, 1, -1);
+                        pos++;
+                    } else {
+                        d = 0;
+                    }
+                    if (d < 0) {
+                        break;
+                    }
+                    if (d >= dayCount)
+                        d = 0;
+                    pos1 = pos + 1;
+                    while (pos1 < s.length && s.charAt(pos1) !== ',') {
+                        pos1++;
+                    }
+                    weekDayTexts[wd] = s.substring(pos, pos1);
+                    weekDayFormats[wd] = d;
+                    pos = pos1 + 1;
+                }
+                timeTable = tt;
+                for (var i = 0; i < 7; i++) {
+                    console.log("weekDay " + weekDays[i] + " : Day" + weekDayFormats[i] + " = " + weekDayTexts[i]);
+                }
+                console.log("setTimeTable: end");
+            }
+
+            function readWeekday(s, start) {
+                if (s === null) {
+                    return -1;
+                }
+                if (s.length < start + 3) {
+                    return -1;
+                }
+                if (s.charAt(start + 2) !== ':') {
+                    return -1;
+                }
+                s = s.substring(start, start + 2);
+                var res = decodeWeekDay(s);
+                return res;
+            }
+
+            function decodeWeekDay(f) {
+                var x = -1;
+                for (var i = 0; i < 7; i++)
+                    if (weekDays[i] === f) {
+                        x = i;
+                        break;
+                    }
+                return x;
+            }
+
+            // ----------------------------------------------------------------
+            // day
+
+            function setDayCount(x) {
+                console.log("setDayCount start " + x)
+                if (x < 1)
+                    x = 1;
+                else if (x > DAY_COUNT)
+                    x = DAY_COUNT;
+                if (x === dayCount) {
+                    console.log("setDayCount end, no change " + dayCount)
+                    return;
+                }
+                console.log("setDayCount before " + dayCount)
+                dayCount = x;
+                if (selectedDay >= dayCount)
+                    selectDay(dayCount - 1);
+                for (var i = dayCount; i < DAY_COUNT;
+                        i++
+                        )
+                    dayTexts[i] = "";
+                prepareDaySelector("b-day-select");
+                prepareDaySelector("tt-day");
+                showDays();
+                console.log("setDayCount end " + dayCount)
+            }
+
+            function prepareDaySelector(name) {
+                name = "#" + name;
+                var place = $(name);
+                if (place === null) {
+                    return;
+                }
+                if (place === undefined) {
+                    return;
+                }
+                if (place.length === 0) {
+                    return;
+                }
+                if (place.length > 1) {
+                    return;
+                }
+                var select = place[0];
+                var maxValue = Number(dayCount - 1);
+                var maxFound = -1;
+                var item;
+                var toRemove = [];
+                for (item in select.getElementsByTagName("OPTION")) {
+                    if (item === undefined)
+                        continue;
+                    var e = select[item];
+                    if (e.tagName !== "OPTION") {
+                        continue;
+                    }
+                    var value = Number(e.getAttribute("value"));
+                    if (value > maxValue) {
+                        toRemove.push(value);
+                    } else if (value > maxFound) {
+                        maxFound = value;
+                    }
+                }
+                for (item in toRemove) {
+                    var value = toRemove[item];
+                    place.children("option[value='" + value + "']").detach();
+                }
+                for (var i = maxFound + 1; i <= maxValue; i++) {
+                    $("<option value=\"" + i + "\">Day " + i + "</option>").appendTo(place);
+                }
+                if (isReady)
+                    $(name).selectmenu("refresh");
+            }
+
+            function saveSelectedDay() {
+                if (selectedDay >= 0) {
+                    console.log("save previous selected day " + selectedDay);
+                    encodeDaySpec();
+                    dayTexts[selectedDay] = selectedDayText;
+                    showDays();
+                }
+            }
+
+            function selectDay(x) {
+                if (x === selectedDay)
+                    return;
+                console.log("select day " + x);
+                if (selectedDay >= 0) {
+                    saveSelectedDay();
+                }
+                selectedDay = x;
+                if (selectedDay >= 0)
+                    selectedDayText = dayTexts[selectedDay];
+                else
+                    selectedDayText = "";
+                if (!isReady) {
+                    console.log("... not ready");
+                    return;
+                }
+                $("#b-day-select").val(x);
+                decodeDaySpec();
+                fillDay();
+            }
+
+            function encodeDaySpec() {
+                console.log("encodeDaySpec: start");
+                var time = readDayStart();
+                var s = timeToString(time, null);
+                for (var i = 0; i < LESSON_COUNT; i++) {
+                    s += $("#day-lesson-" + i).val();
+                    s += $("#day-break-" + i).val();
+                }
+                selectedDayText = s;
+            }
+
+            function decodeDaySpec() {
+                console.log("decodeDaySpec(" + selectedDayText + "): start");
+                var s = selectedDayText;
+                setDayStart(0, 0);
+                for (var i = 0; i < LESSON_COUNT; i++) {
+                    setDayInfo(i, 'N', defaultBreakLength);
+                }
+                if (s === null || s.length <= 0) {
+                    // TODO none yet => clear to defaults
+                    return;
+                }
+                var hour = readNumber(s, 0, 2, -1);
+                console.log("hour = " + hour);
+                var minute = readNumber(s, 2, 2, -1);
+                console.log("minute = " + minute);
+                if (hour < 0 || minute < 0)
+                    return;
+                setDayStart(hour, minute);
+                var pos = 4;
+                var numLen;
+                var len = s.length;
+                for (var i = 0; i < LESSON_COUNT; i++) {
+                    if (pos >= len)
+                        break;
+                    var c = s.charAt(pos);
+                    pos++;
+                    numLen = findNumber(s, pos);
+                    if (numLen < 0)
+                        break;
+                    var n = readNumber(s, pos, numLen, -1);
+                    pos += numLen;
+                    setDayInfo(i, c, n);
+                }
+                console.log("decodeDaySpec(" + selectedDayText + "): end");
+            }
+
+            function setDayInfo(i, lesson, breakLen) {
+                $("#day-lesson-" + i).val(lesson).selectmenu("refresh");
+                $("#day-break-" + i).val(breakLen).selectmenu("refresh");
+            }
+
+            function findNumber(s, start) {
+                if (s === null) {
+                    return -1;
+                }
+                if (s.length <= start) {
+                    return -1;
+                }
+                var res = start;
+                while (s.length > res) {
+                    var c = s.charAt(res);
+                    if (c < '0' || c > '9')
+                        break;
+                    res++;
+                }
+                if (res <= start)
+                    return -1;
+                return res - start;
+            }
+
+            function readNumber(s, start, len, def) {
+                //console.log("readNumber(" + s + "," + start + "," + len + "," + def + "): start");
+                if (s === null) {
+                    //console.log("   ... null");
+                    return def;
+                }
+                if (s.length < start + len) {
+                    //console.log("   ... short");
+                    return def;
+                }
+                s = s.substring(start, start + len);
+                //console.log("   ... s = \"" + s + "\"");
+                var res = Number(s);
+                return res;
+            }
+
+            function timeToString(time, separator) {
+                var s = "";
+                var h = Math.floor(time / 60);
+                var m = time % 60;
+                if (h < 10)
+                    s += "0";
+                s += h;
+                if (separator !== null)
+                    s += separator;
+                if (m < 10)
+                    s += "0";
+                s += m;
+                return s;
+            }
+
+            function writeTime(time, part, n) {
+                var id = "#" + part + "-" + n;
+                var s = timeToString(time, ":");
+                //console.log("writeTime(" + time + ") ... " + h + " / " + m + " = " + s);
+                $(id).text(s);
+            }
+
+            function lessonLength(n) {
+                var id = "#day-lesson-" + n;
+                var s = $(id).val();
+//                console.log("lesson " + id + " = " + s);
+                if (s === "N")
+                    return lessonNormal;
+                else
+                    return lessonLong;
+            }
+
+            function breakLength(n) {
+                var id = "#day-break-" + n;
+                var s = Number($(id).val());
+//                console.log("break " + id + " = " + s);
+                return s;
+            }
+
+            function setDayStart(h, m) {
+                console.log("setDayStart(" + h + "," + m + ") ...");
+                $("#day-start-h").val(String(h)).selectmenu("refresh");
+                $("#day-start-m").val(String(m)).selectmenu("refresh");
+                readDayStart();
+                console.log(" ... setDayStart(" + dayStartHour + "," + dayStartMinute + ")");
+            }
+
+            function readDayStart() {
+                dayStartHour = Number($("#day-start-h").val());
+                dayStartMinute = Number($("#day-start-m").val());
+                var time = dayStartHour * 60 + dayStartMinute;
+                return time;
+            }
+
+            function fillDay() {
+                var time = readDayStart();
+                for (var i = 0; i < 10; i++) {
+                    writeTime(time, "day-start-lesson", i);
+                    writeTime(time, "tt-start", i);
+                    time += lessonLength(i);
+                    writeTime(time, "day-end-lesson", i);
+                    writeTime(time, "tt-end", i);
+                    time += breakLength(i);
+                }
+            }
+
+            function showDays() {
+                for (var i = 0; i < 5; i++) {
+                    console.log("day" + i + " = " + dayTexts[i])
+                    $("[name=display-day" + i + "]").val(dayTexts[i]);
+                }
+            }
+
+            // ----------------------------------------------------------------
+            // lessons
+
+            function readLessons() {
+                lessonNormal = Number($("#lesson1").val());
+                lessonLong = Number($("#lesson2").val());
+                var res = "" + lessonNormal;
+                if (lessonLong !== null && lessonLong > lessonNormal) {
+                    res += "," + lessonLong;
+                }
+                return res;
+            }
+
+            function setLessons(s) {
+                console.log("setLessons(" + s + ")");
+                var a = s.split(",");
+                var l1 = Number(a[0]);
+                console.log("setLessons(" + s + "): l1 = " + l1);
+                if (l1 < 15) {
+                    l1 = 15;
+                    console.log("setLessons(" + s + "): l1 := " + l1);
+                }
+                var l2;
+                if (a.length === 2) {
+                    l2 = Number(a[1]);
+                    console.log("setLessons(" + s + "): l2 = " + l2);
+                } else {
+                    l2 = l1 * 2;
+                    console.log("setLessons(" + s + "): l2 := " + l2);
+                    if (l2 > 120) {
+                        l2 = 120;
+                        console.log("setLessons(" + s + "): l2 := " + l2);
+                    }
+                }
+                if (l2 < l1) {
+                    l2 = l1;
+                    console.log("setLessons(" + s + "): l2 := " + l2);
+                }
+                $("#lesson1").val(l1);
+                try {
+                    $("#lesson1").slider("refresh");
+                } catch (e) {
+                }
+                $("#lesson2").val(l2);
+                try {
+                    $("#lesson2").slider("refresh");
+                } catch (e) {
+                }
+                readLessons();
+            }
+
+            // ----------------------------------------------------------------
+            // end
+        </script>
+    </body>
+</html>

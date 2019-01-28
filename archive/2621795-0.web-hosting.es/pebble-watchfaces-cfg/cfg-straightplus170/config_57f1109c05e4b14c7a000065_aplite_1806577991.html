@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {background-color:Gold}
+      p    {
+        color:DarkGoldenRod;
+        font-size:100%;
+      }
+      h1   {color:GoldenRod}
+      h2   {color:White}
+      h3  {
+        color:DimGray;
+        font-size:100%;
+      }
+      h4  {
+        color:Black;
+        font-size:110%;
+      }
+      button  {
+        font-size:200%;
+      }
+      button.boton2 {
+        font-size:100%;
+      }
+      select  {
+        color:Black;
+        font-size:100%;
+      }
+      input  {
+        color:Black;
+        font-size:100%;
+      }
+      a   {
+        font-size:100%;
+      }
+    </style>  
+  
+    <title>STRAIGHT PLUS settings</title>
+    <script src="/2621795-0.web-hosting.es/pebble-watchfaces-cfg/js/jquery-2.js"></script>
+  </head>
+  <body>
+    <div>
+      <h1>STRAIGHT PLUS Watchface (v1.70)</h1>
+      <h2>SETTINGS</h2>
+   
+      <h4>THEME
+      <select id="color_theme_o">
+        <option value="0">(STR)Elegant cyan</option>
+        <option value="1">(STR)Vivid blue</option>
+        <option value="2">(STR)Passion red</option>
+        <option value="3">(STR)Military green</option>
+        <option value="4">(STR)Deep purple</option>
+        <option value="5">(STR)Nature green</option>
+        <option value="6">(STR)Colorless gray</option>
+        <option value="7">(STR)BW tribute</option>
+        <option value="8">(STR)Tough pink</option>
+        <option value="9">(FRU)Orange juice</option>
+        <option value="10">(FRU)Fresh watermelon</option>
+        <option value="11">(FRU)Fresh melon</option>
+        <option value="12">(VAR)Radioctive green</option>
+        <option value="13">(VAR)Flying sky</option>
+        <option value="14">(VAR)Violet paint touch</option>
+        <option value="15">(VAR)Miami vice</option>
+        <option value="16">(BLH)Water black hole</option>
+        <option value="17">(BLH)Gold black hole</option>
+        <option value="18">(BLH)Love black hole</option>
+        <option value="19">(BLH)Orange black hole</option>
+        <option value="20">(BLH)Grass black hole</option>
+        <option value="21">(PWN)Owned by Blue</option>
+        <option value="22">(PWN)Owned by Red</option>
+        <option value="23">(PWN)Owned Black-red</option>
+        <option value="24">(PWN)Owned by White</option>
+        <option value="25">(PWN)Owned by Yellow</option>
+        <option value="26">(PWN)Owned by Green</option>
+        <option value="27">(PWN)Owned by Purple</option>
+        <option value="28">(PWN)Owned by Cyan</option>
+        <option value="29">(PWN)Owned Black-cyan</option>
+        <option value="30">(PWN)Owned Black-yellow</option>
+        <option value="31">(PWN)Owned Black-c-y</option>
+        <option value="32">(PWN)Owned by Orange</option>
+        <option value="33">(PWN)Owned Black-white</option>
+        <option value="34">(PWN)Owned Black-green</option>
+        <option value="35">(PWN)Owned Black-orange</option>
+        <option value="36">(PWN)Owned Black-purple</option>
+        <option value="37">(PWN)Owned Blk-R-Orange</option>
+        <option value="38">(PWN)Owned Blk-R-Blue</option>
+        <option value="39">(BLH)Blue black hole</option>
+        <option value="40">(666)Number of beast</option>
+        <option value="41">(PWN)Owned by DarkRed</option>
+        <option value="42">(PWN)Owned by DarkCyan</option>
+        <option value="43">(NEW)Dark blue-cyan</option>
+        <option value="44">(NEW)Black-magenta</option>
+        <option value="45">(NEW)Dark red-white</option>
+        <option value="46">(NEW)Dark blue-orange</option>
+        <option value="47">(NEW)Black-yellow-mag</option>
+        <option value="48">(NEW)Yellow-Gold</option>
+        <option value="98">COLOR WEATHER</option>
+        <option value="99">RANDOM (All themes)</option>
+        <option value="100">RANDOM (Selected below)</option>
+      </select>
+      </h4>
+      <p>&nbsp; &nbsp; *COLOR WEATHER theme is a 2-color weather coding based on my COLOR WEATHER Watchface</p>
+   
+      <h4>SWAP Up/Down Colors
+      <select id="color3_o">
+        <option value="10">No</option>
+        <option value="20">Yes</option>
+      </select>
+      </h4>
+      
+      <h4>DETAILS STYLE
+      <select id="look_style_o">
+        <option value="0">Original design</option>
+        <option value="1">Minimalism lover</option>
+        <option value="2">Weather fanatic</option>
+        <option value="3">Minimalism but date</option>
+        <option value="4">Maximal Temp and date</option>
+        <option value="5">Wind-full and date</option>
+        <option value="6">Humidity and date</option>
+        <option value="7">Location and date</option>
+        <option value="8">Wind-speed and date</option>
+        <option value="9">Step count and date</option>
+        <option value="10">Walked and date</option>
+        <option value="11">KCalories and date</option>
+        <option value="12">Heart rate and date</option>
+        <option value="13">Kstep count and date</option>
+        <option value="20">FITNESS and date</option>
+      </select>
+      </h4>
+
+      <h4>Weather icons style
+      <select id="wico_style_o">
+        <option value="80">AUTO SELECTION</option>
+        <option value="0">Default</option>
+        <option value="2">Default no stroke</option>
+        <option value="1">RED theme</option>
+        <option value="4">DARK theme</option>
+        <option value="3">CYAN theme</option>
+        <option value="5">YELLOW theme</option>
+        <option value="6">YELLOW-CYAN theme</option>
+        <option value="7">REAL theme</option>
+        <option value="8">MAGENTA theme</option>
+        <option value="9">WHITE theme</option>
+        <option value="10">LIGHT RED theme</option>
+        <option value="11">BLUE theme</option>
+        <option value="12">ORANGE theme</option>
+      </select>
+      </h4>
+      
+      <h4>Show Battery bar
+      <select id="battery_bar_o">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+        <option value="50">Only if <= 50% charge</option>
+        <option value="40">Only if <= 40% charge</option>
+        <option value="30">Only if <= 30% charge</option>
+        <option value="20">Only if <= 20% charge</option>
+      </select>
+      </h4>
+   
+      <h4>Date style
+      <select id="day_month_order">
+        <option value="10">Day.Month (eg. 23.02)</option>
+        <option value="1">Month.Day (eg. 02.23)</option>
+        <option value="2">DayWeek Day (eg. MON 23)</option>
+        <option value="62">DaWeek Day (eg. MO 23)</option>
+        <option value="72">DWeek Day (eg. M 23)</option>
+        <option value="3">Day (eg. 23)</option>
+        <option value="5">Month Day (eg. FEB 23)</option>
+      </select>
+      </h4>
+      
+      <p align="center">
+      <button id="save_up_button" onclick="submitValues()">SAVE</button>
+      </p>
+   
+      <h4>Font style
+      <select id="font_style_o">
+        <option value="0">Thin straight</option>
+        <option value="1">Cool straight</option>
+        <option value="2">Tall straight</option>
+        <option value="3">Curved straight</option>
+      </select>
+      </h4>
+
+      <h4>Selected themes for Random/Shake
+      <select multiple="" id="random_theme_o">
+        <option value="0">(STR)Elegant cyan</option>
+        <option value="1">(STR)Vivid blue</option>
+        <option value="2">(STR)Passion red</option>
+        <option value="3">(STR)Military green</option>
+        <option value="4">(STR)Deep purple</option>
+        <option value="5">(STR)Nature green</option>
+        <option value="6">(STR)Colorless gray</option>
+        <option value="7">(STR)BW tribute</option>
+        <option value="8">(STR)Tough pink</option>
+        <option value="9">(FRU)Orange juice</option>
+        <option value="10">(FRU)Fresh watermelon</option>
+        <option value="11">(FRU)Fresh melon</option>
+        <option value="12">(VAR)Radioctive green</option>
+        <option value="13">(VAR)Flying sky</option>
+        <option value="14">(VAR)Violet paint touch</option>
+        <option value="15">(VAR)Miami vice</option>
+        <option value="16">(BLH)Water black hole</option>
+        <option value="17">(BLH)Gold black hole</option>
+        <option value="18">(BLH)Love black hole</option>
+        <option value="19">(BLH)Orange black hole</option>
+        <option value="20">(BLH)Grass black hole</option>
+        <option value="21">(PWN)Owned by Blue</option>
+        <option value="22">(PWN)Owned by Red</option>
+        <option value="23">(PWN)Owned Black-red</option>
+        <option value="24">(PWN)Owned by White</option>
+        <option value="25">(PWN)Owned by Yellow</option>
+        <option value="26">(PWN)Owned by Green</option>
+        <option value="27">(PWN)Owned by Purple</option>
+        <option value="28">(PWN)Owned by Cyan</option>
+        <option value="29">(PWN)Owned Black-cyan</option>
+        <option value="30">(PWN)Owned Black-yellow</option>
+        <option value="31">(PWN)Owned Black-c-y</option>
+        <option value="32">(PWN)Owned by Orange</option>
+        <option value="33">(PWN)Owned Black-white</option>
+        <option value="34">(PWN)Owned Black-green</option>
+        <option value="35">(PWN)Owned Black-orange</option>
+        <option value="36">(PWN)Owned Black-purple</option>
+        <option value="37">(PWN)Owned Blk-R-Orange</option>
+        <option value="38">(PWN)Owned Blk-R-Blue</option>
+        <option value="39">(BLH)Blue black hole</option>
+        <option value="40">(666)Number of beast</option>
+        <option value="41">(PWN)Owned by DarkRed</option>
+        <option value="42">(PWN)Owned by DarkCyan</option>
+        <option value="43">(NEW)Dark blue-cyan</option>
+        <option value="44">(NEW)Black-magenta</option>
+        <option value="45">(NEW)Dark red-white</option>
+        <option value="46">(NEW)Dark blue-orange</option>
+        <option value="47">(NEW)Black-yellow-mag</option>
+        <option value="48">(NEW)Yellow-Gold</option>
+      </select>
+      </h4>
+      
+      <h4>Random frequency
+      <select id="random_time_o">
+        <option value="1">1 minute</option>
+        <option value="5">5 minutes</option>
+        <option value="10">10 minutes</option>
+        <option value="15">15 minutes</option>
+        <option value="30">30 minutes</option>
+        <option value="60">60 minutes</option>
+      </select>
+      </h4>
+   
+      <h4>Weather units
+      <select id="temperature_unit">
+        <option value="C">Celsius</option>
+        <option value="F">Fahrenheit</option>
+      </select>
+      </h4>
+   
+      <h4>Wind speed units
+      <select id="wind_unit">
+        <option value="K">Km/h</option>
+        <option value="M">mi/h (mph)</option>
+      </select>
+      </h4>
+   
+      <h4>Distance units
+      <select id="walk_unit">
+        <option value="K">kilometers</option>
+        <option value="M">miles</option>
+      </select>
+      </h4>
+   
+      <h4>STEP GOAL
+      <select id="flag1_o">
+        <option value="0">Disable step goal bar</option>
+        <option value="1">5000</option>
+        <option value="2">10000</option>
+        <option value="3">15000</option>
+        <option value="4">20000</option>
+        <option value="6">30000</option>
+      </select>
+      </h4>
+
+      <h4>Shake for
+      <select id="shake_for_o">
+        <option value="0">Do nothing</option>
+        <option value="1">Change to next selected theme</option>
+      </select>
+      </h4>
+   
+      <h4>Vibration on Disconnect
+      <select id="btdiscvibes">
+        <option value="false">No</option>
+        <option value="true">Yes</option>
+      </select>
+      </h4>
+   
+      <h4>Hourly vibration
+      <select id="flag3_o">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      </h4>
+   
+      <h4>NIGHT THEME
+      <select id="color4_o">
+        <option value="0">(STR)Elegant cyan</option>
+        <option value="1">(STR)Vivid blue</option>
+        <option value="2">(STR)Passion red</option>
+        <option value="3">(STR)Military green</option>
+        <option value="4">(STR)Deep purple</option>
+        <option value="5">(STR)Nature green</option>
+        <option value="6">(STR)Colorless gray</option>
+        <option value="7">(STR)BW tribute</option>
+        <option value="8">(STR)Tough pink</option>
+        <option value="9">(FRU)Orange juice</option>
+        <option value="10">(FRU)Fresh watermelon</option>
+        <option value="11">(FRU)Fresh melon</option>
+        <option value="12">(VAR)Radioctive green</option>
+        <option value="13">(VAR)Flying sky</option>
+        <option value="14">(VAR)Violet paint touch</option>
+        <option value="15">(VAR)Miami vice</option>
+        <option value="16">(BLH)Water black hole</option>
+        <option value="17">(BLH)Gold black hole</option>
+        <option value="18">(BLH)Love black hole</option>
+        <option value="19">(BLH)Orange black hole</option>
+        <option value="20">(BLH)Grass black hole</option>
+        <option value="21">(PWN)Owned by Blue</option>
+        <option value="22">(PWN)Owned by Red</option>
+        <option value="23">(PWN)Owned Black-red</option>
+        <option value="24">(PWN)Owned by White</option>
+        <option value="25">(PWN)Owned by Yellow</option>
+        <option value="26">(PWN)Owned by Green</option>
+        <option value="27">(PWN)Owned by Purple</option>
+        <option value="28">(PWN)Owned by Cyan</option>
+        <option value="29">(PWN)Owned Black-cyan</option>
+        <option value="30">(PWN)Owned Black-yellow</option>
+        <option value="31">(PWN)Owned Black-c-y</option>
+        <option value="32">(PWN)Owned by Orange</option>
+        <option value="33">(PWN)Owned Black-white</option>
+        <option value="34">(PWN)Owned Black-green</option>
+        <option value="35">(PWN)Owned Black-orange</option>
+        <option value="36">(PWN)Owned Black-purple</option>
+        <option value="37">(PWN)Owned Blk-R-Orange</option>
+        <option value="38">(PWN)Owned Blk-R-Blue</option>
+        <option value="39">(BLH)Blue black hole</option>
+        <option value="40">(666)Number of beast</option>
+        <option value="41">(PWN)Owned by DarkRed</option>
+        <option value="42">(PWN)Owned by DarkCyan</option>
+        <option value="43">(NEW)Dark blue-cyan</option>
+        <option value="44">(NEW)Black-magenta</option>
+        <option value="45">(NEW)Dark red-white</option>
+        <option value="46">(NEW)Dark blue-orange</option>
+        <option value="47">(NEW)Black-yellow-mag</option>
+        <option value="48">(NEW)Yellow-Gold</option>
+        <option value="98">COLOR WEATHER</option>
+      </select>
+      </h4>
+      
+      <h4>When use night theme
+      <select id="flag2_o">
+        <option value="0">NEVER</option>
+        <option value="10">From 18:00 to 6:00</option>
+        <option value="11">From 18:00 to 7:00</option>
+        <option value="12">From 18:00 to 8:00</option>
+        <option value="1">From 19:00 to 6:00</option>
+        <option value="2">From 19:00 to 7:00</option>
+        <option value="3">From 19:00 to 8:00</option>
+        <option value="4">From 20:00 to 7:00</option>
+        <option value="5">From 20:00 to 8:00</option>
+        <option value="6">From 20:00 to 9:00</option>
+        <option value="7">From 21:00 to 7:00</option>
+        <option value="8">From 21:00 to 8:00</option>
+        <option value="9">From 21:00 to 9:00</option>
+        <option value="13">From 22:00 to 6:00</option>
+        <option value="14">From 22:00 to 7:00</option>
+        <option value="15">From 22:00 to 8:00</option>
+      </select>
+      </h4>
+      
+      <h4 id="head_gps_loc">Weather location (Blank for auto detect)
+      <input type="text" id="gps_location_o">
+      </h4>
+      <p id="p_gps_loc">&nbsp; &nbsp; ZipCode,CountryCode or City,Country *Examples: 08031,es or Barcelona,ES</p>
+
+      <p align="center">
+      <button id="save_down_button" onclick="submitValues()">SAVE</button>
+      </p>
+     
+      <h4>CUSTOM THEME COLORS
+      </h4><h3>ENABLE CUSTOM?
+      <select id="user0_o">
+        <option value="00">No</option>
+        <option value="01">Yes</option>
+        <option value="02">Except night theme</option>
+      </select>
+      </h3>
+      
+      <p align="left">
+      <button class="boton2" id="default_colors" onclick="defaultColors()">DEFAULT ALL</button>
+      </p>
+     
+      <h3>UPPER COLOR
+      <select id="user11_o">
+        <option value="00">*Theme DEFAULT*</option>
+        <option value="62">*Linked to Down*</option>
+        <option value="01">BLACK</option>
+        <option value="02">WHITE</option>
+        <option value="03">GRAY dark</option>
+        <option value="04">GRAY light</option>
+        <option value="05">BLUE veryDark</option>
+        <option value="06">BLUE dark</option>
+        <option value="07">BLUE</option>
+        <option value="08">BLUE medium</option>
+        <option value="09">BLUE light</option>
+        <option value="10">CYAN dark</option>
+        <option value="11">CYAN</option>
+        <option value="12">PURPLE dark</option>
+        <option value="13">PURPLE</option>
+        <option value="14">MAGENTA</option>
+        <option value="15">RED veryDark</option>
+        <option value="16">RED dark</option>
+        <option value="17">RED</option>
+        <option value="18">RED light</option>
+        <option value="19">ORANGE</option>
+        <option value="20">ORANGE light</option>
+        <option value="21">GREEN dark</option>
+        <option value="22">GREEN medium</option>
+        <option value="23">GREEN</option>
+        <option value="24">GREEN army</option>
+        <option value="25">YELLOW</option>
+        <option value="26">YELLOW light</option>
+        <option value="27">GOLD</option>
+        <option value="28">BROWN</option>
+      </select>
+      </h3>
+      <h3>DOWN COLOR
+      <select id="user12_o">
+        <option value="00">*Theme DEFAULT*</option>
+        <option value="61">*Linked to Upper*</option>
+        <option value="01">BLACK</option>
+        <option value="02">WHITE</option>
+        <option value="03">GRAY dark</option>
+        <option value="04">GRAY light</option>
+        <option value="05">BLUE veryDark</option>
+        <option value="06">BLUE dark</option>
+        <option value="07">BLUE</option>
+        <option value="08">BLUE medium</option>
+        <option value="09">BLUE light</option>
+        <option value="10">CYAN dark</option>
+        <option value="11">CYAN</option>
+        <option value="12">PURPLE dark</option>
+        <option value="13">PURPLE</option>
+        <option value="14">MAGENTA</option>
+        <option value="15">RED veryDark</option>
+        <option value="16">RED dark</option>
+        <option value="17">RED</option>
+        <option value="18">RED light</option>
+        <option value="19">ORANGE</option>
+        <option value="20">ORANGE light</option>
+        <option value="21">GREEN dark</option>
+        <option value="22">GREEN medium</option>
+        <option value="23">GREEN</option>
+        <option value="24">GREEN army</option>
+        <option value="25">YELLOW</option>
+        <option value="26">YELLOW light</option>
+        <option value="27">GOLD</option>
+        <option value="28">BROWN</option>
+      </select>
+      </h3>
+      <h3>HOUR TEXT
+      <select id="user2_o">
+        <option value="00">*Theme DEFAULT*</option>
+        <option value="55">*Linked to Weather*</option>
+        <option value="01">BLACK</option>
+        <option value="02">WHITE</option>
+        <option value="03">GRAY dark</option>
+        <option value="04">GRAY light</option>
+        <option value="05">BLUE veryDark</option>
+        <option value="06">BLUE dark</option>
+        <option value="07">BLUE</option>
+        <option value="08">BLUE medium</option>
+        <option value="09">BLUE light</option>
+        <option value="10">CYAN dark</option>
+        <option value="11">CYAN</option>
+        <option value="12">PURPLE dark</option>
+        <option value="13">PURPLE</option>
+        <option value="14">MAGENTA</option>
+        <option value="15">RED veryDark</option>
+        <option value="16">RED dark</option>
+        <option value="17">RED</option>
+        <option value="18">RED light</option>
+        <option value="19">ORANGE</option>
+        <option value="20">ORANGE light</option>
+        <option value="21">GREEN dark</option>
+        <option value="22">GREEN medium</option>
+        <option value="23">GREEN</option>
+        <option value="24">GREEN army</option>
+        <option value="25">YELLOW</option>
+        <option value="26">YELLOW light</option>
+        <option value="27">GOLD</option>
+        <option value="28">BROWN</option>
+      </select>
+      </h3>
+      <h3>DATE TEXT
+      <select id="user4_o">
+        <option value="00">*Theme DEFAULT*</option>
+        <option value="01">BLACK</option>
+        <option value="02">WHITE</option>
+        <option value="03">GRAY dark</option>
+        <option value="04">GRAY light</option>
+        <option value="05">BLUE veryDark</option>
+        <option value="06">BLUE dark</option>
+        <option value="07">BLUE</option>
+        <option value="08">BLUE medium</option>
+        <option value="09">BLUE light</option>
+        <option value="10">CYAN dark</option>
+        <option value="11">CYAN</option>
+        <option value="12">PURPLE dark</option>
+        <option value="13">PURPLE</option>
+        <option value="14">MAGENTA</option>
+        <option value="15">RED veryDark</option>
+        <option value="16">RED dark</option>
+        <option value="17">RED</option>
+        <option value="18">RED light</option>
+        <option value="19">ORANGE</option>
+        <option value="20">ORANGE light</option>
+        <option value="21">GREEN dark</option>
+        <option value="22">GREEN medium</option>
+        <option value="23">GREEN</option>
+        <option value="24">GREEN army</option>
+        <option value="25">YELLOW</option>
+        <option value="26">YELLOW light</option>
+        <option value="27">GOLD</option>
+        <option value="28">BROWN</option>
+      </select>
+      </h3>
+      <h3>WEATHER TEXT
+      <select id="user5_o">
+        <option value="00">*Theme DEFAULT*</option>
+        <option value="52">*Linked to Hour*</option>
+        <option value="01">BLACK</option>
+        <option value="02">WHITE</option>
+        <option value="03">GRAY dark</option>
+        <option value="04">GRAY light</option>
+        <option value="05">BLUE veryDark</option>
+        <option value="06">BLUE dark</option>
+        <option value="07">BLUE</option>
+        <option value="08">BLUE medium</option>
+        <option value="09">BLUE light</option>
+        <option value="10">CYAN dark</option>
+        <option value="11">CYAN</option>
+        <option value="12">PURPLE dark</option>
+        <option value="13">PURPLE</option>
+        <option value="14">MAGENTA</option>
+        <option value="15">RED veryDark</option>
+        <option value="16">RED dark</option>
+        <option value="17">RED</option>
+        <option value="18">RED light</option>
+        <option value="19">ORANGE</option>
+        <option value="20">ORANGE light</option>
+        <option value="21">GREEN dark</option>
+        <option value="22">GREEN medium</option>
+        <option value="23">GREEN</option>
+        <option value="24">GREEN army</option>
+        <option value="25">YELLOW</option>
+        <option value="26">YELLOW light</option>
+        <option value="27">GOLD</option>
+        <option value="28">BROWN</option>
+      </select>
+      </h3>
+      <h3>DETAIL TEXT
+      <select id="user6_o">
+        <option value="00">*Theme DEFAULT*</option>
+        <option value="01">BLACK</option>
+        <option value="02">WHITE</option>
+        <option value="03">GRAY dark</option>
+        <option value="04">GRAY light</option>
+        <option value="05">BLUE veryDark</option>
+        <option value="06">BLUE dark</option>
+        <option value="07">BLUE</option>
+        <option value="08">BLUE medium</option>
+        <option value="09">BLUE light</option>
+        <option value="10">CYAN dark</option>
+        <option value="11">CYAN</option>
+        <option value="12">PURPLE dark</option>
+        <option value="13">PURPLE</option>
+        <option value="14">MAGENTA</option>
+        <option value="15">RED veryDark</option>
+        <option value="16">RED dark</option>
+        <option value="17">RED</option>
+        <option value="18">RED light</option>
+        <option value="19">ORANGE</option>
+        <option value="20">ORANGE light</option>
+        <option value="21">GREEN dark</option>
+        <option value="22">GREEN medium</option>
+        <option value="23">GREEN</option>
+        <option value="24">GREEN army</option>
+        <option value="25">YELLOW</option>
+        <option value="26">YELLOW light</option>
+        <option value="27">GOLD</option>
+        <option value="28">BROWN</option>
+      </select>
+      </h3>
+      <h3>STEP GOAL BAR
+      <select id="user7_o">
+        <option value="00">*Theme DEFAULT*</option>
+        <option value="01">BLACK</option>
+        <option value="02">WHITE</option>
+        <option value="03">GRAY dark</option>
+        <option value="04">GRAY light</option>
+        <option value="05">BLUE veryDark</option>
+        <option value="06">BLUE dark</option>
+        <option value="07">BLUE</option>
+        <option value="08">BLUE medium</option>
+        <option value="09">BLUE light</option>
+        <option value="10">CYAN dark</option>
+        <option value="11">CYAN</option>
+        <option value="12">PURPLE dark</option>
+        <option value="13">PURPLE</option>
+        <option value="14">MAGENTA</option>
+        <option value="15">RED veryDark</option>
+        <option value="16">RED dark</option>
+        <option value="17">RED</option>
+        <option value="18">RED light</option>
+        <option value="19">ORANGE</option>
+        <option value="20">ORANGE light</option>
+        <option value="21">GREEN dark</option>
+        <option value="22">GREEN medium</option>
+        <option value="23">GREEN</option>
+        <option value="24">GREEN army</option>
+        <option value="25">YELLOW</option>
+        <option value="26">YELLOW light</option>
+        <option value="27">GOLD</option>
+        <option value="28">BROWN</option>
+      </select>
+      </h3>
+      <h3>BATTERY BAR
+      <select id="user8_o">
+        <option value="00">*Theme DEFAULT*</option>
+        <option value="52">*Linked to Hour*</option>
+        <option value="01">BLACK</option>
+        <option value="02">WHITE</option>
+        <option value="03">GRAY dark</option>
+        <option value="04">GRAY light</option>
+        <option value="05">BLUE veryDark</option>
+        <option value="06">BLUE dark</option>
+        <option value="07">BLUE</option>
+        <option value="08">BLUE medium</option>
+        <option value="09">BLUE light</option>
+        <option value="10">CYAN dark</option>
+        <option value="11">CYAN</option>
+        <option value="12">PURPLE dark</option>
+        <option value="13">PURPLE</option>
+        <option value="14">MAGENTA</option>
+        <option value="15">RED veryDark</option>
+        <option value="16">RED dark</option>
+        <option value="17">RED</option>
+        <option value="18">RED light</option>
+        <option value="19">ORANGE</option>
+        <option value="20">ORANGE light</option>
+        <option value="21">GREEN dark</option>
+        <option value="22">GREEN medium</option>
+        <option value="23">GREEN</option>
+        <option value="24">GREEN army</option>
+        <option value="25">YELLOW</option>
+        <option value="26">YELLOW light</option>
+        <option value="27">GOLD</option>
+        <option value="28">BROWN</option>
+      </select>
+      </h3>
+      <h3>SEPARATOR
+      <select id="user13_o">
+        <option value="00">*Theme DEFAULT*</option>
+        <option value="52">*Linked to Hour*</option>
+        <option value="01">BLACK</option>
+        <option value="02">WHITE</option>
+        <option value="03">GRAY dark</option>
+        <option value="04">GRAY light</option>
+        <option value="05">BLUE veryDark</option>
+        <option value="06">BLUE dark</option>
+        <option value="07">BLUE</option>
+        <option value="08">BLUE medium</option>
+        <option value="09">BLUE light</option>
+        <option value="10">CYAN dark</option>
+        <option value="11">CYAN</option>
+        <option value="12">PURPLE dark</option>
+        <option value="13">PURPLE</option>
+        <option value="14">MAGENTA</option>
+        <option value="15">RED veryDark</option>
+        <option value="16">RED dark</option>
+        <option value="17">RED</option>
+        <option value="18">RED light</option>
+        <option value="19">ORANGE</option>
+        <option value="20">ORANGE light</option>
+        <option value="21">GREEN dark</option>
+        <option value="22">GREEN medium</option>
+        <option value="23">GREEN</option>
+        <option value="24">GREEN army</option>
+        <option value="25">YELLOW</option>
+        <option value="26">YELLOW light</option>
+        <option value="27">GOLD</option>
+        <option value="28">BROWN</option>
+      </select>
+      </h3>
+      
+      
+      <br>
+      <p align="center">
+      <button id="save_button" onclick="submitValues()">SAVE</button>
+      </p>
+
+      <br>
+      <br>
+      <hr color="White">
+      <p align="center"><a style="font-family: verdana; font-size: 130%; font-weight: bold;" href="/dp-watchfaces.com//_634240805.html" target="_blank">dP-watchfaces.com</a></p>
+    </div>
+  
+    <script>
+      function getQueryParam(variable, defaultValue) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (pair[0] === variable) {
+            return decodeURIComponent(pair[1]);
+          }
+        }
+        return defaultValue || false;
+      }
+      
+      function getUrlParameter(sParam) {
+        var sPageURL = window.location.search.substring(1);
+        var sURLVariables = sPageURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+          var sParameterName = sURLVariables[i].split('=');
+          if (sParameterName[0] == sParam) {
+            return sParameterName[1];
+          }
+        }
+        return "null";
+      }
+      
+      function defaultColors() {
+        var uc = document.getElementById("user0_o");
+        
+        for (var i = 1; i <= 14; i++) {
+          uc = document.getElementById("user"+i+"_o");
+          if (uc != null)
+            uc.selectedIndex = 0;
+        }       
+      }
+      
+      function getUserColors() {
+        var usercolors = "";
+        var uc = document.getElementById("user0_o");
+        
+        for (var i = 0; i <= 14; i++) {
+          uc = document.getElementById("user"+i+"_o");
+          if (uc != null)
+            usercolors = usercolors + uc.options[uc.selectedIndex].value;
+          else
+            usercolors = usercolors + '00';
+        }
+        return usercolors;
+      }
+
+      function saveOptions() {
+        var temperatureUnit = document.getElementById("temperature_unit");
+        var btdiscvibes     = document.getElementById("btdiscvibes");
+        var dayMonthOrder   = document.getElementById("day_month_order");
+        var basalttheme     = document.getElementById("color_theme_o");
+        var fontstyle       = document.getElementById("font_style_o");
+        var randomtheme     = document.getElementById("random_theme_o");
+        var randomtime      = document.getElementById("random_time_o");
+        var lookstyle       = document.getElementById("look_style_o");
+        var gpslocation     = document.getElementById("gps_location_o");
+        var batterybar      = document.getElementById("battery_bar_o");
+        var wicostyle       = document.getElementById("wico_style_o");
+        var shakefor        = document.getElementById("shake_for_o");
+        var color3          = document.getElementById("color3_o");
+        var color4          = document.getElementById("color4_o");
+        var flag1           = document.getElementById("flag1_o");
+        var flag2           = document.getElementById("flag2_o");
+        var flag3           = document.getElementById("flag3_o");
+        var windUnit        = document.getElementById("wind_unit");
+        var walkUnit        = document.getElementById("walk_unit");
+        var usercolors      = getUserColors();
+
+        var auxthemes    = "";
+        
+        for (var i=0; i < randomtheme.options.length; i++) {
+          if (randomtheme.options[i].selected == true) {
+            auxthemes = auxthemes + "1";
+          }
+          else {
+            auxthemes = auxthemes + "0";
+          }
+        }
+     
+        var options = {
+          "temp_unit"   : temperatureUnit.options[temperatureUnit.selectedIndex].value,
+          "btdiscvibes" : btdiscvibes.options[btdiscvibes.selectedIndex].value,
+          "day_first"   : dayMonthOrder.options[dayMonthOrder.selectedIndex].value,
+          "color_theme" : basalttheme.options[basalttheme.selectedIndex].value,
+          "color_3"     : color3.options[color3.selectedIndex].value,
+          "color_4"     : color4.options[color4.selectedIndex].value,
+          "flag_1"      : flag1.options[flag1.selectedIndex].value,
+          "flag_2"      : flag2.options[flag2.selectedIndex].value,
+          "flag_3"      : flag3.options[flag3.selectedIndex].value,
+          "font_style"  : fontstyle.options[fontstyle.selectedIndex].value,
+          "look_style"  : lookstyle.options[lookstyle.selectedIndex].value,
+          "gps_location": encodeURIComponent(gpslocation.value),
+          "battery_bar" : batterybar.options[batterybar.selectedIndex].value,
+          "wico_style"  : wicostyle.options[wicostyle.selectedIndex].value,
+          "shake_for"   : shakefor.options[shakefor.selectedIndex].value,
+          "wind_unit"   : windUnit.options[windUnit.selectedIndex].value,
+          "walk_unit"   : walkUnit.options[walkUnit.selectedIndex].value,
+          "random_time" : randomtime.options[randomtime.selectedIndex].value,
+          "random_theme": auxthemes,
+          "user_colors" : usercolors
+        }
+         
+        return options;
+      }
+     
+      function submitValues() {
+        console.log("Submit");
+        
+        var return_to = getQueryParam('return_to', 'pebblejs://close#');
+   
+        var options = saveOptions();
+        document.location = return_to + encodeURIComponent(JSON.stringify(options));
+      }
+      
+      function setUserColors() {
+        var usercolors = getUrlParameter("user_colors");
+        var uc = document.getElementById("user0_o");
+        
+        if ((usercolors == undefined) && (usercolors == null) && (usercolors == "null")) {
+          usercolors = "000000000000000000000000000000";
+        }
+        for (var i = 0; i <= 14; i++) {
+          uc = document.getElementById("user"+i+"_o");
+          if (uc != null) {
+            uc.value = usercolors.charAt(2*i) + usercolors.charAt((2*(i+1))-1);
+            if (uc.selectedIndex < 0) uc.selectedIndex = 0;
+          }
+        }       
+      }
+      
+      $(document).ready(function() {
+        var temperatureUnit = document.getElementById('temperature_unit');
+        var btdiscvibes     = document.getElementById('btdiscvibes');
+        var dayMonthOrder   = document.getElementById('day_month_order');
+        var basalttheme     = document.getElementById('color_theme_o');
+        var fontstyle       = document.getElementById('font_style_o');
+        var randomtheme     = document.getElementById('random_theme_o');
+        var randomtime      = document.getElementById('random_time_o');
+        var lookstyle       = document.getElementById('look_style_o');
+        var gpslocation     = document.getElementById('gps_location_o');
+        var batterybar      = document.getElementById('battery_bar_o');
+        var wicostyle       = document.getElementById('wico_style_o');
+        var shakefor        = document.getElementById('shake_for_o');
+        var color3          = document.getElementById("color3_o");
+        var color4          = document.getElementById("color4_o");
+        var flag1           = document.getElementById("flag1_o");
+        var flag2           = document.getElementById("flag2_o");
+        var flag3           = document.getElementById("flag3_o");
+        var windUnit        = document.getElementById('wind_unit');
+        var walkUnit        = document.getElementById('walk_unit');
+        var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+
+        temperatureUnit.value = getUrlParameter('temp_unit');
+        if (temperatureUnit.selectedIndex < 0) temperatureUnit.selectedIndex = 0;
+
+        btdiscvibes.value = getUrlParameter('btdiscvibes');
+        if (btdiscvibes.selectedIndex < 0) btdiscvibes.selectedIndex = 1;
+
+        basalttheme.value = getUrlParameter('color_theme');
+        if (basalttheme.selectedIndex < 0) basalttheme.selectedIndex = 29;
+
+        dayMonthOrder.value = getUrlParameter('day_first');
+        if (dayMonthOrder.selectedIndex < 0) dayMonthOrder.selectedIndex = 4;
+
+        fontstyle.value = getUrlParameter('font_style');
+        if (fontstyle.selectedIndex < 0) fontstyle.selectedIndex = 1;
+
+        lookstyle.value = getUrlParameter('look_style');
+        if (lookstyle.selectedIndex < 0) lookstyle.selectedIndex = 13;
+
+        wicostyle.value = getUrlParameter('wico_style');
+        if (wicostyle.selectedIndex < 0) wicostyle.selectedIndex = 0;
+
+        batterybar.value = getUrlParameter('battery_bar');
+        if (batterybar.selectedIndex < 0) batterybar.selectedIndex = 1;
+
+        color3.value = getUrlParameter('color_3');
+        if (color3.selectedIndex < 0) color3.selectedIndex = 0;
+
+        color4.value = getUrlParameter('color_4');
+        if (color4.selectedIndex < 0) color4.selectedIndex = 33;
+
+        flag1.value = getUrlParameter('flag_1');
+        if (flag1.selectedIndex < 0) flag1.selectedIndex = 0;
+
+        flag2.value = getUrlParameter('flag_2');
+        if (flag2.selectedIndex < 0) flag2.selectedIndex = 0;
+
+        flag3.value = getUrlParameter('flag_3');
+        if (flag3.selectedIndex < 0) flag3.selectedIndex = 0;
+
+        windUnit.value = getUrlParameter('wind_unit');
+        if (windUnit.selectedIndex < 0) windUnit.selectedIndex = 0;
+
+        walkUnit.value = getUrlParameter('walk_unit');
+        if (walkUnit.selectedIndex < 0) walkUnit.selectedIndex = 0;
+
+        shakefor.value = getUrlParameter('shake_for');
+        if (shakefor.selectedIndex < 0) shakefor.selectedIndex = 0;
+        
+        var auxthemes = getUrlParameter('random_theme');
+        if (auxthemes == null ||
+            auxthemes == undefined ||
+            auxthemes == "null") {
+          randomtheme.options[0].selected = false;
+				}
+				else {
+          for (var i=0; i < randomtheme.options.length; i++) {
+            if (auxthemes.charAt(i) == "1") {
+              randomtheme.options[i].selected = true;
+            }
+            else {
+              randomtheme.options[i].selected = false;
+            }
+          }
+        }
+
+        randomtime.value = getUrlParameter('random_time');
+        if (randomtime.selectedIndex < 0) randomtime.selectedIndex = 1;
+
+        if (!iOS) {
+          gpslocation.value = getUrlParameter('gps_location');
+          if ((gpslocation.value == null) || (gpslocation.value == "null") || (gpslocation.value == undefined) ||
+              (gpslocation.value == "None") || (gpslocation.value == "undefined")) {
+            gpslocation.value = "";
+          }
+          else {
+            gpslocation.value = decodeURIComponent(gpslocation.value).trim();
+          }
+        }
+        else {
+          gpslocation.value = "";
+          gpslocation.style.visibility = "hidden";
+          document.getElementById("head_gps_loc").style.visibility = "hidden";
+          document.getElementById("p_gps_loc").style.visibility = "hidden";
+        }
+        
+        setUserColors();
+        
+      });
+      
+    </script>
+
+  </body>
+</html>
+	

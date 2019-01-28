@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Edge Analog Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/imoto-yuya.github.io/edge_analog/css/slate.css'>
+  <script src='/imoto-yuya.github.io/edge_analog/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Edge Analog Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Invert color
+          <input id='invert_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Vibrate on disconnect
+          <input id='connection_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Display</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Ticks
+          <input id='show_ticks_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Day of the week
+          <input id='show_day_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Second hand
+          <input id='show_second_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Battery state
+          <input id='show_battery_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Customizability</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Round color
+          <input id='round_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Language for day
+          <select id="lang_select" style="color:#000000">
+          <option value="en">English</option>
+	  <option value="fr">French</option>
+          <option value="de">German</option>
+          </select>
+        </label>
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Vertical watchface
+          <input id='rotate_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        The watchface rotate to the left in charging.
+      </div>
+    </div>
+    
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE'>
+      </div>
+    </div>
+
+    <div style="margin-top : 30px">
+    <center>
+    <a href="http://imoto-yuya-1234.github.io/web_page/bitcoin/bitcoin.html">
+    <img src="/imoto-yuya.github.io/edge_analog/RibbonDonateBitcoin.png" width="200" height="50">
+    </a>
+    </center>
+    </div>
+    
+  </body>
+  
+  <script>
+  function getConfigData() {
+    var invertCheckbox = document.getElementById('invert_checkbox');
+    var connectionCheckbox = document.getElementById('connection_checkbox');
+    var showticksCheckbox = document.getElementById('show_ticks_checkbox');
+    var showdayCheckbox = document.getElementById('show_day_checkbox');
+    var showsecondCheckbox = document.getElementById('show_second_checkbox');
+    var showbatteryCheckbox = document.getElementById('show_battery_checkbox');
+    var roundColorPicker = document.getElementById('round_color_picker');
+    var langSelect = document.getElementById('lang_select');
+    var rotateCheckbox = document.getElementById('rotate_checkbox');
+ 
+    var options = {
+      'invert': invertCheckbox.checked,
+      'connection': connectionCheckbox.checked,
+      'show_ticks': showticksCheckbox.checked,
+      'show_day': showdayCheckbox.checked,
+      'show_second': showsecondCheckbox.checked,
+      'show_battery': showbatteryCheckbox.checked,
+      'round_color': roundColorPicker.value,
+      'lang': langSelect.value,
+      'rotate': rotateCheckbox.checked
+    };
+
+    // Save for next launch
+    localStorage['invert'] = options['invert'];
+    localStorage['connection'] = options['connection'];
+    localStorage['show_ticks'] = options['show_ticks'];
+    localStorage['show_day'] = options['show_day'];
+    localStorage['show_second'] = options['show_second'];
+    localStorage['show_battery'] = options['show_battery'];
+    localStorage['round_color'] = options['round_color'];
+    localStorage['lang'] = options['lang'];
+    localStorage['rotate'] = options['rotate'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var invertCheckbox = document.getElementById('invert_checkbox');
+    var connectionCheckbox = document.getElementById('connection_checkbox');
+    var showticksCheckbox = document.getElementById('show_ticks_checkbox');
+    var showdayCheckbox = document.getElementById('show_day_checkbox');
+    var showsecondCheckbox = document.getElementById('show_second_checkbox');
+    var showbatteryCheckbox = document.getElementById('show_battery_checkbox');
+    var roundColorPicker = document.getElementById('round_color_picker');
+    var langSelect = document.getElementById('lang_select');
+    var rotateCheckbox = document.getElementById('rotate_checkbox');
+
+    // Load any previously saved configuration, if available
+    invertCheckbox.checked = JSON.parse(localStorage['invert']);
+    connectionCheckbox.checked = JSON.parse(localStorage['connection']);
+    showticksCheckbox.checked = JSON.parse(localStorage['show_ticks']);
+    showdayCheckbox.checked = JSON.parse(localStorage['show_day']);
+    showsecondCheckbox.checked = JSON.parse(localStorage['show_second']);
+    showbatteryCheckbox.checked = JSON.parse(localStorage['show_battery']);
+    roundColorPicker.value = localStorage['round_color'];
+    langSelect.value = localStorage['lang'];
+    rotateCheckbox.checked = JSON.parse(localStorage['rotate']);
+    
+  })();
+  </script>
+</html>

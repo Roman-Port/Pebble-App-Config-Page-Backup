@@ -1,0 +1,104 @@
+<html>
+	<head>
+		<title>Pokeball</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+	<script src="/code.jquery.com//jquery-1.js"></script>
+	<script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>	
+	</head>
+	<body onload="setParams()">
+		<div data-role="page" data-theme="a">
+			<div data-role="header">
+				<h1>Configuration</h1>
+			</div>
+			
+			<div data-role="main" class="ui-content">
+				<form>
+					<label for="ball_pref" class="select">Ball Type</label>
+					<select name="ball_pref" id="ball_pref">
+						<option value="0">Pokeball</option>
+						<option value="1">Great Ball</option>
+						<option value="2">Ultra Ball</option>
+						<option value="3">Master Ball</option>
+						<option value="4">Safari Ball</option>
+					</select>
+				
+					<label for="time_pref" class="select">Time Format</label>
+					<select name="time_pref" id="time_pref">
+						<option value="0">Digital</option>
+						<option value="1">Analog</option>
+					</select>
+					
+					<label for="unit_pref" class="select">Hand Style</label>
+					<select name="unit_pref" id="unit_pref">
+						<option value="0">Minutes</option>
+						<option value="1">Seconds</option>
+					</select>
+					
+					<label for="vibe_pref">Vibration</label>
+					<select name="vibe_pref" id="vibe_pref">
+						<option value="0">No Vibration</option>
+						<option value="1">Hourly</option>
+						<option value="2">BT Disconnect</option>
+						<option value="3">Hourly + BT Disconnect</option>
+					</select>
+				</form>
+				
+				<button style="width:50%; margin-left:auto; margin-right:0px;" type="submit" id="submit">Submit</button>
+			</div>
+			
+			<script>
+				function setParams(){
+					var query = location.search.substring(1);
+					var params = query.split("=");
+
+					var ball = params[1].substring(0,1);
+					var time = params[2].substring(0,1);
+					var unit = params[3].substring(0,1);
+					var vibe = params[4].substring(0,1);
+					
+					$("#ball_pref").val(ball).attr("selected", true).siblings("option").removeAttr("selected");
+					$("#time_pref").val(time).attr("selected", true).siblings("option").removeAttr("selected");
+					$("#unit_pref").val(unit).attr("selected", true).siblings("option").removeAttr("selected");
+					$("#vibe_pref").val(vibe).attr("selected", true).siblings("option").removeAttr("selected");
+
+					$("#ball_pref").selectmenu("refresh", true);
+					$("#time_pref").selectmenu("refresh", true);
+					$("#unit_pref").selectmenu("refresh", true);
+					$("#vibe_pref").selectmenu("refresh", true);
+				}
+			</script>
+
+			<script>
+				function getQueryParam(variable, default_){
+					var query = location.search.substring(1);
+					var vars = query.split('&');
+					for(var i = 0; i < vars.length; i++){
+						var pair = vars[i].split('=');
+						if(pair[0] == variable)
+							return decodeURIComponent(pair[1]);
+					}
+					return default_ || false;
+				}
+
+				function saveOptions(){
+					var pin_check = $('#vibe_pref').attr('checked');
+					
+					var options = {
+						'ball': $('#ball_pref').val(),
+						'time': $('#time_pref').val(),
+						'unit': $('#unit_pref').val(),
+						'vibe': $('#vibe_pref').val()
+					};
+					return options;
+				}
+				
+				$("#submit").click(function(){
+					console.log(saveOptions());
+					var return_to = getQueryParam('return_to', 'pebblejs://close#');
+					document.location = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
+				});
+			</script>
+		</div>
+	</body>
+</html>

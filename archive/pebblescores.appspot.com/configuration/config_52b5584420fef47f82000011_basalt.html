@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Configuration</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/pebblescores.appspot.com//jquery.css">
+    <script type="text/javascript" src="/www.google.com//jsapi_193066765.js"></script>
+    <script src="/ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script src="/pebblescores.appspot.com//jquery.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Falldown</h1>
+      </div>
+      <div data-role="content">
+        <div data-role="fieldcontain">
+          <label for="username">Username:</label>
+          <textarea cols="40" rows="8" name="username" id="username"></textarea>
+        </div>
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    
+    <script>
+      function saveOptions() {
+        var options = {
+          'username': $("#username").val(),
+        }
+        return options;
+      }
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          document.location = "pebblejs://close";
+        });
+
+        $("#b-submit").click(function() {
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          document.location = location;
+        });
+
+      });
+    </script>
+  </body>
+</html>

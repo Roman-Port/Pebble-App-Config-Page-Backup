@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Lignite Lifetime Upgrade</title>
+
+    <!-- Bootstrap -->
+    <link href="../_resources/upgrade/css/bootstrap.css" rel="stylesheet">
+    <link href="../_resources/upgrade/css/lignitestyles.css?v=3.0" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="../_resources/upgrade/js/bootstrap.min.js"></script>
+
+    <!-- Fonts Awesome -->
+    <link rel="stylesheet" href="../_resources/upgrade/css/font-awesome.min.css">
+
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-73640245-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lignitelogo"></div>
+        </div>
+    </div>
+    <div class="maincontent">
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 upgrade">
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 clockface-description" id="stepOneDiv">
+                <div>
+                    <h3 id="title">Upgrade to the Lifetime Bundle for Fitbit</h3>
+                </div>
+
+                <p id="offerAmount">In appreciation of our Pebble customers, we're offering <b>up to 50% off</b> of our Lifetime Bundle for Fitbit.</p>
+                <p><strong id="upgradeSubtitle">It includes...</strong></p>
+                <ul id="lifetimeBenefits">
+                    <li><strong>All 30+ of our high-quality Fitbit clock faces</strong></li>
+                    <li><strong>Every</strong> future Fitbit clock face we create</li>
+                    <li>All Fitbit clock face improvements</li>
+                </ul>
+
+                <h4 id="limitedTime">Limited time offer!</h4>
+
+                <p id="nextStep">To check your discount, enter your PayPal email address or your Lignite for Pebble access code below.</p>
+                <div id="lookupContent">
+                    <form accept-charset="UTF-8" role="form" onsubmit="getCode()">
+                        <fieldset>
+                            <div class="form-group" id="userEntryDiv">
+                                <input class="form-control" placeholder="Your PayPal email or Lignite access code" name="accessCode" id="userIDEntry" style="margin: 5px 0;" maxlength="40" autofocus>
+                            </div>
+                        </fieldset>
+                    </form>
+                    <button type="button" id="submit" name="submit" class="btn btn-lg btn-success btn-block" onclick="prepareUpgrade()"><i class="fa fa-rocket"></i> Upgrade</button>
+                    <p style="margin-top: 1em;font-size: 75%" align="center"><i>Taxes included</i></p>
+
+                    <hr>
+
+                    <div>
+                        <h3>Don't have a Fitbit?</h3>
+                    </div>
+
+                    <p>No worries, we've got you covered.</p>
+
+                    <div style="display:inline-block;">
+                        <div style="width:100%;margin-bottom:20px;">
+                            <img src="../_resources/upgrade/img/versas.png" style="width:100%; height:100%;margin-bottom:6px;"/>
+
+                            <button type="button" name="submit" class="btn btn-lg btn-success btn-block" onclick="amazon(true)"><i class="fa fa-rocket"></i> Buy Fitbit Versa</button>
+                        </div>
+                        <div style="width:100%;margin-bottom:10px;">
+                            <img src="../_resources/upgrade/img/ionics.png" style="width:100%; height:100%; margin-bottom:6px;"/>
+
+                            <button type="button" name="submit" class="btn btn-lg btn-success btn-block" onclick="amazon(false)"><i class="fa fa-rocket"></i> Buy Fitbit Ionic</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center purchase-footer">
+                <small>
+                    <p class="issues"><a href="#" onclick="emailUs()">Issues? Email us!</a></p>
+                    <p class="paypal">
+                        <img src="../_resources/upgrade/img/paypal.png" alt="Powered by PayPal" width="185px" height="23px">
+                    </p>
+                    <p class="address">Lignite<br/>P.O. Box 24104<br/>Guelph, ON<br/>N1E6V8<br/>Canada</p>
+                    <p><a href="https://www.paypal.com/us/webapps/mpp/ua/acceptableuse-full">PayPal acceptable use policy</a></p>
+                    <p>By purchasing from us, you agree to our <a href="https://www.lignite.io/fitbit_privacy_policy/">privacy policy</a>.</p>
+                    <p class="lignitefooter"><small>Made with <b class="fa fa-heart" aria-hidden="true"></b> in Canada and Switzerland by Team Lignite</small></p>
+                    <p>© 2015
+                        <script>
+                            new Date().getFullYear() > 2010 && document.write(" - " + new Date().getFullYear());
+                        </script>
+                    </p>
+                </small>
+            </div>
+        </div>
+    </div>
+</body>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.9/js/bootstrap-dialog.min.js"></script>
+
+<script>
+var validUserDetailsForUpgrade = undefined;
+var versaAffiliateLink = "https://amzn.to/2Bxc5ZD";
+var ionicAffiliateLink = "https://amzn.to/2MFwPmn";
+
+function capitaliseFirstLetterForString(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+}
+
+function emailUs() {
+    var c = "contact";
+    var d = "lignite.io";
+    window.location.href = "mail" + "to" + ":" + c + "@" + d;
+}
+
+function amazon(versa){
+    window.location.href = versa ? versaAffiliateLink : ionicAffiliateLink;
+}
+
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
+
+function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] === variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    return defaultValue || false;
+}
+
+function launchUpgrade(){
+    var purchaseURL = "https://api.lignite.me:9444/pebble_upgrade/?";
+    if(validUserDetailsForUpgrade.email){
+        purchaseURL += "email=" + validUserDetailsForUpgrade.email;
+    }
+    else{
+        purchaseURL += "accessCode=" + validUserDetailsForUpgrade.accessCode;
+    }
+
+    console.log("Redirecting to " + purchaseURL);
+
+    window.location.href = purchaseURL;
+    document.getElementById("submit").innerHTML = "Awesome! Hang on...";
+}
+
+function prepareUpgrade(){
+    if(validUserDetailsForUpgrade){
+        launchUpgrade();
+        return;
+    }
+
+    var userInput = document.getElementById("userIDEntry").value;
+
+    var upgradeQuery = {};
+
+    var isEmail = validateEmail(userInput);
+    if(isEmail){
+        upgradeQuery.email = userInput;
+    }
+    else{
+        if(userInput.length !== 10){
+            BootstrapDialog.show({
+                title: "Oh boy",
+                message: "Please enter either your PayPal email or your access code (which is 10 character long).",
+                type: BootstrapDialog.TYPE_DANGER
+            });
+            return;
+        }
+        else{
+            upgradeQuery.accessCode = userInput;
+        }
+    }
+
+    $.post("https://api.lignite.me:9443/pebble/upgrade/check", JSON.stringify(upgradeQuery), function(data, status){
+        var object = JSON.parse(data);
+
+        console.log(JSON.stringify(object));
+
+        if(object.error){
+            // console.log("Error: " + object.error);
+            // window.alert(object.error);
+
+            BootstrapDialog.show({
+                title: "Error Upgrading",
+                message: object.error,
+                type: BootstrapDialog.TYPE_DANGER
+            });
+        }
+        else{
+            if(object.ownsFitbitBundle){
+                console.log("Already a lifetime ligniter");
+
+                BootstrapDialog.show({
+                    title: "You're Already a Lifetime Ligniter ❤️",
+                    message: "You already own our lifetime bundle, so there's no need to upgrade.\n\nIf you're interested in purchasing a second copy of our bundle, please go to <a href='https://www.Lignite.io/#lifetime'>www.Lignite.io/#lifetime</a> and use a different PayPal account at checkout.",
+                    type: BootstrapDialog.TYPE_SUCCESS
+                });
+            }
+            // else if(object.alreadyUpgradedToFitbit){
+            //     BootstrapDialog.show({
+            //         title: "You've Already Upgraded ❤️",
+            //         message: "You already upgraded to our Lifetime Bundle for Fitbit, so there's no need to upgrade again.\n\nIf you're interested in purchasing a second copy of our bundle, please go to <a href='https://www.Lignite.io/#lifetime'>www.Lignite.io/#lifetime</a> and use a different PayPal account at checkout.",
+            //         type: BootstrapDialog.TYPE_SUCCESS
+            //     });
+            // }
+            else{
+                validUserDetailsForUpgrade = upgradeQuery;
+
+                document.getElementById("title").innerHTML = "Hey " + capitaliseFirstLetterForString(object.firstName) + "!";
+                // document.getElementById("upgradeSubtitle").innerHTML = "We're offering you our Fitbit Lifetime Bundle upgrade for only $2.49!";
+                document.getElementById("nextStep").innerHTML = "";
+                document.getElementById("offerAmount").innerHTML = "We're offering you our Lifetime Bundle for Fitbit for only $" + object.costOfUpgrade + " <b>(" + object.percentageDiscount + "% off)</b>!";
+                document.getElementById("submit").innerHTML = '<i class="fa fa-rocket"></i>Upgrade Now';
+
+                // document.getElementById("lifetimeBenefits").hidden = true;
+                // document.getElementById("limitedTime").hidden = true;
+                document.getElementById("userEntryDiv").hidden = true;
+
+                console.log("User is good to upgrade, got back " + JSON.stringify(object, undefined, 4));
+            }
+        }
+    });
+
+    console.log("Prepare with json '" + JSON.stringify(upgradeQuery) + "'");
+}
+
+var accessCode = getQueryParam("accessCode");
+if(accessCode){
+    document.getElementById("userIDEntry").value = accessCode;
+    prepareUpgrade();
+}
+
+</script>
+
+</html>

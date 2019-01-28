@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+ 	<head>
+		<link rel='stylesheet' href='/sport-house.net/uploadedFiles/files/jakethedog/switchery.css'>
+		<script src='/sport-house.net/uploadedFiles/files/jakethedog/switchery.bin'></script>
+		<style>
+			body {
+				background-color: #efeff4;
+			}
+			
+			.btn {
+				font-family: Arial;
+				font-size: 21px;
+				text-decoration: none;
+			}
+
+			.lbl {
+				font-family: Arial;
+				font-size: 21px;
+			}
+			
+			table {
+				background-color: white;
+				width: 100%;
+				border-top: 1px solid #c8c7cc;
+				border-bottom: 1px solid #c8c7cc;
+				margin-top: 20px;
+				margin-bottom: 30px;
+			}
+
+			td {
+				padding: 5px;
+			}
+
+			.chkbox {
+				width: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<center>
+		<table>
+			<tr>
+				<td class='name'><label for='blink_checkbox' class='lbl'>Flashing adventure</label></td>
+				<td class='chkbox'><input id='blink_checkbox' type='checkbox' class='js-switch' checked=""></td>
+			</tr>
+		</table>
+		
+		
+		<input id='submit_button' type='button' class='btn' value='Save and close'>
+		<center>
+
+		<script>
+			var submitButton = document.getElementById('submit_button');
+
+			var elem = document.querySelector('.js-switch');
+			var init = new Switchery(elem);
+
+			submitButton.addEventListener('click', function() {
+				var blinkcheckbox = document.getElementById('blink_checkbox');
+				var options = {'blink': (blinkcheckbox.checked == true) ? 1 : 0};
+				var urlparams = encodeURIComponent(JSON.stringify(options));
+
+				//watch
+				//document.location = 'pebblejs://close#' + urlparams;
+
+				//emulator
+				document.location = 'https://cloudpebble.net/ide/emulator/config?' + urlparams;
+			});
+		</script>
+	</center></center></body>
+</html>
+
+

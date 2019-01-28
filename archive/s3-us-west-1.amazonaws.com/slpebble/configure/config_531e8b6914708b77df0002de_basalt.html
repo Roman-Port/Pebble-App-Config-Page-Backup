@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Configurable</title>
+    <meta charset="utf-8">
+	<meta http-equiv="PRAGMA" content="NO-CACHE">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+  </head>
+  <body>
+
+    <div data-role="page" id="page1">
+      <div data-theme="" data-role="header">
+	<h3>Mindfulness Pebble App Configuration</h3>
+      </div>
+
+      <div data-role="content">
+
+        <div data-role="fieldcontain">
+          <label for="pmessage">Persistent Message (appears directly below time):</label>
+          <input type="text" size="10" maxlength="10" name="pmessage" id="pmessage">
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="shour">Starting Hour:</label>
+          <select name="shour" id="shour">
+            <option value="0">12am</option>
+            <option value="1">1am</option>
+			<option value="2">2am</option>
+			<option value="3">3am</option>
+			<option value="4">4am</option>
+			<option value="5">5am</option>
+			<option value="6">6am</option>
+			<option value="7">7am</option>
+			<option value="8">8am</option>
+			<option value="9">9am</option>
+			<option value="10">10am</option>
+			<option value="11">11am</option>
+			<option value="12">12pm</option>
+			<option value="13">1pm</option>
+			<option value="14">2pm</option>
+			<option value="15">3pm</option>
+			<option value="16">4pm</option>
+			<option value="17">5pm</option>
+			<option value="18">6pm</option>
+			<option value="19">7pm</option>
+			<option value="20">8pm</option>
+			<option value="21">9pm</option>
+			<option value="22">10pm</option>
+			<option value="23">11pm</option>
+          </select>
+		  <label for="shour">Ending Hour:</label>
+          <select name="ehour" id="ehour">
+            <option value="0">12am</option>
+            <option value="1">1am</option>
+			<option value="2">2am</option>
+			<option value="3">3am</option>
+			<option value="4">4am</option>
+			<option value="5">5am</option>
+			<option value="6">6am</option>
+			<option value="7">7am</option>
+			<option value="8">8am</option>
+			<option value="9">9am</option>
+			<option value="10">10am</option>
+			<option value="11">11am</option>
+			<option value="12">12pm</option>
+			<option value="13">1pm</option>
+			<option value="14">2pm</option>
+			<option value="15">3pm</option>
+			<option value="16">4pm</option>
+			<option value="17">5pm</option>
+			<option value="18">6pm</option>
+			<option value="19">7pm</option>
+			<option value="20">8pm</option>
+			<option value="21">9pm</option>
+			<option value="22">10pm</option>
+			<option value="23">11pm</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <fieldset data-role="controlgroup">
+            <legend>Enter your reminder phrases:</legend>
+            <label for="phrase1">#1</label>
+			<input name="phrase1" id="phrase1" type="text" maxlength="40" class="custom">
+            
+			<label for="phrase2">#2</label>
+			<input name="phrase2" id="phrase2" type="text" maxlength="40" class="custom">
+
+			<label for="phrase3">#3</label>
+			<input name="phrase3" id="phrase3" type="text" maxlength="40" class="custom">
+
+			<label for="phrase4">#4</label>
+			<input name="phrase4" id="phrase4" type="text" maxlength="40" class="custom">
+
+			<label for="phrase5">#5</label>
+			<input name="phrase5" id="phrase5" type="text" maxlength="40" class="custom">
+
+			<label for="phrase6">#6</label>
+			<input name="phrase6" id="phrase6" type="text" maxlength="40" class="custom">
+
+			<label for="phrase7">#7</label>
+			<input name="phrase7" id="phrase7" type="text" maxlength="40" class="custom">
+
+			<label for="phrase8">#8</label>
+			<input name="phrase8" id="phrase8" type="text" maxlength="40" class="custom">
+
+			<label for="phrase9">#9</label>
+			<input name="phrase9" id="phrase9" type="text" maxlength="40" class="custom">
+
+			<label for="phrase10">#10</label>
+			<input name="phrase10" id="phrase10" type="text" maxlength="40" class="custom">
+
+            </fieldset>
+          </div>
+
+        <div data-role="fieldcontain">
+          <label for="showdate">Show Date:</label>
+          <select name="showdate" id="showdate" data-role="slider">
+            <option value="off">Off</option>
+            <option value="on">On</option>
+          </select>
+        </div>
+
+        <div data-role="fieldcontain">
+          <label for="debug">Debug Mode:</label>
+          <select name="debug" id="debug" data-role="slider">
+            <option value="off">Off</option>
+            <option value="on">On</option>
+          </select>
+        </div>
+
+        </div>
+
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+            </fieldset>
+          </div>
+        </div>
+      
+    
+    <script>
+
+      $.urlParam = function(name){
+	var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+	if (!results) { return 0; }
+	return results[1] || 0;
+      }
+
+      function updateControls() {
+        var debugval = decodeURIComponent($.urlParam("debugval"));
+        if (debugval != '') {
+          $("#debug").val(debugval).slider("refresh");
+        }
+        var showdateval = decodeURIComponent($.urlParam("showdateval"));
+        if (showdateval != '') {
+          $("#showdate").val(showdateval).slider("refresh");
+        }
+        var pmessageval = decodeURIComponent($.urlParam("pmessageval"));
+        if (pmessageval != '') {
+          $("#pmessage").val(pmessageval);
+        }
+        var shourval = decodeURIComponent($.urlParam("shourval"));
+        if (shourval != '') {
+          $("#shour").val(shourval).selectmenu("refresh");
+        }
+        var ehourval = decodeURIComponent($.urlParam("ehourval"));
+        if (ehourval != '') {
+          $("#ehour").val(ehourval).selectmenu("refresh");
+        }
+        var phrase1val = decodeURIComponent($.urlParam("phrase1val"));
+        if (phrase1val != '') {
+          $("#phrase1").val(phrase1val);
+        }
+        var phrase2val = decodeURIComponent($.urlParam("phrase2val"));
+        if (phrase2val != '') {
+          $("#phrase2").val(phrase2val);
+        }
+        var phrase3val = decodeURIComponent($.urlParam("phrase3val"));
+        if (phrase3val != '') {
+          $("#phrase3").val(phrase3val);
+        }
+        var phrase4val = decodeURIComponent($.urlParam("phrase4val"));
+        if (phrase4val != '') {
+          $("#phrase4").val(phrase4val);
+        }
+        var phrase5val = decodeURIComponent($.urlParam("phrase5val"));
+        if (phrase5val != '') {
+          $("#phrase5").val(phrase5val);
+        }
+        var phrase6val = decodeURIComponent($.urlParam("phrase6val"));
+        if (phrase6val != '') {
+          $("#phrase6").val(phrase6val);
+        }
+        var phrase7val = decodeURIComponent($.urlParam("phrase7val"));
+        if (phrase7val != '') {
+          $("#phrase7").val(phrase7val);
+        }
+        var phrase8val = decodeURIComponent($.urlParam("phrase8val"));
+        if (phrase8val != '') {
+          $("#phrase8").val(phrase8val);
+        }
+        var phrase9val = decodeURIComponent($.urlParam("phrase9val"));
+        if (phrase9val != '') {
+          $("#phrase9").val(phrase9val);
+        }
+        var phrase10val = decodeURIComponent($.urlParam("phrase10val"));
+        if (phrase10val != '') {
+          $("#phrase10").val(phrase10val);
+        }
+      }
+
+      function saveOptions() {
+        var options = {
+          'debug': $("#debug").val(),
+          'showdate': $("#showdate").val(),
+          'pmessage': $("#pmessage").val(),
+          'shour': parseInt($("#shour").val()),
+          'ehour': parseInt($("#ehour").val()),
+          'phrase1': $("#phrase1").val(),
+          'phrase2': $("#phrase2").val(),
+          'phrase3': $("#phrase3").val(),
+          'phrase4': $("#phrase4").val(),
+          'phrase5': $("#phrase5").val(),
+          'phrase6': $("#phrase6").val(),
+          'phrase7': $("#phrase7").val(),
+          'phrase8': $("#phrase8").val(),
+          'phrase9': $("#phrase9").val(),
+          'phrase10': $("#phrase10").val()
+        }
+        return options;
+      }
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+
+      });
+
+	$('#page1').bind('pageinit', updateControls);
+    </script>
+  </body>
+</html>

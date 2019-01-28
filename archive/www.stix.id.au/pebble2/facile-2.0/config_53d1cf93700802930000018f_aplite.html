@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Facile</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+  </head>
+  <body onload="getOptions()">
+    <div data-role="page" id="main">
+      <div data-role="header">
+        <h1>Facile</h1>
+      </div>
+
+      <div class="ui-content-a" role="main" data-mini="true">
+
+        <div data-role="ui-field-contain">
+          <label for="refreshIntervalS" class="select">Refresh interval:</label>
+          <small><b>Note:</b> Auto will display seconds for one minute after starting, and after a tap or shake, ideal to conserve your battery.</small>
+          <select name="refreshIntervalS" id="refreshIntervalS">
+            <option value="0">Auto</option>
+            <option value="1">1s</option>
+            <option value="2">2s</option>
+            <option value="5">5s</option>
+            <option value="10">10s</option>
+            <option value="15">15s</option>
+            <option value="20">20s</option>
+            <option value="30">30s</option>
+            <option value="60">60s</option>
+          </select>
+          <label for="dateFormat" class="select">Date Format:</label>
+          <select name="dateFormat" id="dateFormat">
+            <option value="#F">YYYY-MM-DD</option>
+            <option value="#d/#m/#Y">DD/MM/YYYY</option>
+            <option value="#D">MM/DD/YY</option>
+            <option value="#d #b #Y">DD MMM YYYY</option>
+          </select>
+          <input type="checkbox" name="invert" id="invert" class="custom">
+          <label for="invert">Invert display</label>
+          <fieldset class="ui-grid-a">
+            <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+            <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <script>
+      function getOptions() {
+        $("#refreshIntervalS").val(
+            localStorage.getItem("refreshIntervalS")).selectmenu("refresh", true);
+        $("#dateFormat").val(
+            localStorage.getItem("dateFormat")).selectmenu("refresh", true);
+        $("#invert").prop("checked",
+            localStorage.getItem("invert") == 0 ? false : true).checkboxradio("refresh");
+      }
+      function saveOptions() {
+        var options = {
+          'refreshIntervalS': $("#refreshIntervalS").val(),
+          'dateFormat': $("#dateFormat").val(),
+          'invert': $("#invert").prop("checked") ? 1 : 0,
+        }
+        return options;
+      }
+      function getQueryParam(variable, default_) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (pair[0] == variable)
+            return decodeURIComponent(pair[1]);
+        }
+        return default_ || false;
+      }
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          location.href = getQueryParam('return_to', 'pebblejs://close');
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+
+          var options = saveOptions();
+          var uri = getQueryParam('return_to', 'pebblejs://close#') +
+            encodeURIComponent(JSON.stringify(options));
+          console.log("Warping to: " + uri);
+          localStorage.setItem("refreshIntervalS", options.refreshIntervalS);
+          localStorage.setItem("dateFormat", options.dateFormat);
+          localStorage.setItem("invert", options.invert);
+          location.href = uri;
+        });
+
+      });
+    </script>
+  </body>
+</html>

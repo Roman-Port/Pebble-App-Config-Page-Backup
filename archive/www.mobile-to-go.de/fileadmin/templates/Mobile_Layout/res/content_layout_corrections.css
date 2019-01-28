@@ -1,0 +1,35 @@
+/*
+  Document   : content_layout_corrections.css
+  Created on : 13.03.2014, 21:03:06
+  Author     : Holger Dahm
+  Description: CSS corrections for the mobile content layout.
+*/
+
+#hd_address {
+  text-align: center;
+}
+
+#hd_copyright {
+  text-align: center;
+}
+
+/* CSS for jquery mobile dialogs */
+
+.ui-header .ui-title, .ui-footer .ui-title {
+  margin: 0 10%;
+}
+
+.ui-dialog-contain {
+    padding: 5px;
+}
+
+/* CSS for validation jquery plugin */
+
+label.error
+{
+  font-size: 13px;
+  font-weight:bold;
+  color: #FF0000;
+  padding-left: 10px;
+}
+

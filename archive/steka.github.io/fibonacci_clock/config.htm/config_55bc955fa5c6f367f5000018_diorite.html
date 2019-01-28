@@ -1,0 +1,220 @@
+<html>
+  <head>
+    <title>Fibonacci Clock Settings</title>
+    <script>
+      var elementIds = [
+        "ShowTime", "ShowDate", /* "ShowMonth", */ "ShowWeekNum", "ShowCharge",
+        "ShowBluetooth", "ShowSpiral", "HourColor", "MinuteColor", "HourMinuteColor",
+        "NoneColor", "SpiralColor", "BackgroundColor", "GridColor", "DotColor",
+        "TimeColor", "OutlineColor", "VibeBluetooth", "FiboDisplay"
+      ];
+
+      var defValue = [
+        0,  // ShowTime
+        0,  // ShowDate
+/*
+        0,  // ShowMonth
+*/
+        0,  // ShowWeekNum
+        1,  // ShowCharge
+        1,  // ShowBluetooth
+        1,  // ShowSpiral
+        48, // HourColor
+        12, // MinuteColor
+        3,  // HourMinuteColor
+        63, // NoneColor
+        56, // SpiralColor
+        0,  // BackgroundColor
+        0,  // GridColor
+        63, // DotColor
+        64, // TimeColor
+        21, // OutlineColor
+	1,  // VibeBluetooth
+	0,  // FiboDisplay
+      ];
+
+
+      // Expand a 2-bit color part (r, g, or b) to 8-bit
+      function expColor(c) {
+        return (c << 6) + (c << 4) + (c << 2) + c;
+      }
+
+      // Create a RGB hex string
+      function rgb2hex(r, g, b) {
+        var col = (1 << 24) + (r << 16) + (g << 8) + b;
+        return col.toString(16).substring(1);
+      }
+
+      function AddColorOptions(element) {
+        var colors = [
+          "Black", "OxfordBlue", "DukeBlue", "Blue", "DarkGreen", "MidnightGreen", "CobaltBlue", "BlueMoon",
+          "IslamicGreen", "JaegerGreen", "TiffanyBlue", "VividCerulean", "Green", "Malachite", "MediumSpringGreen", "Cyan",
+          "BulgarianRose", "ImperialPurple", "Indigo", "ElectricUltramarine", "ArmyGreen", "DarkGray", "Liberty", "VeryLightBlue",
+          "KellyGreen", "MayGreen", "CadetBlue", "PictonBlue", "BrightGreen", "ScreaminGreen", "MediumAquamarine", "ElectricBlue",
+          "DarkCandyAppleRed", "JazzberryJam", "Purple", "VividViolet", "WindsorTan", "RoseVale", "Purpureus", "LavenderIndigo",
+          "Limerick", "Brass", "LightGray", "BabyBlueEyes", "SpringBud", "Inchworm", "MintGreen", "Celeste",
+          "Red", "Folly", "FashionMagenta", "Magenta", "Orange", "SunsetOrange", "BrilliantRose", "ShockingPink",
+          "ChromeYellow", "Rajah", "Melon", "RichBrilliantLavender", "Yellow", "Icterine", "PastelYellow", "White"
+        ];
+        
+        for (var i = 0; i < 64; i++) {
+          var opt = document.createElement('option');
+          var hexR = expColor((i >> 4) & 0x03);
+          var hexG = expColor((i >> 2) & 0x03);
+          var hexB = expColor(i & 0x03);
+
+          if ( (i <  8) || ( (i > 15) && (i < 24) ) ) {
+            txtCol = "FFFFFF";
+          } else {
+            txtCol = "000000";
+          }
+          opt.setAttribute("style", "background-color:#" + rgb2hex(hexR, hexG, hexB) + "; color:#" + txtCol)
+          opt.setAttribute("value", 192 + i)
+          opt.innerHTML = colors[i];
+          element.appendChild(opt);
+        }
+	if (element.id == "TimeColor") {
+          var opt = document.createElement('option');
+          opt.setAttribute("value", 256)
+          opt.innerHTML = "(Legible color)";
+          element.appendChild(opt);
+	}
+      }
+
+      function OnLoadHandler() {
+        document.getElementById("Save").addEventListener("click", SaveHandler);
+        for (var id in elementIds) {
+          var element = document.getElementById(elementIds[id]);
+          var def = localStorage.getItem(elementIds[id]);
+          if (document.getElementById(elementIds[id] + "Preview")) {
+            AddColorOptions(element);
+            element.addEventListener("change", UpdatePreviews);
+            if (def) def = def - 192;
+          }
+          if (!def) def = defValue[id];     
+          element.options[def].selected = true;
+        }
+        UpdatePreviews();
+      };
+
+      function UpdatePreviews() {
+        for (var id in elementIds) {
+          var previewElem = document.getElementById(elementIds[id] + "Preview");
+          if (previewElem) {
+            var selectionElem = document.getElementById(elementIds[id]);
+            previewElem.style.backgroundColor = selectionElem.options[selectionElem.selectedIndex].style.backgroundColor;
+          }
+        }
+      }
+
+      function getQueryParam(variable, default_) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (pair[0] == variable)
+            return decodeURIComponent(pair[1]);
+        }
+        return default_ || false;
+      }
+
+      function SaveHandler() {
+        console.log("SaveHandler called!");
+        var options = new Map();
+        for (var id in elementIds) {
+          var element = document.getElementById(elementIds[id]);
+          options[elementIds[id]] = element.options[element.selectedIndex].value;
+          localStorage.setItem(elementIds[id], element.options[element.selectedIndex].value);
+        }
+
+        var json = JSON.stringify(options);
+        console.log("JSON: ", json);
+        var return_to = getQueryParam('return_to', 'pebblejs://close#');
+        document.location = return_to + encodeURIComponent(json);
+      };
+    </script>
+  </head>
+  <body onload="OnLoadHandler()">
+    <h1>Fibonacci Clock Settings</h1>
+
+    <p><select id="ShowTime">
+      <option value="0">Hide</option>
+      <option value="1">Show</option>
+      <option value="2">Show on tap</option>
+    </select> time with digits</p>
+
+    <p><select id="ShowDate">
+      <option value="0">Hide</option>
+      <option value="1">Show</option>
+    </select> date</p>
+<!--
+    <p><select id="ShowMonth">
+      <option value="0">Hide</option>
+      <option value="1">Show</option>
+    </select> month</p>
+ -->
+    <p><select id="ShowWeekNum">
+      <option value="0">Hide</option>
+      <option value="1">Show</option>
+    </select> week number</p>
+
+    <p><select id="ShowCharge">
+      <option value="0">Hide</option>
+      <option value="1">Show</option>
+    </select> battery charge</p>
+
+    <p><select id="ShowBluetooth">
+      <option value="0">Hide</option>
+      <option value="1">Show</option>
+    </select> bluetooth connection</p>
+
+    <p><select id="VibeBluetooth">
+      <option value="0">Silent</option>
+      <option value="1">Vibe</option>
+    </select> when loosing bluetooth connection</p>
+
+    <p><select id="ShowSpiral">
+      <option value="0">Hide</option>
+      <option value="1">Show</option>
+    </select> spiral</p>
+
+    <p><select id="FiboDisplay">
+      <option value="0">Fit</option>
+      <option value="1">Zoom</option>
+    </select> display</p>
+    
+    <p><select id="HourColor"></select>
+    <span id="HourColorPreview" style="border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;</span> Hour color</p>
+
+    <p><select id="MinuteColor"></select>
+    <span id="MinuteColorPreview" style="border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;</span> Minute color</p>
+
+    <p><select id="HourMinuteColor"></select>
+    <span id="HourMinuteColorPreview" style="border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;</span> Hour+Minute color</p>
+
+    <p><select id="NoneColor"></select>
+    <span id="NoneColorPreview" style="border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;</span> None color</p>
+
+    <p><select id="SpiralColor"></select>
+    <span id="SpiralColorPreview" style="border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;</span> Spiral color</p>
+
+    <p><select id="BackgroundColor"></select>
+    <span id="BackgroundColorPreview" style="border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;</span> Background color</p>
+
+    <p><select id="GridColor"></select>
+    <span id="GridColorPreview" style="border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;</span> Grid color</p>
+
+    <p><select id="DotColor"></select>
+    <span id="DotColorPreview" style="border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;</span> Dot color</p>
+
+    <p><select id="TimeColor"></select>
+    <span id="TimeColorPreview" style="border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;</span> Time color</p>
+
+    <p><select id="OutlineColor"></select>
+    <span id="OutlineColorPreview" style="border:1px solid">&nbsp;&nbsp;&nbsp;&nbsp;</span> Outline color</p>
+
+    <p>
+    <button id="Save">Save</button>
+    </p>
+  </body>
+</html>

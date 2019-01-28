@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Settings</title>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+<link rel="stylesheet" href="/www.themapman.com/pebblewatch/marks-slate.css">
+<link rel="stylesheet" href="/www.themapman.com/pebblewatch/jquery.css">
+<link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+<script src="/code.jquery.com//jquery-1.js"></script>
+<script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+    <style>
+      .ui-header .ui-title { margin-left: 1em; margin-right: 1em; text-overflow: clip; }
+      /*.ui-radio { width: 50%; }*/
+    </style>
+  </head>
+  <body>
+    <div data-role='page' id='main'>
+      <div data-role='header' class='jqm-header' data-theme='a'>
+        <h1>Settings</h1>
+      </div>
+<p>
+
+        
+             <h2>Weather</h2>
+
+          <label for="gps_switch">Use GPS</label>
+          <select name="gps_switch" id="gps_switch" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+  <br>
+        Enter your <strong>Location</strong> if <strong>Use GPS</strong> (above) is <strong>NO</strong><br>
+        
+          <input type="text" name="location" id="location" value=" ">
+ 
+          <fieldset data-role="controlgroup" data-type="horizontal">
+            <legend>Units:</legend>
+
+            <label for="celsius">Celsius</label>
+            <input type="radio" id="celsius" name="units" value="celsius" data-theme="a">
+
+            <label for="fahrenheit">Fahrenheit</label>
+            <input type="radio" id="fahrenheit" name="units" value="fahrenheit" data-theme="a">
+          </fieldset>
+        <br><hr>
+
+               <h3>Display</h3>
+             
+          <p>Font Style</p>
+          <select name="font" id="font" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">Square</option>
+            <option value="true">Round</option>
+          </select>
+    <br> 
+                   <p>Date &amp Health Info</p>
+                   
+
+   
+
+       <select name="hidedate" id="hidedate">
+            <option value="0" id="dnm" class="custom">Large (date only)</option>
+            <option value="1" id="week" class="custom">Steps* &amp day of week</option>
+            <option value="2" id="doty" class="custom">HR** &amp day of week</option>
+            <option value="3" id="dmy" class="custom">Small (date/steps*/HR**)</option>
+       <!--     <option value=4 id="mdy" class="custom">(Time) HH:MM MM/DD</option>
+            <option value=5 id="wd" class="custom">W[eek] D[ay]</option>
+            <option value=6 id="int" class="custom">YYYY MM DD</option>
+            <option value=7 id="dot" class="custom">DD.MM.YYYY</option>
+            <option value=8 id="ywd" class="custom">YY.WW.DDD</option>
+            <option value=9 id="time" class="custom">(Time) HH:MM [24hr]</option>-->
+          </select><br>
+           Notes: <br>
+          <small>
+          *Health metrics (steps and HR) require watches and firmware that support health.<br>
+          **Heart Rate (HR) only appears on the P2HR. Where HR is not available steps will display.</small><br>
+          <p><br>
+                   <p>Invert time</p>
+          <select name="invert_color" id="invert_color" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+<br>
+
+          
+           <p>Blink time separator</p>
+          <select name="blink" id="blink" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+ <br>
+ <!--         <p>Hide battery bar</p>
+          <select name="hidebatt" id="hidebatt" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+ 
+
+<br><br>
+
+          <p>Hide temperature</p>
+          <select name="hidetemp" id="hidetemp" data-theme="c" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+ <br><br>
+          <p>Hide weather picture</p>
+          <select name="hidewicon" id="hidewicon" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+ <br><br>
+-->
+ 
+               <br> <hr> <br>
+                 <h3>Vibration</h3>
+          <p>Bluetooth</p>
+          <select name="bluetoothvibe" id="bluetoothvibe" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+<p>
+          <p>Hourly </p>
+          <select name="hourlyvibe" id="hourlyvibe" data-theme="a" data-role="slider" data-track-theme="a">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        <hr><p>
+        
+        <div class='ui-body ui-body-b'>
+          <fieldset class='ui-grid-a'>
+            <div class='ui-block-a'><button type='submit' data-theme='d' id='b-cancel'>Cancel</button></div>
+            <div class='ui-block-b'><button type='submit' data-theme='b' id='b-submit'>Submit</button></div>
+          </fieldset>
+        </div>
+</p>
+          <br>
+
+<p align="center">
+  <a href="/www.paypal.me//markchopsreed.html" title="Support"><img src="/www.themapman.com/pebblewatch/paypalwider.png" width="300" height="47"></a>
+    <br><br>
+<em>If you find this watchface useful, please consider making a small donation via the link above. Thankyou.</em>
+</p>
+ </div>
+    
+   <script>
+      function getQueryVariable(variable) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (pair[0] == variable)
+            return decodeURIComponent(pair[1]);
+        }
+        return false;
+      }
+
+      function saveOptions() {
+        var options = {
+          'use_gps': $('#gps_switch').val(),
+          'location': $('#location').val(),
+          'units': $('input:radio[name=units]:checked').val(),
+		  'invert_color': $('#invert_color').val(),
+          'bluetoothvibe': $('#bluetoothvibe').val(),
+          'hourlyvibe': $('#hourlyvibe').val(),
+		  'font': $('#font').val(),
+		  'hidebatt': $('#hidebatt').val(),
+//          'hidedate': $('#hidedate').val(),
+          'hidetemp': $('#hidetemp').val(),
+		  'hidedate': parseInt( $("#hidedate :selected").val() ),
+          'hidewicon': $('#hidewicon').val(),
+          'steps': $('#steps').val(),
+  //        'min': $('#min').val(),
+          'hidesep': $('#hidesep').val(),
+          'blink': $('#blink').val()
+
+        }
+        return options;
+      }
+
+      $().ready(function() {
+        $('#b-cancel').click(function() {
+          document.location = 'pebblejs://close#';
+        });
+        $('#b-submit').click(function() {
+          document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(saveOptions()));
+        });
+
+        $('#gps_switch').val(getQueryVariable('use_gps')).change();
+        $('#location').val(getQueryVariable('location'));
+        if (getQueryVariable('units') == "celsius") {
+          $('input:radio[name=units][value=celsius]').prop('checked', true).trigger("click");
+        } else {
+          $('input:radio[name=units][value=fahrenheit]').prop('checked', true).trigger("click");
+        }
+        $('#invert_color').val(getQueryVariable('invert_color')).change();
+        $('#bluetoothvibe').val(getQueryVariable('bluetoothvibe')).change();
+        $('#hourlyvibe').val(getQueryVariable('hourlyvibe')).change();
+	    $('#font').val(getQueryVariable('font')).change();
+	  	$('#hidebatt').val(getQueryVariable('hidebatt')).change();
+        $('#hidedate').val(getQueryVariable('hidedate')).change();
+        $('#hidetemp').val(getQueryVariable('hidetemp')).change();
+		$('#hidewicon').val(getQueryVariable('hidewicon')).change();
+		$('#steps').val(getQueryVariable('steps')).change();
+	//	$('#min').val(getQueryVariable('min')).change();
+		$('#hidesep').val(getQueryVariable('hidesep')).change();
+		$('#blink').val(getQueryVariable('blink')).change();
+
+        // Disable location field based on GPS toggle
+        $('#location').prop('disabled', $('#gps_switch').val() == "true");
+        $('#gps_switch').change(function() {
+          $('#location').prop('disabled', $('#gps_switch').val() == "true");
+        });
+      });
+    </script>
+  </body>
+</html>

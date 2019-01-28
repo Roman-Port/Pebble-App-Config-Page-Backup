@@ -1,0 +1,60 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+	<title>Pebble Config</title>
+</head>
+<body>
+	<h1>Simple WeatherWatch</h1>
+
+	<form>
+		<h2>Temperature Unit</h2>
+		<p>
+			<input type="radio" id="radio_tempUnit_c" name="tempUnit" value="c">
+			<label for="radio_tempUnit_c">Celsius</label><br>
+			<input type="radio" id="radio_tempUnit_f" name="tempUnit" value="f">
+			<label for="radio_tempUnit_f">Fahrenheit</label>
+		</p>
+
+		<p><button id="button_save">Save</button></p>
+	</form>
+
+	<script type="text/javascript">
+		// Get config values
+		var oldConfig = getUrlVars();
+
+		if (!isNullOrUndefined(oldConfig.tempUnit) && oldConfig.tempUnit.length > 0) {
+			document.getElementById("radio_tempUnit_" + oldConfig.tempUnit).checked = true;
+		}
+
+		// Event listener for save button
+		var buttonSave = document.getElementById("button_save");
+		buttonSave.addEventListener('click', function (e) {
+			e.preventDefault();
+
+			var config = {};
+
+			config.tempUnit = document.querySelector('input[name="tempUnit"]:checked').value;
+
+			// Save to PebbleKit JS
+			window.location.href = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(config));
+		});
+
+		// Utiliyt
+		function getUrlVars() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
+				vars[key] = value;
+			});
+			return vars;
+		}
+
+		function isNullOrUndefined(o) {
+			if (typeof o === "undefined" || o === null) {
+				return true;
+			}
+			return false;
+		}
+	</script>
+</body>
+</html>

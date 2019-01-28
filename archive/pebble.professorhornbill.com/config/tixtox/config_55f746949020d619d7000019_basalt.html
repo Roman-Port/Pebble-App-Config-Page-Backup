@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel='stylesheet' type='text/css' href='/pebble.professorhornbill.com/config/slate/dist/css/slate.css'>
+  <link rel='stylesheet' type='text/css' href='/pebble.professorhornbill.com/config/css/style.css'>
+</head>
+<body>
+  <div class='item-container'>
+    <h1 class='title'>TixTox</h1>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-content'>
+      <label class='item'>
+        First Hour Digit Color
+        <input id='h1backgroundColorPicker' type='text' class='item-color item-color-normal' value='#000000'>
+      </label>
+      <label class='item'>
+        Second Hour Digit Color
+        <input id='h2backgroundColorPicker' type='text' class='item-color item-color-normal' value='#000000'>
+      </label>
+      <label class='item'>
+        First Minute Digit Color
+        <input id='m1backgroundColorPicker' type='text' class='item-color item-color-normal' value='#000000'>
+      </label>
+      <label class='item'>
+        Second Minute Digit Color
+        <input id='m2backgroundColorPicker' type='text' class='item-color item-color-normal' value='#000000'>
+      </label>
+    </div>
+    </div>
+
+    <div class="item-container">
+    <div class="item-container-content">
+      <label class='item'>
+        Background Color
+        <input id='bkbackgroundColorPicker' type='text' class='item-color item-color-normal' value='#000000'>
+      </label>
+      <label class='item'>
+        Hide unlit squares
+        <input id='backgroundMatchCheckbox' type='checkbox' class='item-checkbox' checked="">
+      </label>
+    </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-content">
+        <label class="item">Refresh screen every x second(s)
+          <select id='refreshScreenTab' name='select-1' dir='rtl' class='item-select'>
+            <option class='item-select-option' value='1'>1</option>
+            <option class='item-select-option' value='2'>5</option> 
+            <option class='item-select-option' value='3'>10</option>
+            <option class='item-select-option' value='4' selected="">15</option>
+            <option class='item-select-option' value='5'>30</option>
+            <option class='item-select-option' value='6'>60</option>
+          </select>
+      </label>
+     </div>
+    </div>
+
+    <div class='item-container-footer'>
+      These settings only change on the watch after you click submit.  Please consider taking the time to like this watchface, thanks.
+    </div>
+  
+
+  <div class='item-container'>
+    <div class='button-container'>
+      <input id='submitButton' type='button' class='item-button' value='SUBMIT'>
+    </div>
+  </div>
+
+  <script src='/pebble.professorhornbill.com/config/slate/dist/js/slate.bin'></script>
+  <script src='/pebble.professorhornbill.com/config/js/tixtoxmain.bin'></script></body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spinny Configuration</title>
+    <link rel='stylesheet' type='text/css' href='/bcaller.github.io/pebble-superspinnywatch/css/slate.css'>
+    <script src='/bcaller.github.io/pebble-superspinnywatch/js/slate.js'></script>
+    <style>
+        .title {
+            padding: 15px 10px;
+            text-transform: uppercase;
+            font-family: 'PT Sans', sans-serif;
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #888888;
+            text-align: center;
+        }
+		@font-face {
+		  font-family: Alanden;
+		  src: url(fonts/Alanden_.ttf);
+		}
+		@font-face {
+		  font-family: KomikaBoogie;
+		  src: url(fonts/KOMIKABG.ttf);
+		}
+		@font-face {
+		  font-family: Neptun;
+		  src: url(fonts/Neptun.ttf);
+		}
+		@font-face {
+		  font-family: Timepiece;
+		  src: url(fonts/Timepiece.TTF);
+		}
+    </style>
+</head>
+
+<body>
+<h1 class='title'>Spinny Configuration</h1>
+
+<div class='item-container'>
+    <div class='item-container-content'>
+        <div class='item'>
+            Choose colours and settings for spinny
+        </div>
+    </div>
+</div>
+
+<div class='item-container'>
+    <div class='item-container-header'>Colours</div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Background colour
+            <input id='background_color_picker' data-key="BG" type='text' class='item-color item-color-normal' value='#000071'>
+        </label>
+    </div>
+	<div class='item-container-content'>
+        <label class='item'>
+            Text colour
+            <input id='text_color_picker' data-key="FG" type='text' class='item-color item-color-normal' value='#ffffff'>
+        </label>
+    </div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Colour 1
+            <input id='color1_picker' data-key="C1" type='text' class='item-color item-color-normal' value='#ffff00'>
+        </label>
+    </div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Colour 2
+            <input id='color2_picker' data-key="C2" type='text' class='item-color item-color-normal' value='#ffaa00'>
+        </label>
+    </div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Colour 3
+            <input id='color3_picker' data-key="C3" type='text' class='item-color item-color-normal' value='#ff55aa'>
+        </label>
+    </div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Colour 4
+            <input id='color4_picker' data-key="C4" type='text' class='item-color item-color-normal' value='#00ffff'>
+        </label>
+    </div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Colour 5
+            <input id='color5_picker' data-key="C5" type='text' class='item-color item-color-normal' value='#ffaa55'>
+        </label>
+    </div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Number of colours
+            <select name="select-1" dir='rtl' data-key="N_COLOURS" class="item-select">
+				<option class="item-select-option" value="3">3</option>
+				<option class="item-select-option" value="4" selected="selected">4</option>
+				<option class="item-select-option" value="5">5</option>
+			</select>
+        </label>
+    </div>
+    <div class='item-container-footer'>
+        Choose the 5 colours for the rays
+    </div>
+</div>
+
+<div class='item-container'>
+    <div class='item-container-header'>Display & Behaviour</div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Show date
+            <input id='date_checkbox' data-key="DATE" type='checkbox' class='item-toggle' checked="checked">
+        </label>
+    </div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Show weather
+            <input id='weather_checkbox' data-key="WEATHER" type='checkbox' class='item-toggle' checked="checked">
+        </label>
+    </div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Vibrate on Bluetooth disconnect
+            <input id='disco_vibrate_checkbox' data-key="DISCO_VIBRATE" type='checkbox' class='item-toggle' checked="checked">
+        </label>
+    </div>
+    <div class='item-container-content'>
+        <label class='item'>
+            Black and white on Bluetooth disconnect
+            <input data-key="DESATURATE" type='checkbox' class='item-toggle' checked="checked">
+        </label>
+    </div>
+	<div class='item-container-content'>
+        <label class='item'>
+            Weather in Fahrenheit
+            <input data-key="TEMP_UNITS_F" type='checkbox' class='item-toggle'>
+        </label>
+    </div>
+</div>
+
+<div class="item-container">
+  <div class="item-container-header">Time Font</div>
+  <div class="item-container-content" style="font-size: larger;">
+    <label class="item" style="font-family: Neptun;">
+      12:47 &nbsp; 05:68
+      <input type="radio" class="item-radio" name="radio-font" data-key="FONT" value="0" checked="checked">
+    </label>
+	<label class="item" style="font-family: Timepiece;">
+      12:47 &nbsp; 05:68
+      <input type="radio" class="item-radio" name="radio-font" data-key="FONT" value="1">
+    </label>
+    <label class="item" style="font-family: Alanden;">
+      12:47 &nbsp; 05:68
+      <input type="radio" class="item-radio" name="radio-font" data-key="FONT" value="2">
+    </label>
+	<label class="item" style="font-family: KomikaBoogie;">
+      12:47 &nbsp; 05:68
+      <input type="radio" class="item-radio" name="radio-font" data-key="FONT" value="3">
+    </label>
+  </div>
+  	<div class='item-container-content'>
+        <label class='item'>
+            Larger weather font
+            <input id='large_weather_checkbox' data-key="SIZE_WEATHER" type='checkbox' class='item-toggle'>
+        </label>
+    </div>
+	<div class='item-container-content'>
+        <label class='item'>
+            Smaller date font
+            <input id='tiny_date_checkbox' data-key="SIZE_DATE" type='checkbox' class='item-toggle'>
+        </label>
+    </div>
+</div>
+
+<div class='item-container'>
+    <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+    </div>
+</div>
+</body>
+
+<script>
+    function getConfigData() {
+        var options = {};
+        $("input").each(function () {
+            var $this = $(this);
+            var key = $this.data("key");
+            if(key) {
+                if (this.type == "checkbox") {
+                    localStorage[key] = options[key] = this.checked ? 1 : 0
+                } else if (this.type == "radio") {
+					if(this.checked)
+						localStorage[key] = options[key] = parseInt(this.value)
+                } else if($this.hasClass("item-color")){
+                    localStorage[key] = this.value;
+					var hexStart = this.value.indexOf('0x')==0 ? 2 : 1; //0xffffff or #ffffff
+                    options[key] = parseInt(this.value.substring(hexStart), 16);
+                } else {
+                    localStorage[key] = options[key] = this.value
+                }
+            }
+        });
+		$("select").each(function() {
+			var $this = $(this);
+            var key = $this.data("key");
+            if(key) {
+				localStorage[key] = options[key] = parseInt(this.value)
+			}
+		});
+
+        console.log('Got options: ' + JSON.stringify(options));
+        return options;
+    }
+
+    function getQueryParam(variable, defaultValue) {
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split('=');
+            if (pair[0] === variable) {
+                return decodeURIComponent(pair[1]);
+            }
+        }
+        return defaultValue || false;
+    }
+
+    var submitButton = document.getElementById('submit_button');
+    submitButton.addEventListener('click', function() {
+        console.log('Submit');
+
+        // Set the return URL depending on the runtime environment
+        var return_to = getQueryParam('return_to', 'pebblejs://close#');
+        document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+    });
+
+    (function() {
+        // Load any previously saved configuration, if available
+        $("input").each(function () {
+            var $this = $(this);
+            var key = $this.data("key");
+            if(key && localStorage[key] != undefined) {
+                if (this.type == "checkbox")
+                    this.checked = JSON.parse(localStorage[key]);
+				else if (this.type == "radio")
+					this.checked = (this.value == localStorage[key]);
+                else
+                    this.value = localStorage[key];
+            }
+        });
+		$("select").each(function() {
+			var $this = $(this);
+            var key = $this.data("key");
+            if(key && localStorage[key] != undefined) {
+				this.value = localStorage[key];
+			}
+		});
+    })();
+</script>
+</html>

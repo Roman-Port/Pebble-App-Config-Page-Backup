@@ -1,0 +1,749 @@
+﻿﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>Pebstyle config</title>
+    <script type="text/javascript" src="/ygalanter.github.io/configs/cobblestyle/slate.js"></script>
+    <script type="text/javascript" src="/ygalanter.github.io/configs/cobblestyle/gcolor.js"></script>
+    <link type="text/css" rel="stylesheet" href="/ygalanter.github.io/configs/cobblestyle/slate.css">
+
+    <style type="text/css">
+        .popup {
+            display: none;
+            background-color: white !important;
+            position: absolute !important;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            border: solid 1px darkgray;
+            z-index: 1000;
+            overflow: auto;
+        }
+
+        .nonaplite {
+            display:none;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="item-container">
+        <div class="item-container-header">Bluetooth Options</div>
+        <div class="item-container-content">
+
+            <label class="item">
+                Bluetooth Alert
+                <select id="bluetoothAlert" class="item-select">
+                    <option value="0" class="item-select-option">Disabled</option>
+                    <option value="1" class="item-select-option">Silent</option>
+                    <option value="2" class="item-select-option" selected="selected">Weak</option>
+                    <option value="3" class="item-select-option">Normal</option>
+                    <option value="4" class="item-select-option">Strong</option>
+                    <option value="5" class="item-select-option">Double</option>
+                </select>
+            </label>
+
+            <label class="item" id="xdivbluetoothIcon" style="display:none">
+                Bluetooth Icon
+                <select id="bluetoothIcon" class="item-select">
+                    <option value="0" class="item-select-option">Always Visible</option>
+                    <option value="1" class="item-select-option">Hide Connected</option>
+                    <option value="2" class="item-select-option">Always Hidden</option>
+                </select>
+            </label>
+        </div>
+
+        <div class="item-container-header">Time Options</div>
+        <div class="item-container-content">
+
+            <label class="item">
+                Time Separator
+                <select id="timeSeparator" class="item-select">
+                    <option value="0" class="item-select-option" selected="selected">Colon</option>
+                    <option value="1" class="item-select-option">Dot</option>
+                </select>
+            </label>
+
+            <label class="item">
+                Main Clock
+                <select id="mainClock" class="item-select">
+                    <option value="0" class="item-select-option" selected="selected">Analog</option>
+                    <option value="1" class="item-select-option">Digital</option>
+                </select>
+            </label>
+
+            <label class="item" id="xdivSecondHand">
+                Enable Second Hand
+                <input type="checkbox" class="item-toggle" id="secondHand" checked="checked">
+            </label>
+
+            <label class="item">
+                <span id="secondaryInfoLabel">Secondary Info</span>
+                <select id="secondaryInfoType" class="item-select">
+                    <optgroup label="Select Option">
+                        <option value="3" class="item-select-option">Disabled</option>
+
+                        <option id="optLocationStreet" value="2" class="item-select-option">Current Location</option>
+                        <option id="optLocationTown" value="6" style="display:none" class="item-select-option">Location (town)</option>
+                        <option id="optLocationCountry" value="7" style="display:none" class="item-select-option">Location (state)</option>
+
+                        <option value="1" class="item-select-option" selected="selected">Local Time</option>
+                        <option value="4" class="item-select-option" style="display:none">Local Military Time</option>
+                        <option id="optUtcMilitaryTime" value="0" data-timezone="UTC" class="item-select-option" style="display:none">UTC Military Time</option> <!--0 - UTC timezone offset--> 
+                        <option value="5" class="item-select-option" style="display:none">Step Counter</option>
+                    </optgroup>
+
+                    <optgroup label="Or Timezone">
+                        <!--UTC timezone offcets in minutes-->
+                        <option value="480" data-timezone="BJS" data-coordinates="lat=39.90615&lng=116.39125" class="item-select-option">Beijing Time</option>
+                        <option value="60" data-timezone="BRU" data-coordinates="lat=50.84683&lng=4.35170" class="item-select-option">Brussels Time</option>
+                        <option value="-180" data-timezone="BUE" data-coordinates="lat=-34.61607&lng=-58.43329" class="item-select-option">Buenos Aires Time</option>
+                        <option value="130" data-timezone="CAI" data-coordinates="lat=30.03503&lng=31.56475" class="item-select-option">Cairo Time</option>
+                        <option value="420" data-timezone="JKT" data-coordinates="lat=-6.17542&lng=106.82718" class="item-select-option">Jakarta Time</option>
+                        <option value="480" data-timezone="HKG" data-coordinates="lat=22.27942&lng=114.16281" class="item-select-option">Hong Kong Time</option>
+                        <option value="60" data-timezone="LON" data-coordinates="lat=51.5074&lng=-0.1278" class="item-select-option">London Time</option>
+                        <option value="-480" data-timezone="LAX" data-coordinates="lat=34.02106&lng=-118.41174" class="item-select-option">Los Angeles Time</option>
+                        <option value="60" data-timezone="MAD" data-coordinates="lat=40.47806&lng=-3.70343" class="item-select-option">Madrid Time</option>
+                        <option value="-600" data-timezone="MEL" data-coordinates="lat=-37.81439&lng=144.96316" class="item-select-option">Melbourne Time</option>
+                        <option value="-360" data-timezone="MEX" data-coordinates="lat=19.43261&lng=-99.13321" class="item-select-option">Mexico City Time</option>
+                        <option value="180" data-timezone="MOW" data-coordinates="lat=55.72520&lng=37.62896" class="item-select-option">Moscow Time</option>
+                        <option value="330" data-timezone="DEL" data-coordinates="lat=28.64431&lng=77.09239" class="item-select-option">New Delhi Time</option>
+                        <option value="-300" data-timezone="NYC" data-coordinates="lat=40.69785&lng=-73.97963" class="item-select-option">New York Time</option>
+                        <option value="60" data-timezone="PAR" data-coordinates="lat=48.85888&lng=2.34694" class="item-select-option">Paris Time</option>
+                        <option value="60" data-timezone="ROM" data-coordinates="lat=41.89880&lng=12.54513" class="item-select-option">Rome Time</option>
+                        <option value="600" data-timezone="SYD" data-coordinates="lat=-33.76965&lng=150.80178" class="item-select-option">Sydney Time</option>
+                        <option value="540" data-timezone="TYO" data-coordinates="lat=35.6895&lng=139.6917" class="item-select-option">Tokyo Time</option>
+                        <option value="-300" data-timezone="DCA" data-coordinates="lat=38.89381&lng=-77.01457" class="item-select-option">Washington</option>
+                    </optgroup>
+
+                </select>
+            </label>
+
+            <label class="item" id="xdivampmText" style="display:none">
+                <span id="ampmTitle">Text to replace AM/PM slot</span>
+                <div class="item-input-wrapper item-input-wrapper-button">
+                    <input type="text" id="ampmText" class="item-input" maxlength="14" placeholder="Leave blank for auto" style="color:black">
+                </div>
+            </label>
+
+        </div>
+
+        <div class="item-container-header">Weather Options</div>
+        <div class="item-container-content">
+
+            <label class="item" id="lblForecastIoApiKey" style="display:none">
+                Forecast.io API Key
+                <div class="item-input-wrapper item-input-wrapper-button">
+                    <input type="text" id="xtxtForecastIoApiKey" class="item-input" placeholder="API KEY" style="color:black">
+                </div>
+                <div style="font-size:small;">
+                    Register at https://developer.forecast.io to receive API Key. This is a one time procedure, no billing information required there.
+                </div>
+            </label>
+
+            <label class="item">
+                Display Temperature in
+                <select id="temperatureFormat" class="item-select">
+                    <option id="optF" value="0" class="item-select-option">Fahrenheit</option>
+                    <option id="optC" value="1" class="item-select-option">Celsius</option>
+                </select>
+            </label>
+
+            <label class="item" id="xDivLocationSelection">
+                Weather Location
+                <select id="locationService" class="item-select">
+                    <option id="automatic" value="0" class="item-select-option">Automatic</option>
+                    <option id="manual" value="1" class="item-select-option">Manual</option>
+                    <option id="disabled" value="2" class="item-select-option">Disabled</option>
+                </select>
+
+                <div class="item-container" id="xDivWOID" style="display:none">
+                    <div class="item-container-header" id="woeidTite">Please enter WOEID</div>
+                    <div class="item-container-content">
+                        <label class="item">
+                            <div class="item-input-wrapper item-input-wrapper-button">
+                                <input type="text" id="xtxtWOEID" class="item-input" style="color:black">
+                            </div>
+                            <input type="button" class="item-button item-input-button" value="LOOKUP" id="xbtnWOEID">
+                        </label>
+                    </div>
+                </div>
+            </label>
+
+            <label class="item" id="xDivWeatherInterval">
+                Weather Update
+                <select id="weatherInterval" class="item-select">
+                    <option id="opt15" value="15" class="item-select-option">Every 15 minutes</option>
+                    <option id="opt30" value="30" class="item-select-option">Every half an hour</option>
+                    <option id="opt60" value="60" class="item-select-option">Every hour</option>
+                </select>
+            </label>
+
+            </div>
+
+        <div class="item-container-header">Appearance Options</div>
+        <div class="item-container-content">
+
+            <label class="item" id="xDivSidebarLocation" style="display:none">
+                Sidebar location
+                <select id="sidebarLocation" class="item-select">
+                    <option value="0" class="item-select-option" selected="selected">Right</option>
+                    <option value="1" class="item-select-option">Left</option>
+                </select>
+            </label>
+
+            <div class="nonaplite">
+
+                <label class="item">
+                    Color Selection
+                    <select id="colorSelection" class="item-select">
+                        <option value="0" class="item-select-option" selected="selected">Automatic</option>
+                        <option value="1" class="item-select-option">Custom</option>
+                    </select>
+                </label>
+
+                <div id="xDivColorSelection" style="display:none">
+                    <label class="item">
+                        Main BG Color
+                        <input type="text" class="item-color item-color-normal" id="mainBgColor" value="#000000">
+                    </label>
+
+                    <label class="item">
+                        Main Text/Hands Color
+                        <input type="text" class="item-color item-color-normal" id="mainColor" value="#FFFFFF">
+                    </label>
+
+                    <label class="item">
+                        <span id="labelsidebarBgColor">Sidebar BG/Second Hand Color</span>
+                        <input type="text" class="item-color item-color-normal" id="sidebarBgColor" value="#00FF00">
+                    </label>
+
+                    <label class="item">
+                        <span id="labelsidebarColor">Sidebar Text Color</span>
+                        <input type="text" class="item-color item-color-normal" id="sidebarColor" value="#000000">
+                    </label>
+                </div>
+
+            </div>
+
+            </div>
+
+        </div>
+    
+    <div class="item-container popup" id="xDivWOIDlookup">
+        <div class="item-container-header">Location (city/state/country/postal)</div>
+        <div class="item-container-content">
+            <label class="item">
+                <div class="item-input-wrapper item-input-wrapper-button">
+                    <input type="text" id="xtxtAddress" class="item-input" placeholder="City/state/country/postal code" style="color:black">
+                </div>
+                <input type="button" class=" item-button item-input-button" value="SEARCH" id="xbtnWOEIDlookup">
+                <div id="results" style="font-size:12px; color:black"></div>
+                <input type="button" class=" item-button" value="Close" id="xbtnWOEIDlookup" style="width:70px; margin-top:10px" onclick="$('#xDivWOIDlookup').hide();">
+            </label>
+        </div>
+    </div>
+
+    <div class="item-container">
+        <div class="button-container">
+            <input type="button" class="item-button" value="SAVE" id="xbtnSave">
+        </div>
+    </div>
+
+    <div class="item-container">
+        <div class="button-container">
+            <input type="button" class="item-button" value="CANCEL" id="xbtnCancel">
+        </div>
+    </div>
+
+    <div class="item-container">
+        <div class="button-container">
+            <input type="button" value="My Starbucks fund" class="item-button" name="submit" onclick="location.href='https://www.paypal.me/yuriygalanter';">
+        </div>
+    </div>
+
+    <div class="item-container">
+        <div class="item-container-content">
+            <div class="item" style="font-size:small; line-height:130%">
+                If you like this watchface and would like to see it further developed as well as other wonderful Pebble apps and faces created, please know - I run on coffee. It's an essential fuel for inspiration and creativity. So if you click the Fund button above (or the ad below) - I won't run out of fuel :) Thanks!
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        var MAIN_CLOCK_ANALOG = 0;
+        var MAIN_CLOCK_DIGITAL = 1;
+
+        var SECOND_HAND_DISABLED = 0;
+        var SECOND_HAND_ENABLED = 1;
+
+        var BLUETOOTH_ALERT_DISABLED = 0;
+        var BLUETOOTH_ALERT_SILENT = 1;
+        var BLUETOOTH_ALERT_WEAK = 2;
+        var BLUETOOTH_ALERT_NORMAL = 3;
+        var BLUETOOTH_ALERT_STRONG = 4;
+        var BLUETOOTH_ALERT_DOUBLE = 5;
+
+        var TEMPERATURE_FAHRENHEIT = 0;
+        var TEMPERATURE_CELSIUS = 1;
+
+        var LOCATION_AUTOMATIC = 0;
+        var LOCATION_MANUAL = 1;
+        var LOCATION_DISABLED = 2;
+
+        var SECONDARY_INFO_DISABLED = 3;
+        var SECONDARY_INFO_CURRENT_TIME = 1;
+
+        var SECONDARY_INFO_CURRENT_LOCATION_STREET_LEVEL = 2;
+        var SECONDARY_INFO_CURRENT_LOCATION_TOWN_LEVEL = 6;
+        var SECONDARY_INFO_CURRENT_LOCATION_COUNTRY_LEVEL = 7;
+
+        var SECONDARY_INFO_CURRENT_MILITARY_TIME = 4;
+        var SECONDARY_INFO_UTC_MILITARY_TIME = 0;
+        var SECONDARY_INFO_HEALTH_STEP_COUNTER = 5;
+        //otherwise timezone offset
+
+        var TIME_SEPARATOR_COLON = 0;
+        var TIME_SEPARATOR_DOT = 1;
+
+        var SIDEBAR_LOCATION_RIGHT = 0;
+        var SIDEBAR_LOCATION_LEFT = 1;
+
+        var COLOR_SELECTION_AUTOMATIC = 0;
+        var COLOR_SELECTION_CUSTOM = 1;
+
+        var BLUETOOTH_ICON_ALWAYS_VISIBLE = 0;
+        var BLUETOOTH_ICON_HIDDEN_WHEN_CONNECTED = 1;
+        var BLUETOOTH_ICON_ALWAYS_HIDDEN = 1;
+
+
+        var settings;
+
+        // to get value of query string
+        function getURLVariable(name) {
+            name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var regexS = "[\\?&]" + name + "=([^&#]*)",
+                regex = new RegExp(regexS),
+                results = regex.exec(window.location.href);
+            if (results == null) return "";
+            else return results[1];
+        }
+
+        $(document).ready(function () {
+
+            // loading settings
+            try {
+                settings = JSON.parse(localStorage.getItem("pebstyle_settings"));
+            }
+            catch (err) {
+                settings = null;
+            }
+
+            if (settings == null) {
+                settings = {
+                    mainClock: MAIN_CLOCK_ANALOG,
+                    bluetoothAlert: BLUETOOTH_ALERT_WEAK,
+                    bluetoothIcon: BLUETOOTH_ICON_ALWAYS_VISIBLE,
+                    secondHand: SECOND_HAND_ENABLED,
+                    temperatureFormat: TEMPERATURE_FAHRENHEIT,
+                    locationService: LOCATION_AUTOMATIC,
+                    secondaryInfoType: SECONDARY_INFO_CURRENT_TIME,
+                    timeZoneName: '',
+                    ampmText:'',
+                    woeid: getURLVariable('version') >= '2.18'? '' : 0,
+                    weatherInterval: 60,
+                    timeSeparator: TIME_SEPARATOR_COLON,
+                    sidebarLocation: SIDEBAR_LOCATION_RIGHT,
+                    colorSelection: COLOR_SELECTION_AUTOMATIC,
+                    mainBgColor: GColor.Black,
+                    mainColor: GColor.White,
+                    sidebarBgColor: GColor.Black,
+                    sidebarColor: GColor.White,
+                    forecastIoApiKey: ''
+                };
+            }
+
+            
+            // setting dropdown values
+            $('#mainClock').val(settings.mainClock != null ? settings.mainClock: MAIN_CLOCK_ANALOG);
+
+            //hiding second hand selection for large time
+            if (settings.mainClock == MAIN_CLOCK_DIGITAL) {
+                $('#xdivSecondHand').hide();
+                $('#secondHand').prop('checked', false);
+            } else {
+                $('#secondHand').prop('checked', settings.secondHand == SECOND_HAND_ENABLED ? 'checked' : '');
+            }
+
+            $('#bluetoothAlert').val(settings.bluetoothAlert != null ? settings.bluetoothAlert : BLUETOOTH_ALERT_WEAK);
+            $('#temperatureFormat').val(settings.temperatureFormat != null ? settings.temperatureFormat : TEMPERATURE_FAHRENHEIT);
+            $('#locationService').val(settings.locationService != null ? settings.locationService : 0); // reading location and if manual - setting WOEID as well
+            $('#timeSeparator').val(settings.timeSeparator != null ? settings.timeSeparator : TIME_SEPARATOR_COLON);
+
+            switch (settings.secondaryInfoType) {
+                case SECONDARY_INFO_DISABLED:
+                case SECONDARY_INFO_CURRENT_TIME:
+                case SECONDARY_INFO_CURRENT_MILITARY_TIME:
+                case SECONDARY_INFO_CURRENT_LOCATION_STREET_LEVEL:
+                case SECONDARY_INFO_CURRENT_LOCATION_TOWN_LEVEL:
+                case SECONDARY_INFO_CURRENT_LOCATION_COUNTRY_LEVEL:
+                case SECONDARY_INFO_HEALTH_STEP_COUNTER:
+                    $('#secondaryInfoType').val(settings.secondaryInfoType);
+                    break;
+                default:
+                    $('*[data-timezone="' + settings.timeZoneName + '"]').prop('selected', true);
+                    break;
+            }
+
+            if (getURLVariable("platform") == "chalk") {
+                $("#secondaryInfoLabel").html("Circle bottom")
+            }
+            
+
+
+            //adjusting weather visuals based on location service type
+            switch (settings.locationService) {
+                case LOCATION_MANUAL:
+                    $('#xtxtWOEID').val(settings.woeid);
+                    $('#xDivWOID').show();
+                    break;
+                case LOCATION_AUTOMATIC:
+                    $('#xtxtWOEID').val('');
+                    $('#xDivWOID').hide();
+                    break;
+                case LOCATION_DISABLED:
+                    $('#xDivWeatherInterval').hide();
+                    break;
+            }
+
+            $('#weatherInterval').val(settings.weatherInterval != null ? settings.weatherInterval : 60); // reading update interval and if not set - make it an hour
+
+
+            //if version is equal or above '1.232' - enable these functions
+            if (getURLVariable('version') >= '1.232') {
+
+                //enabling sidebar location (only not for chalk)
+                if (getURLVariable("platform") != "chalk") {
+                    $('#xDivSidebarLocation').show();
+                    $('#sidebarLocation').val(settings.sidebarLocation != null ? settings.sidebarLocation : SIDEBAR_LOCATION_RIGHT);
+                }
+
+                if (getURLVariable("platform") != "aplite" || getURLVariable('version') >= '1.3') { // enabling color selection on color wacthes or aplite SDK3+ that has grey
+                    $(".nonaplite").css("display", "block");
+
+                    //hiding unavailable colors from aplite
+                    if (getURLVariable("platform") == "aplite") {
+
+                        $("i").filter(function (index) {
+                            return $(this).data("value") != "0xFFFFFF" && $(this).data("value") != "0x000000" && $(this).data("value") != "0xAAAAAA"
+                        }).hide()
+
+                        $("i").filter(function (index) {
+                            return $(this).data("value") == "0xFFFFFF" || $(this).data("value") == "0x000000" || $(this).data("value") == "0xAAAAAA"
+                        }).css("border", "solid 1px black")
+
+                    }
+
+                    $('#colorSelection').val(settings.colorSelection != null ? settings.colorSelection : COLOR_SELECTION_AUTOMATIC);
+
+                    if (settings.colorSelection == COLOR_SELECTION_CUSTOM) {
+                        $('#xDivColorSelection').show();
+                    }
+
+                    //showing colors
+                    if (settings.mainBgColor) {
+                        $("#mainBgColor ~ div > span").css("background-color", "#" + GColor.toHex(settings.mainBgColor));
+                        $("#mainBgColor").val("0x" + GColor.toHex(settings.mainBgColor));
+
+                        $("#mainColor ~ div > span").css("background-color", "#" + GColor.toHex(settings.mainColor));
+                        $("#mainColor").val("0x" + GColor.toHex(settings.mainColor));
+
+                        $("#sidebarBgColor ~ div > span").css("background-color", "#" + GColor.toHex(settings.sidebarBgColor));
+                        $("#sidebarBgColor").val("0x" + GColor.toHex(settings.sidebarBgColor));
+
+                        $("#sidebarColor ~ div > span").css("background-color", "#" + GColor.toHex(settings.sidebarColor));
+                        $("#sidebarColor").val("0x" + GColor.toHex(settings.sidebarColor));
+                    }
+
+                }
+
+                //changing titles for Chalk
+                if (getURLVariable("platform") == "chalk") {
+
+                    $("#labelsidebarBgColor").html("Circle BG/Second Hand color");
+                    $("#labelsidebarColor").html("Circle Text/Icon color");
+                   
+                }
+                
+
+            }
+
+            //if version is equal or above '2.02' - enable these functions
+            if (getURLVariable('version') >= '2.02') {
+
+                //showing custom am/pm text
+                $('#xdivampmText').show();
+                $('#ampmText').val(settings.ampmText ? settings.ampmText : '');
+
+                //for chalk changing text of ampm label and limitation of characters
+                if (getURLVariable("platform") == "chalk") {
+                    $("#ampmTitle").html("Text to display on circle top")
+                }
+
+                //showing bluetooth icon visibility
+                if (settings.bluetoothAlert != BLUETOOTH_ALERT_DISABLED) {
+                    $('#xdivbluetoothIcon').show();
+                    $('#bluetoothIcon').val(settings.bluetoothIcon ? settings.bluetoothIcon : BLUETOOTH_ICON_ALWAYS_VISIBLE);
+                }
+
+
+            }
+
+            if (getURLVariable('version') >= '2.03' /* && getURLVariable("platform") != "chalk" */) {
+                $('#ampmText').prop("maxlength", 40);
+            }
+            
+            if (getURLVariable('version') >= '2.10' ) { // enabling option "military time" for secondary info
+                $('#secondaryInfoType option[value="4"]').css('display','');
+            }
+
+            if (getURLVariable('version') >= '2.13' && getURLVariable("platform")!= "aplite") { // enabling option "step counter" for secondary info
+                $('#secondaryInfoType option[value="5"]').css('display', '');
+            }
+
+            //after version 2.17 switched to Forecast.IO weather and Nominatim geocoding
+            if (getURLVariable('version') >= '2.17') {
+
+                if (getURLVariable('version') >= '2.18') {
+                    //renaming woeid
+                    $('#woeidTite').html('Please enter coordinates: lat,long');
+
+                } else {
+                    //disabling manual location
+                    if ($('#locationService').val() == LOCATION_MANUAL) {
+                        $('#locationService').val(LOCATION_AUTOMATIC);
+                        $('#xDivWOID').hide();
+                    }
+                    $('#manual').hide();
+                }
+
+
+                //showing input box for Forecast IO API Key
+                $('#lblForecastIoApiKey').show();
+
+                //restoring saved API key
+                $('#xtxtForecastIoApiKey').val(settings.forecastIoApiKey ? settings.forecastIoApiKey : '');
+            }
+
+            // after version 2.21 enable detailed location
+            if (getURLVariable('version') >= '2.21') {
+                $("#optLocationStreet").html("Location (street)");
+                $("#optLocationTown").show();
+                $("#optLocationCountry").show();
+
+            }
+
+
+            // after version 2.23 enable UTC Military Time
+            if (getURLVariable('version') >= '2.23') {
+                $("#optUtcMilitaryTime").show();
+            }
+
+
+            //assigning save button
+            $('#xbtnSave').click(function () {
+
+                // saving colors
+                settings.mainBgColor = GColor.fromHex($("#mainBgColor").val());
+                settings.mainColor = GColor.fromHex($("#mainColor").val());
+                settings.sidebarBgColor = GColor.fromHex($("#sidebarBgColor").val());
+                settings.sidebarColor = GColor.fromHex($("#sidebarColor").val());
+
+
+                if ($('#locationService').val() == '1') { // if we selected manual location check and save WOEID
+                    if ($('#xtxtWOEID').val() == '') {
+                        if (getURLVariable('version') >= '2.18') alert('Please enter coordinates');
+                        else alert('Please enter WOEID');
+                        return;
+                    }
+                }
+
+                settings.woeid = getURLVariable('version') >= '2.18'? $('#xtxtWOEID').val() : parseInt($('#xtxtWOEID').val());
+                settings.forecastIoApiKey = $('#xtxtForecastIoApiKey').val();
+
+                var selS = $('#secondaryInfoType').get(0);
+                settings.timeZoneName = selS[selS.selectedIndex].getAttribute('data-timezone');
+
+                settings.ampmText = $('#ampmText').val();
+
+                localStorage.setItem("pebstyle_settings", JSON.stringify(settings));
+
+                var location = (decodeURIComponent(getURLVariable('return_to')) || "pebblejs://close#") + encodeURIComponent(JSON.stringify(settings));
+                document.location = location;
+
+            })
+
+            //assigning cancel button
+            $('#xbtnCancel').click(function () {
+
+                var location = decodeURIComponent(getURLVariable('return_to')) || "pebblejs://close#";
+                document.location = location;
+
+            })
+
+            //assigning checkboxes
+            $("input[type=checkbox]").change(function () {
+                settings[this.id] = this.checked ? 1 : 0;
+            });
+
+
+            //getting value of dropdowns
+            $('select').change(function (e) {
+                e.preventDefault();
+                var intVal = parseInt(this.value);
+                settings[this.id] = intVal;
+
+                //for location selection also checking if textbox needed for manual WOEID
+                if (this.id == 'locationService') {
+                    if (this.options[this.selectedIndex].value == LOCATION_MANUAL) {
+                        $('#xDivWOID').show();
+                    } else {
+                        $('#xDivWOID').hide();
+                    }
+
+                    // hide weather interval if weather is disabled
+                    if (this.options[this.selectedIndex].value == LOCATION_DISABLED) {
+                        $('#xDivWeatherInterval').hide();
+                    } else {
+                        $('#xDivWeatherInterval').show();
+                    }
+
+
+                }
+
+                if (this.id == 'mainClock') {
+                    if (this.options[this.selectedIndex].value == MAIN_CLOCK_ANALOG) {
+                        $('#xdivSecondHand').show();
+                    } else {
+                        $('#secondHand').prop('checked', false);
+                        $('#xdivSecondHand').hide();
+                        settings.secondHand = SECOND_HAND_DISABLED;
+                    }
+                }
+
+
+                // showing colors if custom color selection is selected
+                if (this.id == 'colorSelection') {
+
+                    if (this.options[this.selectedIndex].value == COLOR_SELECTION_CUSTOM) {
+                        $('#xDivColorSelection').show();
+                    } else {
+                        $('#xDivColorSelection').hide();
+                    }
+
+                }
+
+
+                //showing hiding bluetooth icon visibility depending on bluetooth alert type
+                if (this.id == 'bluetoothAlert' && getURLVariable('version') >= '2.02') {
+
+                    if (this.options[this.selectedIndex].value != BLUETOOTH_ALERT_DISABLED) {
+                        $('#xdivbluetoothIcon').show();
+                    } else {
+                        $('#xdivbluetoothIcon').hide();
+                    }
+
+                }
+
+                // YG 2016-05-09: Now getting timezone offset dynamically (so it's always correct event with DST)
+                if (this.id == 'secondaryInfoType' && this.options[this.selectedIndex].getAttribute('data-coordinates') != null) {
+                    var that = this;
+
+                    $.getJSON('http://api.timezonedb.com/?' + this.options[this.selectedIndex].getAttribute('data-coordinates') + '&key=2F2TELTVDRIB&format=json', function (data) {
+                        that.options[that.selectedIndex].value = parseInt(data.gmtOffset) / 60;
+                        settings[that.id] = parseInt(data.gmtOffset) / 60;
+                    })
+
+                }
+
+
+            })
+
+            //showing WHOEID lookup screen
+            $('#xbtnWOEID').click(function (e) {
+                $('#results').children().remove();
+                $('#xtxtAddress').val('');
+                $('#xDivWOIDlookup').show();
+                window.scrollTo(0, 0);
+            })
+
+            //WOEID lookup
+            $('#xbtnWOEIDlookup').click(function (e) {
+                e.preventDefault();
+                $('#results').children().remove();
+
+
+                if (getURLVariable('version') >= '2.18') { //for this version and after use lat,long lookup for forecast.io 
+
+                    $.getJSON('http://nominatim.openstreetmap.org/search?q=' + $('#xtxtAddress').val() + '&format=json', function (data) {
+
+                        if (data.count == 0) { // no results
+                            $('#results').append('<div>No Results</div>');
+                        } else { //looping thru results
+                            $('#results').append('<div><i>Tap location below to get coordinates</i></div>');
+                            $('#results').append('<hr/>');
+                            for (i = 0; i < data.length; i++) {
+                                result = data[i];
+                                $('#results').append('<div onclick = "$(\'#xtxtWOEID\').val(\'' + result.lat + ',' + result.lon + '\');$(\'#xDivWOIDlookup\').hide();">' + 
+                                    (result.display_name.length > 60? result.display_name.substring(0, 57) + '...': result.display_name) +
+                                  '</div>');
+                            }
+                        }
+                    })
+
+
+
+
+
+                } else { // otherwise use original Yahoo lookup
+
+                    $.getJSON('http://query.yahooapis.com/v1/public/yql', { 'q': 'select * from geo.places where text="' + $('#xtxtAddress').val() + '"', 'format': 'json' }, function (data) {
+                        console.log(data);
+
+                        if (data.query.count == 0) { // no results
+                            $('#results').append('<div>No Results</div>');
+                        } else if (data.query.count == 1) { // single result
+                            result = data.query.results.place;
+                            $('#results').append('<div onclick = "$(\'#xtxtWOEID\').val(' + result.woeid + ');$(\'#xDivWOIDlookup\').hide();">' + result.name + ', ' + result.admin1.content + ' (' + result.admin1.code + ') WOEID: <span style="font-weight:bold">' + result.woeid + '</span></div>');
+                        } else { // no results
+                            for (i = 0; i < data.query.count; i++) {
+                                result = data.query.results.place[i];
+                                $('#results').append('<div onclick = "$(\'#xtxtWOEID\').val(' + result.woeid + ');$(\'#xDivWOIDlookup\').hide();">' + result.name + ', ' + result.admin1.content + ' (' + result.admin1.code + ') WOEID: <span style="font-weight:bold">' + result.woeid + '</span></div>');
+                            }
+                        }
+                    })
+                }
+
+            })
+
+
+        }
+     )
+
+    </script>
+
+    <script async="" src="/pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <!-- Pebble Config -->
+    <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-8184318363505287" data-ad-slot="7086382952" data-ad-format="auto"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+</body>
+
+</html>

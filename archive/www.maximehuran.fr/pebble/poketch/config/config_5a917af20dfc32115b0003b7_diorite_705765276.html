@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Pokétech++ Configuration</title>
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+    <style>
+        body {
+            background-color: #74AE61;
+            text-align: center;
+            font-family: 'Press Start 2P', cursive;
+            color: #224116
+        }
+
+        h1 {
+            margin: 0
+        }
+
+        input {
+            height: 1.5em;
+            font-size: 1em
+        }
+
+        div {
+            margin: 0.5em;
+            line-height: 20px;
+        }
+
+        input[type=submit] {
+            width: 50%;
+            min-width: 250px;
+            margin: auto;
+            display: block;
+            border: 5px solid #224116;
+            background-color: #74AE61;
+            font-family: 'Press Start 2P', cursive;
+            color: #224116;
+            line-height: 2.5em;
+            height: 3em;
+            cursor: pointer;
+        }
+
+        .container input[type=checkbox] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .checkmark {
+            position: absolute;
+            margin-top: -15px;
+            height: 25px;
+            width: 25px;
+            border: 5px solid #224116;
+            background-color: #74AE61;
+            cursor: pointer;
+        }
+
+        .container input:checked ~ .checkmark {
+            background-color: #224116;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .container input:checked ~ .checkmark:after {
+            display: block;
+        }
+
+        .container .checkmark:after {
+            left: 9px;
+            top: 5px;
+            width: 5px;
+            height: 10px;
+            border: solid #74AE61;
+            border-width: 0 3px 3px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .param {
+            display: inline-table;
+            width: 95%;
+            height: 3em
+        }
+
+        .label, .checkbox {
+            display: table-cell;
+            vertical-align: middle
+        }
+
+        .label {
+            text-align: left
+        }
+
+        .checkbox {
+            text-align: right;
+            width: 1.5em;
+            height: 1.5em
+        }
+
+        .example {
+            width: 75%;
+            display: inline-block;
+            text-align: left;
+            font-size: 0.6em
+        }
+
+        hr {
+            margin: 15px 0;
+            color: #224116;
+            background-color: #224116;
+            border: 0;
+            height: 5px;
+        }
+    </style>
+    <script>
+        var config = JSON.parse(getQueryParam('config', '{}'));
+
+        // Function on load
+        function putConfig() {
+            for (var param in config) {
+                var element = document.getElementById(param);
+                if (element) {
+                    if (typeof config[param] === 'boolean') {
+                        element.checked = config[param];
+                    } else {
+                        element.value = config[param];
+                    }
+                }
+            }
+        }
+
+        // Determine the correct return URL (emulator vs real watch)
+        function getQueryParam(variable, defaultValue) {
+            var query = location.search.substring(1);
+            var vars = query.split('&');
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (pair[0] === variable) {
+                    return decodeURIComponent(pair[1]);
+                }
+            }
+            return defaultValue || false;
+        }
+
+        // Function on submit
+        function getConfig() {
+            var form = document.getElementById('config_form');
+            for (config = {}, i = 0; i < form.length; i++) {
+                id = form[i].id;
+                if (form[i].type === 'submit') {
+                    continue;
+                } else if (form[i].type === 'checkbox') {
+                    config[id] = form[i].checked;
+                } else {
+                    config[id] = parseInt(form[i].value);
+                }
+            }
+
+            var return_to = getQueryParam('return_to', 'pebblejs://close#');
+            return window.location.href = return_to + encodeURIComponent(JSON.stringify(config));
+        }
+    </script>
+</head>
+<body onload="putConfig();">
+<h1>Pokétech++</h1>
+<small>By MiniMax</small>
+<hr size="1">
+<form action="javascript: getConfig();" id="config_form">
+    <div>Enjoy \o/ Configuration is available! More features and configuration soon !</div>
+    <hr size="1">
+    <div class="param">
+        <div class="label">
+            Vibe on disconnect<br>
+            <small>Vibe when phone is disconnected</small>
+        </div>
+        <div class="checkbox">
+            <label class="container">
+                <input type="checkbox" id="vibe_on_disconnect">
+                <span class="checkmark"></span>
+            </label>
+        </div>
+    </div>
+    <hr size="1">
+    <input type="submit" id="save" value="Save and apply">
+</form>
+</body>
+</html>

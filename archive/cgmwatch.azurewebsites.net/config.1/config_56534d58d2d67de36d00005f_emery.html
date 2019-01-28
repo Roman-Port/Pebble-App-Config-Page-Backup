@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<html>
+  
+  <head>
+    <title>Simple CGM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+  </head>
+  
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Settings</h1>
+      </div>
+      <div data-role="content">
+        <div class="ui-body ui-body-b" id="form-shower">
+          <form>
+            <select id="mode" style="width: 100%;">
+              <option value="none">Select Mode (REQUIRED):</option>
+              <option value="Share">Share</option>
+              <option value="Nightscout">Nightscout</option>
+              <option value="Carelink">Carelink [NOT WORKING]</option>
+              <option value="Rogue">Rogue [CUSTOM CODE]</option>
+            </select>
+          </form>
+        </div>
+        <form name="Share" id="Share" style="display:none" onsubmit="wrapSubmit()">
+          <label for="regions" class="select">Region:</label>
+          <select name="region" id="region" style="width: 100%;">
+              <option value="usa">USA</option>
+              <option value="outside">Outside USA</option>
+          </select>
+        
+          <label for="accountName">Share Username: </label>
+          <input type="text" name="accountName" id="accountName" value="" autocapitalize="off" autocorrect="off">
+          <label for="password">Share Password: </label>
+          <input type="password" name="password" id="password" value="">
+          <label for="remember">Remember Password</label>
+          <input type="checkbox" name="remember" id="remember">
+        </form>
+        <form name="Nightscout" id="Nightscout" style="display:none" onsubmit="wrapSubmit()"><div data-role="fieldcontain">
+            <label for="api_NS">NS Pebble Endpoint: </label>
+            <input type="text" name="api_ns" id="api_ns" value="" autocapitalize="off" autocorrect="off">
+            <label for="raw">Show Raw (EGV from unfiltered value) when data is not "clean"</label>
+          <input type="checkbox" name="raw" id="raw">    
+          </div>
+          </form>
+        <form name="Carelink" id="Carelink" style="display:none" onsubmit="wrapSubmit()">
+          <div data-role="fieldcontain">
+             <label for="accountName_cl">Carelink Username: </label>
+          <input type="text" name="accountName_cl" id="accountName_cl" value="" autocapitalize="off" autocorrect="off">
+          <label for="password_cl">Carelink Password: </label>
+          <input type="password" name="password_cl" id="password_cl" value="">
+          <label for="remember_cl">Remember Password</label>
+          <input type="checkbox" name="remember_cl" id="remember_cl">
+          </div>
+        </form>
+         <form name="Rogue" id="Rogue" style="display:none" onsubmit="wrapSubmit()">
+          <div data-role="fieldcontain">
+            <label for="api">API Endpoint: </label>
+            <input type="text" name="api" id="api" value="" autocapitalize="off" autocorrect="off">
+          </div>
+        </form>
+        <div class="ui-body ui-body-b" id="subcan">
+          <b>Options for all modes:</b>
+          <hr>
+          <label for="selectList">
+            <br>Unit:</label>
+          <select id="unit" style="width: 100%;">
+            <option value="mgdl">mg/dL</option>
+            <option value="mmol">mmol/l</option>
+          </select>
+          <label for="high">High Threshold:</label>
+          <input type="text" name="high" id="high" value="">
+          <label for="low">Low Threshold:</label>
+          <input type="text" name="low" id="low" value="">
+          <label for="selectList">
+            <br>Vibration:</label>
+          <select id="vibe" name="vibe" style="width: 100%;">
+            <option value="1">New BGs & Alerts</option>
+            <option value="0">Alerts Only</option>
+          </select>
+          <hr>
+          <fieldset class="ui-grid-a">
+            <div class="ui-block-a">
+              <button type="submit" data-theme="d" id="b-cancel">Cancel</button>
+            </div>
+            <div class="ui-block-b">
+              <input type="submit" data-theme="a" id="b-submit" value="Submit">
+            </div>
+          </fieldset>
+        </div>
+        <div class="ui-body ui-body-b" id="codes">
+          <h3>Error Codes</h3>
+          <h4>In most cases, either restarting watchface, checking bluetooth connection and/or relaunching the pebble smartphone app will address and fix these issues</h4>
+          <p>log: incorrect username and/or password </p>
+          <p>tot: time out error when getting data</p>
+          <p>svr: error with date from server</p>
+          <p>exc: exception; typically no data present</p>
+          <p>set: no watchface settings available</p>
+          <p>rst: unrecoverable communication error (reset watchface and/or pebble smartphone app)</p>
+          <p>ast: app message timeout</p>
+          <p>asr: app message send rejected</p>
+          <p>anc: app not connected</p>
+          <p>anr: app not running</p>
+          <p>aia: invalid argument</p>
+          <p>aby: app message busy</p>
+          <p>abo: buffer overflow</p>
+          <p>aar: message already released</p>
+          <p>car: callback already registered</p>
+          <p>cnr: callback not registered</p>
+          <p>oom: out of memory</p>
+          <p>acd: message closed</p>
+          <p>aie: internal error</p>   
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $("#mode").on("change", function() {
+          $("#" + $(this).val()).show().siblings().hide();
+          $("#form-shower").show();
+          $("#subcan").show();
+          $('#remember').prop('checked', $("#remember").is(':checked'));
+          $('#region').selectmenu("refresh",true);
+          $("#b-submit").prop("disabled", false);
+      })
+      function saveOptions() {
+        var options;
+        if ($("#mode").val()=="Nightscout") {
+          options = {
+          'mode': $("#mode").val(),
+          'accountName': $("#accountName").val(),
+          'password': $("#password").val(),
+          'high': $("#high").val(),
+          'low': $("#low").val(),
+          'unit': $("#unit").val(),
+          'vibe': $("#vibe").val(),
+          'api': $("#api_ns").val(),
+          'monogram': $("#monogram").val(),
+          'raw': $('#raw').is(':checked'), }
+        } else if ($("#mode").val()=="Carelink") {
+          options = {
+          'mode': $("#mode").val(),
+          'accountName_cl': $("#accountName_cl").val(),
+          'password_cl': $("#password_cl").val(),
+          'high': $("#high").val(),
+          'low': $("#low").val(),
+          'unit': $("#unit").val(),
+          'vibe': $("#vibe").val(),
+          'api': $("#api_ns").val(),
+          'monogram': $("#monogram").val(), }
+        
+        } else {
+           options = {
+          'mode': $("#mode").val(),
+          'accountName': $("#accountName").val(),
+          'password': $("#password").val(),
+          'high': $("#high").val(),
+          'low': $("#low").val(),
+          'unit': $("#unit").val(),
+          'vibe': $("#vibe").val(),
+          'api': $("#api").val(),
+          'region': $("#region").val(),
+          'monogram': $("#monogram").val(),
+        }
+          
+        }
+        return options;
+      }
+
+      function storeOptions() {
+        var options;
+  
+        options = {
+          'accountName': $("#accountName").val(),
+          'accountName_cl': $("#accountName_cl").val(),
+          'high': $("#high").val(),
+          'low': $("#low").val(),
+          'unit': $("#unit").val(),
+          'mode': $("#mode").val(),
+          'vibe': $("#vibe").val(),
+          'api': $("#api").val(),
+          'api_ns': $("#api_ns").val(),
+          'monogram': $("#monogram").val(),
+          'raw' : $("#raw").is(':checked'),
+          'region': $("#region").val(),
+          'remember' : $("#remember").is(':checked'),
+          'remember_cl' : $("#remember_cl").is(':checked'),
+        }
+        if ($("#remember").is(':checked') || $("#remember_cl").is(':checked'))
+        {
+          options.password = $("#password").val();
+          options.password_cl = $("#password_cl").val();
+        } else 
+        {
+          options.password = "";
+        }
+
+        return options;
+      }
+      
+      // Get query variables
+      function getQueryParam(variable, defaultValue) {
+        // Find all URL parameters
+        var query = location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+
+          // If the query variable parameter is found, decode it to use and return it for use
+          if (pair[0] === variable) {
+            return decodeURIComponent(pair[1]);
+          }
+        }
+        return defaultValue || false;
+      }
+      
+      function wrapSubmit() {
+         console.log("Submit");
+          var mode = $("#mode").val()
+          if (mode == 'none') {
+            alert('You must select a mode to submit settings.')
+          } else {
+            //var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+            window.localStorage.setItem('options', JSON.stringify(storeOptions()));
+            
+            var return_to = getQueryParam('return_to', 'pebblejs://close#');
+            document.location = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
+          
+            //console.log("Warping to: " + location);
+            //console.log(location);
+            //document.location = location;
+          }
+      }
+
+      $().ready(function() {
+        
+        var old_options = JSON.parse(window.localStorage.getItem('options')) || {   'mode': 'Share' ,
+            'high': 180,
+            'low' : 80,
+            'unit': 'mgdl',
+            'accountName': '',
+            'vibe' : 'new',
+            'api' : '',
+            
+        };
+        
+        //$("#mode option[value='"+ old_options.mode + "']").prop('selected', true);
+        $('#accountName').val(old_options.accountName);
+        $('#password').val(old_options.password);
+        $('#accountName_cl').val(old_options.accountName_cl);
+        $('#password_cl').val(old_options.password_cl);
+        $('#high').val(old_options.high);
+        $('#low').val(old_options.low);
+        $('#api').val(old_options.api);
+        $('#api_ns').val(old_options.api_ns);
+        $('#monogram').val(old_options.monogram);
+        $('#raw').prop('checked', old_options.raw).checkboxradio("refresh");
+        $('#remember').prop('checked', old_options.remember).checkboxradio("refresh");
+        $('#remember_cl').prop('checked', old_options.remember_cl).checkboxradio("refresh");
+        $("#unit option[value='"+ old_options.unit + "']").prop('selected', true);
+        $("#region option[value='"+ old_options.region + "']").prop('selected', true);
+        $("#vibe option[value='" + old_options.vibe +"']").prop('selected', true);
+
+        $('#unit').selectmenu("refresh",true);
+        $('#vibe').selectmenu("refresh",true);
+        
+        //$("#b-submit").prop("disabled", true);
+         
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+
+
+
+        $("#b-submit").click(function() {
+          wrapSubmit();
+        });
+
+      });
+    </script>
+  </body>
+
+</html>

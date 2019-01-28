@@ -1,0 +1,175 @@
+﻿<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		
+		<title>Verdandi Configuration</title>
+		
+		<link rel="stylesheet" type="text/css" href="/zerion7.com/pebble/verdandi/slate/css/slate.css">
+	</head>
+	<body>
+		<div class="item-container">
+			<div class="item-container-header">Date</div>
+			<div class="item-container-content">
+				<label class="item">
+					Format
+					<select id="dateformat" class="item-select">
+						<option class="item-select-option" value="0"></option><br>
+<b>Notice</b>:  Trying to get property 'dateformat' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>28</b><br>
+ selected>2019-01-28
+						<option class="item-select-option" value="1"></option><br>
+<b>Notice</b>:  Trying to get property 'dateformat' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>29</b><br>
+>Jan 28, 2019
+					</select>
+				</label>
+				<label class="item">
+					Foreground Color
+					<input type="text" class="item-color item-color-normal" id="color-date" value="<br />
+<b>Notice</b>:  Trying to get property 'color-date' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>34</b><br />
+">
+				</label>
+				<label class="item">
+					Background Color
+					<input type="text" class="item-color item-color-normal" id="color-date-back" value="<br />
+<b>Notice</b>:  Trying to get property 'color-date-back' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>38</b><br />
+">
+				</label>
+			</div>
+		</div>
+		
+		<div class="item-container">
+			<div class="item-container-header">Time</div>
+			<div class="item-container-content">
+				<label class="item">
+					Foreground Color
+					<input type="text" class="item-color item-color-normal" id="color-time-text" value="<br />
+<b>Notice</b>:  Trying to get property 'color-time-text' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>48</b><br />
+">
+				</label>
+				<label class="item">
+					Background Color
+					<input type="text" class="item-color item-color-normal" id="color-time" value="<br />
+<b>Notice</b>:  Trying to get property 'color-time' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>52</b><br />
+">
+				</label>
+			</div>
+		</div>
+		
+		<div class="item-container">
+			<div class="item-container-header">Weather</div>
+			<div class="item-container-content">
+				<label class="item">
+					Enabled
+					<input type="checkbox" class="item-toggle" id="weather-enabled"><br>
+<b>Notice</b>:  Trying to get property 'weather-enabled' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>62</b><br>
+>
+				</label>
+				<label class="item">
+					Inhibit updates while asleep
+					<input type="checkbox" class="item-toggle" id="weather-inhibit-asleep"><br>
+<b>Notice</b>:  Trying to get property 'weather-inhibit-asleep' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>66</b><br>
+>
+				</label>
+				<label class="item">
+					Units
+					<select id="units" class="item-select">
+						<option class="item-select-option" value="0"></option><br>
+<b>Notice</b>:  Trying to get property 'units' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>71</b><br>
+ selected>Kelvin
+						<option class="item-select-option" value="1"></option><br>
+<b>Notice</b>:  Trying to get property 'units' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>72</b><br>
+>Celsius
+						<option class="item-select-option" value="2"></option><br>
+<b>Notice</b>:  Trying to get property 'units' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>73</b><br>
+>Fahrenheit
+					</select>
+				</label>
+				<label class="item">
+					Foreground Color
+					<input type="text" class="item-color item-color-normal" id="color-weather" value="<br />
+<b>Notice</b>:  Trying to get property 'color-weather' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>78</b><br />
+">
+				</label>
+				<label class="item">
+					Background Color
+					<input type="text" class="item-color item-color-normal" id="color-weather-back" value="<br />
+<b>Notice</b>:  Trying to get property 'color-weather-back' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>82</b><br />
+">
+				</label>
+			</div>
+		</div>
+		
+		<div class="item-container">
+			<div class="item-container-header">Stale Weather</div>
+			<div class="item-container-content">
+				<label class="item">
+					Hide when stale
+					<input type="checkbox" class="item-toggle" id="weather-hide-stale"><br>
+<b>Notice</b>:  Trying to get property 'weather-hide-stale' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>92</b><br>
+>
+				</label>
+				<label class="item">
+					Foreground Color
+					<input type="text" class="item-color item-color-normal" id="color-weather-stale" value="<br />
+<b>Notice</b>:  Trying to get property 'color-weather-stale' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>96</b><br />
+">
+				</label>
+				<label class="item">
+					Background Color
+					<input type="text" class="item-color item-color-normal" id="color-weather-stale-back" value="<br />
+<b>Notice</b>:  Trying to get property 'color-weather-stale-back' of non-object in <b>/home/fedora/public_html/pebble/verdandi/config-1.12.php</b> on line <b>100</b><br />
+">
+				</label>
+			</div>
+			<div class="item-container-footer">
+				Weather will switch to these colors when the data is over 2 hours old.
+			</div>
+		</div>
+		
+		<div class="item-container">
+			<div class="button-container">
+				<input type="button" class="item-button" id="save" value="Save">
+			</div>
+		</div>
+		
+		<script>
+			document.addEventListener('DOMContentLoaded', function () {
+				var	button = document.getElementById('save'),
+					unitsSelect = document.getElementById('units'),
+					dateformatSelect = document.getElementById('dateformat'),
+					colorDateInput = document.getElementById('color-date'),
+					colorDateBackInput = document.getElementById('color-date-back'),
+					colorTimeInput = document.getElementById('color-time'),
+					colorTimeTextInput = document.getElementById('color-time-text'),
+					colorWeatherInput = document.getElementById('color-weather'),
+					colorWeatherBackInput = document.getElementById('color-weather-back'),
+					colorWeatherStaleInput = document.getElementById('color-weather-stale'),
+					colorWeatherStaleBackInput = document.getElementById('color-weather-stale-back'),
+					weatherEnabledToggle = document.getElementById('weather-enabled'),
+					weatherHideStaleToggle = document.getElementById('weather-hide-stale'),
+					weatherInhibitAsleepToggle = document.getElementById('weather-inhibit-asleep');
+				
+				button.addEventListener('click', function() {
+					var config = {};
+					
+					config['units'] = parseInt(unitsSelect.value);
+					config['dateformat'] = parseInt(dateformatSelect.value);
+					config['color-date'] = colorDateInput.value;
+					config['color-date-back'] = colorDateBackInput.value;
+					config['color-time'] = colorTimeInput.value;
+					config['color-time-text'] = colorTimeTextInput.value;
+					config['color-weather'] = colorWeatherInput.value;
+					config['color-weather-back'] = colorWeatherBackInput.value;
+					config['color-weather-stale'] = colorWeatherStaleInput.value;
+					config['color-weather-stale-back'] = colorWeatherStaleBackInput.value;
+					config['weather-enabled'] = weatherEnabledToggle.checked;
+					config['weather-hide-stale'] = weatherHideStaleToggle.checked;
+					config['weather-inhibit-asleep'] = weatherInhibitAsleepToggle.checked;
+					
+					location.href = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(config));
+				});
+			});
+		</script>
+		<script src="/zerion7.com/pebble/verdandi/slate/js/slate.js"></script>
+	</body>
+</html>

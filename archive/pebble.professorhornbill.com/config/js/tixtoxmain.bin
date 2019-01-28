@@ -1,0 +1,78 @@
+(function() {
+  loadOptions();
+  submitHandler();
+})();
+
+function submitHandler() {
+  var $submitButton = $('#submitButton');
+
+  $submitButton.on('click', function() {
+    console.log('Submit');
+
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getAndStoreConfigData()));
+  });
+}
+
+function loadOptions() {
+  var $h1backgroundColorPicker = $('#h1backgroundColorPicker');
+  var $h2backgroundColorPicker = $('#h2backgroundColorPicker');
+  var $m1backgroundColorPicker = $('#m1backgroundColorPicker');
+  var $m2backgroundColorPicker = $('#m2backgroundColorPicker');
+  var $bkbackgroundColorPicker = $('#bkbackgroundColorPicker');
+  var $backgroundMatchCheckbox = $('#backgroundMatchCheckbox');
+  var $refreshScreenTab = $('#refreshScreenTab');
+
+  if (localStorage.h1backgroundColor) {
+    $h1backgroundColorPicker[0].value = localStorage.h1backgroundColor;
+    $h2backgroundColorPicker[0].value = localStorage.h2backgroundColor;
+    $m1backgroundColorPicker[0].value = localStorage.m1backgroundColor;
+    $m2backgroundColorPicker[0].value = localStorage.m2backgroundColor;
+    $bkbackgroundColorPicker[0].value = localStorage.bkbackgroundColor;
+    $backgroundMatchCheckbox[0].checked = localStorage.backgroundMatch;
+    $refreshScreenTab[0].value = localStorage.refreshScreen;
+  }
+}
+
+function getAndStoreConfigData() {
+  var $h1backgroundColorPicker = $('#h1backgroundColorPicker');
+  var $h2backgroundColorPicker = $('#h2backgroundColorPicker');
+  var $m1backgroundColorPicker = $('#m1backgroundColorPicker');
+  var $m2backgroundColorPicker = $('#m2backgroundColorPicker');
+  var $bkbackgroundColorPicker = $('#bkbackgroundColorPicker');
+  var $backgroundMatchCheckbox = $('#backgroundMatchCheckbox');
+  var $refreshScreenTab = $('#refreshScreenTab');
+
+  var options = {
+    h1backgroundColor: $h1backgroundColorPicker.val(),
+    h2backgroundColor: $h2backgroundColorPicker.val(),
+    m1backgroundColor: $m1backgroundColorPicker.val(),
+    m2backgroundColor: $m2backgroundColorPicker.val(),
+    bkbackgroundColor: $bkbackgroundColorPicker.val(),
+    backgroundMatch:  $backgroundMatchCheckbox[0].checked,
+    refreshScreen:  $refreshScreenTab[0].value
+  };
+
+  localStorage.h1backgroundColor = options.h1backgroundColor;
+  localStorage.h2backgroundColor = options.h2backgroundColor;
+  localStorage.m1backgroundColor = options.m1backgroundColor;
+  localStorage.m2backgroundColor = options.m2backgroundColor;
+  localStorage.bkbackgroundColor = options.bkbackgroundColor;
+  localStorage.backgroundMatch = options.backgroundMatch;
+  localStorage.refreshScreen = options.refreshScreen;
+ 
+  console.log('Got options: ' + JSON.stringify(options));
+  return options;
+}
+
+function getQueryParam(variable, defaultValue) {
+  var query = location.search.substring(1);
+  var vars = query.split('&');
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split('=');
+    if (pair[0] === variable) {
+      return decodeURIComponent(pair[1]);
+    }
+  }
+  return defaultValue || false;
+}

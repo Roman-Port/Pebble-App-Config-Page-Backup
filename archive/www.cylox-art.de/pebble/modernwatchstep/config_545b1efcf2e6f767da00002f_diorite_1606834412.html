@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Settings for Pebble Watchface "Modern Step" by Thorsten Stark -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Modern Step</title>
+    
+	<link rel="stylesheet" href="/ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.css">
+
+	<script src="/ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+	<script src="/ajax.googleapis.com/ajax/libs/jquerymobile/1.4.3/jquery.js"></script>
+	
+    
+</head>
+
+<body>
+	<div data-role="page">
+	<div data-role="header"><h1>Modern Step</h1></div>
+	<div role="main" class="ui-content">
+		<fieldset>
+		  <div data-role="fieldcontain">
+		    <label for="select-based-flipswitch">Show Steps:</label>
+		    <select id="show-steps-flipswitch" data-role="flipswitch">
+		      <option value="off">No</option>
+		      <option value="on">Yes</option>
+		      
+		    </select>
+		  </div>
+		</fieldset>
+		
+		<fieldset>
+		  <div data-role="fieldcontain">
+		    <label for="select-based-seconds-flipswitch">Show seconds:</label>
+		    <select id="show-seconds-flipswitch" data-role="flipswitch">
+		      <option value="off">No</option>
+		      <option value="on">Yes</option>
+		      
+		    </select>
+		  </div>
+		</fieldset>
+		
+		<fieldset>
+		  <div data-role="fieldcontain">
+		    <label for="select-based-battery-flipswitch">Show Battery Level as Number:</label>
+		    <select id="show-battery-flipswitch" data-role="flipswitch">
+		      <option value="off">No</option>
+		      <option value="on">Yes</option>
+		      
+		    </select>
+		  </div>
+		</fieldset>
+		
+		<form>
+		<div class="ui-field-contain">
+			<label for="select-native-1">Minimum Steps Update Intervall:</label>
+			<select name="update-frequency" id="update-frequency-selector">
+				<option value="1">Every Second</option>
+				<option value="5">5 Seconds</option>
+				<option value="10">10 Seconds</option>
+				<option value="30">30 Seconds</option>
+			</select>
+		</div>
+		</form>
+		
+		
+		<!-- Debug 'Console' <div id="con"></div>-->
+	</div>
+	<div data-role="footer">
+		<button id="b-cancel">Cancel</button>
+		<button id="b-submit">Submit</button>
+	</div>
+</div>
+	
+	
+	
+    
+    <!--Script Part -->
+    <script>
+    function getURLVariable(name)  {
+	  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+	  var regexS = "[\\?&]"+name+"=([^&#]*)",
+	      regex = new RegExp(regexS),
+	      results = regex.exec(window.location.href);
+	  if (results == null) return "";
+	  else return results[1];
+	}
+	
+	function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
+}
+	
+	$(document).ready(function() {
+	  var showSteps = getURLVariable('showSteps');
+	  showSteps = decodeURI(showSteps); // decode if text/string
+	  
+	  var showSeconds = getURLParameter('showSeconds');
+	  showSeconds = decodeURI(showSeconds); 
+	  
+	  var showBattery = getURLParameter('showBattery');
+	  showBattery = decodeURI(showBattery);
+	  
+	  var updateInterval = getURLParameter('updateInterval');
+	  updateInterval = decodeURI(updateInterval); 
+	  
+	  console.log("Steps: "+showSteps);
+	 
+	 $('#con').text("Steps:"+showSteps+" - Seconds:"+updateInterval+" Battery:"+showBattery );
+	 
+	  if (showSteps == 'on') {
+	    $('#show-steps-flipswitch').val('on').flipswitch("refresh");
+	  }
+	  
+	  if (showSeconds == 'on') {
+	    $('#show-seconds-flipswitch').val('on').flipswitch("refresh");
+	  }
+	  
+	  if (showBattery == 'on') {
+	    $('#show-battery-flipswitch').val('on').flipswitch("refresh");
+	  }
+	  
+	  switch(updateInterval){
+	  	case "1":
+	  		$('#update-frequency-selector').val(1);
+	  		break;
+	  	case "5":
+	  		$('#update-frequency-selector').val(5);
+	  		break;
+	  	case "10":
+	  		$('#update-frequency-selector').val(10);
+	  		break;
+	  	case "30":
+	  		$('#update-frequency-selector').val(30);
+	  		break;
+	  	//default: $('#update-frequency-selector').val(5);
+	  }
+	  $('#update-frequency-selector').selectmenu("refresh", true);
+	  
+	});
+
+    function saveOptions() {
+       var options = {
+            SHOW_STEPS: $('#show-steps-flipswitch').val(),
+            SHOW_SECONDS: $('#show-seconds-flipswitch').val(),
+            UPDATE_INTERVAL: parseInt( $('#update-frequency-selector').val()) ,
+            SHOW_BATTERY: $('#show-battery-flipswitch').val()
+        }
+      return options;
+    }
+    
+    
+    $('#b-cancel').on("tap", function() {
+    	console.log("Cancelled by HTML");
+      	document.location = 'pebblejs://close';
+    });
+        
+    
+  $('#b-submit').on("tap",  function() {
+      console.log("Submit");
+ 
+      var options = saveOptions();
+      var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+       
+      document.location = location;
+    });
+    </script>
+
+</body>
+</html>

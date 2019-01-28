@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <title>Globetrot Configuration</title>
+  
+<link rel='stylesheet' type='text/css' href='/microbyter.github.io/css/slate.css'>
+  
+<script src='/microbyter.github.io/js/slate.js'></script>
+  
+<style>
+  
+.title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  
+  
+  
+</style>
+  
+  <script type="text/javascript">
+       $(document).ready(function () {
+ 
+           var chkControlLeft = document.getElementById('use_left_circle');
+           var chkControlRight = document.getElementById('use_right_circle');
+		   var chControlLZone = document.getElementById('luse_own');
+		   var chControlRZone = document.getElementById('ruse_own');
+		   var chControlTheme = document.getElementById('use_own_theme');
+		   var chControlLowbat = document.getElementById('use_lowbat');
+		   var chControlSleephours = document.getElementById('use_sleephours');
+
+           $(use_left_circle).click(function () {
+               if ($(chkControlLeft).is(":checked")) {
+                   $("#ldrop").show("slow");
+               }
+               else {
+                   $("#ldrop").hide("slow");
+               }
+           });
+		   
+		   
+		    $(use_right_circle).click(function () {
+               if ($(chkControlRight).is(":checked")) {
+                   $("#rdrop").show("slow");
+               }
+               else {
+                   $("#rdrop").hide("slow");
+               }
+           });
+		   
+		   $(use_lowbat).click(function () {
+               if ($(chControlLowbat).is(":checked")) {
+                   $("#lowbat_drop").show("slow");
+               }
+               else {
+                    $("#lowbat_drop").hide("slow");
+               }
+           });
+
+		   $(use_sleephours).click(function () {
+               if ($(chControlSleephours).is(":checked")) {
+                   $("#sleephours_drop").show("slow");
+               }
+               else {
+                    $("#sleephours_drop").hide("slow");
+               }
+           });
+
+		   $(luse_own).click(function () {
+               if ($(chControlLZone).is(":checked")) {
+                   $("#lown").show("slow");
+                   $("#lselect").hide("slow");
+               }
+               else {
+                   $("#lselect").show("slow");
+                   $("#lown").hide("slow");
+               }
+           });
+
+		   
+		   $(ruse_own).click(function () {
+               if ($(chControlRZone).is(":checked")) {
+                   $("#rown").show("slow");
+                   $("#rselect").hide("slow");
+               }
+               else {
+                   $("#rselect").show("slow");
+                   $("#rown").hide("slow");
+               }
+           });
+		   
+		   $(use_own_theme).click(function () {
+               if ($(chControlTheme).is(":checked")) {
+                   $("#theme_preset").hide("slow");
+				   $("#theme_customizer").show("slow");
+               }
+               else {
+                   $("#theme_preset").show("slow");
+				   $("#theme_customizer").hide("slow");
+               }
+           });
+
+   });
+ </script>
+</head>
+<body>
+
+<h1 class='title'>Globetrot Configurator</h1>
+    
+<div class='item-container'>
+<div class='item-container-content'>      
+<div class='item'>
+Use this configuration page to choose the settings you would like.  <p> 
+Please show your support for Pebble Developers and remember to <3 faces you enjoy!        
+</div>
+</div>
+</div>
+    
+<div class='item-container'>
+													
+													
+													<!-- THEME OPTIONS -->  
+													<!-- THEME OPTIONS -->  
+													<!-- THEME OPTIONS -->  
+	
+	
+      
+	<div class='item-container-header'>Theme Color Customizability
+	</div>
+	<div class='item-container-content'>
+		<label class='item'>
+          Use Your Own Theme      
+		<input id='use_own_theme' type='checkbox' class='item-toggle'>
+		</label>
+	</div> 
+
+<!--      <div class="item-container-content">
+        <label class="item tab-buttons">Theme	
+          <a id="themetab1" name="theme-tab-1" class="tab-button active">Preset</a>
+          <a id="themetab2" name="theme-tab-1" class="tab-button">Make My Own</a>
+        </label>
+      </div> -->
+	<div class="item-container-content" id="theme_preset">
+        <label class="item">
+          Preset Themes
+          <select id="theme_picker" name="theme_picker" dir='rtl' class="item-select">
+            <option class="item-select-option" value='0'>Black</option>
+            <option class="item-select-option" value='1'>White</option>
+            <option class="item-select-option" value='2'>Red</option>
+            <option class="item-select-option" value='3'>Blue</option>
+            <option class="item-select-option" value='4'>Green</option>
+            <option class="item-select-option" value='5'>Purple</option>
+            <option class="item-select-option" value='6'>Seasons Greetings</option>
+          </select>
+        </label>
+    </div>
+	
+	<div class="item-container-content" id="theme_customizer">
+         <label class="item">
+          Background Color
+          <input type="text" class="item-color item-color-normal" name="bgColorPicker" id="bgColorPicker" value="0xFFFFFF">
+        </label>
+         <label class="item">
+          Tick/Hash Color
+          <input type="text" class="item-color item-color-normal" name="tickColorPicker" id="tickColorPicker" value="0xFFFFFF">
+        </label>
+         <label class="item">
+          Hours Hand Color
+          <input type="text" class="item-color item-color-normal" name="hourColorPicker" id="hourColorPicker" value="0xFFFFFF">
+        </label>
+         <label class="item">
+          Minutes Hand Color
+          <input type="text" class="item-color item-color-normal" name="minuteColorPicker" id="minuteColorPicker" value="0xFFFFFF">
+        </label>
+         <label class="item">
+          Seconds Hand Color
+          <input type="text" class="item-color item-color-normal" name="secondColorPicker" id="secondColorPicker" value="0xFFFFFF">
+        </label>
+         <label class="item">
+          Center Dot Color
+          <input type="text" class="item-color item-color-normal" name="centerColorPicker" id="centerColorPicker" value="0xFFFFFF">
+        </label>
+         <label class="item">
+          Date Color
+          <input type="text" class="item-color item-color-normal" name="dateColorPicker" id="dateColorPicker" value="0xFFFFFF">
+        </label>
+         <label class="item">
+          Complication Ring Color
+          <input type="text" class="item-color item-color-normal" name="rightColorPicker" id="ringColorPicker" value="0xFFFFFF">
+        </label>
+         <label class="item">
+          Complication Hands Color
+          <input type="text" class="item-color item-color-normal" name="smallColorPicker" id="smallColorPicker" value="0xFFFFFF">
+        </label>
+         <label class="item">
+          Complication Label Color
+          <input type="text" class="item-color item-color-normal" name="labelColorPicker" id="labelColorPicker" value="0xFFFFFF">
+        </label>
+	</div>
+</div> <p><br>
+													
+													
+													<!-- WATCH FEATURES -->  
+													<!-- WATCH FEATURES -->  
+													<!-- WATCH FEATURES -->  
+
+
+
+
+<div class='item-container-header'>Watch Features
+	<div class='item-container-content'>
+		<label class='item'>
+          Display Seconds Hand        
+		<input id='use_sec_hand' type='checkbox' class='item-toggle'>
+		</label>
+	</div> 
+	<div class='item-container-content'>
+		<label class='item'>
+          Display Date        
+		<input id='use_date_option' type='checkbox' class='item-toggle'>
+		</label>
+	</div> 
+	<div class='item-container-content'>
+		<label class='item'>
+          Display Hash/Tick Marks        
+		<input id='use_tick_option' type='checkbox' class='item-toggle'>
+		</label>
+	</div> 
+
+	<div class='item-container-content'>
+		<label class='item'>
+          Bluetooth Status Vibrate
+		<input id='use_bluetooth' type='checkbox' class='item-toggle'>
+		</label>
+	</div> 
+		<div class='item-container-content'>
+		<label class='item'>
+          Vibrate Every Hour
+		<input id='use_vibrate' type='checkbox' class='item-toggle'>
+		</label>
+	</div> 
+	<div class='item-container-footer'><font color="FF0000">Enabling Seconds Hand, Bluetooth and Hourly Vibrate options may affect battery life.</font></div>      
+
+</div> <p><br>
+
+													
+													
+													<!-- POWER SAVING OPTIONS -->  
+													<!-- POWER SAVING OPTIONS -->  
+													<!-- POWER SAVING OPTIONS -->  
+
+
+
+
+<div class='item-container-header'>Power Save Options
+	<div class='item-container-footer'>
+	<b>Battery Saver Mode:</b> Reduces watch functions to minimal when the battery reaches the percentage you specify.<br>
+	<b>Sleep Hours Saver:</b> Reduces watch functions to minimal during the times you specify.<br>
+	</div>
+
+	<div class='item-container-content'>
+		<label class='item'>
+		  Use Battery Saver Mode
+		<input id='use_lowbat' type='checkbox' class='item-toggle'>
+		</label>
+	</div> 
+
+	<div class="item-container-content" id="lowbat_drop">
+        <label class="item">
+          At Battery Percentage
+          <select id="batt_percent" name="batt_percent" dir='rtl' class="item-select">
+            <option class="item-select-option" value='10'>10%</option>
+            <option class="item-select-option" value='20'>20%</option>
+            <option class="item-select-option" value='30'>30%</option>
+            <option class="item-select-option" value='40'>40%</option>
+            <option class="item-select-option" value='50'>50%</option>
+            <option class="item-select-option" value='60'>60%</option>
+            <option class="item-select-option" value='70'>70%</option>
+            <option class="item-select-option" value='80'>80%</option>
+            <option class="item-select-option" value='90'>90%</option>
+            <option class="item-select-option" value='100'>100%</option>
+          </select>
+
+		  </label>
+    </div>
+
+	<div class='item-container-content'>
+		<label class='item'>
+          Use Sleep Hours Saver Mode
+		<input id='use_sleephours' type='checkbox' class='item-toggle'>
+		</label>
+	</div> 
+
+	<div class="item-container-content" id="sleephours_drop">
+        <label class="item">
+          From Start Time
+          <select id="sleep_start" name="sleep_start" dir='rtl' class="item-select">
+            <option class="item-select-option" value='00'>00:00</option>
+            <option class="item-select-option" value='01'>01:00</option>
+            <option class="item-select-option" value='00'>02:00</option>
+            <option class="item-select-option" value='03'>03:00</option>
+            <option class="item-select-option" value='04'>04:00</option>
+            <option class="item-select-option" value='05'>05:00</option>
+            <option class="item-select-option" value='06'>06:00</option>
+            <option class="item-select-option" value='07'>07:00</option>
+            <option class="item-select-option" value='08'>08:00</option>
+            <option class="item-select-option" value='09'>09:00</option>
+            <option class="item-select-option" value='10'>10:00</option>
+            <option class="item-select-option" value='11'>11:00</option>
+            <option class="item-select-option" value='12'>12:00</option>
+            <option class="item-select-option" value='13'>13:00</option>
+            <option class="item-select-option" value='14'>14:00</option>
+            <option class="item-select-option" value='15'>15:00</option>
+            <option class="item-select-option" value='16'>16:00</option>
+            <option class="item-select-option" value='17'>17:00</option>
+            <option class="item-select-option" value='18'>18:00</option>
+            <option class="item-select-option" value='19'>19:00</option>
+            <option class="item-select-option" value='20'>20:00</option>
+            <option class="item-select-option" value='21' selected="">21:00</option>
+            <option class="item-select-option" value='22'>22:00</option>
+            <option class="item-select-option" value='23'>23:00</option>
+          </select>
+	  </label>
+	  
+	  <label class="item">
+          To End Time
+          <select id="sleep_end" name="sleep_end" dir='rtl' class="item-select">
+            <option class="item-select-option" value='00'>00:00</option>
+            <option class="item-select-option" value='01'>01:00</option>
+            <option class="item-select-option" value='00'>02:00</option>
+            <option class="item-select-option" value='03'>03:00</option>
+            <option class="item-select-option" value='04'>04:00</option>
+            <option class="item-select-option" value='05'>05:00</option>
+            <option class="item-select-option" value='06'>06:00</option>
+            <option class="item-select-option" value='07'>07:00</option>
+            <option class="item-select-option" value='08' selected="">08:00</option>
+            <option class="item-select-option" value='09'>09:00</option>
+            <option class="item-select-option" value='10'>10:00</option>
+            <option class="item-select-option" value='11'>11:00</option>
+            <option class="item-select-option" value='12'>12:00</option>
+            <option class="item-select-option" value='13'>13:00</option>
+            <option class="item-select-option" value='14'>14:00</option>
+            <option class="item-select-option" value='15'>15:00</option>
+            <option class="item-select-option" value='16'>16:00</option>
+            <option class="item-select-option" value='17'>17:00</option>
+            <option class="item-select-option" value='18'>18:00</option>
+            <option class="item-select-option" value='19'>19:00</option>
+            <option class="item-select-option" value='20'>20:00</option>
+            <option class="item-select-option" value='21'>21:00</option>
+            <option class="item-select-option" value='22'>22:00</option>
+            <option class="item-select-option" value='23'>23:00</option>
+          </select>
+	  </label>
+
+	  
+    </div>
+
+
+</div> <p><br>
+
+
+
+													
+													
+													<!-- LEFT COMPLICATION -->  
+													<!-- LEFT COMPLICATION -->  
+													<!-- LEFT COMPLICATION -->  
+
+
+<div class="item-container">
+	<div class="item-container-header">Left Complication
+	</div>
+    <div class='item-container-footer'><b>Display Complication: </b> Turn the complication ON or OFF<p>
+	<b>Set Your Own Zone: </b> If you none of the cities in your list match a city you want to use in the complication, select this option to input your own
+	   timezone and label
+	</div>
+
+
+	<div class='item-container-content'>
+		<label class='item'>
+          Display Left Complication
+		<input id='use_left_circle' type='checkbox' class='item-toggle' checked="">
+		</label>
+	</div>		
+	<div class="item-container-content" id="ldrop">
+		<div class='item-container-content'>
+			<label class='item'>
+			Set Your Own Zone?        
+			<input id='luse_own' type='checkbox' class='item-toggle'>
+			</label>
+		</div>
+
+		<div class="item-container-content" id="lselect">
+        <label class="item">
+          Left City
+          <select id="lcity_picker" name="lcity_picker" dir='rtl' class="item-select">
+            <option class="item-select-option" value='0'>ANCHORAGE</option>
+            <option class="item-select-option" value='1'>ATHENS</option>
+            <option class="item-select-option" value='2'>BANGKOK</option>
+            <option class="item-select-option" value='3'>BEIJING</option>
+            <option class="item-select-option" value='4'>BEIRUT</option>
+            <option class="item-select-option" value='5'>BRUSSELS</option>
+            <option class="item-select-option" value='6'>CAIRO</option>
+            <option class="item-select-option" value='7'>DALLAS</option>
+            <option class="item-select-option" value='8'>HONOLULU</option>>
+            <option class="item-select-option" value='9'>LONDON</option>
+            <option class="item-select-option" value='10'>LOS ANGELES</option>
+            <option class="item-select-option" value='11'>MADRID</option>
+            <option class="item-select-option" value='12'>MANILA</option>
+            <option class="item-select-option" value='13'>MOSCOW</option>
+            <option class="item-select-option" value='14'>NEW DELHI</option>
+            <option class="item-select-option" value='15'>OSLO</option>
+            <option class="item-select-option" value='16'>PARIS</option>
+            <option class="item-select-option" value='17'>RIYADH</option>
+            <option class="item-select-option" value='18'>SEOUL</option>
+            <option class="item-select-option" value='19'>SINGAPORE</option>
+            <option class="item-select-option" value='20'>SYDNEY</option>
+            <option class="item-select-option" value='21'>TOKYO</option>
+            <option class="item-select-option" value='22'>VATICAN CITY</option>
+            <option class="item-select-option" value='23'>WASHINGTON DC</option>
+            <option class="item-select-option" value='24'>ZURICH</option>
+          </select>
+        </label>
+		</div>
+	
+		<div class="item-container-content" id="lown">
+		<label class="item">
+          Timezone
+          <select id="ltimezone_picker" name="ltimezone_picker" dir='rtl' class="item-select">
+            <option class="item-select-option" value='0'>UTC</option>
+            <option class="item-select-option" value='-11'>UTC -11</option>
+            <option class="item-select-option" value='-10'>UTC -10</option>
+            <option class="item-select-option" value='-9'>UTC -9</option>
+            <option class="item-select-option" value='-8'>UTC -8</option>
+            <option class="item-select-option" value='-7'>UTC -7</option>
+            <option class="item-select-option" value='-6'>UTC -6</option>
+            <option class="item-select-option" value='-5'>UTC -5</option>
+            <option class="item-select-option" value='-4'>UTC -4</option>
+            <option class="item-select-option" value='-3'>UTC -3</option>>
+            <option class="item-select-option" value='-2'>UTC -2</option>
+            <option class="item-select-option" value='-1'>UTC -1</option>
+            <option class="item-select-option" value='1'>UTC +1</option>
+            <option class="item-select-option" value='2'>UTC +2</option>
+            <option class="item-select-option" value='3'>UTC +3</option>
+            <option class="item-select-option" value='4'>UTC +4</option>
+            <option class="item-select-option" value='5'>UTC +5</option>
+            <option class="item-select-option" value='6'>UTC +6</option>
+            <option class="item-select-option" value='7'>UTC +7</option>
+            <option class="item-select-option" value='8'>UTC +8</option>
+            <option class="item-select-option" value='9'>UTC +9</option>
+            <option class="item-select-option" value='11'>UTC +10</option>
+            <option class="item-select-option" value='10'>UTC +11</option>
+            <option class="item-select-option" value='12'>UTC +12</option>
+            <option class="item-select-option" value='13'>UTC +13</option>
+            <option class="item-select-option" value='14'>UTC +14</option>
+          </select>
+        </label>
+	
+	
+			<div class="item-container-content">
+			<label class="item">
+				<div class="item-input-wrapper">
+				<input id="lcity_label" type="text" class="item-input" name="lcity_label" placeholder="Left Label">
+				</div>
+				<div class='item-container-footer'>Add your own label - up to 3 characters.
+				</div>
+			</label>
+			</div> 
+		</div>
+	</div>
+
+    </div> 
+	
+	
+	<p><br>
+													
+													
+													<!-- RIGHT COMPLICATION -->  
+													<!-- RIGHT COMPLICATION -->  
+													<!-- RIGHT COMPLICATION -->  
+
+	<div class="item-container">
+      <div class="item-container-header">Right Complication</div>
+
+  		<div class='item-container-content'>
+		<label class='item'>
+          Display Right Complication        
+		<input id='use_right_circle' type='checkbox' class='item-toggle' checked="">
+		</label>
+		</div>
+
+	<div class="item-container-content" id="rdrop">
+		<div class='item-container-content'>
+			<label class='item'>
+			Set Your Own Zone?
+			<input id='ruse_own' type='checkbox' class='item-toggle'>
+			</label>
+		</div>
+
+		<div class="item-container-content" id="rselect">
+        <label class="item">
+          Right City
+          <select id="rcity_picker" name="rcity_picker" dir='rtl' class="item-select">
+            <option class="item-select-option" value='0'>ANCHORAGE</option>
+            <option class="item-select-option" value='1'>ATHENS</option>
+            <option class="item-select-option" value='2'>BANGKOK</option>
+            <option class="item-select-option" value='3'>BEIJING</option>
+            <option class="item-select-option" value='4'>BEIRUT</option>
+            <option class="item-select-option" value='5'>BRUSSELS</option>
+            <option class="item-select-option" value='6'>CAIRO</option>
+            <option class="item-select-option" value='7'>DALLAS</option>
+            <option class="item-select-option" value='8'>HONOLULU</option>>
+            <option class="item-select-option" value='9'>LONDON</option>
+            <option class="item-select-option" value='10'>LOS ANGELES</option>
+            <option class="item-select-option" value='11'>MADRID</option>
+            <option class="item-select-option" value='12'>MANILA</option>
+            <option class="item-select-option" value='13'>MOSCOW</option>
+            <option class="item-select-option" value='14'>NEW DELHI</option>
+            <option class="item-select-option" value='15'>OSLO</option>
+            <option class="item-select-option" value='16'>PARIS</option>
+            <option class="item-select-option" value='17'>RIYADH</option>
+            <option class="item-select-option" value='18'>SEOUL</option>
+            <option class="item-select-option" value='19'>SINGAPORE</option>
+            <option class="item-select-option" value='20'>SYDNEY</option>
+            <option class="item-select-option" value='21'>TOKYO</option>
+            <option class="item-select-option" value='22'>VATICAN CITY</option>
+            <option class="item-select-option" value='23'>WASHINGTON DC</option>
+            <option class="item-select-option" value='24'>ZURICH</option>
+          </select>
+        </label>
+		</div>
+	
+		<div class="item-container-content" id="rown">
+		<label class="item">
+          Timezone
+          <select id="rtimezone_picker" name="rtimezone_picker" dir='rtl' class="item-select">
+            <option class="item-select-option" value='0'>UTC</option>
+            <option class="item-select-option" value='-11'>UTC -11</option>
+            <option class="item-select-option" value='-10'>UTC -10</option>
+            <option class="item-select-option" value='-9'>UTC -9</option>
+            <option class="item-select-option" value='-8'>UTC -8</option>
+            <option class="item-select-option" value='-7'>UTC -7</option>
+            <option class="item-select-option" value='-6'>UTC -6</option>
+            <option class="item-select-option" value='-5'>UTC -5</option>
+            <option class="item-select-option" value='-4'>UTC -4</option>
+            <option class="item-select-option" value='-3'>UTC -3</option>>
+            <option class="item-select-option" value='-2'>UTC -2</option>
+            <option class="item-select-option" value='-1'>UTC -1</option>
+            <option class="item-select-option" value='1'>UTC +1</option>
+            <option class="item-select-option" value='2'>UTC +2</option>
+            <option class="item-select-option" value='3'>UTC +3</option>
+            <option class="item-select-option" value='4'>UTC +4</option>
+            <option class="item-select-option" value='5'>UTC +5</option>
+            <option class="item-select-option" value='6'>UTC +6</option>
+            <option class="item-select-option" value='7'>UTC +7</option>
+            <option class="item-select-option" value='8'>UTC +8</option>
+            <option class="item-select-option" value='9'>UTC +9</option>
+            <option class="item-select-option" value='11'>UTC +10</option>
+            <option class="item-select-option" value='10'>UTC +11</option>
+            <option class="item-select-option" value='12'>UTC +12</option>
+            <option class="item-select-option" value='13'>UTC +13</option>
+            <option class="item-select-option" value='14'>UTC +14</option>
+          </select>
+        </label>
+	
+	
+			<div class="item-container-content">
+			<label class="item"> Label
+				<div class="item-input-wrapper">
+				<input id="rcity_label" type="text" class="item-input" name="rcity_label" placeholder="Right Label">
+				</div>
+				<div class='item-container-footer'>Add your own label - up to 3 characters.
+				</div>
+			</label>
+			</div> 
+		</div>
+	</div>
+<p><br><p>
+
+	<div class="item-container">
+      <div class="item-container-header">Timezone References</div>
+		<img src="/microbyter.github.io//east.png">
+        <p>
+		<img src="/microbyter.github.io//west.png">
+
+	</div>
+
+	<p><br><p>
+<div class='item-container'>
+    <div class='button-container'>  
+	<input id='submit_button' type='button' class='item-button' value='SUBMIT'>  
+	</div>
+	<div class='item-container-footer'> <p><br><p><center><b>MicroByter Studios - Config Version 1.4</b></center></p></br></p></div>
+	
+		
+	<center>
+	Enjoy my watchfaces and feel generous?
+	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+	<input type="hidden" name="cmd" value="_s-xclick">
+	<input type="hidden" name="hosted_button_id" value="94X94B3M2HS6N">
+	<input type="image" src="/www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+	<img alt="" border="0" src="/www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+	</form>
+	</center>
+	
+</div>
+</div></body>
+</html>
+
+
+
+<script>
+
+
+
+function getConfigData() {
+    
+    var theme= document.getElementById('theme_picker');
+    var lcity = document.getElementById('lcity_picker');
+    var rcity = document.getElementById('rcity_picker');
+	var useSeconds = document.getElementById('use_sec_hand');
+	var useTicks = document.getElementById('use_tick_option');
+	var useDate = document.getElementById('use_date_option');
+	var useBluetooth = document.getElementById('use_bluetooth');
+	var useVibrate = document.getElementById('use_vibrate');
+	var lcityLabel = document.getElementById('lcity_label');
+	var rcityLabel = document.getElementById('rcity_label');
+	var useLeftCircle = document.getElementById('use_left_circle');
+	var useRightCircle = document.getElementById('use_right_circle');
+	var leftUseOwn = document.getElementById('luse_own');
+	var rightUseOwn = document.getElementById('ruse_own');
+	var ltimeZone = document.getElementById('ltimezone_picker');
+	var rtimeZone = document.getElementById('rtimezone_picker');
+	var bgColor = document.getElementById('bgColorPicker');
+	var ringColor = document.getElementById('ringColorPicker');
+	var hourColor = document.getElementById('hourColorPicker');
+	var smallColor = document.getElementById('smallColorPicker');
+	var minuteColor = document.getElementById('minuteColorPicker');
+	var secondColor = document.getElementById('secondColorPicker');
+	var centerColor = document.getElementById('centerColorPicker');
+	var dateColor = document.getElementById('dateColorPicker');
+	var labelColor = document.getElementById('labelColorPicker');
+	var tickColor = document.getElementById('tickColorPicker');
+	var useOwnTheme = document.getElementById('use_own_theme');
+	var useLowbat = document.getElementById('use_lowbat');
+	var useSleephours = document.getElementById('use_sleephours');
+	var battPercent = document.getElementById('batt_percent');
+	var sleepStart = document.getElementById('sleep_start');
+	var sleepEnd = document.getElementById('sleep_end');
+
+    var options = {
+		'theme': theme.value,
+		'lcity': lcity.value,
+		'rcity': rcity.value,
+		'useSeconds' : useSeconds.checked,
+		'useDate' : useDate.checked,
+		'useTicks' : useTicks.checked,
+		'useBluetooth' : useBluetooth.checked,
+		'useVibrate' : useVibrate.checked,
+		'lcityLabel' : lcityLabel.value.substring(0, 3),	
+		'rcityLabel' : rcityLabel.value.substring(0, 3),
+		'useLeftCircle' : useLeftCircle.checked,
+		'useRightCircle' : useRightCircle.checked,
+		'leftUseOwn' : leftUseOwn.checked,
+		'rightUseOwn' : rightUseOwn.checked,
+		'ltimeZone' : ltimeZone.value,
+		'rtimeZone' : rtimeZone.value,
+		'bgColor' : bgColor.value,
+		'ringColor' : ringColor.value,
+		'hourColor' : hourColor.value,
+		'smallColor' : smallColor.value,
+		'minuteColor' : minuteColor.value,
+		'secondColor' : secondColor.value,
+		'centerColor' : centerColor.value,
+		'dateColor' : dateColor.value,
+		'labelColor' : labelColor.value,
+		'tickColor' : tickColor.value,
+		'useOwnTheme' : useOwnTheme.checked,
+		'useLowbat' : useLowbat.checked,
+		'useSleephours' : useSleephours.checked,
+		'battPercent' : battPercent.value,
+		'sleepStart' : sleepStart.value,
+		'sleepEnd' : sleepEnd.value,
+		
+	};
+
+    // Save for next launch
+    localStorage['theme'] = options['theme'];
+    localStorage['lcity'] = options['lcity'];
+    localStorage['rcity'] = options['rcity'];
+    localStorage['useSeconds'] = options['useSeconds'];
+    localStorage['useTicks'] = options['useTicks'];
+    localStorage['useDate'] = options['useDate'];
+    localStorage['useBluetooth'] = options['useBluetooth'];
+    localStorage['useVibrate'] = options['useVibrate'];
+    localStorage['lcityLabel'] = options['lcityLabel'];
+    localStorage['rcityLabel'] = options['rcityLabel'];
+    localStorage['useLeftCircle'] = options['useLeftCircle'];
+    localStorage['useRightCircle'] = options['useRightCircle'];
+	
+	if (leftUseOwn.checked  == true) {
+		localStorage['leftUseOwn'] = 1;
+	} else {
+		localStorage['leftUseOwn'] = 0;
+	}
+		
+	if (rightUseOwn.checked  == true) {
+		localStorage['rightUseOwn'] = 1;
+	} else {
+		localStorage['rightUseOwn'] = 0;
+	}
+
+    localStorage['ltimeZone'] = options['ltimeZone'];
+    localStorage['rtimeZone'] = options['rtimeZone'];
+    localStorage['bgColor'] = options['bgColor'];
+    localStorage['ringColor'] = options['ringColor'];
+    localStorage['hourColor'] = options['hourColor'];
+    localStorage['smallColor'] = options['smallColor'];
+    localStorage['minuteColor'] = options['minuteColor'];
+    localStorage['secondColor'] = options['secondColor'];
+    localStorage['centerColor'] = options['centerColor'];
+    localStorage['dateColor'] = options['dateColor'];
+    localStorage['labelColor'] = options['labelColor'];
+    localStorage['tickColor'] = options['tickColor'];
+	localStorage['useOwnTheme'] = options['useOwnTheme'];
+	localStorage['useLowbat'] = options['useLowbat'];
+	localStorage['useSleephours'] = options['useSleephours'];
+	localStorage['battPercent'] = options['battPercent'];
+	localStorage['sleepStart'] = options['sleepStart'];
+	localStorage['sleepEnd'] = options['sleepEnd'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var theme = document.getElementById('theme');
+    var lcity= document.getElementById('lcity');
+    var rcity= document.getElementById('rcity');
+    var useSeconds= document.getElementById('useSeconds');
+    var useTicks= document.getElementById('useTicks');
+    var useDate= document.getElementById('useDate');
+    var useBluetooth= document.getElementById('useBluetooth');
+    var useVibrate= document.getElementById('useVibrate');
+	var lcityLabel= document.getElementById('lcityLabel');
+	var rcityLabel= document.getElementById('rcityLabel');
+	var useLeftCircle= document.getElementById('useLeftCircle');
+	var useRightCircle= document.getElementById('useRightCircle');
+	var leftUseOwn= document.getElementById('leftUseOwn');
+	var rightUseOwn= document.getElementById('rightUseOwn');
+	var ltimeZone= document.getElementById('ltimeZone');
+	var rtimeZone= document.getElementById('rtimeZone');
+	var bgColor= document.getElementById('bgColor');
+	var ringColor= document.getElementById('ringColor');
+	var hourColor= document.getElementById('hourColor');
+	var smallColor= document.getElementById('smallColor');
+	var minuteColor= document.getElementById('minuteColor');
+	var secondColor= document.getElementById('secondColor');
+	var centerColor= document.getElementById('centerColor');
+	var dateColor= document.getElementById('dateColor');
+	var labelColor= document.getElementById('labelColor');
+	var tickColor= document.getElementById('tickColor');
+	var useOwnTheme= document.getElementById('useOwnTheme');
+	var useLowbat = document.getElementById('useLowbat');
+	var useSleephours  = document.getElementById('useSleephours');
+	var battPercent  = document.getElementById('battPercent');
+	var sleepStart  = document.getElementById('sleepStart');
+	var sleepEnd  = document.getElementById('sleepEnd');
+
+	
+    // Load any previously saved configuration, if available
+    if(localStorage['theme']) {
+		theme_picker.value = localStorage['theme'];
+		lcity_picker.value = localStorage['lcity'];
+		rcity_picker.value = localStorage['rcity'];
+		use_sec_hand.checked = JSON.parse(localStorage['useSeconds']);
+		use_bluetooth.checked = JSON.parse(localStorage['useBluetooth']);
+		use_vibrate.checked = JSON.parse(localStorage['useVibrate']);
+		use_right_circle.checked = JSON.parse(localStorage['useRightCircle']);
+		use_left_circle.checked = JSON.parse(localStorage['useLeftCircle']);
+		use_left_circle.checked = JSON.parse(localStorage['useLeftCircle']);
+		ltimezone_picker.value = localStorage['ltimeZone'];
+		rtimezone_picker.value = localStorage['rtimeZone'];
+		bgColorPicker.value = localStorage['bgColor'];
+		ringColorPicker.value = localStorage['ringColor'];
+		hourColorPicker.value = localStorage['hourColor'];
+		smallColorPicker.value = localStorage['smallColor'];
+		minuteColorPicker.value = localStorage['minuteColor'];
+		secondColorPicker.value = localStorage['secondColor'];
+		centerColorPicker.value = localStorage['centerColor'];
+		dateColorPicker.value = localStorage['dateColor'];
+		labelColorPicker.value = localStorage['labelColor'];
+		tickColorPicker.value = localStorage['tickColor'];
+    }
+
+	if(localStorage['useOwnTheme']) {
+		use_own_theme.checked = JSON.parse(localStorage['useOwnTheme']);
+	} else {
+		use_own_theme.checked = false;
+	}
+
+	if(localStorage['useTicks']) {
+		use_tick_option.checked = JSON.parse(localStorage['useTicks']);
+		use_date_option.checked = JSON.parse(localStorage['useDate']);
+	} else {
+		use_tick_option.checked = true;
+		use_date_option.checked = true;
+	}
+	
+	if(localStorage['battPercent']) {
+		batt_percent.value = localStorage['battPercent'];
+		sleep_start.value = localStorage['sleepStart'];
+		sleep_end.value = localStorage['sleepEnd'];
+	}
+	
+	if(localStorage['useLowbat']) {
+		use_lowbat.checked = JSON.parse(localStorage['useLowbat']);
+	} else {
+		use_lowbat.checked = false;
+	}
+	
+	if(localStorage['useSleephours']) {
+		use_sleephours.checked = JSON.parse(localStorage['useSleephours']);
+	} else {
+		use_sleephours.checked = false;
+	}
+
+
+	if(localStorage['leftUseOwn']) {
+		if (localStorage['leftUseOwn'] == 1)
+			luse_own.checked = true;
+		else
+			luse_own.checked = false;		
+	} else {
+		luse_own.checked = false;
+	}
+	
+	if(localStorage['rightUseOwn']) {
+		if (localStorage['rightUseOwn'] == 1)
+			ruse_own.checked = true;
+		else
+			ruse_own.checked = false;		
+	} else {
+		ruse_own.checked = false;
+	}
+	
+    if(localStorage['lcityLabel']) {
+	  lcity_label.value = localStorage['lcityLabel'];
+	  rcity_label.value = localStorage['rcityLabel'];
+	}
+
+	//HIDE&SHOW INITIAL DEFAULTS	
+	if (use_own_theme.checked) {
+		$("#theme_preset").hide("slow");
+		$("#theme_customizer").show("slow");
+	} else {
+		$("#theme_preset").show("slow");
+		$("#theme_customizer").hide("slow");
+	}
+
+	if (use_lowbat.checked) {
+        $("#lowbat_drop").show("slow");
+	} else {
+        $("#lowbat_drop").hide("slow");
+	}
+
+	if (use_sleephours.checked) {
+        $("#sleephours_drop").show("slow");
+	} else {
+        $("#sleephours_drop").hide("slow");
+	}
+	
+    if (luse_own.checked == false) {
+	    $("#lown").hide("slow");
+        $("#lselect").show("slow");
+    } else {
+	    $("#lown").show("slow");
+        $("#lselect").hide("slow");
+	}
+
+    if (ruse_own.checked == false) {
+	    $("#rown").hide("slow");
+        $("#rselect").show("slow");
+    } else {
+	    $("#rown").show("slow");
+        $("#rselect").hide("slow");
+	}
+
+    if (use_left_circle.checked == false) {
+		$("#ldrop").hide("slow"); 
+	}
+	
+    if (use_right_circle.checked == false) {
+		$("#rdrop").hide("slow");
+    }
+
+
+	
+ })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

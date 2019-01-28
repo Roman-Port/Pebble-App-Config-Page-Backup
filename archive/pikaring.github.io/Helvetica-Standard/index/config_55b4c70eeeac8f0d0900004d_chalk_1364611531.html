@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="imagetoolbar" content="no">
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="/pikaring.github.io./Helvetica-Standard/css/common.css" type="text/css"> 
+<script src="/code.jquery.com//jquery-1.js"></script>
+<!-- 
+ -->
+<script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+<script type="text/javascript" src="/pikaring.github.io./Helvetica-Standard/js/jquery.js"></script>
+<script type="text/javascript" src="/pikaring.github.io./Helvetica-Standard/js/common.js"></script>
+<title>Helvetica-Standard</title>
+</head>
+<body>
+<div id="top">
+<div id="header">
+</div><!-- /#header-->
+<div id="contents">
+<h1><a href="/pikaring.github.io./Helvetica-Standard/index.html">configuration</a></h1>
+<p>Choose color.</p>
+<form>
+<p>
+<select id="color" size="4">
+	<option value="0" selected="">white</option>
+	<option value="1">black</option>
+	<option value="2">blue</option>
+	<option value="3">red</option>
+</select>
+</p>
+
+<p>Choose weather timezone.</p>
+<p>
+<select id="weather" size="4">
+	<option value="0" selected="">now</option>
+	<option value="1">+3h</option>
+	<option value="2">+6h</option>
+	<option value="3">+9h</option>
+	<option value="4">+12h</option>
+	<option value="5">+15h</option>
+	<option value="6">+18h</option>
+	<option value="7">+21h</option>
+	<option value="8">+24h</option>
+	<option value="9">+27h</option>
+	<option value="10">+30h</option>
+	<option value="11">+33h</option>
+	<option value="12">+36h</option>
+	<option value="13">+39h</option>
+	<option value="14">+42h</option>
+	<option value="15">+45h</option>
+	<option value="16">+48h</option>
+</select>
+</p>
+
+<p>Celsius / Fahrenheit</p>
+<p>
+<select id="temp" size="2">
+	<option value="0" selected="">&#8451;</option>
+	<option value="1">&#8457;</option>
+</select>
+</p>
+
+<p>Do you want disable the seconds hand?</p>
+<p>
+<select id="second" size="2">
+	<option value="0" selected="">disable</option>
+	<option value="1">able</option>
+</select>
+</p>
+
+<p><input type="submit" id="b-save" value="save"></p>
+<p><input type="submit" id="b-cancel" value="cancel"></p>
+
+</form>
+
+</div><!-- /#contents-->
+<div id="footer">
+</div><!-- /#footer-->
+</div><!-- /#top-->
+
+<script>
+
+function saveOptions() {
+	var colorValue = parseInt($('#color').val());
+	var weatherValue = parseInt($('#weather').val());
+	var tempValue = parseInt($('#temp').val());
+	var secondsValue = parseInt($('#second').val());
+	var sendValue =[colorValue,weatherValue,tempValue,secondsValue];
+<!--alert(sendValue);-->	
+	return sendValue;
+}
+
+$().ready(function() 
+	{
+	$("#b-cancel").click(function() 
+		{
+		console.log("Canceling");
+		document.location = "pebblejs://close";
+	});
+	$("#b-save").click(function() {
+		console.log("Save");
+		var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+		document.location = location;
+	});
+});
+</script>
+</body>
+</html>

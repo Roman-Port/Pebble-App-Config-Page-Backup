@@ -1,0 +1,105 @@
+/*-------------------------------------------------------------------------------------------------------*/
+/* Plugin Name: Nafets Imprint                                                                           */
+/* Plugin URI: http://www.nafets-design.com                                                              */
+/* Description: Dieses Plugin generiert eine Impressum und eine Datenschutz Seite inkl. dem Cookie Layer */
+/* Version: 1.0.3                                                                                        */
+/* Author: nafetSDesign                                                                                  */
+/* Author URI: http://www.nafets-design.com                                                              */
+/* License: GPLv2                                                                                        */
+/* Copyright: Stefan Nordhoff                                                                            */
+/*                                                                                                       */
+/* File: nafets-imprint.css                                                                              */
+/*-------------------------------------------------------------------------------------------------------*/
+
+div#nafets_imprint h2 {
+	margin: 0 !important;
+	font-size: 18px !important;
+}
+div#nafets_imprint h3 {
+	margin: 0 !important;
+	font-size: 17px !important;
+}
+div#nafets_imprint h4 {
+	margin: 0 !important;
+	font-size: 16px !important;
+}
+div#nafets_imprint p,
+div#nafets_imprint li {
+	font-size: 14px !important;
+}
+div#nafets_imprint p+p,
+div#nafets_imprint p+h2,
+div#nafets_imprint p+h3,
+div#nafets_imprint h2+h3,
+div#nafets_imprint h3+h4 {
+	margin-top: 15px !important;
+}
+div#nafets_imprint h2+p,
+div#nafets_imprint h3+p,
+div#nafets_imprint h4+p {
+	margin-top: 0 !important;
+}
+div#nafets_imprint ul.table {
+	margin-left: 0 !important;
+	padding-left: 0 !important;
+	display: block !important;
+}
+div#nafets_imprint ul.table li {
+	margin-left: 20px;
+	display: table-row;
+}
+div#nafets_imprint ul.table li::before,
+div#nafets_imprint ul.table li::after {
+	content: '';
+	display: none !important;
+}
+div#nafets_imprint ul li.notable {
+	margin-left: 0 !important;
+	display: inline-block !important;
+}
+div#nafets_imprint ul li span {
+	display: table-cell;
+}
+div#nafets_imprint ul li span+span {
+	padding-left: 10px;
+}
+
+div#nafets_imprint-cookie {
+	width: 100%;
+	padding-bottom: 10px;
+	background: rgba( 0,0,0, 0.8 );
+	border-top: 3px solid #000;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	display: none;
+	z-index: 9999;
+}
+div#nafets_imprint-cookie p {
+	width: 100% !important;
+	min-height: 20px !important;
+	line-height: 20px !important;
+	margin: 5px auto !important;
+	font-family: Arial !important;
+	font-size: 12px !important;
+	text-align: center !important;
+	color: #FFF !important;
+}
+div#nafets_imprint-cookie p a {
+	color: #FFF !important;
+	text-decoration: underline !important;
+}
+div#nafets_imprint-cookie div.nafets_imprint-accept {
+	width: 50px;
+	height: 24px;
+	line-height: 24px;
+	text-align: center;
+	font-family: Arial;
+	font-size: 12px;
+	text-align: center;
+	color: #FFF;
+	cursor: pointer;
+	margin: 0 auto;
+	background: green;
+	border-radius: 2px;
+}

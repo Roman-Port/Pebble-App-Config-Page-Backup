@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>BIG Again Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/wrbrooks.github.io/bigagain/css/slate.css'>
+  <script src='/wrbrooks.github.io/bigagain/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>BIG Again Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to set the colors for BIG Again
+        </div>
+      </div>
+    </div>
+
+
+    <div class='item-container'>
+      <div class='item-container-header'>Customizability</div>
+        <div class='item-container-content'>
+        <label class='item'>
+          Solid minute digits
+          <input id='solid-toggle' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Digit color
+          <input id='color_picker_a' type='text' class='item-color item-color-sunny' value='0xFFFFFF'>
+        </label>
+      </div>
+
+      <div class='item-container-content'>
+        <label class='item'>
+          Background color
+          <input id='color_picker_b' type='text' class='item-color item-color-sunny' value='0x000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        On black-and-white Pebbles, any non-white color is interpreted as black.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+    
+    
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='reset_button' type='button' class='item-button' value='RESTORE DEFAULTS'>
+      </div>
+    </div>
+    
+  </body>
+  <script>
+  function getConfigData() {
+    var colorPickerA = document.getElementById('color_picker_a');
+    var colorPickerB = document.getElementById('color_picker_b'); 
+    var solidToggle = document.getElementById('solid-toggle'); 
+
+    var options = {
+      'color_a': colorPickerA.value,
+      'color_b': colorPickerB.value,
+      'solid_minutes': solidToggle.checked
+    };
+
+    // Save for next launch
+    localStorage.color_a = options.color_a;
+    localStorage.color_b = options.color_b;
+    localStorage.solid_minutes = options.solid_minutes;
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+  
+  
+  var resetButton = document.getElementById('reset_button');
+  resetButton.addEventListener('click', function() {
+    console.log('Reset to default settings');
+
+    // Grab the controls from the form
+    var colorPickerA = document.getElementById('color_picker_a');
+    var colorPickerB = document.getElementById('color_picker_b');
+    var solidToggle = document.getElementById('solid-toggle');
+    
+    // Reset the controls to their default values
+    colorPickerA.value = '0xFFFFFF';
+    colorPickerB.value = '0x000000';
+    solidToggle.checked = false;
+
+    // Store the defaults and return them to the watch.
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+  
+
+  (function() {
+    var colorPickerA = document.getElementById('color_picker_a');
+    var colorPickerB = document.getElementById('color_picker_b');
+    var solidToggle = document.getElementById('solid-toggle');
+
+    // Load any previously saved configuration, if available
+    if(localStorage.color_a) {
+      colorPickerA.value = localStorage.color_a;
+    }
+
+    if(localStorage.color_b) {
+      colorPickerB.value = localStorage.color_b;
+    }
+    
+    if(localStorage.solid_minutes) {
+      solidToggle.checked = JSON.parse(localStorage.solid_minutes);
+    }
+  })();
+  </script>
+</html>

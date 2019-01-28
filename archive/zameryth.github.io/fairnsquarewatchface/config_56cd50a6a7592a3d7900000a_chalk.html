@@ -1,0 +1,205 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel='stylesheet' type='text/css' href='/zameryth.github.io/fairnsquarewatchface/bower_components/pebble-slate/dist/css/slate.css'>
+  <link rel='stylesheet' type='text/css' href='/zameryth.github.io/fairnsquarewatchface/css/style.css'>
+
+</head>
+<body>
+  <div class='item-container'>
+    <h1 class='title'>Fair N Square<br>Configuration Page</h1>
+  </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Themes</div>
+        <div class='item-container-content'>
+
+            <label class='item' style="width: auto;overflow-x: scroll;overflow-y:hidden;white-space:nowrap;">
+              <a onclick="spectrum();"><img src="/zameryth.github.io/fairnsquarewatchface/images/Spectrum.png"></a>
+              <a onclick="playfulstamps();"><img src="/zameryth.github.io/fairnsquarewatchface/images/Playful%20Stamps.png"></a>
+              <a onclick="jazzyred();"><img src="/zameryth.github.io/fairnsquarewatchface/images/Jazzy%20Red.png"></a>
+              <a onclick="coolblue();"><img src="/zameryth.github.io/fairnsquarewatchface/images/Cool%20Blue.png"></a>
+              <a onclick="forestgreen();"><img src="/zameryth.github.io/fairnsquarewatchface/images/Forest%20Green.png"></a>
+              <a onclick="original();"><img src="/zameryth.github.io/fairnsquarewatchface/images/Original.png"></a>
+            </label>
+
+        <div class='item-container-footer'>
+              If the color selection locks up after you select a theme, tap the same theme again to fix it. This will be fixed later.<br>
+        </div>
+    </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Digit Color</div>
+
+    <div class='item-container-content'>
+
+      <label class='item'>
+        Hour Tens Place
+        <input id='hourTens' class='item-color item-color-normal' value="0xFFFFFF">
+      </label>
+      <label class='item'>
+        Hour Ones Place
+        <input id='hourOnes' class='item-color item-color-normal' value="0xFFFFFF">
+      </label>
+
+      <label class='item'>
+        Minute Tens Place
+        <input id='minTens' class='item-color item-color-normal' value="0xFFFFFF">
+      </label>
+
+      <label class='item'>
+        Minute Ones Place
+        <input id='minOnes' class='item-color item-color-normal' value="0xFFFFFF">
+      </label>
+
+    </div>
+
+      <div class='item-container'>
+        <div class='item-container-header'>Foreground Settings</div>
+
+        <div class='item-container-content'>
+
+          <label class='item'>
+            Top Left Color
+            <input id='topLeft' class='item-color item-color-normal' value="0xAA0000">
+          </label>
+
+                    <label class='item'>
+                      Top Left Type<br>
+                      <form>
+                      <select id='topLeftType' name='select-1' dir='rtl' class='item-select'>
+                        <option class='item-select-option' value='0'>Box</option>
+                        <option class='item-select-option' value='1'>Curves</option>
+                        <option class='item-select-option' value='2'>Outline</option>
+                        <option class='item-select-option' value='3'>Thin</option>
+                        <option class='item-select-option' value='4'>Zig Zag</option>
+                        <option class='item-select-option' value='5'>Frame</option>
+                        <option class='item-select-option' value='6'>Stripes</option>
+                        <option class='item-select-option' value='7'>Stamp</option>
+                      </select>
+                    </form>
+                    </label>
+
+          <label class='item'>
+            Top Right Color
+            <input id='topRight' class='item-color item-color-normal' value="0x0000AA">
+          </label>
+
+          <label class='item'>
+            Top Right Type<br>
+            <form>
+            <select id='topRightType' name='select-1' dir='rtl' class='item-select'>
+              <option class='item-select-option' value='0'>Box</option>
+              <option class='item-select-option' value='1'>Curves</option>
+              <option class='item-select-option' value='2'>Outline</option>
+              <option class='item-select-option' value='3'>Thin</option>
+              <option class='item-select-option' value='4'>Zig Zag</option>
+              <option class='item-select-option' value='5'>Frame</option>
+              <option class='item-select-option' value='6'>Stripes</option>
+              <option class='item-select-option' value='7'>Stamp</option>
+            </select>
+          </form>
+          </label>
+
+          <label class='item'>
+            Bottom Left Color
+            <input id='botLeft' class='item-color item-color-normal' value="0x0000AA">
+          </label>
+
+          <label class='item'>
+            Bottom Left Type<br>
+            <form>
+            <select id='botLeftType' name='select-1' dir='rtl' class='item-select'>
+              <option class='item-select-option' value='0'>Box</option>
+              <option class='item-select-option' value='1'>Curves</option>
+              <option class='item-select-option' value='2'>Outline</option>
+              <option class='item-select-option' value='3'>Thin</option>
+              <option class='item-select-option' value='4'>Zig Zag</option>
+              <option class='item-select-option' value='5'>Frame</option>
+              <option class='item-select-option' value='6'>Stripes</option>
+              <option class='item-select-option' value='7'>Stamp</option>
+            </select>
+          </form>
+          </label>
+
+          <label class='item'>
+            Bottom Right Color
+            <input id='botRight' class='item-color item-color-normal' value="0xAA0000">
+          </label>
+
+          <label class='item'>
+            Bottom Right Type<br>
+            <form>
+            <select id='botRightType' name='select-1' dir='rtl' class='item-select'>
+              <option class='item-select-option' value='0'>Box</option>
+              <option class='item-select-option' value='1'>Curves</option>
+              <option class='item-select-option' value='2'>Outline</option>
+              <option class='item-select-option' value='3'>Thin</option>
+              <option class='item-select-option' value='4'>Zig Zag</option>
+              <option class='item-select-option' value='5'>Frame</option>
+              <option class='item-select-option' value='6'>Stripes</option>
+              <option class='item-select-option' value='7'>Stamp</option>
+            </select>
+          </form>
+          </label>
+
+        </div>
+
+        <div class='item-container'>
+          <div class='item-container-header'>Misc</div>
+            <div class='item-container-content'>
+
+
+                <label class='item'>
+                    Background Color
+                    <input id='bgcolor' class='item-color item-color-normal' value="0x000000">
+                </label>
+
+                <label class='item'>
+                    Date Color
+                    <input id='datecolor' class='item-color item-color-normal' value="0xFFFFFF">
+                </label>
+
+
+        </div>
+
+
+    <div class='item-container-footer'>
+      Tap submit to save your changes.<br>
+      v.1.5
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='button-container'>
+      <input id='submitButton' type='button' class='item-button' value='SUBMIT'>
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='button-container'>
+      <input onclick="loadOptions(), load_js()" type='button' class='item-button' value='RESET'>
+    </div>
+  </div>
+
+<br>
+<br>
+
+<div class="item-container" id='donate'>
+  <div class="item-container-content">
+    <div class="item">
+        Love using Fair N Square? Feel free to donate any amount!
+        You'll also encourage me to make more content for the Pebble! :)<br>
+        Thanks for the support!<br>
+        <center><a href="/www.paypal.me//zameryth.html"><img id='donate' src="/zameryth.github.io/fairnsquarewatchface/images/paypal.gif"></a></center>
+    </div>
+  </div>
+</div>
+
+  <script src='/zameryth.github.io/fairnsquarewatchface/bower_components/pebble-slate/dist/js/slate.js'></script>
+  <script src='/zameryth.github.io/fairnsquarewatchface/js/main.js'></script>
+
+</div></div></div></body>
+</html>

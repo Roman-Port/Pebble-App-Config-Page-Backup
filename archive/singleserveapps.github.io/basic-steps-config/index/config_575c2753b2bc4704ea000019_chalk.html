@@ -1,0 +1,81 @@
+﻿﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel='stylesheet' type='text/css' href='/singleserveapps.github.io/basic-steps-config/bower_components/pebble-slate/dist/css/slate.css'>
+	<link rel='stylesheet' type='text/css' href='/singleserveapps.github.io/basic-steps-config/css/style.css'>
+</head>
+<body>
+
+    <div class='item-container'>
+        <div class='item-container-header'>Color options</div>
+        <div class='item-container-content'>
+            <label class='item'>
+                Background Color
+                <input id='backgroundColorPicker' type='text' class='item-color item-color-normal' value='#000000'>
+            </label>
+
+            <label class='item'>
+                Hour Text Color
+                <input id='hrColorPicker' type='text' class='item-color item-color-normal' value='#ffffff'>
+            </label>
+
+            <label class='item'>
+                Minutes Text Color
+                <input id='minColorPicker' type='text' class='item-color item-color-normal' value='#ff5500'>
+            </label>
+
+            <label class='item'>
+                Steps/Date Color
+                <input id='wsdColorPicker' type='text' class='item-color item-color-normal' value='#ffffff'>
+            </label>
+        </div>
+        <div class='item-container-footer'>
+            Choose the background, hour, minutes, and steps/date colors for the watchface.
+            (For Pebble and Pebble Steel, select from black & white colors only. Black is default for background color and white is default for text color.)
+        </div>
+    </div>
+	
+    <div class='item-container'>
+        <div class='item-container-header'>Display options</div>
+		
+		<div class="item-container-content">
+		<label class="item">
+      			Hour font
+      			<select id="hourFont" dir='rtl' class="item-select">
+        		<option class="item-select-option" value="0">Thin</option>
+        		<option class="item-select-option" selected="" value="1">Regular</option>
+        		<option class="item-select-option" value="2">Bold</option>
+      			</select>
+      	</label>
+          </div>
+          <div class='item-container-footer'>
+              Select font width for hour digits - thin, regular, or bold. Relaunch watchface to apply display option.
+         </div>			
+
+		<div class="item-container-content">
+		<label class="item">
+      			Minutes font
+      			<select id="minutesFont" dir='rtl' class="item-select">
+        		<option class="item-select-option" value="0">Thin</option>
+        		<option class="item-select-option" selected="" value="1">Regular</option>
+        		<option class="item-select-option" value="2">Bold</option>
+      			</select>
+      	</label>
+          </div>
+          <div class='item-container-footer'>
+              Select font width for minutes digits - thin, regular, or bold. Relaunch watchface to apply display option.
+         </div>
+	</div>	
+
+    <div class='item-container'>
+        <div class='button-container'>
+            <input id='submitButton' type='button' class='item-button' value='Save'>
+        </div>
+    </div>
+
+	<script src='/singleserveapps.github.io/basic-steps-config/bower_components/pebble-slate/dist/js/slate.js'></script>
+	<script src='/singleserveapps.github.io/basic-steps-config/js/main.js'></script>
+</body>
+</html>

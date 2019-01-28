@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Shifting Braille Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/pipebble.nfshost.com/shifting_braille/css/slate.css'>
+  <script src='/pipebble.nfshost.com/shifting_braille/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Shifting Braille Configuration</h1>
+
+    <!-- <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied to this app.
+        </div>
+      </div>
+    </div> -->
+
+    <div class='item-container'>
+      <div class='item-container-header'>Customizability</div>
+     <div class='item-container-content'>
+        <label class='item'>
+          Display Seconds
+          <input id='display_seconds_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        When enabled, watch displays hours, minutes and seconds. Conserve battery power by disabling seconds.
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Color
+          <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's background color. Note: Only available on Pebble Time.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Accessibility</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Tap the time when watch is shaken
+          <input id='tapback_time_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        When enabled and watch is shaken, Shifting Braille will tap the time in <a href="/en.wikipedia.org/wiki/Morse_code.html">morse code</a>.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var displaySecondsCheckbox = document.getElementById('display_seconds_checkbox');
+    var tapbackTimeCheckbox = document.getElementById('tapback_time_checkbox');
+ 
+    var options = {
+      'background_color': backgroundColorPicker.value,
+      'display_seconds': displaySecondsCheckbox.checked,
+      'tapback_time': tapbackTimeCheckbox.checked,
+    };
+
+    // Save for next launch
+    localStorage['background_color'] = options['background_color'];
+    localStorage['display_seconds'] = options['display_seconds'];
+    localStorage['tapback_time'] = options['tapback_time'];
+
+    //console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    //console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var displaySecondsCheckbox = document.getElementById('display_seconds_checkbox');
+    var tapbackTimeCheckbox = document.getElementById('tapback_time_checkbox');
+
+    // Load any previously saved configuration, if available
+    if('display_seconds' in localStorage) {
+      displaySecondsCheckbox.checked = JSON.parse(localStorage['display_seconds']);
+      backgroundColorPicker.value = localStorage['background_color'];
+      tapbackTimeCheckbox.checked = JSON.parse(localStorage['tapback_time']);
+    }
+  })();
+  </script>
+</html>

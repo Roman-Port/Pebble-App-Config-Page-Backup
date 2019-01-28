@@ -1,0 +1,382 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Poco Watch - Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.css" rel="stylesheet">
+    <link href="/netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link href="/polygonplanet.github.io/Poco-Watch/settings/css/style7329764f1a.css" rel="stylesheet">
+    <link href="/polygonplanet.github.io/Poco-Watch/settings/css/jquery.css" rel="stylesheet">
+    <style>
+    input[type=checkbox], input[type=radio] {
+      -moz-transform: scale(1.5, 1.5);
+      -webkit-transform: scale(1.5, 1.5);
+      transform: scale(1.5, 1.5);
+      margin-right: 1em;
+    }
+
+    label.disabled {
+      color: #aaa;
+    }
+
+    .settings-container {
+      display: none;
+    }
+
+    .loading {
+      margin: 1em auto;
+      padding: 1em;
+      font-size: 16px;
+    }
+
+    .loading:after {
+      content: "Loading...";
+    }
+
+    #accelLevelGraph {
+      margin: 2em;
+    }
+    </style>
+  </head>
+
+  <body>
+    <div class="container loading-container">
+      <div class="loading">
+      </div>
+    </div>
+    <div class="container settings-container">
+      <h2>
+        Poco Watch
+      </h2>
+      <hr>
+      <div class="form-group">
+        <label>
+          Bluetooth disconnect vibration:
+        </label>
+        <label class="checkbox">
+          <input id="bluetoothVibe" type="checkbox">
+          ON
+        </label>
+      </div>
+      <hr>
+      <div class="form-group date-format-group">
+        <label>
+          Date format:
+        </label>
+        <div class="dateFormat-group">
+          <label class="radio">
+            <input type="radio" name="dateFormat" value="1" class="dateFormat-default" checked="checked">
+            Week DD/MM
+          </label>
+          <label class="radio">
+            <input type="radio" name="dateFormat" value="2">
+            Week MM/DD
+          </label>
+          <label class="radio">
+            <input type="radio" name="dateFormat" value="3">
+            DD/MM Week
+          </label>
+          <label class="radio">
+            <input type="radio" name="dateFormat" value="4">
+            MM/DD Week
+          </label>
+        </div>
+      </div>
+      <!--
+      <hr>
+      <div class="form-group">
+        <label class="warnings">
+          ! Reset all of data:
+        </label>
+        <label class="checkbox">
+          <input id="resetAllOfData" type="checkbox">
+          OK
+        </label>
+      </div>
+      -->
+      <hr>
+      <div class="submit-group group-buttons">
+        <button class="btn button-submit btn-primary btn-lg">
+          Save
+        </button>
+      </div>
+      <hr>
+      <div class="footer-addr">
+        Poco Watch by
+        <a href="/polygonpla.net//.html">polygon planet</a>.
+      </div>
+    </div>
+
+    <div class="graph-container">
+      <div id="accelLevelGraph"></div>
+    </div>
+
+    <script src="/ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
+    <script src="/netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.js"></script>
+    <script src="/polygonplanet.github.io/Poco-Watch/settings/js/jquery.js"></script>
+    <script src="/polygonplanet.github.io/Poco-Watch/settings/js/jquery.js"></script>
+    <script src="/polygonplanet.github.io/Poco-Watch/settings/js/jqplot.js"></script>
+
+    <script>
+    var STORE_KEYS = [
+      'poco'
+    ];
+
+    var store = {
+      bluetoothVibe: {
+        value: 1,
+        selector: '#bluetoothVibe',
+        get: function(el) {
+          return el.prop('checked') ? 1 : 0;
+        },
+        set: function(el, v) {
+          el.prop('checked', !!v);
+        },
+        fix: function(v) {
+          return (v - 0) ? 1 : 0;
+        }
+      },
+      dateFormat: {
+        value: 1,
+        selector: '.dateFormat-group',
+        get: function(el) {
+          var self = this;
+          var v;
+
+          $(this.selector + ' input[type=radio]').each(function() {
+            if ($(this).prop('checked')) {
+              v = $(this).val();
+            }
+          });
+
+          if (!v) {
+            $(this.selector + ' .dateFormat-default').prop('checked', true);
+            return this.fix(this.value);
+          }
+
+          return this.fix(v);
+        },
+        set: function(el, v) {
+          var self = this;
+
+          $(this.selector + ' input[type=radio]').each(function() {
+            $(this).prop('checked', self.fix(v) === self.fix($(this).val()));
+          });
+
+          return (this.value = this.fix($(this.selector + ' :checked').val()));
+        },
+        fix: function(v) {
+          var n = (v - 0) || 0;
+          return Math.max(1, Math.min(4, n));
+        }
+      },
+      resetAllOfData: {
+        value: 0,
+        selector: '#resetAllOfData',
+        get: function(el) {
+          return el.prop('checked') ? 1 : 0;
+        },
+        set: function(el, v) {
+          el.prop('checked', !!v);
+        },
+        fix: function(v) {
+          return (v - 0) ? 1 : 0;
+        }
+      },
+      accelPointTotal: {
+        value: [],
+        get: function(el) {
+          return this.value;
+        },
+        set: function(el, v) {
+          return (this.value = this.fix(v));
+        },
+        fix: function(v) {
+          if (typeof v === 'string') {
+            v = JSON.parse(decodeURIComponent(v));
+          }
+          return v;
+        }
+      }
+    };
+
+
+    var clearStorage = function() {
+      var key;
+
+      for (var i = 0, len = window.localStorage.length; i < len; i++) {
+        key = window.localStorage.key(i);
+        if (key != null && !~STORE_KEYS.indexOf(key)) {
+          window.localStorage.removeItem(key);
+        }
+      }
+    };
+
+
+    var parseParams = function(uri) {
+      var params = {};
+
+      var re = /[?&]+([^=&]+)=([^&]*)/g;
+      var m;
+
+      while ((m = re.exec(uri)) != null) {
+        params[m[1]] = m[2];
+      }
+
+      return params;
+    };
+
+
+    var isEncoded = function(s) {
+      return /^(?:[a-zA-Z0-9_~.-]|%[0-9a-fA-F]{2})*$/.test(s);
+    };
+
+    var encodeParams = function(uri) {
+      var encode = function(s) {
+        return isEncoded(s) ? s : encodeURIComponent(s);
+      };
+
+      return uri.replace(/([?&]+)([^=&]+)=([^&]*)/g, function(match, sep, key, value) {
+        return sep + encode(key) + '=' + encode(value);
+      });
+    };
+
+
+    var closeWin = function(data) {
+      var uri = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(data));
+      window.location.href = uri;
+    };
+
+
+    var drawAccelPointGraph = function() {
+      var accelPointTotal = store.accelPointTotal.get() || [];
+
+      if (accelPointTotal.length < 2) {
+        return;
+      }
+
+      var pad = function(v) {
+        return '' + (v < 10 ? '0' + v : v);
+      };
+
+      var getDate = function(d) {
+        return d.getFullYear() + '-' + pad(d.getMonth()) + '-' + pad(d.getDate());
+      };
+
+      var today = new Date();
+      var maxDate = getDate(today);
+
+      var data = [];
+      var day;
+
+      accelPointTotal.forEach(function(point, i) {
+        day = getDate(new Date(today.getTime() - ((i + 1) * (24 * 60 * 60 * 1000))));
+        data.push([day, point]);
+      });
+
+      var minDate = day;
+
+      var options = {
+        grid: {
+          drawGridLines: false,
+          gridLineColor: '#eee',
+          borderColor: '#ccc',
+          background: '#fff',
+          shadow: false
+        },
+        seriesDefaults: {
+          shadow: false
+        },
+        seriesColors: ['#428BCA'],
+        title: {
+          text: 'Accel Level (7days)'
+        },
+        axes: {
+          xaxis: {
+            renderer: $.jqplot.DateAxisRenderer,
+            min: minDate,
+            max: maxDate,
+            tickInterval: '1 days',
+            tickOptions: {
+              formatString: '%d'
+            }
+          },
+          yaxis: {
+            min: 0
+          }
+        }
+      };
+
+      $.jqplot('accelLevelGraph', [data], options);
+    };
+
+
+    $(document).ready(function() {
+      // remove old item
+      //clearStorage();
+
+      var params = parseParams(window.location.href);
+
+      Object.keys(store).forEach(function(key) {
+        var value = params[key];
+        var field = store[key];
+
+        if (field.decode) {
+          value = field.decode(value);
+        }
+
+        if (key in store && value != null) {
+          field.value = field.fix(value);
+        }
+
+        field.set($(field.selector), field.value);
+      });
+
+      $('.button-submit').on('click', function(ev) {
+        var f = function(v) { return v };
+
+        var values = Object.keys(store).reduce(function(o, k) {
+          var value = store[k].get($(store[k].selector));
+
+          o[k] = (store[k].encode || f)(value);
+          return o;
+        }, {});
+
+        closeWin(values);
+        ev.preventDefault();
+        ev.stopPropagation();
+      });
+
+
+      var loaded = false;
+
+      setTimeout(function checkFields() {
+        var group = $('.feed-input-group input, .feed-input-group label');
+
+        $('input[type=checkbox], input[type=radio]').each(function() {
+          if (!$(this).prop('disabled') && $(this).prop('checked')) {
+            $(this).parent().addClass('field-selected');
+          } else {
+            $(this).parent().removeClass('field-selected');
+          }
+        });
+
+        if (!loaded) {
+          loaded = true;
+
+          $('.loading-container').hide();
+          $('.settings-container').show();
+        }
+
+        setTimeout(checkFields, 64);
+      }, 64);
+
+      drawAccelPointGraph();
+    });
+    </script>
+
+  </body>
+</html>

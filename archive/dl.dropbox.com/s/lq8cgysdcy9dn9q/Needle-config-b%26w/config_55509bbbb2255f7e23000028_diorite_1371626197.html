@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!-- COLOR VERSION -->
+
+<!--TODO : Black & White Version-->
+<html>
+	<meta name="viewport" content="width=device-width">
+	<style>
+		body {
+			background: #444;
+			color: #FFF;
+			font-family: sans-serif, HelveticaNeue-Light, sans-serif;
+		}
+	p,a {
+			color: #FFF;
+			text-align: center;
+		}
+	hr {clear: both; margin: 10px 0}
+	h1 {
+			text-align: center;
+		}
+		
+	select {
+			display: inline-block;
+			padding: 4px 3px 5px 5px;
+			width: 150px;
+			outline: none;
+			color: black;
+			border: 1px solid #C8BFC4;
+			border-radius: 4px;
+			box-shadow: inset 1px 1px 2px #ddd8dc;
+			background-color: lightgrey;
+	}
+
+	</style>
+	
+	<head>
+		<title>SIMPLE NEEDLE</title>
+
+	</head>
+	
+	<body>
+		<h1>SIMPLE NEEDLE</h1>
+		<hr>
+		<p>
+		<select id="display_date_select">
+			<option selected="" disabled="">Display Date</option>
+			<option value="on">On</option>
+			<option value="off">Off</option>
+		</select>
+		</p>
+		
+		<p>
+		<button id="save_button">Save</button>
+		</p>
+	</body>
+</html>
+
+
+
+<script>
+	
+	function getQueryParam(variable, default_) {
+		var query = location.search.substring(1);
+		var vars = query.split('&');
+			for (var i = 0; i < vars.length; i++) {
+				var pair = vars[i].split('=');
+				if (pair[0] == variable)
+						return decodeURIComponent(pair[1]);
+			}
+		return default_ || false;
+	}
+
+	//Setup to allow easy adding more options later
+	function saveOptions() {
+		var displayDateSelect = document.getElementById("display_date_select");
+		
+		var options = {
+			"display_date": displayDateSelect.options[displayDateSelect.selectedIndex].value
+		}
+		return options;
+	};
+
+
+var submitButton = document.getElementById("save_button");
+submitButton.addEventListener("click",
+							  function() {
+							  console.log("Submit");
+							  
+							  var options = saveOptions();
+							  
+							  var return_to = getQueryParam('return_to', 'pebblejs://close#');
+							  document.location = return_to + encodeURIComponent(JSON.stringify(options));
+							  
+							  },
+							  false);
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head profile="http://dublincore.org/documents/dcq-html/">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="schema.DC" href="/purl.org/dc/elements/1.1/.bin">
+  <link rel="schema.DCTERMS" href="/purl.org/dc/terms/.bin">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta charset="UTF-8">
+  <meta name="AUTHOR" content="Oliver Merkel">
+  <meta name="COPYRIGHT" content="Oliver Merkel">
+  <meta name="DC.creator" content="Oliver Merkel">
+  <meta name="DC.contributor" content="Oliver Merkel">
+  <meta name="DC.rights" content="
+See file named LICENSE being part of the repository.
+
+Copyright (c) 2015
+@author Oliver Merkel, Merkel(dot)Oliver(at)web(dot)de.
+All rights reserved.
+
+Logos and trademarks belong to their respective owners.
+
+All source code also including code parts written in HMTL, Javascript, CSS, C is under MIT License.
+
+The MIT License (MIT)
+
+Copyright (c) 2015 Oliver Merkel, Merkel(dot)Oliver(at)web(dot)de
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the &quot;Software&quot;), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+If not otherwise stated all game graphics (independent of its format) are licensed under
+    http://creativecommons.org/licenses/by-nc-sa/4.0/deed.en_US
+    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+">
+    <title>Configurable</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.5/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.4.5/jquery.js"></script>
+  </head>
+  <body>
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Oh dear! Oh dear! I shall be too late... configuration</h1>
+      </div> <!-- /header -->
+
+      <div data-role="content">
+        <div data-role="fieldcontain">
+          <label for="enable_second_hand">Show the second-hand</label>
+          <select name="enable_second_hand" id="enable_second_hand" data-role="slider">
+            <option value="off">Off</option>
+            <option value="on" selected="selected">On</option>
+          </select>
+        </div> <!-- /fieldcontain -->
+
+        <div data-role="fieldcontain">
+          <label for="behavior_minute_hand">Minute-hand behavior</label>
+          <select name="behavior_minute_hand" id="behavior_minute_hand" data-role="slider">
+            <option value="tick">Tick</option>
+            <option value="sweep" selected="selected">Sweep</option>
+          </select>
+        </div> <!-- /fieldcontain -->
+
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+          </fieldset>
+        </div>
+      </div> <!-- /content -->
+    </div> <!-- /page -->
+    <script>
+      function saveOptions() {
+        var options = {}
+        $('textarea, select, [type="hidden"], [type="password"], [type="text"]').each(function(){options[$(this).attr('id')] = $(this).val();})
+        $('[type="radio"], [type="checkbox"]').each(function(){options[$(this).attr('id')] = $(this).is(':checked');})
+        return options;
+      }
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+        $("#b-submit").click(function() {
+          console.log("Submit");
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+        var obj = jQuery.parseJSON(decodeURIComponent(window.location.search.substring(1)));
+        for(key in obj) {
+          $("#"+[key]).val(obj[key]);
+          $("#"+[key]).val(obj[key]).slider("refresh");
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Configurable</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.0/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+    <script src="/code.jquery.com/mobile/1.4.4/jquery.js"></script>
+    <script>
+		$( document ).on( "pageinit", "#main", function() {
+			$( "#cty_sel" ).on( "filterablebeforefilter", function ( e, data ) {
+				var value =data.input.val(),
+				    group = $( "#cty_results" ),
+				    $el,
+				    action = function() {
+				    	var x = $(this), y = $( "#cty_sel" )[0].parentNode.firstElementChild,
+				    	cty_res =  x[0].text, cty_nm = cty_res.substring(0,cty_res.search(",")),
+				    	key="AIzaSyALTyx9QM5FyrbZlrqvyWYPUPUY18-mLSo";
+					console.log("Item selected "+ cty_res);
+					y[0].value = cty_res;
+					console.log("City is "+cty_nm);
+					group.controlgroup( "container" ).empty();
+					$.ajax({
+						url: "https://maps.googleapis.com/maps/api/geocode/json",
+						dataType: "json",
+						crossDomain: true,
+						data: {
+							address: cty_nm,
+							sensor: false,
+							key: key
+						}
+					})
+					.then( function ( cty_dtl ) {
+						console.log("google Item:"+ JSON.stringify(cty_dtl));
+						var latittude = cty_dtl.results[0].geometry.location;
+						console.log("Latittude:"+latittude);
+						$.ajax({
+							url: "https://maps.googleapis.com/maps/api/timezone/json",
+							dataType: "json",
+							crossDomain: true,
+							data: {
+								location: latittude.lat+","+latittude.lng,
+								timestamp: new Date().getTime()/1000 ,
+								sensor: false,
+								key: key
+							}
+						})
+						.then( function ( zne_dtl ) {
+							console.log("google Zone:"+ JSON.stringify(zne_dtl,null,2));
+							$.each( zne_dtl, function ( i, val ) {
+								console.log("Item:"+val);
+								if(i=="status"){
+									$el = $( "<il href='#' id='zn_clock'>" + i+ ": " + val + "</il>" );
+									$( "#cty_results" ).controlgroup( "container" )[ "append" ]( $el );
+									$el.buttonMarkup();
+									return true;
+								};
+								if(i=="dstOffset" || i=="rawOffset"){
+									var offset =  (zne_dtl.dstOffset+zne_dtl.rawOffset)*1000+(new Date).getTimezoneOffset()*60000 ;
+									$el = $( "<input type='hidden' name='offset' value="+offset+">" );
+									$( "#cty_results" ).controlgroup( "container" )[ "append" ]( $el );
+									//$el = $( "<input type='hidden' name='cty_nm' value='"+cty_nm+"'>" );
+									//$( "#cty_results" ).controlgroup( "container" )[ "append" ]( $el );
+									get_cty_lbl(cty_nm);
+									return true;
+								}
+								$el = $( "<il href='#'> " + val + "</il>" );
+								$( "#cty_results" ).controlgroup( "container" )[ "append" ]( $el );
+								$el.buttonMarkup();
+							});
+							group.controlgroup( "refresh" );
+							var xxx= parseInt($('input[name=offset]').val());
+							date_time("zn_clock",xxx);
+						});
+					});
+					console.log("this is"+result);
+				};   
+				
+				console.log("Text 2:"+value);
+				
+				if ( value && value.length > 2 ) {
+					group.controlgroup( "container" ).empty();
+					$.ajax({
+						url: "http://gd.geobytes.com/AutoCompleteCity",
+						dataType: "jsonp",
+						crossDomain: true,
+						data: {
+							q: value
+						}
+					})
+					.then( function ( response ) {
+						$.each( response, function ( i, val ) {
+							console.log("Item:"+val);
+							$el = $( "<a href='#' value="+val+">" + val + "</a>" ).bind( "click", action );
+							$( "#cty_results" ).controlgroup( "container" )[ "append" ]( $el );
+							$el.buttonMarkup();
+						});
+						group.controlgroup( "refresh" );
+					});
+				}
+				else{
+					group.controlgroup( "container" ).empty();
+				}
+			});
+		});
+		function date_time(id,offset){
+        		date = new Date();
+        		date.setTime(date.getTime()+offset);
+        		h = date.getHours();
+        		if(h<10){
+                		h = "0"+h;
+		        }
+        		m = date.getMinutes();
+        		if(m<10){
+                		m = "0"+m;
+        		}
+        		s = date.getSeconds();
+        		if(s<10){
+                		s = "0"+s;
+        		}
+        		result = ''+h+':'+m+':'+s;
+        		document.getElementById(id).innerHTML = result;
+        		setTimeout('date_time("'+id+'",'+offset+');','1000');
+        		//setTimeout('date_time("'+id+'");','1000');
+        		return true;
+		}
+    </script> 
+
+  </head>
+  <body onload="date_time('date_time',0)">
+    <div data-role="page" id="main">
+      <div data-role="header" class="jqm-header">
+        <h1>Configurable Pebble App</h1>
+      </div>
+
+      <div data-role="content">
+      
+      	
+        <label for="date_time">Current time:</label>  
+
+    <div id="date_time" class="ui-input-btn ui-btn">
+        current time
+    </div>
+
+	<label for="cty_sel">Second time for:</label>  
+	<div class="ui-body ui-body-d ui-corner-all">
+		<ul id="cty_sel" data-inset="true" data-filter-placeholder="Type a city name..." data-filter="true" data-text="nanan">
+  		</ul>
+        	<div data-role="controlgroup" id="cty_results"><!-- items will be injected here --></div>
+        	</div>
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+              <div class="ui-block-a"><button type="submit" data-theme="d" id="b-cancel">Cancel</button></div>
+              <div class="ui-block-b"><button type="submit" data-theme="a" id="b-submit">Submit</button></div>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    
+    <script>
+	function get_cty_lbl(cty_name){
+		console.log("Searching for "+cty_name);
+		
+		var cty_id=cty_name, group = $( "#cty_results" ),
+				    $el;
+		$.getJSON("cty_list.json", function() {
+			console.log( "success" );
+			})
+  			.done(function(data) {
+    				console.log(cty_id+ " second success" +JSON.stringify(data) );
+    				console.log("Log "+data[cty_id]);
+    				if(data[cty_id] == undefined ){
+    					$el = $( "<input type='hidden' name='cty_nm' value='"+cty_name.substring(0,3)+"'>" );
+    				}else{
+    					$el = $( "<input type='hidden' name='cty_nm' value='"+data[cty_id]+"'>" );
+    				};
+				$( "#cty_results" ).controlgroup( "container" )[ "append" ]( $el );
+				group.controlgroup( "refresh" );
+  			})
+  			.fail(function() {
+    				console.log( "error" );
+  			})
+  			.always(function() {
+    				console.log( "complete" );
+  		});
+  		//$.getJSON("cty_list.json", function(data) { 
+    		//	cty_list=data;
+  		//}); 
+		//var cty_id = cty_list[0];
+        	//System.out.println( "Coolness: " + cty_id );
+        	
+		
+		return cty_name;
+	}
+      function requestURL(urll) {
+	console.log("requested url is:"+urll);
+	var jsonObj = new Object;
+	var http_request = new XMLHttpRequest();
+	http_request.open("GET", urll , false);
+	http_request.send();
+	jsonObj = JSON.parse(http_request.responseText);
+	return jsonObj;	
+	}
+      function saveOptions() {
+        var options = {
+          'name': $("#name").val(),
+          'special-feature': $("#special-feature").val(),
+          'checkbox-cheetos': $("#checkbox-cheetos").is(':checked'),
+          'checkbox-doritos': $("#checkbox-doritos").is(':checked'),
+          'checkbox-fritos': $("#checkbox-fritos").is(':checked'),
+          'checkbox-sunchips': $("#checkbox-sunchips").is(':checked')
+        }
+	var selected_id  = $( "input:radio[name='cty']:checked" ).attr("id");
+	console.log("Selected item is "+selected_id);
+	var url_lat = "https://maps.googleapis.com/maps/api/geocode/json?address=%20+%20+%20+%20+"+$("input:radio[name='cty']:checked" ).attr("value")+"+%20&sensor=false&key=AIzaSyALTyx9QM5FyrbZlrqvyWYPUPUY18-mLSo";
+	console.log("First url:"+url_lat);
+       
+	var result1 = requestURL(url_lat);
+	console.log("City info jsonObject is:"+JSON.stringify(result1));
+	var latittude = result1.results[0].geometry.location;
+	console.log("Latittude:"+latittude);
+	url_lat = "https://maps.googleapis.com/maps/api/timezone/json?location="+latittude.lat+","+latittude.lng+"&timestamp="+new Date().getTime()/1000+"&sensor=false&key=AIzaSyALTyx9QM5FyrbZlrqvyWYPUPUY18-mLSo";
+	console.log("Second url:"+url_lat);
+	result1 = requestURL(url_lat);
+	console.log("Zone info jsonObject is:"+JSON.stringify(result1));
+        return options;
+      }
+
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+          document.location = "pebblejs://close";
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+		var options = {
+          	'offset': parseInt($('input[name=offset]').val()),
+          	'cty_id':  $('input[name=cty_nm]').val()
+        	};	
+          var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(options));
+          console.log("Warping to: " + location);
+          console.log(location);
+          document.location = location;
+        });
+
+      });
+    </script>
+  </body>
+</html>

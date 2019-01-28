@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Expectant Spouse Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/rawgit.com/Tico0001/Expectant-Father/master/config/css/slate.css'>
+  <script src='/rawgit.com/Tico0001/Expectant-Father/master/config/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Expectant Spouse Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Please select the name of your spouse, the name of the baby, and the conception date.
+        </div>
+      </div>
+    </div>
+
+    <div class="item-container">
+      <div class="item-container-header">Configuration.</div>
+      <div class="item-container-content">
+        <label class="item">
+          Spouse's name:
+          <div class="item-input-wrapper">
+            <input id='wife_name_picker' type="text" class="item-input" name="input-1" value="My spouse">
+          </div>
+        </label>
+        <label class="item">
+          Baby's name:
+          <div class="item-input-wrapper">
+            <input id='baby_name_picker' type="text" class="item-input" name="input-2" value="the baby">
+          </div>
+        </label>
+        <label class="item">
+          Conception date:
+          <input id='concep_date_picker' type="date" class="item-date" name="date-1" value="2015-02-12">
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Pick the approximate conception date of the baby.
+        If the resulting calculated week of pregnancy does not match, tweak this date.
+      </div>
+    </div>
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  
+  <script>
+  function getConfigData() {
+    var wifeNamePicker = document.getElementById('wife_name_picker');
+    var babyNamePicker = document.getElementById('baby_name_picker');
+    var concepDatePicker = document.getElementById('concep_date_picker');
+    
+    // Save options selected
+    var options = {
+      'wife_name': wifeNamePicker.value,
+      'baby_name': babyNamePicker.value,
+      'concep_year': parseInt(concepDatePicker.value.substr(0,4)),
+      'concep_mon': parseInt(concepDatePicker.value.substr(5,2)),
+      'concep_day': parseInt(concepDatePicker.value.substr(8,2))
+    };
+    
+    // Local Storage
+    // Save for next launch
+    localStorage['wife_name'] = options['wife_name'];
+    localStorage['baby_name'] = options['baby_name'];
+    localStorage['concep_date'] = concepDatePicker.value;
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var wifeNamePicker = document.getElementById('wife_name_picker');
+    var babyNamePicker = document.getElementById('baby_name_picker');
+    var ConcepDatePicker = document.getElementById('concep_date_picker');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['wife_name']){
+      wifeNamePicker.value = localStorage['wife_name'];
+    }
+    if(localStorage['baby_name']){
+      babyNamePicker.value = localStorage['baby_name'];  
+    }
+    if(localStorage['concep_date']){
+      ConcepDatePicker.value = localStorage['concep_date'];
+    }
+  })();
+  </script>
+</html>

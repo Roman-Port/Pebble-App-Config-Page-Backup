@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Boxyface Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/andree182.github.io/pebble-boxyface/config/css/slate.css'>
+  <script src='/andree182.github.io/pebble-boxyface/config/js/slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Boxyface Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Colors</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Color / Bluetooth on
+          <input id='KEY_BG_BT_COLOR' type='text' class='item-color item-color-sunny' value='#0068ca'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Color / Bluetooth off
+          <input id='KEY_BG_NOBT_COLOR' type='text' class='item-color item-color-sunny' value='#e35462'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Text Color
+          <input id='KEY_TEXT_COLOR' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Text Background Color
+          <input id='KEY_TEXT_BG_COLOR' type='text' class='item-color item-color-sunny' value='#ffffff'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's colors. Note: Only available on color watches.
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Features</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Leading Zero for Hours
+          <input id='KEY_HOUR_LEADING_ZERO' type='checkbox' class='item-toggle' checked="">
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Show Battery Status
+          <input id='KEY_SHOW_BATTERY_STATUS' type='checkbox' class='item-toggle' checked="">
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class="item">
+          Layout
+          <select id="KEY_LAYOUT" dir='rtl' class="item-select">
+            <option class="item-select-option" value="-1">Clock on the top</option>
+            <option class="item-select-option" value="0" selected="">Clock in the middle</option>
+            <option class="item-select-option" value="1">Clock on the bottom</option>
+          </select>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Visit the <a href="/github.com/andree182/pebble-boxyface.html">homepage</a> for source code, issue reporting etc.
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+
+  <script>
+	var KEY_BG_BT_COLOR = document.getElementById('KEY_BG_BT_COLOR');
+	var KEY_BG_NOBT_COLOR = document.getElementById('KEY_BG_NOBT_COLOR');
+	var KEY_TEXT_COLOR = document.getElementById('KEY_TEXT_COLOR');
+	var KEY_TEXT_BG_COLOR = document.getElementById('KEY_TEXT_BG_COLOR');
+	var KEY_HOUR_LEADING_ZERO = document.getElementById('KEY_HOUR_LEADING_ZERO');
+	var KEY_SHOW_BATTERY_STATUS = document.getElementById('KEY_SHOW_BATTERY_STATUS');
+	var KEY_LAYOUT = document.getElementById('KEY_LAYOUT');
+
+	function getConfigData() {
+		var options = {
+			'KEY_BG_BT_COLOR': KEY_BG_BT_COLOR.value,
+			'KEY_BG_NOBT_COLOR': KEY_BG_NOBT_COLOR.value,
+			'KEY_TEXT_COLOR': KEY_TEXT_COLOR.value,
+			'KEY_TEXT_BG_COLOR': KEY_TEXT_BG_COLOR.value,
+			'KEY_HOUR_LEADING_ZERO': KEY_HOUR_LEADING_ZERO.checked,
+			'KEY_SHOW_BATTERY_STATUS': KEY_SHOW_BATTERY_STATUS.checked,
+			'KEY_LAYOUT': parseInt(KEY_LAYOUT.value),
+		};
+
+		// Save for next launch
+		for (var key in options) {
+			localStorage[key] = options[key];
+		}
+
+		console.log('Got options: ' + JSON.stringify(options));
+		return options;
+	}
+
+	function getQueryParam(variable, defaultValue) {
+		var query = location.search.substring(1);
+		var vars = query.split('&');
+		for (var i = 0; i < vars.length; i++) {
+		var pair = vars[i].split('=');
+		if (pair[0] === variable) {
+			return decodeURIComponent(pair[1]);
+		}
+		}
+		return defaultValue || false;
+	}
+	
+	var submitButton = document.getElementById('submit_button');
+	submitButton.addEventListener('click', function() {
+		console.log('Submit');
+
+		// Set the return URL depending on the runtime environment
+		var return_to = getQueryParam('return_to', 'pebblejs://close#');
+		document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+	});
+
+	(function() {
+		// Load any previously saved configuration, if available
+		if (localStorage['KEY_BG_BT_COLOR']) {
+			KEY_BG_BT_COLOR.value = localStorage['KEY_BG_BT_COLOR'];
+			KEY_BG_NOBT_COLOR.value = localStorage['KEY_BG_NOBT_COLOR'];
+			KEY_TEXT_COLOR.value = localStorage['KEY_TEXT_COLOR'];
+			KEY_TEXT_BG_COLOR.value = localStorage['KEY_TEXT_BG_COLOR'];
+			KEY_HOUR_LEADING_ZERO.checked = JSON.parse(localStorage['KEY_HOUR_LEADING_ZERO']);
+			KEY_SHOW_BATTERY_STATUS.checked = JSON.parse(localStorage['KEY_SHOW_BATTERY_STATUS']);
+			KEY_LAYOUT.value = localStorage['KEY_LAYOUT'];
+		}
+	})();
+  </script>
+</html>

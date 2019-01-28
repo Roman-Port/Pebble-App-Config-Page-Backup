@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html class="" ng-app="netatApp" ng-controller="commonController as common" ng-strict-di="" ng-cloak="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, maximum-scale=1">
+
+  <meta name="csrf-token" content="19aac7e65a1708de58d2d0978fe74271">
+
+  <meta name="fragment" content="!">
+            <title ng-bind="MetaTags.title"></title>
+    <meta name="description" content="{{MetaTags.description}}">
+    <meta property="og:title" content="Sign-up">
+  <meta property="og:description" content="Experience the comfort of a Smart Home: Smart Thermostat, Security Camera with Face Recognition, Weather Station">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.netatmo.com//en-US/checklogin/547f99cd197759b64caec672/read_station?client_id=547f99cd197759b64caec672&redirect_uri=http%3A%2F%2Fpebble-netatmo.appspot.com%2Fauth%2Fresult&scope=read_station&next_url=https%3A%2F%2Fapp.netatmo.net%2Foauth2%2Fauthorize%3Fclient_id%3D547f99cd197759b64caec672%26response_type%3Dcode%26redirect_uri%3Dhttp%253A%252F%252Fpebble-netatmo.appspot.com%252Fauth%252Fresult%26scope%3Dread_station">
+  <meta name="url" content="https://www.netatmo.com//en-US/checklogin/547f99cd197759b64caec672/read_station?client_id=547f99cd197759b64caec672&redirect_uri=http%3A%2F%2Fpebble-netatmo.appspot.com%2Fauth%2Fresult&scope=read_station&next_url=https%3A%2F%2Fapp.netatmo.net%2Foauth2%2Fauthorize%3Fclient_id%3D547f99cd197759b64caec672%26response_type%3Dcode%26redirect_uri%3Dhttp%253A%252F%252Fpebble-netatmo.appspot.com%252Fauth%252Fresult%26scope%3Dread_station">
+    <meta property="og:image" content="https://www.netatmo.com/images/common/logo-rh.jpg">
+  <meta property="og:image:width" content="450">
+  <meta property="og:image:height" content="240">
+      <meta name="robots" content="index,follow,noodp">
+    <meta name="coverage" content="Worldwide">
+  <meta name="type" content="website">
+  <meta name="site_name" content="Netatmo">
+
+    <link rel="alternate" href="/auth.netatmo.com/checklogin/547f99cd197759b64caec672/read_station_1869766333.html" hreflang="x-default">
+      <link rel="alternate" href="/auth.netatmo.com/de-DE/checklogin/547f99cd197759b64caec672/read_station_1869766333.html" hreflang="de-de">
+      <link rel="alternate" href="/auth.netatmo.com/en-GB/checklogin/547f99cd197759b64caec672/read_station_1869766333.html" hreflang="en-gb">
+      <link rel="alternate" href="/auth.netatmo.com/en-US/checklogin/547f99cd197759b64caec672/read_station_1869766333.html" hreflang="en-us">
+      <link rel="alternate" href="/auth.netatmo.com/es-ES/checklogin/547f99cd197759b64caec672/read_station_1869766333.html" hreflang="es-es">
+      <link rel="alternate" href="/auth.netatmo.com/fr-FR/checklogin/547f99cd197759b64caec672/read_station_1869766333.html" hreflang="fr-fr">
+      <link rel="alternate" href="/auth.netatmo.com/it-IT/checklogin/547f99cd197759b64caec672/read_station_1869766333.html" hreflang="it-it">
+      <link rel="alternate" href="/auth.netatmo.com/nl-NL/checklogin/547f99cd197759b64caec672/read_station_1869766333.html" hreflang="nl-nl">
+      <link rel="alternate" href="/auth.netatmo.com/ja-JP/checklogin/547f99cd197759b64caec672/read_station_1869766333.html" hreflang="ja-jp">
+  
+  <!-- CSS -->
+  <script type="text/javascript" src="/hello.myfonts.net/count/2f1fe6.css"></script>
+    <link rel="stylesheet" media="all" href="/dist/css/template.css?v=99">
+  <!-- favico -->
+  <!-- begin of favico -->
+
+<link href="/images/favicons/favicon.ico?v=99" rel="icon">
+<link rel="shortcut icon" href="/images/favicons/favicon.ico?v=99">
+
+	<!-- Win8 tile -->
+		<meta name="msapplication-TileImage" content="/images/favicons/icon144.png?v=99">
+		<meta name="msapplication-TileColor" content="#B20099">
+		<meta name="application-name" content="name">
+	<!-- IE11 tiles -->
+		<meta name="msapplication-square70x70logo" content="/images/favicons/icon70.png?v=99">
+		<meta name="msapplication-square150x150logo" content="/images/favicons/icon150.png?v=99">
+		<meta name="msapplication-wide310x150logo" content="/images/favicons/icon310x150.png?v=99">
+		<meta name="msapplication-square310x310logo" content="/images/favicons/icon310.png?v=99">
+<!-- end of favico -->
+
+  <!--[if IE]>
+  <link rel="stylesheet" type="text/css" href="/css/ie.css?v=99" />
+  <![endif]-->
+  <!-- BEGIN GOOGLE ANALYTICS CODE -->
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+</script>
+
+  <script type="text/javascript">
+    ga('create', 'UA-27910893-2', 'auto');  // Replace with your property ID.
+    ga('send', 'pageview');
+  </script>
+<!-- END GOOGLE ANALYTICS CODE -->
+
+  <!-- TAG COMMANDER START //-->
+<script type="text/javascript">
+(function (){
+//<![CDATA[
+var tc_vars = {
+     env_template : 'category_main', // Page template name
+     env_work : 'prod', // Working environnement
+     env_channel : 'd', // Channel (desktop, tablet, mobile)
+     env_language : 'en-US', // Website language
+     env_country : 'US', // Country
+     user_id : '', // Visitor ID
+     user_gender : '', // Visitor Gender
+     user_age : '', // Visitor Age
+     user_postalcode : '', // Visitor postal code
+     user_city : '', // Visitor city
+     user_country : '', // Visitor country
+     user_category : '', // Visitor category (internal CRM segmentation)
+     user_creation_date : '', // Visitor account creation date
+     user_recency : '', // R - Visitor recency (last purchase date)
+     user_frequency : '', // F - Visitor frequency (number of purchases)
+     user_amount : '', // M - Visitor amount (total amount spent by the Client)
+     user_email : '', // Email of the customer
+     user_email_optin : '', // Visitor optin newsletter or not
+     user_status : '', // Visitor status : customer or prospect
+     page_cat1 : '', // Main Category
+     page_cat2 : '', // Category
+     page_cat3 : '', // Sub Category
+     page_name : '', // Page name (needed only when the analytics tool is implemented into TagCommander)
+     page_error : '', // Error page
+     product_id : '', // Product ID
+     product_item_id : '', // Product Item ID
+     product_sku : '', // Product SKU
+     product_name : '', // Product name
+     product_category : '', // Product category
+     product_unitprice_ati : '', // Product unit price ATI (all tax included)
+     product_discount_ati : '', // Product discount price ATI (all tax included)
+     product_unitprice_tf : '', // Product unit price TF (tax free)
+     product_discount_tf : '', // Product discount price TF (tax free)
+     product_currency : '', // Currency code (ISO code 4217)
+     product_url_page : '', // Product URL (URL of the product page)
+     product_url_picture : '', // Main picture absolute path from the first slash (URL of the product main image)
+     product_rating : '', // Product rating
+     product_instock : '', // Product available in stock or not
+     list_accessories : null, // Product available in stock or not
+     order_id : '', // Order ID
+     basket_id : '', // Basket ID created when a product is added to the basket
+     order_amount_ati_without_sf : '', // Order amount ATI (all tax included) without shipping fee
+     order_amount_ati_with_sf : '', // Order amount ATI (all tax included) with shipping fee
+     order_discount_ati : '', // Order discount ATI (all tax included) - let empty if no discount
+     order_ship_ati : '', // Order shipping fee ATI (all tax included)
+     order_amount_tf_without_sf : '', // Order amount TF (tax free) without shipping fee
+     order_amount_tf_with_sf : '', // Order amount TF (tax free) with shipping fee
+     order_discount_tf : '', // Order discount TF (tax free) - let empty if no discount
+     order_ship_tf : '', // Order shipping fee TF (tax free)
+     order_tax : '', // Taxes
+     order_payment_methods : '', // Payment methods (VISA, CB,MASTERCARD,AMEX,…) - JavaScript array if several payment methods for the same order
+     order_shipping_method : '', // Shipping method ("express", "express signature", ou "standard")
+     order_status : '', // Order status ("validated","rejected","waiting")
+     order_promo_code : '', // List of promotionnal codes/coupons in the order - JavaScript array if several coupons for the same order
+     order_currency : '', // Currency code (ISO code 4217)
+     order_newcustomer : '', // First order or already client
+     order_products_number : '', // Number of products into the order
+     order_products : [{ // Information about products added to the basket (JavaScript Array)
+          order_product_id : '', // Product ID (= product ID mentionned in the product flows)
+          order_product_sku : '', // Product SKU
+          order_product_name : '', // Product name
+          order_product_category : '', // Product category
+          order_product_quantity : '', // Product quantity
+          order_product_unitprice_ati : '', // Product unitprice ATI (all tax included)
+          order_product_discount_ati : '', // Product discount ATI (all tax included)
+          order_product_unitprice_tf : '', // Product unitprice TF (tax free)
+          order_product_discount_tf : '', // Product discount TF (tax free)
+          order_product_currency : '', // Product currency
+          order_product_url_page : '', // Product URL (URL of the product page)
+          order_product_url_picture : '', // Main picture absolute path from the first slash (URL of the product main image)
+          order_product_rating : '', // Product rating
+          order_product_instock : '' // Product instock or not
+     }],
+     store_country : '', // Keyword of store research
+     store_list : null // Store name
+}
+window.tc_vars = tc_vars;
+})();
+//]]>
+</script>
+<!-- TAG COMMANDER END //-->
+    
+  <script>
+    window.fbAsyncInit = function() {
+    FB.init({ //jshint ignore: line
+      appId      : '292716490799017',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+    // FB.AppEvents.logPageView();
+  };
+
+  (function(d, s, id){
+    'use strict';
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = '//connect.facebook.net/en_US/sdk.js';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  window.twttr = (function(d, s, id) {
+    'use strict';
+    var js, fjs = d.getElementsByTagName(s)[0],
+    t = window.twttr || {};
+    if (d.getElementById(id)) return t;
+    js = d.createElement(s);
+    js.id = id;
+    js.src = 'https://platform.twitter.com/widgets.js';
+    fjs.parentNode.insertBefore(js, fjs);
+    t._e = [];
+    t.ready = function(f) {t._e.push(f);};
+    return t;
+  }(document, 'script', 'twitter-wjs'));
+</script>
+</head>
+
+<body device-detector="">
+        <div ng-include="'/static/common/cookie-warning.html'"></div>
+        <div id="main-view">
+                    <div id="header"><na-header></na-header></div>
+        <div id='auth' class="c-form--auth ">
+    <form action="/en-US/access/login?next_url=https%3A%2F%2Fapp.netatmo.net%2Foauth2%2Fauthorize%3Fclient_id%3D547f99cd197759b64caec672%26response_type%3Dcode%26redirect_uri%3Dhttp%3A%2F%2Fpebble-netatmo.appspot.com%2Fauth%2Fresult%26scope%3Dread_station" method="post" accept-charset="utf-8" class="c-form__wrapper" name="auth_form"><div style="display:none">
+<input type="hidden" name="ci_csrf_netatmo" value="19aac7e65a1708de58d2d0978fe74271">
+</div>    	<h2 class="c-title">Log in</h2>
+		<!-- Global errors -->
+								<!-- End global errors -->
+        <div class="o-row o-grid-start-xs o-grid-between-xs">
+            <div class="o-grid-xs-12 h-flush-margin--left">
+                <p class="c-label">Email</p>
+                <div class="c-input">
+                	                    <input type="email" name="mail" value="" class="h-bg-color--white trim-input">                </div>
+                <div></div>
+            </div>
+
+            <div class="o-grid-xs-12 h-flush-margin--left h-margin-xs--top-1">
+                <p class="c-label">Password</p>
+                <div class="c-input">
+                	                    <input type="password" name="pass" value="" class="h-bg-color--white">                </div>
+                <div></div>
+            </div>
+
+			<div class="o-grid-xs-12 h-margin-xs--top-3 h-txt--left">
+				<input type="submit" name="log_submit" value="Log in" class="c-submit-button">
+				<input type="checkbox" name="stay_logged" checked="true" value="accept" class="h-txt-xs--size-16 m--small" id="stay_logged">
+				<label for="stay_logged" class="c-label--light">Stay logged</label>
+			</div>
+
+			<div class="o-grid-xs-12 o-grid-sm-6 h-margin-xs--top-3 h-txt--center">
+									<a href="/en-US/access/lostpassword" class="c-label--light" target="_blank">Lost your password?</a>							</div>
+			<div class="o-grid-xs-12 o-grid-sm-6 h-margin-xs--top-1 h-margin-sm--top-3 h-txt--center">
+									<a href="/en-US/access/signup?next_url=https%3A%2F%2Fapp.netatmo.net%2Foauth2%2Fauthorize%3Fclient_id%3D547f99cd197759b64caec672%26response_type%3Dcode%26redirect_uri%3Dhttp%3A%2F%2Fpebble-netatmo.appspot.com%2Fauth%2Fresult%26scope%3Dread_station" class="c-label--light">Sign-up</a>							</div>
+        </div>
+	</form></div>
+<script type="text/javascript" src="/dist/js/events.js"></script>
+</div><!-- main view -->
+<div id="footer">
+    <na-footer :langs="[{value: 'Deutsch', key: 'de-de'}, {value: 'British English', key: 'en-gb'}, {value: 'U.S. English', key: 'en-us'}, {value: 'Español', key: 'es-es'}, {value: 'Français', key: 'fr-fr'}, {value: 'Italiano', key: 'it-it'}, {value: 'Nederlands', key: 'nl-nl'}, {value: '日本語', key: 'ja-jp'}]"></na-footer>
+</div>
+
+<script type="text/javascript" src="/dist/langs/en-US/common_message_lang.js?v=99"></script>
+    <script type="text/javascript">window.config={locale:"en-US",AUTH_URL:"https://auth.netatmo.com/",APP_URL:"https://www.netatmo.com/",COUNTRY_CODE:"US", CONTINENT_CODE:"NA",AUTH_IFRAME: "false", PRO_URL: "https://pro.netatmo.com", DEV_URL: "https://dev.netatmo.com/", VIEW_URL: "https://view.netatmo.com/"}</script>
+  <script type="text/javascript" src="/dist/js/vendors.js?v=99"></script>  <!-- BEGIN ANGULARJS CONFIGURATION -->
+<script type="text/javascript">
+ (function () {
+     angular.module("naConfigService", []).
+             constant('NAConfig', {
+                                                      locale: "en-US",
+                                 countryCode: "US",
+                 continentCode: "NA",
+                 prodMode: true,
+                 preProdMode: false,
+                 provisionningMode: false,
+                 csrf_name: "ci_csrf_netatmo",
+                 csrf_value: "19aac7e65a1708de58d2d0978fe74271",
+                 baseUrl: "/",
+                 myUrl: "https://my.netatmo.com/",
+                 wmUrl: "https://weathermap.netatmo.com/",
+                 authUrl: "https://auth.netatmo.com/",
+                 wwwUrl: "https://www.netatmo.com/",
+                 proviUrl: "https://www.provisionning.netatmo.com/",
+                 proUrl: "https://pro.netatmo.com",
+                 devUrl: "https://dev.netatmo.com/",
+                 checkUrl: "https://check.netatmo.com/",
+                 adminUrl: "https://admin.netatmo.com/",
+                 staticUrl: "https://static.netatmo.com/",
+                 filesUrl: "https://s3-eu-west-1.amazonaws.com/common-data-files/",
+                 apiUrl: "https://app.netatmo.net/api/",
+                 apiPublicUrl: "https://api.netatmo.com/api/",
+                 loginUrl: "https://auth.netatmo.com/access/checklogin",
+                 shopUrl: "https://shop.netatmo.com/",
+                 viewUrl: "https://view.netatmo.com/",
+                 webPusherUrl: "https://my.netatmo.com/",
+                 webSocketUrl: "wss://app.netatmo.net/ws/",
+                 WEBVERSION: "99",
+                 cookieDomain: ".netatmo.com",
+                 cookiePrefix: "netatmocom",
+                 checkLoginAndRedirect: false,
+                 thmCountry: false,
+                                                                            accessToken: "",
+                                      isDemoMode: false,
+                                  mobileType: {'ios': false, 'android': false},
+                 nativeApp: false ,
+                 nativeAppVersion: 0,
+                 nativeAppType: "",
+                                  permittedUriChars: "a-z 0-9~%.:_\-",
+                 fbApiKey: "292716490799017",
+                 force_installer: null,
+                 currentApp: "checklogin"
+             });
+ }) ();
+</script>
+<!-- END ANGULARJS CONFIGURATION -->
+    <script type="text/javascript" src="/dist/js/template.js?v=99"></script>
+    
+  <script src="/www.youtube.com//iframe_api.js"></script>
+    <script src="/dist/vuejs/natemplate.js?v=99"></script>
+
+    
+  <div id="liveagent"></div>
+</body>
+</html>

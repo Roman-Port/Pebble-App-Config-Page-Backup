@@ -1,0 +1,1384 @@
+﻿<!DOCTYPE html>
+<!-- vim: set enc=utf-8 tenc=utf-8 fenc=utf-8 guifont=consolas: -->
+<html>
+  <head>
+    <title>Timely</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.4.1/jquery.css">
+    <script src="/code.jquery.com//jquery-2.js"></script>
+    <script src="/code.jquery.com/mobile/1.4.1/jquery.js"></script>
+  <!--
+   This page and its contents are Copyright Martin Norland (@cynorg), 2014.
+
+   All rights reserved.
+
+   No permission is given to copy, distribute, modify, or reuse the contents herein
+
+   I intend to build this into a proper library for Pebble configuration pages
+
+   email me at cyn@cyn.org if yoú're interested in my progress.
+   -->
+    <script>
+      var openSection = null;
+      var openGroup = null;
+      var localOptions = null;
+      var lastLanguage = null;
+      var ui_trans={ // http://en.wikipedia.org/wiki/ISO_639-1
+        'misc': {
+          'language': {
+            'EN':'English'
+            ,'ES':'Español'
+            ,'FR':'French'
+            ,'GE':'German'
+            ,'IT':'Italian'
+            ,'NL':'Dutch'
+            ,'RU':'Русский'
+          } ,'default': {
+            'EN':'Default'
+            ,'RU':"дефолт" //GT
+            ,'ES':""
+          } ,'yes': {
+            'EN':'Yes'
+            ,'RU':"Да"
+            ,'ES':'Sí'
+          } ,'no': {
+            'EN':'No'
+            ,'RU':"Нет"
+            ,'ES':'No'
+          } ,'cancel':  {
+            'EN':'Cancel'
+            ,'RU':"отменить" //GT
+            ,'ES':'Cancelar'
+          } ,'save': {
+            'EN':'Save'
+            ,'RU':"сохранять" //GT
+            ,'ES':'Guardar' // Salvar = safe ?  Ahorrar = save
+          } ,'loading': {
+            'EN':'Loading'
+          } ,'none': {
+            'EN':'None'
+            ,'RU':"Ни одна" //GT
+            ,'ES':'Nunca'
+          } ,'1X': {
+            'EN':'1x'
+            ,'RU':""
+            ,'ES':""
+          } ,'2X': {
+            'EN':'2x'
+            ,'RU':""
+            ,'ES':""
+          } ,'3X': {
+            'EN':'3x'
+            ,'RU':""
+            ,'ES':""
+          } ,'long': {
+            'EN':'Long'
+            ,'RU':"долго" //GT
+            ,'ES':""
+          }
+        }
+        ,'general': {
+          'header': {
+            'EN':'General'
+            ,'RU':"Общие"
+            ,'ES':""
+          } ,'theme': {
+            'EN':'Theme'
+            ,'RU':"Тема"
+            ,'ES':""
+          } ,'t_dark': {
+            'EN':'Dark'
+            ,'RU':"Темная"
+            ,'ES':""
+          } ,'t_light':  {
+            'EN':'Light'
+            ,'RU':"Светлая"
+            ,'ES':""
+          } ,'show_status': {
+            'EN':'Show Statusbar'
+          } ,'vibe': {
+            'EN':'Hourly Vibration'
+            ,'RU':"Почасовая вибрация"
+            ,'ES':""
+          } ,'v_disc': {
+            'EN':'Disconnect Vibration'
+            ,'RU':"Вибрация при потере связи с телефоном"
+            ,'ES':""
+          } ,'v_conn': {
+            'EN':'Connect Vibration'
+            ,'RU':"Вибрация при подключении к телефону"
+            ,'ES':""
+          } ,'v_min': {
+            'EN':'Subtle A'
+            ,'RU':""
+            ,'ES':""
+          } ,'v_min2': {
+            'EN':'Subtle B'
+            ,'RU':""
+            ,'ES':""
+          } ,'v_ow': {
+            'EN':'Not Subtle'
+            ,'RU':""
+            ,'ES':""
+          }
+        }
+        ,'translations': {
+          'header':           {
+            'EN':'Translations'
+            ,'RU':"Перевод"
+            ,'ES':""
+          } ,'status': {
+            'EN':'Status'
+            ,'RU':"Статус"
+            ,'ES':""
+          } , 'connected': {
+            'EN':'Connected'
+            ,'RU':"Соединен"
+            ,'ES':"Conectado"
+            ,'FR':"Lié"
+            ,'GE':"Verbunden"
+            ,'IT':"Collegato"
+            ,'NL':"Aangesloten"
+          } , 'd_connected': {
+            'EN':'Linked'
+            ,'RU':"Соед"
+            ,'ES':"Conectado"
+            ,'FR':"Lié"
+            ,'GE':"Verbunden"
+            ,'IT':"Connesso"
+            ,'NL':"Verband"
+          } , 'disconnected': {
+            'EN':'Disconnected'
+            ,'RU':"Отключен"
+            ,'ES':"Desconectado"
+            ,'FR':"Coupé"
+            ,'GE':"Getrennt"
+            ,'IT':"Scollegato"
+            ,'NL':"Losmakend"
+          } , 'd_disconnected': {
+            'EN':'No Link'
+            ,'RU':"НЕТ Соед"
+            ,'FR':"Coupé"
+            ,'ES':""
+            ,'GE':"Getrennt"
+            ,'IT':""
+            ,'NL':"losmakend"
+          } , 'daysofweek': {
+            'EN':'Days of Week'
+            ,'RU':"Дни недели"
+            ,'ES':""
+          } , 'abbr_daysofweek': {
+            'EN':'Days of Week (abbreviated)'
+            ,'RU':"Дни недели (аббр)"
+            ,'ES':""
+          } , 'sunday': {
+            'EN':'Sunday'
+            ,'RU':"Воскресенье"
+            ,'ES':'domingo'
+            ,'FR':'dimanche'
+            ,'GE':'Sonntag'
+            ,'IT':'domenica'
+            ,'NL':'zondag'
+          } , 'a_sunday': {
+            'EN':'Su'
+            ,'RU':"Вс"
+            ,'ES':'do'
+            ,'FR':'di'
+            ,'GE':'So'
+            ,'IT':'do'
+            ,'NL':'zo'
+          } , 'monday': {
+            'EN':'Monday'
+            ,'RU':"Понедельник"
+            ,'ES':'lunes'
+            ,'FR':'lundi'
+            ,'GE':'Montag'
+            ,'IT':'lunedì'
+            ,'NL':'maandag'
+          } , 'a_monday': {
+            'EN':'Mo'
+            ,'RU':"Пн"
+            ,'ES':'lu'
+            ,'FR':'lu'
+            ,'GE':'Mo'
+            ,'IT':'lu'
+            ,'NL':'ma'
+          } , 'tuesday': {
+            'EN':'Tuesday'
+            ,'RU':"Вторник"
+            ,'ES':'martes'
+            ,'FR':'mardi'
+            ,'GE':'Dienstag'
+            ,'IT':'martedì'
+            ,'NL':'dinsdag'
+          } , 'a_tuesday': {
+            'EN':'Tu'
+            ,'RU':"Вт"
+            ,'ES':'ma'
+            ,'FR':'ma'
+            ,'GE':'Di'
+            ,'IT':'ma'
+            ,'NL':'di'
+          } , 'wednesday': {
+            'EN':'Wednesday'
+            ,'RU':"Среда"
+            ,'ES':'miércoles'
+            ,'FR':'mercredi'
+            ,'GE':'Mittwoch'
+            ,'IT':'mercoledì'
+            ,'NL':'woensdag'
+          } , 'a_wednesday': {
+            'EN':'We'
+            ,'RU':"Ср"
+            ,'ES':'mi'
+            ,'FR':'mi'
+            ,'GE':'Mi'
+            ,'IT':'me'
+            ,'NL':'wo'
+          } , 'thursday': {
+            'EN':'Thursday'
+            ,'RU':"Четверг"
+            ,'ES':'jueves'
+            ,'FR':'jeudi'
+            ,'GE':'Donnerstag'
+            ,'IT':'giovedì'
+            ,'NL':'donderdag'
+          } , 'a_thursday': {
+            'EN':'Th'
+            ,'RU':"Чт"
+            ,'ES':'ju'
+            ,'FR':'je'
+            ,'GE':'Do'
+            ,'IT':'gi'
+            ,'NL':'do'
+          } , 'friday': {
+            'EN':'Friday'
+            ,'RU':"Пятница"
+            ,'ES':'viernes'
+            ,'FR':'vendredi'
+            ,'GE':'Freitag'
+            ,'IT':'venerdì'
+            ,'NL':'vrijdag'
+          } , 'a_friday': {
+            'EN':'Fr'
+            ,'RU':"Пт"
+            ,'ES':'vi'
+            ,'FR':'ve'
+            ,'GE':'Fr'
+            ,'IT':'ve'
+            ,'NL':'vr'
+          } , 'saturday': {
+            'EN':'Saturday'
+            ,'RU':"Суббота"
+            ,'ES':'sábado'
+            ,'FR':'samedi'
+            ,'GE':'Samstag'
+            ,'IT':'sabato'
+            ,'NL':'zaterdag'
+          } , 'a_saturday': {
+            'EN':'Sa'
+            ,'RU':"Сб"
+            ,'ES':'sa'
+            ,'FR':'sa'
+            ,'GE':'Sa'
+            ,'IT':'sa'
+            ,'NL':'za'
+          } , 'months': {
+            'EN':'Months'
+            ,'RU':"Месяца"
+            ,'ES':''
+            ,'FR':''
+            ,'GE':''
+            ,'IT':''
+            ,'NL':''
+          } , 'abbr_months': {
+            'EN':'Months (abbreviated)'
+            ,'RU':"Месяца (аббр)"
+            ,'ES':''
+            ,'FR':''
+            ,'GE':''
+            ,'IT':''
+            ,'NL':''
+          } , 'january': {
+            'EN':'January'
+            ,'RU':"Январь"
+            ,'ES':'enero'
+            ,'FR':'janvier'
+            ,'GE':'Januar'
+            ,'IT':'gennaio'
+            ,'NL':'januari'
+          } , 'a_january': {
+            'EN':'Jan'
+            ,'RU':"янв"
+            ,'ES':'ene'
+            ,'FR':'jan'
+            ,'GE':'Jan'
+            ,'IT':'gen'
+            ,'NL':'jan'
+          } , 'february': {
+            'EN':'February'
+            ,'RU':"Февраль"
+            ,'ES':'febrero'
+            ,'FR':'février'
+            ,'GE':'Februar'
+            ,'IT':'febbraio'
+            ,'NL':'februari'
+          } , 'a_february': {
+            'EN':'Feb'
+            ,'RU':"фев"
+            ,'ES':'feb'
+            ,'FR':'fév'
+            ,'GE':'Feb'
+            ,'IT':'feb'
+            ,'NL':'feb'
+          } , 'march': {
+            'EN':'March'
+            ,'RU':"Март"
+            ,'ES':'marzo'
+            ,'FR':'mars'
+            ,'GE':'März'
+            ,'IT':'marzo'
+            ,'NL':'maart'
+          } , 'a_march': {
+            'EN':'Mar'
+            ,'RU':"мар"
+            ,'ES':'mar'
+            ,'FR':'mar'
+            ,'GE':'Mär'
+            ,'IT':'mar'
+            ,'NL':'maa'
+          } , 'april': {
+            'EN':'April'
+            ,'RU':"Апрель"
+            ,'ES':'abril'
+            ,'FR':'avril'
+            ,'GE':'April'
+            ,'IT':'aprile'
+            ,'NL':'april'
+          } , 'a_april': {
+            'EN':'Apr'
+            ,'RU':"Апр"
+            ,'ES':'abr'
+            ,'FR':'avr'
+            ,'GE':'Apr'
+            ,'IT':'apr'
+            ,'NL':'apr'
+          } , 'may': {
+            'EN':'May'
+            ,'RU':"Май"
+            ,'ES':'mayo'
+            ,'FR':'mai'
+            ,'GE':'Mai'
+            ,'IT':'maggio'
+            ,'NL':'mei'
+          } , 'a_may': {
+            'EN':'May'
+            ,'RU':"май"
+            ,'ES':'may'
+            ,'FR':'mai'
+            ,'GE':'Mai'
+            ,'IT':'mag'
+            ,'NL':'mei'
+          } , 'june': {
+            'EN':'June'
+            ,'RU':"Июнь"
+            ,'ES':'junio'
+            ,'FR':'juin'
+            ,'GE':'Juni'
+            ,'IT':'giugno'
+            ,'NL':'juni'
+          } , 'a_june': {
+            'EN':'Jun'
+            ,'RU':"июн"
+            ,'ES':'jun'
+            ,'FR':'jui'
+            ,'GE':'Jun'
+            ,'IT':'giu'
+            ,'NL':'jun'
+          } , 'july': {
+            'EN':'July'
+            ,'RU':"Июль"
+            ,'ES':'julio'
+            ,'FR':'juillet'
+            ,'GE':'Juli'
+            ,'IT':'luglio'
+            ,'NL':'juli'
+          } , 'a_july': {
+            'EN':'Jul'
+            ,'RU':"июль"
+            ,'ES':'jul'
+            ,'FR':'jui'
+            ,'GE':'Jul'
+            ,'IT':'lug'
+            ,'NL':'jul'
+          } , 'august': {
+            'EN':'August'
+            ,'RU':"Август"
+            ,'ES':'agosto'
+            ,'FR':'août'
+            ,'GE':'August'
+            ,'IT':'agosto'
+            ,'NL':'augustus'
+          } , 'a_august': {
+            'EN':'Aug'
+            ,'RU':"Авг"
+            ,'ES':'ago'
+            ,'FR':'aoû'
+            ,'GE':'Aug'
+            ,'IT':'ago'
+            ,'NL':'aug'
+          } , 'september': {
+            'EN':'September'
+            ,'RU':"Сентябрь"
+            ,'ES':'septiembre'
+            ,'FR':'septembre'
+            ,'GE':'September'
+            ,'IT':'settembre'
+            ,'NL':'september'
+          } , 'a_september': {
+            'EN':'Sep'
+            ,'RU':"сен"
+            ,'ES':'sep'
+            ,'FR':'sep'
+            ,'GE':'Sep'
+            ,'IT':'set'
+            ,'NL':'sep'
+          } , 'october': {
+            'EN':'October'
+            ,'RU':"Октябрь"
+            ,'ES':'octubre'
+            ,'FR':'octobre'
+            ,'GE':'Oktober'
+            ,'IT':'ottobre'
+            ,'NL':'oktober'
+          } , 'a_october': {
+            'EN':'Oct'
+            ,'RU':"окт"
+            ,'ES':'oct'
+            ,'FR':'oct'
+            ,'GE':'Okt'
+            ,'IT':'ott'
+            ,'NL':'okt'
+          } , 'november': {
+            'EN':'November'
+            ,'RU':"Ноябрь"
+            ,'ES':'noviembre'
+            ,'FR':'novembre'
+            ,'GE':'November'
+            ,'IT':'novembre'
+            ,'NL':'november'
+          } , 'a_november': {
+            'EN':'Nov'
+            ,'RU':"ноя"
+            ,'ES':'nov'
+            ,'FR':'nov'
+            ,'GE':'Nov'
+            ,'IT':'nov'
+            ,'NL':'nov'
+          } , 'december': {
+            'EN':'December'
+            ,'RU':"Декабрь"
+            ,'ES':'diciembre'
+            ,'FR':'décembre'
+            ,'GE':'Dezember'
+            ,'IT':'dicembre'
+            ,'NL':'december'
+          } , 'a_december': {
+            'EN':'Dec'
+            ,'RU':"дек"
+            ,'ES':'dic'
+            ,'FR':'déc'
+            ,'GE':'Dez'
+            ,'IT':'dic'
+            ,'NL':'dec'
+          }
+        }
+        ,'weather': {
+          'header': {
+            'EN':'Weather'
+          }
+          ,'weather_units': {
+            'EN':'Units'
+          }
+          ,'fahrenheit': {
+            'EN':'Fahrenheit'
+          }
+          ,'celsius': {
+            'EN':'Celsius'
+          }
+          ,'weather_update': {
+            'EN':'Update Frequency'
+          }
+          ,'off': {
+            'EN':'Disabled'
+          }
+          ,'15_min': {
+            'EN':'15 mins'
+          }
+          ,'30_min': {
+            'EN':'30 mins'
+          }
+          ,'60_min': {
+            'EN':'Hourly'
+          }
+        }
+        ,'clock': {
+          'header': {
+            'EN':'Clock'
+            ,'RU':"Часы"
+            ,'ES':""
+          }
+
+          ,'date_format': {
+            'EN':'Date Format'
+            ,'RU':'Формат даты'
+            ,'ES':""
+          }
+          ,'date_format_note': {
+            'EN':'Localized date formats are at the top, use the search box to find a specific date format, I recommend entering a preferred delimiter'
+          }
+          ,'below_time': {
+            'EN':'Below Time'
+            ,'RU':''
+            ,'ES':""
+          }
+          ,'style_week':  {
+            'EN':'Left'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'style_day':   {
+            'EN':'Middle'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'style_am_pm': {
+            'EN':'Right'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'week_format': {
+            'EN':'Week Format'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'-':      {
+            'EN':'-'
+            ,'RU':''
+            ,'ES':''
+          }
+          ,'week':   {
+            'EN':'Week'
+            ,'RU':"неделя" //GT
+            ,'ES':""
+          }
+          ,'tz':     {
+            'EN':'TZ'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'am_pm':  {
+            'EN':'AM/PM'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'day':    {
+            'EN':'Day'
+            ,'RU':"день" //GT
+            ,'ES':""
+          }
+          ,'month':  {
+            'EN':'Month'
+            ,'RU':"месяц" //GT
+            ,'ES':""
+          }
+          ,'doy':    {
+            'EN':'Day of Year'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'dliy':   {
+            'EN':'Days Left in Year'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'seconds':   {
+            'EN':'Seconds'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'doy_dliy':   {
+            'EN':'Day of Year / Days Left'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'date_0':   {
+            'EN':'MMMM DD, YYYY'
+            //,'RU':"MMMM ДД, ГГГГ"
+          }
+          ,'date_1':   {
+            'EN':'MMMM DD, \'YY'
+            //,'RU':"MMMM ДД, 'ГГ"
+          }
+          ,'date_2':  { 'EN':'Mon DD, YYYY' }
+          ,'date_3':  { 'EN':"Mon DD, 'YY" }
+          ,'date_11': { 'EN':'D MMMM YYYY' }
+          ,'date_12': { 'EN':"D MMMM 'YY" }
+          ,'date_13': { 'EN':'D Mon YYYY' }
+          ,'date_14': { 'EN':"D Mon 'YY" }
+          // DD MM YYYY (%d %m %Y)
+          ,'date_215': {
+            'EN':'DD.MM.YYYY'
+            //,'RU':"ДД.MM.ГГГГ"
+          }
+          ,'date_216': {'EN':'DD-MM-YYYY'}
+          ,'date_217': {'EN':'DD/MM/YYYY'}
+          ,'date_218': {'EN':'DD MM YYYY'}
+          ,'date_219': {'EN':'DDMMYYYY'}
+          // DD MM YY (%d %m %y)
+          ,'date_220': {'EN':'DD.MM.YY'}
+          ,'date_221': {'EN':'DD-MM-YY'}
+          ,'date_222': {'EN':'DD/MM/YY'}
+          ,'date_223': {'EN':'DD MM YY'}
+          ,'date_224': {'EN':'DDMMYY'}
+          // dd MM YYYY (%e %m %Y)
+          ,'date_225': {'EN':'dd.MM.YYYY'}
+          ,'date_226': {'EN':'dd-MM-YYYY'}
+          ,'date_227': {'EN':'dd/MM/YYYY'}
+          ,'date_228': {'EN':'dd MM YYYY'}
+          ,'date_229': {'EN':'ddMMYYYY'}
+          // dd MM YY (%e %m %y)
+          ,'date_230': {'EN':'dd.MM.YY'}
+          ,'date_231': {'EN':'dd-MM-YY'}
+          ,'date_232': {'EN':'dd/MM/YY'}
+          ,'date_233': {'EN':'dd MM YY'}
+          ,'date_234': {'EN':'ddMMYY'}
+          // YYYY MM DD (%Y %m %d)
+          ,'date_235': {'EN':'YYYY.MM.DD'}
+          ,'date_236': {'EN':'YYYY-MM-DD'}
+          ,'date_237': {'EN':'YYYY/MM/DD'}
+          ,'date_238': {'EN':'YYYY MM DD'}
+          ,'date_239': {'EN':'YYYYMMDD'}
+          // YY MM DD (%y %m %d)
+          ,'date_240': {'EN':'YY.MM.DD'}
+          ,'date_241': {'EN':'YY-MM-DD'}
+          ,'date_242': {'EN':'YY/MM/DD'}
+          ,'date_243': {'EN':'YY MM DD'}
+          ,'date_244': {'EN':'YYMMDD'}
+          // YYYY MM dd (%Y %m %e)
+          ,'date_245': {'EN':'YYYY.MM.dd'}
+          ,'date_246': {'EN':'YYYY-MM-dd'}
+          ,'date_247': {'EN':'YYYY/MM/dd'}
+          ,'date_248': {'EN':'YYYY MM dd'}
+          ,'date_249': {'EN':'YYYYMMdd'}
+          // YY MM dd (%y %m %e)
+          ,'date_250': {'EN':'YY.MM.dd'}
+          ,'date_251': {'EN':'YY-MM-dd'}
+          ,'date_252': {'EN':'YY/MM/dd'}
+          ,'date_253': {'EN':'YY MM dd'}
+          ,'date_254': {'EN':'YYMMdd'}
+          ,'week_0': {
+            'EN':'ISO 8601'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'week_1': {
+            'EN':'Sun 1st of W1'
+            ,'RU':"1 день воскресенье"
+            ,'ES':""
+          }
+          ,'week_2': {
+            'EN':'Mon 1st of W1'
+            ,'RU':"1 день понедельник"
+            ,'ES':""
+          }
+        }
+        ,'calendar': {
+          'header': {
+            'EN':'Calendar'
+            ,'RU':"Календарь"
+            ,'ES':""
+          }
+          ,'invert_day':    {
+            'EN':'Invert Today'
+            ,'RU':'Инвертировать текущий'
+            ,'ES':""
+          }
+          ,'grid':          {
+            'EN':'Grid'
+            ,'RU':"Линии"
+            ,'ES':""
+          }
+          ,'start_of_week': {
+            'EN':'Start of Week'
+            ,'RU':"Начало недели"
+            ,'ES':""
+          }
+          ,'sow_0': {
+            'EN':'Su'
+            ,'RU':"Вс"
+            ,'ES':""
+          }
+          ,'sow_1': {
+            'EN':'Mo'
+            ,'RU':"Пн"
+            ,'ES':""
+          }
+          ,'sow_2': {
+            'EN':'Tu'
+            ,'RU':"Вт"
+            ,'ES':""
+          }
+          ,'sow_3': {
+            'EN':'We'
+            ,'RU':"Ср"
+            ,'ES':""
+          }
+          ,'sow_4': {
+            'EN':'Th'
+            ,'RU':"Чт"
+            ,'ES':""
+          }
+          ,'sow_5': {
+            'EN':'Fr'
+            ,'RU':"Пт"
+            ,'ES':""
+          }
+          ,'sow_6': {
+            'EN':'Sa'
+            ,'RU':"Сб"
+            ,'ES':""
+          }
+          ,'week_pattern': {
+            'EN':'Weeks to Show'
+          }
+          ,'wkp_0': {
+            'EN':'Previous, Current, Next'
+          }
+          ,'wkp_1': {
+            'EN':'Two Previous, Current'
+          }
+          ,'wkp_2': {
+            'EN':'Current, Two Next'
+          }
+          ,'wkp_3': {
+            'EN':'Previous, Current'
+          }
+          ,'wkp_4': {
+            'EN':'Current, Next'
+          }
+          ,'wkp_5': {
+            'EN':'Current'
+          }
+        }
+        ,'advanced': {
+          'header': {
+            'EN':'Advanced'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'debugging': {
+            'EN':'Debugging'
+            ,'RU':""
+            ,'ES':""
+          }
+          ,'debuglang': {
+            'EN':'Language/Translation Debugging'
+            ,'RU':""
+            ,'ES':""
+          }
+        }
+      };
+      /*
+        // unused, extra translations
+        ,'RU': {
+          ,'general': {
+            ,"__font":     "Шрифт часов" // unused
+            ,"__weather":  "Погода"      // unused
+            ,"__showbatt": "Состояние батареи" // unused
+            ,'__gps':      "" // unused
+            ,"__selected": "" // unused
+            ,"__get_location": "" // unused
+            ,"__units_of_measurement": "" // unused
+            ,'__min':          "мин" // unused (as in minute)
+            ,"__celsius":      "" // unused
+            ,"__fahrenheit":   "" // unused
+            ,"__time_between_checks_for_weather": "Интервал обновления" // unused
+            ,"__1hour":        "1 час" // unused
+            ,"__2hours":       "2 час" // unused
+            ,"__first_page":   "Первая страница" // unused
+            ,"__shake_to_switch":  "переключение встряхиванием" // unused
+          }
+        };
+      */
+      // ui_settings= {section {g [ {f []} ] } }
+      var ui_settings={
+        'general': {
+          'c': true
+          ,'g': [
+            { 'h': ''
+              ,'f': [
+                { 'ak': 0, 'f': 'theme',    't': 'cgm', 'dt':'h', 'v':'i', 'o': { '0':'t_dark', '1':'t_light' }, 'd': 0 }
+                ,{ 'ak': 21, 'f': 'show_status',   't': 'cgm', 'dt':'h', 'v':'i', 'o': { '1':'yes', '0':'no' }, 'd': 1 }
+                ,{ 'ak': 3, 'f': 'vibe',     't': 'cgm', 'dt':'h', 'v':'i', 'o': { '0':'none', '1':'1X', '2':'2X', '3':'3X', '4':'long', '5':'v_min', '6':'v_min2', '7':'v_ow' }, 'd': 0 }
+                ,{ 'ak': 11, 'f': 'v_disc',  't': 'cgm', 'dt':'h', 'v':'i', 'o': { '0':'none', '1':'1X', '2':'2X', '3':'3X', '4':'long', '5':'v_min', '6':'v_min2', '7':'v_ow' }, 'd': 2 }
+                ,{ 'ak': 12, 'f': 'v_conn',  't': 'cgm', 'dt':'h', 'v':'i', 'o': { '0':'none', '1':'1X', '2':'2X', '3':'3X', '4':'long', '5':'v_min', '6':'v_min2', '7':'v_ow' }, 'd': 0 }
+              ]
+            }
+          ]
+        }
+        ,'translations': {
+          'c': true
+          ,'g': [
+            { 'h': 'status'
+              ,'f': [
+                { 'ak': 527, 'f': 'connected',      't': 'trans', 'v':'s', 'd': 'd_', 'l': 9 }
+                ,{ 'ak': 528, 'f': 'disconnected',  't': 'trans', 'v':'s', 'd': 'd_', 'l': 9 }
+              ]
+            }
+            ,{ 'h': 'months'
+              ,'f': [
+                { 'ak': 507, 'f': 'january',    't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 508, 'f': 'february',  't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 509, 'f': 'march',     't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 510, 'f': 'april',     't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 511, 'f': 'may',       't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 512, 'f': 'june',      't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 513, 'f': 'july',      't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 514, 'f': 'august',    't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 515, 'f': 'september', 't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 516, 'f': 'october',   't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 517, 'f': 'november',  't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 518, 'f': 'december',  't': 'trans', 'v':'s', 'd':'', 'l':11 }
+              ]
+            }
+            ,{ 'h': 'abbr_months'
+              ,'f': [
+                { 'ak': 531, 'f': 'january',    't': 'trans', 'v':'s', 'd':'a_', 'l':4 }
+                ,{ 'ak': 532, 'f': 'february',  't': 'trans', 'v':'s', 'd':'a_', 'l':4 }
+                ,{ 'ak': 533, 'f': 'march',     't': 'trans', 'v':'s', 'd':'a_', 'l':4 }
+                ,{ 'ak': 534, 'f': 'april',     't': 'trans', 'v':'s', 'd':'a_', 'l':4 }
+                ,{ 'ak': 535, 'f': 'may',       't': 'trans', 'v':'s', 'd':'a_', 'l':4 }
+                ,{ 'ak': 536, 'f': 'june',      't': 'trans', 'v':'s', 'd':'a_', 'l':4 }
+                ,{ 'ak': 537, 'f': 'july',      't': 'trans', 'v':'s', 'd':'a_', 'l':4 }
+                ,{ 'ak': 538, 'f': 'august',    't': 'trans', 'v':'s', 'd':'a_', 'l':4 }
+                ,{ 'ak': 539, 'f': 'september', 't': 'trans', 'v':'s', 'd':'a_', 'l':4 }
+                ,{ 'ak': 540, 'f': 'october',   't': 'trans', 'v':'s', 'd':'a_', 'l':4 }
+                ,{ 'ak': 541, 'f': 'november',  't': 'trans', 'v':'s', 'd':'a_', 'l':4 }
+                ,{ 'ak': 542, 'f': 'december',  't': 'trans', 'v':'s', 'd':'a_', 'l':4 }
+              ]
+            }
+            ,{ 'h': 'daysofweek'
+              ,'f': [
+                { 'ak': 520, 'f': 'sunday',     't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 521, 'f': 'monday',    't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 522, 'f': 'tuesday',   't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 523, 'f': 'wednesday', 't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 524, 'f': 'thursday',  't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 525, 'f': 'friday',    't': 'trans', 'v':'s', 'd':'', 'l':11 }
+                ,{ 'ak': 526, 'f': 'saturday',  't': 'trans', 'v':'s', 'd':'', 'l':11 }
+              ]
+            }
+            ,{ 'h': 'abbr_daysofweek'
+              ,'f': [
+                { 'ak': 500, 'f': 'sunday',     't': 'trans', 'v':'s', 'd':'a_', 'l':2 }
+                ,{ 'ak': 501, 'f': 'monday',    't': 'trans', 'v':'s', 'd':'a_', 'l':2 }
+                ,{ 'ak': 502, 'f': 'tuesday',   't': 'trans', 'v':'s', 'd':'a_', 'l':2 }
+                ,{ 'ak': 503, 'f': 'wednesday', 't': 'trans', 'v':'s', 'd':'a_', 'l':2 }
+                ,{ 'ak': 504, 'f': 'thursday',  't': 'trans', 'v':'s', 'd':'a_', 'l':2 }
+                ,{ 'ak': 505, 'f': 'friday',    't': 'trans', 'v':'s', 'd':'a_', 'l':2 }
+                ,{ 'ak': 506, 'f': 'saturday',  't': 'trans', 'v':'s', 'd':'a_', 'l':2 }
+              ]
+            }
+          ]
+        }
+        ,'weather': {
+          'c': true
+          ,'g': [
+            { 'h': ''
+              ,'f': [
+                { 'ak': 35, 'f': 'weather_units',   't': 'cgm', 'dt':'h', 'v':'i', 'o': { '0':'fahrenheit', '1':'celsius' }, 'd': 0 }
+                ,{ 'ak': 36, 'f': 'weather_update',  't': 'cgm', 'dt':'h', 'v':'i', 'o': { '0':'off', '15':'15_min', '30':'30_min', '60':'60_min' }, 'd': 15 }
+              ]
+            }
+          ]
+        }
+        ,'clock': {
+          'c': true
+          ,'g': [
+            { 'h': 'date_format'
+              ,'f': [
+                { 'ak': 5, 'f': 'date_format', 'n': '_note', 't': 'cgsf', 'dt':'v', 'v':'i', 'o': { '0':'date_0', '1':'date_1', '2':'date_2', '3':'date_3', '11':'date_11', '12':'date_12', '13':'date_13', '14':'date_14', '215':'date_215', '216':'date_216', '217':'date_217', '218':'date_218', '219':'date_219', '220':'date_220', '221':'date_221', '222':'date_222', '223':'date_223', '224':'date_224', '225':'date_225', '226':'date_226', '227':'date_227', '228':'date_228', '229':'date_229', '230':'date_230', '231':'date_231', '232':'date_232', '233':'date_233', '234':'date_234', '235':'date_235', '236':'date_236', '237':'date_237', '238':'date_238', '239':'date_239', '240':'date_240', '241':'date_241', '242':'date_242', '243':'date_243', '244':'date_244', '245':'date_245', '246':'date_246', '247':'date_247', '248':'date_248', '249':'date_249', '250':'date_250', '251':'date_251', '252':'date_252', '253':'date_253', '254':'date_254' }, 'd': 0 }
+              ]
+            }
+            ,{ 'h': 'below_time'
+              ,'f': [
+                ,{ 'ak': 8, 'f': 'style_week',  't': 'cgm', 'dt':'h', 'v':'i', 'o': { '0':'-', '1':'week', '2':'tz', '3':'am_pm', '4':'doy', '5':'dliy', '6':'seconds' }, 'd': 0 }
+                ,{ 'ak': 7, 'f': 'style_day',   't': 'cgm', 'dt':'h', 'v':'i', 'o': { '0':'-', '1':'day', '2':'month', '3':'tz', '4':'week', '5':'am_pm', '6':'doy_dliy' }, 'd': 0 }
+                ,{ 'ak': 6, 'f': 'style_am_pm', 't': 'cgm', 'dt':'h', 'v':'i', 'o': { '0':'-', '1':'am_pm', '2':'tz', '3':'week', '4':'doy', '5':'dliy', '6':'seconds' }, 'd': 0 }
+                ,{ 'ak': 9, 'f': 'week_format', 't': 'cgm', 'dt':'v', 'v':'i', 'o': { '0':'week_0', '1':'week_1', '2':'week_2' }, 'd': 0 }
+              ]
+            }
+          ]
+        }
+        ,'calendar': {
+          'c': true
+          ,'g': [
+            { 'h': ''
+              ,'f': [
+                { 'ak': 1, 'f': 'invert_day',      't': 'cgm', 'dt':'h', 'v':'i', 'o': { '1':'yes', '0':'no' }, 'd': 1 }
+                ,{ 'ak': 2, 'f': 'grid',           't': 'cgm', 'dt':'h', 'v':'i', 'o': { '1':'yes', '0':'no' }, 'd': 1 }
+                ,{ 'ak': 4, 'f': 'start_of_week',  't': 'cgm', 'dt':'h', 'v':'i', 'o': { '0':'sow_0', '1':'sow_1', '2':'sow_2', '3':'sow_3', '4':'sow_4', '5':'sow_5', '6':'sow_6' }, 'd': 0 }
+                ,{ 'ak': 17, 'f': 'week_pattern',  't': 'cgm', 'dt':'v', 'v':'i', 'o': { '0':'wkp_0', '1':'wkp_1', '2':'wkp_2' }, 'd': 0 }
+              ]
+            }
+          ]
+        }
+        ,'advanced': {
+          'c': true
+          ,'g': [
+            { 'h': ''
+              ,'f': [
+                { 'ak': 10, 'f': 'debugging',   't': 'cgm', 'dt':'h', 'v':'i', 'o': { '1':'yes', '0':'no' }, 'd': 0 }
+                ,{ 'ak': 16, 'f': 'debuglang',  't': 'cgm', 'dt':'h', 'v':'i', 'o': { '1':'yes', '0':'no' }, 'd': 0 }
+              ]
+            }
+          ]
+        }
+      };
+    </script>
+    <script>
+
+      function get_translation ( l, s, k ) {
+        var fb = 'misc'; // fallback section
+        var l_fb = 'EN'; // fallback language
+        if (ui_trans[s] !== undefined) {
+          if (ui_trans[s][k] !== undefined) {
+            if (ui_trans[s][k][l] !== undefined && ui_trans[s][k][l] !== '')       { return ui_trans[s][k][l]; }
+          }
+          if (ui_trans[fb][k] !== undefined) {
+            if (ui_trans[fb][k][l] !== undefined && ui_trans[fb][k][l] !== '')      { return ui_trans[fb][k][l]; }
+          }
+        }
+        if (l != l_fb) {
+        if (ui_trans[s] !== undefined) {
+          if (ui_trans[s][k] !== undefined) {
+            if (ui_trans[s][k][l_fb] !== undefined && ui_trans[s][k][l_fb] !== '')       { return ui_trans[s][k][l_fb]; }
+          }
+          if (ui_trans[fb][k] !== undefined) {
+            if (ui_trans[fb][k][l_fb] !== undefined && ui_trans[fb][k][l_fb] !== '')      { return ui_trans[fb][k][l_fb]; }
+          }
+        }
+        }
+        return l+'_'+s+'_'+k; // give up...
+      };
+
+      function make_section ( lang, s) {
+        var s_detail = ui_settings[s];
+        var data_collapsed = s_detail.c;
+        if (openSection != null) {
+          if (openSection != 'myS_'+s ) { data_collapsed = true; } else { data_collapsed = false; }
+        }
+
+        var s_out = '<div data-role="collapsible" data-theme="a" data-collapsed="'+data_collapsed+'" data-inset="false" data-iconpos="right" data-expanded-icon="carat-u" data-collapsed-icon="carat-d" class="mySection" id="myS_'+s+'"><h2>' + get_translation(lang,s,'header') + '</h2>';
+        Object.keys(s_detail.g).forEach(function (key) { 
+          s_out += make_group(lang, s, key);
+        });
+        s_out += '</div>';
+        return s_out;
+      };
+
+      function make_group ( lang, s, g) {
+        var g_detail = ui_settings[s].g[g];
+        var g_out = '';
+        if (g_detail.h != '') {
+          var data_collapsed = true;
+          if (openSection != null) {
+            if (openSection == 'myS_'+s && openGroup != null) {
+              if (openGroup != 'myG_'+s+'_'+g ) { data_collapsed = true; } else { data_collapsed = false; }
+            }
+          }
+          
+          g_out += '<div data-role="collapsible" data-collapsed="'+data_collapsed+'" class="myGroup" id="myG_'+s+'_'+g+'">';
+          g_out += '<h2>' + '('+g_detail.f.length+') ' + get_translation(lang,s,g_detail.h) + '</h2>';
+        }
+        Object.keys(g_detail.f).forEach(function (key) { 
+          g_out += make_field(lang, s, g, key);
+        });
+        g_out += '';
+        g_out += '</div>';
+        return g_out;
+      };
+
+      function make_field ( lang, s, g, f ) {
+        var f_detail = ui_settings[s].g[g].f[f]
+        f_type = f_detail.t;
+        var f_out = '';
+        if (f_detail.t == 'cgm') { f_out = make_field_cgm(lang, s, g, f); }
+        else if (f_detail.t == 'cgsf') { f_out = make_field_cgsf(lang, s, g, f); }
+        else if (f_detail.t == 'trans') { f_out = make_field_trans(lang, s, g, f); }
+        else if (f_detail.t == 'note') { f_out = get_translation(lang,s,f_detail.f) }
+        else { f_out = "Unrecognized field type: " + f_detail.t + " (" + get_translation(lang,s,f_detail.f) + ")<br>"; }
+        return f_out;
+      };
+
+      function make_field_trans(lang, s, g, k) {
+        var f_detail = ui_settings[s].g[g].f[k];
+        //var output = '<div class="ui-field-contain">';
+        var output = '<div class="ui-grid-b">';
+        var def_trans = get_translation(lang,s,f_detail.d+f_detail.f);
+        //output += '<a href="#" onclick="$(\'input[name=key'+f_detail.ak+']\').val(\''+def_trans+'\'); return false;" style="float: right;" class="ui-shadow ui-btn ui-corner-all" id="trans_def_'+f_detail.ak+'">'+get_translation(lang,'misc','default')+'</a>';
+        output += '<div class="ui-block-a">';
+        output += '<label for="key'+f_detail.ak+'" id="label_key'+f_detail.ak+'">'+get_translation(lang,s,f_detail.f)+':</label>';
+        output += '</div><div class="ui-block-b">';
+        output += '<input name="key'+f_detail.ak+'" id="trans_key'+f_detail.ak+'" placeholder="Enter Translation" value="'+def_trans+'" data-mini="true" type="text" maxlength="'+f_detail.l+'">';
+        output += '</div><div class="ui-block-c">';
+        output += '<a href="#" onclick="$(\'input[name=key'+f_detail.ak+']\').val(\''+def_trans+'\'); return false;" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-btn-b ui-mini" id="trans_def_'+f_detail.ak+'">'+get_translation(lang,'misc','default')+'</a>';
+        output += '</div>';
+        output += '</div>';
+        return output;
+      };
+
+      function make_field_cgm(lang, s, g, k) {
+        var f_detail = ui_settings[s].g[g].f[k];
+        var data_type = "";
+        if (f_detail.dt == 'h') { data_type = 'horizontal'; }
+        else if (f_detail.dt == 'v') { data_type = 'vertical'; }
+        var data_mini = ' data-mini="true"';
+//        data_type = 'vertical';
+//        if (data_type == 'horizontal') { data_mini = ''; } // fix for Android, data-mini horizontal cg's
+        var output = '<div class="ui-field-contain"><fieldset data-role="controlgroup" data-type="'+data_type+'"'+data_mini+'>';
+        output += '<legend>'+get_translation(lang,s,f_detail.f)+':</legend>';
+        var checked = '';
+        var count = 0;
+        Object.keys(f_detail.o).forEach(function (key) {
+          count++;
+          checked = '';
+          if (Number(key) == f_detail.d) { checked = ' checked="checked"'; }
+          output += '<input type="radio" name="key'+f_detail.ak+'" id="key'+f_detail.ak+'-'+key+'" value="'+key+'"'+checked+' style="white-space: nowrap !important; overflow: visible !important;">';
+          output += '<label for="key'+f_detail.ak+'-'+key+'" style="white-space: nowrap !important; overflow: visible !important;">'+get_translation(lang,s,f_detail.o[key])+'</label>';
+          if (count > 9000) {
+            output += '<br style="clear:both;"/>';
+            count = 0;
+          }
+        });
+        output += "</fieldset></div>";
+        return output;
+      };
+
+      function make_field_cgsf(lang, s, g, k) {
+        var f_detail = ui_settings[s].g[g].f[k];
+        var data_type = "";
+        if (f_detail.dt == 'h') { data_type = 'horizontal'; }
+        else if (f_detail.dt == 'v') { data_type = 'vertical'; }
+        var output = '';
+        if ( f_detail.n != '' ) { output += get_translation(lang,s,f_detail.f+f_detail.n); }
+        output += '<div class="ui-field-contain"><fieldset data-role="controlgroup" data-type="'+data_type+'" data-mini="true">';
+        output += '<legend>'+get_translation(lang,s,f_detail.f)+':</legend>';
+        output += '<input data-type="search" id="searchFor_'+f_detail.ak+'">';
+        //output += '<div id="key_'+f_detail.ak+'" id="key'+f_detail.ak+'" data-filter="true" data-filter-reveal="true" data-filter-placeholder="'+get_translation(lang,s,'search_'+f_detail)+'" data-input="#searchFor_'+f_detail.ak+'">';
+        output += '<div id="key_'+f_detail.ak+'" id="key'+f_detail.ak+'" data-filter="true" data-filter-reveal="false" data-input="#searchFor_'+f_detail.ak+'">';
+        var checked = '';
+        Object.keys(f_detail.o).forEach(function (key) {
+          checked = '';
+          if (Number(key) == f_detail.d) { checked = ' checked="checked"'; }
+          output += '<span>';
+          output += '<input type="radio" name="key'+f_detail.ak+'" id="key'+f_detail.ak+'-'+key+'" value="'+key+'"'+checked+'>';
+          output += '<label for="key'+f_detail.ak+'-'+key+'">'+get_translation(lang,s,f_detail.o[key])+'</label>';
+          output += '</span>';
+        });
+        output += "</div></fieldset></div>";
+        return output;
+      };
+
+      function make_languages(lang) {
+        var output = '';
+        Object.keys(ui_trans.misc.language).forEach(function (key) { 
+// ui-icon-home ui-icon back ui-icon-grid :: ui-btn-icon-right
+          output += '<a href="#" onclick="make_interface(\''+key+'\');" class="ui-shadow ui-btn ui-corner-all ui-btn-inline ui-mini" id="langS_'+key+'">'+get_translation(key,'misc','language')+'</a>';
+        });
+        output += '<br /><br /><a href="#sidebar" data-rel="close" class="ui-shadow ui-btn ui-corner-all ui-mini ui-btn-icon-left ui-icon-back">'+get_translation(lang,'misc','cancel')+'</a>';
+        $("#sidebar").html(output).trigger('create');
+        //$( "#sidebar" ).trigger( "updatelayout" );
+      };
+
+      function make_interface(lang) {
+        if (lastLanguage !== null) {
+          $("#loading").html(get_translation(lang,'misc','loading') + ' ' + get_translation(lang,'misc','language'));
+          $("#loading").popup('open');
+          // not initial page load ... FIXME: (works, but not a good check)
+          //console.log('make interface for ' + lang + ' - ' + JSON.stringify(localOptions));
+          localOptions = getOptions(); // retain current options before changing!
+        }
+        var output = "";
+
+        Object.keys(ui_settings).forEach(function (key) { 
+          output += make_section(lang, key);
+        });
+
+        $("#config").html(output).trigger('create');
+        $(".peb-submit").html(get_translation(lang,'misc','save'));
+        $(".peb-language").html(get_translation(lang,'misc','language'));
+        $("div.mySection:jqmData(role='collapsible'),div.myGroup:jqmData(role='collapsible')").each(function(){
+          bindEvents($(this));
+        //bindEventTouch($(this)); 
+        });
+        if (localOptions != null) { setOptions(); }
+        //console.log("Setting language to " + lang + " from " + lastLanguage);
+        if (lastLanguage != null) { $("a#langS_"+lastLanguage).removeClass('ui-btn-active'); }
+        $("a#langS_"+lang).addClass('ui-btn-active');
+        lastLanguage = lang;
+        $("#sidebar").panel('close');
+        $("#loading").popup('close');
+      }
+
+      /*
+function bindEventTouch(element) {
+    element.bind('tap', function(event, ui) {
+       if(element.hasClass('ui-collapsible-collapsed')) {
+            alert(element.attr('id')+' is closed');
+        } else {
+            alert(element.attr('id')+' is open');
+        }
+    });
+}
+*/
+
+      function bindEvents(element) {
+        //'click change dblclick submit collapsibleexpand collapsiblecollapse'
+        element.bind('collapsibleexpand collapsiblecollapse', function(event) {
+          //alert('Event: ' + event.type + ' for element: ' + element.attr('id') + ' with class: ' + element.attr('class'));
+          if (event.type == 'collapsibleexpand') {
+            if (element.hasClass('mySection')) {
+              $('#'+openSection).collapsible( "collapse" );
+              openSection = element.attr('id');
+            } else if (element.hasClass('myGroup')) {
+              openGroup = element.attr('id');
+            }
+          } else {
+            if (element.hasClass('mySection')) {
+              if (element.attr('id') == openSection) {
+                openSection = null;
+                openGroup = null;
+              }
+            } else if (element.hasClass('myGroup')) {
+              if (element.attr('id') == openGroup) {
+                openGroup = null;
+              }
+            }
+          }
+          event.stopPropagation();
+        });
+      }
+
+      function getWebOptions(lang) {
+        if (lang == undefined) { lang = lastLanguage; }
+        var options = { 'web': { } };
+        options['web']['lang'] = lang;
+        return options;
+      }
+
+      function getOptions() {
+        var options = getWebOptions();
+        // ui_settings= {section {g [ {f []} ] } }
+        Object.keys(ui_settings).forEach(function (s) {
+          Object.keys(ui_settings[s].g).forEach(function (g) { 
+            Object.keys(ui_settings[s].g[g].f).forEach(function (f) { 
+            var field = ui_settings[s].g[g].f[f];
+              if (field.t == 'cgm' || field.t == 'cgsf') {
+                if (field.v == 'i') {
+                  options[field.ak] = Number( $("input[name=key"+field.ak+"]:checked").val() );
+                } else if (field.v == 's') {
+                  options[field.ak] = $("input[name=key"+field.ak+"]:checked").val();
+                }
+              } else if (field.t == 'trans') {
+                options[field.ak] = $("input[name=key"+field.ak+"]").val();
+              } else if (field.t == 'text') {
+                if (field.v == 'i') {
+                  options[field.ak] = Number( $("input[name=key"+field.ak+"]").val() );
+                } else if (field.v == 's') {
+                  options[field.ak] = $("input[name=key"+field.ak+"]").val();
+                }
+              } else {
+                console.log('Unknown field: ' + "\n" +
+                    "\n\t Field:      \t" + field.f  +
+                    "\n\t AppMsgKey:  \t" + field.ak +
+                    "\n\t Type:       \t" + field.t  +
+                    "\n\t Value:      \t" + field.v  +
+                    '');
+              }
+            });
+          });
+        });
+        return options;
+      }
+
+      function setOptions() {
+        // ui_settings= {section {g [ {f []} ] } }
+        Object.keys(ui_settings).forEach(function (s) {
+          Object.keys(ui_settings[s].g).forEach(function (g) { 
+            Object.keys(ui_settings[s].g[g].f).forEach(function (f) {
+              var field = ui_settings[s].g[g].f[f];
+              if (localOptions[field.ak] !== undefined) {
+                if (field.t == 'cgm' || field.t == 'cgsf') {
+                  $("input[name=key"+field.ak+"][id=key"+field.ak+"-"+localOptions[field.ak]+"]").prop('checked',true);
+                  $("input[name=key"+field.ak+"]").checkboxradio('refresh');
+                } else if (field.t == 'trans') {
+                  if (lastLanguage == null) {
+                    //console.log('implicit set trans ' + lastLanguage + '  ' + localOptions[field.ak] + '  '  + get_translation(lastLanguage,s,f));
+                    $("input[name=key"+field.ak+"]").val(localOptions[field.ak]);
+                  } else {
+                    if (localOptions[field.ak] !== get_translation(lastLanguage,s,field.d+field.f)) {
+                      // translation does match, it was not the default, so let's retain the value
+                      console.log('Retain trans: ' + lastLanguage + '  ' + localOptions[field.ak] + '  '  + get_translation(lastLanguage,s,field.d+field.f));
+                      $("input[name=key"+field.ak+"]").val(localOptions[field.ak]);
+                    }
+                  }
+          
+  //                $("input[name=key"+field.ak+"]").val(localOptions[field.ak]);
+                } else if (field.t == 'text') {
+                  $("input[name=key"+field.ak+"]").val(localOptions[field.ak]);
+                } else {
+                  console.log('Unknown field: ' + "\n" +
+                      "\n\t Field:      \t" + field.f  +
+                      "\n\t AppMsgKey:  \t" + field.ak +
+                      "\n\t Type:       \t" + field.t  +
+                      "\n\t Value:      \t" + field.v  +
+                      '');
+                }
+              }
+            });
+          });
+        });
+      }
+
+      function upgradeOptions_old_to_v22(o) {
+        localOptions = getWebOptions('EN');
+        localOptions[0] = o['style_inv'];
+        localOptions[1] = o['style_day_inv'];
+        localOptions[2] = o['style_grid'];
+        localOptions[3] = o['vibe_hour'];
+        localOptions[4] = o['intl_dowo'];
+        localOptions[5] = o['intl_fmt_date'];
+        localOptions[6] = o['style_am_pm'];
+        localOptions[7] = o['style_day'];
+        localOptions[8] = o['style_week'];
+        localOptions[9] = o['intl_fmt_week'];
+        localOptions[11] = o['vibe_pat_disconnect'];
+        localOptions[12] = o['vibe_pat_connect'];
+        localOptions[527] = o['trans_connected'];
+        localOptions[528] = o['trans_disconnected'];
+        localOptions[507] = o['trans_january'];
+        localOptions[508] = o['trans_february'];
+        localOptions[509] = o['trans_march'];
+        localOptions[510] = o['trans_april'];
+        localOptions[511] = o['trans_may'];
+        localOptions[512] = o['trans_june'];
+        localOptions[513] = o['trans_july'];
+        localOptions[514] = o['trans_august'];
+        localOptions[515] = o['trans_september'];
+        localOptions[516] = o['trans_october'];
+        localOptions[517] = o['trans_november'];
+        localOptions[518] = o['trans_december'];
+        localOptions[500] = o['trans_abbr_sunday'];
+        localOptions[501] = o['trans_abbr_monday'];
+        localOptions[502] = o['trans_abbr_tuesday'];
+        localOptions[503] = o['trans_abbr_wedsday'];
+        localOptions[504] = o['trans_abbr_thursday'];
+        localOptions[505] = o['trans_abbr_friday'];
+        localOptions[506] = o['trans_abbr_saturday'];
+        localOptions[520] = o['trans_sunday'];
+        localOptions[521] = o['trans_monday'];
+        localOptions[522] = o['trans_tuesday'];
+        localOptions[523] = o['trans_wedsday'];
+        localOptions[524] = o['trans_thursday'];
+        localOptions[525] = o['trans_friday'];
+        localOptions[526] = o['trans_saturday'];
+        //console.log("Upgraded options: " + JSON.stringify(localOptions));
+      }
+
+      function loadOptions() {
+        if (typeof window.localStorage !== "undefined") {
+          if (window.localStorage.pebble_timely_options) {
+            var tempOptions = JSON.parse(window.localStorage.pebble_timely_options);
+            if (typeof tempOptions['web'] !== "undefined") {
+              //console.log("Latest options found: " + JSON.stringify(tempOptions));
+              localOptions = tempOptions;
+              return localOptions['web']['lang'];
+            } else {
+              //console.log("Old options found: " + JSON.stringify(tempOptions));
+              upgradeOptions_old_to_v22(tempOptions);
+            }
+          }
+        }
+        return 'EN';
+      }
+
+      function utf8_to_b64( str ) {
+        return window.btoa(unescape(encodeURIComponent( str )));
+      }
+
+      $(document).ready(function(){
+        var lang = loadOptions(); // load default language from options
+        make_languages(lang);     // pass to make_languages
+        make_interface(lang);     // and make_interface
+
+        $(".peb-submit").click(function() {
+          ls_pto = JSON.stringify(getOptions());
+          if (typeof window.localStorage !== "undefined") {
+            window.localStorage.pebble_timely_options = ls_pto;
+            console.log("Options: " + ls_pto);
+          }
+          //var location = "pebblejs://close#" + ls_pto;
+          var location = "pebblejs://close#" + utf8_to_b64(ls_pto);
+          console.log("Warping to: " + location);
+          document.location = location;
+        });
+        
+      });
+
+    </script>
+  </head>
+  <body>
+    <form accept-charset="utf-8" onsubmit="return false;">
+    <div data-role="page" id="main">
+
+    <div data-role="header" data-theme="a" data-position="fixed">
+<div data-role="navbar" data-mini="false">
+    <ul>
+        <li><a href="#" class="peb-submit ui-btn-icon-left ui-icon-check">(submit)</a></li>
+        <li><a href="#sidebar" class="peb-language ui-btn-icon-right ui-icon-bars">(language)</a></li>
+    </ul>
+</div><!-- /navbar -->
+</div>
+
+    <div id="sidebar" data-role="panel" data-position="right" data-display="overlay">
+      <div>
+        <!-- dynamically generated -->
+      </div>
+    </div>
+
+      <div data-role="content">
+        <div id="loading" data-role="popup" data-overlay-theme="a" data-theme="b" class="ui-content" data-dismissible="false" data-position-to="window">
+          (loading)
+        </div>
+        <div data-role="collapsible-set" data-corners="true" data-theme="a" data-content-theme="a" id="config">
+          <!-- dynamically generated -->
+        </div>
+      </div>
+      <div data-role="footer" data-theme="a">
+        <div class="ui-body ui-body-c">
+<div data-role="navbar" data-position="fixed">
+    <ul>
+        <li><a href="#" class="ui-state-disabled">&copy; @cynorg 2014</a></li>
+        <li><a href="#" class="peb-submit ui-btn-icon-right ui-icon-check">(submit)</a></li>
+    </ul>
+</div><!-- /navbar -->
+
+        </div>
+      </div>
+    </div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<head>
+	<script type="text/javascript">
+		var SaveSet = function(e)
+		{
+			e.preventDefault();
+			var set;
+			var checked = document.getElementById('Auto').checked;
+			if(checked)
+				set = {"IP":"auto"};//,"DELAY":document.getElementById('delay').value};
+			else
+				set = {"IP":document.getElementById('ip').value};//,"DELAY":document.getElementById('delay').value};
+		       
+			var url = 'pebblejs://close#' + JSON.stringify(set);
+
+			window.location.href = url;
+		};
+	</script>
+</head>
+<body>
+    <form name="Set" id="Set">
+	<p>Huebble Configuration Page</p>
+	<p>Advanced Users Only!!</p>
+	<p>Incorrect IP Could Cause Connection Issues</p>
+	<label><input type="checkbox" name="Auto" value="value" id="Auto">Check To Use Automatic Detection</label>
+	<p>Or Enter IP Address Below</p>
+	IP: <input type="text" id="ip" name="ip" value=""><br>
+	<p>
+	<button id="Save">Save</button>
+    </form>
+ <script type="text/javascript">
+      var form = document.getElementById('Set');
+      var button = document.getElementById('Save');
+
+      form.onsubmit = SaveSet;
+      button.onclick = SaveSet;
+ </script>
+
+</body>
+</html>
+

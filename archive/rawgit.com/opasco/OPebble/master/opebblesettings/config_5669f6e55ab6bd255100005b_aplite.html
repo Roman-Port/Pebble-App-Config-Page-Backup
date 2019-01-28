@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Round and Smart Settings</title>
+  </head>
+  <body>
+    <h1>Round and Smart - Settings</h1>
+    
+    <p>
+    <div class='item-container'>
+      <div class='item-container-header'><h3>Features</h3></div>
+      <div class='item-container-content'>
+        <label class='item'>
+          <input id='use_date_checkbox' type='checkbox' class='item-toggle'>
+          Display Date
+        </label>
+        <br>
+        <label class='item'>
+          <input id='use_dualtime_checkbox' type='checkbox' class='item-toggle'>
+          Display Dual Time
+        </label>
+        <label class='item'>
+          <input id='dualtimeoffset_number' type='number' defaultvalue="0" min="-12" max="12" maxlength="5" class='item-number'>
+          UTC Offset
+        </label>
+        <label class='item'>
+          <input id='dualtimedst_checkbox' type='checkbox' class='item-toggle'>
+          DST
+        </label>
+        </br>
+        <label class='item'>
+          <input id='use_health_checkbox' type='checkbox' class='item-toggle'>
+          Display Steps and Activity
+        </label>
+        <br>
+        <label class='item'>
+          <input id='dailystepsmanualgoal_number' type='number' defaultvalue="0" min="0" max="999999" maxlength="8" class='item-number'>
+          Daily Steps Goal - 0 for Automatic
+        </label>
+        </br>
+        <label class='item'>
+          <input id='dailyactivitymanualgoal_number' type='number' defaultvalue="0" min="0" max="24" maxlength="3" class='item-number'>
+          Daily Activity Goal (in hours) - 0 for Automatic
+        </label>
+        <br>
+        <label class='item'>
+          <input id='use_compass_checkbox' type='checkbox' class='item-toggle'>
+          Display Compass (may impact battery)
+        </label>
+        </br>
+        <label class='item'>
+          <input id='use_darkbg_checkbox' type='checkbox' class='item-toggle'>
+          Use Dark Background
+        </label>
+        <br>
+        <label class='item'>
+          <input id='use_vibrations_checkbox' type='checkbox' class='item-toggle'>
+          Vibration warnings
+        </label>
+        </br>
+        <label class='item'>
+          <input id='use_debug_checkbox' type='checkbox' class='item-toggle'>
+          Display Debug Messages
+        </label>
+      </div>
+    </div>
+    </p>
+    
+     <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='Ok'>
+      </div>
+    </div>
+
+  </body>
+  <script>
+  function getConfigData() {
+    var useHealth = document.getElementById('use_health_checkbox');
+    var dailyStepsManualGoal = document.getElementById('dailystepsmanualgoal_number');
+    var dailyActivityManualGoal = document.getElementById('dailyactivitymanualgoal_number');
+    var useDate = document.getElementById('use_date_checkbox');
+    var useCompass = document.getElementById('use_compass_checkbox');
+    var useDebug = document.getElementById('use_debug_checkbox');
+    var useVibrations = document.getElementById('use_vibrations_checkbox');
+    var useDualTime = document.getElementById('use_dualtime_checkbox');
+    var dualTimeOffset = document.getElementById('dualtimeoffset_number');
+    var dualTimeDST = document.getElementById('dualtimedst_checkbox');
+    var useDarkBg = document.getElementById('use_darkbg_checkbox');
+ 
+    var options = {
+      'useDate': useDate.checked,
+      'useHealth': useHealth.checked,
+      'dailyStepsManualGoal': dailyStepsManualGoal.value,
+      'dailyActivityManualGoal': dailyActivityManualGoal.value,
+      'useCompass': useCompass.checked,
+      'useDebug': useDebug.checked,
+      'useVibrations': useVibrations.checked,
+      'useDualTime': useDualTime.checked,
+      'dualTimeOffset': dualTimeOffset.value,
+      'dualTimeDST': dualTimeDST.checked,
+      'useDarkBg': useDarkBg.checked
+    };
+    // Save for next launch
+    localStorage['useDate'] = options['useDate'];
+    localStorage['useDualTime'] = options['useDualTime'];
+    localStorage['dualTimeOffset'] = options['dualTimeOffset'];
+    localStorage['dualTimeDST'] = options['dualTimeDST'];
+    localStorage['useHealth'] = options['useHealth'];
+    localStorage['dailyStepsManualGoal'] = options['dailyStepsManualGoal'];
+    localStorage['dailyActivityManualGoal'] = options['dailyActivityManualGoal'];
+    localStorage['useCompass'] = options['useCompass'];
+    localStorage['useDebug'] = options['useDebug'];
+    localStorage['useVibrations'] = options['useVibrations'];
+    localStorage['useDarkBg'] = options['useDarkBg'];
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var useHealth = document.getElementById('use_health_checkbox');
+    var dailyStepsManualGoal = document.getElementById('dailystepsmanualgoal_number');
+    var dailyActivityManualGoal = document.getElementById('dailyactivitymanualgoal_number');
+    var useDate = document.getElementById('use_date_checkbox');
+    var useCompass = document.getElementById('use_compass_checkbox');
+    var useVibrations = document.getElementById('use_vibrations_checkbox');
+    var useDebug = document.getElementById('use_debug_checkbox');
+    var useDualTime = document.getElementById('use_dualtime_checkbox');
+    var dualTimeOffset = document.getElementById('dualtimeoffset_number');
+    var dualTimeDST = document.getElementById('dualtimedst_checkbox');
+    var useDarkBg = document.getElementById('use_darkbg_checkbox');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['useDate']) {
+      useDate.checked = JSON.parse(localStorage['useDate']);
+    }
+    else {
+      useDate.checked = 1;
+    }
+    if(localStorage['useDualTime']) {
+      useDualTime.checked = JSON.parse(localStorage['useDualTime']);
+    }
+    if(localStorage['dualTimeOffset']) {
+      dualTimeOffset.value = JSON.parse(localStorage['dualTimeOffset']);
+    }
+    else {
+      dualTimeOffset.value = 0;
+    }
+    if(localStorage['dualTimeDST']) {
+      dualTimeDST.checked = JSON.parse(localStorage['dualTimeDST']);
+    }
+    if(localStorage['useHealth']) {
+      useHealth.checked = JSON.parse(localStorage['useHealth']);
+    }
+    else {
+      useHealth.checked = 1;
+    }
+    if(localStorage['dailyStepsManualGoal']) {
+      dailyStepsManualGoal.value = JSON.parse(localStorage['dailyStepsManualGoal']);
+    }
+    else {
+      dailyStepsManualGoal.value = 0;
+    }
+    if(localStorage['dailyActivityManualGoal']) {
+      dailyActivityManualGoal.value = JSON.parse(localStorage['dailyActivityManualGoal']);
+    }
+    else {
+      dailyActivityManualGoal.value = 0;
+    }
+    if(localStorage['useCompass']) {
+      useCompass.checked = JSON.parse(localStorage['useCompass']);
+    }
+    if(localStorage['useDebug']) {
+      useDebug.checked = JSON.parse(localStorage['useDebug']);
+    }
+    if(localStorage['useVibrations']) {
+      useVibrations.checked = JSON.parse(localStorage['useVibrations']);
+    }
+    if(localStorage['useDarkBg']) {
+      useDarkBg.checked = JSON.parse(localStorage['useDarkBg']);
+    }
+  })();
+  </script>
+</html>

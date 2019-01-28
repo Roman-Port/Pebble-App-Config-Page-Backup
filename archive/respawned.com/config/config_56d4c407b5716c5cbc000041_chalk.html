@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Googlor Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/respawned.com//slate.css'>
+  <script src='/respawned.com//slate.js'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Googlor Configuration</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Use this configuration page to choose the settings you would like applied to this app.
+        </div>
+      </div>
+    </div>
+<div class="item-container">
+  <div class="item-container-header">Google Search Term</div>
+  <div class="item-container-content">
+    <label class="item">
+      <div class="item-input-wrapper">
+        <input type="text" class="item-input" id="gterm" name="gterm" placeholder="Cats">
+      </div>
+    </label>
+  </div>
+</div>
+
+<div class="item-container">
+  <div class="item-container-header">Timed refresh in minutes</div>
+  <div class="item-container-content">
+    <label class="item">
+      <input type="range" class="item-slider" name="slider-1" value="60">
+      <div class="item-input-wrapper item-slider-text">
+        <input type="text" id="refresh_interval" class="item-input" name="slider-1" value="60">
+      </div>
+    </label>
+  </div>
+</div>
+    <div class='item-container'>
+      <div class='item-container-header'>Shake Refresh</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Refresh on shake?
+          <input id='shake_refresh' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Shake to initiate a new image download
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SAVE'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+    var refreshEl = document.getElementById('refresh_interval');
+    var shakeEl = document.getElementById('shake_refresh');
+    var gTerm = document.getElementById('gterm');
+    var options = {
+      'refresh': refreshEl.value,
+      'shake_refresh': shakeEl.checked ? 1 : 0,
+      'gterm': gTerm.value
+    };
+
+    // Save for next launch
+    localStorage['googlor'] = JSON.stringify(options);
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var refreshEl = document.getElementById('refresh_interval');
+    var shakeEl = document.getElementById('shake_refresh');
+    var gTerm = document.getElementById('gterm');
+
+    // Load any previously saved configuration, if available
+    if(localStorage['googlor']) {
+      options = JSON.parse(localStorage['googlor']);
+      shakeEl.checked = options.shake_refresh;
+      refreshEl.value = options.refresh;
+      gTerm.value = options.gterm;
+    } else {
+        // DEFAULTS
+      shakeEl.checked = true;
+      refreshEl.value = 60;
+      gTerm.value = "Cats";
+    }
+  })();
+  </script>
+</html>

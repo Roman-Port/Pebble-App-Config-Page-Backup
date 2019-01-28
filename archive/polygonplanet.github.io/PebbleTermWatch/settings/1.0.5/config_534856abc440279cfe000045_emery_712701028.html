@@ -1,0 +1,370 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Pebble Term Watch - Settings</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="/netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.css" rel="stylesheet">
+    <link href="/netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link href="/polygonplanet.github.io/PebbleTermWatch/settings/css/style7329764f1a.css" rel="stylesheet">
+    <style>
+    input[type=checkbox], input[type=radio] {
+      -moz-transform: scale(1.5, 1.5);
+      -webkit-transform: scale(1.5, 1.5);
+      transform: scale(1.5, 1.5);
+      margin-right: 1em;
+    }
+
+    label.disabled {
+      color: #aaa;
+    }
+
+    .settings-container {
+      display: none;
+    }
+
+    .loading {
+      margin: 1em auto;
+      padding: 1em;
+      font-size: 16px;
+    }
+
+    .loading:after {
+      content: "Loading...";
+    }
+    </style>
+  </head>
+
+  <body>
+    <div class="container loading-container">
+      <div class="loading">
+      </div>
+    </div>
+    <div class="container settings-container">
+      <h2>
+        Pebble Term Watch
+      </h2>
+      <hr>
+      <div class="form-group">
+        <label>
+          Bluetooth disconnect vibration:
+        </label>
+        <label class="checkbox">
+          <input id="bluetoothVibe" type="checkbox">
+          ON
+        </label>
+      </div>
+      <hr>
+      <div class="form-group">
+        <label>
+          Minutely typing animation:
+        </label>
+        <label class="checkbox">
+          <input id="typingAnimation" type="checkbox">
+          ON
+        </label>
+      </div>
+      <hr>
+      <div class="form-group">
+        <label>
+          Feed URL (Optional):
+        </label>
+        <div class="feedurl-container">
+          <input placeholder="http://www.example.com/feed/rss" id="feedUrl" class="form-control" type="text">
+          <input id="feedEnabled" type="hidden" value="">
+        </div>
+      </div>
+      <hr>
+      <div class="feed-input-container">
+        <div class="form-group feed-input-group">
+          <label>
+            Feed fetch interval (Optional):
+          </label>
+          <div class="feedInterval-group">
+            <label class="radio">
+              <input type="radio" name="feedInterval" value="300">
+              5 minutes
+            </label>
+            <label class="radio">
+              <input type="radio" name="feedInterval" value="600">
+              10 minutes
+            </label>
+            <label class="radio">
+              <input type="radio" name="feedInterval" value="900" class="feedInterval-default" checked="checked">
+              15 minutes
+            </label>
+            <label class="radio">
+              <input type="radio" name="feedInterval" value="1800">
+              30 minutes
+            </label>
+            <label class="radio">
+              <input type="radio" name="feedInterval" value="3600">
+              1 hour
+            </label>
+          </div>
+        </div>
+        <hr>
+        <div class="form-group feed-input-group">
+          <label>
+            Vibrate when receive new Feed (Optional):
+          </label>
+          <label class="checkbox">
+            <input id="feedVibe" type="checkbox">
+            ON
+          </label>
+        </div>
+        <hr>
+      </div>
+      <div class="submit-group group-buttons">
+        <button class="btn button-submit btn-primary btn-lg">
+          Save
+        </button>
+      </div>
+      <hr>
+      <div class="footer-addr">
+        Pebble Term Watch by
+        <a href="/polygonpla.net//.html">polygon planet</a>.
+      </div>
+    </div>
+    <script src="/ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
+    <script src="/netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.js"></script>
+    <script src="/polygonplanet.github.io/PebbleTermWatch/settings/js/jquery.js"></script>
+
+    <script>
+    var STORE_KEYS = [
+      'pebbleTerm',
+      'pebbleTermLifecycle'
+    ];
+
+    var store = {
+      bluetoothVibe: {
+        value: 1,
+        selector: '#bluetoothVibe',
+        get: function(el) {
+          return el.prop('checked') ? 1 : 0;
+        },
+        set: function(el, v) {
+          el.prop('checked', !!v);
+        },
+        fix: function(v) {
+          return (v - 0) ? 1 : 0;
+        }
+      },
+      typingAnimation: {
+        value: 1,
+        selector: '#typingAnimation',
+        get: function(el) {
+          return el.prop('checked') ? 1 : 0;
+        },
+        set: function(el, v) {
+          el.prop('checked', !!v);
+        },
+        fix: function(v) {
+          return (v - 0) ? 1 : 0;
+        }
+      },
+      feedUrl: {
+        value: '',
+        selector: '#feedUrl',
+        get: function(el) {
+          return this.fix(el.val());
+        },
+        set: function(el, v) {
+          var url = this.fix(v);
+          el.val(url);
+          return (this.value = url);
+        },
+        fix: function(v) {
+          var url = ('' + v).replace(/^\s+|\s+$/g, '');
+          return /^https?:\/\/\w+/.test(url) ? url : '';
+        },
+        encode: function(v) {
+          return encodeParams(v);
+        },
+        decode: function(v) {
+          return decodeURIComponent(v);
+        }
+      },
+      feedEnabled: {
+        value: 0,
+        get: function(el) {
+          this.update();
+          return this.fix(el.val());
+        },
+        set: function(el, v) {
+          el.val(this.fix(v));
+          return (this.value = this.fix(el.val()));
+        },
+        fix: function(v) {
+          return (v - 0) ? 1 : 0;
+        },
+        update: function() {
+          this.set($('#feedEnabled'),
+            store.feedUrl.get($('#feedUrl')) ? 1 : 0);
+        }
+      },
+      feedVibe: {
+        value: 0,
+        selector: '#feedVibe',
+        get: function(el) {
+          return el.prop('checked') ? 1 : 0;
+        },
+        set: function(el, v) {
+          el.prop('checked', !!v);
+        },
+        fix: function(v) {
+          return (v - 0) ? 1 : 0;
+        }
+      },
+      feedInterval: {
+        value: 15 * 60,
+        selector: '.feedInterval-group',
+        get: function(el) {
+          var self = this;
+          var v;
+
+          $(this.selector + ' input[type=radio]').each(function() {
+            if ($(this).prop('checked')) {
+              v = $(this).val();
+            }
+          });
+
+          if (!v) {
+            $(this.selector + ' .feedInterval-default').prop('checked', true);
+            return this.fix(this.value);
+          }
+
+          return this.fix(v);
+        },
+        set: function(el, v) {
+          var self = this;
+
+          $(this.selector + ' input[type=radio]').each(function() {
+            $(this).prop('checked', self.fix(v) === self.fix($(this).val()));
+          });
+
+          return (this.value = this.fix($(this.selector + ' :checked').val()));
+        },
+        fix: function(v) {
+          var time = (v - 0) || 0;
+          return Math.max(5 * 60, Math.min(60 * 60, time));
+        }
+      }
+    };
+
+
+    var clearStorage = function() {
+      var key;
+
+      for (var i = 0, len = window.localStorage.length; i < len; i++) {
+        key = window.localStorage.key(i);
+        if (key != null && !~STORE_KEYS.indexOf(key)) {
+          window.localStorage.removeItem(key);
+        }
+      }
+    };
+
+    var parseParams = function(uri) {
+      var params = {};
+
+      var re = /[?&]+([^=&]+)=([^&]*)/g;
+      var m;
+
+      while ((m = re.exec(uri)) != null) {
+        params[m[1]] = m[2];
+      }
+
+      return params;
+    };
+
+
+    var isEncoded = function(s) {
+      return /^(?:[a-zA-Z0-9_~.-]|%[0-9a-fA-F]{2})*$/.test(s);
+    };
+
+    var encodeParams = function(uri) {
+      var encode = function(s) {
+        return isEncoded(s) ? s : encodeURIComponent(s);
+      };
+
+      return uri.replace(/([?&]+)([^=&]+)=([^&]*)/g, function(match, sep, key, value) {
+        return sep + encode(key) + '=' + encode(value);
+      });
+    };
+
+
+    var closeWin = function(data) {
+      var uri = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(data));
+      window.location.href = uri;
+    };
+
+
+    $(document).ready(function() {
+      // remove old item
+      clearStorage();
+
+      var params = parseParams(window.location.href);
+
+      Object.keys(store).forEach(function(key) {
+        var value = params[key];
+        var field = store[key];
+
+        if (field.decode) {
+          value = field.decode(value);
+        }
+
+        if (key in store && value != null) {
+          field.value = field.fix(value);
+        }
+
+        field.set($(field.selector), field.value);
+      });
+
+      $('.button-submit').on('click', function(ev) {
+        var f = function(v) { return v };
+
+        var values = Object.keys(store).reduce(function(o, k) {
+          var value = store[k].get($(store[k].selector));
+
+          o[k] = (store[k].encode || f)(value);
+          return o;
+        }, {});
+
+        closeWin(values);
+        ev.preventDefault();
+        ev.stopPropagation();
+      });
+
+
+      var loaded = false;
+
+      setTimeout(function checkFields() {
+        var val = $('#feedUrl').val();
+        var group = $('.feed-input-group input, .feed-input-group label');
+        //var disabled = !store.feedUrl.fix(val);
+        //group.prop('disabled', disabled);
+
+        $('input[type=checkbox], input[type=radio]').each(function() {
+          if (!$(this).prop('disabled') && $(this).prop('checked')) {
+            $(this).parent().addClass('field-selected');
+          } else {
+            $(this).parent().removeClass('field-selected');
+          }
+        });
+
+        if (!loaded) {
+          loaded = true;
+
+          $('.loading-container').hide();
+          $('.settings-container').show();
+        }
+
+        setTimeout(checkFields, 64);
+      }, 64);
+    });
+    </script>
+
+  </body>
+</html>

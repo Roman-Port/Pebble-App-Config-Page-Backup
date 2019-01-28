@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+  <title></title>
+  <link href="/ag-web.co.uk/pebble/rude-fuzzy/css/slate.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <form id="main-form">
+
+    <div class="item-container">
+      <div class="item-container-header">Rude Word</div>
+      <div class="item-container-content">
+        <label class="item">
+          <div class="item-input-wrapper">
+            <input type="text" maxlength="10" class="item-input" id="rude_word" name="rude-word" placeholder="f***ing">
+          </div>
+        </label>
+      </div>
+      <div class="item-container-footer">
+      	Your word can be a maximum of 10 characters long.
+      </div>
+    </div>
+    
+    <div class="item-container">
+  <div class="item-container-header">Colours</div>
+  <div class="item-container-content">
+     <label class="item">
+      Date Colour
+      <input type="text" class="item-color item-color-normal" id="colour_1" value="0x00FFFF">
+    </label>
+     <label class="item">
+      Divider Colour
+      <input type="text" class="item-color item-color-normal" id="colour_2" value="0xAA0000">
+    </label>
+    <label class="item">
+      Time Colour
+      <input type="text" class="item-color item-color-normal" id="colour_3" value="0xFF0055">
+    </label>
+  </div>
+</div>
+
+    <div class="item-container">
+      <div class="button-container">
+        <input type="button" id="save_button" class="item-button" value="SEND">
+      </div>
+    </div>
+
+  </form>
+  <script type="text/javascript" src="/ag-web.co.uk/pebble/rude-fuzzy/js/slate.js"></script>
+  <script type="text/javascript">
+// Get query variables
+function getQueryParam(variable, defaultValue) {
+  // Find all URL parameters
+  var query = location.search.substring(1);
+  var vars = query.split('&');
+  for (var i = 0; i < vars.length; i++) {
+    var pair = vars[i].split('=');
+
+    // If the query variable parameter is found, decode it to use and return it for use
+    if (pair[0] === variable) {
+      return decodeURIComponent(pair[1]);
+    }
+  }
+  return defaultValue || false;
+};
+
+  //Setup to allow easy adding more options later
+  function saveOptions() {
+    var rudeword = document.getElementById("rude_word");
+    var datecolour = document.getElementById("colour_1");
+    var dividercolour = document.getElementById("colour_2");
+    var timecolour = document.getElementById("colour_3");
+ 
+    var options = {
+      "rudeword": rudeword.value,
+	  "datecolour": datecolour.value,
+	  "dividercolour": dividercolour.value,
+	  "timecolour": timecolour.value
+    }
+	
+	// Save for next launch
+	localStorage['rudeword'] = options['rudeword'];
+	localStorage['datecolour'] = options['datecolour'];
+	localStorage['dividercolour'] = options['dividercolour'];
+	localStorage['timecolour'] = options['timecolour'];
+     
+    return options;
+  };
+ 
+  var submitButton = document.getElementById("save_button");
+  submitButton.addEventListener("click", 
+    function() {
+      console.log("Submit");
+ 
+      var options = saveOptions();
+	  // Set the return URL depending on the runtime environment
+		var return_to = getQueryParam('return_to', 'pebblejs://close#');
+		document.location = return_to + encodeURIComponent(JSON.stringify(options));
+    }, 
+  false);
+  
+  (function() {
+    var rudeword = document.getElementById("rude_word");
+    var datecolour = document.getElementById("colour_1");
+    var dividercolour = document.getElementById("colour_2");
+    var timecolour = document.getElementById("colour_3");
+    // Load any previously saved configuration, if available
+    if(localStorage['rudeword']) {
+      rudeword.value = localStorage['rudeword'];
+	  datecolour.value = localStorage['datecolour'];
+	  dividercolour.value = localStorage['dividercolour'];
+	  timecolour.value = localStorage['timecolour'];
+    }
+  })();
+</script>
+</body>
+</html>

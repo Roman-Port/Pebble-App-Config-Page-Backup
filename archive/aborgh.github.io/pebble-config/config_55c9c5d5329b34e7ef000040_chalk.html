@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title></title>
+    <link href="/aborgh.github.io/pebble-config/bower_components/pebble-slate/dist/css/slate.css" rel="stylesheet" type="text/css">
+    <link href="/aborgh.github.io/pebble-config/config/css/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="item-container">
+            <h1 class="title">Top to Bottom<br>
+            Customability</h1>
+
+            <div class="item-container-header" id="rubrik">
+                Watchface Settings
+            </div>
+        </div>
+
+        <div class="item-container">
+            <div class="item-container-header">
+                Background Color
+            </div>
+
+            <div class="item-container-content">
+
+                <label class="item">Top Color <input class="item-color item-color-normal" id="topColorPicker" type="text"></label>
+
+                <label class="item">Bottom Color <input class="item-color item-color-normal" id="bottomColorPicker" type="text" value="#ffffff"></label>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <div class="item-container-header">
+                Text Color
+            </div>
+
+            <div class="item-container-content">
+
+                <label class="item">Text Color Top <input class="item-color item-color-normal" id="topTextColorPicker" type="text" value="#000000"></label>
+
+                <label class="item">Text Color
+                Bottom <input class="item-color item-color-normal" id="bottomTextColorPicker" type="text" value="#000000"></label>
+            </div>
+        </div>
+
+        <div class="item-container">
+            <div class="item-container-header">
+                Time
+            </div>
+        </div>
+
+        <div class="item-container-content">
+            <label class="item">Show Weekday
+                <input checked="" class="item-toggle" id="weekdayFormatCheckbox" type="checkbox"></label>
+
+            <label class="item">Weekday Color <input class="item-color item-color-normal" id="weekdayColorPicker" type="text" value="#ffffff"></label>
+
+            <label class="item">24-Hour Format
+                <input checked="" class="item-toggle" id="timeFormatCheckbox" type="checkbox"></label>
+
+            <label class="item">D/M/Y Date Format
+                <input checked="" class="item-toggle" id="dateFormatCheckbox" type="checkbox"></label>
+
+
+
+        </div>
+
+        <div class="item-container">
+            <label class="item-container-header">Miscellaneous</label>
+        </div>
+
+        <div class="item-container-content">
+
+            <label class="item">Vibrate On Bluetooth Disconnect <input checked="" class="item-toggle" id="bluetoothFormatCheckbox" type="checkbox"></label>
+            
+            <label class="item">Hourly Vibrate
+                <input checked="" class="item-toggle" id="hourVibrateFormatCheckbox" type="checkbox"></label>
+
+             <label class="item">Show battery <input checked="" class="item-toggle" id="batteryFormatCheckbox" type="checkbox"></label>
+
+             <label class="item">Battery Color <input class="item-color item-color-normal" id="batteryColorPicker" type="text"></label>
+        </div>
+    </div>
+
+    <div class="item-container-footer">
+        Press save and the watchface will update
+    </div>
+
+    <div class="item-container">
+        <div class="button-container">
+            <input class="item-button" id="submitButton" type="button" value="SAVE">
+        </div>
+    </div><script src="/aborgh.github.io/pebble-config/bower_components/pebble-slate/dist/js/slate.js"></script> <script src="/aborgh.github.io/pebble-config/config/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/code.jquery.com/mobile/1.3.2/jquery.css">
+    <script src="/code.jquery.com//jquery-1.js"></script>
+	<script>$(document).bind('mobileinit',function() { $.mobile.pushStateEnabled = false; });</script> <!-- Chrome Security override -->
+    <script src="/code.jquery.com/mobile/1.3.2/jquery.js"></script>
+    <title>Configuration</title>
+  </head>
+
+  <body>
+    <div data-role="page" id="page1">
+      <div data-role="navbar" data-iconpos="left">
+        <ul>
+          <li><a href="#" class="ui-btn-active" id="pagetittle" data-icon="gear">Configuration</a></li>
+        </ul>
+      </div>
+      <div data-role="content" style="margin:0 auto;margin-left:auto;margin-right:auto;align:center;text-align:center;">
+
+        <fieldset class="ui-grid-a">
+          <div class="ui-block-a">
+            <legend>Inverter:<!-- p style="font-size:10pt;font-style:italic;">[Bright space? Really??]</p --></legend>
+            <select name="inv" id="inv" data-background="" data-role="slider">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+          <div class="ui-block-b"> 
+            <legend>Start animation: </legend>
+            <select name="anim" id="anim" data-background="" data-role="slider">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+        </fieldset>
+        
+        <fieldset class="ui-grid-a">
+          <div class="ui-block-a">
+            <legend>Show Stars: </legend>
+            <select name="stars" id="stars" data-background="" data-role="slider">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+          <div class="ui-block-b">
+            <legend>Hourly vibrate: </legend>
+            <select name="vibr" id="vibr" data-background="" data-role="slider">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+        </fieldset>
+        
+        <fieldset class="ui-grid-a">
+          <div class="ui-block-a">
+            <legend>Show Asteorids: </legend>
+            <select name="astro" id="astro" data-background="" data-role="slider">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+          <div class="ui-block-b">
+            <legend>Infinite rotation: </legend>
+            <select name="infr" id="infr" data-background="" data-role="slider">
+              <option value="no">No</option>
+              <option value="yes">Yes</option>
+            </select>
+          </div>
+        </fieldset>
+        
+        <legend>Enter date for Lucky Star*:</legend>
+        <input data-clear-btn="false" name="date" id="date" pattern="\d{8}" value="" placeholder="YYYYMMDD" type="number">
+        *Enter allways 8 numbers, YYYYMMDD.<br>Enter zeros for year to have it every year, zeros for month to have it every month, zeros for day to have it every day.<br>Zeros everywhere to turn it off.
+        
+        <div class="ui-body ui-body-b">
+          <fieldset class="ui-grid-a">
+            <div class="ui-block-a"><button type="submit" data-theme="a" id="b-cancel" data-icon="delete">Cancel</button></div>
+            <div class="ui-block-b"><button type="submit" data-theme="b" id="b-submit" data-icon="check">Submit</button></div>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+    <script>
+      <!-- from http://snipplr.com/view/26662/get-url-parameters-with-jquery--improved/ -->
+      $.urlParam = function(name){
+        var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+        if (!results) { return 0; }
+        return results[1] || 0;
+      }
+
+      function updateControls() {
+        var title = decodeURIComponent($.urlParam("title"));
+        var inv = decodeURIComponent($.urlParam("inv"));
+        var anim = decodeURIComponent($.urlParam("anim"));
+        var stars = decodeURIComponent($.urlParam("stars"));
+        var vibr = decodeURIComponent($.urlParam("vibr"));        
+        var astro = decodeURIComponent($.urlParam("astro"));        
+        var infr = decodeURIComponent($.urlParam("infr"));
+        var date = decodeURIComponent($.urlParam("date"));
+        $('#pagetittle').find('.ui-btn-text').text(title+' Configuration');
+               
+        if (inv != 'yes' && inv != 'no') {
+          inv = 'no';
+        }
+        $("#inv").val(inv).slider("refresh");
+             
+        if (anim != 'yes' && anim != 'no') {
+          anim = 'yes';
+        }
+        $("#anim").val(anim).slider("refresh");
+              
+        if (stars != 'yes' && stars != 'no') {
+          stars = 'yes';
+        }
+        $("#stars").val(stars).slider("refresh");
+       
+        if (vibr != 'yes' && vibr != 'no') {
+          vibr = 'no';
+        }
+        $("#vibr").val(vibr).slider("refresh");
+        
+        if (astro != 'yes' && astro != 'no') {
+          astro = 'no';
+        }
+        $("#astro").val(astro).slider("refresh");
+        
+        if (infr != 'yes' && infr != 'no') {
+          infr = 'no';
+        }
+        $("#infr").val(infr).slider("refresh");
+        
+        if (date == '' || date == '0') {
+          date = '00000000';
+        }
+        $("#date").val(date);
+      }
+
+      function saveOptions() {
+        var options = {
+          'inv': $("#inv").val(),
+          'anim': $('#anim').val(),
+          'stars': $("#stars").val(),
+          'vibr': $("#vibr").val(),
+          'date': $('#date').val(),
+          'astro': $("#astro").val(),
+          'infr': $("#infr").val(),
+      }
+        return options;
+      }
+
+	  // Workaround to work with CloudPebble
+      function getQueryParam(variable, default_) {
+		var query = location.search.substring(1);
+		var vars = query.split('&');
+		for (var i = 0; i < vars.length; i++) {
+		   var pair = vars[i].split('=');
+		   if (pair[0] == variable)
+		      return decodeURIComponent(pair[1]);
+		}
+		return default_ || false;
+	  }	  
+	  
+      $().ready(function() {
+        $("#b-cancel").click(function() {
+          console.log("Cancel");
+		  var return_to = getQueryParam('return_to', 'pebblejs://close#');
+          document.location = return_to;
+        });
+
+        $("#b-submit").click(function() {
+          console.log("Submit");
+		  var return_to = getQueryParam('return_to', 'pebblejs://close#');
+          var location = return_to + encodeURIComponent(JSON.stringify(saveOptions()));
+          console.log(location);
+          document.location = location;
+        });
+      });
+
+      $.fn.fix_radios = function() {
+        function focus() {
+          if ( !this.checked ) return;
+            if ( !this.was_checked ) {
+              $( this ).change();
+            }
+        }
+
+        function change( e ) {
+          if ( this.was_checked ) {
+            e.stopImmediatePropagation();
+            return;
+              }
+          $( "input[name=" + this.name + "]" ).each( function() {
+            this.was_checked = this.checked;
+          } );
+        }
+        return this.focus( focus ).change( change );
+      }
+
+        $(function() {
+          $("input[type=radio]").fix_radios();
+          /*
+          $("input[name='theme']").change(function(){
+            if ($("input[name='theme']:checked").val() == 'circle'){
+              $("#fsm").val('no').slider("refresh");
+              $("#fsm").slider('disable');
+              $("#sep").slider('enable');
+              $('#datefmt').selectmenu('enable');
+              $("#smart").slider('enable');
+            } else { 
+              $("#fsm").slider('enable');
+            }
+          });
+          $("#fsm").change(function() {
+            if ($("#fsm").val() == 'yes'){
+              $("#sep").val('no').slider("refresh");
+              $("#sep").slider('disable');
+              $('#datefmt').selectmenu('disable');
+              $("#smart").val('no').slider("refresh");
+              $("#smart").slider('disable');
+            } else {
+              $("#sep").slider('enable');
+              $('#datefmt').selectmenu('enable');
+              $("#smart").slider('enable');
+            }
+          });
+          */
+        });
+
+      $('#page1').bind('pageinit', updateControls);
+    </script>
+  </body>
+</html>

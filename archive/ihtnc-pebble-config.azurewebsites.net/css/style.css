@@ -1,0 +1,9 @@
+.config { padding: 10px; font-family: Arial; width: auto; color: Black; }
+.config .title { font-size: larger; font-weight: bold; }
+.config .error { color: Red; }
+.config .fields { display: block; }
+.config .field { display:block; padding-top: 10px; }
+.config .field .field-header { float: left; font-weight: bold; display: inline-block; vertical-align:top; }
+.config .field .field-content { padding-left: 10px; display: inline-block; vertical-align:top; }
+.config .footer { padding-top: 10px; text-align: center; }
+.config .copyright { padding-top: 20px; font-size: x-small; color: Gray; text-align: center; }

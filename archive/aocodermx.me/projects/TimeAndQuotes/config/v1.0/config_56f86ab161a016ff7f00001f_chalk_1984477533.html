@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TimeAndQuotes Configuration WebSite</title>
+  <link rel='stylesheet' type='text/css' href='/aocodermx.me/projects/TimeAndQuotes/config/v1.0/css/slate.css'>
+
+  <style>
+    .title {
+      text-align: center;
+      padding-top: 0.5em;
+    }
+    .item blockquote {
+      padding-right: 20px;
+    }
+    #addQuoteDialogUP, #addQuoteDialogDOWN, #addquoteDOWN {
+      display:none;
+    }
+    #remainingUP, #remainingDOWN {
+      text-align: right;
+      font-size: 0.6em;
+      padding:0px;
+    }
+    .item-input {
+      font-size:1.1em;
+    }
+    .item_quote blockquote footer {
+      text-align:right;
+      font-size: 1.3em;
+      padding-right:1em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 class="title">Time&amp;Quotes</h1>
+
+  <div class="item-container">
+    <div class="item-container-header">Look and Feel Settings</div>
+    <div class="item-container-content">
+      <label class="item">
+        Background Color
+        <input id="bgcolor" type="text" class="item-color item-color-normal" value="0x000000">
+      </label>
+
+      <label class="item">
+        24 Hours Format
+        <input id="time24hours" type="checkbox" class="item-toggle">
+      </label>
+
+      <label class="item">
+        Show calendar
+        <input id="showcalendar" type="checkbox" class="item-toggle" checked="">
+      </label>
+
+      <label class="item">
+        Show battery dots
+        <input id="showbattery" type="checkbox" class="item-toggle">
+      </label>
+
+      <label class="item">
+        Change Quotes
+        <select id="changequotes" dir='ltr' class="item-select">
+          <option class="item-select-option" value="1" selected="">Randomly</option>
+          <option class="item-select-option" value="2">Sequentially</option>
+       </select>
+      </label>
+
+      <label class="item">
+        Change Quotes Period
+        <select id="changequote" dir='ltr' class="item-select">
+          <option class="item-select-option" value="2">Minute</option>
+          <option class="item-select-option" value="4">Hour</option>
+          <option class="item-select-option" value="8" selected="">Day</option>
+          <option class="item-select-option" value="16">Month</option>
+          <option class="item-select-option" value="32">Year</option>
+          <!--option class="item-select-option">Weekly</option-->
+       </select>
+      </label>
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="item-container-header">Saved Quotes</div>
+    <div class="item-container-content">
+      <a name="addQuoteDialogAnchorUP"></a>
+      <label id="addquoteUP" class="item add-item">
+        Add Quote
+      </label>
+
+       <!--
+       <label class="item">
+         <blockquote>
+           <p>Quote 2</p>
+           <footer>— Author 2</footer>
+         </blockquote>
+         <div class="delete-item"></div>
+        </label>
+        -->
+
+      <div id="addQuoteDialogUP">
+        <label class="item">
+          <div class="item-input-wrapper">
+            <textarea id="quoteUP" rows="3" type="text" class="item-input" placeholder="Quote"></textarea>
+            <div class="item" id="remainingUP"></div>
+          </div>
+        </label>
+        <label class="item">
+          <div class="item-input-wrapper">
+            <input id="authorUP" type="text" class="item-input" maxlength="30" placeholder="Author">
+          </div>
+        </label>
+        <label class="item">
+          <div class="item tab-buttons">
+            <a id="addquoteconfirmUP" class="tab-button active">Add</a>
+            <a id="addquotecancelUP" class="tab-button">Cancel</a>
+          </div>
+        </label>
+      </div>
+
+      <a name="addQuoteDialogAnchorDOWN"></a>
+      <label id="addquoteDOWN" class="item add-item">
+        Add Quote
+       </label>
+
+       <div id="addQuoteDialogDOWN">
+         <label class="item">
+           <div class="item-input-wrapper">
+             <textarea id="quoteDOWN" rows="3" type="text" class="item-input" placeholder="Quote"></textarea>
+             <div class="item" id="remainingDOWN"></div>
+           </div>
+         </label>
+         <label class="item">
+           <div class="item-input-wrapper">
+             <input id="authorDOWN" type="text" class="item-input" maxlength="30" placeholder="Author">
+           </div>
+         </label>
+         <label class="item">
+           <div class="item tab-buttons">
+             <a id="addquoteconfirmDOWN" class="tab-button active">Add</a>
+             <a id="addquotecancelDOWN" class="tab-button">Cancel</a>
+           </div>
+         </label>
+       </div>
+
+    </div>
+  </div>
+
+  <div class="item-container">
+    <div class="button-container">
+      <input id="save_button" type="button" class="item-button" value="SAVE">
+    </div>
+  </div>
+
+  <script src='/aocodermx.me/projects/TimeAndQuotes/config/v1.0/js/slate.js'></script>
+  <script src='/aocodermx.me/projects/TimeAndQuotes/config/v1.0/js/main.js'></script>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore (a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-75001383-1', 'auto');
+    ga('send', 'pageview');
+  </script>
+</body>
+</html>

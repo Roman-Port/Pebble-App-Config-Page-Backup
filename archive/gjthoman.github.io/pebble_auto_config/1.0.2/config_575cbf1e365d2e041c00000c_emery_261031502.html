@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Pebble Auto Configuration</title>
+<link rel="stylesheet" href="main.css">
+  	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  </head>
+  <body>
+  	<div class="container">
+	  	<h1 id='page_title'>Loading Configuration</h1>
+	  	<div id="settings">
+
+      </div>
+    </div>
+		<input id='submit_button' class="btn btn-primary btn-large btn-block" type='button' value='Save'>
+		<span class='source-link'>Created using <a href="/github.com/gjthoman/pebble_auto_config.html">Pebble Auto Configuration</a></span>
+		<br>
+    <div hidden="">
+      <script id="paragraph-template" type="text/x-handlebars-template">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            {{content}}
+          </div>
+        </div>
+      </script>
+
+      <script id="section-template" type="text/x-handlebars-template">
+        <h2>{{label}}</h2>
+      </script>
+
+      <script id="panel_input-template" type="text/x-handlebars-template">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{title}}</h3>
+          </div>
+          <div class="panel-body">
+            <input class="form-control {{klass}}" name="{{name}}" id="{{id}}" value="{{value}}" type="{{type}}">
+          </div>
+        </div>
+      </script>
+
+      <script id="panel_bool-template" type="text/x-handlebars-template">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{title}}</h3>
+          </div>
+          <div class="panel-body">
+            <style type="text/css">
+              input#{{id}}[type=checkbox] + label:after {
+                {{#if off}}
+                  content: "{{off}}";
+                {{else}}
+                  content: "Off";
+                {{/if}}
+              }
+              input#{{id}}[type=checkbox]:checked + label:after {
+                {{#if on}}
+                  content: "{{on}}";
+                {{else}}
+                  content: "On";
+                {{/if}}
+              }
+            </style>
+            <input class="{{klass}}" name="{{name}}" id="{{id}}" value="{{value}}" type="checkbox" {{options}}>
+            <label for="{{id}}"></label>
+          </div>
+        </div>
+      </script>
+      
+      <script id="panel_option-template" type="text/x-handlebars-template">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{title}}</h3>
+          </div>
+          <div class="panel-body">
+            {{#each options}}
+              <input class="undefined" name="{{key}}" id="{{key}}{{id}}" value="{{value}}" type="radio" {{options}}>
+              <label for="{{key}}{{id}}">{{label}}</label>
+            {{/each}}
+          </div>
+        </div>   
+      </script>
+    </div>
+	
+<script src="main.js"></script>
+  </body>
+</html>

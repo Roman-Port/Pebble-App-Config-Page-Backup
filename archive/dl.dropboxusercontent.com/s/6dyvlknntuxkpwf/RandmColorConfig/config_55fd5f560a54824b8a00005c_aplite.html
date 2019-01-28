@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0101)https://dl.dropboxusercontent.com/s/6dyvlknntuxkpwf/RandmColorConfig.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>RandomColor Configuration</title>
+  <style id="style-1-cropbar-clipper">
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+  <body>
+    <h2>RandomColor Configuration</h2>
+
+    <hr>
+
+    <h3>Font Style</h3>
+
+    <select id="font_select">
+      <option value="font1">SeasideResortNF</option>
+      <option value="font2">Amadeus</option>
+      <option value="font3">Barrio-Regular</option>
+      <option value="font4">Carousel</option>
+      <option value="font5">SF-Archery-Black</option>
+      <option value="font6">Blackout-Midnight</option>
+    </select>
+
+    <hr>
+ 
+
+    <p>
+    <button id="save_button">Save</button>
+    </p>
+
+
+    <script>
+      function persistWrite(key, value) {
+        localStorage.setItem(key, value);
+      }
+
+      var persistRead = function(key, defaultValue) {
+        if(localStorage.getItem(key) === null) {
+          return defaultValue;
+        } else {
+          return localStorage.getItem(key);
+        }
+      };
+
+      function firstTimeSetup() {
+        if(!persistRead('first-time', false)) {
+          persistWrite('first-time', true);
+          console.log('This is the first launch!');
+
+          // Align with watchapp defaults
+          persistWrite('font', 'font1');
+        }
+      }
+
+      function loadConfig() {
+        var category = persistRead('font', 'font1'); // Default
+        var fontSelect = document.getElementById('font_select');
+        for(var i = 0; i < fontSelect.options.length; i += 1) {
+          if(fontSelect.options[i].value == category) {
+            fontSelect.selectedIndex = i;
+          }
+        }
+      }
+
+      function xhrAsyncRequest(url, type, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          callback(this.responseText);
+        };
+        xhr.open(type, url);
+        xhr.send();
+      };
+
+
+      var submitButton = document.getElementById('save_button');
+      submitButton.addEventListener('click', 
+        function() {
+          var fontSelect = document.getElementById('font_select');
+
+          var options = {
+            'font': '' + fontSelect.options[fontSelect.selectedIndex].value
+          };
+
+          // Save
+          persistWrite('font', options['font']);
+
+          // Return
+          document.location = 'pebblejs://close#' + encodeURIComponent(JSON.stringify(options));
+        }, 
+      false);
+
+      firstTimeSetup();
+      loadConfig();
+    </script>
+  
+</body></html>

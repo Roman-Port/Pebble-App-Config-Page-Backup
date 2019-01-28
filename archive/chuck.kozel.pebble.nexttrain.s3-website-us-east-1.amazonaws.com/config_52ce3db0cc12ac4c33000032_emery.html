@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="/chuck.kozel.pebble.nexttrain.s3-website-us-east-1.amazonaws.com//jquery.css">
+<script src="/chuck.kozel.pebble.nexttrain.s3-website-us-east-1.amazonaws.com//jquery-1.bin"></script>
+<script src="/chuck.kozel.pebble.nexttrain.s3-website-us-east-1.amazonaws.com//jquery.bin"></script>
+<body>
+<div data-role="content">
+<div class="ui-body">
+	<h4>Touch a station name in Top and/or Bottom to select it; then press save and relaunch app on watch to see train times.</h4>
+  <fieldset class="ui-grid-a">
+      <div class="ui-block-a"><button onclick="cancel()" type="submit" data-theme="a" id="b-cancel">Cancel</button></div>
+      <div class="ui-block-b"><button onclick="save()" type="submit" data-theme="b" id="b-submit">Save</button></div>
+    </fieldset>
+</div>
+
+<div data-role="collapsible" data-inset="false" id="topStation">
+	<h3>Top Station</h3>
+	<div data-role="collapsible-set">
+		<div data-role="collapsible" data-inset="false"><h3>Red</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Howard</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','47th',30237)">47th</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','63rd',30177)">63rd</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','69th',30191)">69th</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','79th',30046)">79th</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','87th',30275)">87th</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','95th/Ran Ryan',30088)">95th/Ran Ryan</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Addison',30273)">Addison</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Argyle',30229)">Argyle</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Belmont',30255)">Belmont</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Berwyn',30066)">Berwyn</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Bryn Mawr',30267)">Bryn Mawr</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Cermak-Chinatown',30193)">Cermak-Chinatown</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Chicago',30279)">Chicago</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Clark/Division',30121)">Clark/Division</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Fullerton',30233)">Fullerton</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Garfield',30223)">Garfield</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Grand',30064)">Grand</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Granville',30147)">Granville</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Harrison',30285)">Harrison</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Jackson',30109)">Jackson</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Jarvis',30227)">Jarvis</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Lake',30289)">Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Lawrence',30149)">Lawrence</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Loyola',30251)">Loyola</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Monroe',30211)">Monroe</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Morse',30020)">Morse</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','North/Clybourn',30125)">North/Clybourn</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Roosevelt',30269)">Roosevelt</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Sheridan',30016)">Sheridan</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Sox-35th',30036)">Sox-35th</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Thorndale',30169)">Thorndale</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','Howard','Wilson',30105)">Wilson</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>95th</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'Red','95th','47th',30238)">47th</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','63rd',30178)">63rd</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','69th',30192)">69th</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','79th',30047)">79th</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','87th',30276)">87th</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','95th/Dan Ryan',30089)">95th/Dan Ryan</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Addison',30274)">Addison</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Argyle',30230)">Argyle</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Belmont',30256)">Belmont</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Berwyn',30067)">Berwyn</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Bryn Mawr',30268)">Bryn Mawr</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Cermak-Chinatown',30194)">Cermak-Chinatown</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Chicago',30280)">Chicago</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Clark/Division',30122)">Clark/Division</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Fullerton',30234)">Fullerton</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Garfield',30224)">Garfield</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Grand',30065)">Grand</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Granville',30148)">Granville</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Harrison',30286)">Harrison</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Howard',30174)">Howard</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Jackson',30110)">Jackson</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Jarvis',30228)">Jarvis</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Lake',30290)">Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Lawrence',30150)">Lawrence</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Loyola',30252)">Loyola</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Monroe',30212)">Monroe</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Morse',30021)">Morse</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','North/Clybourn',30126)">North/Clybourn</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Roosevelt',30270)">Roosevelt</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Sheridan',30017)">Sheridan</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Sox-35th',30037)">Sox-35th</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Thorndale',30170)">Thorndale</a></li>
+						<li><a href="#" onclick="trainClick(0,'Red','95th','Wilson',30106)">Wilson</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Blue</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Forest Park</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Addison',30240)">Addison</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Austin',30002)">Austin</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Belmont',30013)">Belmont</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','California',30112)">California</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Chicago',30272)">Chicago</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Cicero',30188)">Cicero</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Clark/Lake',30374)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Clinton',30085)">Clinton</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Cumberland',30045)">Cumberland</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Damen',30116)">Damen</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Division',30063)">Division</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Grand',30096)">Grand</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Harlem (Forest Park Branch)',30190)">Harlem (Forest Park Branch)</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Harlem (O'Hare branch)',30146)">Harlem (O'Hare branch)</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Illinois Medical District',30158)">Illinois Medical District</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Irving Park',30108)">Irving Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Jackson',30015)">Jackson</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Jefferson Park',30248)">Jefferson Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Kedzie-Homan',30049)">Kedzie-Homan</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','LaSalle',30262)">LaSalle</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Logan Square',30198)">Logan Square</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Monroe',30154)">Monroe</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Montrose',30260)">Montrose</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Oak Park',30035)">Oak Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','O'Hare',30172)">O'Hare</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Pulaski',30180)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Racine',30093)">Racine</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Rosemont',30160)">Rosemont</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','UIC-Halsted',30069)">UIC-Halsted</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Washington',30073)">Washington</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Western (Forest Park Branch)',30043)">Western (Forest Park Branch)</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','Forest Pk','Western (O'Hare branch)',30130)">Western (O'Hare branch)</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>O'Hare</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Addison',30239)">Addison</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Austin',30001)">Austin</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Belmont',30012)">Belmont</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','California',30111)">California</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Chicago',30271)">Chicago</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Cicero',30187)">Cicero</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Clark/Lake',30375)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Clinton',30084)">Clinton</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Cumberland',30044)">Cumberland</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Damen',30115)">Damen</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Division',30062)">Division</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Forest Park',30076)">Forest Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Grand',30095)">Grand</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Harlem (Forest Park Branch)',30189)">Harlem (Forest Park Branch)</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Harlem (O'Hare branch)',30145)">Harlem (O'Hare branch)</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Illinois Medical District',30157)">Illinois Medical District</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Irving Park',30107)">Irving Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Jackson',30014)">Jackson</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Jefferson Park',30247)">Jefferson Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Kedzie-Homan',30048)">Kedzie-Homan</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','LaSalle',30261)">LaSalle</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Logan Square',30197)">Logan Square</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Monroe',30153)">Monroe</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Montrose',30259)">Montrose</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Oak Park',30034)">Oak Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Pulaski',30179)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Racine',30092)">Racine</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Rosemont',30159)">Rosemont</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','UIC-Halsted',30068)">UIC-Halsted</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Washington',30072)">Washington</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Western (Forest Park Branch)',30042)">Western (Forest Park Branch)</a></li>
+						<li><a href="#" onclick="trainClick(0,'Blue','O\'Hare','Western (O'Hare branch)',30129)">Western (O'Hare branch)</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Brown</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Loop</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Addison',30278)">Addison</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Armitage',30128)">Armitage</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Belmont',30258)">Belmont</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Chicago',30138)">Chicago</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Damen',30019)">Damen</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Diversey',30104)">Diversey</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Francisco',30168)">Francisco</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Fullerton',30236)">Fullerton</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Irving Park',30282)">Irving Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Kedzie',30226)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Kimball',30250)">Kimball</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Merchandise Mart',30091)">Merchandise Mart</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Montrose',30288)">Montrose</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Paulina',30254)">Paulina</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Rockwell',30196)">Rockwell</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Sedgwick',30156)">Sedgwick</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Southport',30071)">Southport</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Wellington',30232)">Wellington</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Loop','Western',30284)">Western</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>Kimball</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Addison',30277)">Addison</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Damen',30018)">Damen</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Francisco',30167)">Francisco</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Irving Park',30281)">Irving Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Kedzie',30225)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Montrose',30287)">Montrose</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Paulina',30253)">Paulina</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Rockwell',30195)">Rockwell</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Southport',30070)">Southport</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Western',30283)">Western</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Armitage',30127)">Armitage</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Belmont',30257)">Belmont</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Chicago',30137)">Chicago</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Diversey',30103)">Diversey</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Fullerton',30235)">Fullerton</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Merchandise Mart',30090)">Merchandise Mart</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Sedgwick',30155)">Sedgwick</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Wellington',30231)">Wellington</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Adams/Wabash',30131)">Adams/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Clark/Lake',30075)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Harold Washington Library-State/Van Buren',30165)">Harold Washington Library-State/Van Buren</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','LaSalle/Van Buren',30030)">LaSalle/Van Buren</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Madison/Wabash',30123)">Madison/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Quincy/Wells',30008)">Quincy/Wells</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Randolph/Wabash',30038)">Randolph/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','State/Lake',30051)">State/Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'Brn','Kimball','Washington/Wells',30142)">Washington/Wells</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Green</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Harlem</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Adams/Wabash',30131)">Adams/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Clark/Lake',30075)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Madison/Wabash',30123)">Madison/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Randolph/Wabash',30038)">Randolph/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','State/Lake',30051)">State/Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Roosevelt',30080)">Roosevelt</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','35th-Bronzeville-IIT',30213)">35th-Bronzeville-IIT</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','43rd',30245)">43rd</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','47th',30209)">47th</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','51st',30024)">51st</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Ashland/63rd',30056)">Ashland/63rd</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Austin',30244)">Austin</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','California',30266)">California</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Central',30055)">Central</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Cicero',30009)">Cicero</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Conservatory',30292)">Conservatory</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Cottage Grove',30140)">Cottage Grove</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Garfield',30099)">Garfield</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Halsted',30183)">Halsted</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Indiana',30058)">Indiana</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Kedzie',30208)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','King Drive',30218)">King Drive</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Laramie',30136)">Laramie</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Oak Park',30264)">Oak Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Pulaski',30006)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Ridgeland',30120)">Ridgeland</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Ashland',30032)">Ashland</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Clinton',30222)">Clinton</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','Harlem','Morgan',30296)">Morgan</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>63rd/Cottage Grove</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Roosevelt',30081)">Roosevelt</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Ashland',30033)">Ashland</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Clinton',30221)">Clinton</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Morgan',30295)">Morgan</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Adams/Wabash',30132)">Adams/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Clark/Lake',30074)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Madison/Wabash',30124)">Madison/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Randolph/Wabash',30039)">Randolph/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','State/Lake',30050)">State/Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','King Drive',30217)">King Drive</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Halsted',30184)">Halsted</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','35th-Bronzeville-IIT',30214)">35th-Bronzeville-IIT</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','43rd',30246)">43rd</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','47th',30210)">47th</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','51st',30025)">51st</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Austin',30243)">Austin</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','California',30265)">California</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Central',30054)">Central</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Cicero',30094)">Cicero</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Conservatory',30291)">Conservatory</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Garfield',30100)">Garfield</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Harlem/Lake',30003)">Harlem/Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Indiana',30059)">Indiana</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Kedzie',30207)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Laramie',30135)">Laramie</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Oak Park',30263)">Oak Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Pulaski',30005)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(0,'G','63rd/Cottage Grv','Ridgeland',30119)">Ridgeland</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Purple</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Howard-Loop</h3>
+					<ul data-role="listview">
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Central',30242)">Central</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Davis',30011)">Davis</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Dempster',30134)">Dempster</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Foster',30102)">Foster</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Linden',30204)">Linden</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Main',30053)">Main</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Noyes',30079)">Noyes</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','South Boulevard',30164)">South Boulevard</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Armitage',30128)">Armitage</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Belmont',30258)">Belmont</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Chicago',30138)">Chicago</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Diversey',30104)">Diversey</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Fullerton',30236)">Fullerton</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Merchandise Mart',30091)">Merchandise Mart</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Sedgwick',30156)">Sedgwick</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Howard-Loop','Wellington',30232)">Wellington</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>Linden</h3>
+					<ul data-role="listview">
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Howard',30175)">Howard</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Central',30241)">Central</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Davis',30010)">Davis</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Dempster',30133)">Dempster</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Foster',30101)">Foster</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Linden',30203)">Linden</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Main',30052)">Main</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Noyes',30078)">Noyes</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','South Boulevard',30163)">South Boulevard</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Armitage',30127)">Armitage</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Belmont',30257)">Belmont</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Chicago',30137)">Chicago</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Diversey',30103)">Diversey</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Fullerton',30235)">Fullerton</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Merchandise Mart',30090)">Merchandise Mart</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Sedgwick',30155)">Sedgwick</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Wellington',30231)">Wellington</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Harold Washington Library',30166)">Harold Washington Library</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','LaSalle/Van Buren',30031)">LaSalle/Van Buren</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Quincy/Wells',30007)">Quincy/Wells</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Washington/Wells',30141)">Washington/Wells</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Adams/Wabash',30132)">Adams/Wabash</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Clark/Lake',30074)">Clark/Lake</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Madison/Wabash',30124)">Madison/Wabash</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','Randolph/Wabash',30039)">Randolph/Wabash</a></li>
+                        <li><a href="#" onclick="trainClick(0,'P','Linden','State/Lake',30050)">State/Lake</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Yellow</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Howard</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'Y','Howard','Oakton',30298)">Oakton</a></li>
+						<li><a href="#" onclick="trainClick(0,'Y','Howard','Skokie',30027)">Skokie</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>Skokie</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'Y','Skokie','Howard',30175)">Howard</a></li>
+						<li><a href="#" onclick="trainClick(0,'Y','Skokie','Oakton',30297)">Oakton</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Pink</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Loop</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','18th',30161)">18th</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','54th/Cermak',30113)">54th/Cermak</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','California',30086)">California</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','Central Park',30151)">Central Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','Cicero',30082)">Cicero</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','Damen',30040)">Damen</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','Kedzie',30201)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','Kostner',30117)">Kostner</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','Polk',30199)">Polk</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','Pulaski',30028)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','Western',30143)">Western</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','Ashland',30033)">Ashland</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','Clinton',30221)">Clinton</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','Loop','Morgan',30295)">Morgan</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>54th/Cermak</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Harold Washington Library-State/Van Buren',30166)">Harold Washington Library-State/Van Buren</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','LaSalle/Van Buren',30031)">LaSalle/Van Buren</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Quincy/Wells',30007)">Quincy/Wells</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Washington/Wells',30141)">Washington/Wells</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Adams/Wabash',30132)">Adams/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Clark/Lake',30074)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Madison/Wabash',30124)">Madison/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Randolph/Wabash',30039)">Randolph/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','State/Lake',30050)">State/Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Ashland',30032)">Ashland</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Clinton',30222)">Clinton</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Morgan',30296)">Morgan</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','18th',30162)">18th</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','California',30087)">California</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Central Park',30152)">Central Park</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Cicero',30083)">Cicero</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Damen',30041)">Damen</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Kedzie',30202)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Kostner',30118)">Kostner</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Polk',30200)">Polk</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Pulaski',30029)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(0,'Pink','54th/Cermak','Western',30144)">Western</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Orange</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Loop</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'Org','Loop','Roosevelt',30080)">Roosevelt</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Loop','35th/Archer',30022)">35th/Archer</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Loop','Ashland',30205)">Ashland</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Loop','Halsted',30215)">Halsted</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Loop','Kedzie',30219)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Loop','Midway',30181)">Midway</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Loop','Pulaski',30185)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Loop','Western',30060)">Western</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>Midway</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Roosevelt',30081)">Roosevelt</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','35th/Archer',30023)">35th/Archer</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Ashland',30206)">Ashland</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Halsted',30216)">Halsted</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Kedzie',30220)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Pulaski',30186)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Western',30061)">Western</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Harold Washington Library-State/Van Buren',30166)">Harold Washington Library-State/Van Buren</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','LaSalle/Van Buren',30031)">LaSalle/Van Buren</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Quincy/Wells',30007)">Quincy/Wells</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Washington/Wells',30141)">Washington/Wells</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Adams/Wabash',30132)">Adams/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Clark/Lake',30074)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Madison/Wabash',30124)">Madison/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','Randolph/Wabash',30039)">Randolph/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(0,'Org','Midway','State/Lake',30050)">State/Lake</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div data-role="collapsible" data-inset="false" id="botStation">
+	<h3>Bottom Station</h3>
+	<div data-role="collapsible-set">
+		<div data-role="collapsible" data-inset="false"><h3>Red</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Howard</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','47th',30237)">47th</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','63rd',30177)">63rd</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','69th',30191)">69th</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','79th',30046)">79th</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','87th',30275)">87th</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','95th/Ran Ryan',30088)">95th/Ran Ryan</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Addison',30273)">Addison</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Argyle',30229)">Argyle</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Belmont',30255)">Belmont</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Berwyn',30066)">Berwyn</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Bryn Mawr',30267)">Bryn Mawr</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Cermak-Chinatown',30193)">Cermak-Chinatown</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Chicago',30279)">Chicago</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Clark/Division',30121)">Clark/Division</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Fullerton',30233)">Fullerton</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Garfield',30223)">Garfield</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Grand',30064)">Grand</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Granville',30147)">Granville</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Harrison',30285)">Harrison</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Jackson',30109)">Jackson</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Jarvis',30227)">Jarvis</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Lake',30289)">Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Lawrence',30149)">Lawrence</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Loyola',30251)">Loyola</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Monroe',30211)">Monroe</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Morse',30020)">Morse</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','North/Clybourn',30125)">North/Clybourn</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Roosevelt',30269)">Roosevelt</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Sheridan',30016)">Sheridan</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Sox-35th',30036)">Sox-35th</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Thorndale',30169)">Thorndale</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','Howard','Wilson',30105)">Wilson</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>95th</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'Red','95th','47th',30238)">47th</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','63rd',30178)">63rd</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','69th',30192)">69th</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','79th',30047)">79th</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','87th',30276)">87th</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','95th/Dan Ryan',30089)">95th/Dan Ryan</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Addison',30274)">Addison</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Argyle',30230)">Argyle</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Belmont',30256)">Belmont</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Berwyn',30067)">Berwyn</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Bryn Mawr',30268)">Bryn Mawr</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Cermak-Chinatown',30194)">Cermak-Chinatown</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Chicago',30280)">Chicago</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Clark/Division',30122)">Clark/Division</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Fullerton',30234)">Fullerton</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Garfield',30224)">Garfield</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Grand',30065)">Grand</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Granville',30148)">Granville</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Harrison',30286)">Harrison</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Howard',30174)">Howard</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Jackson',30110)">Jackson</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Jarvis',30228)">Jarvis</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Lake',30290)">Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Lawrence',30150)">Lawrence</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Loyola',30252)">Loyola</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Monroe',30212)">Monroe</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Morse',30021)">Morse</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','North/Clybourn',30126)">North/Clybourn</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Roosevelt',30270)">Roosevelt</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Sheridan',30017)">Sheridan</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Sox-35th',30037)">Sox-35th</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Thorndale',30170)">Thorndale</a></li>
+						<li><a href="#" onclick="trainClick(1,'Red','95th','Wilson',30106)">Wilson</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Blue</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Forest Park</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Addison',30240)">Addison</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Austin',30002)">Austin</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Belmont',30013)">Belmont</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','California',30112)">California</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Chicago',30272)">Chicago</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Cicero',30188)">Cicero</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Clark/Lake',30374)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Clinton',30085)">Clinton</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Cumberland',30045)">Cumberland</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Damen',30116)">Damen</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Division',30063)">Division</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Grand',30096)">Grand</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Harlem (Forest Park Branch)',30190)">Harlem (Forest Park Branch)</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Harlem (O'Hare branch)',30146)">Harlem (O'Hare branch)</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Illinois Medical District',30158)">Illinois Medical District</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Irving Park',30108)">Irving Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Jackson',30015)">Jackson</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Jefferson Park',30248)">Jefferson Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Kedzie-Homan',30049)">Kedzie-Homan</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','LaSalle',30262)">LaSalle</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Logan Square',30198)">Logan Square</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Monroe',30154)">Monroe</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Montrose',30260)">Montrose</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Oak Park',30035)">Oak Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','O'Hare',30172)">O'Hare</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Pulaski',30180)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Racine',30093)">Racine</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Rosemont',30160)">Rosemont</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','UIC-Halsted',30069)">UIC-Halsted</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Washington',30073)">Washington</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Western (Forest Park Branch)',30043)">Western (Forest Park Branch)</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','Forest Pk','Western (O'Hare branch)',30130)">Western (O'Hare branch)</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>O'Hare</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Addison',30239)">Addison</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Austin',30001)">Austin</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Belmont',30012)">Belmont</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','California',30111)">California</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Chicago',30271)">Chicago</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Cicero',30187)">Cicero</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Clark/Lake',30375)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Clinton',30084)">Clinton</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Cumberland',30044)">Cumberland</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Damen',30115)">Damen</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Division',30062)">Division</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Forest Park',30076)">Forest Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Grand',30095)">Grand</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Harlem (Forest Park Branch)',30189)">Harlem (Forest Park Branch)</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Harlem (O'Hare branch)',30145)">Harlem (O'Hare branch)</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Illinois Medical District',30157)">Illinois Medical District</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Irving Park',30107)">Irving Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Jackson',30014)">Jackson</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Jefferson Park',30247)">Jefferson Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Kedzie-Homan',30048)">Kedzie-Homan</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','LaSalle',30261)">LaSalle</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Logan Square',30197)">Logan Square</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Monroe',30153)">Monroe</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Montrose',30259)">Montrose</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Oak Park',30034)">Oak Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Pulaski',30179)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Racine',30092)">Racine</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Rosemont',30159)">Rosemont</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','UIC-Halsted',30068)">UIC-Halsted</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Washington',30072)">Washington</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Western (Forest Park Branch)',30042)">Western (Forest Park Branch)</a></li>
+						<li><a href="#" onclick="trainClick(1,'Blue','O\'Hare','Western (O'Hare branch)',30129)">Western (O'Hare branch)</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Brown</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Loop</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Addison',30278)">Addison</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Armitage',30128)">Armitage</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Belmont',30258)">Belmont</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Chicago',30138)">Chicago</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Damen',30019)">Damen</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Diversey',30104)">Diversey</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Francisco',30168)">Francisco</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Fullerton',30236)">Fullerton</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Irving Park',30282)">Irving Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Kedzie',30226)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Kimball',30250)">Kimball</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Merchandise Mart',30091)">Merchandise Mart</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Montrose',30288)">Montrose</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Paulina',30254)">Paulina</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Rockwell',30196)">Rockwell</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Sedgwick',30156)">Sedgwick</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Southport',30071)">Southport</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Wellington',30232)">Wellington</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Loop','Western',30284)">Western</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>Kimball</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Addison',30277)">Addison</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Damen',30018)">Damen</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Francisco',30167)">Francisco</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Irving Park',30281)">Irving Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Kedzie',30225)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Montrose',30287)">Montrose</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Paulina',30253)">Paulina</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Rockwell',30195)">Rockwell</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Southport',30070)">Southport</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Western',30283)">Western</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Armitage',30127)">Armitage</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Belmont',30257)">Belmont</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Chicago',30137)">Chicago</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Diversey',30103)">Diversey</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Fullerton',30235)">Fullerton</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Merchandise Mart',30090)">Merchandise Mart</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Sedgwick',30155)">Sedgwick</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Wellington',30231)">Wellington</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Adams/Wabash',30131)">Adams/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Clark/Lake',30075)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Harold Washington Library-State/Van Buren',30165)">Harold Washington Library-State/Van Buren</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','LaSalle/Van Buren',30030)">LaSalle/Van Buren</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Madison/Wabash',30123)">Madison/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Quincy/Wells',30008)">Quincy/Wells</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Randolph/Wabash',30038)">Randolph/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','State/Lake',30051)">State/Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'Brn','Kimball','Washington/Wells',30142)">Washington/Wells</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Green</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Harlem</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Adams/Wabash',30131)">Adams/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Clark/Lake',30075)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Madison/Wabash',30123)">Madison/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Randolph/Wabash',30038)">Randolph/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','State/Lake',30051)">State/Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Roosevelt',30080)">Roosevelt</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','35th-Bronzeville-IIT',30213)">35th-Bronzeville-IIT</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','43rd',30245)">43rd</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','47th',30209)">47th</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','51st',30024)">51st</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Ashland/63rd',30056)">Ashland/63rd</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Austin',30244)">Austin</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','California',30266)">California</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Central',30055)">Central</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Cicero',30009)">Cicero</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Conservatory',30292)">Conservatory</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Cottage Grove',30140)">Cottage Grove</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Garfield',30099)">Garfield</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Halsted',30183)">Halsted</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Indiana',30058)">Indiana</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Kedzie',30208)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','King Drive',30218)">King Drive</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Laramie',30136)">Laramie</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Oak Park',30264)">Oak Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Pulaski',30006)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Ridgeland',30120)">Ridgeland</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Ashland',30032)">Ashland</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Clinton',30222)">Clinton</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','Harlem','Morgan',30296)">Morgan</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>63rd/Cottage Grove</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Roosevelt',30081)">Roosevelt</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Ashland',30033)">Ashland</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Clinton',30221)">Clinton</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Morgan',30295)">Morgan</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Adams/Wabash',30132)">Adams/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Clark/Lake',30074)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Madison/Wabash',30124)">Madison/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Randolph/Wabash',30039)">Randolph/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','State/Lake',30050)">State/Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','King Drive',30217)">King Drive</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Halsted',30184)">Halsted</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','35th-Bronzeville-IIT',30214)">35th-Bronzeville-IIT</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','43rd',30246)">43rd</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','47th',30210)">47th</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','51st',30025)">51st</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Austin',30243)">Austin</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','California',30265)">California</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Central',30054)">Central</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Cicero',30094)">Cicero</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Conservatory',30291)">Conservatory</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Garfield',30100)">Garfield</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Harlem/Lake',30003)">Harlem/Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Indiana',30059)">Indiana</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Kedzie',30207)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Laramie',30135)">Laramie</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Oak Park',30263)">Oak Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Pulaski',30005)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(1,'G','63rd/Cottage Grv','Ridgeland',30119)">Ridgeland</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Purple</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Howard-Loop</h3>
+					<ul data-role="listview">
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Central',30242)">Central</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Davis',30011)">Davis</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Dempster',30134)">Dempster</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Foster',30102)">Foster</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Linden',30204)">Linden</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Main',30053)">Main</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Noyes',30079)">Noyes</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','South Boulevard',30164)">South Boulevard</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Armitage',30128)">Armitage</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Belmont',30258)">Belmont</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Chicago',30138)">Chicago</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Diversey',30104)">Diversey</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Fullerton',30236)">Fullerton</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Merchandise Mart',30091)">Merchandise Mart</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Sedgwick',30156)">Sedgwick</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Howard-Loop','Wellington',30232)">Wellington</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>Linden</h3>
+					<ul data-role="listview">
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Howard',30175)">Howard</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Central',30241)">Central</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Davis',30010)">Davis</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Dempster',30133)">Dempster</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Foster',30101)">Foster</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Linden',30203)">Linden</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Main',30052)">Main</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Noyes',30078)">Noyes</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','South Boulevard',30163)">South Boulevard</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Armitage',30127)">Armitage</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Belmont',30257)">Belmont</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Chicago',30137)">Chicago</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Diversey',30103)">Diversey</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Fullerton',30235)">Fullerton</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Merchandise Mart',30090)">Merchandise Mart</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Sedgwick',30155)">Sedgwick</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Wellington',30231)">Wellington</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Harold Washington Library',30166)">Harold Washington Library</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','LaSalle/Van Buren',30031)">LaSalle/Van Buren</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Quincy/Wells',30007)">Quincy/Wells</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Washington/Wells',30141)">Washington/Wells</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Adams/Wabash',30132)">Adams/Wabash</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Clark/Lake',30074)">Clark/Lake</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Madison/Wabash',30124)">Madison/Wabash</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','Randolph/Wabash',30039)">Randolph/Wabash</a></li>
+                        <li><a href="#" onclick="trainClick(1,'P','Linden','State/Lake',30050)">State/Lake</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Yellow</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Howard</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'Y','Howard','Oakton',30298)">Oakton</a></li>
+						<li><a href="#" onclick="trainClick(1,'Y','Howard','Skokie',30027)">Skokie</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>Skokie</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'Y','Skokie','Howard',30175)">Howard</a></li>
+						<li><a href="#" onclick="trainClick(1,'Y','Skokie','Oakton',30297)">Oakton</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Pink</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Loop</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','18th',30161)">18th</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','54th/Cermak',30113)">54th/Cermak</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','California',30086)">California</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','Central Park',30151)">Central Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','Cicero',30082)">Cicero</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','Damen',30040)">Damen</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','Kedzie',30201)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','Kostner',30117)">Kostner</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','Polk',30199)">Polk</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','Pulaski',30028)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','Western',30143)">Western</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','Ashland',30033)">Ashland</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','Clinton',30221)">Clinton</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','Loop','Morgan',30295)">Morgan</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>54th/Cermak</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Harold Washington Library-State/Van Buren',30166)">Harold Washington Library-State/Van Buren</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','LaSalle/Van Buren',30031)">LaSalle/Van Buren</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Quincy/Wells',30007)">Quincy/Wells</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Washington/Wells',30141)">Washington/Wells</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Adams/Wabash',30132)">Adams/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Clark/Lake',30074)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Madison/Wabash',30124)">Madison/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Randolph/Wabash',30039)">Randolph/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','State/Lake',30050)">State/Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Ashland',30032)">Ashland</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Clinton',30222)">Clinton</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Morgan',30296)">Morgan</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','18th',30162)">18th</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','California',30087)">California</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Central Park',30152)">Central Park</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Cicero',30083)">Cicero</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Damen',30041)">Damen</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Kedzie',30202)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Kostner',30118)">Kostner</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Polk',30200)">Polk</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Pulaski',30029)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(1,'Pink','54th/Cermak','Western',30144)">Western</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div data-role="collapsible" data-inset="false"><h3>Orange</h3>
+			<label>Direction</label>
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-inset="false"><h3>Loop</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'Org','Loop','Roosevelt',30080)">Roosevelt</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Loop','35th/Archer',30022)">35th/Archer</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Loop','Ashland',30205)">Ashland</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Loop','Halsted',30215)">Halsted</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Loop','Kedzie',30219)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Loop','Midway',30181)">Midway</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Loop','Pulaski',30185)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Loop','Western',30060)">Western</a></li>
+					</ul>
+				</div>
+				<div data-role="collapsible" data-inset="false"><h3>Midway</h3>
+					<ul data-role="listview">
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Roosevelt',30081)">Roosevelt</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','35th/Archer',30023)">35th/Archer</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Ashland',30206)">Ashland</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Halsted',30216)">Halsted</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Kedzie',30220)">Kedzie</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Pulaski',30186)">Pulaski</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Western',30061)">Western</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Harold Washington Library-State/Van Buren',30166)">Harold Washington Library-State/Van Buren</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','LaSalle/Van Buren',30031)">LaSalle/Van Buren</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Quincy/Wells',30007)">Quincy/Wells</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Washington/Wells',30141)">Washington/Wells</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Adams/Wabash',30132)">Adams/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Clark/Lake',30074)">Clark/Lake</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Madison/Wabash',30124)">Madison/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','Randolph/Wabash',30039)">Randolph/Wabash</a></li>
+						<li><a href="#" onclick="trainClick(1,'Org','Midway','State/Lake',30050)">State/Lake</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+<script>
+	var routes=[{},{}];
+	function trainClick(position,color,direction,station,stpid){
+		routes[position].color = color;
+		routes[position].direction = direction;
+		routes[position].station = station;
+		routes[position].stpid = stpid;
+	}
+	function save(){
+		console.log("Save");
+		var location = "pebblejs://close#" + encodeURIComponent(JSON.stringify(routes));
+		console.log(location);
+		document.location = location;
+	}
+	function cancel(){
+		console.log("Cancel");
+		document.location = "pebblejs://close";
+	}
+</script>
+</body>
+</html>

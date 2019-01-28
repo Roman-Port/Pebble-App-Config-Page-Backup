@@ -1,0 +1,47 @@
+.label {
+    font-family: Verdana;
+    font-weight: bold;
+    font-size:25px;
+}
+
+
+#tblDir {
+            width: 305px;
+            height: 325px;  
+            position:relative;    
+            z-index:1000;
+
+        }
+
+        #tblDir td {
+            width:100px;
+            text-align:center;
+            opacity: 1;
+        }
+
+        #tblDir td div {
+            margin:auto
+        }
+
+        #tblDir td input {
+            position:relative;
+        }
+
+.screen {
+    width:144px;
+    height:168px;
+    border: solid 1px black;
+    overflow:hidden;  
+    position:relative;
+}
+
+.number {
+    font-family: arial;
+    font-weight: bold;
+    font-size:72px;
+}        
+
+#h1 {position: relative;left:35px;top:5px}
+#h2 {position: relative; left:15px;top:5px}
+#m1 {position: relative;left:15px;top:-25px}
+#m2 {position: relative; left:-5px;top:-25px}

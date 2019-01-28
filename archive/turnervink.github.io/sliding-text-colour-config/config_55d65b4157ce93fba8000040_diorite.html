@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel='stylesheet' type='text/css' href='/turnervink.github.io/sliding-text-colour-config/bower_components/pebble-slate/dist/css/slate.css'>
+	<link rel='stylesheet' type='text/css' href='/turnervink.github.io/sliding-text-colour-config/css/style.css'>
+</head>
+<body>
+	<h1 class='title'>Text Watch Colour</h1>
+
+	<div class='item-container'>
+		<div class='item-container-content'>
+			<label class='item'>
+				Text Colour
+				<input id='textColorPicker' type='text' class='item-color item-color-sunny' value='0xffffff'>
+			</label>
+
+			<label class='item'>
+				Background Colour
+				<input id='backgroundColorPicker' type='text' class='item-color item-color-sunny' value='#000000'>
+			</label>
+		</div>
+		<div class='item-container-footer'>
+				Relaunch the watchface to see changes
+			</div>
+	</div>
+
+	<div class='item-container'>
+		<div class='button-container'>
+			<input id='submitButton' type='button' class='item-button' value='SAVE'>
+		</div>
+	</div>
+
+	<script src='/turnervink.github.io/sliding-text-colour-config/bower_components/pebble-slate/dist/js/slate.js'></script>
+	<script src='/turnervink.github.io/sliding-text-colour-config/js/main.js'></script>
+</body>
+</html>

@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Fuzzy Text - Configuration</title>
+    <link rel='stylesheet' type='text/css' href='/www.matb.se/pebble-config/config/css/slate.css'>
+    <script src='/www.matb.se/pebble-config/config/js/slate.js'></script>
+    <style>
+      .title {
+        padding: 15px 10px;
+        text-transform: uppercase;
+        font-family: 'PT Sans', sans-serif;
+        font-size: 1.2em;
+        font-weight: 500;
+        color: #888888;
+        text-align: center;
+      }
+
+      .bw-config,
+      .color-config,
+      .language-config,
+      .offset-config,
+      .message-time-config,
+      .gesture-config,
+      .bt-lost-config
+      {
+        display: none;
+      }
+
+      .fixed-bottom {
+        position: fixed; 
+        bottom:0%;
+        width:100%;
+        background-color: rgba(234,234,234,0.9);
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border-top: 1px solid #dedede;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Fuzzy Text - Configuration</h1>
+
+    <div class='item-container language-config'>
+      <div class='item-container-header'>Language</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Select language
+          <select id='language_choice' class='item-select'></select>
+        </label>
+      </div>
+    </div>
+
+    <div class='item-container bw-config'>
+      <div class='item-container-header'>Screen color</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Inverse colors
+          <input id='inverse_color_checkbox' type='checkbox' class='item-toggle'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        The default colors are white text on black background. When this option is enabled you get black
+        text on white background instead.
+      </div>
+    </div>
+
+    <div class='item-container color-config'>
+      <div class='item-container-header'>Colors</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Color
+          <input id='background_color_picker' type='text' class='item-color item-color-sunny' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        The watchface background color.
+      </div>
+    </div>
+
+    <div class='item-container color-config'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Regular text color
+          <input id='regular_color_picker' type='text' class='item-color item-color-sunny' value='#FFFFFF'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        The watchface REGULAR text color, this is usually used for everything except the hours.
+      </div>
+    </div>
+
+    <div class='item-container color-config'>
+      <div class='item-container-content'>
+        <label class='item'>
+          Bold text color
+          <input id='bold_color_picker' type='text' class='item-color item-color-sunny' value='#FFFFFF'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        The watchface BOLD text color, this is usually used for the hours.
+      </div>
+    </div>
+
+    <div class='item-container  bt-lost-config'>
+    <div class='item-container-header'>Notifications</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Connection lost
+              <select id='bt_choice' class='item-select'>
+              <option value="0">Off</option>
+              <option value="1">Message only</option>
+              <option value="2" selected="">Buzz and message</option>
+            </select>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Notifies with a buzz and a message if the connection to the phone is lost. (The buzz will be disabled when Quiet Time is on.)
+      </div>
+    </div>
+
+    <div class='item-container offset-config'>
+      <div class='item-container-header'>Other</div>
+     
+      <div class='gesture-config' style='margin-bottom: 1em'>
+        <div class='item-container-content'>
+          <label class='item'>
+              Show date on gesture
+              <select id='gesture_choice' class='item-select'>
+              <option value="0">Off</option>
+              <option value="2">Flick wrist</option>
+              <option value="3">Shake up/down</option>
+              <option value="1">Boxing move</option>
+              <option value="4" selected="">Any shake</option>
+            </select>
+          </label>
+        </div>
+        <div class='item-container-footer'>
+            The date and precise time can be shown when you shake the watch. You can configure which type of shaking move the watch reacts on, or turn the feature off.
+        </div>
+      </div>
+
+      <div class='item-container-content offset-config'>
+        <label class='item'>
+          Time offset, minutes
+          <select id='offset_choice' class='item-select'>
+            <option value="0">0:00</option>
+            <option value="60">1:00</option>
+            <option value="120">2:00</option>
+            <option value="150">2:30</option>
+            <option value="180" selected="">3:00</option>
+            <option value="240">4:00</option>
+            <option value="300">5:00</option>
+          </select>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+      With five minute precision, this option decides how much ahead of time the watch will switch to the next
+      time entry.<p>
+      <i>Example:</i> If set to 0:00 the watch will switch to <b>nine o'clock</b> at <b>09:00</b> exactly. If set to 2:00,
+      it will switch to <b>nine o'clock</b> at <b>08:58</b> (2 minutes ahead).
+      </div>
+    </div>
+
+    <div class='item-container message-time-config'>
+      <div class='item-container-content'>
+        <label class='item'>
+            Greeting display time
+            <select id='message_time_choice' class='item-select'>
+            <option value="0">off</option>
+            <option value="2">2 seconds</option>
+            <option value="3" selected="">3 seconds</option>
+            <option value="4">4 seconds</option>
+          </select>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        When the watchface is started a greeting message is diplayed. This setting decides for how long.
+      </div>
+    </div>
+
+    <!-- Keep this at the botton, just above the submit button -->
+    <div class='item-container-footer' style="height: 50px"></div>
+
+    <div class='item-container fixed-bottom'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+
+  function getConfigData() {
+    var inverseColorCheckbox = document.getElementById('inverse_color_checkbox');
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var regularColorPicker = document.getElementById('regular_color_picker');
+    var boldColorPicker = document.getElementById('bold_color_picker');
+    var languageChoice = document.getElementById('language_choice');
+    var offsetChoice = document.getElementById('offset_choice');
+    var messageTime = document.getElementById('message_time_choice');
+    var gesture = document.getElementById('gesture_choice');
+    var btLostNotification = document.getElementById('bt_choice');
+
+    var options = {
+      'inverse_colors': inverseColorCheckbox.checked,
+      'background_color': backgroundColorPicker.value,
+      'regular_color': regularColorPicker.value,
+      'bold_color': boldColorPicker.value,
+      'language': languageChoice.value,
+      'offset': offsetChoice.value,
+      'message_time': messageTime.value,
+      'gesture': gesture.value,
+      'bt_notification': btLostNotification.value
+    };
+
+    // Save for next launch
+    localStorage['inverse_colors'] = options['inverse_colors'];
+    localStorage['background_color'] = options['background_color'];
+    localStorage['regular_color'] = options['regular_color'];
+    localStorage['bold_color'] = options['bold_color'];
+    localStorage['language'] = options['language'];
+    localStorage['offset'] = options['offset'];
+    localStorage['message_time'] = options['message_time'];
+    localStorage['gesture'] = options['gesture'];
+    localStorage['bt_notification'] = options['bt_notification'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var inverseColorCheckbox = document.getElementById('inverse_color_checkbox');
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var regularColorPicker = document.getElementById('regular_color_picker');
+    var boldColorPicker = document.getElementById('bold_color_picker');
+    var languageChoice = document.getElementById('language_choice');
+    var offsetChoice = document.getElementById('offset_choice');
+    var messageTime = document.getElementById('message_time_choice');
+    var gesture = document.getElementById('gesture_choice');
+    var btLostNotification = document.getElementById('bt_choice');
+
+    var selected_configs = [];
+    var available_languages = {};
+
+    // Setup black n´ white or color options
+    if (getQueryParam("bw")) {
+      Array.prototype.push.apply(selected_configs, document.getElementsByClassName("bw-config"));
+    } else {
+      Array.prototype.push.apply(selected_configs, document.getElementsByClassName("color-config"));
+    }
+
+    // Add option and language avabilities depending on client version
+    var version = getQueryParam("v");
+    if (version > 0) {
+      if (version >= 33) {
+        Array.prototype.push.apply(selected_configs, document.getElementsByClassName("language-config"));        
+        available_languages["Svenska"] = 1;
+        available_languages["English"] = 2;
+        available_languages["Norsk"] = 3;
+      }
+      if (version >= 34) {
+        Array.prototype.push.apply(selected_configs, document.getElementsByClassName("offset-config"));        
+        available_languages["Nederlands"] = 4;
+      }
+      if (version >= 35) {
+        available_languages["Italiano"] = 5;
+      }
+      if (version >= 38) {
+        available_languages["Español"] = 6;
+      }
+      if (version >= 40) {
+        Array.prototype.push.apply(selected_configs, document.getElementsByClassName("message-time-config"));
+      }
+      if (version >= 41) {
+        available_languages["Deutsch (O)"] = 7;
+        available_languages["Deutsch (w)"] = 8;
+      }
+      if (version >= 42) {
+        Array.prototype.push.apply(selected_configs, document.getElementsByClassName("gesture-config"));
+        Array.prototype.push.apply(selected_configs, document.getElementsByClassName("bt-lost-config"));
+      }
+    }
+
+    // Make all available options visible
+    for (var i = 0; i < selected_configs.length; i++) {
+      selected_configs[i].style.display = "block";
+    }
+
+    // Add all languages sorted by name
+    keys = [];
+    for (key in available_languages) {
+      if (available_languages.hasOwnProperty(key)) {
+        keys.push(key);
+      }
+    }
+    keys.sort();
+    for (var i = 0; i < keys.length; i++) {
+      console.log(keys[i] + ": " + available_languages[keys[i]]);
+      languageChoice.options[languageChoice.options.length] = new Option(keys[i], available_languages[keys[i]]);
+    }
+    languageChoice.value = 1;
+
+    // Load any previously saved configuration, if available
+    if(localStorage['inverse_colors']) inverseColorCheckbox.checked = JSON.parse(localStorage['inverse_colors']);
+    if(localStorage['background_color']) backgroundColorPicker.value = localStorage['background_color'];
+    if(localStorage['regular_color']) regularColorPicker.value = localStorage['regular_color'];
+    if(localStorage['bold_color']) boldColorPicker.value = localStorage['bold_color'];
+    if(localStorage['language']) languageChoice.value = localStorage['language'];
+    if(localStorage['offset']) offsetChoice.value = localStorage['offset'];
+    if(localStorage['message_time']) messageTime.value = localStorage['message_time'];
+    if(localStorage['gesture']) gesture.value = localStorage['gesture'];
+    if(localStorage['bt_notification']) btLostNotification.value = localStorage['bt_notification'];
+
+  })();
+  </script>
+</html>

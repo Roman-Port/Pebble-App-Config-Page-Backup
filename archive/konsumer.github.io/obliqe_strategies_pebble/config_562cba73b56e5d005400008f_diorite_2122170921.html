@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel='stylesheet' type='text/css' href='/konsumer.github.io/obliqe_strategies_pebble/slate/css/slate.css'>
+</head>
+<body>
+  <div class='item-container'>
+    <h1 class='title'>Oblique Strategies</h1>
+  </div>
+
+  <div class='item-container'>
+    <div class='item-container-header'>Colors</div>
+    <div class='item-container-content'>
+      <label class='item' id="colorchoose">
+        Color
+        <input id='bg' type='text' class='item-color item-color-sunny' value='0x000000'>
+      </label>
+      <label class="item">
+        Invert
+      <input id='invert' type="checkbox" class="item-toggle">
+    </label>
+    </div>
+    <div class='item-container-footer'>
+      These settings only change on the watch after you click save.
+    </div>
+  </div>
+
+  <div class='item-container'>
+    <div class='button-container'>
+      <button class='item-button'>SAVE</button>
+    </div>
+  </div>
+
+  <script src='/konsumer.github.io/obliqe_strategies_pebble/slate/js/slate.js'></script>
+<script>
+/* global $  */
+
+function getQueryParam (variable, defaultValue) {
+  var vars = window.location.search.substring(1).split('&')
+  for (var i = vars.length; i--;) {
+    var pair = vars[i].split('=')
+    if (pair[0] === variable) {
+      return decodeURIComponent(pair[1])
+    }
+  }
+  return defaultValue || false
+}
+
+$('button').on('click', function () {
+  window.localStorage.invert = $('#invert')[0].checked
+  window.localStorage.color = $('#bg').val()
+  var config = {
+    invert: window.localStorage.invert,
+    color: window.localStorage.color
+  }
+  console.log(config)
+  window.location = getQueryParam('return_to', 'pebblejs://close#') + encodeURIComponent(JSON.stringify(config))
+})
+
+if (window.localStorage.invert && window.localStorage.invert === 'true') {
+  $('#invert').attr('checked', true)
+}
+
+if (window.localStorage.color) {
+  $('#bg').val(window.localStorage.color)
+}
+
+var version = getQueryParam('version', 1)
+if (version < 3) {
+  $('#colorchoose').hide()
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Condensed Configuration</title>
+		<meta name="viewport" content="width=device-width">
+		<style>
+			* {
+				box-sizing: border-box;
+				-webkit-tap-highlight-color: transparent;
+			}
+			body, h1, form, input, button {
+				margin: 0;
+			}
+			html {
+				font-family: Helvetica, sans-serif;
+				font-size: 16px;
+				line-height: 1.25em;
+			}
+			body {
+				max-width: 480px;
+				margin: 0 auto;
+			}
+			form {
+				padding: 1em;
+			}
+			form > * + * {
+				margin-top: 1rem;
+			}
+			label {
+				display: block;
+			}
+			input, button, .colorpicker-swatch {
+				display: block;
+				-webkit-appearance: none;
+				width: 100%;
+				height: 3rem;
+				padding: 0 .5rem;
+				border: 1px solid #000;
+				border-radius: 0.1875rem;
+				line-height: 3rem;
+				font-family: inherit;
+				font-size: 1.5rem;
+				color: inherit;
+			}
+			input, .colorpicker-swatch {
+				background-color: #fff;
+				margin-top: .25rem;
+			}
+			button {
+				color: #fff;
+				background-color: #000;
+			}
+			.row {
+				display: flex;
+			}
+			.row > * {
+				flex: 1;
+			}
+			.row > * + * {
+				margin-left: 1rem;
+			}
+			#colorpicker-canvas {
+				width: 100%;
+				image-rendering: -webkit-optimize-contrast;
+				image-rendering: -webkit-crisp-edges;
+				image-rendering: crisp-edges;
+				image-rendering: pixelated;
+				margin-top: 1em;
+			}
+		</style>
+	</head>
+	<body>
+		<form>
+			<h1>Condensed</h1>
+			<label>
+				Background Color
+				<input name="backgroundColor" type="text" class="colorpicker">
+			</label>
+			<label>
+				Time Color
+				<input name="timeColor" type="text" class="colorpicker">
+			</label>
+			<label>
+				Battery Ring Color
+				<input name="batteryRingColor" type="text" class="colorpicker">
+			</label>
+			<div class="row">
+				<button type="button" name="cancel">Cancel</button>
+				<button type="button" name="save">Save</button>
+			</div>
+		</form>
+		<script>
+			(function() {
+				function _onTouchEnd( e, sourceTarget, target, callback ) {
+					document.removeEventListener( "touchend", sourceTarget._customOnTouchEnd, false );
+					sourceTarget._customOnTouchEnd = null;
+					
+					if( e.target === target ) {
+						if( typeof callback === "object" ) {
+							callback.handleEvent( e.changedTouches[0] );
+						}
+						else {
+							callback( e.changedTouches[0] );
+						}
+					}
+				}
+				
+				function _onTouchStart( startEvent, callback ) {
+					var sourceTarget = startEvent.currentTarget;
+					sourceTarget._customOnTouchEnd = function( endEvent ) {
+						_onTouchEnd( endEvent, sourceTarget, startEvent.target, callback );
+					};
+					
+					document.addEventListener( "touchend", sourceTarget._customOnTouchEnd, false );
+				}
+				
+				window.addClick = function( element, callback ) {
+					if( "ontouchstart" in window ) {
+						element.addEventListener( "touchstart", function( e ) {
+							_onTouchStart( e, callback );
+						}, false );
+					}
+					else {
+						element.addEventListener( "click", callback, false );
+					}
+				}
+			})();
+			
+			(function() {
+				function padHex( num ) {
+					return ( "000000" + num.toString( 16 ) ).slice( -6 ).toUpperCase();
+				}
+				
+				function ColorPicker( input, color ) {
+					this.input = input;
+					this.color = color;
+					
+					this.label = input.parentNode;
+					
+					var container = document.createElement( "div" );
+					container.className = "row";
+					this.swatch = document.createElement( "div" );
+					this.swatch.className = "colorpicker-swatch";
+					container.appendChild( this.swatch );
+					container.appendChild( input );
+					
+					addClick( container, this, false );
+					
+					this.label.appendChild( container );
+					
+					input.disabled = true;
+					
+					ColorPicker.setValue( this, color );
+				}
+				
+				ColorPicker.prototype.handleEvent = function( e ) {
+					if( ColorPicker.activeInstance === this ) {
+						ColorPicker.activeInstance = null;
+						
+						this.label.removeChild( ColorPicker.colorPickerNode );
+					}
+					else {
+						if( ColorPicker.colorPickerNode === null ) {
+							ColorPicker.createNode();
+						}
+						
+						ColorPicker.activeInstance = this;
+						
+						this.label.appendChild( ColorPicker.colorPickerNode );
+					}
+				};
+				
+				ColorPicker.colorPickerNode = null;
+				ColorPicker.activeInstance = null;
+				ColorPicker.setValue = function( instance, value ) {
+					var color = "#" + padHex( value );
+					instance.input.value = color;
+					instance.swatch.style.backgroundColor = color;
+					instance.color = value;
+				};
+				
+				ColorPicker.createNode = function() {
+					var colors = [
+						0xFFAAAA, 0xFF5555, 0xFF0000, 0xAA0000, 0x550000, 0xAA5555, 0xAA5500, 0xFF5500, 0xFFAA00, 0xFFAA55,
+						0xFFFFAA, 0xFFFF55, 0xFFFF00, 0xAAAA00, 0x555500, 0xAAAA55, 0x55AA00, 0x55FF00, 0xAAFF00, 0xAAFF55,
+						0xAAFFAA, 0x55FF55, 0x00FF00, 0x00AA00, 0x005500, 0x55AA55, 0x00AA55, 0x00FF55, 0x00FFAA, 0x55FFAA,
+						0xAAFFFF, 0x55FFFF, 0x00FFFF, 0x00AAAA, 0x005555, 0x55AAAA, 0x0055AA, 0x0055FF, 0x00AAFF, 0x55AAFF,
+						0xAAAAFF, 0x5555FF, 0x0000FF, 0x0000AA, 0x000055, 0x5555AA, 0x5500AA, 0x5500FF, 0xAA00FF, 0xAA55FF,
+						0xFFAAFF, 0xFF55FF, 0xFF00FF, 0xAA00AA, 0x550055, 0xAA55AA, 0xAA0055, 0xFF0055, 0xFF00AA, 0xFF55AA,
+						0xFFFFFF, 0xAAAAAA, 0x555555, 0x000000
+					];
+					
+					var canvas = document.createElement("canvas");
+					canvas.id = "colorpicker-canvas";
+					canvas.width = canvas.height = 8;
+					var context = canvas.getContext( "2d" );
+					
+					var imageData = context.getImageData( 0, 0, 8, 8 );
+					var data = imageData.data;
+					var i = 0;
+					
+					for( ; i < 64 * 4; i += 4 ) {
+						var color = colors[i >>> 2];
+						data[ i ]     =   color >>> 16;
+						data[ i + 1 ] = ( color >>>  8 ) & 0xFF;
+						data[ i + 2 ] =   color & 0xFF;
+						data[ i + 3 ] =   0xFF;
+					}
+					
+					context.putImageData( imageData, 0, 0 );
+					
+					addClick( canvas, function( e ) {
+						var rect = canvas.getBoundingClientRect();
+						var x = ( e.clientX - rect.left << 3 ) / rect.width  >>> 0;
+						var y = ( e.clientY - rect.top  << 3 ) / rect.height >>> 0;
+						
+						ColorPicker.setValue( ColorPicker.activeInstance, colors[ ( y << 3 ) + x ] );
+					} );
+					
+					ColorPicker.colorPickerNode = canvas;
+					
+					data = null;
+					imageData = null;
+					context = null;
+				};
+				
+				window.ColorPicker = ColorPicker;
+			})();
+			
+			var APPKEY_BACKGROUND_COLOR = 0;
+			var APPKEY_TIME_COLOR = 1;
+			var APPKEY_BATTERY_RING_COLOR = 2;
+			
+			var form = document.forms[ 0 ];
+			
+			var bgColorPicker;
+			var timeColorPicker;
+			var batteryRingColorPicker;
+			
+			function ARGB8toRGB32channel( channel ) {
+				return ( channel << 6 ) | ( channel << 4 ) | ( channel << 2 ) | channel;
+			}
+			function ARGB8toRGB32( color ) {
+				return ( ARGB8toRGB32channel( ( color & 0x03 ) >>> 0 ) << 0 ) | ( ARGB8toRGB32channel( ( color & 0x0C ) >>> 2 ) << 8 ) | ( ARGB8toRGB32channel( ( color & 0x30 ) >>> 4 ) << 16 )
+			}
+			
+			function RGB64toARGB8( color ) {
+				return 0xC0 | ( ( color >>> 12 ) & 0x30 ) | ( ( color >>> 6 ) & 0x0C ) | ( color & 0x03 );
+			}
+			
+			(function() {
+				// Apply preconfigured values
+				var options;
+				var optionsString = decodeURIComponent( location.search.substring( 1 ) );
+				
+				try {
+					options = JSON.parse( optionsString );
+				}
+				catch( e ) {
+					options = null;
+				}
+				
+				if( options === null ) {
+					options = {};
+					options[ APPKEY_BACKGROUND_COLOR ] = 0xC0; // 0b11000000
+					options[ APPKEY_TIME_COLOR ] = 0xFF; // 0b11111111
+					options[ APPKEY_BATTERY_RING_COLOR ] = 0xFF; // 0b11111111
+				}
+				
+				bgColorPicker = new ColorPicker( form.backgroundColor, ARGB8toRGB32( options[ APPKEY_BACKGROUND_COLOR ] ) );
+				timeColorPicker = new ColorPicker( form.timeColor, ARGB8toRGB32( options[ APPKEY_TIME_COLOR ] ) );
+				batteryRingColorPicker = new ColorPicker( form.batteryRingColor, ARGB8toRGB32( options[ APPKEY_BATTERY_RING_COLOR ] ) );
+			})();
+			
+			form.save.addEventListener( "click", function( e ) {
+				// Make a data object to be sent, coercing value types to integers
+				var options = {};
+				options[ APPKEY_BACKGROUND_COLOR ] = RGB64toARGB8( bgColorPicker.color );
+				options[ APPKEY_TIME_COLOR ] = RGB64toARGB8( timeColorPicker.color );
+				options[ APPKEY_BATTERY_RING_COLOR ] = RGB64toARGB8( batteryRingColorPicker.color );
+				
+				// Encode and send the data when the page closes
+				document.location = "pebblejs://close#" + encodeURIComponent( JSON.stringify( options ) );
+			}, false );
+			
+			form.cancel.addEventListener( "click", function( e ) {
+				document.location = "pebblejs://close";
+			}, false );
+		</script>
+	</body>
+</html>

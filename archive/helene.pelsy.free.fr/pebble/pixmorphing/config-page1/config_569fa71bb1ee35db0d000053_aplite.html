@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Slate Example Configuration</title>
+  <link rel='stylesheet' type='text/css' href='/helene.pelsy.free.fr/pebble/pixmorphing/css/slate.css'>
+  <script src='/helene.pelsy.free.fr/pebble/pixmorphing/js/slate.bin'></script>
+  <style>
+  .title {
+    padding: 15px 10px;
+    text-transform: uppercase;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888888;
+    text-align: center;
+  }
+  </style>
+  </head>
+
+  <body>
+    <h1 class='title'>Configuration Pixmorphing</h1>
+
+    <div class='item-container'>
+      <div class='item-container-content'>
+        <div class='item'>
+          Yes, i can change lot of thing.
+        </div>
+      </div>
+    </div>
+
+    <div class='item-container'>
+      <div class='item-container-header'>Color</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Background Color
+          <input id='background_color_picker' type='text' class='item-color item-color-normal' value='#000000'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's background color.
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Hour Color the tens digit
+          <input id='hour1_color_picker' type='text' class='item-color item-color-normal' value='#FFFF00'>
+        </label>
+      </div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Hour Color the units digit
+          <input id='hour11_color_picker' type='text' class='item-color item-color-normal' value='#FFFF00'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's hour color.
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Minute Color the tens digit
+          <input id='minute1_color_picker' type='text' class='item-color item-color-normal' value='#FF5500'>
+        </label>
+      </div>
+      
+         <div class='item-container-content'>
+        <label class='item'>
+          Minute Color the units digit
+          <input id='minute11_color_picker' type='text' class='item-color item-color-normal' value='#FF5500'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's minute color.
+      </div>
+      
+      <div class='item-container-content'>
+        <label class='item'>
+          Seconde Color the tens digit
+          <input id='seconde1_color_picker' type='text' class='item-color item-color-normal' value='#00FFFF'>
+        </label>
+      </div>
+      
+         <div class='item-container-content'>
+        <label class='item'>
+          Seconde Color the units digit
+          <input id='seconde11_color_picker' type='text' class='item-color item-color-normal' value='#00FFFF'>
+        </label>
+      </div>
+      <div class='item-container-footer'>
+        Choose the app's minute color.
+      </div>
+      
+    </div>
+    
+         <div class='item-container'>
+      <div class='item-container-header'>Bluetooth</div>
+      <div class='item-container-content'>
+       <label class='item'>
+          Vibe when disconnected 
+        <input id='bt_checkbox' type='checkbox' class='item-toggle' checked="">
+        </label>
+        
+         <label class='item'>
+          Hour Color the units digit when bluetooth is disconnected 
+          <input id='bt_color_picker' type='text' class='item-color item-color-normal' value='#FF0000'>
+        </label>
+        </div>
+           <div class='item-container-footer'>
+        Bluetooth detection
+      </div>
+      
+    </div>
+    
+      <div class='item-container'>
+      <div class='item-container-header'>VIBE</div>
+      <div class='item-container-content'>
+        <label class='item'>
+          Short
+          <input id='vibe1' name="vibe" type='radio' value='0' class='item-radio' checked="">
+        </label>
+       <label class='item'>
+          Long
+          <input id='vibe2' name="vibe" type='radio' value='1' class='item-radio'>
+        </label>
+          <label class='item'>
+          Double
+          <input id='vibe3' name="vibe" type='radio' value='2' class='item-radio'>
+        </label>
+      </div>
+
+      
+      <div class='item-container-footer'>
+        vibe type
+      </div>
+      
+           <div class='item-container-content'>
+       <label class='item'>
+          None
+          <input id='vibeF1' name="frequence" type='radio' value='0' class='item-radio'>
+        </label>
+        <label class='item'>
+          Quarter
+          <input id='vibeF2' name="frequence" type='radio' value='15' class='item-radio'>
+        </label>
+       <label class='item'>
+          half
+          <input id='vibeF3' name="frequence" type='radio' value='30' class='item-radio'>
+        </label>
+          <label class='item'>
+          hour
+          <input id='vibeF' name="frequence" type='radio' value='60' class='item-radio' checked="">
+        </label>
+      </div>
+             
+      <div class='item-container-footer'>
+        vibe frequency
+      </div>
+      
+    </div>
+    
+     <div class='item-container'>
+      <div class='item-container-header'>STYLE</div>
+      <div class='item-container-content'>
+       <label class='item'>
+          Rounded 
+          <input id='rounded_checkbox' type='checkbox' class='item-toggle' checked="">
+        </label>
+      </div>
+
+      
+      <div class='item-container-footer'>
+        pixel style rounded or not.
+      </div>
+      </div>
+
+
+      <div class='item-container'>
+      <div class='item-container-header'>TAP</div>
+      <div class='item-container-content'>
+       <label class='item'>
+          Use 
+          <input id='tap_checkbox' type='checkbox' class='item-toggle' checked="">
+        </label>
+      </div>
+
+      
+      <div class='item-container-footer'>
+        (up/down --> light)<br> (left/rigt --> date)<br>(front/behind --> seconde)
+      </div>
+      </div>
+
+    <div class='item-container'>
+      <div class='button-container'>
+        <input id='submit_button' type='button' class='item-button' value='SUBMIT'>
+      </div>
+    </div>
+  </body>
+  <script>
+  function getConfigData() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    //var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+    var h1ColorPicker =  document.getElementById('hour1_color_picker');
+    var h11ColorPicker =  document.getElementById('hour11_color_picker');
+    var m1ColorPicker =  document.getElementById('minute1_color_picker');
+    var m11ColorPicker =  document.getElementById('minute11_color_picker');
+    var s1ColorPicker =  document.getElementById('seconde1_color_picker');
+    var s11ColorPicker =  document.getElementById('seconde11_color_picker');   
+    var tapPicker =  document.getElementById('tap_checkbox');
+    var btPicker =  document.getElementById('bt_checkbox');
+    var btColorPicker =  document.getElementById('bt_color_picker');
+    
+    var roundedPicker =  document.getElementById('rounded_checkbox');
+    
+    var frequences = document.getElementsByName('frequence');
+    var frequence_value;
+    for(var i = 0; i < frequences.length; i++){
+        if(frequences[i].checked){
+            frequence_value = frequences[i].value;
+        }
+    }
+    
+    var vibes = document.getElementsByName('vibe');
+    var vibe_value;
+    for(var i = 0; i < vibes.length; i++){
+        if(vibes[i].checked){
+            vibe_value = vibes[i].value;
+        }
+    }
+    
+    
+ 
+    var options = {
+      'background_color': backgroundColorPicker.value,
+      'h1_color': h1ColorPicker.value,
+      'h11_color': h11ColorPicker.value,
+      'm1_color': m1ColorPicker.value,
+      'm11_color': m11ColorPicker.value,
+      's1_color': s1ColorPicker.value,
+      's11_color': s11ColorPicker.value,
+      'frequence': frequence_value,
+      'vibe': vibe_value,
+      'tap': tapPicker.checked,
+      'rounded': roundedPicker.checked,
+      'bt': btPicker.checked,
+      'bt_color': btColorPicker.value
+     // 'high_contrast': highContrastCheckbox.checked
+    };
+
+    // Save for next launch
+    localStorage['background_color'] = options['background_color'];
+    localStorage['h1_color'] = options['h1_color'];
+    localStorage['h11_color'] = options['h11_color'];
+    localStorage['m1_color'] = options['m1_color'];
+    localStorage['m11_color'] = options['m11_color'];
+    localStorage['s1_color'] = options['s1_color'];
+    localStorage['s11_color'] = options['s11_color'];
+    localStorage['frequence'] = options['frequence'];
+    localStorage['vibe'] = options['vibe'];
+    localStorage['tap'] = options['tap'];
+    localStorage['rounded'] = options['rounded'];
+    localStorage['bt'] = options['bt'];
+    localStorage['bt_color'] = options['bt_color'];
+    //localStorage['high_contrast'] = options['high_contrast'];
+
+    console.log('Got options: ' + JSON.stringify(options));
+    return options;
+  }
+
+  function getQueryParam(variable, defaultValue) {
+    var query = location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+      var pair = vars[i].split('=');
+      if (pair[0] === variable) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return defaultValue || false;
+  }
+ 
+  var submitButton = document.getElementById('submit_button');
+  submitButton.addEventListener('click', function() {
+    console.log('Submit');
+
+    // Set the return URL depending on the runtime environment
+    var return_to = getQueryParam('return_to', 'pebblejs://close#');
+    document.location = return_to + encodeURIComponent(JSON.stringify(getConfigData()));
+  });
+
+  (function() {
+    var backgroundColorPicker = document.getElementById('background_color_picker');
+    var h1ColorPicker =  document.getElementById('hour1_color_picker');
+    var h11ColorPicker =  document.getElementById('hour11_color_picker');
+    var m1ColorPicker =  document.getElementById('minute1_color_picker');
+    var m11ColorPicker =  document.getElementById('minute11_color_picker');
+    var s1ColorPicker =  document.getElementById('seconde1_color_picker');
+    var s11ColorPicker =  document.getElementById('seconde11_color_picker');
+    var frequencePicker =  document.getElementById('vibeF');
+    var vibePicker =  document.getElementById('vibe');
+    var tapPicker =  document.getElementById('tap_checkbox');
+    var roundedPicker =  document.getElementById('rounded_checkbox');
+    var btPicker  = document.getElementById('bt_checkbox');
+    var btColorPicker =  document.getElementById('bt_color_picker');
+   // var highContrastCheckbox = document.getElementById('high_contrast_checkbox');
+
+    // Load any previously saved configuration, if available
+    //if(localStorage['high_contrast']) {
+    //  highContrastCheckbox.checked = JSON.parse(localStorage['high_contrast']);
+   //   backgroundColorPicker.value = localStorage['background_color'];
+   // }
+   if(localStorage['background_color']) {
+   backgroundColorPicker.value = localStorage['background_color'];
+   h1ColorPicker.value = localStorage['h1_color'];
+   h11ColorPicker.value = localStorage['h11_color'];
+   m1ColorPicker.value = localStorage['m1_color'];
+   m11ColorPicker.value = localStorage['m11_color'];
+   s1ColorPicker.value = localStorage['s1_color'];
+   s11ColorPicker.value = localStorage['s11_color'];
+   tapPicker.checked = JSON.parse(localStorage['tap']);
+   roundedPicker.checked = JSON.parse(localStorage['rounded']);
+   btColorPicker.value = localStorage['bt_color'];
+   btPicker.checked = JSON.parse(localStorage['bt']);
+   
+   
+   var frequences = document.getElementsByName('frequence');
+    var frequence_value;
+    for(var i = 0; i < frequences.length; i++){
+        if(frequences[i].value==localStorage['frequence']){
+            frequences[i].checked = true;
+        }
+    }
+    
+    var vibes = document.getElementsByName('vibe');
+    var vibe_value;
+    for(var i = 0; i < vibes.length; i++){
+        if(vibes[i].value==localStorage['vibe']){
+            vibes[i].checked = true;
+        }
+    }
+    
+   }
+   
+
+  })();
+  </script>
+</html>

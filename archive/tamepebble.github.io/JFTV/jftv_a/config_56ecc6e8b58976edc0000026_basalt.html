@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<title>Japanese Fuzzy Time (Vertical) Configuration</title>
+		<link rel='stylesheet' type='text/css' href='/tamepebble.github.io/slate/css/slate.css'>
+		<script src='/tamepebble.github.io/slate/js/slate.js'></script>
+		<link rel='stylesheet' type='text/css' href='/tamepebble.github.io/css/tamegoro.css'>
+
+	</head>
+
+	<body>
+
+		<h1 class='title'>Japanese Fuzzy Time (Vertical)</h1>
+
+		<div class="item-container">
+			<div class="item-container-content">
+			</div>
+		</div>
+	
+		<form id="main-form">
+
+			<div class='item-container'>
+
+				<div class='item-container-header'>
+					Font
+				</div>
+
+				<div class='item-container-content'>
+
+					<label class="item">
+						<img src="/tamepebble.github.io/JFTV/shirousagi.png">(Shirousagi)
+						<input type="radio" class="item-radio" id="radio-font-shirousagi" name="groupe-radio-font" checked="">
+					</label>
+
+					<label class="item">
+						<img src="/tamepebble.github.io/JFTV/jiyucho.png">(Jiyucho)
+						<input type="radio" class="item-radio" id="radio-font-jiyucho" name="groupe-radio-font">
+					</label>
+
+					<label class="item">
+						<img src="/tamepebble.github.io/JFTV/mikachan.png">(Mikachan)
+						<input type="radio" class="item-radio" id="radio-font-mikachan" name="groupe-radio-font">
+					</label>
+
+					<label class="item">
+						<img src="/tamepebble.github.io/JFTV/ktegaki.png">(Kawaii Tegaki)
+						<input type="radio" class="item-radio" id="radio-font-ktegaki" name="groupe-radio-font">
+					</label>
+
+					<label class="item">
+						<img src="/tamepebble.github.io/JFTV/hui.png">(Huiji)
+						<input type="radio" class="item-radio" id="radio-font-hui" name="groupe-radio-font">
+					</label>
+<!--
+					<label class="item">
+						<img src="puchikuma.png">(Puchikuma)
+						<input type="radio" class="item-radio" id="radio-font-puchikuma" name="groupe-radio-font">
+					</label>
+-->
+				</div>
+
+				<div class='item-container-footer'>
+				</div>
+
+			</div>
+
+			<div class='item-container'>
+
+				<div class='item-container-header'>
+					Color
+				</div>
+
+				<div class='item-container-content'>
+
+					<label class="item">
+						Invert
+						<input type="checkbox" class="item-toggle" id="toggle-invert">
+					</label>
+
+				</div>
+
+				<div class='item-container-footer'>
+				</div>
+
+			</div>
+
+			<div class='item-container'>
+
+				<div class='item-container-header'>
+					Icon
+				</div>
+
+				<div class='item-container-content'>
+
+					<label class="item">
+						Battery charging
+						<input type="checkbox" class="item-toggle" id="toggle-icon-battery" checked="">
+					</label>
+
+				</div>
+
+				<div class='item-container-footer'>
+				</div>
+
+			</div>
+
+			<div class='item-container'>
+
+				<div class='item-container-header'>
+					Vibration
+				</div>
+
+				<div class='item-container-content'>
+
+					<label class="item">
+						Time Signal (dot dot dot...)
+						<input type="checkbox" class="item-toggle" id="toggle-vibration-time-signal">
+					</label>
+					<label class="item">
+						Connection Lost (dash dot dot)
+						<input type="checkbox" class="item-toggle" id="toggle-vibration-connection" checked="">
+					</label>
+
+				</div>
+
+				<div class='item-container-footer'>
+				</div>
+
+			</div>
+
+			<div class='item-container'>
+
+				<div class='button-container'>
+					<input id='button-cancel' type='button' class='item-button' value='CANCEL'>
+					<input id='button-save' type='button' class='item-button' value='SAVE'>
+				</div>
+
+			</div>
+
+		</form>
+	
+	</body>
+
+<script src='/tamepebble.github.io/JFTV/jftv_a.js'></script>
+
+</html>
+
